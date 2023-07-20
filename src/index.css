@@ -10,7 +10,6 @@
   --categoryMinHeight: 3cm;
   --categoryMargin: 0.5cm;
 
-
   --titleFont: "Inter";
   --titleFontSize: 24px;
   --titleFontWeight: 1000;
@@ -56,7 +55,7 @@
   border-right: hidden;
 }
 
-#items {
+.items {
   max-height: calc(100%);
 
   display: flex;
@@ -66,7 +65,7 @@
   overflow-y: scroll;
 }
 
-#items::after {
+.items::after {
   content: "";
   flex: auto;
 }
@@ -91,14 +90,14 @@
 
   /* Centers the text */
   align-items: center;
-  display:flex;
+  display: flex;
   flex-direction: column;
   justify-content: center;
 }
 
 .listItem:hover {
-  cursor:pointer;
- }
+  cursor: pointer;
+}
 
 .emptyDiv {
   width: var(--categoryWidth);
@@ -112,8 +111,115 @@
   border-bottom: none;
 }
 
-#backButton {
+.backButton {
   background-color: var(--backgroundColour);
+}
+
+.itemPage {
+  display: grid;
+  grid-template-areas:
+    "titleBar"
+    "addons"
+    "bottomBar";
+}
+
+.itemPageTitleBar {
+  grid-area: "titleBar";
+  display: grid;
+  grid-template-areas: "title exitButton";
+}
+
+.itemPageAddonsTitle {
+  grid-area: "title";
+min-width: 50%;
+margin-top: auto;
+margin-bottom: 0.4cm;
+margin-left: 0.22cm
+}
+
+.itemPageTitleCenter {
+    font-family: var(--titleFont);
+  font-size: var(--titleFontSize);
+  font-weight: var(--titleFontWeight);
+  display: flex;
+  
+}
+
+.itemPageExitButton {
+  display: inline-block;
+  grid-area: "exitButton";
+  font-family: var(--titleFont);
+  font-size: var(--titleFontSize);
+  font-weight: var(--titleFontWeight);
+  border: var(--borderStyle);
+margin: 0.2cm;
+
+  margin-left: auto;
+  width: min-content;
+  text-align: right;
+
+  padding: 0.2cm 0.4cm 0.2cm 0.4cm
+}
+
+.itemPageExitButton:hover {
+  cursor: pointer;
+}
+
+.itemPageAddonsSection {
+  grid-area: addons;
+  border: var(--borderStyle);
+  margin: 0cm 0.2cm 0cm 0.2cm;
+  display: flex;
+  flex-direction: column;
+  padding-top: 0.4cm
+}
+
+.addon {
+  border: var(--borderStyle);
+  width: auto;
+  margin: 0cm 0.4cm 0.4cm 0.4cm;
+  height: 1.2cm;
+  display: grid;
+  grid-template-areas: "name price toggle";
+  font-family: var(--categoryFont);
+  font-weight: var(--titleFontWeight);
+  justify-content: start;
+}
+
+.addonName {
+  grid-area: 'name';
+  font-size: 32px;
+  width: min-content;
+  white-space: nowrap;
+
+  display: flex;
+padding-bottom: 0.1cm;
+padding-left: 0.2cm;
+}
+
+
+.addonPrice {
+
+  grid-area: "price";
+  font-style: var(--categoryFont);
+  justify-self: start;
+  font-size:14px;
+/* push text to bottom */
+    display: flex;
+
+    padding-bottom: 0.25cm;
+    padding-left: 0.35cm;
+
+}
+
+.addonText {
+  align-self:flex-end;}
+  
+
+.toggleAddon {
+  grid-area: "toggle";
+  border: var(--borderStyle);
+
 }
 
 #orderTitle {

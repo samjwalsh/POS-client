@@ -3,6 +3,8 @@ import * as ReactDOM from "react-dom/client";
 
 import {updateItems, resetMenu} from "../app.jsx";
 
+import getMenu from "../tools/menuAPI.js";
+
 export default function (items) {
 let backButtonCount = 0;
 
@@ -67,12 +69,17 @@ const handleClick = (event, item) => {
       within: item.name,
     };
 
-    item.items.unshift(backButton);
+    item.items.unshift(backButton); 
+
     updateItems(item.items);
+  } else {
+    console.log('itemclicked')
+    console.log(item)
   }
 };
 
 const handleBackButton = (event, item) => {
-resetMenu();
+  console.log('backbutton pressed')
+updateItems(getMenu());
 }
 
