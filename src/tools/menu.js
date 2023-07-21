@@ -53,12 +53,10 @@ export const menu = [
           addons.forEach(addon => {
             if (addon.selected == 'x') {
             selectedAddons.push(addon.name)
-            console.log('addon selected')
             addonsCost += addon.price
             }
           })
 
-          console.log(selectedAddons)
           if (selectedAddons.includes('Chocolate Dip') && !(selectedAddons.includes('Flake'))) {
             addonsCost -= .3
           }
@@ -92,12 +90,10 @@ export const menu = [
           addons.forEach(addon => {
             if (addon.selected == 'x') {
             selectedAddons.push(addon.name)
-            console.log('addon selected')
             addonsCost += addon.price
             }
           })
 
-          console.log(selectedAddons)
           if (selectedAddons.includes('Chocolate Dip') && (selectedAddons.includes('Flake'))) {
             addonsCost -= .2
           }

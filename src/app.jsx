@@ -18,7 +18,9 @@ const root = ReactDOM.createRoot(domNode);
 function App() {
   const [menuState, setMenuState] = useState("");
   const [currentOrder, setCurrentOrder] = useState("");
-  const [order, setOrder] = useState("");
+  const [order, setOrder] = useState([
+    { name: "Cone", addons: ["Waffle Cone", "Flake"] },
+  ]);
   return (
     <div className="container" id="Container">
       <MenuBar menuState={menuState} />
@@ -85,7 +87,8 @@ function Menu({
           key={item.name}
           className={classes}
           id={item.name}
-          onClick={(event) => handleItemClick(event, item, setMenuState)}
+          onClick={(event) => handleItemClick(event, item, setMenuState, currentOrder, setCurrentOrder, order, setOrder)}
+
         >
           {item.name}
         </div>
@@ -219,8 +222,7 @@ function ItemPage({
     quantity = currentOrder.quantity;
   }
 
-const price = computePrice(item, currentOrder, setCurrentOrder).toFixed(2)
-//add .toFixed(2)
+  const price = computePrice(item, currentOrder, setCurrentOrder).toFixed(2);
 
   return (
     <div className="itemPage">
@@ -246,79 +248,194 @@ const price = computePrice(item, currentOrder, setCurrentOrder).toFixed(2)
       <div className="itemPageAddonsSection">{addonsHTML}</div>
       <div className="bottomBar">
         <div className="quantitySection">
-          <div className="subtractQuantity" onClick={(event) => decreaseQuantity(event, item, currentOrder, setCurrentOrder)}>-</div>
+          <div
+            className="subtractQuantity"
+            onClick={(event) =>
+              decreaseQuantity(event, item, currentOrder, setCurrentOrder)
+            }
+          >
+            -
+          </div>
           <div className="quantityValue">{quantity}</div>
-          <div className="addQuantity" onClick={(event) => increaseQuantity(event, item, currentOrder, setCurrentOrder)}>+</div>
+          <div
+            className="addQuantity"
+            onClick={(event) =>
+              increaseQuantity(event, item, currentOrder, setCurrentOrder)
+            }
+          >
+            +
+          </div>
         </div>
         <div className="priceSection">
           <div className="priceContainer">€{price}</div>
         </div>
         <div className="orderAdd">
-          <div className="orderAddContainer" onClick={(event => addToOrder(event, item, setMenuState, currentOrder, setCurrentOrder, order, setOrder))}>Add</div>
+          <div
+            className="orderAddContainer"
+            onClick={(event) =>
+              addToOrder(
+                event,
+                item,
+                setMenuState,
+                currentOrder,
+                setCurrentOrder,
+                order,
+                setOrder
+              )
+            }
+          >
+            Add
+          </div>
         </div>
       </div>
     </div>
   );
 }
 
-function addToOrder(event, item, setMenuState, currentOrder, setCurrentOrder, order, setOrder) {
- //TODO create order shit
+function addToOrder(
+  event,
+  item,
+  setMenuState,
+  currentOrder,
+  setCurrentOrder,
+  order,
+  setOrder
+) {
+  let parsedOrder = {};
+
+  parsedOrder.name = item.name;
+  parsedOrder.price = computePriceNoQuantity(item, currentOrder);
+
+  if (currentOrder.quantity == undefined) {
+    parsedOrder.quantity = 1;
+  } else {
+    parsedOrder.quantity = currentOrder.quantity;
+  }
+
+  parsedOrder.addons = [];
+  if (currentOrder.addons !== undefined) {
+    currentOrder.addons.forEach((addon) => {
+      if (addon.selected === "x") {
+        parsedOrder.addons.push(addon.name);
+      }
+    });
+  }
+
+
+
+  let itemWasDupe = false;
+
+
+  for (let index = 0; index < order.length; index++) {
+    let orderItem = order[index];
+
+    if (
+      parsedOrder.name === orderItem.name &&
+      arrayEquals(parsedOrder.addons, orderItem.addons)
+    ) {
+      //Fucky stuff to allow me to edit an element in the array with only the react State shit
+
+      // 1. Make a shallow copy of the array
+      let temp_order = order;
+
+      // 2. Make a shallow copy of the element you want to mutate
+      let temp_orderItem = temp_order[index];
+
+      // 3. Update the property you're interested in
+      temp_orderItem.quantity += parsedOrder.quantity;
+
+      // 4. Put it back into our array. N.B. we *are* mutating the array here, but that's why we made a copy first
+      temp_order[index] = temp_orderItem;
+
+      // 5. Set the state to our new copy
+      setOrder(temp_order);
+
+      itemWasDupe = true;
+    }
+  }
+
+  if (!itemWasDupe) {
+    setOrder((order) => [...order, parsedOrder]);
+  }
 }
 
-function computePrice (item, currentOrder, setCurrentOrder) {
-  console.log(currentOrder)
-if (currentOrder == '') {
-  console.log(item.price)
-  return item.price
-} else if(currentOrder.priceCheck == '') {
-  let addonsCost = 0;
-currentOrder.addons.forEach(addon => {
- if (addon.selected === 'x') {
-  addonsCost+= addon.price;
- }
-})
-return (currentOrder.price + addonsCost) * currentOrder.quantity
-} else {
-  console.log(currentOrder)
-  const addonsCost = currentOrder.priceCheck(currentOrder.addons)
-  return (currentOrder.price + addonsCost) * currentOrder.quantity
+function arrayEquals(a, b) {
+  return (
+    Array.isArray(a) &&
+    Array.isArray(b) &&
+    a.length === b.length &&
+    a.every((val, index) => val === b[index])
+  );
 }
+
+function computePriceNoQuantity(item, currentOrder) {
+  if (currentOrder == "") {
+    return item.price;
+  } else if (currentOrder.priceCheck == "") {
+    let addonsCost = 0;
+    currentOrder.addons.forEach((addon) => {
+      if (addon.selected === "x") {
+        addonsCost += addon.price;
+      }
+    });
+    return currentOrder.price + addonsCost;
+  } else {
+    const addonsCost = currentOrder.priceCheck(currentOrder.addons);
+    return currentOrder.price + addonsCost;
+  }
+}
+
+function computePrice(item, currentOrder, setCurrentOrder) {
+  if (currentOrder == "") {
+    return item.price;
+  } else if (currentOrder.priceCheck == "") {
+    let addonsCost = 0;
+    currentOrder.addons.forEach((addon) => {
+      if (addon.selected === "x") {
+        addonsCost += addon.price;
+      }
+    });
+    return (currentOrder.price + addonsCost) * currentOrder.quantity;
+  } else {
+    const addonsCost = currentOrder.priceCheck(currentOrder.addons);
+    return (currentOrder.price + addonsCost) * currentOrder.quantity;
+  }
 }
 
 function decreaseQuantity(event, item, currentOrder, setCurrentOrder) {
-let quantity;
-if (currentOrder.quantity == undefined) {
-  quantity = 1;
-} else if (currentOrder.quantity == 1) {
-quantity = 1
-} else {
-  quantity = currentOrder.quantity - 1;
-}
+  let quantity;
+  if (currentOrder.quantity == undefined) {
+    quantity = 1;
+  } else if (currentOrder.quantity == 1) {
+    quantity = 1;
+  } else {
+    quantity = currentOrder.quantity - 1;
+  }
 
-setCurrentOrder({
-  name: item.name,
-  price: item.price,
-  quantity: quantity,
-  priceCheck: item.priceCheck === undefined ? "" : item.priceCheck,
-  addons: item.addons,
-});
+  setCurrentOrder({
+    name: item.name,
+    price: item.price,
+    quantity: quantity,
+    priceCheck: item.priceCheck === undefined ? "" : item.priceCheck,
+    addons: item.addons,
+  });
 }
 
 function increaseQuantity(event, item, currentOrder, setCurrentOrder) {
   let quantity;
-if (currentOrder.quantity == undefined) {
-  quantity = 2;
-} else {
-  quantity = currentOrder.quantity + 1;
-}
+  if (currentOrder.quantity == undefined) {
+    quantity = 2;
+  } else {
+    quantity = currentOrder.quantity + 1;
+  }
 
-setCurrentOrder({
-  name: item.name,
-  price: item.price,
-  quantity: quantity,
-  priceCheck: item.priceCheck === undefined ? "" : item.priceCheck,
-  addons: item.addons,
-});
+  setCurrentOrder({
+    name: item.name,
+    price: item.price,
+    quantity: quantity,
+    priceCheck: item.priceCheck === undefined ? "" : item.priceCheck,
+    addons: item.addons,
+  });
 }
 
 function exitItemPage(
@@ -332,19 +449,23 @@ function exitItemPage(
   setCurrentOrder("");
 }
 
-function handleItemClick(event, item, setMenuState) {
+function handleItemClick(event, item, setMenuState, currentOrder, setCurrentOrder, order, setOrder) {
   if (item.type === "backButton") {
     setMenuState("");
     //Back button pressed
     return;
   } else if (item.type === undefined && item.modifiers === undefined) {
+    addToOrder(event, item, setMenuState, currentOrder, setCurrentOrder, order, setOrder)
+    setMenuState("")
     return;
     // Item with no mods pressed
+
   } else if (item.type === undefined) {
     //Item with mods pressed
     setMenuState(item);
   } else {
-    // Item pressed
+    // category pressed
+
     setMenuState(item);
   }
 }
