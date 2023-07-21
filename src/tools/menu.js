@@ -22,7 +22,7 @@ items: [...]
 */
 export const menu = [
   {
-    name: "Cones",
+    name: "Cone",
     price: 2.5,
     modifiers: [
       {
@@ -42,15 +42,34 @@ export const menu = [
         name: "Crushed Flake",
         price: 1,
       },
+      {name: "Chocolate Dip",
+    price: 1.0},
       {
-        priceCheck: function (itemSelection) {
+        priceCheck: function (addons) {
           // Add code to check for chocolate dip selection and adjust price accordingly: Choco cone = 3.3, Choco 99 = 4
+          let addonsCost = 0;
+          let selectedAddons = []
+
+          addons.forEach(addon => {
+            if (addon.selected == 'x') {
+            selectedAddons.push(addon.name)
+            console.log('addon selected')
+            addonsCost += addon.price
+            }
+          })
+
+          console.log(selectedAddons)
+          if (selectedAddons.includes('Chocolate Dip') && !(selectedAddons.includes('Flake'))) {
+            addonsCost -= .3
+          }
+
+          return addonsCost
         },
       },
     ],
   },
   {
-    name: "Kid's Cones",
+    name: "Kid's Cone",
     price: 2.3,
     modifiers: [
       {
@@ -63,9 +82,27 @@ export const menu = [
         price: 0.5,
       },
       { name: "Crushed Flake", price: 1 },
+      {name: "Chocolate Dip", price: 1.2},
       {
-        priceCheck: function (itemSelection) {
+        priceCheck: function (addons) {
           // Add code to check for chocolate dip, both choco dip with and without flake are 3.5
+          let addonsCost = 0;
+          let selectedAddons = []
+
+          addons.forEach(addon => {
+            if (addon.selected == 'x') {
+            selectedAddons.push(addon.name)
+            console.log('addon selected')
+            addonsCost += addon.price
+            }
+          })
+
+          console.log(selectedAddons)
+          if (selectedAddons.includes('Chocolate Dip') && (selectedAddons.includes('Flake'))) {
+            addonsCost -= .2
+          }
+
+          return addonsCost
         },
       },
     ],
@@ -120,7 +157,7 @@ export const menu = [
         name: "Sundae",
         price: 4.0,
         modifiers: [
-          { name: "flake", price: 0.5 },
+          { name: "Flake", price: 0.5 },
           { name: "Toppings", price: 0.5 },
           { name: "Crushed Flake", price: 1.0 },
         ],
