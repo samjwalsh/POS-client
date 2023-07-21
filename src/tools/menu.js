@@ -19,6 +19,7 @@ type: 'category',
 name: '',
 items: [...]
 }
+
 */
 export const menu = [
   {
