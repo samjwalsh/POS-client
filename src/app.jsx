@@ -36,7 +36,6 @@ function MenuBar({ menuState }) {
   return <div id="menuBar">{menuState.name}</div>;
 }
 
-
 function Menu({ menuState, setMenuState }) {
   let items = [];
 
@@ -111,21 +110,27 @@ function ItemPage({ menuState, setMenuState }) {
   item.price = menuState.price;
 
   item.addons = [];
-  menuState.modifiers.forEach(addon => {
-    if(addon.name !== undefined) {
+  menuState.modifiers.forEach((addon) => {
+    if (addon.name !== undefined) {
       item.addons.push(addon);
     } else {
       item.priceCheck = addon;
     }
-  })
-  
+  });
+
   console.log(item.addons);
   const addonsHTML = item.addons.map((addon) => {
     return (
       <div key={addon.name} className="addon" id={addon.name}>
-        <div className="addonName"><div className="addonText">{addon.name}</div></div>
-        <div className="addonPrice" ><div className="addonText">€{addon.price.toFixed(2)}</div></div>
-        <div className="toggleAddon"></div>
+        <div className="addonName">
+          <div className="addonText">{addon.name}</div>
+        </div>
+        <div className="addonPrice">
+          <div className="addonText">€{addon.price.toFixed(2)}</div>
+        </div>
+        <div className="toggleAddon">
+          <div className="toggleAddonButton">X</div>
+        </div>
       </div>
     );
     //TODO add code for auto-checking default addon
@@ -136,18 +141,23 @@ function ItemPage({ menuState, setMenuState }) {
         <div className="itemPageAddonsTitle">
           <div className="itemPageTitleCenter">Addons</div>
         </div>
-        <div className="itemPageExitButton" onClick={(event) => exitItemPage(event, item, setMenuState)}>X</div>
+        <div
+          className="itemPageExitButton"
+          onClick={(event) => exitItemPage(event, item, setMenuState)}
+        >
+          X
+        </div>
       </div>
       <div className="itemPageAddonsSection">{addonsHTML}</div>
+      <div className="bottomBar"></div>
     </div>
   );
 }
 
 function exitItemPage(event, item, setMenuState) {
-  console.log(item)
-  setMenuState('');
-};
-
+  console.log(item);
+  setMenuState("");
+}
 
 function handleItemClick(event, item, setMenuState) {
   if (item.type === "backButton") {
