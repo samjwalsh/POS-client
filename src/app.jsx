@@ -657,7 +657,7 @@ function handleKeypadClick(
       setkeypad({ ...temp_keypad });
     }
   } else if (action === "Enter") {
-    log(`Enter clicked on keypad`)
+    log(`Enter clicked on keypad`);
     if (!(keypad.value === "")) {
       //Fucky stuff to allow me to edit an element in the array with only the react State shit
 
@@ -670,11 +670,11 @@ function handleKeypadClick(
       if (keypad.sign === "-") {
         keypadValueArray.unshift("-");
       }
-      log(`Calculating keypad value`)
+      log(`Calculating keypad value`);
       let keypadValue = parseFloat(keypadValueArray.join(""));
 
       if (payCash.payCash.state === false) {
-        log(`Update the adjustment in the order`)
+        log(`Update the adjustment in the order`);
         // 1. Make a shallow copy of the array
         let temp_order = order;
 
@@ -686,7 +686,7 @@ function handleKeypadClick(
 
         order.setOrder([...temp_order.order]);
       } else {
-        log(`Calculating the subtotal`)
+        log(`Calculating the subtotal`);
         let subtotal = 0;
         order.order.forEach((orderItem, index) => {
           if (!(orderItem.name === "Adjustment")) {
@@ -696,17 +696,17 @@ function handleKeypadClick(
             subtotal += orderItem.value;
           }
         });
-        log(`Calculating the change given the keypad value and the subtotal`)
+        log(`Calculating the change given the keypad value and the subtotal`);
         setChange(keypadValue - subtotal);
       }
     }
-    log(`Disabling the keypad`)
+    log(`Disabling the keypad`);
     setkeypad({ enabled: false, value: "", sign: "+" });
   } else {
     if (keypad.value.length < 4) {
-      log(`Keypad value length is less than 4`)
+      log(`Keypad value length is less than 4`);
       if (!(keypad.value === "" && action === "0")) {
-        log(`Adding action ${action} to keypad`)
+        log(`Adding action ${action} to keypad`);
         let temp_keypad = keypad;
         temp_keypad.value += action;
         setkeypad({ ...temp_keypad });
@@ -716,7 +716,7 @@ function handleKeypadClick(
 }
 
 function parseKeypadValue(keypad) {
-  log(`Turning the keypad value into a number`)
+  log(`Turning the keypad value into a number`);
   if (keypad.value === "") {
     return (parseFloat("0") / 100).toFixed(2);
   } else {
@@ -725,24 +725,24 @@ function parseKeypadValue(keypad) {
 }
 
 function Order(order, setOrder) {
-  log(`Initiating keypad state`)
+  log(`Initiating keypad state`);
   const [keypad, setkeypad] = useState({
     enabled: false,
     value: "",
     sign: "+",
   });
 
-  log(`Initiating payCash state`)
+  log(`Initiating payCash state`);
   const [payCash, setPayCash] = useState({
     state: false,
     returnedKeypadValue: 0,
   });
 
-  log(`Initiating change state`)
+  log(`Initiating change state`);
   const [change, setChange] = useState(0);
 
   if (keypad.enabled == true) {
-    log (`Opening the keypad`)
+    log(`Opening the keypad`);
     return (
       <div className="orderContainer" id="order">
         <Keypad
@@ -761,12 +761,12 @@ function Order(order, setOrder) {
   function Keypad(payCash) {
     let keypadText = "";
     if (keypad.sign === "-") {
-      log(`Keypad value is negative, parsing string`)
+      log(`Keypad value is negative, parsing string`);
       keypadText += "(";
       keypadText += parseKeypadValue(keypad);
       keypadText += ")";
     } else {
-      log(`Keypad value is positive, parsing string`)
+      log(`Keypad value is positive, parsing string`);
       keypadText += parseKeypadValue(keypad);
     }
     return (
@@ -1024,10 +1024,10 @@ function Order(order, setOrder) {
 
   let orderItems = [];
   let subtotal = 0;
-log(`Calculating subtotal`)
+  log(`Calculating subtotal`);
   order.order.forEach((orderItem, index) => {
     if (!(orderItem.name === "Adjustment")) {
-      log(`Adding ${orderItem.name} to HTML and subtotal`)
+      log(`Adding ${orderItem.name} to HTML and subtotal`);
       subtotal += orderItem.price * orderItem.quantity;
       orderItems.push(
         <div
@@ -1061,7 +1061,7 @@ log(`Calculating subtotal`)
       );
     } else {
       //add code for displaying the adjustment
-      log(`Adding adjustment of ${orderItem.value} to HTML and subtotal`)
+      log(`Adding adjustment of ${orderItem.value} to HTML and subtotal`);
       subtotal += orderItem.value;
       if (orderItem.value != 0) {
         orderItems.push(
@@ -1094,7 +1094,7 @@ log(`Calculating subtotal`)
   });
 
   if (payCash.state === true) {
-    log(`Rendering interface for paying with cash`)
+    log(`Rendering interface for paying with cash`);
 
     return (
       <div className="orderContainer" id="order">
@@ -1141,7 +1141,7 @@ log(`Calculating subtotal`)
       </div>
     );
   }
-log(`Rendering standard order container`)
+  log(`Rendering standard order container`);
   return (
     <div className="orderContainer" id="order">
       <div className="orderItems">
@@ -1183,13 +1183,17 @@ log(`Rendering standard order container`)
 }
 
 function handlePayment(order, setOrder, paymentType, payCash, setPayCash) {
-
   //TODO add code to record all orders
   if (paymentType === "card") {
-    log(`Payment type card selected, resetting order`)
+    log(`Payment type card selected, resetting order`);
     order.setOrder([]);
+  } else if (payCash.state === true) {
+    setPayCash({
+      state: false,
+      returnedKeypadValue: 0,
+    });
   } else {
-    log(`Payment type cash selected, turning on keypad`)
+    log(`Payment type cash selected, turning on keypad`);
     setPayCash({ state: true, returnedKeypadValue: 0 });
   }
 }
@@ -1199,7 +1203,7 @@ function PayCash(order, setPayCash, keypad, setkeypad) {
   const setChange = order.setChange;
 
   if (order.payCash.returnedKeypadValue != 0) {
-    log(`Rendering pay cash area given keypad value returned is not 0`)
+    log(`Rendering pay cash area given keypad value returned is not 0`);
     //order.setPayCash({state: false, returnedKeypadValue: 0})
 
     return (
@@ -1258,7 +1262,7 @@ function PayCash(order, setPayCash, keypad, setkeypad) {
     );
   }
 
-  log(`Rendering pay cash area given keypad not used`)
+  log(`Rendering pay cash area given keypad not used`);
   return (
     <div className="payCash">
       <div className="payCashOptions">
@@ -1316,9 +1320,9 @@ function PayCash(order, setPayCash, keypad, setkeypad) {
 }
 
 function handlePayCash(event, order, value, setChange) {
-  log(`Button for paying with cash clicked`)
+  log(`Button for paying with cash clicked`);
   if (value === "exit") {
-    log(`Exiting the pay cash section and resetting the order`)
+    log(`Exiting the pay cash section and resetting the order`);
     order.order.setOrder([]);
     order.setPayCash({ state: false, returnedKeypadValue: 0 });
     order.setChange(0);
@@ -1334,7 +1338,7 @@ function handlePayCash(event, order, value, setChange) {
     }
   });
 
-  log(`Calculating the subtotal`)
+  log(`Calculating the subtotal`);
 
   let change = 0;
   if (typeof value === "number") {
@@ -1343,10 +1347,10 @@ function handlePayCash(event, order, value, setChange) {
     setChange(change);
   }
 
-  log(`Calculating the change`)
+  log(`Calculating the change`);
 
   if (value === "custom") {
-    log(`Enabling the keypad`)
+    log(`Enabling the keypad`);
     order.setkeypad({
       enabled: true,
       value: "",
