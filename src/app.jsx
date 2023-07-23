@@ -5,6 +5,8 @@ import { useState } from "react";
 //TODO make addons bigger y-height wise and also make the entire thing a button, instead of having to click on the little box
 // TODO make it so that if you click on an item that doesn't have mods, it gets added to the cart but the menu page stays inside the given category so that you can easily add a higher quantity of the item without having to repeatedly select the category
 
+import log from "./tools/logging";
+
 import getMenu from "./tools/menuAPI";
 import { menu } from "./tools/menu";
 const menuObj = getMenu();
@@ -44,8 +46,10 @@ root.render(<App />);
 
 function MenuBar({ menuState }) {
   if (menuState.name === undefined) {
+    log(`Set menu title to Menu`);
     return <div id="menuBar">Menu</div>;
   }
+  log(`Set menu title to ${menuState.name}`);
   return <div id="menuBar">{menuState.name}</div>;
 }
 
@@ -62,11 +66,14 @@ function Menu({
 
   if (menuState === "" || menuState.type === "category") {
     if (menuState === "") {
+      log(`Rendering default menu`);
       // Render top-level menu if state is ''
       items = getMenu();
     } else if (menuState.type === "category") {
+      log(`Rendering a category`);
       items = menuState.items;
       if (items[0].type !== "backButton") {
+        log(`Added a back button`);
         items.unshift({
           name: "Back",
           type: "backButton",
@@ -80,11 +87,15 @@ function Menu({
       //Code for adding relevent classes to each item
       let classes = "listItem";
       if (item.type === "category") {
+        log(`Added class "category" to ${item.name}`);
         classes += " category";
       } else if (item.type === "backButton") {
+        log(`Added class "category" to the back button`);
+
         classes += " backButton";
       }
 
+      log(`Added item ${item.name} to HTML`);
       itemsHTML.push(
         <div
           key={item.name}
@@ -119,6 +130,7 @@ function Menu({
       </div>
     );
   } else if (menuState.modifiers !== undefined) {
+    log(`Rendering an item which has modifiers`);
     return (
       <div id="menu">
         {" "}
@@ -138,19 +150,26 @@ function Menu({
 function handleAddonToggle(event, item, addon, currentOrder, setCurrentOrder) {
   const index = event.target.id;
 
+  log(`Addon ${item.addons[index].name} toggled`);
+
   if (item.addons[index].selected === "X") {
     item.addons[index].selected = "";
+    log(`Addon was toggled off`);
   } else {
     item.addons[index].selected = "X";
+    log(`Addon was toggled on`);
   }
 
   let quantity;
   if (currentOrder.quantity == undefined) {
+    log(`Quantity set to 1`);
     quantity = 1;
   } else {
+    log(`Quantity set to ${currentOrder.quantity}`);
     quantity = currentOrder.quantity;
   }
 
+  log(`Current order updated`);
   setCurrentOrder({
     name: item.name,
     price: item.price,
@@ -177,7 +196,9 @@ function ItemPage({
   menuState.modifiers.forEach((addon) => {
     if (addon.name !== undefined) {
       item.addons.push(addon);
+      log(`Detected an addon`);
     } else {
+      log(`Detected a priceCheck function`);
       item.priceCheck = addon.priceCheck;
     }
   });
@@ -185,6 +206,7 @@ function ItemPage({
   const addonsHTML = item.addons.map((addon, index) => {
     let selected;
     if (currentOrder.addons == undefined) {
+      log(`Initialised addon selected string`);
       selected = "";
       addon.selected = "";
     } else if (currentOrder.addons[index].selected === "X") {
@@ -193,6 +215,7 @@ function ItemPage({
       selected = "";
     }
 
+    log(`Created HTML for addon ${addon.name}`);
     return (
       <div key={addon.name} className="addon" id={addon.name}>
         <div className="addonName">
@@ -202,7 +225,7 @@ function ItemPage({
           <div className="addonText">€{addon.price.toFixed(2)}</div>
         </div>
         <div className="toggleAddon">
-          <button
+          <div
             className="toggleAddonButton"
             id={index}
             onClick={(event) =>
@@ -216,7 +239,7 @@ function ItemPage({
             }
           >
             {selected}
-          </button>
+          </div>
         </div>
       </div>
     );
@@ -230,15 +253,17 @@ function ItemPage({
     quantity = currentOrder.quantity;
   }
 
+  log(`Computed price for item and addons`);
   const price = computePrice(item, currentOrder, setCurrentOrder).toFixed(2);
 
+  log(`Created HTML for item page`);
   return (
     <div className="itemPage">
       <div className="itemPageTitleBar">
         <div className="itemPageAddonsTitle">
           <div className="itemPageTitleCenter">Addons</div>
         </div>
-        <button
+        <div
           className="itemPageExitButton"
           onClick={(event) =>
             exitItemPage(
@@ -251,7 +276,7 @@ function ItemPage({
           }
         >
           Cancel
-        </button>
+        </div>
       </div>
       <div className="itemPageAddonsSection">{addonsHTML}</div>
       <div className="bottomBar">
@@ -324,6 +349,7 @@ function addToOrder(
   if (currentOrder.addons !== undefined) {
     currentOrder.addons.forEach((addon) => {
       if (addon.selected === "X") {
+        log(`Addon ${addon.name} put into order`);
         parsedOrder.addons.push(addon.name);
       }
     });
@@ -338,6 +364,7 @@ function addToOrder(
       parsedOrder.name === orderItem.name &&
       arrayEquals(parsedOrder.addons, orderItem.addons)
     ) {
+      log(`Detected duplicate item in order`);
       //Fucky stuff to allow me to edit an element in the array with only the react State shit
 
       // 1. Make a shallow copy of the array
@@ -348,6 +375,8 @@ function addToOrder(
 
       // 3. Update the property you're interested in
       temp_orderItem.quantity += parsedOrder.quantity;
+
+      log(`Changing quantity of already existing item in order`);
 
       // 4. Put it back into our array. N.B. we *are* mutating the array here, but that's why we made a copy first
       temp_order[index] = temp_orderItem;
@@ -362,13 +391,16 @@ function addToOrder(
   }
 
   if (!itemWasDupe) {
+    log(`Added item ${item.name} to order, was not a duplicate`);
     setOrder((order) => [...order, parsedOrder]);
   }
 
+  log(`Exiting item page`);
   exitItemPage(event, item, setMenuState, setCurrentOrder, currentOrder);
 }
 
 function arrayEquals(a, b) {
+  log(`Detecting if two orders are equal`);
   return (
     Array.isArray(a) &&
     Array.isArray(b) &&
@@ -378,6 +410,7 @@ function arrayEquals(a, b) {
 }
 
 function computePriceNoQuantity(item, currentOrder) {
+  log(`Computing price of individual item ${item.name}`);
   if (currentOrder == "") {
     return item.price;
   } else if (currentOrder.priceCheck == "") {
@@ -389,12 +422,14 @@ function computePriceNoQuantity(item, currentOrder) {
     });
     return currentOrder.price + addonsCost;
   } else {
+    log(`Computing price of addons using priceCheck function`);
     const addonsCost = currentOrder.priceCheck(currentOrder.addons);
     return currentOrder.price + addonsCost;
   }
 }
 
 function computePrice(item, currentOrder, setCurrentOrder) {
+  log(`Compute price of item ${item.name} multiplied by its quantity`);
   if (currentOrder == "") {
     return item.price;
   } else if (currentOrder.priceCheck == "") {
@@ -406,6 +441,9 @@ function computePrice(item, currentOrder, setCurrentOrder) {
     });
     return (currentOrder.price + addonsCost) * currentOrder.quantity;
   } else {
+    log(
+      `Computing price of ${item.name} multiplied by its quantity using a priceCheck function`
+    );
     const addonsCost = currentOrder.priceCheck(currentOrder.addons);
     return (currentOrder.price + addonsCost) * currentOrder.quantity;
   }
@@ -414,11 +452,14 @@ function computePrice(item, currentOrder, setCurrentOrder) {
 function decreaseQuantity(event, item, currentOrder, setCurrentOrder) {
   let quantity;
   if (currentOrder.quantity == undefined) {
+    log(`Quantity of item was undefined, setting to 1`);
     quantity = 1;
   } else if (currentOrder.quantity == 1) {
+    log(`Quantity of item already 1`);
     quantity = 1;
   } else {
     quantity = currentOrder.quantity - 1;
+    log(`Decreasing quantity of item from ${quantity + 1} to ${quantity}`);
   }
 
   setCurrentOrder({
@@ -434,8 +475,10 @@ function increaseQuantity(event, item, currentOrder, setCurrentOrder) {
   let quantity;
   if (currentOrder.quantity == undefined) {
     quantity = 2;
+    log(`Increasing quantity of item from undefined to 2`);
   } else {
     quantity = currentOrder.quantity + 1;
+    log(`Increasing quantity of item from ${quantity - 1} to ${quantity}`);
   }
 
   setCurrentOrder({
@@ -454,6 +497,7 @@ function exitItemPage(
   setCurrentOrder,
   currentOrder
 ) {
+  log(`Exiting item page to main menu and deleting current order`);
   setMenuState("");
   setCurrentOrder("");
 }
@@ -467,11 +511,14 @@ function handleItemClick(
   order,
   setOrder
 ) {
+  log(`Item clicked`);
   if (item.type === "backButton") {
+    log(`Item was the back button`);
     setMenuState("");
     //Back button pressed
     return;
   } else if (item.type === undefined && item.modifiers === undefined) {
+    log(`Item had no modifiers, adding to order`);
     addToOrder(
       event,
       item,
@@ -485,16 +532,18 @@ function handleItemClick(
     return;
     // Item with no mods pressed
   } else if (item.type === undefined) {
+    log(`Item had modifiers, opening item page`);
     //Item with mods pressed
     setMenuState(item);
   } else {
     // category pressed
-
+    log(`Item was a category, opening category`);
     setMenuState(item);
   }
 }
 
 function OrderBar() {
+  log(`Set title for order bar to Order`);
   return <div id="orderTitle">Order</div>;
 }
 
@@ -502,6 +551,7 @@ function handleOrderItemRemove(event, orderItem, order, setOrder) {
   if (orderItem.name === "Adjustment") {
     order.order.forEach((item, index) => {
       if (orderItem === item) {
+        //TODO figure out how this works, this code runs everytime even if the item selected isn't the adjustment
         //Fucky stuff to allow me to edit an element in the array with only the react State shit
 
         // 1. Make a shallow copy of the array
@@ -524,6 +574,7 @@ function handleOrderItemRemove(event, orderItem, order, setOrder) {
     });
   } else if (orderItem.quantity > 1) {
     order.order.forEach((item, index) => {
+      log(`Reducing quantity of item ${item.name} in order by 1`);
       if (orderItem == item) {
         //Fucky stuff to allow me to edit an element in the array with only the react State shit
 
@@ -548,6 +599,7 @@ function handleOrderItemRemove(event, orderItem, order, setOrder) {
   } else {
     order.order.forEach((item, index) => {
       if (orderItem == item) {
+        log(`Removing item ${item.name} from order`);
         //Fucky stuff to allow me to edit an element in the array with only the react State shit
 
         // 1. Make a shallow copy of the array
@@ -566,6 +618,7 @@ function handleOrderItemRemove(event, orderItem, order, setOrder) {
 }
 
 function handlePlusMinus(event, keypad, setkeypad) {
+  log(`Opening the keypad`);
   let temp_keypad = keypad;
   temp_keypad.enabled = !keypad.enabled;
   setkeypad({ ...temp_keypad });
@@ -582,41 +635,46 @@ function handleKeypadClick(
   change,
   setChange
 ) {
-  console.log(payCash.payCash.state);
-
   if (action === "X") {
+    log(`X clicked on keypad`);
     setkeypad({ enabled: false, value: "", sign: "+" });
   } else if (action === "-") {
+    log(`- clicked on keypad`);
     let temp_keypad = keypad;
     temp_keypad.sign = "-";
     setkeypad({ ...temp_keypad });
   } else if (action === "+") {
+    log(`+ clicked on keypad`);
     let temp_keypad = keypad;
     temp_keypad.sign = "+";
     setkeypad({ ...temp_keypad });
   } else if (action === "Del") {
+    log(`Del clicked on keypad`);
     if (keypad.value !== "") {
+      log(`Removing last char from keypad value, given value isn't empty`);
       let temp_keypad = keypad;
       temp_keypad.value = temp_keypad.value.slice(0, -1);
       setkeypad({ ...temp_keypad });
     }
   } else if (action === "Enter") {
+    log(`Enter clicked on keypad`)
     if (!(keypad.value === "")) {
       //Fucky stuff to allow me to edit an element in the array with only the react State shit
 
       let keypadValueArray = keypad.value.split("");
-if(keypadValueArray.length < 2) {
-  keypadValueArray.unshift(0);
-}
+      if (keypadValueArray.length < 2) {
+        keypadValueArray.unshift(0);
+      }
       keypadValueArray.splice(keypadValueArray.length - 2, 0, ".");
 
       if (keypad.sign === "-") {
         keypadValueArray.unshift("-");
       }
-
+      log(`Calculating keypad value`)
       let keypadValue = parseFloat(keypadValueArray.join(""));
 
       if (payCash.payCash.state === false) {
+        log(`Update the adjustment in the order`)
         // 1. Make a shallow copy of the array
         let temp_order = order;
 
@@ -628,7 +686,7 @@ if(keypadValueArray.length < 2) {
 
         order.setOrder([...temp_order.order]);
       } else {
-
+        log(`Calculating the subtotal`)
         let subtotal = 0;
         order.order.forEach((orderItem, index) => {
           if (!(orderItem.name === "Adjustment")) {
@@ -638,15 +696,17 @@ if(keypadValueArray.length < 2) {
             subtotal += orderItem.value;
           }
         });
-
-        console.log(keypadValue);
-        setChange(keypadValue - subtotal)
+        log(`Calculating the change given the keypad value and the subtotal`)
+        setChange(keypadValue - subtotal);
       }
     }
+    log(`Disabling the keypad`)
     setkeypad({ enabled: false, value: "", sign: "+" });
   } else {
     if (keypad.value.length < 4) {
+      log(`Keypad value length is less than 4`)
       if (!(keypad.value === "" && action === "0")) {
+        log(`Adding action ${action} to keypad`)
         let temp_keypad = keypad;
         temp_keypad.value += action;
         setkeypad({ ...temp_keypad });
@@ -656,6 +716,7 @@ if(keypadValueArray.length < 2) {
 }
 
 function parseKeypadValue(keypad) {
+  log(`Turning the keypad value into a number`)
   if (keypad.value === "") {
     return (parseFloat("0") / 100).toFixed(2);
   } else {
@@ -664,36 +725,48 @@ function parseKeypadValue(keypad) {
 }
 
 function Order(order, setOrder) {
+  log(`Initiating keypad state`)
   const [keypad, setkeypad] = useState({
     enabled: false,
     value: "",
     sign: "+",
   });
 
+  log(`Initiating payCash state`)
   const [payCash, setPayCash] = useState({
     state: false,
     returnedKeypadValue: 0,
   });
 
+  log(`Initiating change state`)
   const [change, setChange] = useState(0);
 
   if (keypad.enabled == true) {
+    log (`Opening the keypad`)
     return (
       <div className="orderContainer" id="order">
-        <Keypad payCash={payCash} setPayCash={setPayCash} change={change} setChange={setChange} order={order} setOrder={setOrder}/>
+        <Keypad
+          payCash={payCash}
+          setPayCash={setPayCash}
+          change={change}
+          setChange={setChange}
+          order={order}
+          setOrder={setOrder}
+        />
       </div>
     );
   }
 
   //TODO this shit is actually beyond fucked up, i cannot figure out how to pass variables through to a component, they all end up becoming undefined somehow, hopefully I just need to look at this a different way tomorrow
   function Keypad(payCash) {
-    console.log(payCash);
     let keypadText = "";
     if (keypad.sign === "-") {
+      log(`Keypad value is negative, parsing string`)
       keypadText += "(";
       keypadText += parseKeypadValue(keypad);
       keypadText += ")";
     } else {
+      log(`Keypad value is positive, parsing string`)
       keypadText += parseKeypadValue(keypad);
     }
     return (
@@ -951,9 +1024,10 @@ function Order(order, setOrder) {
 
   let orderItems = [];
   let subtotal = 0;
-
+log(`Calculating subtotal`)
   order.order.forEach((orderItem, index) => {
     if (!(orderItem.name === "Adjustment")) {
+      log(`Adding ${orderItem.name} to HTML and subtotal`)
       subtotal += orderItem.price * orderItem.quantity;
       orderItems.push(
         <div
@@ -975,18 +1049,19 @@ function Order(order, setOrder) {
               €{orderItem.price.toFixed(2)} EA
             </div>
           </div>
-          <button
+          <div
             className="orderItemRemove"
             onClick={(event) =>
               handleOrderItemRemove(event, orderItem, order, setOrder)
             }
           >
             <div className="orderItemRemoveText">X</div>
-          </button>
+          </div>
         </div>
       );
     } else {
       //add code for displaying the adjustment
+      log(`Adding adjustment of ${orderItem.value} to HTML and subtotal`)
       subtotal += orderItem.value;
       if (orderItem.value != 0) {
         orderItems.push(
@@ -1004,14 +1079,14 @@ function Order(order, setOrder) {
               </div>
               <div className="orderItemPriceEach"></div>
             </div>
-            <button
+            <div
               className="orderItemRemove"
               onClick={(event) =>
                 handleOrderItemRemove(event, orderItem, order, setOrder)
               }
             >
               <div className="orderItemRemoveText">X</div>
-            </button>
+            </div>
           </div>
         );
       }
@@ -1019,6 +1094,8 @@ function Order(order, setOrder) {
   });
 
   if (payCash.state === true) {
+    log(`Rendering interface for paying with cash`)
+
     return (
       <div className="orderContainer" id="order">
         <PayCash
@@ -1064,7 +1141,7 @@ function Order(order, setOrder) {
       </div>
     );
   }
-
+log(`Rendering standard order container`)
   return (
     <div className="orderContainer" id="order">
       <div className="orderItems">
@@ -1106,22 +1183,23 @@ function Order(order, setOrder) {
 }
 
 function handlePayment(order, setOrder, paymentType, payCash, setPayCash) {
+
   //TODO add code to record all orders
   if (paymentType === "card") {
+    log(`Payment type card selected, resetting order`)
     order.setOrder([]);
   } else {
+    log(`Payment type cash selected, turning on keypad`)
     setPayCash({ state: true, returnedKeypadValue: 0 });
   }
 }
 
 function PayCash(order, setPayCash, keypad, setkeypad) {
-
   const change = order.change;
-  const setChange = order.setChange
+  const setChange = order.setChange;
 
   if (order.payCash.returnedKeypadValue != 0) {
-    console.log(order.payCash)
-
+    log(`Rendering pay cash area given keypad value returned is not 0`)
     //order.setPayCash({state: false, returnedKeypadValue: 0})
 
     return (
@@ -1180,6 +1258,7 @@ function PayCash(order, setPayCash, keypad, setkeypad) {
     );
   }
 
+  log(`Rendering pay cash area given keypad not used`)
   return (
     <div className="payCash">
       <div className="payCashOptions">
@@ -1237,10 +1316,12 @@ function PayCash(order, setPayCash, keypad, setkeypad) {
 }
 
 function handlePayCash(event, order, value, setChange) {
+  log(`Button for paying with cash clicked`)
   if (value === "exit") {
+    log(`Exiting the pay cash section and resetting the order`)
     order.order.setOrder([]);
     order.setPayCash({ state: false, returnedKeypadValue: 0 });
-    order.setChange(0)
+    order.setChange(0);
   }
 
   let subtotal = 0;
@@ -1253,6 +1334,8 @@ function handlePayCash(event, order, value, setChange) {
     }
   });
 
+  log(`Calculating the subtotal`)
+
   let change = 0;
   if (typeof value === "number") {
     change = value - subtotal;
@@ -1260,7 +1343,10 @@ function handlePayCash(event, order, value, setChange) {
     setChange(change);
   }
 
+  log(`Calculating the change`)
+
   if (value === "custom") {
+    log(`Enabling the keypad`)
     order.setkeypad({
       enabled: true,
       value: "",
