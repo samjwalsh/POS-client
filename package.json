@@ -2,7 +2,7 @@
   "name": "pos-client",
   "productName": "pos-client",
   "version": "1.0.0",
-  "description": "",
+  "description": "pos-client",
   "main": ".webpack/main",
   "scripts": {
     "start": "electron-forge start",

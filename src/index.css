@@ -4,19 +4,21 @@
   --categoryFont: "Inter";
   --categoryFontWeight: 600;
   --categoryFontSize: 24px;
-  --categoryWidth: 4cm;
-  --categoryMinWidth: 2cm;
+  --categoryWidth: 5cm;
+  --categoryMinWidth: 4cm;
   --categoryHeight: 4px;
   --categoryMinHeight: 3cm;
-  --categoryMargin: 0.5cm;
+  --categoryMargin: 0.2cm;
 
   --titleFont: "Inter";
   --titleFontSize: 24px;
   --titleFontWeight: 1000;
-  --backgroundColour: rgb(255, 128, 128);
+  --headerColour: rgb(255, 128, 128);
 
   --borderStyle: solid black;
-  --borderStyled: solid red;
+  --borderStyled: solid 1px red;
+
+  --backgroundColour: rgb(255, 255, 255);
 
   overflow: hidden;
 }
@@ -24,7 +26,8 @@
 * {
   padding: 0px;
   margin: 0px;
-  user-select: none; 
+  user-select: none;
+  background-color: var(--backgroundColour);
 }
 
 .container {
@@ -43,7 +46,7 @@
   border-right: hidden;
   border-bottom: hidden;
 
-  background-color: var(--backgroundColour);
+  background-color: var(--headerColour);
 
   text-align: center;
   font-family: var(--titleFont);
@@ -84,7 +87,7 @@
   text-align: center;
   word-break: break-word;
 
-  width: var(--categoryWidth);
+  max-width: var(--categoryWidth);
   min-width: var(--categoryMinWidth);
   height: var(--categoryMinHeight);
   min-height: var(--categoryMinHeight);
@@ -95,6 +98,8 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
+
+  flex: 1;
 }
 
 .listItem:hover {
@@ -102,19 +107,35 @@
 }
 
 .emptyDiv {
-  width: var(--categoryWidth);
+  border: var(--borderStyle);
+  border-top: none;
+  border-bottom: none;
+  font-family: var(--categoryFont);
+  font-weight: var(--categoryFontWeight);
+  font-size: var(--titleFontSize);
+  text-align: center;
+  word-break: break-word;
+
+  max-width: var(--categoryWidth);
   min-width: var(--categoryMinWidth);
   height: 0px;
   margin: var(--categoryMargin);
   margin-top: 0px;
   margin-bottom: 0px;
-  border: var(--borderStyle);
-  border-top: none;
-  border-bottom: none;
+
+  /* Centers the text */
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  flex: 1;
+
+  flex: 1;
 }
 
 .backButton {
-  background-color: var(--backgroundColour);
+  background-color: var(--headerColour);
 }
 
 .itemPage {
@@ -128,14 +149,14 @@
 }
 
 .itemPageTitleBar {
-  grid-area: "titleBar";
+  grid-area: titleBar;
   display: grid;
   grid-template-areas: "title exitButton";
   height: min-content;
 }
 
 .itemPageAddonsTitle {
-  grid-area: "title";
+  grid-area: title;
   margin-top: auto;
   margin-bottom: 0.2cm;
   margin-left: 0.22cm;
@@ -150,7 +171,7 @@
 
 .itemPageExitButton {
   display: inline-block;
-  grid-area: "exitButton";
+  grid-area: exitButton;
   font-family: var(--titleFont);
   font-size: var(--titleFontSize);
   font-weight: var(--titleFontWeight);
@@ -174,7 +195,7 @@
   margin: 0cm 0.2cm 0cm 0.2cm;
   display: flex;
   flex-direction: column;
-  padding-top: 0.4cm;
+  padding-top: 0.2cm;
   height: auto;
   overflow: hidden;
   overflow-y: scroll;
@@ -183,7 +204,7 @@
 .addon {
   border: var(--borderStyle);
   width: auto;
-  margin: 0cm 0.4cm 0.4cm 0.4cm;
+  margin: 0cm 0.2cm 0.2cm 0.2cm;
   height: 1.2cm;
   display: grid;
   grid-template-areas: "name price toggle";
@@ -194,7 +215,7 @@
 }
 
 .addonName {
-  grid-area: "name";
+  grid-area: name;
   font-size: 24pt;
   width: min-content;
   white-space: nowrap;
@@ -205,7 +226,7 @@
 }
 
 .addonPrice {
-  grid-area: "price";
+  grid-area: price;
   font-style: var(--categoryFont);
   font-size: 14pt;
   width: min-content;
@@ -221,7 +242,7 @@
 }
 
 .toggleAddon {
-  grid-area: "toggle";
+  grid-area: toggle;
   display: flex;
   justify-content: flex-end;
   align-items: center;
@@ -229,6 +250,7 @@
 
 .toggleAddonButton {
   font-size: 18pt;
+  font-weight: var(--categoryFontWeight);
   border: var(--borderStyle);
   margin-right: 0.2cm;
   height: 0.8cm;
@@ -241,7 +263,7 @@
 }
 
 .bottomBar {
-  grid-area: "bottomBar";
+  grid-area: bottomBar;
   border: var(--borderStyle);
   border-top: none;
   margin: 0cm 0.2cm 0.2cm 0.2cm;
@@ -256,7 +278,7 @@
 }
 
 .quantitySection {
-  grid-area: "quantitySection";
+  grid-area: quantitySection;
   display: grid;
   grid-template-areas: "subtractQuantity quantityValue addQuantity";
   margin: 0.2cm;
@@ -267,33 +289,32 @@
   grid-template-columns: 1.2cm 1.2cm 1.2cm;
 }
 
-
 .subtractQuantity {
-  grid-area: "subtractQuantity";
+  grid-area: subtractQuantity;
   border-right: var(--borderStyle);
   display: grid;
   align-self: center;
-  height: 100%
+  height: 100%;
 }
 
 .quantityValue {
-  grid-area: "quantityValue";
+  grid-area: quantityValue;
   display: grid;
-
 }
 
 .addQuantity {
-  grid-area: "addQuantity";
+  grid-area: addQuantity;
   display: grid;
-border-left: var(--borderStyle);
-height: 100%;
+  border-left: var(--borderStyle);
+  height: 100%;
 }
 
 .priceSection {
-  grid-area: "priceSection";
+  grid-area: priceSection;
   border: var(--borderStyle);
   position: relative;
   margin: 0.2cm;
+  margin-left: 0cm;
   width: auto;
   min-width: 3.5cm;
 }
@@ -304,28 +325,27 @@ height: 100%;
   top: 50%;
   transform: translate(-50%, -50%);
   left: 50%;
-
 }
 
 .orderAdd {
-  grid-area: "orderAdd";
+  grid-area: orderAdd;
   border: var(--borderStyle);
   display: grid;
   margin: 0.2cm;
+  margin-left: 0cm;
   min-width: 3cm;
 }
 
 .orderAddContainer {
   align-self: center;
   text-align: center;
-
 }
 
 #orderTitle {
   border: var(--borderStyle);
   border-bottom: hidden;
 
-  background-color: var(--backgroundColour);
+  background-color: var(--headerColour);
 
   text-align: center;
   font-family: var(--titleFont);
@@ -337,4 +357,310 @@ height: 100%;
 
 #order {
   border: var(--borderStyle);
+}
+
+.orderContainer {
+  display: grid;
+  grid-template-areas:
+    "orderItems"
+    "subTotal";
+  grid-template-rows: auto min-content;
+  font-family: var(--categoryFont);
+  font-weight: var(--categoryFontWeight);
+}
+
+.orderItems {
+  grid-area: orderItems;
+  display: flex;
+  flex-direction: column;
+  height: auto;
+  overflow: hidden;
+  overflow-y: scroll;
+}
+
+.hiddenOrderItem {
+  margin-top: 0.2cm;
+}
+
+.orderItem {
+  margin: 0.2cm;
+  margin-top: 0cm;
+  padding: 0.2cm;
+  border: var(--borderStyle);
+  width: auto;
+
+  display: grid;
+  grid-template-areas: "nameAndAddons priceAndPriceEach orderItemRemove";
+  grid-template-columns: auto min-content min-content;
+}
+
+.nameAndAddons {
+  grid-area: nameAndAddons;
+  display: grid;
+  grid-template-areas:
+    "orderItemName"
+    "orderItemAddons";
+  grid-template-rows: auto min-content;
+}
+
+.orderItemName {
+  font-size: 16pt;
+}
+
+.orderItemAddons {
+  font-size: 10pt;
+}
+
+.priceAndPriceEach {
+  margin-right: 0.2cm;
+  grid-area: priceAndPriceEach;
+  width: min-content;
+  white-space: nowrap;
+  text-align: right;
+
+  display: grid;
+  grid-template-areas:
+    "orderItemPrice"
+    "orderItemPriceEach";
+  grid-template-rows: auto min-content;
+}
+
+.orderItemPrice {
+  grid-area: orderItemPrice;
+}
+
+.orderItemPriceEach {
+  grid-area: orderItemPriceEach;
+  font-size: 10pt;
+}
+
+.orderItemRemove {
+  grid-area: orderItemRemove;
+  border: var(--borderStyle);
+  width: 1cm;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.orderItemRemoveText {
+  font-size: 24pt;
+  font-weight: var(--categoryFontWeight);
+}
+
+.subTotal {
+  border-top: var(--borderStyle);
+  grid-area: subTotal;
+  display: grid;
+  grid-template-areas:
+    "subTotalTop"
+    "subTotalBottom";
+  grid-template-rows: auto auto;
+}
+
+.subTotalTop {
+  grid-area: subTotalTop;
+  display: grid;
+  grid-template-areas: "subTotalTitle subTotalPrice";
+  grid-template-columns: auto auto;
+  font-size: 24pt;
+  margin-top: 0cm;
+}
+
+.subTotalTitle {
+  grid-area: subTotalTitle;
+  margin-left: 0.2cm;
+}
+
+.subTotalPrice {
+  grid-area: subTotalPrice;
+  text-align: right;
+  margin-right: 0.2cm;
+}
+
+.subTotalBottom {
+  grid-area: subTotalBottom;
+  display: grid;
+  grid-template-areas: "plusMinus card cash";
+  grid-template-columns: min-content 1fr 1fr;
+  margin-top: 0.1cm;
+}
+
+.plusMinus {
+  grid-area: plusMinus;
+  display: flex;
+  align-items: center;
+}
+
+.plusMinusContainer {
+  margin: 0.2cm;
+  margin-top: 0cm;
+  border: var(--borderStyle);
+  font-size: 24pt;
+  text-align: center;
+  width: 1cm;
+}
+
+.card {
+  grid-area: card;
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+.cardContainer {
+  margin: 0.2cm;
+  margin-left: 0px;
+  margin-top: 0cm;
+
+  border: var(--borderStyle);
+  font-size: 24pt;
+  text-align: center;
+  width: 100%;
+}
+
+.cash {
+  grid-area: cash;
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+.cashContainer {
+  margin: 0.2cm;
+  margin-left: 0px;
+  margin-top: 0cm;
+  border: var(--borderStyle);
+  font-size: 24pt;
+  text-align: center;
+  width: 100%;
+}
+
+.keypadGrid {
+  display: grid;
+  grid-template-areas:
+    "keypadDisplay keypadDisplay keypadClose"
+    "keypadMinus keypadPlus keypadBack"
+    "keypad7 keypad8 keypad9"
+    "keypad4 keypad5 keypad6"
+    "keypad1 keypad2 keypad3"
+    "keypad0 keypad0 keypadEnter";
+
+  row-gap: 0.2cm;
+  column-gap: 0.2cm;
+  padding: 0.2cm;
+
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr;
+}
+
+.keypadButton {
+  border: var(--borderStyle);
+
+  /* Center text */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.keypadDisplay {
+  border: var(--borderStyle);
+  grid-area: keypadDisplay;
+  font-size: 32pt;
+  font-weight: var(--categoryFontWeight);
+  /* Center text */
+  display: grid;
+  grid-template-areas: "keypadDisplayText keypadDisplayTextValue";
+  align-items: center;
+}
+
+.keypadDisplayText {
+  height: min-content;
+  margin:0.2cm;
+  margin-right: 0cm;
+
+
+  width: min-content;
+}
+
+.keypadDisplayTextValue {
+
+  height: min-content;
+  margin:0.2cm;
+  margin-left: 0cm;
+
+  text-align: right;
+}
+
+.keypadText {
+  font-size: 24pt;
+}
+
+.keypadClose {
+  grid-area: keypadClose;
+}
+.keypadMinus {
+  grid-area: keypadMinus;
+}
+.keypadPlus {
+  grid-area: keypadPlus;
+}
+.keypadBack {
+  grid-area: keypadBack;
+}
+.keypad7 {
+  grid-area: keypad7;
+}
+.keypad8 {
+  grid-area: keypad8;
+}
+.keypad9 {
+  grid-area: keypad9;
+}
+.keypad4 {
+  grid-area: keypad4;
+}
+.keypad5 {
+  grid-area: keypad5;
+}
+.keypad6 {
+  grid-area: keypad6;
+}
+.keypad1 {
+  grid-area: keypad1;
+}
+.keypad2 {
+  grid-area: keypad2;
+}
+.keypad3 {
+  grid-area: keypad3;
+}
+.keypadDecimal {
+  grid-area: keypadDecimal;
+}
+.keypad0 {
+  grid-area: keypad0;
+}
+.keypadEnter {
+  grid-area: keypadEnter;
+}
+
+.payCash {
+  display: grid;
+  grid-template-areas: "payCashOptions"
+  "payCashChange";
+  grid-template-rows: auto 1.2cm;
+}
+
+.payCashOptions {
+  border: var(--borderStyled);
+  grid-area: payCashOptions;
+}
+
+.payCashChange {
+  border: var(--borderStyle);
+  border-bottom: none;
+  border-right: none;
+  border-left: none;
+  grid-area: payCashChange;
 }
