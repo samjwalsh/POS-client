@@ -550,8 +550,9 @@
   column-gap: 0.2cm;
   padding: 0.2cm;
 
+
   grid-template-columns: 1fr 1fr 1fr;
-  grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr;
+  grid-template-rows: 1.2fr 1fr 1fr 1fr 1fr 1fr;
 }
 
 .keypadButton {
@@ -576,17 +577,15 @@
 
 .keypadDisplayText {
   height: min-content;
-  margin:0.2cm;
+  margin: 0.2cm;
   margin-right: 0cm;
-
 
   width: min-content;
 }
 
 .keypadDisplayTextValue {
-
   height: min-content;
-  margin:0.2cm;
+  margin: 0.2cm;
   margin-left: 0cm;
 
   text-align: right;
@@ -647,14 +646,67 @@
 
 .payCash {
   display: grid;
-  grid-template-areas: "payCashOptions"
-  "payCashChange";
-  grid-template-rows: auto 1.2cm;
+  grid-template-areas:
+    "payCashOptions"
+    "payCashChange";
+  grid-template-rows: auto min-content;
 }
 
 .payCashOptions {
-  border: var(--borderStyled);
   grid-area: payCashOptions;
+  display: grid;
+  grid-template-areas:
+    "payCash50 payCash20"
+    "payCash10 payCash5"
+    "payCashCustom payCashCustom"
+    "payCashExit payCashExit";
+  font-size: 32pt;
+  font-weight: var(--categoryFontWeight);
+  font-family: var(--categoryFont);
+  grid-template-rows: 1fr 1fr min-content 0.8fr;
+  grid-template-columns: 1fr 1fr;
+  margin: 0.2cm;
+  row-gap: 0.2cm;
+  column-gap: 0.2cm;
+}
+
+.payCash50 {
+  grid-area: payCash50;
+}
+
+.payCash20 {
+  grid-area: payCash20;
+}
+
+.payCash10 {
+  grid-area: payCash10;
+}
+
+.payCash5 {
+  grid-area: payCash5;
+}
+
+.payCashPreset {
+  border: var(--borderStyle);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.payCashCustom {
+  border: var(--borderStyle);
+  grid-area: payCashCustom;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.payCashExit {
+  border: var(--borderStyle);
+  grid-area: payCashExit;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .payCashChange {
@@ -663,4 +715,22 @@
   border-right: none;
   border-left: none;
   grid-area: payCashChange;
+  height: min-content;
+}
+
+.payCashChange {
+  display: grid;
+  grid-template-areas: "payCashChangeTitle payCashChangeValue";
+  font-size: 24pt;
+}
+
+.payCashChangeTitle {
+  margin: 0.2cm;
+  grid-area: payCashChangeTitle;
+}
+
+.payCashChangeValue {
+  margin: 0.2cm;
+  grid-area: payCashChangeValue;
+  text-align: right;
 }

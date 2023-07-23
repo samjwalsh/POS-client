@@ -571,8 +571,18 @@ function handlePlusMinus(event, keypad, setkeypad) {
   setkeypad({ ...temp_keypad });
 }
 
-function handleKeypadClick(event, order, setOrder, keypad, setkeypad, action) {
-  console.log(action);
+function handleKeypadClick(
+  event,
+  order,
+  setOrder,
+  keypad,
+  setkeypad,
+  action,
+  payCash,
+  change,
+  setChange
+) {
+  console.log(payCash.payCash.state);
 
   if (action === "X") {
     setkeypad({ enabled: false, value: "", sign: "+" });
@@ -587,9 +597,7 @@ function handleKeypadClick(event, order, setOrder, keypad, setkeypad, action) {
   } else if (action === "Del") {
     if (keypad.value !== "") {
       let temp_keypad = keypad;
-      console.log(temp_keypad.value);
       temp_keypad.value = temp_keypad.value.slice(0, -1);
-      console.log(temp_keypad.value);
       setkeypad({ ...temp_keypad });
     }
   } else if (action === "Enter") {
@@ -597,7 +605,9 @@ function handleKeypadClick(event, order, setOrder, keypad, setkeypad, action) {
       //Fucky stuff to allow me to edit an element in the array with only the react State shit
 
       let keypadValueArray = keypad.value.split("");
-
+if(keypadValueArray.length < 2) {
+  keypadValueArray.unshift(0);
+}
       keypadValueArray.splice(keypadValueArray.length - 2, 0, ".");
 
       if (keypad.sign === "-") {
@@ -606,16 +616,32 @@ function handleKeypadClick(event, order, setOrder, keypad, setkeypad, action) {
 
       let keypadValue = parseFloat(keypadValueArray.join(""));
 
-      // 1. Make a shallow copy of the array
-      let temp_order = order;
+      if (payCash.payCash.state === false) {
+        // 1. Make a shallow copy of the array
+        let temp_order = order;
 
-      // 2. Make a shallow copy of the element you want to mutate
-      temp_order.order.push({ name: "Adjustment", value: keypadValue });
+        // 2. Make a shallow copy of the element you want to mutate
+        temp_order.order.push({ name: "Adjustment", value: keypadValue });
 
-      // 5. Set the state to our new copy
-      // More fuckery because react doesnt see changing quantity as a change to state, so we have to manually trigger a rerender with this method (destructuring?)
+        // 5. Set the state to our new copy
+        // More fuckery because react doesnt see changing quantity as a change to state, so we have to manually trigger a rerender with this method (destructuring?)
 
-      order.setOrder([...temp_order.order]);
+        order.setOrder([...temp_order.order]);
+      } else {
+
+        let subtotal = 0;
+        order.order.forEach((orderItem, index) => {
+          if (!(orderItem.name === "Adjustment")) {
+            subtotal += orderItem.price * orderItem.quantity;
+          } else {
+            //add code for displaying the adjustment
+            subtotal += orderItem.value;
+          }
+        });
+
+        console.log(keypadValue);
+        setChange(keypadValue - subtotal)
+      }
     }
     setkeypad({ enabled: false, value: "", sign: "+" });
   } else {
@@ -646,28 +672,27 @@ function Order(order, setOrder) {
 
   const [payCash, setPayCash] = useState({
     state: false,
+    returnedKeypadValue: 0,
   });
 
+  const [change, setChange] = useState(0);
+
   if (keypad.enabled == true) {
-    console.log("keypad enabled");
     return (
       <div className="orderContainer" id="order">
-        <Keypad />
+        <Keypad payCash={payCash} setPayCash={setPayCash} change={change} setChange={setChange} order={order} setOrder={setOrder}/>
       </div>
     );
   }
 
   //TODO this shit is actually beyond fucked up, i cannot figure out how to pass variables through to a component, they all end up becoming undefined somehow, hopefully I just need to look at this a different way tomorrow
-  function Keypad() {
-    console.log(keypad);
-    console.log("keypad in keypad() ^");
+  function Keypad(payCash) {
+    console.log(payCash);
     let keypadText = "";
     if (keypad.sign === "-") {
-      console.log(keypad.sign);
       keypadText += "(";
       keypadText += parseKeypadValue(keypad);
       keypadText += ")";
-      console.log(keypadText);
     } else {
       keypadText += parseKeypadValue(keypad);
     }
@@ -680,7 +705,15 @@ function Order(order, setOrder) {
         <div
           className="keypadClose keypadButton"
           onClick={(event) => {
-            handleKeypadClick(event, order, setOrder, keypad, setkeypad, "X");
+            handleKeypadClick(
+              event,
+              order,
+              setOrder,
+              keypad,
+              setkeypad,
+              "X",
+              payCash
+            );
           }}
         >
           <div className="keypadCenter keypadText">X</div>
@@ -688,7 +721,15 @@ function Order(order, setOrder) {
         <div
           className="keypadMinus keypadButton"
           onClick={(event) => {
-            handleKeypadClick(event, order, setOrder, keypad, setkeypad, "-");
+            handleKeypadClick(
+              event,
+              order,
+              setOrder,
+              keypad,
+              setkeypad,
+              "-",
+              payCash
+            );
           }}
         >
           <div className="keypadCenter keypadText">-</div>
@@ -696,7 +737,15 @@ function Order(order, setOrder) {
         <div
           className="keypadPlus keypadButton"
           onClick={(event) => {
-            handleKeypadClick(event, order, setOrder, keypad, setkeypad, "+");
+            handleKeypadClick(
+              event,
+              order,
+              setOrder,
+              keypad,
+              setkeypad,
+              "+",
+              payCash
+            );
           }}
         >
           <div className="keypadCenter keypadText">+</div>
@@ -704,7 +753,15 @@ function Order(order, setOrder) {
         <div
           className="keypadBack keypadButton"
           onClick={(event) => {
-            handleKeypadClick(event, order, setOrder, keypad, setkeypad, "Del");
+            handleKeypadClick(
+              event,
+              order,
+              setOrder,
+              keypad,
+              setkeypad,
+              "Del",
+              payCash
+            );
           }}
         >
           <div className="keypadCenter keypadText">←</div>
@@ -712,7 +769,15 @@ function Order(order, setOrder) {
         <div
           className="keypad7 keypadButton"
           onClick={(event) => {
-            handleKeypadClick(event, order, setOrder, keypad, setkeypad, "7");
+            handleKeypadClick(
+              event,
+              order,
+              setOrder,
+              keypad,
+              setkeypad,
+              "7",
+              payCash
+            );
           }}
         >
           <div className="keypadCenter keypadText">7</div>
@@ -720,7 +785,15 @@ function Order(order, setOrder) {
         <div
           className="keypad8 keypadButton"
           onClick={(event) => {
-            handleKeypadClick(event, order, setOrder, keypad, setkeypad, "8");
+            handleKeypadClick(
+              event,
+              order,
+              setOrder,
+              keypad,
+              setkeypad,
+              "8",
+              payCash
+            );
           }}
         >
           <div className="keypadCenter keypadText">8</div>
@@ -728,7 +801,15 @@ function Order(order, setOrder) {
         <div
           className="keypad9 keypadButton"
           onClick={(event) => {
-            handleKeypadClick(event, order, setOrder, keypad, setkeypad, "9");
+            handleKeypadClick(
+              event,
+              order,
+              setOrder,
+              keypad,
+              setkeypad,
+              "9",
+              payCash
+            );
           }}
         >
           <div className="keypadCenter keypadText">9</div>
@@ -736,7 +817,15 @@ function Order(order, setOrder) {
         <div
           className="keypad4 keypadButton"
           onClick={(event) => {
-            handleKeypadClick(event, order, setOrder, keypad, setkeypad, "4");
+            handleKeypadClick(
+              event,
+              order,
+              setOrder,
+              keypad,
+              setkeypad,
+              "4",
+              payCash
+            );
           }}
         >
           <div className="keypadCenter keypadText">4</div>
@@ -744,7 +833,15 @@ function Order(order, setOrder) {
         <div
           className="keypad5 keypadButton"
           onClick={(event) => {
-            handleKeypadClick(event, order, setOrder, keypad, setkeypad, "5");
+            handleKeypadClick(
+              event,
+              order,
+              setOrder,
+              keypad,
+              setkeypad,
+              "5",
+              payCash
+            );
           }}
         >
           <div className="keypadCenter keypadText">5</div>
@@ -752,7 +849,15 @@ function Order(order, setOrder) {
         <div
           className="keypad6 keypadButton"
           onClick={(event) => {
-            handleKeypadClick(event, order, setOrder, keypad, setkeypad, "6");
+            handleKeypadClick(
+              event,
+              order,
+              setOrder,
+              keypad,
+              setkeypad,
+              "6",
+              payCash
+            );
           }}
         >
           <div className="keypadCenter keypadText">6</div>
@@ -760,7 +865,15 @@ function Order(order, setOrder) {
         <div
           className="keypad1 keypadButton"
           onClick={(event) => {
-            handleKeypadClick(event, order, setOrder, keypad, setkeypad, "1");
+            handleKeypadClick(
+              event,
+              order,
+              setOrder,
+              keypad,
+              setkeypad,
+              "1",
+              payCash
+            );
           }}
         >
           <div className="keypadCenter keypadText">1</div>
@@ -768,7 +881,15 @@ function Order(order, setOrder) {
         <div
           className="keypad2 keypadButton"
           onClick={(event) => {
-            handleKeypadClick(event, order, setOrder, keypad, setkeypad, "2");
+            handleKeypadClick(
+              event,
+              order,
+              setOrder,
+              keypad,
+              setkeypad,
+              "2",
+              payCash
+            );
           }}
         >
           <div className="keypadCenter keypadText">2</div>
@@ -776,7 +897,15 @@ function Order(order, setOrder) {
         <div
           className="keypad3 keypadButton"
           onClick={(event) => {
-            handleKeypadClick(event, order, setOrder, keypad, setkeypad, "3");
+            handleKeypadClick(
+              event,
+              order,
+              setOrder,
+              keypad,
+              setkeypad,
+              "3",
+              payCash
+            );
           }}
         >
           <div className="keypadCenter keypadText">3</div>
@@ -785,7 +914,15 @@ function Order(order, setOrder) {
         <div
           className="keypad0 keypadButton"
           onClick={(event) => {
-            handleKeypadClick(event, order, setOrder, keypad, setkeypad, "0");
+            handleKeypadClick(
+              event,
+              order,
+              setOrder,
+              keypad,
+              setkeypad,
+              "0",
+              payCash
+            );
           }}
         >
           <div className="keypadCenter keypadText">0</div>
@@ -799,11 +936,14 @@ function Order(order, setOrder) {
               setOrder,
               keypad,
               setkeypad,
-              "Enter"
+              "Enter",
+              payCash,
+              change,
+              setChange
             );
           }}
         >
-          <div className="keypadCenter keypadText">{">"}</div>
+          <div className="keypadCenter keypadText">{"→"}</div>
         </div>
       </div>
     );
@@ -879,12 +1019,17 @@ function Order(order, setOrder) {
   });
 
   if (payCash.state === true) {
-    console.log("paying cash");
     return (
       <div className="orderContainer" id="order">
         <PayCash
-        order={order}
-        setOrder={setOrder}
+          order={order}
+          setOrder={setOrder}
+          payCash={payCash}
+          setPayCash={setPayCash}
+          keypad={keypad}
+          setkeypad={setkeypad}
+          change={change}
+          setChange={setChange}
         />
         <div className="subTotal">
           <div className="subTotalTop">
@@ -965,17 +1110,161 @@ function handlePayment(order, setOrder, paymentType, payCash, setPayCash) {
   if (paymentType === "card") {
     order.setOrder([]);
   } else {
-    setPayCash({ state: true });
+    setPayCash({ state: true, returnedKeypadValue: 0 });
   }
 }
 
-function PayCash(order) {
-console.log(order)
+function PayCash(order, setPayCash, keypad, setkeypad) {
 
-return (
-  <div className="payCash">
-    <div className="payCashOptions"></div>
-    <div className="payCashChange"></div>
-  </div>
-)
+  const change = order.change;
+  const setChange = order.setChange
+
+  if (order.payCash.returnedKeypadValue != 0) {
+    console.log(order.payCash)
+
+    //order.setPayCash({state: false, returnedKeypadValue: 0})
+
+    return (
+      <div className="payCash">
+        <div className="payCashOptions">
+          <div
+            className="payCash50 payCashPreset"
+            onClick={(event) => handlePayCash(event, order, 50, setChange)}
+          >
+            <div className="payCashCenterText">50</div>
+          </div>
+          <div
+            className="payCash20 payCashPreset"
+            onClick={(event) => handlePayCash(event, order, 20, setChange)}
+          >
+            <div className="payCashCenterText">20</div>
+          </div>
+          <div
+            className="payCash10 payCashPreset"
+            onClick={(event) => handlePayCash(event, order, 10, setChange)}
+          >
+            <div className="payCashCenterText">10</div>
+          </div>
+          <div
+            className="payCash5 payCashPreset"
+            onClick={(event) => handlePayCash(event, order, 5, setChange)}
+          >
+            <div className="payCashCenterText">5</div>
+          </div>
+          <div
+            className="payCashCustom"
+            onClick={(event) =>
+              handlePayCash(event, order, "custom", setChange, setPayCash)
+            }
+          >
+            <div className="payCashCenterText">Custom</div>
+          </div>
+          <div
+            className="payCashExit"
+            onClick={(event) =>
+              handlePayCash(event, order, "exit", setChange, setPayCash)
+            }
+          >
+            <div className="payCashCenterText">Done</div>
+          </div>
+        </div>
+        <div className="payCashChange">
+          <div className="payCashChangeTitle">
+            <div className="payCashCenterText">Change</div>
+          </div>
+          <div className="payCashChangeValue">
+            <div className="payCashCenterText">€{change.toFixed(2)}</div>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  return (
+    <div className="payCash">
+      <div className="payCashOptions">
+        <div
+          className="payCash50 payCashPreset"
+          onClick={(event) => handlePayCash(event, order, 50, setChange)}
+        >
+          <div className="payCashCenterText">50</div>
+        </div>
+        <div
+          className="payCash20 payCashPreset"
+          onClick={(event) => handlePayCash(event, order, 20, setChange)}
+        >
+          <div className="payCashCenterText">20</div>
+        </div>
+        <div
+          className="payCash10 payCashPreset"
+          onClick={(event) => handlePayCash(event, order, 10, setChange)}
+        >
+          <div className="payCashCenterText">10</div>
+        </div>
+        <div
+          className="payCash5 payCashPreset"
+          onClick={(event) => handlePayCash(event, order, 5, setChange)}
+        >
+          <div className="payCashCenterText">5</div>
+        </div>
+        <div
+          className="payCashCustom"
+          onClick={(event) =>
+            handlePayCash(event, order, "custom", setChange, setPayCash)
+          }
+        >
+          <div className="payCashCenterText">Custom</div>
+        </div>
+        <div
+          className="payCashExit"
+          onClick={(event) =>
+            handlePayCash(event, order, "exit", setChange, setPayCash)
+          }
+        >
+          <div className="payCashCenterText">Done</div>
+        </div>
+      </div>
+      <div className="payCashChange">
+        <div className="payCashChangeTitle">
+          <div className="payCashCenterText">Change</div>
+        </div>
+        <div className="payCashChangeValue">
+          <div className="payCashCenterText">€{change.toFixed(2)}</div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function handlePayCash(event, order, value, setChange) {
+  if (value === "exit") {
+    order.order.setOrder([]);
+    order.setPayCash({ state: false, returnedKeypadValue: 0 });
+    order.setChange(0)
+  }
+
+  let subtotal = 0;
+  order.order.order.forEach((orderItem, index) => {
+    if (!(orderItem.name === "Adjustment")) {
+      subtotal += orderItem.price * orderItem.quantity;
+    } else {
+      //add code for displaying the adjustment
+      subtotal += orderItem.value;
+    }
+  });
+
+  let change = 0;
+  if (typeof value === "number") {
+    change = value - subtotal;
+
+    setChange(change);
+  }
+
+  if (value === "custom") {
+    order.setkeypad({
+      enabled: true,
+      value: "",
+      sign: "+",
+    });
+  }
 }
