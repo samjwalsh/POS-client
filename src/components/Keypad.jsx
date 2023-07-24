@@ -208,19 +208,19 @@ function handleKeypadClick(event, props, action) {
       if (payCash.state === false) {
         log(`Update the adjustment in the order`);
         // 1. Make a shallow copy of the array
-        let temp_order = order;
+        let temp_order = props.order;
 
         // 2. Make a shallow copy of the element you want to mutate
-        temp_order.order.push({ name: "Adjustment", value: keypadValue });
+        temp_order.push({ name: "Adjustment", value: keypadValue });
 
         // 5. Set the state to our new copy
         // More fuckery because react doesnt see changing quantity as a change to state, so we have to manually trigger a rerender with this method (destructuring?)
 
-        order.setOrder([...temp_order.order]);
+        props.setOrder([...temp_order]);
       } else {
         log(`Calculating the subtotal`);
         let subtotal = 0;
-        order.order.forEach((orderItem, index) => {
+        props.order.forEach((orderItem, index) => {
           if (!(orderItem.name === "Adjustment")) {
             subtotal += orderItem.price * orderItem.quantity;
           } else {
