@@ -5,7 +5,6 @@ import { useState } from "react";
 import log from "../tools/logging";
 
 export default function PayCash(props) {
-  console.log(props);
   const change = props.change;
   const setChange = props.setChange;
 
@@ -118,7 +117,6 @@ export default function PayCash(props) {
 }
 
 function handlePayCash(event, props, value) {
-  console.log(props);
   log(`Button for paying with cash clicked`);
   if (value === "exit") {
     log(`Exiting the pay cash section and resetting the order`);

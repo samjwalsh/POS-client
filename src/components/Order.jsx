@@ -200,7 +200,6 @@ export default function Order(props) {
 }
 
 function handlePayment(props, paymentType) {
-  console.log(props);
   const payCash = props.payCash;
   const setPayCash = props.setPayCash;
   //TODO add code to record all orders
@@ -226,7 +225,6 @@ function handlePlusMinus(event, keypad, setkeypad) {
 }
 
 function handleOrderItemRemove(event, props) {
-    console.log(props)
     const orderItem = props.orderItem;
     const order = props.order;
     const setOrder = props.order

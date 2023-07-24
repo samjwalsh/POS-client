@@ -5,7 +5,6 @@ import { useState } from "react";
 import log from "../tools/logging";
 
 export default function Keypad(props) {
-  console.log(props);
   const keypad = props.keypad;
 
   let keypadText = "";
