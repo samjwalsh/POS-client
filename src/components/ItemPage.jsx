@@ -256,7 +256,7 @@ function exitItemPage(
   setCurrentOrder("");
 }
 
-function addToOrder(
+export function addToOrder(
   event,
   item,
   setMenuState,

@@ -3,6 +3,7 @@ import * as ReactDOM from "react-dom/client";
 import { useState } from "react";
 
 import getMenu from "../tools/menuAPI";
+import { addToOrder } from "./ItemPage.jsx";
 
 import ItemPage from "./ItemPage.jsx";
 
