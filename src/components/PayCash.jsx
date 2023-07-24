@@ -122,13 +122,13 @@ function handlePayCash(event, props, value) {
   log(`Button for paying with cash clicked`);
   if (value === "exit") {
     log(`Exiting the pay cash section and resetting the order`);
-    props.order.setOrder([]);
+    props.setOrder([]);
     props.setPayCash({ state: false, returnedKeypadValue: 0 });
     props.setChange(0);
   }
 
   let subtotal = 0;
-  props.order.order.forEach((orderItem, index) => {
+  props.order.forEach((orderItem, index) => {
     if (!(orderItem.name === "Adjustment")) {
       subtotal += orderItem.price * orderItem.quantity;
     } else {
