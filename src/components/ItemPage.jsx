@@ -42,27 +42,30 @@ export default function ItemPage(props) {
 
     log(`Created HTML for addon ${addon.name}`);
     return (
-      <div key={addon.name} className="addon" id={addon.name}>
+      <div
+        key={addon.name}
+        className="addon"
+        id={index}
+        onClick={(event) =>
+          handleAddonToggle(
+            event,
+            item,
+            item.addons[index],
+            currentOrder,
+            setCurrentOrder,
+            index
+          )
+        }
+      ><div className="addonNameAndPrice">
         <div className="addonName">
           <div className="addonText">{addon.name}</div>
         </div>
         <div className="addonPrice">
           <div className="addonText">€{addon.price.toFixed(2)}</div>
         </div>
+        </div>
         <div className="toggleAddon">
-          <div
-            className="toggleAddonButton"
-            id={index}
-            onClick={(event) =>
-              handleAddonToggle(
-                event,
-                item,
-                item.addons[index],
-                currentOrder,
-                setCurrentOrder
-              )
-            }
-          >
+          <div className="toggleAddonButton" id={index}>
             {selected}
           </div>
         </div>
@@ -171,9 +174,15 @@ function computePrice(item, currentOrder, setCurrentOrder) {
   }
 }
 
-function handleAddonToggle(event, item, addon, currentOrder, setCurrentOrder) {
-  const index = event.target.id;
-
+function handleAddonToggle(
+  event,
+  item,
+  addon,
+  currentOrder,
+  setCurrentOrder,
+  index
+) {
+  //const index = event.target.id;
   log(`Addon ${item.addons[index].name} toggled`);
 
   if (item.addons[index].selected === "X") {

@@ -23,6 +23,11 @@
   overflow: hidden;
 }
 
+@font-face {
+  font-family: Inter;
+  src: url(./assets/Inter.ttf);
+}
+
 * {
   padding: 0px;
   margin: 0px;
@@ -205,36 +210,46 @@
   border: var(--borderStyle);
   width: auto;
   margin: 0cm 0.2cm 0.2cm 0.2cm;
-  height: 1.2cm;
+  height: 1.5cm;
   display: grid;
-  grid-template-areas: "name price toggle";
-  grid-template-columns: min-content min-content auto;
+  grid-template-areas: "addonNameAndPrice toggle";
+  grid-template-columns: min-content auto;
   font-family: var(--categoryFont);
   font-weight: var(--categoryFontWeight);
   justify-content: stretch;
 }
 
+.addonNameAndPrice {
+  grid-area: addonNameAndPrice;
+  display: grid;
+  grid-template-areas: "addonName addonPrice";
+  grid-template-columns: min-content min-content;
+  align-items: center;
+  justify-items: center;
+  margin: 0.2cm;
+}
+
 .addonName {
-  grid-area: name;
+  grid-area: addonName;
   font-size: 24pt;
   width: min-content;
   white-space: nowrap;
 
   display: flex;
-  padding-bottom: 0.1cm;
-  padding-left: 0.2cm;
+}
+.test {
+  font-size: 14pt;
 }
 
 .addonPrice {
-  grid-area: price;
+  grid-area: addonPrice;
   font-style: var(--categoryFont);
   font-size: 14pt;
   width: min-content;
   /* push text to bottom */
   display: flex;
-
-  padding-bottom: 0.2cm;
-  padding-left: 0.35cm;
+  padding-top: 0.25cm;
+  margin-left: 0.2cm;
 }
 
 .addonText {
@@ -549,7 +564,6 @@
   row-gap: 0.2cm;
   column-gap: 0.2cm;
   padding: 0.2cm;
-
 
   grid-template-columns: 1fr 1fr 1fr;
   grid-template-rows: 1.2fr 1fr 1fr 1fr 1fr 1fr;
