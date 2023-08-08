@@ -135,6 +135,7 @@ function handleItemClick(
     log(`Item had modifiers, opening item page`);
     //Item with mods pressed
     setMenuState(item);
+    console.log(item)
   } else {
     // category pressed
     log(`Item was a category, opening category`);

@@ -251,6 +251,7 @@ function decreaseQuantity(event, item, currentOrder, setCurrentOrder) {
     priceCheck: item.priceCheck === undefined ? "" : item.priceCheck,
     addons: item.addons,
   });
+
 }
 
 function exitItemPage(
@@ -324,6 +325,8 @@ export function addToOrder(
       // 5. Set the state to our new copy
       // More fuckery because react doesnt see changing quantity as a change to state, so we have to manually trigger a rerender with this method (destructuring?)
 
+      console.log([...temp_order])
+
       setOrder([...temp_order]);
 
       itemWasDupe = true;
@@ -333,6 +336,7 @@ export function addToOrder(
   if (!itemWasDupe) {
     log(`Added item ${item.name} to order, was not a duplicate`);
     setOrder((order) => [...order, parsedOrder]);
+    console.log(order)
   }
 
   log(`Exiting item page`);
