@@ -2,9 +2,6 @@ import * as React from "react";
 import * as ReactDOM from "react-dom/client";
 import { useState } from "react";
 
-
-import log from "./tools/logging";
-
 import Order from "./components/Order.jsx";
 import OrderBar from "./components/OrderBar.jsx";
 import MenuBar from "./components/MenuBar.jsx";

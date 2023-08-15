@@ -1,5 +1,6 @@
-const { app, BrowserWindow } = require("electron");
+const { app, BrowserWindow, ipcMain } = require("electron");
 const path = require("path");
+const sound = require("sound-play");
 
 // Handle creating/removing shortcuts on Windows when installing/uninstalling.
 if (require("electron-squirrel-startup")) {
@@ -8,13 +9,17 @@ if (require("electron-squirrel-startup")) {
 
 const createWindow = () => {
   // Create the browser window.
+
   const mainWindow = new BrowserWindow({
     width: 1024,
     height: 600,
     webPreferences: {
+      nodeIntegration: true,
+      contextIsolation: false,
+      sandbox: false,
       preload: MAIN_WINDOW_PRELOAD_WEBPACK_ENTRY,
     },
-    fullscreen: true,
+    //fullscreen: true,
     autoHideMenuBar: true,
   });
 
@@ -49,3 +54,13 @@ app.on("activate", () => {
 
 // In this file you can include the rest of your app's specific main process
 // code. You can also put them in separate files and import them here.
+
+ipcMain.on("playBeep", () => {
+  console.log(path.join(__dirname, '/assets/beep.wav'));
+  sound.play(path.join(__dirname, '/assets/beep.wav'));
+  console.log('test')
+});
+
+ipcMain.on("quit", () => {
+  app.quit()
+})

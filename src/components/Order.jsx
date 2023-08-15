@@ -7,6 +7,10 @@ import log from "../tools/logging";
 import PayCash from "./PayCash.jsx";
 import Keypad from "./Keypad.jsx";
 
+import { quit } from "../tools/ipc";
+
+import playBeep from "../tools/playBeep";
+
 export default function Order(props) {
   const order = props.order;
   const setOrder = props.setOrder;
@@ -50,7 +54,7 @@ export default function Order(props) {
   let subtotal = 0;
   log(`Calculating subtotal`);
   order.forEach((orderItem, index) => {
-    let passProps = {order, setOrder, orderItem}
+    let passProps = { order, setOrder, orderItem };
     if (!(orderItem.name === "Adjustment")) {
       log(`Adding ${orderItem.name} to HTML and subtotal`);
       subtotal += orderItem.price * orderItem.quantity;
@@ -76,9 +80,7 @@ export default function Order(props) {
           </div>
           <div
             className="orderItemRemove"
-            onClick={(event) =>
-              handleOrderItemRemove(event, passProps)
-            }
+            onClick={(event) => handleOrderItemRemove(event, passProps)}
           >
             <div className="orderItemRemoveText">X</div>
           </div>
@@ -106,9 +108,7 @@ export default function Order(props) {
             </div>
             <div
               className="orderItemRemove"
-              onClick={(event) =>
-                handleOrderItemRemove(event, passProps)
-              }
+              onClick={(event) => handleOrderItemRemove(event, passProps)}
             >
               <div className="orderItemRemoveText">X</div>
             </div>
@@ -200,6 +200,7 @@ export default function Order(props) {
 }
 
 function handlePayment(props, paymentType) {
+  playBeep();
   const payCash = props.payCash;
   const setPayCash = props.setPayCash;
   //TODO add code to record all orders
@@ -218,6 +219,8 @@ function handlePayment(props, paymentType) {
 }
 
 function handlePlusMinus(event, keypad, setkeypad) {
+  quit();
+
   log(`Opening the keypad`);
   let temp_keypad = keypad;
   temp_keypad.enabled = !keypad.enabled;
@@ -225,76 +228,76 @@ function handlePlusMinus(event, keypad, setkeypad) {
 }
 
 function handleOrderItemRemove(event, props) {
-    const orderItem = props.orderItem;
-    const order = props.order;
-    const setOrder = props.order
+  const orderItem = props.orderItem;
+  const order = props.order;
+  const setOrder = props.order;
 
-    if (orderItem.name === "Adjustment") {
-      order.forEach((item, index) => {
-        if (orderItem === item) {
-            log(`Removing adjustment`)
-          //TODO figure out how this works, this code runs everytime even if the item selected isn't the adjustment
-          //Fucky stuff to allow me to edit an element in the array with only the react State shit
-  
-          // 1. Make a shallow copy of the array
-          let temp_order = order;
-  
-          // 2. Make a shallow copy of the element you want to mutate
-          let temp_orderItem = temp_order[index];
-  
-          // 3. Update the property you're interested in
-          temp_orderItem.value = 0;
-  
-          // 4. Put it back into our array. N.B. we *are* mutating the array here, but that's why we made a copy first
-          temp_order[index] = temp_orderItem;
-  
-          // 5. Set the state to our new copy
-          // More fuckery because react doesnt see changing quantity as a change to state, so we have to manually trigger a rerender with this method (destructuring?)
-  
-          props.setOrder([...temp_order]);
-        }
-      });
-    } else if (orderItem.quantity > 1) {
-      order.forEach((item, index) => {
-        log(`Reducing quantity of item ${item.name} in order by 1`);
-        if (orderItem == item) {
-          //Fucky stuff to allow me to edit an element in the array with only the react State shit
-  
-          // 1. Make a shallow copy of the array
-          let temp_order = order;
-  
-          // 2. Make a shallow copy of the element you want to mutate
-          let temp_orderItem = temp_order[index];
-  
-          // 3. Update the property you're interested in
-          temp_orderItem.quantity--;
-  
-          // 4. Put it back into our array. N.B. we *are* mutating the array here, but that's why we made a copy first
-          temp_order[index] = temp_orderItem;
-  
-          // 5. Set the state to our new copy
-          // More fuckery because react doesnt see changing quantity as a change to state, so we have to manually trigger a rerender with this method (destructuring?)
-  
-          props.setOrder([...temp_order]);
-        }
-      });
-    } else {
-      order.forEach((item, index) => {
-        if (orderItem == item) {
-          log(`Removing item ${item.name} from order`);
-          //Fucky stuff to allow me to edit an element in the array with only the react State shit
-  
-          // 1. Make a shallow copy of the array
-          let temp_order = order;
-  
-          // 4. Put it back into our array. N.B. we *are* mutating the array here, but that's why we made a copy first
-          temp_order.splice(index, 1);
-  
-          // 5. Set the state to our new copy
-          // More fuckery because react doesnt see changing quantity as a change to state, so we have to manually trigger a rerender with this method (destructuring?)
-  
-          props.setOrder([...temp_order]);
-        }
-      });
-    }
+  if (orderItem.name === "Adjustment") {
+    order.forEach((item, index) => {
+      if (orderItem === item) {
+        log(`Removing adjustment`);
+        //TODO figure out how this works, this code runs everytime even if the item selected isn't the adjustment
+        //Fucky stuff to allow me to edit an element in the array with only the react State shit
+
+        // 1. Make a shallow copy of the array
+        let temp_order = order;
+
+        // 2. Make a shallow copy of the element you want to mutate
+        let temp_orderItem = temp_order[index];
+
+        // 3. Update the property you're interested in
+        temp_orderItem.value = 0;
+
+        // 4. Put it back into our array. N.B. we *are* mutating the array here, but that's why we made a copy first
+        temp_order[index] = temp_orderItem;
+
+        // 5. Set the state to our new copy
+        // More fuckery because react doesnt see changing quantity as a change to state, so we have to manually trigger a rerender with this method (destructuring?)
+
+        props.setOrder([...temp_order]);
+      }
+    });
+  } else if (orderItem.quantity > 1) {
+    order.forEach((item, index) => {
+      log(`Reducing quantity of item ${item.name} in order by 1`);
+      if (orderItem == item) {
+        //Fucky stuff to allow me to edit an element in the array with only the react State shit
+
+        // 1. Make a shallow copy of the array
+        let temp_order = order;
+
+        // 2. Make a shallow copy of the element you want to mutate
+        let temp_orderItem = temp_order[index];
+
+        // 3. Update the property you're interested in
+        temp_orderItem.quantity--;
+
+        // 4. Put it back into our array. N.B. we *are* mutating the array here, but that's why we made a copy first
+        temp_order[index] = temp_orderItem;
+
+        // 5. Set the state to our new copy
+        // More fuckery because react doesnt see changing quantity as a change to state, so we have to manually trigger a rerender with this method (destructuring?)
+
+        props.setOrder([...temp_order]);
+      }
+    });
+  } else {
+    order.forEach((item, index) => {
+      if (orderItem == item) {
+        log(`Removing item ${item.name} from order`);
+        //Fucky stuff to allow me to edit an element in the array with only the react State shit
+
+        // 1. Make a shallow copy of the array
+        let temp_order = order;
+
+        // 4. Put it back into our array. N.B. we *are* mutating the array here, but that's why we made a copy first
+        temp_order.splice(index, 1);
+
+        // 5. Set the state to our new copy
+        // More fuckery because react doesnt see changing quantity as a change to state, so we have to manually trigger a rerender with this method (destructuring?)
+
+        props.setOrder([...temp_order]);
+      }
+    });
   }
+}
