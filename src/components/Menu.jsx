@@ -3,11 +3,12 @@ import * as ReactDOM from "react-dom/client";
 import { useState } from "react";
 
 import getMenu from "../tools/menuAPI";
-import { addToOrder } from "./ItemPage.jsx";
+import { handleAddToOrder } from "./ItemPage.jsx";
 
 import ItemPage from "./ItemPage.jsx";
 
 import log from "../tools/logging";
+import playBeep from "../tools/playBeep";
 
 export default function Menu(props) {
   const menuState = props.menuState;
@@ -100,16 +101,13 @@ export default function Menu(props) {
   }
 }
 
-function handleItemClick(
-  event,
-  item,
-  props
-) {
-    const setMenuState = props.setMenuState;
-    const currentOrder = props.currentOrder;
-    const setCurrentOrder = props.setCurrentOrder;
-    const order = props.order;
-    const setOrder = props.setOrder;
+function handleItemClick(event, item, props) {
+  playBeep();
+  const setMenuState = props.setMenuState;
+  const currentOrder = props.currentOrder;
+  const setCurrentOrder = props.setCurrentOrder;
+  const order = props.order;
+  const setOrder = props.setOrder;
 
   log(`Item clicked`);
   if (item.type === "backButton") {
@@ -119,7 +117,7 @@ function handleItemClick(
     return;
   } else if (item.type === undefined && item.modifiers === undefined) {
     log(`Item had no modifiers, adding to order`);
-    addToOrder(
+    handleAddToOrder(
       event,
       item,
       setMenuState,
@@ -135,7 +133,7 @@ function handleItemClick(
     log(`Item had modifiers, opening item page`);
     //Item with mods pressed
     setMenuState(item);
-    console.log(item)
+    console.log(item);
   } else {
     // category pressed
     log(`Item was a category, opening category`);

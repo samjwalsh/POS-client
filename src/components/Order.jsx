@@ -219,6 +219,7 @@ function handlePayment(props, paymentType) {
 }
 
 function handlePlusMinus(event, keypad, setkeypad) {
+  playBeep();
   quit();
 
   log(`Opening the keypad`);
@@ -228,6 +229,7 @@ function handlePlusMinus(event, keypad, setkeypad) {
 }
 
 function handleOrderItemRemove(event, props) {
+  playBeep();
   const orderItem = props.orderItem;
   const order = props.order;
   const setOrder = props.order;

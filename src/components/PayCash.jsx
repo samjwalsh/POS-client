@@ -3,6 +3,7 @@ import * as ReactDOM from "react-dom/client";
 import { useState } from "react";
 
 import log from "../tools/logging";
+import playBeep from "../tools/playBeep";
 
 export default function PayCash(props) {
   const change = props.change;
@@ -117,6 +118,7 @@ export default function PayCash(props) {
 }
 
 function handlePayCash(event, props, value) {
+  playBeep();
   log(`Button for paying with cash clicked`);
   if (value === "exit") {
     log(`Exiting the pay cash section and resetting the order`);

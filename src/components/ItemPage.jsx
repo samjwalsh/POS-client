@@ -3,6 +3,7 @@ import * as ReactDOM from "react-dom/client";
 import { useState } from "react";
 
 import log from "../tools/logging";
+import playBeep from "../tools/playBeep";
 
 export default function ItemPage(props) {
   const menuState = props.menuState;
@@ -56,13 +57,14 @@ export default function ItemPage(props) {
             index
           )
         }
-      ><div className="addonNameAndPrice">
-        <div className="addonName">
-          <div className="addonText">{addon.name}</div>
-        </div>
-        <div className="addonPrice">
-          <div className="addonText">€{addon.price.toFixed(2)}</div>
-        </div>
+      >
+        <div className="addonNameAndPrice">
+          <div className="addonName">
+            <div className="addonText">{addon.name}</div>
+          </div>
+          <div className="addonPrice">
+            <div className="addonText">€{addon.price.toFixed(2)}</div>
+          </div>
         </div>
         <div className="toggleAddon">
           <div className="toggleAddonButton" id={index}>
@@ -94,7 +96,7 @@ export default function ItemPage(props) {
         <div
           className="itemPageExitButton"
           onClick={(event) =>
-            exitItemPage(
+            handleExitItemPage(
               event,
               item,
               setMenuState,
@@ -112,7 +114,7 @@ export default function ItemPage(props) {
           <div
             className="subtractQuantity"
             onClick={(event) =>
-              decreaseQuantity(event, item, currentOrder, setCurrentOrder)
+              handleDecreaseQuantity(event, item, currentOrder, setCurrentOrder)
             }
           >
             -
@@ -121,7 +123,7 @@ export default function ItemPage(props) {
           <div
             className="addQuantity"
             onClick={(event) =>
-              increaseQuantity(event, item, currentOrder, setCurrentOrder)
+              handleIncreaseQuantity(event, item, currentOrder, setCurrentOrder)
             }
           >
             +
@@ -134,7 +136,7 @@ export default function ItemPage(props) {
           <div
             className="orderAddContainer"
             onClick={(event) =>
-              addToOrder(
+              handleAddToOrder(
                 event,
                 item,
                 setMenuState,
@@ -182,6 +184,7 @@ function handleAddonToggle(
   setCurrentOrder,
   index
 ) {
+  playBeep();
   //const index = event.target.id;
   log(`Addon ${item.addons[index].name} toggled`);
 
@@ -212,7 +215,8 @@ function handleAddonToggle(
   });
 }
 
-function increaseQuantity(event, item, currentOrder, setCurrentOrder) {
+function handleIncreaseQuantity(event, item, currentOrder, setCurrentOrder) {
+  playBeep();
   let quantity;
   if (currentOrder.quantity == undefined) {
     quantity = 2;
@@ -231,7 +235,8 @@ function increaseQuantity(event, item, currentOrder, setCurrentOrder) {
   });
 }
 
-function decreaseQuantity(event, item, currentOrder, setCurrentOrder) {
+function handleDecreaseQuantity(event, item, currentOrder, setCurrentOrder) {
+  playBeep();
   let quantity;
   if (currentOrder.quantity == undefined) {
     log(`Quantity of item was undefined, setting to 1`);
@@ -251,22 +256,24 @@ function decreaseQuantity(event, item, currentOrder, setCurrentOrder) {
     priceCheck: item.priceCheck === undefined ? "" : item.priceCheck,
     addons: item.addons,
   });
-
 }
 
-function exitItemPage(
+function handleExitItemPage(
+  
   event,
   item,
   setMenuState,
   setCurrentOrder,
   currentOrder
 ) {
+  playBeep();
+
   log(`Exiting item page to main menu and deleting current order`);
   setMenuState("");
   setCurrentOrder("");
 }
 
-export function addToOrder(
+export function handleAddToOrder(
   event,
   item,
   setMenuState,
@@ -275,6 +282,8 @@ export function addToOrder(
   order,
   setOrder
 ) {
+  playBeep();
+
   let parsedOrder = {};
 
   parsedOrder.name = item.name;
@@ -325,7 +334,7 @@ export function addToOrder(
       // 5. Set the state to our new copy
       // More fuckery because react doesnt see changing quantity as a change to state, so we have to manually trigger a rerender with this method (destructuring?)
 
-      console.log([...temp_order])
+      console.log([...temp_order]);
 
       setOrder([...temp_order]);
 
@@ -336,11 +345,11 @@ export function addToOrder(
   if (!itemWasDupe) {
     log(`Added item ${item.name} to order, was not a duplicate`);
     setOrder((order) => [...order, parsedOrder]);
-    console.log(order)
+    console.log(order);
   }
 
   log(`Exiting item page`);
-  exitItemPage(event, item, setMenuState, setCurrentOrder, currentOrder);
+  handleExitItemPage(event, item, setMenuState, setCurrentOrder, currentOrder);
 }
 
 function computePriceNoQuantity(item, currentOrder) {

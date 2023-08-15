@@ -55,12 +55,6 @@ app.on("activate", () => {
 // In this file you can include the rest of your app's specific main process
 // code. You can also put them in separate files and import them here.
 
-ipcMain.on("playBeep", () => {
-  console.log(path.join(__dirname, '/assets/beep.wav'));
-  sound.play(path.join(__dirname, '/assets/beep.wav'));
-  console.log('test')
-});
-
 ipcMain.on("quit", () => {
   app.quit()
 })

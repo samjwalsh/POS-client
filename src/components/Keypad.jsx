@@ -3,6 +3,7 @@ import * as ReactDOM from "react-dom/client";
 import { useState } from "react";
 
 import log from "../tools/logging";
+import playBeep from "../tools/playBeep";
 
 export default function Keypad(props) {
   const keypad = props.keypad;
@@ -158,6 +159,7 @@ function parseKeypadValue(keypad) {
 }
 
 function handleKeypadClick(event, props, action) {
+  playBeep();
   const order = props.order;
   const setOrder = props.setOrder;
   const keypad = props.keypad;
