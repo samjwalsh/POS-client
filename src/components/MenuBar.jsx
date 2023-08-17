@@ -4,11 +4,31 @@ import { useState } from "react";
 
 import log from "../tools/logging";
 
-export default function MenuBar({ menuState }) {
-    if (menuState.name === undefined) {
-      log(`Set menu title to Menu`);
-      return <div id="menuBar">Menu</div>;
-    }
-    log(`Set menu title to ${menuState.name}`);
-    return <div id="menuBar">{menuState.name}</div>;
+import hamburger from "../assets/hamburger.svg";
+
+export default function MenuBar(props) {
+  let menuState = props.menuState;
+  let setHamburger = props.setHamburger;
+  let menuTitle = "";
+  if (menuState.name === undefined) {
+    menuTitle = "Menu";
   }
+  log(`Set menu title to ${menuState.name}`);
+  return (
+    <div id="menuBar">
+      <div id="hamburgerIcon">
+        <img
+          src={hamburger}
+          onClick={(event) => handleClickHamburger(event, setHamburger)}
+          id="hamburgerSVG"
+        />
+      </div>
+      <div id="menuTitle">{menuTitle}</div>
+      <div id="menuFiller"></div>
+    </div>
+  );
+}
+
+function handleClickHamburger(event, setHamburger) {
+  setHamburger(true);
+}

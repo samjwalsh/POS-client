@@ -15,12 +15,12 @@ function App() {
   const [menuState, setMenuState] = useState("");
   const [currentOrder, setCurrentOrder] = useState("");
   const [order, setOrder] = useState([]);
-  const [hamburger, sethamburger] = useState(false);
+  const [hamburger, setHamburger] = useState(false);
 
   return (
     <div className="container" id="Container">
-      <HamburgerMenu hamburger={hamburger} sethamburger={sethamburger} />
-      <MenuBar menuState={menuState} />
+      <HamburgerMenu hamburger={hamburger} setHamburger={setHamburger} />
+      <MenuBar menuState={menuState} setHamburger={setHamburger} />
       <OrderBar />
       <Menu
         menuState={menuState}

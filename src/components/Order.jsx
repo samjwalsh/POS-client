@@ -220,7 +220,6 @@ function handlePayment(props, paymentType) {
 
 function handlePlusMinus(event, keypad, setkeypad) {
   playBeep();
-  quit();
 
   log(`Opening the keypad`);
   let temp_keypad = keypad;

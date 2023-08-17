@@ -49,8 +49,9 @@
   border: var(--borderStyle);
   border-right: hidden;
   border-bottom: hidden;
-
-  background-color: var(--headerColour);
+  display: grid;
+  grid-template-areas: "hamburgerIcon menuTitle menuFiller";
+  grid-template-columns: 1fr 1fr 1fr;
 
   text-align: center;
   font-family: var(--titleFont);
@@ -59,6 +60,126 @@
   height: var(--headerHeight);
   line-height: var(--headerHeight);
 }
+
+#hamburgerIcon {
+  background-color: var(--headerColour);
+
+  grid-area: hamburgerIcon;
+  text-align: left;
+  padding-left: var(--standardMargin);
+}
+
+#hamburgerSVG {
+  background-color: var(--headerColour);
+
+  height: 3rem;
+  width: 2.5rem;
+}
+
+#sideMenu {
+  width: 100%;
+  height: 100%;
+  z-index: 1000;
+  position: absolute;
+
+  display: grid;
+  grid-template-areas: "sideMenuContent sideMenuBackground";
+
+  grid-template-columns: 25% auto;
+  background-color: transparent;
+}
+
+#sideMenuContent {
+  grid-area: "sideMenuContent";
+  border: var(--borderStyle);
+
+  display: grid;
+  grid-template-areas:
+    "sideMenuClose"
+    "sideMenuOptions"
+    "sideMenuTerminate";
+
+  grid-template-rows: min-content auto min-content;
+}
+
+#sideMenuClose {
+  height: min-content;
+  display: grid;
+  grid-template-columns: auto min-content;
+  grid-gap: var(--standardMargin);
+  padding: var(--standardMargin);
+  border-bottom: var(--borderStyle);
+}
+
+#sideMenuCloseText {
+  font-size: 2rem;
+  font-weight: var(--categoryFontWeight);
+  font-family: var(--categoryFont);
+  text-align: left;
+  border: var(--borderStyle);
+  padding-left: var(--standardMargin);
+}
+
+#sideMenuCloseButton {
+  margin-left: auto;
+  margin-right: 0;
+  text-align: right;
+  width: min-content;
+  border: var(--borderStyle);
+  font-family: var(--titleFont);
+  font-weight: var(--categoryFontWeight);
+  font-size: 2rem;
+  padding: 0 0.5rem 0 0.5rem;
+}
+
+#sideMenuOptions {
+  display: flex;
+  flex-direction: column;
+  padding: var(--standardMargin);
+  border-bottom: var(--borderStyle);
+}
+
+.sideMenuOption {
+  font-size: 2rem;
+  font-weight: var(--categoryFontWeight);
+  font-family: var(--categoryFont);
+  text-align: left;
+  border: var(--borderStyle);
+  margin-bottom: var(--standardMargin);
+  padding-left: var(--standardMargin);
+}
+
+#sideMenuBackground {
+  grid-area: "sideMenuBackground";
+
+  background-color: rgba(0, 0, 0, 0.25);
+}
+
+#sideMenuTerminate {
+  padding: var(--standardMargin);
+}
+
+#sideMenuTerminateText {
+  font-size: 2rem;
+  font-weight: var(--categoryFontWeight);
+  font-family: var(--categoryFont);
+  text-align: left;
+  border: var(--borderStyle);
+  padding-left: var(--standardMargin);
+}
+
+#menuTitle {
+  background-color: var(--headerColour);
+
+  grid-area: menuTitle;
+}
+
+#menuFiller {
+  background-color: var(--headerColour);
+
+  grid-area: menuFiller;
+}
+
 #menu {
   border: var(--borderStyle);
   border-right: hidden;
@@ -132,7 +253,7 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-  
+
   flex: 1;
 }
 
@@ -474,7 +595,6 @@
   grid-template-columns: auto auto;
   font-size: 2rem;
   margin: 0.5rem 0rem 0.5rem 0rem;
-
 }
 
 .subTotalTitle {

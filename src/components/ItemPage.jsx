@@ -334,8 +334,6 @@ export function handleAddToOrder(
       // 5. Set the state to our new copy
       // More fuckery because react doesnt see changing quantity as a change to state, so we have to manually trigger a rerender with this method (destructuring?)
 
-      console.log([...temp_order]);
-
       setOrder([...temp_order]);
 
       itemWasDupe = true;
