@@ -1,5 +1,5 @@
 :root {
-  --headerHeight: 3rem;
+  --headerHeight: 2.75rem;
 
   --categoryFont: "Inter";
   --categoryFontWeight: 600;
@@ -40,40 +40,69 @@
     "menuBar orderTitle"
     "menu order";
   grid-template-columns: auto 35%;
-  grid-template-rows: var(--headerHeight) calc(100vh - var(--headerHeight));
-  grid-gap: 0rem;
+  grid-template-rows: auto calc(100vh - var(--headerHeight));
   height: 100%;
 }
 
 #menuBar {
+  height: var(--headerHeight);
   border: var(--borderStyle);
   border-right: hidden;
   border-bottom: hidden;
   display: grid;
   grid-template-areas: "hamburgerIcon menuTitle menuFiller";
-  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-columns: min-content 1fr min-content;
 
   text-align: center;
   font-family: var(--titleFont);
   font-size: var(--titleFontSize);
   font-weight: var(--titleFontWeight);
-  height: var(--headerHeight);
-  line-height: var(--headerHeight);
 }
 
 #hamburgerIcon {
-  background-color: var(--headerColour);
-
+  background-color: var(--backgroundColour);
+  border-right: var(--borderStyle);
   grid-area: hamburgerIcon;
   text-align: left;
   padding-left: var(--standardMargin);
+  padding-right: var(--standardMargin);
+
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  flex: 1;
 }
 
 #hamburgerSVG {
+  background-color: var(--backgroundColour);
+
+  height: 2.5rem;
+  width: 2.5rem;
+}
+
+#menuTitle {
   background-color: var(--headerColour);
 
-  height: 3rem;
-  width: 2.5rem;
+  grid-area: menuTitle;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  flex: 1;
+}
+
+#menuFiller {
+  background-color: var(--headerColour);
+  width: 3.5rem;
+  grid-area: menuFiller;
+}
+
+#menu {
+  border: var(--borderStyle);
+  border-right: hidden;
 }
 
 #sideMenu {
@@ -103,33 +132,54 @@
 }
 
 #sideMenuClose {
-  height: min-content;
   display: grid;
+  grid-template-areas: "sideMenuCloseText sideMenuCloseButton";
   grid-template-columns: auto min-content;
-  grid-gap: var(--standardMargin);
-  padding: var(--standardMargin);
+
+  /* grid-gap: var(--standardMargin); */
   border-bottom: var(--borderStyle);
+
+  align-items: center;
 }
 
 #sideMenuCloseText {
-  font-size: 2rem;
-  font-weight: var(--categoryFontWeight);
-  font-family: var(--categoryFont);
+  grid-area: sideMenuCloseText;
+  font-size: 1.8rem;
+  font-weight: var(--titleFontWeight);
+  font-family: var(--titleFont);
   text-align: left;
-  border: var(--borderStyle);
   padding-left: var(--standardMargin);
+  height: 100%;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  flex: 1;
+
+  background-color: var(--headerColour);
 }
 
 #sideMenuCloseButton {
+  height: var(--headerHeight);
+  grid-area: sideMenuCloseButton;
   margin-left: auto;
   margin-right: 0;
-  text-align: right;
-  width: min-content;
-  border: var(--borderStyle);
+  text-align: center;
+  width: 1.5rem;
   font-family: var(--titleFont);
   font-weight: var(--categoryFontWeight);
   font-size: 2rem;
-  padding: 0 0.5rem 0 0.5rem;
+  padding: 0 var(--standardMargin) 0 var(--standardMargin);
+
+  border-left: var(--borderStyle);
+
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  flex: 1;
 }
 
 #sideMenuOptions {
@@ -152,7 +202,7 @@
 #sideMenuBackground {
   grid-area: "sideMenuBackground";
 
-  background-color: rgba(0, 0, 0, 0.25);
+  background-color: rgba(0, 0, 0, 0.5);
 }
 
 #sideMenuTerminate {
@@ -166,23 +216,6 @@
   text-align: left;
   border: var(--borderStyle);
   padding-left: var(--standardMargin);
-}
-
-#menuTitle {
-  background-color: var(--headerColour);
-
-  grid-area: menuTitle;
-}
-
-#menuFiller {
-  background-color: var(--headerColour);
-
-  grid-area: menuFiller;
-}
-
-#menu {
-  border: var(--borderStyle);
-  border-right: hidden;
 }
 
 .items {
@@ -481,8 +514,13 @@
   font-family: var(--titleFont);
   font-size: var(--titleFontSize);
   font-weight: var(--titleFontWeight);
-  height: var(--headerHeight);
-  line-height: var(--headerHeight);
+  
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  flex: 1;
 }
 
 #order {

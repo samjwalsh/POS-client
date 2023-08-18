@@ -5,6 +5,7 @@ import { useState } from "react";
 import log from "../tools/logging";
 
 import hamburger from "../assets/hamburger.svg";
+import playBeep from "../tools/playBeep";
 
 export default function MenuBar(props) {
   let menuState = props.menuState;
@@ -16,19 +17,21 @@ export default function MenuBar(props) {
   log(`Set menu title to ${menuState.name}`);
   return (
     <div id="menuBar">
-      <div id="hamburgerIcon">
+      <div id="hamburgerIcon" onClick={(event) => handleClickHamburger(event, setHamburger)}>
         <img
           src={hamburger}
-          onClick={(event) => handleClickHamburger(event, setHamburger)}
+          
           id="hamburgerSVG"
         />
       </div>
       <div id="menuTitle">{menuTitle}</div>
-      <div id="menuFiller"></div>
+      <div id="menuFiller">
+      </div>
     </div>
   );
 }
 
 function handleClickHamburger(event, setHamburger) {
+  playBeep();
   setHamburger(true);
 }

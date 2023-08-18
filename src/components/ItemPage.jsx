@@ -343,7 +343,6 @@ export function handleAddToOrder(
   if (!itemWasDupe) {
     log(`Added item ${item.name} to order, was not a duplicate`);
     setOrder((order) => [...order, parsedOrder]);
-    console.log(order);
   }
 
   log(`Exiting item page`);

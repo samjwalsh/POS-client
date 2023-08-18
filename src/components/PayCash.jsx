@@ -4,6 +4,7 @@ import { useState } from "react";
 
 import log from "../tools/logging";
 import playBeep from "../tools/playBeep";
+import { addOrder } from "../tools/ipc";
 
 export default function PayCash(props) {
   const change = props.change;
@@ -125,17 +126,10 @@ function handlePayCash(event, props, value) {
     props.setOrder([]);
     props.setPayCash({ state: false, returnedKeypadValue: 0 });
     props.setChange(0);
+    addOrder(props.order, 'Cash');
   }
 
-  let subtotal = 0;
-  props.order.forEach((orderItem, index) => {
-    if (!(orderItem.name === "Adjustment")) {
-      subtotal += orderItem.price * orderItem.quantity;
-    } else {
-      //add code for displaying the adjustment
-      subtotal += orderItem.value;
-    }
-  });
+  const subtotal = calculateSubtotal(props.order);
 
   log(`Calculating the subtotal`);
 
@@ -156,4 +150,17 @@ function handlePayCash(event, props, value) {
       sign: "+",
     });
   }
+}
+
+export function calculateSubtotal(order) {
+  let subtotal = 0;
+  order.forEach((orderItem, index) => {
+    if (!(orderItem.name === "Adjustment")) {
+      subtotal += orderItem.price * orderItem.quantity;
+    } else {
+      //add code for displaying the adjustment
+      subtotal += orderItem.value;
+    }
+  });
+  return subtotal
 }

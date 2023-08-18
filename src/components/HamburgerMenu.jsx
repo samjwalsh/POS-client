@@ -1,7 +1,7 @@
 import * as React from "react";
 
 import playBeep from "../tools/playBeep";
-import { quit } from "../tools/ipc";
+import { getAllOrders, quit, removeAllOrders } from "../tools/ipc";
 
 export default function HamburgerMenu(props) {
   let hamburger = props.hamburger;
@@ -14,18 +14,13 @@ export default function HamburgerMenu(props) {
   const sideMenuOptions = [
     {
       id: 0,
-      name: "Orders",
-      function: handleClickOrder(),
+      name: "X-Totals",
+      function: handleClickX,
     },
     {
       id: 1,
-      name: "X-Totals",
-      function: handleClickX(),
-    },
-    {
-      id: 2,
       name: "Z-Totals",
-      function: handleClickZ(),
+      function: handleClickZ,
     },
   ];
 
@@ -34,9 +29,7 @@ export default function HamburgerMenu(props) {
       <div
         className="sideMenuOption"
         key={option.id}
-        onClick={() => {
-          option.function;
-        }}
+        onClick={option.function}
       >
         {option.name}
       </div>
@@ -75,16 +68,21 @@ function handleCloseSideMenu(setHamburger) {
   setHamburger(false);
 }
 
-function handleClickOrder() {
+function handleClickOrders() {
   playBeep();
 }
 
-function handleClickX() {
+async function handleClickX() {
   playBeep();
+
+  const orders = await getAllOrders();
+  console.log(orders);
 }
 
 function handleClickZ() {
   playBeep();
+
+  removeAllOrders();
 }
 
 function handleTerminatePOS() {

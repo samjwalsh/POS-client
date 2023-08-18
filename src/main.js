@@ -1,6 +1,5 @@
-const { app, BrowserWindow, ipcMain } = require("electron");
+const { app, BrowserWindow} = require("electron");
 const path = require("path");
-const sound = require("sound-play");
 
 // Handle creating/removing shortcuts on Windows when installing/uninstalling.
 if (require("electron-squirrel-startup")) {
@@ -55,6 +54,7 @@ app.on("activate", () => {
 // In this file you can include the rest of your app's specific main process
 // code. You can also put them in separate files and import them here.
 
-ipcMain.on("quit", () => {
-  app.quit()
-})
+//importing APIs
+import './mainProcessAPIs/ordersAPI'
+import './mainProcessAPIs/quitAPI'
+

@@ -7,6 +7,7 @@ import OrderBar from "./components/OrderBar.jsx";
 import MenuBar from "./components/MenuBar.jsx";
 import Menu from "./components/Menu.jsx";
 import HamburgerMenu from "./components/HamburgerMenu.jsx";
+import { getAllOrders } from "./tools/ipc.js";
 
 const domNode = document.getElementById("App");
 const root = ReactDOM.createRoot(domNode);
