@@ -14,8 +14,6 @@ function App() {
 
   const [hamburgerOpen, setHamburgerOpen] = useState(false);
 
-  console.log(hamburgerOpen);
-
   return (
     <div className="app">
       <HamburgerMenu
