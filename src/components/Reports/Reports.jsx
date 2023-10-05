@@ -23,10 +23,39 @@ export default function Reports(props) {
 
   console.log(orders);
 
-  const ordersHTML = [];
+  let ordersHTML;
   if (Array.isArray(orders)) {
-    orders.forEach((order, index) => {
-      ordersHTML.push(<div id={index}>order</div>);
+    ordersHTML = orders.map((order, index) => {
+      let itemsHTML = order.items.map((item) => {
+        return (
+          <div className="reportsOrderItem">
+            {item.name}
+          </div>
+        );
+      });
+
+      const orderDate = new Date(order.time);
+
+      return (
+        <div key={order.time}>
+          Date:{" "}
+          {orderDate.getDate() +
+            "/" +
+            (orderDate.getMonth() + 1) +
+            "/" +
+            orderDate.getFullYear() +
+            " " +
+            orderDate.getHours() +
+            ":" +
+            orderDate.getMinutes() +
+            ":" +
+            orderDate.getSeconds()}{" "}
+          <br />
+          Total:{Math.round(order.subtotal, 2)} (
+          {order.paymentMethod}) Items:
+          {itemsHTML}
+        </div>
+      );
     });
   }
 
