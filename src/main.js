@@ -1,7 +1,7 @@
-const { app, BrowserWindow} = require("electron");
+const { app, BrowserWindow } = require("electron");
 const path = require("path");
 
-const dev = true;
+const dev = app.isPackaged;
 
 // Handle creating/removing shortcuts on Windows when installing/uninstalling.
 if (require("electron-squirrel-startup")) {
@@ -20,7 +20,7 @@ const createWindow = () => {
       sandbox: false,
       preload: MAIN_WINDOW_PRELOAD_WEBPACK_ENTRY,
     },
-    fullscreen: dev === false? true : false,
+    fullscreen: dev === false ? true : false,
     autoHideMenuBar: true,
   });
 
@@ -57,6 +57,5 @@ app.on("activate", () => {
 // code. You can also put them in separate files and import them here.
 
 //importing APIs
-import './mainProcessAPIs/ordersAPI'
-import './mainProcessAPIs/quitAPI'
-
+import "./mainProcessAPIs/ordersAPI";
+import "./mainProcessAPIs/quitAPI";
