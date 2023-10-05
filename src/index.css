@@ -904,3 +904,23 @@ html {
   grid-area: payCashChangeValue;
   text-align: right;
 }
+
+.reports {
+  display: grid;
+  grid-template-areas: 
+  "reportsTitleBar"
+  "reportsOrders";
+
+  grid-template-rows: auto calc(100vh - var(--headerHeight));
+}
+
+.reportsTitleBar {
+  height: var(--headerHeight);
+  grid-area: "reportsTitleBar";
+  border: var(--borderStyled);
+}
+
+.reportsOrders {
+  grid-area: "reportsOrders";
+  border: var(--borderStyled);
+}

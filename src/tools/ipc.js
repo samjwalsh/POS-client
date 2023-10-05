@@ -1,4 +1,4 @@
-import { calculateSubtotal } from "../components/PayCash.jsx";
+import { calculateSubtotal } from "../components/Register/PayCash.jsx";
 
 const ipcRenderer = window.ipcRenderer;
 

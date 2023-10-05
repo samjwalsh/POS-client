@@ -4,20 +4,20 @@ import { useState } from "react";
 
 import Order from "./Order.jsx";
 import OrderBar from "./OrderBar.jsx";
-import MenuBar from "./MenuBar.jsx";
+import MenuBar from "../MenuBar.jsx";
 import Menu from "./Menu.jsx";
-import HamburgerMenu from "./HamburgerMenu.jsx";
 
 export default function RegisterState(props) {
   const [menuState, setMenuState] = useState("");
   const [currentOrder, setCurrentOrder] = useState("");
   const [order, setOrder] = useState([]);
-  const [hamburger, setHamburger] = useState(false);
+
+  const hamburgerOpen = props.hamburgerOpen;
+  const setHamburgerOpen = props.setHamburgerOpen;
 
   return (
     <div className="container" id="Container">
-      <HamburgerMenu hamburger={hamburger} setHamburger={setHamburger} />
-      <MenuBar menuState={menuState} setHamburger={setHamburger} />
+      <MenuBar menuState={menuState} setHamburger={setHamburgerOpen} />
       <OrderBar />
       <Menu
         menuState={menuState}

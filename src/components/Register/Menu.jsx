@@ -2,13 +2,13 @@ import * as React from "react";
 import * as ReactDOM from "react-dom/client";
 import { useState } from "react";
 
-import getMenu from "../tools/menuAPI";
+import getMenu from "../../tools/menuAPI";
 import { handleAddToOrder } from "./ItemPage.jsx";
 
 import ItemPage from "./ItemPage.jsx";
 
-import log from "../tools/logging";
-import playBeep from "../tools/playBeep";
+import log from "../../tools/logging";
+import playBeep from "../../tools/playBeep";
 
 export default function Menu(props) {
   const menuState = props.menuState;

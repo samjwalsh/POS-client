@@ -2,14 +2,16 @@ import * as React from "react";
 import * as ReactDOM from "react-dom/client";
 import { useState } from "react";
 
-import log from "../tools/logging";
+import log from "../../tools/logging";
+
+import { addOrder } from "../../tools/ipc";
 
 import PayCash from "./PayCash.jsx";
-import Keypad from "./Keypad.jsx";
+import Keypad from "../Keypad.jsx";
 
-import { quit } from "../tools/ipc";
+import { quit } from "../../tools/ipc";
 
-import playBeep from "../tools/playBeep";
+import playBeep from "../../tools/playBeep";
 
 export default function Order(props) {
   const order = props.order;
@@ -31,7 +33,12 @@ export default function Order(props) {
   log(`Initiating change state`);
   const [change, setChange] = useState(0);
 
-  const passProps = { payCash, setPayCash, order, setOrder };
+  const passProps = {
+    payCash,
+    setPayCash,
+    order,
+    setOrder,
+  };
 
   if (keypad.enabled == true) {
     log(`Opening the keypad`);
@@ -66,13 +73,20 @@ export default function Order(props) {
           <div className="nameAndAddons">
             <div className="orderItemName">
               {orderItem.name +
-                (orderItem.quantity > 1 ? ` (${orderItem.quantity})` : "")}
+                (orderItem.quantity > 1
+                  ? ` (${orderItem.quantity})`
+                  : "")}
             </div>
-            <div className="orderItemAddons">{orderItem.addons.join(", ")}</div>
+            <div className="orderItemAddons">
+              {orderItem.addons.join(", ")}
+            </div>
           </div>
           <div className="priceAndPriceEach">
             <div className="orderItemPrice">
-              €{(orderItem.price * orderItem.quantity).toFixed(2)}
+              €
+              {(
+                orderItem.price * orderItem.quantity
+              ).toFixed(2)}
             </div>
             <div className="orderItemPriceEach">
               €{orderItem.price.toFixed(2)} EA
@@ -80,7 +94,9 @@ export default function Order(props) {
           </div>
           <div
             className="orderItemRemove"
-            onClick={(event) => handleOrderItemRemove(event, passProps)}
+            onClick={(event) =>
+              handleOrderItemRemove(event, passProps)
+            }
           >
             <div className="orderItemRemoveText">X</div>
           </div>
@@ -88,27 +104,35 @@ export default function Order(props) {
       );
     } else {
       //add code for displaying the adjustment
-      log(`Adding adjustment of ${orderItem.value} to HTML and subtotal`);
+      log(
+        `Adding adjustment of ${orderItem.value} to HTML and subtotal`
+      );
       subtotal += orderItem.value;
       if (orderItem.value != 0) {
         orderItems.push(
           <div className="orderItem" key={index}>
             <div className="nameAndAddons">
-              <div className="orderItemName">Adjustment</div>
+              <div className="orderItemName">
+                Adjustment
+              </div>
               <div className="orderItemAddons"></div>
             </div>
             <div className="priceAndPriceEach">
               <div className="orderItemPrice">
                 €
                 {orderItem.value < 0
-                  ? `(${Math.abs(orderItem.value).toFixed(2)})`
+                  ? `(${Math.abs(orderItem.value).toFixed(
+                      2
+                    )})`
                   : `${orderItem.value.toFixed(2)}`}
               </div>
               <div className="orderItemPriceEach"></div>
             </div>
             <div
               className="orderItemRemove"
-              onClick={(event) => handleOrderItemRemove(event, passProps)}
+              onClick={(event) =>
+                handleOrderItemRemove(event, passProps)
+              }
             >
               <div className="orderItemRemoveText">X</div>
             </div>
@@ -136,24 +160,32 @@ export default function Order(props) {
         <div className="subTotal">
           <div className="subTotalTop">
             <div className="subTotalTitle">Subtotal</div>
-            <div className="subTotalPrice">€{subtotal.toFixed(2)}</div>
+            <div className="subTotalPrice">
+              €{subtotal.toFixed(2)}
+            </div>
           </div>
           <div className="subTotalBottom">
             <div
               className="plusMinus"
-              onClick={(event) => handlePlusMinus(event, keypad, setkeypad)}
+              onClick={(event) =>
+                handlePlusMinus(event, keypad, setkeypad)
+              }
             >
               <div className="plusMinusContainer">±</div>
             </div>
             <div
               className="card"
-              onClick={(event) => handlePayment(passProps, "card")}
+              onClick={(event) =>
+                handlePayment(passProps, "card")
+              }
             >
               <div className="cardContainer">Card</div>
             </div>
             <div
               className="cash"
-              onClick={(event) => handlePayment(passProps, "cash")}
+              onClick={(event) =>
+                handlePayment(passProps, "cash")
+              }
             >
               <div className="cashContainer">Cash</div>
             </div>
@@ -172,24 +204,32 @@ export default function Order(props) {
       <div className="subTotal">
         <div className="subTotalTop">
           <div className="subTotalTitle">Subtotal</div>
-          <div className="subTotalPrice">€{subtotal.toFixed(2)}</div>
+          <div className="subTotalPrice">
+            €{subtotal.toFixed(2)}
+          </div>
         </div>
         <div className="subTotalBottom">
           <div
             className="plusMinus"
-            onClick={(event) => handlePlusMinus(event, keypad, setkeypad)}
+            onClick={(event) =>
+              handlePlusMinus(event, keypad, setkeypad)
+            }
           >
             <div className="plusMinusContainer">±</div>
           </div>
           <div
             className="card"
-            onClick={(event) => handlePayment(passProps, "card")}
+            onClick={(event) =>
+              handlePayment(passProps, "card")
+            }
           >
             <div className="cardContainer">Card</div>
           </div>
           <div
             className="cash"
-            onClick={(event) => handlePayment(passProps, "cash")}
+            onClick={(event) =>
+              handlePayment(passProps, "cash")
+            }
           >
             <div className="cashContainer">Cash</div>
           </div>
@@ -206,6 +246,7 @@ function handlePayment(props, paymentType) {
   //TODO add code to record all orders
   if (paymentType === "card") {
     log(`Payment type card selected, resetting order`);
+    addOrder(props.order, "Card");
     props.setOrder([]);
   } else if (payCash.state === true) {
     setPayCash({
@@ -246,7 +287,9 @@ function handleOrderItemRemove(event, props) {
     });
   } else if (orderItem.quantity > 1) {
     order.forEach((item, index) => {
-      log(`Reducing quantity of item ${item.name} in order by 1`);
+      log(
+        `Reducing quantity of item ${item.name} in order by 1`
+      );
       if (orderItem == item) {
         let temp_order = order;
         let temp_orderItem = temp_order[index];

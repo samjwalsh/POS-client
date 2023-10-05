@@ -21,3 +21,7 @@ ipcMain.handle("addOrder", (e, order) => {
 ipcMain.handle("removeAllOrders", () => {
   store.set("orders", []);
 });
+
+ipcMain.handle("removeOrder", (e, orderTime) => {
+  const orders = store.get("orders");
+});
