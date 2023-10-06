@@ -8,7 +8,6 @@ ipcMain.handle("getAllOrders", () => {
 });
 
 ipcMain.handle("addOrder", (e, order) => {
-  console.log(order);
   const orders = store.get("orders");
   if (orders === undefined) {
     store.set("orders", [order]);

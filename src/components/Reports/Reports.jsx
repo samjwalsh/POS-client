@@ -17,44 +17,52 @@ export default function Reports(props) {
   useEffect(() => {
     (async () => {
       const localOrders = await getAllOrders();
-      setOrders(localOrders);
+      setOrders(localOrders.reverse());
     })();
   }, []);
 
-  console.log(orders);
+  // {
+  //   paymentMethod: 'Cash',
+  //   time: 1696614274500,
+  //   subtotal: 11.25,
+  //   items: [
+  //     { name: 'Family Special', price: 10, quantity: 1, addons: [] },
+  //     { name: 'Adjustment', value: 1.25 }
+  //   ]
+  // }
 
   let ordersHTML;
   if (Array.isArray(orders)) {
     ordersHTML = orders.map((order, index) => {
       let itemsHTML = order.items.map((item) => {
-        return (
-          <div className="reportsOrderItem">
-            {item.name}
-          </div>
-        );
+        return <div className="reportsOrderItem">{item.name}</div>;
       });
 
-      const orderDate = new Date(order.time);
+      const orderDateString = calculateDateString(order.time);
 
       return (
-        <div key={order.time}>
-          Date:{" "}
-          {orderDate.getDate() +
-            "/" +
-            (orderDate.getMonth() + 1) +
-            "/" +
-            orderDate.getFullYear() +
-            " " +
-            orderDate.getHours() +
-            ":" +
-            orderDate.getMinutes() +
-            ":" +
-            orderDate.getSeconds()}{" "}
-          <br />
-          Total:{Math.round(order.subtotal, 2)} (
-          {order.paymentMethod}) Items:
-          {itemsHTML}
-        </div>
+        <div key={order.time} className="reportsOrder">
+            <div className="reportsOrderTableDeleteOrder">X</div>
+            <div className="reportsOrderTableTitle reportsOrderTableTitleTime ">
+              Time:
+            </div>
+            <div className="reportsOrderTableValue reportsOrderTableValueTime">
+              {orderDateString}
+            </div>
+            <div className="reportsOrderTableTitle reportsOrderTableTitleSubTotal">
+              Subtotal:
+            </div>
+            <div className="reportsOrderTableValue reportsOrderTableValueSubTotal">
+              {Math.round(order.subtotal).toFixed(2)}
+            </div>
+            <div className="reportsOrderTableTitle reportsOrderTableTitlePayment">
+              Payment:
+            </div>
+            <div className="reportsOrderTableValue reportsOrderTableValuePayment">
+              {order.paymentMethod}
+            </div>
+            <div className="reportsOrderTableItems"></div>
+          </div>
       );
     });
   }
@@ -64,9 +72,7 @@ export default function Reports(props) {
       <div className="reportsTitleBar">
         <div
           id="hamburgerIcon"
-          onClick={(event) =>
-            handleClickHamburger(event, setHamburgerOpen)
-          }
+          onClick={(event) => handleClickHamburger(event, setHamburgerOpen)}
         >
           <img src={hamburger} id="hamburgerSVG" />
         </div>
@@ -79,4 +85,23 @@ export default function Reports(props) {
 function handleClickHamburger(event, setHamburgerOpen) {
   playBeep();
   setHamburgerOpen(true);
+}
+
+function calculateDateString(time) {
+  const date = new Date(time);
+
+  let dateString = "";
+  dateString += date.getHours().toString().padStart(2, "0");
+  dateString += ":";
+  dateString += date.getMinutes().toString().padStart(2, "0");
+  dateString += ":";
+  dateString += date.getSeconds().toString().padStart(2, "0");
+  // dateString += " ";
+  // dateString += date.getDate().toString().padStart(2, "0");
+  // dateString += "/";
+  // dateString += date.getMonth().toString().padStart(2, "0");
+  // dateString += "/";
+  // dateString += date.getFullYear().toString().padStart(2, "0");
+
+  return dateString;
 }

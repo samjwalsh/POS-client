@@ -29,6 +29,7 @@
 
 html {
   font-size: 16px;
+  font-family: Inter;
 }
 
 * {
@@ -518,7 +519,7 @@ html {
   font-family: var(--titleFont);
   font-size: var(--titleFontSize);
   font-weight: var(--titleFontWeight);
-  
+
   align-items: center;
   display: flex;
   flex-direction: column;
@@ -907,20 +908,94 @@ html {
 
 .reports {
   display: grid;
-  grid-template-areas: 
-  "reportsTitleBar"
-  "reportsOrders";
+  grid-template-areas:
+    "reportsTitleBar"
+    "reportsOrders";
 
   grid-template-rows: auto calc(100vh - var(--headerHeight));
+
+  width: 100%;
 }
 
 .reportsTitleBar {
   height: var(--headerHeight);
   grid-area: "reportsTitleBar";
-  border: var(--borderStyled);
+  border: var(--borderStyle);
 }
 
 .reportsOrders {
   grid-area: "reportsOrders";
+  border: var(--borderStyle);
+  border-top: none;
+  overflow: hidden;
+  overflow-y: scroll;
+
+  justify-content: center;
+
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--standardMargin);
+  padding: var(--standardMargin);
+}
+
+.reportsOrder {
+  border: var(--borderStyle);
+  width: calc((100% / 4) - 2 * var(--standardMargin));
+  height: 10em;
+  display: grid;
+  grid-template-areas:
+    "timeTitle timeValue delete"
+    "subtotalTitle subtotalValue delete"
+    "paymentTitle paymentValue delete"
+    "items items items";
+  grid-template-columns: min-content auto;
+  grid-template-rows: min-content auto auto auto;
+}
+
+.reportsOrderTableTitle {
+  width: min-content;
+  align-self: start;
   border: var(--borderStyled);
+  font-size: 1rem;
+  font-weight: var(--categoryFontWeight);
+
+}
+
+.reportsOrderTableValue {
+  border: var(--borderStyled);
+  font-size: 1rem;
+  font-weight: var(--categoryFontWeight);
+  text-align: right;
+}
+
+.reportsOrderTableDeleteOrder {
+  grid-area: delete;
+}
+
+.reportsOrderTableTitleTime {
+  grid-area: timeTitle;
+}
+
+.reportsOrderTableValueTime {
+  grid-area: timeValue;
+}
+
+.reportsOrderTableTitleSubTotal {
+  grid-area: subtotalTitle;
+}
+
+.reportsOrderTableValueSubTotal {
+  grid-area: subtotalValue;
+}
+
+.reportsOrderTableTitlePayment {
+  grid-area: paymentTitle;
+}
+
+.reportsOrderTableValuePayment {
+  grid-area: paymentValue;
+}
+
+.reportsOrderTableItems {
+  grid-area: items;
 }
