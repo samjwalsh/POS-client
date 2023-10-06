@@ -4,7 +4,7 @@ import { useState } from "react";
 
 import log from "../../tools/logging";
 
-import hamburger from "../assets/hamburger.svg";
+import hamburger from "../../assets/hamburger.svg";
 import playBeep from "../../tools/playBeep";
 
 export default function MenuBar(props) {
