@@ -2,10 +2,10 @@ import * as React from "react";
 import * as ReactDOM from "react-dom/client";
 import { useState } from "react";
 
-import log from "../tools/logging";
+import log from "../../tools/logging";
 
 import hamburger from "../assets/hamburger.svg";
-import playBeep from "../tools/playBeep";
+import playBeep from "../../tools/playBeep";
 
 export default function MenuBar(props) {
   let menuState = props.menuState;
