@@ -42,6 +42,7 @@ export default function Reports(props) {
 
       return (
         <div key={order.time} className="reportsOrder">
+          <div className="reportsOrderTableOrderNo"></div>
             <div className="reportsOrderTableDeleteOrder">X</div>
             <div className="reportsOrderTableTitle reportsOrderTableTitleTime ">
               Time:

@@ -940,32 +940,39 @@ html {
 
 .reportsOrder {
   border: var(--borderStyle);
-  width: calc((100% / 4) - 2 * var(--standardMargin));
+  width: calc((100% / 3) - 2 * var(--standardMargin));
   height: 10em;
   display: grid;
   grid-template-areas:
-    "timeTitle timeValue delete"
-    "subtotalTitle subtotalValue delete"
-    "paymentTitle paymentValue delete"
-    "items items items";
-  grid-template-columns: min-content auto;
-  grid-template-rows: min-content auto auto auto;
+  "orderNo orderNo delete"
+  "timeTitle timeValue timeValue"
+  "subtotalTitle subtotalValue subtotalValue"
+  "paymentTitle paymentValue paymentValue"
+  "items items items";
+  grid-template-columns: auto auto auto;
+  grid-template-rows: auto auto auto auto;
+
+  font-size: 1rem;
+  font-weight: var(--categoryFontWeight);
 }
 
 .reportsOrderTableTitle {
   width: min-content;
   align-self: start;
   border: var(--borderStyled);
-  font-size: 1rem;
-  font-weight: var(--categoryFontWeight);
 
 }
 
 .reportsOrderTableValue {
   border: var(--borderStyled);
-  font-size: 1rem;
-  font-weight: var(--categoryFontWeight);
+
   text-align: right;
+}
+
+.reportsOrderTableOrderNo {
+  grid-area: orderNo;
+
+  border: var(--borderStyled)
 }
 
 .reportsOrderTableDeleteOrder {
