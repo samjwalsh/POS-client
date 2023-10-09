@@ -944,63 +944,135 @@ html {
   height: 10em;
   display: grid;
   grid-template-areas:
-  "orderNo orderNo delete"
-  "timeTitle timeValue timeValue"
-  "subtotalTitle subtotalValue subtotalValue"
-  "paymentTitle paymentValue paymentValue"
-  "items items items";
-  grid-template-columns: auto auto auto;
-  grid-template-rows: auto auto auto auto;
+    "orderNo orderNo delete"
+    "timeTitle timeValue timeValue"
+    "subtotalTitle subtotalValue subtotalValue"
+    "paymentTitle paymentValue paymentValue"
+    "items items items";
+  grid-template-columns: min-content auto auto;
+  grid-template-rows: min-content min-content min-content min-content;
 
-  font-size: 1rem;
+  font-size: 1.2rem;
   font-weight: var(--categoryFontWeight);
+
+  padding-top: var(--standardMargin);
 }
 
 .reportsOrderTableTitle {
-  width: min-content;
   align-self: start;
-  border: var(--borderStyled);
+  margin-left: var(--standardMargin);
+  padding-left: var(--standardMargin);
 
+
+  /* Centers the text */
+  align-items: start;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  flex: 1;
 }
 
 .reportsOrderTableValue {
-  border: var(--borderStyled);
 
-  text-align: right;
+  height: min-content;
+  margin-right: var(--standardMargin);
+  padding-right: var(--standardMargin);
+
+
+
+  /* Centers the text */
+  align-items: end;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  flex: 1;
 }
 
 .reportsOrderTableOrderNo {
   grid-area: orderNo;
 
-  border: var(--borderStyled)
+  margin-left: var(--standardMargin);
+  margin-top: var(--standardMargin);
+  margin-bottom: var(--standardMargin);
+
+
+  font-size: 1.5rem;
 }
 
 .reportsOrderTableDeleteOrder {
   grid-area: delete;
+
+  border: var(--borderStyle);
+
+  font-size: 1.5rem;
+
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+
+
+  width: auto;
+
+  margin-right: var(--standardMargin);
+  margin-bottom: var(--standardMargin);
+
+  /* Centers the text */
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  flex: 1;
 }
 
 .reportsOrderTableTitleTime {
+  border-top: var(--borderStyle);
+  border-left: var(--borderStyle);
+  padding-top: var(--standardMargin);
+
+
   grid-area: timeTitle;
 }
 
 .reportsOrderTableValueTime {
+  border-top: var(--borderStyle);
+  border-right: var(--borderStyle);
+  padding-top: var(--standardMargin);
+
+
   grid-area: timeValue;
 }
 
 .reportsOrderTableTitleSubTotal {
   grid-area: subtotalTitle;
+  border-left: var(--borderStyle);
+
 }
 
 .reportsOrderTableValueSubTotal {
   grid-area: subtotalValue;
+  border-right: var(--borderStyle);
+
 }
 
 .reportsOrderTableTitlePayment {
   grid-area: paymentTitle;
+  border-left: var(--borderStyle);
+
+  border-bottom: var(--borderStyle);
+  padding-bottom: var(--standardMargin);
+
 }
 
 .reportsOrderTableValuePayment {
   grid-area: paymentValue;
+  border-right: var(--borderStyle);
+
+  border-bottom: var(--borderStyle);
+  padding-bottom: var(--standardMargin);
+
+
 }
 
 .reportsOrderTableItems {

@@ -42,28 +42,30 @@ export default function Reports(props) {
 
       return (
         <div key={order.time} className="reportsOrder">
-          <div className="reportsOrderTableOrderNo"></div>
-            <div className="reportsOrderTableDeleteOrder">X</div>
-            <div className="reportsOrderTableTitle reportsOrderTableTitleTime ">
-              Time:
-            </div>
-            <div className="reportsOrderTableValue reportsOrderTableValueTime">
-              {orderDateString}
-            </div>
-            <div className="reportsOrderTableTitle reportsOrderTableTitleSubTotal">
-              Subtotal:
-            </div>
-            <div className="reportsOrderTableValue reportsOrderTableValueSubTotal">
-              {Math.round(order.subtotal).toFixed(2)}
-            </div>
-            <div className="reportsOrderTableTitle reportsOrderTableTitlePayment">
-              Payment:
-            </div>
-            <div className="reportsOrderTableValue reportsOrderTableValuePayment">
-              {order.paymentMethod}
-            </div>
-            <div className="reportsOrderTableItems"></div>
+          <div className="reportsOrderTableOrderNo">
+            Order No. {orders.length - index}
           </div>
+          <div className="reportsOrderTableDeleteOrder"> X </div>
+          <div className="reportsOrderTableTitle reportsOrderTableTitleTime ">
+            Time:
+          </div>
+          <div className="reportsOrderTableValue reportsOrderTableValueTime">
+            {orderDateString}
+          </div>
+          <div className="reportsOrderTableTitle reportsOrderTableTitleSubTotal">
+            Subtotal:
+          </div>
+          <div className="reportsOrderTableValue reportsOrderTableValueSubTotal">
+            {order.subtotal.toFixed(2)}
+          </div>
+          <div className="reportsOrderTableTitle reportsOrderTableTitlePayment">
+            Payment:
+          </div>
+          <div className="reportsOrderTableValue reportsOrderTableValuePayment">
+            {order.paymentMethod}
+          </div>
+          <div className="reportsOrderTableItems"></div>
+        </div>
       );
     });
   }
@@ -97,12 +99,12 @@ function calculateDateString(time) {
   dateString += date.getMinutes().toString().padStart(2, "0");
   dateString += ":";
   dateString += date.getSeconds().toString().padStart(2, "0");
-  // dateString += " ";
-  // dateString += date.getDate().toString().padStart(2, "0");
-  // dateString += "/";
-  // dateString += date.getMonth().toString().padStart(2, "0");
-  // dateString += "/";
-  // dateString += date.getFullYear().toString().padStart(2, "0");
+  dateString += " ";
+  dateString += date.getDate().toString().padStart(2, "0");
+  dateString += "/";
+  dateString += date.getMonth().toString().padStart(2, "0");
+  dateString += "/";
+  dateString += date.getFullYear().toString().padStart(2, "0");
 
   return dateString;
 }
