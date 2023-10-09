@@ -973,6 +973,10 @@ html {
   flex: 1;
 }
 
+.reportsOrderTableItems {
+  grid-area: items;
+}
+
 .reportsOrderTableValue {
 
   height: min-content;

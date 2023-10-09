@@ -35,9 +35,41 @@ export default function Reports(props) {
   if (Array.isArray(orders)) {
     ordersHTML = orders.map((order, index) => {
       let itemsHTML = order.items.map((item) => {
-        return <div className="reportsOrderItem">{item.name}</div>;
-      });
+        let formattedQuantity = "";
+        if (item.quantity === 1 || item.quantity === undefined) {
+        } else {
+          formattedQuantity = `(${item.quantity})`;
+        }
 
+        let formattedAddons = "";
+        if (typeof(item.addons) === 'Array') {
+          if (item.addons.length === 1) {
+            formattedAddons = item.addons[0];
+          } else {
+
+          }
+        }
+
+        console.log(item.quantity);
+        console.log(item.name);
+// the adjustment doesnt have a quantity, fix this
+
+        return (
+          <div className="reportsOrderItem">
+            <div className="reportsOrderItemName">
+              {item.name} {formattedQuantity}
+            </div>
+            <div className="reportsOrderTotalPrice">
+            €{(item.price * item.quantity).toFixed(2)}
+            </div>
+            <div className="reportsOrderPriceEach">
+            €{(item.price).toFixed(2)} EA
+            </div>
+            <div className="reportsOrderAddons">
+            </div>
+          </div>
+        );
+      });
       const orderDateString = calculateDateString(order.time);
 
       return (
@@ -65,6 +97,7 @@ export default function Reports(props) {
             {order.paymentMethod}
           </div>
           <div className="reportsOrderTableItems"></div>
+          <div className="reportsOrderTableItems">{itemsHTML}</div>
         </div>
       );
     });
