@@ -36,6 +36,12 @@ export default function Reports(props) {
   let ordersHTML;
   if (Array.isArray(orders)) {
     ordersHTML = orders.map((order, index) => {
+      //Should fix bugs on machines where the adjustment has a value instead of price
+
+      if (order.price === undefined) {
+        removeAllOrders();
+      }
+
       let itemsHTML = order.items.map((item) => {
         let formattedQuantity = "";
         if (item.quantity === 1 || item.quantity === undefined) {
