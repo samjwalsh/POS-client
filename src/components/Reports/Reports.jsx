@@ -38,7 +38,7 @@ export default function Reports(props) {
     ordersHTML = orders.map((order, index) => {
       //Should fix bugs on machines where the adjustment has a value instead of price
 
-      if (order.price === undefined) {
+      if (order.value !== undefined) {
         removeAllOrders();
       }
 
