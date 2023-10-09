@@ -194,7 +194,7 @@ export function calculateSubtotal(order) {
       subtotal += orderItem.price * orderItem.quantity;
     } else {
       //add code for displaying the adjustment
-      subtotal += orderItem.value;
+      subtotal += orderItem.price;
     }
   });
   return subtotal;

@@ -212,7 +212,7 @@ function handleKeypadClick(event, props, action) {
         let temp_order = props.order;
 
         // 2. Make a shallow copy of the element you want to mutate
-        temp_order.push({ name: "Adjustment", value: keypadValue });
+        temp_order.push({ name: "Adjustment", price: keypadValue, quantity: 1 });
 
         // 5. Set the state to our new copy
         // More fuckery because react doesnt see changing quantity as a change to state, so we have to manually trigger a rerender with this method (destructuring?)
@@ -226,7 +226,7 @@ function handleKeypadClick(event, props, action) {
             subtotal += orderItem.price * orderItem.quantity;
           } else {
             //add code for displaying the adjustment
-            subtotal += orderItem.value;
+            subtotal += orderItem.price;
           }
         });
         log(`Calculating the change given the keypad value and the subtotal`);

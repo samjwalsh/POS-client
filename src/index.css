@@ -563,7 +563,8 @@ html {
   width: auto;
 
   display: grid;
-  grid-template-areas: "nameAndAddons priceAndPriceEach orderItemRemove";
+  grid-template-areas:
+  "nameAndAddons priceAndPriceEach orderItemRemove";
   grid-template-columns: auto min-content min-content;
 }
 
@@ -578,10 +579,12 @@ html {
 
 .orderItemName {
   font-size: 1.2rem;
+
+  margin-bottom: var(--standardMargin);
 }
 
 .orderItemAddons {
-  font-size: 0.8rem;
+  font-size: 1rem;
 }
 
 .priceAndPriceEach {
@@ -604,7 +607,7 @@ html {
 
 .orderItemPriceEach {
   grid-area: orderItemPriceEach;
-  font-size: 0.8rem;
+  font-size: 1rem;
 }
 
 .orderItemRemove {
@@ -926,9 +929,7 @@ html {
 .reportsOrders {
   grid-area: "reportsOrders";
   border: var(--borderStyle);
-  border-top: none;
-  overflow: hidden;
-  overflow-y: scroll;
+
 
   justify-content: center;
 
@@ -936,12 +937,15 @@ html {
   flex-wrap: wrap;
   gap: var(--standardMargin);
   padding: var(--standardMargin);
+
+  overflow: hidden;
+  overflow-y: scroll;
 }
 
 .reportsOrder {
   border: var(--borderStyle);
   width: calc((100% / 3) - 2 * var(--standardMargin));
-  height: 10em;
+  height: 25rem;
   display: grid;
   grid-template-areas:
     "orderNo orderNo delete"
@@ -956,6 +960,21 @@ html {
   font-weight: var(--categoryFontWeight);
 
   padding-top: var(--standardMargin);
+}
+
+.reportsOrderFiller {
+
+  border: var(--borderStyle);
+  border-top: none;
+  border-bottom: none;
+
+  height: 0rem;
+  margin-top: 0rem;
+  margin-bottom: 0rem;
+
+  width: calc((100% / 3) - 2 * var(--standardMargin));
+
+
 }
 
 .reportsOrderTableTitle {
@@ -975,6 +994,57 @@ html {
 
 .reportsOrderTableItems {
   grid-area: items;
+
+  border-top: var(--borderStyle);
+  margin-top: var(--standardMargin);
+
+  overflow: hidden;
+  overflow-y: scroll;
+}
+
+.reportsOrderItem{
+  border: var(--borderStyle);
+
+  display: grid;
+  grid-template-areas:
+  "name price"
+  "addons priceEach";
+
+  margin: var(--standardMargin);
+  margin-top: none;
+
+  padding: var(--standardMargin);
+}
+
+.reportsOrderItemName {
+  grid-area: name;
+
+  font-size: 1.2rem;
+
+  margin-bottom: var(--standardMargin);
+}
+
+.reportsOrderTotalPrice {
+  grid-area: price;
+
+  text-align: right;
+
+  font-size: 1.2rem;
+
+  margin-bottom: var(--standardMargin);
+}
+
+.reportsOrderPriceEach {
+  grid-area: priceEach;
+  text-align: right;
+
+  font-size: 1rem;
+}
+
+.reportsOrderAddons {
+  grid-area: addons;
+
+  font-size: 1rem;
 }
 
 .reportsOrderTableValue {

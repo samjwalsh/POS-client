@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 
 import log from "../../tools/logging";
 
-import { getAllOrders } from "../../tools/ipc";
+import { getAllOrders, removeAllOrders } from "../../tools/ipc";
 import playBeep from "../../tools/playBeep";
 
 import hamburger from "../../assets/hamburger.svg";
@@ -31,6 +31,8 @@ export default function Reports(props) {
   //   ]
   // }
 
+  console.log(orders);
+
   let ordersHTML;
   if (Array.isArray(orders)) {
     ordersHTML = orders.map((order, index) => {
@@ -42,17 +44,11 @@ export default function Reports(props) {
         }
 
         let formattedAddons = "";
-        if (typeof(item.addons) === 'Array') {
-          if (item.addons.length === 1) {
-            formattedAddons = item.addons[0];
-          } else {
-
-          }
+        if (Array.isArray(item.addons)) {
+          formattedAddons = item.addons.join(", ");
         }
 
-        console.log(item.quantity);
-        console.log(item.name);
-// the adjustment doesnt have a quantity, fix this
+        // the adjustment doesnt have a quantity, fix this
 
         return (
           <div className="reportsOrderItem">
@@ -60,17 +56,18 @@ export default function Reports(props) {
               {item.name} {formattedQuantity}
             </div>
             <div className="reportsOrderTotalPrice">
-            €{(item.price * item.quantity).toFixed(2)}
+              €{(item.price * item.quantity).toFixed(2)}
             </div>
             <div className="reportsOrderPriceEach">
-            €{(item.price).toFixed(2)} EA
+              €{item.price.toFixed(2)} EA
             </div>
-            <div className="reportsOrderAddons">
-            </div>
+            <div className="reportsOrderAddons">{formattedAddons}</div>
           </div>
         );
       });
       const orderDateString = calculateDateString(order.time);
+
+      console.log(order);
 
       return (
         <div key={order.time} className="reportsOrder">
@@ -96,7 +93,6 @@ export default function Reports(props) {
           <div className="reportsOrderTableValue reportsOrderTableValuePayment">
             {order.paymentMethod}
           </div>
-          <div className="reportsOrderTableItems"></div>
           <div className="reportsOrderTableItems">{itemsHTML}</div>
         </div>
       );
@@ -113,7 +109,14 @@ export default function Reports(props) {
           <img src={hamburger} id="hamburgerSVG" />
         </div>
       </div>
-      <div className="reportsOrders">{ordersHTML}</div>
+      <div className="reportsOrders">
+        {ordersHTML}
+        <div className="reportsOrderFiller"></div>
+        <div className="reportsOrderFiller"></div>
+        <div className="reportsOrderFiller"></div>
+        <div className="reportsOrderFiller"></div>
+        <div className="reportsOrderFiller"></div>
+      </div>
     </div>
   );
 }
@@ -132,12 +135,12 @@ function calculateDateString(time) {
   dateString += date.getMinutes().toString().padStart(2, "0");
   dateString += ":";
   dateString += date.getSeconds().toString().padStart(2, "0");
-  dateString += " ";
-  dateString += date.getDate().toString().padStart(2, "0");
-  dateString += "/";
-  dateString += date.getMonth().toString().padStart(2, "0");
-  dateString += "/";
-  dateString += date.getFullYear().toString().padStart(2, "0");
+  // dateString += " ";
+  // dateString += date.getDate().toString().padStart(2, "0");
+  // dateString += "/";
+  // dateString += date.getMonth().toString().padStart(2, "0");
+  // dateString += "/";
+  // dateString += date.getFullYear().toString().padStart(2, "0");
 
   return dateString;
 }

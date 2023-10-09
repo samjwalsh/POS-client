@@ -95,9 +95,9 @@ export default function Order(props) {
       );
     } else {
       //add code for displaying the adjustment
-      log(`Adding adjustment of ${orderItem.value} to HTML and subtotal`);
-      subtotal += orderItem.value;
-      if (orderItem.value != 0) {
+      log(`Adding adjustment of ${orderItem.price} to HTML and subtotal`);
+      subtotal += orderItem.price;
+      if (orderItem.price != 0) {
         orderItems.push(
           <div className="orderItem" key={index}>
             <div className="nameAndAddons">
@@ -107,9 +107,9 @@ export default function Order(props) {
             <div className="priceAndPriceEach">
               <div className="orderItemPrice">
                 €
-                {orderItem.value < 0
-                  ? `(${Math.abs(orderItem.value).toFixed(2)})`
-                  : `${orderItem.value.toFixed(2)}`}
+                {orderItem.price < 0
+                  ? `(${Math.abs(orderItem.price).toFixed(2)})`
+                  : `${orderItem.price.toFixed(2)}`}
               </div>
               <div className="orderItemPriceEach"></div>
             </div>
@@ -247,7 +247,7 @@ function handleOrderItemRemove(event, props) {
         log(`Removing adjustment`);
         let temp_order = order;
         let temp_orderItem = temp_order[index];
-        temp_orderItem.value = 0;
+        temp_orderItem.price = 0;
         temp_order[index] = temp_orderItem;
         setOrder([...temp_order]);
       }
