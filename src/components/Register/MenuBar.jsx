@@ -16,22 +16,7 @@ export default function MenuBar(props) {
   }
   log(`Set menu title to ${menuState.name}`);
   return (
-    <div id="menuBar">
-      <div id="hamburgerIcon" onClick={(event) => handleClickHamburger(event, setHamburger)}>
-        <img
-          src={hamburger}
-          
-          id="hamburgerSVG"
-        />
-      </div>
-      <div id="menuTitle">{menuTitle}</div>
-      <div id="menuFiller">
-      </div>
-    </div>
+      <div id="menuTitle" className="titleStyle">{menuTitle}</div>
   );
 }
 
-function handleClickHamburger(event, setHamburger) {
-  playBeep();
-  setHamburger(true);
-}

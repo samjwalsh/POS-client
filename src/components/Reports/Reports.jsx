@@ -31,18 +31,16 @@ export default function Reports(props) {
   //   ]
   // }
 
-  console.log(orders);
-
   let ordersHTML;
   if (Array.isArray(orders)) {
     ordersHTML = orders.map((order, index) => {
-      //Should fix bugs on machines where the adjustment has a value instead of price
-
-      if (order.value !== undefined) {
-        removeAllOrders();
-      }
-
       let itemsHTML = order.items.map((item) => {
+        if (item.value !== undefined || item.price === undefined) {
+          removeAllOrders();
+        }
+
+        //Should fix bugs on machines where the adjustment has a value instead of price
+
         let formattedQuantity = "";
         if (item.quantity === 1 || item.quantity === undefined) {
         } else {
@@ -57,7 +55,7 @@ export default function Reports(props) {
         // the adjustment doesnt have a quantity, fix this
 
         return (
-          <div className="reportsOrderItem">
+          <div className="reportsOrderItem" key={item.name}>
             <div className="reportsOrderItemName">
               {item.name} {formattedQuantity}
             </div>
@@ -73,14 +71,20 @@ export default function Reports(props) {
       });
       const orderDateString = calculateDateString(order.time);
 
-      console.log(order);
-
       return (
         <div key={order.time} className="reportsOrder">
           <div className="reportsOrderTableOrderNo">
             Order No. {orders.length - index}
           </div>
-          <div className="reportsOrderTableDeleteOrder"> X </div>
+          <div
+            className="reportsOrderTableDeleteOrder"
+            onClick={(event) =>
+              handleDeleteOrder(event, order, orders, setOrders)
+            }
+          >
+            {" "}
+            X{" "}
+          </div>
           <div className="reportsOrderTableTitle reportsOrderTableTitleTime ">
             Time:
           </div>
@@ -107,14 +111,8 @@ export default function Reports(props) {
 
   return (
     <div className="reports">
-      <div className="reportsTitleBar">
-        <div
-          id="hamburgerIcon"
-          onClick={(event) => handleClickHamburger(event, setHamburgerOpen)}
-        >
-          <img src={hamburger} id="hamburgerSVG" />
-        </div>
-      </div>
+      <div className="ordersTitle titleStyle">Orders</div>
+      <div className="reportsTitle titleStyle">Reports</div>
       <div className="reportsOrders">
         {ordersHTML}
         <div className="reportsOrderFiller"></div>
@@ -123,6 +121,7 @@ export default function Reports(props) {
         <div className="reportsOrderFiller"></div>
         <div className="reportsOrderFiller"></div>
       </div>
+      <div className="reports">ReportsContent</div>
     </div>
   );
 }
@@ -149,4 +148,20 @@ function calculateDateString(time) {
   // dateString += date.getFullYear().toString().padStart(2, "0");
 
   return dateString;
+}
+
+function handleDeleteOrder(event, deletedOrder, orders, setOrders) {
+  let localOrders = orders;
+
+  let deletedOrderIndex = localOrders.indexOf(deletedOrder)
+
+  console.log(deletedOrderIndex)
+
+  if (deletedOrderIndex > -1) { // only splice array when item is found
+    localOrders.splice(deletedOrderIndex, 1); // 2nd parameter means remove one item only
+  }
+
+  // Move this stuff into ipc and then update the local state once its updated in ipc.js
+
+setOrders([...localOrders]);
 }

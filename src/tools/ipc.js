@@ -26,3 +26,7 @@ export function addOrder(order, paymentMethod) {
 export function removeAllOrders() {
   return ipcRenderer.invoke("removeAllOrders");
 }
+
+export function removeOrder(){
+  
+}

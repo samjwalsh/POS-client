@@ -42,31 +42,21 @@ html {
 .container {
   display: grid;
   grid-template-areas:
-    "menuBar orderTitle"
+    "menuTitle orderTitle"
     "menu order";
   grid-template-columns: auto 35%;
   grid-template-rows: auto calc(100vh - var(--headerHeight));
   height: 100%;
 }
 
-#menuBar {
-  height: var(--headerHeight);
-  border: var(--borderStyle);
-  border-right: hidden;
-  border-bottom: hidden;
-  display: grid;
-  grid-template-areas: "hamburgerIcon menuTitle menuFiller";
-  grid-template-columns: min-content 1fr min-content;
-
-  text-align: center;
-  font-family: var(--titleFont);
-  font-size: var(--titleFontSize);
-  font-weight: var(--titleFontWeight);
-}
 
 #hamburgerIcon {
+
+  height:var(--headerHeight);
+
+  position: absolute;
   background-color: var(--backgroundColour);
-  border-right: var(--borderStyle);
+  border: var(--borderStyle);
   grid-area: hamburgerIcon;
   text-align: left;
   padding-left: var(--standardMargin);
@@ -88,21 +78,10 @@ html {
 }
 
 #menuTitle {
-  background-color: var(--headerColour);
-
   grid-area: menuTitle;
-  align-items: center;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-
-  flex: 1;
-}
-
-#menuFiller {
-  background-color: var(--headerColour);
-  width: 3.5rem;
-  grid-area: menuFiller;
+  border: var(--borderStyle);
+  border-right: none;
+  border-bottom: none;
 }
 
 #menu {
@@ -563,8 +542,7 @@ html {
   width: auto;
 
   display: grid;
-  grid-template-areas:
-  "nameAndAddons priceAndPriceEach orderItemRemove";
+  grid-template-areas: "nameAndAddons priceAndPriceEach orderItemRemove";
   grid-template-columns: auto min-content min-content;
 }
 
@@ -912,24 +890,46 @@ html {
 .reports {
   display: grid;
   grid-template-areas:
-    "reportsTitleBar"
-    "reportsOrders";
-
+    "ordersTitle reportsTitle"
+    "orders reports";
   grid-template-rows: auto calc(100vh - var(--headerHeight));
+  grid-template-columns: 70% 30%;
 
   width: 100%;
 }
 
-.reportsTitleBar {
-  height: var(--headerHeight);
-  grid-area: "reportsTitleBar";
+.ordersTitle {
+  grid-area: ordersTitle;
+
   border: var(--borderStyle);
 }
 
-.reportsOrders {
-  grid-area: "reportsOrders";
+.reportsTitle {
+  grid-area: reportsTitle;
   border: var(--borderStyle);
+  border-left: none;
+}
 
+.titleStyle {
+  background-color: var(--headerColour);
+
+  height: var(--headerHeight);
+
+  font-size: var(--titleFontSize);
+  font-weight: var(--titleFontWeight);
+
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  flex: 1;
+}
+
+.reportsOrders {
+  grid-area: "orders";
+  border: var(--borderStyle);
+  border-top: none;
 
   justify-content: center;
 
@@ -944,8 +944,9 @@ html {
 
 .reportsOrder {
   border: var(--borderStyle);
-  width: calc((100% / 3) - 2 * var(--standardMargin));
-  height: 25rem;
+  width: calc((100% / 2) - 2 * var(--standardMargin));
+  min-height: min-content;
+  max-height: 25rem;
   display: grid;
   grid-template-areas:
     "orderNo orderNo delete"
@@ -953,8 +954,9 @@ html {
     "subtotalTitle subtotalValue subtotalValue"
     "paymentTitle paymentValue paymentValue"
     "items items items";
-  grid-template-columns: min-content auto auto;
+  grid-template-columns: min-content auto min-content;
   grid-template-rows: min-content min-content min-content min-content;
+  
 
   font-size: 1.2rem;
   font-weight: var(--categoryFontWeight);
@@ -963,7 +965,6 @@ html {
 }
 
 .reportsOrderFiller {
-
   border: var(--borderStyle);
   border-top: none;
   border-bottom: none;
@@ -972,16 +973,13 @@ html {
   margin-top: 0rem;
   margin-bottom: 0rem;
 
-  width: calc((100% / 3) - 2 * var(--standardMargin));
-
-
+  width: calc((100% / 2) - 2 * var(--standardMargin));
 }
 
 .reportsOrderTableTitle {
   align-self: start;
   margin-left: var(--standardMargin);
   padding-left: var(--standardMargin);
-
 
   /* Centers the text */
   align-items: start;
@@ -1002,13 +1000,13 @@ html {
   overflow-y: scroll;
 }
 
-.reportsOrderItem{
+.reportsOrderItem {
   border: var(--borderStyle);
 
   display: grid;
   grid-template-areas:
-  "name price"
-  "addons priceEach";
+    "name price"
+    "addons priceEach";
 
   margin: var(--standardMargin);
   margin-top: none;
@@ -1048,12 +1046,9 @@ html {
 }
 
 .reportsOrderTableValue {
-
   height: min-content;
   margin-right: var(--standardMargin);
   padding-right: var(--standardMargin);
-
-
 
   /* Centers the text */
   align-items: end;
@@ -1071,12 +1066,13 @@ html {
   margin-top: var(--standardMargin);
   margin-bottom: var(--standardMargin);
 
-
   font-size: 1.5rem;
 }
 
 .reportsOrderTableDeleteOrder {
   grid-area: delete;
+
+  
 
   border: var(--borderStyle);
 
@@ -1085,8 +1081,7 @@ html {
   padding-left: 0.5rem;
   padding-right: 0.5rem;
 
-
-  width: auto;
+  width: 1.5rem;
 
   margin-right: var(--standardMargin);
   margin-bottom: var(--standardMargin);
@@ -1095,7 +1090,7 @@ html {
   align-items: center;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: end;
 
   flex: 1;
 }
@@ -1105,7 +1100,6 @@ html {
   border-left: var(--borderStyle);
   padding-top: var(--standardMargin);
 
-
   grid-area: timeTitle;
 }
 
@@ -1114,20 +1108,17 @@ html {
   border-right: var(--borderStyle);
   padding-top: var(--standardMargin);
 
-
   grid-area: timeValue;
 }
 
 .reportsOrderTableTitleSubTotal {
   grid-area: subtotalTitle;
   border-left: var(--borderStyle);
-
 }
 
 .reportsOrderTableValueSubTotal {
   grid-area: subtotalValue;
   border-right: var(--borderStyle);
-
 }
 
 .reportsOrderTableTitlePayment {
@@ -1136,7 +1127,6 @@ html {
 
   border-bottom: var(--borderStyle);
   padding-bottom: var(--standardMargin);
-
 }
 
 .reportsOrderTableValuePayment {
@@ -1145,8 +1135,6 @@ html {
 
   border-bottom: var(--borderStyle);
   padding-bottom: var(--standardMargin);
-
-
 }
 
 .reportsOrderTableItems {

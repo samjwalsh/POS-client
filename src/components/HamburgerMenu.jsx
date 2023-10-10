@@ -1,11 +1,9 @@
 import * as React from "react";
 
 import playBeep from "../tools/playBeep";
-import {
-  getAllOrders,
-  quit,
-  removeAllOrders,
-} from "../tools/ipc";
+import { getAllOrders, quit, removeAllOrders } from "../tools/ipc";
+
+import hamburger from "../assets/hamburger.svg";
 
 export default function HamburgerMenu(props) {
   let hamburgerOpen = props.hamburgerOpen;
@@ -14,8 +12,17 @@ export default function HamburgerMenu(props) {
   let setAppState = props.setAppState;
 
   if (hamburgerOpen === false) {
-    return;
+    return (
+      <div
+        id="hamburgerIcon"
+        onClick={(event) => handleClickHamburger(event, setHamburger)}
+      >
+        <img src={hamburger} id="hamburgerSVG" />
+      </div>
+    );
   }
+
+  //move hamburger to this component, and have it float on top left when hamburger menu not open
 
   return (
     <div id="sideMenuContainer">
@@ -25,9 +32,7 @@ export default function HamburgerMenu(props) {
             <div id="sideMenuCloseText">Options</div>
             <div
               id="sideMenuCloseButton"
-              onClick={() =>
-                handleCloseSideMenu(setHamburger)
-              }
+              onClick={() => handleCloseSideMenu(setHamburger)}
             >
               X
             </div>
@@ -36,18 +41,14 @@ export default function HamburgerMenu(props) {
             <div id="sideMenuOption">
               <div
                 className="sideMenuOption"
-                onClick={() =>
-                  handleClickRegister(setAppState)
-                }
+                onClick={() => handleClickRegister(setHamburger, setAppState)}
               >
                 Register
               </div>
             </div>
             <div
               className="sideMenuOption"
-              onClick={() =>
-                handleClickReports(setAppState)
-              }
+              onClick={() => handleClickReports(setHamburger, setAppState)}
             >
               Reports
             </div>
@@ -75,20 +76,31 @@ function handleCloseSideMenu(setHamburger) {
   setHamburger(false);
 }
 
-async function handleClickReports(setAppState) {
+async function handleClickReports(setHamburger, setAppState) {
   playBeep();
 
   const orders = await getAllOrders();
   setAppState("Reports");
+
+  setHamburger(false);
+
 }
 
-function handleClickRegister(setAppState) {
+function handleClickRegister(setHamburger, setAppState) {
   playBeep();
 
   setAppState("Register");
+
+  setHamburger(false);
 }
 
 function handleTerminatePOS() {
   playBeep();
   quit();
+}
+
+
+function handleClickHamburger(event, setHamburger) {
+  playBeep();
+  setHamburger(true);
 }
