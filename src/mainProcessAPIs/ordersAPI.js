@@ -21,6 +21,19 @@ ipcMain.handle("removeAllOrders", () => {
   store.set("orders", []);
 });
 
-ipcMain.handle("removeOrder", (e, orderTime) => {
-  const orders = store.get("orders");
+ipcMain.handle("removeOrder", (e, deletedOrder) => {
+  let orders = store.get("orders");
+
+  let deletedOrderLocalEntry = orders.find(
+    (order) => order.time === deletedOrder.time
+  );
+
+  let deletedOrderIndex = orders.indexOf(deletedOrderLocalEntry);
+
+  if (deletedOrderIndex > -1) {
+    orders.splice(deletedOrderIndex, 1);
+
+    store.set("orders", orders);
+  }
+  return store.get("orders");
 });

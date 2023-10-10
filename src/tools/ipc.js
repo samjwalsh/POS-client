@@ -27,6 +27,6 @@ export function removeAllOrders() {
   return ipcRenderer.invoke("removeAllOrders");
 }
 
-export function removeOrder(){
-  
+export function removeOrder(order) {
+  return ipcRenderer.invoke("removeOrder", order);
 }
