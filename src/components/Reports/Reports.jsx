@@ -19,18 +19,76 @@ export default function Reports(props) {
     })();
   }, []);
 
-  let ordersHTML = createOrdersHTML(orders, setOrders);
-
   return (
     <div className="reports">
       <div className="ordersTitle titleStyle">Orders</div>
       <div className="reportsTitle titleStyle">Reports</div>
       <div className="reportsOrders">
-        {ordersHTML}
+        {createOrdersHTML(orders, setOrders)}
         <div className="reportsOrderFiller"></div>
         <div className="reportsOrderFiller"></div>
       </div>
-      <div className="reports">ReportsContent</div>
+      {reportsStatsHTML(orders, setOrders)}
+    </div>
+  );
+}
+
+function reportsStatsHTML(orders, setOrders) {
+  return (
+    <div className="reportsStats">
+      {createReportsStatsInfo(orders, setOrders)}
+      <div className="reportsStatsButtonsContainer">
+        <div
+          className="reportsStatsButtons button"
+          onClick={(event) => handleDeleteOldOrders(orders, setOrders)}
+        >
+          Del. Old Orders
+        </div>
+        <div
+          className="reportsStatsButtons button"
+          onClick={(event) => handleEndOfDay(orders, setOrders)}
+        >
+          End Of Day
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function createReportsStatsInfo(orders, setOrders) {
+  let cashTotal = 0;
+  let cardTotal = 0;
+
+  orders.forEach((order) => {
+    if (order.paymentMethod === "Card") {
+      cardTotal += order.subtotal;
+    } else {
+      cashTotal += order.subtotal;
+    }
+  });
+
+  let xTotal = cashTotal + cardTotal;
+
+  return (
+    <div className="reportsStatsInfoTable">
+      <div className="reportsStatsInfoTableEntry">
+        <div className="reportsStatsInfoTableEntryKey">Cash:</div>
+        <div className="reportsStatsInfoTableEntryValue">
+          €{cashTotal.toFixed(2)}
+        </div>
+      </div>
+      <div className="reportsStatsInfoTableEntry">
+        <div className="reportsStatsInfoTableEntryKey">Card:</div>
+        <div className="reportsStatsInfoTableEntryValue">
+          €{cardTotal.toFixed(2)}
+        </div>
+      </div>
+      <div className="reportsStatsInfoTableEntry reportsStatsInfoTableEntryLast">
+        <div className="reportsStatsInfoTableEntryKey">X-Total:</div>
+        <div className="reportsStatsInfoTableEntryValue">
+          €{xTotal.toFixed(2)}
+        </div>
+      </div>
     </div>
   );
 }
@@ -142,7 +200,29 @@ function calculateDateString(time) {
 async function handleDeleteOrder(event, deletedOrder, setOrders) {
   let localOrders = await removeOrder(deletedOrder);
 
-  console.log(localOrders);
+  setOrders(localOrders.reverse());
+}
 
+async function handleDeleteOldOrders(orders, setOrders) {
+  let localOrders = await getAllOrders();
+
+  const currentDate = new Date().getDate();
+
+  let newOrders = [];
+
+  localOrders.forEach((order) => {
+    const orderDate = new Date(order.time).getDate();
+    if (orderDate === currentDate) {
+      newOrders.push(order);
+    }
+  });
+
+  setOrders(newOrders.reverse());
+}
+
+async function handleEndOfDay(orders, setOrders) {
+  await removeAllOrders();
+
+  let localOrders = await getAllOrders();
   setOrders(localOrders.reverse());
 }

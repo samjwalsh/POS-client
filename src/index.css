@@ -49,10 +49,8 @@ html {
   height: 100%;
 }
 
-
 #hamburgerIcon {
-
-  height:var(--headerHeight);
+  height: var(--headerHeight);
 
   position: absolute;
   background-color: var(--backgroundColour);
@@ -956,7 +954,6 @@ html {
     "items items items";
   grid-template-columns: min-content auto min-content;
   grid-template-rows: min-content min-content min-content min-content;
-  
 
   font-size: 1.2rem;
   font-weight: var(--categoryFontWeight);
@@ -1072,8 +1069,6 @@ html {
 .reportsOrderTableDeleteOrder {
   grid-area: delete;
 
-  
-
   border: var(--borderStyle);
 
   font-size: 1.5rem;
@@ -1139,4 +1134,63 @@ html {
 
 .reportsOrderTableItems {
   grid-area: items;
+}
+
+.reportsStats {
+  display: grid;
+  grid-template-areas:
+    "reportsStatsValues"
+    "reportsStatsButtons";
+
+  height: 100%;
+
+  grid-template-rows: auto min-content;
+
+  font-size: 2rem;
+  font-weight: var(--categoryFontWeight);
+}
+
+.reportsStatsInfoTable {
+  grid-area: reportsStatsValues;
+
+  padding: var(--standardMargin);
+}
+
+.reportsStatsInfoTableEntry {
+  width: auto;
+  border: var(--borderStyle);
+  border-bottom: none;
+
+  display: flex;
+
+  padding: var(--standardMargin);
+}
+
+.reportsStatsInfoTableEntryValue {
+  text-align: end;
+  flex-grow: 1;
+}
+
+.reportsStatsInfoTableEntryLast {
+  border-bottom: var(--borderStyle);
+}
+
+.reportsStatsButtonsContainer {
+  height: min-content;
+  grid-area: reportsStatsButtons;
+}
+
+.reportsStatsButtons {
+  border: var(--borderStyle);
+  margin: var(--standardMargin);
+}
+
+.button {
+  /* Centers the text */
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  flex: 1;
 }
