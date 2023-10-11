@@ -4,6 +4,10 @@ const Store = require("electron-store");
 const store = new Store();
 
 ipcMain.handle("getAllOrders", () => {
+  const orders = store.get("orders");
+  if (orders === undefined) {
+    store.set("orders", []);
+  }
   return store.get("orders");
 });
 
