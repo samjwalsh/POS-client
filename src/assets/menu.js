@@ -73,10 +73,10 @@ export const menu = [
         price: 1.5,
       },
       {
-        name: "Crushed Flake",
+        name: "Crush Flake",
         price: 1,
       },
-      { name: "Chocolate Dip", price: 1.0 },
+      { name: "Choc Dip", price: 1.0 },
       {
         priceCheck: function (addons) {
           // Add code to check for chocolate dip selection and adjust price accordingly: Choco cone = 3.3, Choco 99 = 4
@@ -91,7 +91,7 @@ export const menu = [
           });
 
           if (
-            selectedAddons.includes("Chocolate Dip") &&
+            selectedAddons.includes("Choc Dip") &&
             !selectedAddons.includes("Flake")
           ) {
             addonsCost -= 0.3;
@@ -147,8 +147,8 @@ export const menu = [
         name: "Toppings",
         price: 0.5,
       },
-      { name: "Crushed Flake", price: 1 },
-      { name: "Chocolate Dip", price: 1.2 },
+      { name: "Crush Flake", price: 1 },
+      { name: "Choc Dip", price: 1.2 },
       {
         priceCheck: function (addons) {
           // Add code to check for chocolate dip, both choco dip with and without flake are 3.5
@@ -163,7 +163,7 @@ export const menu = [
           });
 
           if (
-            selectedAddons.includes("Chocolate Dip") &&
+            selectedAddons.includes("Choc Dip") &&
             selectedAddons.includes("Flake")
           ) {
             addonsCost -= 0.2;
@@ -196,7 +196,7 @@ export const menu = [
             price: 0.5,
           },
           {
-            name: "Crushed Flake",
+            name: "Crush Flake",
             price: 1.0,
           },
         ],
@@ -215,7 +215,7 @@ export const menu = [
             price: 0.5,
           },
           {
-            name: "Crushed Flake",
+            name: "Crush Flake",
             price: 1.0,
           },
         ],
@@ -226,7 +226,7 @@ export const menu = [
         modifiers: [
           { name: "Flake", price: 0.5 },
           { name: "Toppings", price: 0.5 },
-          { name: "Crushed Flake", price: 1.0 },
+          { name: "Crush Flake", price: 1.0 },
         ],
       },
       {
