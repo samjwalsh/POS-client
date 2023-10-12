@@ -3,7 +3,9 @@ import * as ReactDOM from "react-dom/client";
 import { useState } from "react";
 
 import Register from "./components/Register/Register.jsx";
-import Reports from "./components/Reports/Reports.jsx";
+import Reports from "./components/Register/Reports.jsx";
+import Settings from "./components/Settings.jsx";
+
 import HamburgerMenu from "./components/HamburgerMenu.jsx";
 
 const domNode = document.getElementById("App");
@@ -24,19 +26,11 @@ function App() {
       />
       {(() => {
         if (appState === "Register") {
-          return (
-            <Register
-              hamburgerOpen={hamburgerOpen}
-              setHamburgerOpen={setHamburgerOpen}
-            />
-          );
+          return <Register />;
         } else if (appState === "Reports") {
-          return (
-            <Reports
-              hamburgerOpen={hamburgerOpen}
-              setHamburgerOpen={setHamburgerOpen}
-            />
-          );
+          return <Reports />;
+        } else if (appState === "Settings") {
+          return <Settings />
         }
       })()}
     </div>

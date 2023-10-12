@@ -41,17 +41,27 @@ export default function HamburgerMenu(props) {
             <div id="sideMenuOption">
               <div
                 className="sideMenuOption"
-                onClick={() => handleClickRegister(setHamburger, setAppState)}
+                onClick={() =>
+                  handleSetAppState(setHamburger, setAppState, "Register")
+                }
               >
                 Register
               </div>
             </div>
             <div
               className="sideMenuOption"
-              onClick={() => handleClickReports(setHamburger, setAppState)}
+              onClick={() =>
+                handleSetAppState(setHamburger, setAppState, "Reports")
+              }
             >
               Reports
             </div>
+            <div
+              className="sideMenuOption"
+              onClick={() =>
+                handleSetAppState(setHamburger, setAppState, "Settings")
+              }
+            >Settings</div>
           </div>
           <div id="sideMenuTerminate">
             <div
@@ -76,21 +86,9 @@ function handleCloseSideMenu(setHamburger) {
   setHamburger(false);
 }
 
-async function handleClickReports(setHamburger, setAppState) {
+function handleSetAppState(setHamburger, setAppState, mode) {
   playBeep();
-
-  const orders = await getAllOrders();
-  setAppState("Reports");
-
-  setHamburger(false);
-
-}
-
-function handleClickRegister(setHamburger, setAppState) {
-  playBeep();
-
-  setAppState("Register");
-
+  setAppState(mode);
   setHamburger(false);
 }
 
@@ -98,7 +96,6 @@ function handleTerminatePOS() {
   playBeep();
   quit();
 }
-
 
 function handleClickHamburger(event, setHamburger) {
   playBeep();

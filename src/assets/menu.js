@@ -25,6 +25,39 @@ export const menu = [
   {
     name: "Cone",
     price: 2.5,
+    shortcuts: [
+      {
+        name: "Plain Cone",
+        price: 2.5,
+        addons: [],
+      },
+      {
+        name: "99",
+        price: 3,
+        addons: [
+          {
+            name: "Flake",
+            price: 0.5,
+            default: true,
+          },
+        ],
+      },
+      {
+        name: "Special 99",
+        price: 3.5,
+        addons: [
+          {
+            name: "Flake",
+            price: 0.5,
+            default: true,
+          },
+          {
+            name: "Toppings",
+            price: 0.5,
+          },
+        ],
+      },
+    ],
     modifiers: [
       {
         name: "Flake",
@@ -72,6 +105,38 @@ export const menu = [
   {
     name: "Kid's Cone",
     price: 2.3,
+    shortcuts: [
+      {
+        name: "Kid's Cone",
+        price: 2.3,
+      },
+      {
+        name: "Kid's 99",
+        price: 2.5,
+        addons: [
+          {
+            name: "Flake",
+            price: 0.2,
+            default: true,
+          },
+        ],
+      },
+      {
+        name: "Kid's Special 99",
+        price: 3,
+        addons: [
+          {
+            name: "Flake",
+            price: 0.2,
+            default: true,
+          },
+          {
+            name: "Toppings",
+            price: 0.5,
+          },
+        ],
+      },
+    ],
     modifiers: [
       {
         name: "Flake",

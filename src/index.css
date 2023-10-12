@@ -330,7 +330,6 @@ html {
 }
 
 .itemPageAddonsSection {
-  grid-area: addons;
   border: var(--borderStyle);
   margin: 0rem var(--standardMargin) 0rem var(--standardMargin);
 
@@ -340,6 +339,8 @@ html {
   overflow: hidden;
   overflow-y: scroll;
 
+  flex-grow: 1;
+
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
@@ -347,14 +348,56 @@ html {
   align-content: start;
 }
 
+.itemPageAddonsShortcutsContainer {
+  grid-area: addons;
+
+  display: flex;
+  flex-direction: column;
+}
+
+.itemPageShortcuts {
+  /* border: var(--borderStyle);
+  border-bottom: none;
+margin-right: var(--standardMargin);
+margin-left: var(--standardMargin); */
+
+  margin-right: var(--standardMargin);
+  margin-left: var(--standardMargin);
+  margin-bottom: var(--standardMargin);
+
+  height: 40%;
+
+  gap: var(--standardMargin);
+  display: flex;
+  flex-direction: row;
+  overflow: hidden;
+  overflow-y: scroll;
+  justify-content: center;
+}
+
+.itemPageShortcut {
+  padding: var(--standardMargin);
+
+  border: var(--borderStyle);
+  flex-grow: 1;
+
+  font-weight: var(--categoryFontWeight);
+}
+
+.itemPageShortcutName {
+  font-size: var(--categoryFontSize);
+}
+
+.itemPageShortcutPrice {
+  font-size: 1.2rem;
+}
+
 .addon {
   border: var(--borderStyle);
-  flex-grow: 1; 
-  min-width: 18.5rem;
+  flex-grow: 1;
+  min-width: 18rem;
   max-width: 40rem;
-  height: 4rem;
-
-
+  height: 3rem;
   display: grid;
   grid-template-areas: "addonNameAndPrice toggle";
   grid-template-columns: min-content auto;
@@ -364,9 +407,9 @@ html {
   /* justify-content: stretch; */
 }
 
-.addonFiller{
-  flex-grow: 1; 
-  min-width: 18.5rem;
+.addonFiller {
+  flex-grow: 1;
+  min-width: 18rem;
   max-width: 40rem;
 
   margin-right: var(--borderThickness);
@@ -392,7 +435,7 @@ html {
 
 .addonName {
   grid-area: addonName;
-  font-size: 1.5rem;
+  font-size: 1.4rem;
   width: min-content;
   white-space: nowrap;
 
@@ -402,7 +445,7 @@ html {
 .addonPrice {
   grid-area: addonPrice;
   font-style: var(--categoryFont);
-  font-size: 1.2rem;
+  font-size: 1rem;
   width: min-content;
   /* push text to bottom */
   display: flex;
@@ -617,6 +660,8 @@ html {
   grid-area: orderItemRemove;
   border: var(--borderStyle);
   width: 2.5rem;
+  height: 2.5rem;
+
   display: flex;
   align-items: center;
   justify-content: center;

@@ -7,8 +7,6 @@ import log from "../../tools/logging";
 import { getAllOrders, removeAllOrders, removeOrder } from "../../tools/ipc";
 import playBeep from "../../tools/playBeep";
 
-import hamburger from "../../assets/hamburger.svg";
-
 export default function Reports(props) {
   const [orders, setOrders] = useState([]);
 

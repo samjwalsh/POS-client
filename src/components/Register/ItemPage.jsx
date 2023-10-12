@@ -29,6 +29,8 @@ export default function ItemPage(props) {
     }
   });
 
+  item.shortcuts = menuState.shortcuts;
+
   const addonsHTML = item.addons.map((addon, index) => {
     let selected;
     if (currentOrder.addons == undefined) {
@@ -73,8 +75,42 @@ export default function ItemPage(props) {
         </div>
       </div>
     );
+
     //TODO add code for auto-checking default addon
   });
+
+  let shortcutsHTML = "";
+
+  if (item.shortcuts !== undefined) {
+    let shortcutEachHTML = item.shortcuts.map((shortcut) => {
+      let addons = shortcut.addons;
+      return (
+        <div
+          className="itemPageShortcut button"
+          onClick={(shortcut) =>
+            handleClickShortcut(
+              event,
+              item,
+              setMenuState,
+              currentOrder,
+              setCurrentOrder,
+              order,
+              setOrder,
+              addons
+            )
+          }
+          key={shortcut.name}
+        >
+          <div className="itemPageShortcutName">{shortcut.name}</div>
+          <div className="itemPageShortcutPrice">
+            €{shortcut.price.toFixed(2)}
+          </div>
+        </div>
+      );
+    });
+    shortcutsHTML = <div className="itemPageShortcuts">{shortcutEachHTML}</div>;
+  } else {
+  }
 
   let quantity;
   if (currentOrder.quantity == undefined) {
@@ -108,12 +144,15 @@ export default function ItemPage(props) {
           Cancel
         </div>
       </div>
-      <div className="itemPageAddonsSection">
-        {addonsHTML}
-        <div className="addonFiller"></div>
-        <div className="addonFiller"></div>
-        <div className="addonFiller"></div>
-        <div className="addonFiller"></div>
+      <div className="itemPageAddonsShortcutsContainer">
+        {shortcutsHTML}
+        <div className="itemPageAddonsSection">
+          {addonsHTML}
+          <div className="addonFiller"></div>
+          <div className="addonFiller"></div>
+          <div className="addonFiller"></div>
+          <div className="addonFiller"></div>
+        </div>
       </div>
 
       <div className="bottomBar">
@@ -382,4 +421,36 @@ function arrayEquals(a, b) {
     a.length === b.length &&
     a.every((val, index) => val === b[index])
   );
+}
+
+function handleClickShortcut(
+  event,
+  item,
+  setMenuState,
+  currentOrder,
+  setCurrentOrder,
+  order,
+  setOrder,
+  addons
+) {
+  playBeep();
+  addons.forEach((shortcutAddon) => {
+    item.addons.forEach((itemAddon) => {
+      if (shortcutAddon.name == itemAddon.name) {
+        itemAddon.selected = "X";
+      }
+    });
+  });
+
+  if (currentOrder.quantity == undefined) {
+    log(`Quantity set to 1`);
+    item.quantity = 1;
+  } else {
+    log(`Quantity set to ${item.quantity}`);
+    item.quantity = currentOrder.quantity;
+  }
+
+  handleAddToOrder(event, item, setMenuState, item, setCurrentOrder, order, setOrder)
+
+
 }

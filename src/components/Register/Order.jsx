@@ -89,7 +89,7 @@ export default function Order(props) {
             className="orderItemRemove"
             onClick={(event) => handleOrderItemRemove(event, passProps)}
           >
-            <div className="orderItemRemoveText">X</div>
+            <div className="orderItemRemoveText button">X</div>
           </div>
         </div>
       );
