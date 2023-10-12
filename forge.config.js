@@ -6,16 +6,12 @@ module.exports = {
   makers: [
     {
       name: "@electron-forge/maker-squirrel",
-      config: {},
-    },
-    {
-      name: "@electron-forge/maker-zip",
-      platforms: ["darwin"],
+      config: {}, // run yarn make --platform win32 on linux to build win32
     },
     {
       name: "@electron-forge/maker-deb",
       config: {},
-    },
+    }
   ],
   plugins: [
     {
