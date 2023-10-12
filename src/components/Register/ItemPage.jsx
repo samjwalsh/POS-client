@@ -85,13 +85,13 @@ export default function ItemPage(props) {
 
   log(`Computed price for item and addons`);
   const price = computePrice(item, currentOrder, setCurrentOrder).toFixed(2);
-
+  6;
   log(`Created HTML for item page`);
   return (
     <div className="itemPage">
       <div className="itemPageTitleBar">
         <div className="itemPageAddonsTitle">
-          <div className="itemPageTitleCenter">Addons</div>
+          <div className="itemPageTitleCenter">{menuState.name}</div>
         </div>
         <div
           className="itemPageExitButton"
@@ -108,7 +108,14 @@ export default function ItemPage(props) {
           Cancel
         </div>
       </div>
-      <div className="itemPageAddonsSection">{addonsHTML}</div>
+      <div className="itemPageAddonsSection">
+        {addonsHTML}
+        <div className="addonFiller"></div>
+        <div className="addonFiller"></div>
+        <div className="addonFiller"></div>
+        <div className="addonFiller"></div>
+      </div>
+
       <div className="bottomBar">
         <div className="quantitySection">
           <div
@@ -259,7 +266,6 @@ function handleDecreaseQuantity(event, item, currentOrder, setCurrentOrder) {
 }
 
 function handleExitItemPage(
-  
   event,
   item,
   setMenuState,

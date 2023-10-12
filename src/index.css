@@ -14,7 +14,9 @@
   --titleFontWeight: 1000;
   --headerColour: rgb(255, 108, 108);
 
-  --borderStyle: solid black;
+  --borderThickness: 0.2rem;
+
+  --borderStyle: solid var(--borderThickness) black;
   --borderStyled: solid 1px red;
 
   --backgroundColour: rgb(255, 255, 255);
@@ -331,25 +333,51 @@ html {
   grid-area: addons;
   border: var(--borderStyle);
   margin: 0rem var(--standardMargin) 0rem var(--standardMargin);
-  display: flex;
-  flex-direction: column;
-  padding-top: var(--standardMargin);
+
+  column-gap: var(--standardMargin);
+  padding: var(--standardMargin);
   height: auto;
   overflow: hidden;
   overflow-y: scroll;
+
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-content: start;
 }
 
 .addon {
   border: var(--borderStyle);
-  width: auto;
-  margin: 0rem var(--standardMargin) var(--standardMargin) var(--standardMargin);
+  flex-grow: 1; 
+  min-width: 18.5rem;
+  max-width: 40rem;
   height: 4rem;
+
+
   display: grid;
   grid-template-areas: "addonNameAndPrice toggle";
   grid-template-columns: min-content auto;
   font-family: var(--categoryFont);
   font-weight: var(--categoryFontWeight);
-  justify-content: stretch;
+  margin-bottom: var(--standardMargin);
+  /* justify-content: stretch; */
+}
+
+.addonFiller{
+  flex-grow: 1; 
+  min-width: 18.5rem;
+  max-width: 40rem;
+
+  margin-right: var(--borderThickness);
+  margin-left: var(--borderThickness);
+
+  display: grid;
+  grid-template-areas: "addonNameAndPrice toggle";
+  grid-template-columns: min-content auto;
+  font-family: var(--categoryFont);
+  font-weight: var(--categoryFontWeight);
+  /* justify-content: stretch; */
 }
 
 .addonNameAndPrice {
@@ -364,7 +392,7 @@ html {
 
 .addonName {
   grid-area: addonName;
-  font-size: 2rem;
+  font-size: 1.5rem;
   width: min-content;
   white-space: nowrap;
 
@@ -378,7 +406,6 @@ html {
   width: min-content;
   /* push text to bottom */
   display: flex;
-  padding-top: 0.5rem;
   margin-left: var(--standardMargin);
 }
 
@@ -394,13 +421,13 @@ html {
 }
 
 .toggleAddonButton {
-  font-size: 2rem;
+  font-size: 1.5rem;
   font-weight: var(--categoryFontWeight);
   border: var(--borderStyle);
   margin-right: var(--standardMargin);
-  height: 2.5rem;
+  height: 2rem;
   text-align: center;
-  width: 2.5rem;
+  width: 2rem;
 }
 
 .toggleAddonButton:hover {
