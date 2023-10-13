@@ -22,6 +22,7 @@ const createWindow = () => {
     },
     fullscreen: prod === true ? true : false,
     autoHideMenuBar: true,
+    icon: "./assets/icons/abacus.ico",
   });
 
   // and load the index.html of the app.

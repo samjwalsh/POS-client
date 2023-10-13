@@ -1266,3 +1266,23 @@ margin-left: var(--standardMargin); */
 
   flex: 1;
 }
+
+.settingsContainer {
+  display: grid;
+  grid-template-areas: "settingsTitle"
+  "settings"
+  ;
+  grid-template-rows: auto calc(100vh - var(--headerHeight));
+}
+
+.settingsTitle {
+  border: var(--borderStyle);
+}
+
+.settings {
+  display: flex;
+  flex-direction: column;
+
+  overflow: hidden;
+  overflow-y: scroll;
+}

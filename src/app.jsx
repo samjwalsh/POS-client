@@ -14,7 +14,11 @@ const root = ReactDOM.createRoot(domNode);
 function App() {
   const [appState, setAppState] = useState("Register");
 
+  //TODO Change this back to register
+
   const [hamburgerOpen, setHamburgerOpen] = useState(false);
+
+  setSettings();
 
   return (
     <div className="app">
@@ -30,7 +34,7 @@ function App() {
         } else if (appState === "Reports") {
           return <Reports />;
         } else if (appState === "Settings") {
-          return <Settings />
+          return <Settings />;
         }
       })()}
     </div>
@@ -38,3 +42,5 @@ function App() {
 }
 
 root.render(<App />);
+
+function setSettings() {}

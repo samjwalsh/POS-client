@@ -1,6 +1,8 @@
 module.exports = {
   packagerConfig: {
     asar: true,
+      icon: './assets/icons/ico/abacus' // no file extension required
+
   },
   rebuildConfig: {},
   makers: [
