@@ -1,7 +1,7 @@
 import * as React from "react";
 import * as ReactDOM from "react-dom/client";
 import { useState, useEffect } from "react";
-import { getSettings, updateSettings } from "../tools/ipc";
+import { getSettings, resetSettings, updateSettings } from "../tools/ipc";
 
 import playBeep from "../tools/playBeep";
 
@@ -25,14 +25,11 @@ export default function Settings(props) {
       categoryHTML = category.settings.map((setting) => {
         if (setting.type === "range") {
           return (
-            <div
-              className="settingsCategoryOption settingsCategoryOptionRange"
-              key={setting.name}
-            >
+            <div className="settingsCategoryOptionRange" key={setting.name}>
               <div className="settingsCategoryOptionRangeLabel">
                 {setting.name}
               </div>
-              <div className="settingsCategoryOptionRangeSpacer"></div>
+              <div className="settingsCategoryOptionSpacer"></div>
               <div
                 className="settingsCategoryOptionRangeDecrease button r"
                 onClick={(e) => {
@@ -74,7 +71,24 @@ export default function Settings(props) {
                 }}
               >
                 {" "}
-                <img src={undo} id="undoSVG" className="b"/>
+                <img src={undo} id="undoSVG" className="b" />
+              </div>
+            </div>
+          );
+        } else if (setting.type === "button") {
+          return (
+            <div className="settingsCategoryOptionsButton">
+              <div className="settingsCategoryOptionRangeLabel">
+                {setting.name}
+              </div>
+              <div className="settingsCategoryOptionsRangeSpacer"></div>
+              <div
+                className="settingsCategoryOptionsButtonButton r"
+                onClick={(e) => {
+                  handleClickButtonOption(setting, settings, setSettings);
+                }}
+              >
+                {setting.label}
               </div>
             </div>
           );
@@ -138,8 +152,6 @@ async function handleClickRangeOption(setting, method, settings, setSettings) {
   executeSettings(localSettings);
 
   setSettings(localSettings);
-
-  console.log(settings[0].settings[0].value);
 }
 
 export function executeSettings(settings) {
@@ -152,4 +164,16 @@ export function executeSettings(settings) {
       }
     });
   });
+}
+
+async function handleClickButtonOption(setting, settings, setSettings) {
+  playBeep();
+
+  switch (setting.name) {
+    case "Reset All Settings":
+      await resetSettings();
+      let localSettings = await getSettings();
+      executeSettings(localSettings);
+      setSettings(localSettings);
+  }
 }

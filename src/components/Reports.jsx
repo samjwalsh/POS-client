@@ -125,7 +125,7 @@ function createOrdersHTML(orders, setOrders) {
             Subtotal:
           </div>
           <div className="reportsOrderTableValue reportsOrderTableValueSubTotal">
-            {order.subtotal.toFixed(2)}
+            €{order.subtotal.toFixed(2)}
           </div>
           <div className="reportsOrderTableTitle reportsOrderTableTitlePayment">
             Payment:

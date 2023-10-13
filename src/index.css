@@ -1325,7 +1325,7 @@ margin-left: var(--standardMargin); */
   gap: var(--standardMargin);
 }
 
-.settingsCategoryOption {
+.settingsCategoryOptionRange {
   flex-grow: 1;
   display: grid;
   grid-template-areas: "label spacer decrease value increase reset";
@@ -1341,7 +1341,7 @@ margin-left: var(--standardMargin); */
   grid-area: label;
   border: var(--borderStyle);
 }
-.settingsCategoryOptionRangeSpacer {
+.settingsCategoryOptionSpacer {
   grid-area: spacer;
   border: none;
 }
@@ -1376,3 +1376,23 @@ margin-left: var(--standardMargin); */
   border-left: none;
   width: 2rem;
 }
+
+.settingsCategoryOptionsButton {
+  flex-grow: 1;
+  display: grid;
+  grid-template-areas: "label spacer button";
+  border: var(--borderStyle);
+  grid-template-columns: auto 1fr min-content;
+  padding: var(--standardMargin);
+  font-size: 1.5rem;
+  font-weight: var(--categoryFontWeight);
+}
+
+.settingsCategoryOptionsButtonButton {
+  grid-area: button;
+  padding: var(--standardMargin);
+  border: var(--borderStyle);
+  width: min-content;
+}
+
+
