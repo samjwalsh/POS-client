@@ -201,12 +201,15 @@ function calculateDateString(time) {
 }
 
 async function handleDeleteOrder(event, deletedOrder, setOrders) {
+  playBeep();
   let localOrders = await removeOrder(deletedOrder);
 
   setOrders(localOrders.reverse());
 }
 
 async function handleDeleteOldOrders(orders, setOrders) {
+  playBeep();
+
   let localOrders = await getAllOrders();
 
   const currentDate = new Date().getDate();
@@ -226,6 +229,8 @@ async function handleDeleteOldOrders(orders, setOrders) {
 }
 
 async function handleEndOfDay(orders, setOrders) {
+  playBeep();
+
   await removeAllOrders();
 
   let localOrders = await getAllOrders();

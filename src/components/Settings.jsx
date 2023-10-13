@@ -3,6 +3,8 @@ import * as ReactDOM from "react-dom/client";
 import { useState, useEffect } from "react";
 import { getSettings, updateSettings } from "../tools/ipc";
 
+import playBeep from "../tools/playBeep";
+
 import undo from "../assets/undo.svg";
 
 export default function Settings(props) {
@@ -96,6 +98,8 @@ export default function Settings(props) {
 }
 
 async function handleClickRangeOption(setting, method, settings, setSettings) {
+  playBeep();
+
   let localSettings = settings;
 
   let foundCategoryIndex;
