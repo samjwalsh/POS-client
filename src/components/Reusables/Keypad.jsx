@@ -236,7 +236,7 @@ function handleKeypadClick(event, props, action) {
     log(`Disabling the keypad`);
     setkeypad({ enabled: false, value: "", sign: "+" });
   } else {
-    if (keypad.value.length < 4) {
+    if (keypad.value.length < 5) {
       log(`Keypad value length is less than 4`);
       if (!(keypad.value === "" && action === "0")) {
         log(`Adding action ${action} to keypad`);
