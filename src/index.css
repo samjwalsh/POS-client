@@ -610,8 +610,8 @@ margin-left: var(--standardMargin); */
   width: auto;
 
   display: grid;
-  grid-template-areas: "nameAndAddons priceAndPriceEach orderItemRemove";
-  grid-template-columns: auto min-content min-content;
+  grid-template-areas: "nameAndAddons priceAndPriceEach orderItemDecrease orderItemIncrease";
+  grid-template-columns: auto min-content min-content min-content;
 }
 
 .nameAndAddons {
@@ -649,28 +649,32 @@ margin-left: var(--standardMargin); */
 
 .orderItemPrice {
   grid-area: orderItemPrice;
+  font-size: 1rem;
 }
 
 .orderItemPriceEach {
   grid-area: orderItemPriceEach;
-  font-size: 1rem;
+  font-size: 0.8rem;
 }
 
-.orderItemRemove {
-  grid-area: orderItemRemove;
+.orderItemDecrease {
+  font-size: 1.5rem;
+  grid-area: orderItemDecrease;
   border: var(--borderStyle);
   width: 2.5rem;
   height: 2.5rem;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
 }
 
-.orderItemRemoveText {
-  font-size: 2rem;
-  font-weight: var(--categoryFontWeight);
+.orderItemIncrease {
+  font-size: 1.5rem;
+  grid-area: orderItemIncrease;
+  border: var(--borderStyle);
+  width: 2.5rem;
+  height: 2.5rem;
+  border-left: none;
+
 }
+
 
 .subTotal {
   border-top: var(--borderStyle);

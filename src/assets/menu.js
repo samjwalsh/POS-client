@@ -109,6 +109,7 @@ export const menu = [
       {
         name: "Kid's Cone",
         price: 2.3,
+        addons:[]
       },
       {
         name: "Kid's 99",

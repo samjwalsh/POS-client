@@ -86,10 +86,16 @@ export default function Order(props) {
             </div>
           </div>
           <div
-            className="orderItemRemove"
-            onClick={(event) => handleOrderItemRemove(event, passProps)}
+            className="orderItemDecrease button"
+            onClick={(event) => handleOrderItemQuantityChange(event, passProps, 'down')}
           >
-            <div className="orderItemRemoveText button">X</div>
+            -
+          </div>
+          <div
+            className="orderItemIncrease button"
+            onClick={(event) => handleOrderItemQuantityChange(event, passProps, 'up')}
+          >
+            +
           </div>
         </div>
       );
@@ -114,10 +120,12 @@ export default function Order(props) {
               <div className="orderItemPriceEach"></div>
             </div>
             <div
-              className="orderItemRemove"
-              onClick={(event) => handleOrderItemRemove(event, passProps)}
+              className="orderItemDecrease button"
+              onClick={(event) =>
+                handleOrderItemQuantityChange(event, passProps, 'down')
+              }
             >
-              <div className="orderItemRemoveText">X</div>
+X
             </div>
           </div>
         );
@@ -235,7 +243,7 @@ function handlePlusMinus(event, keypad, setkeypad) {
   setkeypad({ ...temp_keypad });
 }
 
-function handleOrderItemRemove(event, props) {
+function handleOrderItemQuantityChange(event, props, direction) {
   playBeep();
   const orderItem = props.orderItem;
   const order = props.order;
@@ -248,6 +256,17 @@ function handleOrderItemRemove(event, props) {
         let temp_order = order;
         let temp_orderItem = temp_order[index];
         temp_orderItem.price = 0;
+        temp_order[index] = temp_orderItem;
+        setOrder([...temp_order]);
+      }
+    });
+  } else if (direction === 'up') {
+    order.forEach((item, index) => {
+      log(`Increasing quantity of item ${item.name} in order by 1`);
+      if (orderItem == item) {
+        let temp_order = order;
+        let temp_orderItem = temp_order[index];
+        temp_orderItem.quantity++;
         temp_order[index] = temp_orderItem;
         setOrder([...temp_order]);
       }
