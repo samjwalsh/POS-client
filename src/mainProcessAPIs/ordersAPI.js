@@ -1,32 +1,36 @@
 const { ipcMain } = require("electron");
 
 const Store = require("electron-store");
-const store = new Store();
+const ordersStore = new Store();
 
 ipcMain.handle("getAllOrders", () => {
-  const orders = store.get("orders");
-  if (orders === undefined) {
-    store.set("orders", []);
+  const orders = ordersStore.get("orders");
+  if (Array.isArray(orders) === false) {
+    ordersStore.set("orders", []);
   }
-  return store.get("orders");
+  return ordersStore.get("orders");
 });
 
 ipcMain.handle("addOrder", (e, order) => {
-  const orders = store.get("orders");
-  if (orders === undefined) {
-    store.set("orders", [order]);
+  const orders = ordersStore.get("orders");
+  if (Array.isArray(orders) === false) {
+    ordersStore.set("orders", [order]);
   } else {
     orders.push(order);
-    store.set("orders", orders);
+    ordersStore.set("orders", orders);
   }
 });
 
+ipcMain.handle("overwriteOrders", (e, orders) => {
+  ordersStore.set("orders", orders);
+});
+
 ipcMain.handle("removeAllOrders", () => {
-  store.set("orders", []);
+  ordersStore.set("orders", []);
 });
 
 ipcMain.handle("removeOrder", (e, deletedOrder) => {
-  let orders = store.get("orders");
+  let orders = ordersStore.get("orders");
 
   let deletedOrderLocalEntry = orders.find(
     (order) => order.time === deletedOrder.time
@@ -37,7 +41,7 @@ ipcMain.handle("removeOrder", (e, deletedOrder) => {
   if (deletedOrderIndex > -1) {
     orders.splice(deletedOrderIndex, 1);
 
-    store.set("orders", orders);
+    ordersStore.set("orders", orders);
   }
-  return store.get("orders");
+  return ordersStore.get("orders");
 });

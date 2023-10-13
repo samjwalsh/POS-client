@@ -2,10 +2,15 @@ import * as React from "react";
 import * as ReactDOM from "react-dom/client";
 import { useState, useEffect } from "react";
 
-import log from "../../tools/logging";
+import log from "../tools/logging";
 
-import { getAllOrders, removeAllOrders, removeOrder } from "../../tools/ipc";
-import playBeep from "../../tools/playBeep";
+import {
+  getAllOrders,
+  overwriteOrders,
+  removeAllOrders,
+  removeOrder,
+} from "../tools/ipc";
+import playBeep from "../tools/playBeep";
 
 export default function Reports(props) {
   const [orders, setOrders] = useState([]);
@@ -185,10 +190,10 @@ function calculateDateString(time) {
   dateString += date.getMinutes().toString().padStart(2, "0");
   dateString += ":";
   dateString += date.getSeconds().toString().padStart(2, "0");
-  // dateString += " ";
-  // dateString += date.getDate().toString().padStart(2, "0");
-  // dateString += "/";
-  // dateString += date.getMonth().toString().padStart(2, "0");
+  dateString += " ";
+  dateString += date.getDate().toString().padStart(2, "0");
+  dateString += "/";
+  dateString += date.getMonth().toString().padStart(2, "0");
   // dateString += "/";
   // dateString += date.getFullYear().toString().padStart(2, "0");
 
@@ -207,20 +212,24 @@ async function handleDeleteOldOrders(orders, setOrders) {
   const currentDate = new Date().getDate();
 
   let newOrders = [];
+  if (Array.isArray(localOrders)) {
+    localOrders.forEach((order, index) => {
+      const orderDate = new Date(order.time).getDate();
+      if (orderDate == currentDate) {
+        newOrders.push(order);
+      }
+    });
+    overwriteOrders(newOrders);
 
-  localOrders.forEach((order) => {
-    const orderDate = new Date(order.time).getDate();
-    if (orderDate === currentDate) {
-      newOrders.push(order);
-    }
-  });
-
-  setOrders(newOrders.reverse());
+    setOrders(newOrders.reverse());
+  }
 }
 
 async function handleEndOfDay(orders, setOrders) {
   await removeAllOrders();
 
   let localOrders = await getAllOrders();
-  setOrders(localOrders.reverse());
+  if (Array.isArray(localOrders)) {
+    setOrders(localOrders.reverse());
+  }
 }

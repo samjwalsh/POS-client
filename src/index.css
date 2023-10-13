@@ -1269,9 +1269,9 @@ margin-left: var(--standardMargin); */
 
 .settingsContainer {
   display: grid;
-  grid-template-areas: "settingsTitle"
-  "settings"
-  ;
+  grid-template-areas:
+    "settingsTitle"
+    "settings";
   grid-template-rows: auto calc(100vh - var(--headerHeight));
 }
 
@@ -1285,4 +1285,84 @@ margin-left: var(--standardMargin); */
 
   overflow: hidden;
   overflow-y: scroll;
+
+  gap: var(--standardMargin);
+
+  padding: var(--standardMargin);
+}
+
+.settingsCategory {
+  border: var(--borderStyle);
+  width: auto;
+
+  display: grid;
+  grid-template-areas: "title"
+  "settings";
+}
+
+.settingsCategoryTitle {
+  margin: var(--standardMargin);
+  grid-area: title;
+  font-size: 2rem;
+  font-weight: var(--categoryFontWeight);
+}
+
+.settingsCategoryOptions {
+  padding: var(--standardMargin);
+  grid-area: settings;
+  display: flex;
+  flex-direction: row;
+  gap: var(--standardMargin);
+}
+
+.settingsCategoryOption {
+  flex-grow: 1;
+  display: grid;
+  grid-template-areas: "label spacer decrease value increase reset";
+  border: var(--borderStyle);
+  grid-template-columns: auto 1fr min-content min-content min-content;
+  padding: var(--standardMargin);
+  font-size: 1.5rem;
+  font-weight: var(--categoryFontWeight);
+}
+
+.settingsCategoryOptionRangeLabel {
+  padding: var(--standardMargin);
+  grid-area: label;
+  border: var(--borderStyle);
+}
+.settingsCategoryOptionRangeSpacer {
+  grid-area: spacer;
+  border: none;
+}
+
+.settingsCategoryOptionRangeDecrease {
+  padding: var(--standardMargin);
+  width: 2rem;
+  grid-area: decrease;
+  border: var(--borderStyle);
+  border-right: none;
+}
+
+.settingsCategoryOptionRangeValue {
+  padding: var(--standardMargin);
+  grid-area: value;
+  border: var(--borderStyle);
+  width: 2.5rem;
+}
+
+.settingsCategoryOptionRangeIncrease {
+  width: 2rem;
+  padding: var(--standardMargin);
+  grid-area: increase;
+  border: var(--borderStyle);
+  border-left: none;
+}
+
+.settingsCategoryOptionRangeReset {
+  padding: var(--standardMargin);
+  grid-area: reset;
+  border: var(--borderStyle);
+  border-left: none;
+  width: 2rem;
 }

@@ -18,9 +18,12 @@ export function addOrder(order, paymentMethod) {
       subtotal: calculateSubtotal(order),
       items: order,
     };
-    console.log(orderItem);
     return ipcRenderer.invoke("addOrder", orderItem);
   }
+}
+
+export function overwriteOrders(orders) {
+  return ipcRenderer.invoke("overwriteOrders", orders);
 }
 
 export function removeAllOrders() {
@@ -29,4 +32,12 @@ export function removeAllOrders() {
 
 export function removeOrder(order) {
   return ipcRenderer.invoke("removeOrder", order);
+}
+
+export function getSettings() {
+  return ipcRenderer.invoke("getSettings");
+}
+
+export function updateSettings(newSettings) {
+  return ipcRenderer.invoke("updateSettings", newSettings);
 }

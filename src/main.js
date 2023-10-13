@@ -22,7 +22,7 @@ const createWindow = () => {
     },
     fullscreen: prod === true ? true : false,
     autoHideMenuBar: true,
-    icon: "./assets/icons/icon.png",
+    icon: path.dirname + "/assets/icons/icon.ico",
   });
 
   // and load the index.html of the app.
@@ -62,3 +62,4 @@ app.on("activate", () => {
 //importing APIs
 import "./mainProcessAPIs/ordersAPI";
 import "./mainProcessAPIs/quitAPI";
+import "./mainProcessAPIs/settingsAPI"
