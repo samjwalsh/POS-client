@@ -1,19 +1,27 @@
 module.exports = {
   packagerConfig: {
     asar: true,
-      icon: './assets/icons/ico/abacus' // no file extension required
-
+    icon: "./assets/icons/icon", // no file extension required
   },
   rebuildConfig: {},
   makers: [
     {
       name: "@electron-forge/maker-squirrel",
-      config: {}, // run yarn make --platform win32 on linux to build win32
+      config: {
+        // An URL to an ICO file to use as the application icon (displayed in Control Panel > Programs and Features).
+        iconUrl: "https://builds.samjw.xyz/assets/icon.ico",
+        // The ICO file to use as the icon for the generated Setup.exe
+        setupIcon: "./assets/icons/icon.ico",
+      }, // run yarn make --platform win32 on linux to build win32
     },
     {
       name: "@electron-forge/maker-deb",
-      config: {},
-    }
+      config: {
+        options: {
+          icon: "./assets/icons/icon.png",
+        },
+      },
+    },
   ],
   plugins: [
     {
