@@ -19,7 +19,7 @@ export default function PayCash(props) {
       <div className="payCash">
         <div className="payCashOptions">
           <div
-            className="payCash50 payCashPreset"
+            className="payCash50 payCashPreset "
             onClick={(event) =>
               handlePayCash(event, props, 50)
             }
@@ -51,7 +51,7 @@ export default function PayCash(props) {
             <div className="payCashCenterText">5</div>
           </div>
           <div
-            className="payCashCustom"
+            className="payCashCustom b"
             onClick={(event) =>
               handlePayCash(event, props, "custom")
             }
@@ -59,7 +59,7 @@ export default function PayCash(props) {
             <div className="payCashCenterText">Custom</div>
           </div>
           <div
-            className="payCashExit"
+            className="payCashExit g"
             onClick={(event) =>
               handlePayCash(event, props, "exit")
             }
@@ -86,52 +86,52 @@ export default function PayCash(props) {
     <div className="payCash">
       <div className="payCashOptions">
         <div
-          className="payCash50 payCashPreset"
+          className="payCash50 payCashPreset b"
           onClick={(event) =>
             handlePayCash(event, props, 50)
           }
         >
-          <div className="payCashCenterText">50</div>
+          <div className="payCashCenterText b">50</div>
         </div>
         <div
-          className="payCash20 payCashPreset"
+          className="payCash20 payCashPreset b"
           onClick={(event) =>
             handlePayCash(event, props, 20)
           }
         >
-          <div className="payCashCenterText">20</div>
+          <div className="payCashCenterText b">20</div>
         </div>
         <div
-          className="payCash10 payCashPreset"
+          className="payCash10 payCashPreset b"
           onClick={(event) =>
             handlePayCash(event, props, 10)
           }
         >
-          <div className="payCashCenterText">10</div>
+          <div className="payCashCenterText b">10</div>
         </div>
         <div
-          className="payCash5 payCashPreset"
+          className="payCash5 payCashPreset b"
           onClick={(event) =>
             handlePayCash(event, props, 5)
           }
         >
-          <div className="payCashCenterText">5</div>
+          <div className="payCashCenterText b ">5</div>
         </div>
         <div
-          className="payCashCustom"
+          className="payCashCustom b"
           onClick={(event) =>
             handlePayCash(event, props, "custom")
           }
         >
-          <div className="payCashCenterText">Custom</div>
+          <div className="payCashCenterText b">Custom</div>
         </div>
         <div
-          className="payCashExit"
+          className="payCashExit g"
           onClick={(event) =>
             handlePayCash(event, props, "exit")
           }
         >
-          <div className="payCashCenterText">Done</div>
+          <div className="payCashCenterText g">Done</div>
         </div>
       </div>
       <div className="payCashChange">

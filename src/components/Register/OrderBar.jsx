@@ -6,6 +6,6 @@ import log from "../../tools/logging";
 
 export default function OrderBar() {
     log(`Set title for order bar to Order`);
-    return <div id="orderTitle">Order</div>;
+    return <div id="orderTitle" className=" y">Order</div>;
   }
   

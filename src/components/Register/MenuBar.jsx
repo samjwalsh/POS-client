@@ -16,7 +16,7 @@ export default function MenuBar(props) {
   }
   log(`Set menu title to ${menuState.name}`);
   return (
-      <div id="menuTitle" className="titleStyle">{menuTitle}</div>
+      <div id="menuTitle" className="titleStyle y">{menuTitle}</div>
   );
 }
 

@@ -86,13 +86,13 @@ export default function Order(props) {
             </div>
           </div>
           <div
-            className="orderItemDecrease button"
+            className="orderItemDecrease button r"
             onClick={(event) => handleOrderItemQuantityChange(event, passProps, 'down')}
           >
             -
           </div>
           <div
-            className="orderItemIncrease button"
+            className="orderItemIncrease button g"
             onClick={(event) => handleOrderItemQuantityChange(event, passProps, 'up')}
           >
             +
@@ -120,7 +120,7 @@ export default function Order(props) {
               <div className="orderItemPriceEach"></div>
             </div>
             <div
-              className="orderItemDecrease button"
+              className="orderItemDecrease button r"
               onClick={(event) =>
                 handleOrderItemQuantityChange(event, passProps, 'down')
               }
@@ -158,19 +158,19 @@ X
               className="plusMinus"
               onClick={(event) => handlePlusMinus(event, keypad, setkeypad)}
             >
-              <div className="plusMinusContainer">±</div>
+              <div className="plusMinusContainer b">±</div>
             </div>
             <div
-              className="card"
+              className="card "
               onClick={(event) => handlePayment(passProps, "card")}
             >
-              <div className="cardContainer">Card</div>
+              <div className="cardContainer g">Card</div>
             </div>
             <div
-              className="cash"
+              className="cash "
               onClick={(event) => handlePayment(passProps, "cash")}
             >
-              <div className="cashContainer">Cash</div>
+              <div className="cashContainer g">Cash</div>
             </div>
           </div>
         </div>
@@ -194,19 +194,19 @@ X
             className="plusMinus"
             onClick={(event) => handlePlusMinus(event, keypad, setkeypad)}
           >
-            <div className="plusMinusContainer">±</div>
+            <div className="plusMinusContainer b">±</div>
           </div>
           <div
             className="card"
             onClick={(event) => handlePayment(passProps, "card")}
           >
-            <div className="cardContainer">Card</div>
+            <div className="cardContainer g">Card</div>
           </div>
           <div
             className="cash"
             onClick={(event) => handlePayment(passProps, "cash")}
           >
-            <div className="cashContainer">Cash</div>
+            <div className="cashContainer g">Cash</div>
           </div>
         </div>
       </div>

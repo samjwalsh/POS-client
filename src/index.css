@@ -1,7 +1,6 @@
 :root {
   --headerHeight: 2.75rem;
 
-  --categoryFont: "Inter";
   --categoryFontWeight: 600;
   --categoryFontSize: 1.5rem;
   --categoryWidth: 8rem;
@@ -9,7 +8,6 @@
   --categoryMinHeight: 7rem;
   --standardMargin: 0.5rem;
 
-  --titleFont: "Inter";
   --titleFontSize: 1.5rem;
   --titleFontWeight: 1000;
   --headerColour: rgb(255, 108, 108);
@@ -19,19 +17,30 @@
   --borderStyle: solid var(--borderThickness) black;
   --borderStyled: solid 1px red;
 
-  --backgroundColour: rgb(255, 255, 255);
 
   overflow: hidden;
+
+  --colour1: #fff;
+  --colour2: #78DBCF;
+  --colour3: #F2AF9F;
+  --colour4: #F9CDA8;
+  --colour5: #6DA5BC;
+
+  --backgroundColour: var(--colour1);
+
 }
 
 @font-face {
-  font-family: Inter;
-  src: url(./assets/Inter.ttf);
+  /* font-family: Inter;
+  src: url(./assets/Inter.ttf); */
+
+  font-family: Gabarito;
+  src: url(./assets/Gabarito.ttf);
 }
 
 html {
   font-size: 16px;
-  font-family: Inter;
+  font-family: Gabarito;
 }
 
 * {
@@ -39,6 +48,22 @@ html {
   margin: 0rem;
   user-select: none;
   background-color: var(--backgroundColour);
+}
+
+.w {
+  background-color: var(--colour1);
+}
+.g {
+  background-color: var(--colour2);
+}
+.r {
+  background-color: var(--colour3);
+}
+.b {
+  background-color: var(--colour4);
+}
+.y {
+  background-color: var(--colour5);
 }
 
 .container {
@@ -55,7 +80,6 @@ html {
   height: var(--headerHeight);
 
   position: absolute;
-  background-color: var(--backgroundColour);
   border: var(--borderStyle);
   grid-area: hamburgerIcon;
   text-align: left;
@@ -71,7 +95,6 @@ html {
 }
 
 #hamburgerSVG {
-  background-color: var(--backgroundColour);
 
   height: 2.5rem;
   width: 2.5rem;
@@ -141,7 +164,6 @@ html {
 
   flex: 1;
 
-  background-color: var(--headerColour);
 }
 
 #sideMenuCloseButton {
@@ -176,7 +198,6 @@ html {
 .sideMenuOption {
   font-size: 2rem;
   font-weight: var(--categoryFontWeight);
-  font-family: var(--categoryFont);
   text-align: left;
   border: var(--borderStyle);
   margin-bottom: var(--standardMargin);
@@ -196,7 +217,6 @@ html {
 #sideMenuTerminateText {
   font-size: 2rem;
   font-weight: var(--categoryFontWeight);
-  font-family: var(--categoryFont);
   text-align: left;
   border: var(--borderStyle);
   padding-left: var(--standardMargin);
@@ -223,7 +243,6 @@ html {
 
 .listItem {
   border: var(--borderStyle);
-  font-family: var(--categoryFont);
   font-weight: var(--categoryFontWeight);
   font-size: var(--titleFontSize);
   text-align: center;
@@ -252,7 +271,6 @@ html {
   border: var(--borderStyle);
   border-top: none;
   border-bottom: none;
-  font-family: var(--categoryFont);
   font-weight: var(--categoryFontWeight);
   font-size: var(--titleFontSize);
   text-align: center;
@@ -272,10 +290,6 @@ html {
   justify-content: center;
 
   flex: 1;
-}
-
-.backButton {
-  background-color: var(--headerColour);
 }
 
 .itemPage {
@@ -300,12 +314,13 @@ html {
   margin-top: auto;
   margin-bottom: var(--standardMargin);
   margin-left: var(--standardMargin);
+  font-weight: var(--categoryFontWeight);
 }
 
 .itemPageTitleCenter {
   font-family: var(--titleFont);
   font-size: 2rem;
-  font-weight: var(--titleFontWeight);
+  font-weight: var(--categoryFontWeight);
   display: flex;
 }
 
@@ -401,7 +416,6 @@ margin-left: var(--standardMargin); */
   display: grid;
   grid-template-areas: "addonNameAndPrice toggle";
   grid-template-columns: min-content auto;
-  font-family: var(--categoryFont);
   font-weight: var(--categoryFontWeight);
   margin-bottom: var(--standardMargin);
   /* justify-content: stretch; */
@@ -418,7 +432,6 @@ margin-left: var(--standardMargin); */
   display: grid;
   grid-template-areas: "addonNameAndPrice toggle";
   grid-template-columns: min-content auto;
-  font-family: var(--categoryFont);
   font-weight: var(--categoryFontWeight);
   /* justify-content: stretch; */
 }
@@ -444,7 +457,6 @@ margin-left: var(--standardMargin); */
 
 .addonPrice {
   grid-area: addonPrice;
-  font-style: var(--categoryFont);
   font-size: 1rem;
   width: min-content;
   /* push text to bottom */
@@ -487,7 +499,6 @@ margin-left: var(--standardMargin); */
   grid-template-areas: "quantitySection priceSection orderAdd";
   grid-template-columns: min-content auto min-content;
 
-  font-family: var(--categoryFont);
   font-weight: var(--categoryFontWeight);
   font-size: 2rem;
 }
@@ -560,7 +571,6 @@ margin-left: var(--standardMargin); */
   border: var(--borderStyle);
   border-bottom: hidden;
 
-  background-color: var(--headerColour);
 
   text-align: center;
   font-family: var(--titleFont);
@@ -585,7 +595,6 @@ margin-left: var(--standardMargin); */
     "orderItems"
     "subTotal";
   grid-template-rows: auto min-content;
-  font-family: var(--categoryFont);
   font-weight: var(--categoryFontWeight);
 }
 
@@ -672,9 +681,7 @@ margin-left: var(--standardMargin); */
   width: 2.5rem;
   height: 2.5rem;
   border-left: none;
-
 }
-
 
 .subTotal {
   border-top: var(--borderStyle);
@@ -888,7 +895,6 @@ margin-left: var(--standardMargin); */
     "payCashExit payCashExit";
   font-size: 2.5rem;
   font-weight: var(--categoryFontWeight);
-  font-family: var(--categoryFont);
   grid-template-rows: 1fr 1fr min-content 0.8fr;
   grid-template-columns: 1fr 1fr;
   margin: var(--standardMargin);
@@ -985,7 +991,6 @@ margin-left: var(--standardMargin); */
 }
 
 .titleStyle {
-  background-color: var(--headerColour);
 
   height: var(--headerHeight);
 
@@ -1300,8 +1305,9 @@ margin-left: var(--standardMargin); */
   width: auto;
 
   display: grid;
-  grid-template-areas: "title"
-  "settings";
+  grid-template-areas:
+    "title"
+    "settings";
 }
 
 .settingsCategoryTitle {

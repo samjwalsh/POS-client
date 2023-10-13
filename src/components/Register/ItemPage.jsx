@@ -47,7 +47,7 @@ export default function ItemPage(props) {
     return (
       <div
         key={addon.name}
-        className="addon"
+        className="addon b"
         id={index}
         onClick={(event) =>
           handleAddonToggle(
@@ -60,15 +60,15 @@ export default function ItemPage(props) {
           )
         }
       >
-        <div className="addonNameAndPrice">
-          <div className="addonName">
-            <div className="addonText">{addon.name}</div>
+        <div className="addonNameAndPrice b">
+          <div className="addonName b">
+            <div className="addonText b">{addon.name}</div>
           </div>
-          <div className="addonPrice">
-            <div className="addonText">€{addon.price.toFixed(2)}</div>
+          <div className="addonPrice b">
+            <div className="addonText b">€{addon.price.toFixed(2)}</div>
           </div>
         </div>
-        <div className="toggleAddon">
+        <div className="toggleAddon b">
           <div className="toggleAddonButton" id={index}>
             {selected}
           </div>
@@ -86,7 +86,7 @@ export default function ItemPage(props) {
       let addons = shortcut.addons;
       return (
         <div
-          className="itemPageShortcut button"
+          className="itemPageShortcut button g"
           onClick={(shortcut) =>
             handleClickShortcut(
               event,
@@ -101,8 +101,8 @@ export default function ItemPage(props) {
           }
           key={shortcut.name}
         >
-          <div className="itemPageShortcutName">{shortcut.name}</div>
-          <div className="itemPageShortcutPrice">
+          <div className="itemPageShortcutName g">{shortcut.name}</div>
+          <div className="itemPageShortcutPrice g">
             €{shortcut.price.toFixed(2)}
           </div>
         </div>
@@ -130,7 +130,7 @@ export default function ItemPage(props) {
           <div className="itemPageTitleCenter">{menuState.name}</div>
         </div>
         <div
-          className="itemPageExitButton"
+          className="itemPageExitButton r"
           onClick={(event) =>
             handleExitItemPage(
               event,
@@ -148,17 +148,17 @@ export default function ItemPage(props) {
         {shortcutsHTML}
         <div className="itemPageAddonsSection">
           {addonsHTML}
-          <div className="addonFiller"></div>
-          <div className="addonFiller"></div>
-          <div className="addonFiller"></div>
-          <div className="addonFiller"></div>
+          <div className="addonFiller "></div>
+          <div className="addonFiller "></div>
+          <div className="addonFiller "></div>
+          <div className="addonFiller "></div>
         </div>
       </div>
 
       <div className="bottomBar">
         <div className="quantitySection">
           <div
-            className="subtractQuantity"
+            className="subtractQuantity r"
             onClick={(event) =>
               handleDecreaseQuantity(event, item, currentOrder, setCurrentOrder)
             }
@@ -167,7 +167,7 @@ export default function ItemPage(props) {
           </div>
           <div className="quantityValue">{quantity}</div>
           <div
-            className="addQuantity"
+            className="addQuantity g"
             onClick={(event) =>
               handleIncreaseQuantity(event, item, currentOrder, setCurrentOrder)
             }
@@ -178,9 +178,9 @@ export default function ItemPage(props) {
         <div className="priceSection">
           <div className="priceContainer">€{price}</div>
         </div>
-        <div className="orderAdd">
+        <div className="orderAdd g">
           <div
-            className="orderAddContainer"
+            className="orderAddContainer g"
             onClick={(event) =>
               handleAddToOrder(
                 event,

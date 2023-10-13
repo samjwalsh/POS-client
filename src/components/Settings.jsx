@@ -32,7 +32,7 @@ export default function Settings(props) {
               </div>
               <div className="settingsCategoryOptionRangeSpacer"></div>
               <div
-                className="settingsCategoryOptionRangeDecrease button"
+                className="settingsCategoryOptionRangeDecrease button r"
                 onClick={(e) => {
                   handleClickRangeOption(
                     setting,
@@ -48,7 +48,7 @@ export default function Settings(props) {
                 {setting.value}
               </div>
               <div
-                className="settingsCategoryOptionRangeIncrease button "
+                className="settingsCategoryOptionRangeIncrease button g"
                 onClick={(e) => {
                   handleClickRangeOption(
                     setting,
@@ -61,7 +61,7 @@ export default function Settings(props) {
                 +
               </div>
               <div
-                className="settingsCategoryOptionRangeReset button"
+                className="settingsCategoryOptionRangeReset button b"
                 onClick={(e) => {
                   handleClickRangeOption(
                     setting,
@@ -72,7 +72,7 @@ export default function Settings(props) {
                 }}
               >
                 {" "}
-                <img src={undo} id="undoSVG" />
+                <img src={undo} id="undoSVG" className="b"/>
               </div>
             </div>
           );

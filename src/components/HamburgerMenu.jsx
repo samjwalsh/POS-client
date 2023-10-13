@@ -14,10 +14,10 @@ export default function HamburgerMenu(props) {
   if (hamburgerOpen === false) {
     return (
       <div
-        id="hamburgerIcon"
+        id="hamburgerIcon" className="r"
         onClick={(event) => handleClickHamburger(event, setHamburger)}
       >
-        <img src={hamburger} id="hamburgerSVG" />
+        <img src={hamburger} id="hamburgerSVG" className="r" />
       </div>
     );
   }
@@ -31,7 +31,7 @@ export default function HamburgerMenu(props) {
           <div id="sideMenuClose">
             <div id="sideMenuCloseText">Options</div>
             <div
-              id="sideMenuCloseButton"
+              id="sideMenuCloseButton" className="r"
               onClick={() => handleCloseSideMenu(setHamburger)}
             >
               X
@@ -40,7 +40,7 @@ export default function HamburgerMenu(props) {
           <div id="sideMenuOptions">
             <div id="sideMenuOption">
               <div
-                className="sideMenuOption"
+                className="sideMenuOption b" 
                 onClick={() =>
                   handleSetAppState(setHamburger, setAppState, "Register")
                 }
@@ -49,7 +49,7 @@ export default function HamburgerMenu(props) {
               </div>
             </div>
             <div
-              className="sideMenuOption"
+              className="sideMenuOption b"
               onClick={() =>
                 handleSetAppState(setHamburger, setAppState, "Reports")
               }
@@ -57,7 +57,7 @@ export default function HamburgerMenu(props) {
               Reports
             </div>
             <div
-              className="sideMenuOption"
+              className="sideMenuOption b"
               onClick={() =>
                 handleSetAppState(setHamburger, setAppState, "Settings")
               }
@@ -65,7 +65,7 @@ export default function HamburgerMenu(props) {
           </div>
           <div id="sideMenuTerminate">
             <div
-              id="sideMenuTerminateText"
+              id="sideMenuTerminateText" className="r"
               onClick={() => handleTerminatePOS()}
             >
               Exit POS

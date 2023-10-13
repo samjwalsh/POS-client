@@ -52,11 +52,13 @@ export default function Menu(props) {
       let classes = "listItem";
       if (item.type === "category") {
         log(`Added class "category" to ${item.name}`);
-        classes += " category";
+        classes += " category b";
       } else if (item.type === "backButton") {
         log(`Added class "category" to the back button`);
 
-        classes += " backButton";
+        classes += " backButton r";
+      } else {
+        classes += " b"
       }
 
       log(`Added item ${item.name} to HTML`);

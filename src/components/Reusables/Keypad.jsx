@@ -25,125 +25,125 @@ export default function Keypad(props) {
         <div className="keypadDisplayTextValue">{keypadText}</div>
       </div>
       <div
-        className="keypadClose keypadButton"
+        className="keypadClose keypadButton r"
         onClick={(event) => {
           handleKeypadClick(event, props, "X");
         }}
       >
-        <div className="keypadCenter keypadText">X</div>
+        <div className="keypadCenter keypadText r">X</div>
       </div>
       <div
-        className="keypadMinus keypadButton"
+        className="keypadMinus keypadButton b"
         onClick={(event) => {
           handleKeypadClick(event, props, "-");
         }}
       >
-        <div className="keypadCenter keypadText">-</div>
+        <div className="keypadCenter keypadText b">-</div>
       </div>
       <div
-        className="keypadPlus keypadButton"
+        className="keypadPlus keypadButton b"
         onClick={(event) => {
           handleKeypadClick(event, props, "+");
         }}
       >
-        <div className="keypadCenter keypadText">+</div>
+        <div className="keypadCenter keypadText b">+</div>
       </div>
       <div
-        className="keypadBack keypadButton"
+        className="keypadBack keypadButton b"
         onClick={(event) => {
           handleKeypadClick(event, props, "Del");
         }}
       >
-        <div className="keypadCenter keypadText">←</div>
+        <div className="keypadCenter keypadText b">←</div>
       </div>
       <div
-        className="keypad7 keypadButton"
+        className="keypad7 keypadButton b"
         onClick={(event) => {
           handleKeypadClick(event, props, "7");
         }}
       >
-        <div className="keypadCenter keypadText">7</div>
+        <div className="keypadCenter keypadText b">7</div>
       </div>
       <div
-        className="keypad8 keypadButton"
+        className="keypad8 keypadButton b"
         onClick={(event) => {
           handleKeypadClick(event, props, "8");
         }}
       >
-        <div className="keypadCenter keypadText">8</div>
+        <div className="keypadCenter keypadText b">8</div>
       </div>
       <div
-        className="keypad9 keypadButton"
+        className="keypad9 keypadButton b"
         onClick={(event) => {
           handleKeypadClick(event, props, "9");
         }}
       >
-        <div className="keypadCenter keypadText">9</div>
+        <div className="keypadCenter keypadText b">9</div>
       </div>
       <div
-        className="keypad4 keypadButton"
+        className="keypad4 keypadButton b"
         onClick={(event) => {
           handleKeypadClick(event, props, "4");
         }}
       >
-        <div className="keypadCenter keypadText">4</div>
+        <div className="keypadCenter keypadText b">4</div>
       </div>
       <div
-        className="keypad5 keypadButton"
+        className="keypad5 keypadButton b"
         onClick={(event) => {
           handleKeypadClick(event, props, "5");
         }}
       >
-        <div className="keypadCenter keypadText">5</div>
+        <div className="keypadCenter keypadText b">5</div>
       </div>
       <div
-        className="keypad6 keypadButton"
+        className="keypad6 keypadButton b"
         onClick={(event) => {
           handleKeypadClick(event, props, "6");
         }}
       >
-        <div className="keypadCenter keypadText">6</div>
+        <div className="keypadCenter keypadText b">6</div>
       </div>
       <div
-        className="keypad1 keypadButton"
+        className="keypad1 keypadButton b"
         onClick={(event) => {
           handleKeypadClick(event, props, "1");
         }}
       >
-        <div className="keypadCenter keypadText">1</div>
+        <div className="keypadCenter keypadText b">1</div>
       </div>
       <div
-        className="keypad2 keypadButton"
+        className="keypad2 keypadButton b"
         onClick={(event) => {
           handleKeypadClick(event, props, "2");
         }}
       >
-        <div className="keypadCenter keypadText">2</div>
+        <div className="keypadCenter keypadText b">2</div>
       </div>
       <div
-        className="keypad3 keypadButton"
+        className="keypad3 keypadButton b"
         onClick={(event) => {
           handleKeypadClick(event, props, "3");
         }}
       >
-        <div className="keypadCenter keypadText">3</div>
+        <div className="keypadCenter keypadText b">3</div>
       </div>
 
       <div
-        className="keypad0 keypadButton"
+        className="keypad0 keypadButton b"
         onClick={(event) => {
           handleKeypadClick(event, props, "0");
         }}
       >
-        <div className="keypadCenter keypadText">0</div>
+        <div className="keypadCenter keypadText b">0</div>
       </div>
       <div
-        className="keypadEnter keypadButton"
+        className="keypadEnter keypadButton g"
         onClick={(event) => {
           handleKeypadClick(event, props, "Enter");
         }}
       >
-        <div className="keypadCenter keypadText">{"→"}</div>
+        <div className="keypadCenter keypadText g">{"→"}</div>
       </div>
     </div>
   );

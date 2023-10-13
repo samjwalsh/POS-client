@@ -24,8 +24,8 @@ export default function Reports(props) {
 
   return (
     <div className="reports">
-      <div className="ordersTitle titleStyle">Orders</div>
-      <div className="reportsTitle titleStyle">Reports</div>
+      <div className="ordersTitle titleStyle y">Orders</div>
+      <div className="reportsTitle titleStyle y">Reports</div>
       <div className="reportsOrders">
         {createOrdersHTML(orders, setOrders)}
         <div className="reportsOrderFiller"></div>
@@ -42,13 +42,13 @@ function reportsStatsHTML(orders, setOrders) {
       {createReportsStatsInfo(orders, setOrders)}
       <div className="reportsStatsButtonsContainer">
         <div
-          className="reportsStatsButtons button"
+          className="reportsStatsButtons button b"
           onClick={(event) => handleDeleteOldOrders(orders, setOrders)}
         >
           Del. Old Orders
         </div>
         <div
-          className="reportsStatsButtons button"
+          className="reportsStatsButtons button r"
           onClick={(event) => handleEndOfDay(orders, setOrders)}
         >
           End Of Day
@@ -110,7 +110,7 @@ function createOrdersHTML(orders, setOrders) {
             Order No. {orders.length - index}
           </div>
           <div
-            className="reportsOrderTableDeleteOrder"
+            className="reportsOrderTableDeleteOrder r"
             onClick={(event) => handleDeleteOrder(event, order, setOrders)}
           >
             X
