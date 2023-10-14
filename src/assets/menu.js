@@ -109,7 +109,7 @@ export const menu = [
       {
         name: "Kid's Cone",
         price: 2.3,
-        addons:[]
+        addons: [],
       },
       {
         name: "Kid's 99",
@@ -341,7 +341,13 @@ export const menu = [
       },
       {
         name: "Hot Chocolate",
-        price: 3.5,
+        price: 3,
+        modifiers: [
+          {
+            name: "Marshmallows",
+            price: 0.5,
+          },
+        ],
       },
       {
         name: "Double Espresso",
@@ -422,44 +428,8 @@ export const menu = [
     type: "category",
     items: [
       {
-        name: "Kit Kat",
-        price: 2,
-      },
-      {
-        name: "Toffee Crisp",
-        price: 2,
-      },
-      {
-        name: "Aero Mint",
-        price: 2,
-      },
-      {
-        name: "Dairy Milk",
-        price: 2,
-      },
-      {
-        name: "Kinder Bueno",
+        name: "Standard Chocolate Bar",
         price: 1.8,
-      },
-      {
-        name: "Munchies",
-        price: 2,
-      },
-      {
-        name: "Mars",
-        price: 2,
-      },
-      {
-        name: "Rolo",
-        price: 2,
-      },
-      {
-        name: "Yorkie",
-        price: 2,
-      },
-      {
-        name: "Yellow Snack",
-        price: 2,
       },
       {
         name: "Purple Snack",
@@ -514,9 +484,10 @@ export const menu = [
         price: 1.6,
       },
       {
-        name: "Snax",
+        name: "Snax, Hula Hoops",
         price: 1.5,
       },
+
       {
         name: "Popcorn Cone",
         price: 2.5,
@@ -544,6 +515,10 @@ export const menu = [
       {
         name: "Large Slush",
         price: 3.5,
+      },
+      {
+        name: "Fart in a Bag",
+        price: 2,
       },
     ],
   },
