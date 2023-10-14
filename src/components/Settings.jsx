@@ -71,7 +71,7 @@ export default function Settings(props) {
                 }}
               >
                 {" "}
-                <img src={undo} id="undoSVG" className="b" />
+                <img src={undo} className="b undoSVG" />
               </div>
             </div>
           );
@@ -105,7 +105,7 @@ export default function Settings(props) {
 
   return (
     <div className="settingsContainer">
-      <div className="settingsTitle titleStyle">Settings</div>
+      <div className="settingsTitle titleStyle y">Settings</div>
       <div className="settings">{settingsHTML}</div>
     </div>
   );

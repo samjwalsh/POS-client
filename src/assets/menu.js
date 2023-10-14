@@ -70,7 +70,7 @@ export const menu = [
       },
       {
         name: "Waffle Cone",
-        price: 1.5,
+        price: 1,
       },
       {
         name: "Crush Flake",
@@ -109,7 +109,7 @@ export const menu = [
       {
         name: "Kid's Cone",
         price: 2.3,
-        addons:[]
+        addons: [],
       },
       {
         name: "Kid's 99",
@@ -363,7 +363,7 @@ export const menu = [
       },
       {
         name: "Waffle Cone",
-        price: 1.5,
+        price: 1,
       },
     ],
   },

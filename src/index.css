@@ -17,17 +17,15 @@
   --borderStyle: solid var(--borderThickness) black;
   --borderStyled: solid 1px red;
 
-
   overflow: hidden;
 
   --colour1: #fff;
-  --colour2: #78DBCF;
-  --colour3: #F2AF9F;
-  --colour4: #F9CDA8;
-  --colour5: #6DA5BC;
+  --colour2: #78dbcf;
+  --colour3: #f2af9f;
+  --colour4: #f9cda8;
+  --colour5: #6da5bc;
 
   --backgroundColour: var(--colour1);
-
 }
 
 @font-face {
@@ -95,7 +93,6 @@ html {
 }
 
 #hamburgerSVG {
-
   height: 2.5rem;
   width: 2.5rem;
 }
@@ -163,7 +160,6 @@ html {
   justify-content: center;
 
   flex: 1;
-
 }
 
 #sideMenuCloseButton {
@@ -570,7 +566,6 @@ margin-left: var(--standardMargin); */
 #orderTitle {
   border: var(--borderStyle);
   border-bottom: hidden;
-
 
   text-align: center;
   font-family: var(--titleFont);
@@ -991,7 +986,6 @@ margin-left: var(--standardMargin); */
 }
 
 .titleStyle {
-
   height: var(--headerHeight);
 
   font-size: var(--titleFontSize);
@@ -1395,4 +1389,7 @@ margin-left: var(--standardMargin); */
   width: min-content;
 }
 
-
+.undoSVG {
+  height: 1.5rem;
+  width: 1.5rem;
+}
