@@ -20,10 +20,16 @@
   overflow: hidden;
 
   --colour1: #fff;
+  --colour2: #52ff94;
+  --colour3: #ff9494;
+  --colour4: #ffd7a3;
+  --colour5: #4eb2da;
+
+  /* --colour1: #fff;
   --colour2: #78dbcf;
   --colour3: #f2af9f;
   --colour4: #f9cda8;
-  --colour5: #6da5bc;
+  --colour5: #6da5bc; */
 
   --backgroundColour: var(--colour1);
 }

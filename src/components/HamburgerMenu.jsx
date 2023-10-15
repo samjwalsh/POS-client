@@ -29,7 +29,7 @@ export default function HamburgerMenu(props) {
       <div id="sideMenu">
         <div id="sideMenuContent">
           <div id="sideMenuClose">
-            <div id="sideMenuCloseText">Options</div>
+            <div id="sideMenuCloseText" className="y">Options</div>
             <div
               id="sideMenuCloseButton" className="r"
               onClick={() => handleCloseSideMenu(setHamburger)}

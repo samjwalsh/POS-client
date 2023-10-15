@@ -105,8 +105,8 @@ function createOrdersHTML(orders, setOrders) {
       const orderDateString = calculateDateString(order.time);
 
       return (
-        <div key={order.time} className="reportsOrder">
-          <div className="reportsOrderTableOrderNo">
+        <div key={order.time} className="reportsOrder y">
+          <div className="reportsOrderTableOrderNo y">
             Order No. {orders.length - index}
           </div>
           <div
