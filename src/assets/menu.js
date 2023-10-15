@@ -74,7 +74,7 @@ export const menu = [
       },
       {
         name: "Crush Flake",
-        price: 1,
+        price: 1.5,
       },
       { name: "Choc Dip", price: 1.0 },
       {
@@ -148,7 +148,7 @@ export const menu = [
         name: "Toppings",
         price: 0.5,
       },
-      { name: "Crush Flake", price: 1 },
+      { name: "Crush Flake", price: 1.5 },
       { name: "Choc Dip", price: 1.2 },
       {
         priceCheck: function (addons) {
@@ -198,7 +198,7 @@ export const menu = [
           },
           {
             name: "Crush Flake",
-            price: 1.0,
+            price: 1.5,
           },
         ],
       },
@@ -217,7 +217,7 @@ export const menu = [
           },
           {
             name: "Crush Flake",
-            price: 1.0,
+            price: 1.5,
           },
         ],
       },
@@ -227,7 +227,7 @@ export const menu = [
         modifiers: [
           { name: "Flake", price: 0.5 },
           { name: "Toppings", price: 0.5 },
-          { name: "Crush Flake", price: 1.0 },
+          { name: "Crush Flake", price: 1.5 },
         ],
       },
       {

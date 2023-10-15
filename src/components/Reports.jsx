@@ -193,7 +193,7 @@ function calculateDateString(time) {
   dateString += " ";
   dateString += date.getDate().toString().padStart(2, "0");
   dateString += "/";
-  dateString += date.getMonth().toString().padStart(2, "0");
+  dateString += (date.getMonth()+1).toString().padStart(2, "0");
   // dateString += "/";
   // dateString += date.getFullYear().toString().padStart(2, "0");
 
