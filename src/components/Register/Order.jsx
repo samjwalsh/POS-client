@@ -125,7 +125,7 @@ export default function Order(props) {
                 handleOrderItemQuantityChange(event, passProps, 'down')
               }
             >
-X
+-
             </div>
           </div>
         );

@@ -32,8 +32,6 @@
   --colour5: #293B41;
   --borderStyle: solid var(--borderThickness) white;
   color: white; */
-  
-
 
   /* --colour1: #fff;
   --colour2: #78dbcf;
@@ -625,13 +623,14 @@ margin-left: var(--standardMargin); */
 .orderItem {
   margin: var(--standardMargin);
   margin-top: 0rem;
-  padding: var(--standardMargin);
   border: var(--borderStyle);
   width: auto;
 
   display: grid;
-  grid-template-areas: "nameAndAddons priceAndPriceEach orderItemDecrease orderItemIncrease";
-  grid-template-columns: auto min-content min-content min-content;
+  /* grid-template-areas: "nameAndAddons priceAndPriceEach orderItemDecrease orderItemIncrease";
+  grid-template-columns: auto min-content min-content min-content; */
+  grid-template-areas: "orderItemDecrease nameAndAddons priceAndPriceEach orderItemIncrease";
+  grid-template-columns: min-content auto min-content min-content min-content;
 }
 
 .nameAndAddons {
@@ -641,12 +640,13 @@ margin-left: var(--standardMargin); */
     "orderItemName"
     "orderItemAddons";
   grid-template-rows: auto min-content;
+  margin: var(--standardMargin);
+  margin-right: none;
 }
 
 .orderItemName {
   font-size: 1.2rem;
 
-  margin-bottom: var(--standardMargin);
 }
 
 .orderItemAddons {
@@ -654,7 +654,7 @@ margin-left: var(--standardMargin); */
 }
 
 .priceAndPriceEach {
-  margin-right: var(--standardMargin);
+  margin: var(--standardMargin);
   grid-area: priceAndPriceEach;
   width: min-content;
   white-space: nowrap;
@@ -680,18 +680,19 @@ margin-left: var(--standardMargin); */
 .orderItemDecrease {
   font-size: 1.5rem;
   grid-area: orderItemDecrease;
-  border: var(--borderStyle);
+  border-right: var(--borderStyle);
   width: 2.5rem;
-  height: 2.5rem;
+  min-height: 2.5rem;
+  height: auto;
 }
 
 .orderItemIncrease {
   font-size: 1.5rem;
   grid-area: orderItemIncrease;
-  border: var(--borderStyle);
+  border-left: var(--borderStyle);
   width: 2.5rem;
-  height: 2.5rem;
-  border-left: none;
+  min-height: 2.5rem;
+  height: auto;
 }
 
 .subTotal {
