@@ -1362,8 +1362,13 @@ margin-left: var(--standardMargin); */
 .settingsCategoryOptionRangeLabel {
   padding: var(--standardMargin);
   grid-area: label;
-  border: var(--borderStyle);
+  
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
+
 .settingsCategoryOptionSpacer {
   grid-area: spacer;
   border: none;
