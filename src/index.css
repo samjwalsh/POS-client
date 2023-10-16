@@ -23,6 +23,17 @@
   --colour3: #ff9494;
   --colour4: #ffd7a3;
   --colour5: #4eb2da;
+  --borderStyle: solid var(--borderThickness) black;
+
+  /* --colour1: #000;
+  --colour2: #275237;
+  --colour3: #632E2E;
+  --colour4: #664E30;
+  --colour5: #293B41;
+  --borderStyle: solid var(--borderThickness) white;
+  color: white; */
+  
+
 
   /* --colour1: #fff;
   --colour2: #78dbcf;
