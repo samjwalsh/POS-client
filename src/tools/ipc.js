@@ -45,3 +45,7 @@ export function updateSettings(newSettings) {
 export function resetSettings() {
   return ipcRenderer.invoke('resetSettings');
 }
+
+export function getVersionNo() {
+  return ipcRenderer.invoke("getVersionNo");
+}

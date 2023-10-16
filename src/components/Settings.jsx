@@ -1,7 +1,12 @@
 import * as React from "react";
 import * as ReactDOM from "react-dom/client";
 import { useState, useEffect } from "react";
-import { getSettings, resetSettings, updateSettings } from "../tools/ipc";
+import {
+  getSettings,
+  getVersionNo,
+  resetSettings,
+  updateSettings,
+} from "../tools/ipc";
 
 import playBeep from "../tools/playBeep";
 
@@ -10,10 +15,15 @@ import undo from "../assets/undo.svg";
 export default function Settings(props) {
   let settings = props.settings;
   let setSettings = props.setSettings;
+  const [version, setVersion] = useState();
+
   useEffect(() => {
     (async () => {
       let localSettings = await getSettings();
       setSettings(localSettings);
+
+      let returnedVersion = await getVersionNo();
+      setVersion(returnedVersion);
     })();
   }, []);
 
@@ -107,6 +117,7 @@ export default function Settings(props) {
     <div className="settingsContainer">
       <div className="settingsTitle titleStyle y">Settings</div>
       <div className="settings">{settingsHTML}</div>
+      <div className="settingsVersionNumber">v{version}</div>
     </div>
   );
 }

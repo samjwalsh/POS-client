@@ -1,11 +1,10 @@
-const { ipcMain } = require("electron");
+const { ipcMain, app } = require("electron");
 
 const Store = require("electron-store");
 const { settingsSchema } = require("../assets/settingsSchema");
 const settingsStore = new Store();
 
 // add code here to check that all the settings match the newest schema, it will run once on startup
-
 
 ipcMain.handle("getSettings", () => {
   let settings = settingsStore.get("settings");
@@ -21,5 +20,9 @@ ipcMain.handle("updateSettings", (e, newSettings) => {
 });
 
 ipcMain.handle("resetSettings", () => {
-  settingsStore.set('settings', settingsSchema)
-})
+  settingsStore.set("settings", settingsSchema);
+});
+
+ipcMain.handle("getVersionNo", () => {
+  return app.getVersion();
+});

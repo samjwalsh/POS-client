@@ -1295,6 +1295,18 @@ margin-left: var(--standardMargin); */
   grid-template-rows: auto calc(100vh - var(--headerHeight));
 }
 
+.settingsVersionNumber {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+
+  margin: var(--standardMargin);
+
+  padding: var(--standardMargin);
+  border: var(--borderStyle);
+  font-size: 1rem;
+}
+
 .settingsTitle {
   border: var(--borderStyle);
 }
