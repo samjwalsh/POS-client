@@ -15,6 +15,12 @@ import playBeep from "../tools/playBeep";
 export default function Reports(props) {
   const [orders, setOrders] = useState([]);
 
+  const [confirmation, setConfirmation] = useState({
+    enabled: false,
+    message: "Continue?",
+    response: false,
+  });
+
   useEffect(() => {
     (async () => {
       const localOrders = await getAllOrders();
