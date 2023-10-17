@@ -515,11 +515,7 @@ export const menu = [
       {
         name: "Large Slush",
         price: 3.5,
-      },
-      {
-        name: "Fart in a Bag",
-        price: 2,
-      },
+      }
     ],
   },
 ];
