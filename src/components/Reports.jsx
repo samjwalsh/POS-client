@@ -4,6 +4,8 @@ import { useState, useEffect } from "react";
 
 import log from "../tools/logging";
 
+import useConfirm from "./Reusables/ConfirmDialog.jsx";
+
 import {
   getAllOrders,
   overwriteOrders,
@@ -14,12 +16,6 @@ import playBeep from "../tools/playBeep";
 
 export default function Reports(props) {
   const [orders, setOrders] = useState([]);
-
-  const [confirmation, setConfirmation] = useState({
-    enabled: false,
-    message: "Continue?",
-    response: false,
-  });
 
   useEffect(() => {
     (async () => {
@@ -117,7 +113,9 @@ function createOrdersHTML(orders, setOrders) {
           </div>
           <div
             className="reportsOrderTableDeleteOrder r"
-            onClick={(event) => handleDeleteOrder(event, order, setOrders)}
+            onClick={(event) =>
+              handleDeleteOrder(event, order, setOrders)
+            }
           >
             X
           </div>
@@ -199,7 +197,7 @@ function calculateDateString(time) {
   dateString += " ";
   dateString += date.getDate().toString().padStart(2, "0");
   dateString += "/";
-  dateString += (date.getMonth()+1).toString().padStart(2, "0");
+  dateString += (date.getMonth() + 1).toString().padStart(2, "0");
   // dateString += "/";
   // dateString += date.getFullYear().toString().padStart(2, "0");
 
@@ -207,10 +205,20 @@ function calculateDateString(time) {
 }
 
 async function handleDeleteOrder(event, deletedOrder, setOrders) {
-  playBeep();
-  let localOrders = await removeOrder(deletedOrder);
 
-  setOrders(localOrders.reverse());
+  playBeep();
+
+  const choice = await useConfirm({
+    title: "Delete all",
+    description: "Are you sure you want to delete everything?",
+    confirmBtnLabel: "Yes",
+  });
+
+  if (choice) {
+    let localOrders = await removeOrder(deletedOrder);
+
+    setOrders(localOrders.reverse());
+  }
 }
 
 async function handleDeleteOldOrders(orders, setOrders) {
