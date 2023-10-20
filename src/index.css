@@ -221,12 +221,17 @@ html {
 }
 
 .sideMenuOption {
-  font-size: 2rem;
+  font-size: 1.8rem;
+  height: 2.8rem;
   font-weight: var(--categoryFontWeight);
   text-align: left;
   border: var(--borderStyle);
   margin-bottom: var(--standardMargin);
   padding-left: var(--standardMargin);
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 #sideMenuBackground {
