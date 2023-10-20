@@ -24,7 +24,7 @@ export default function PayCash(props) {
               handlePayCash(event, props, 50)
             }
           >
-            <div className="payCashCenterText">50</div>
+            <div className="payCashCenterText">€50</div>
           </div>
           <div
             className="payCash20 payCashPreset"
@@ -32,7 +32,7 @@ export default function PayCash(props) {
               handlePayCash(event, props, 20)
             }
           >
-            <div className="payCashCenterText">20</div>
+            <div className="payCashCenterText">€20</div>
           </div>
           <div
             className="payCash10 payCashPreset"
@@ -40,7 +40,7 @@ export default function PayCash(props) {
               handlePayCash(event, props, 10)
             }
           >
-            <div className="payCashCenterText">10</div>
+            <div className="payCashCenterText">€10</div>
           </div>
           <div
             className="payCash5 payCashPreset"
@@ -48,7 +48,7 @@ export default function PayCash(props) {
               handlePayCash(event, props, 5)
             }
           >
-            <div className="payCashCenterText">5</div>
+            <div className="payCashCenterText">€5</div>
           </div>
           <div
             className="payCashCustom b"
@@ -72,7 +72,7 @@ export default function PayCash(props) {
             <div className="payCashCenterText">Change</div>
           </div>
           <div className="payCashChangeValue">
-            <div className="payCashCenterText">
+            <div className="payCashCenterText num">
               €{change.toFixed(2)}
             </div>
           </div>
@@ -91,7 +91,7 @@ export default function PayCash(props) {
             handlePayCash(event, props, 50)
           }
         >
-          <div className="payCashCenterText b">50</div>
+          <div className="payCashCenterText b num">€50</div>
         </div>
         <div
           className="payCash20 payCashPreset b"
@@ -99,7 +99,7 @@ export default function PayCash(props) {
             handlePayCash(event, props, 20)
           }
         >
-          <div className="payCashCenterText b">20</div>
+          <div className="payCashCenterText b num">€20</div>
         </div>
         <div
           className="payCash10 payCashPreset b"
@@ -107,7 +107,7 @@ export default function PayCash(props) {
             handlePayCash(event, props, 10)
           }
         >
-          <div className="payCashCenterText b">10</div>
+          <div className="payCashCenterText b num">€10</div>
         </div>
         <div
           className="payCash5 payCashPreset b"
@@ -115,7 +115,7 @@ export default function PayCash(props) {
             handlePayCash(event, props, 5)
           }
         >
-          <div className="payCashCenterText b ">5</div>
+          <div className="payCashCenterText b num">€5</div>
         </div>
         <div
           className="payCashCustom b"
@@ -123,7 +123,7 @@ export default function PayCash(props) {
             handlePayCash(event, props, "custom")
           }
         >
-          <div className="payCashCenterText b">Custom</div>
+          <div className="payCashCenterText b num">Custom</div>
         </div>
         <div
           className="payCashExit g"
@@ -139,7 +139,7 @@ export default function PayCash(props) {
           <div className="payCashCenterText">Change</div>
         </div>
         <div className="payCashChangeValue">
-          <div className="payCashCenterText">
+          <div className="payCashCenterText num">
             €{change.toFixed(2)}
           </div>
         </div>

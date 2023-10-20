@@ -65,7 +65,7 @@ export default function ItemPage(props) {
             <div className="addonText b">{addon.name}</div>
           </div>
           <div className="addonPrice b">
-            <div className="addonText b">€{addon.price.toFixed(2)}</div>
+            <div className="addonText b num">€{addon.price.toFixed(2)}</div>
           </div>
         </div>
         <div className="toggleAddon b">
@@ -102,7 +102,7 @@ export default function ItemPage(props) {
           key={shortcut.name}
         >
           <div className="itemPageShortcutName g">{shortcut.name}</div>
-          <div className="itemPageShortcutPrice g">
+          <div className="itemPageShortcutPrice g num">
             €{shortcut.price.toFixed(2)}
           </div>
         </div>
@@ -176,7 +176,7 @@ export default function ItemPage(props) {
           </div>
         </div>
         <div className="priceSection">
-          <div className="priceContainer">€{price}</div>
+          <div className="priceContainer num ">€{price}</div>
         </div>
         <div className="orderAdd g">
           <div

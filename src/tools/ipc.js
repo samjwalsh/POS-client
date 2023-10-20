@@ -49,3 +49,7 @@ export function resetSettings() {
 export function getVersionNo() {
   return ipcRenderer.invoke("getVersionNo");
 }
+
+export function deleteLocalData(){
+  return ipcRenderer.invoke('deleteLocalData')
+}
