@@ -1,5 +1,4 @@
 import * as React from "react";
-import * as ReactDOM from "react-dom/client";
 import { useState, useEffect } from "react";
 
 import log from "../tools/logging";
@@ -12,10 +11,13 @@ import {
   removeAllOrders,
   removeOrder,
 } from "../tools/ipc";
+
 import playBeep from "../tools/playBeep";
 
 export default function Reports(props) {
   const [orders, setOrders] = useState([]);
+
+  const [Dialog, confirm] = useConfirm("Continue?", "");
 
   useEffect(() => {
     (async () => {
@@ -24,165 +26,219 @@ export default function Reports(props) {
     })();
   }, []);
 
-  return (
-    <div className="reports">
-      <div className="ordersTitle titleStyle y">Orders</div>
-      <div className="reportsTitle titleStyle y">Reports</div>
-      <div className="reportsOrders">
-        {createOrdersHTML(orders, setOrders)}
-        <div className="reportsOrderFiller"></div>
-        <div className="reportsOrderFiller"></div>
-      </div>
-      {reportsStatsHTML(orders, setOrders)}
-    </div>
-  );
-}
+  // FUNCTIONS
 
-function reportsStatsHTML(orders, setOrders) {
-  return (
-    <div className="reportsStats">
-      {createReportsStatsInfo(orders, setOrders)}
-      <div className="reportsStatsButtonsContainer">
-        <div
-          className="reportsStatsButtons button b"
-          onClick={(event) => handleDeleteOldOrders(orders, setOrders)}
-        >
-          Del. Old Orders
-        </div>
-        <div
-          className="reportsStatsButtons button r"
-          onClick={(event) => handleEndOfDay(orders, setOrders)}
-        >
-          End Of Day
-        </div>
-      </div>
-    </div>
-  );
-}
+  async function handleEndOfDay() {
+    playBeep();
 
-function createReportsStatsInfo(orders, setOrders) {
-  let cashTotal = 0;
-  let cardTotal = 0;
+    const choice = await confirm();
 
-  orders.forEach((order) => {
-    if (order.paymentMethod === "Card") {
-      cardTotal += order.subtotal;
-    } else {
-      cashTotal += order.subtotal;
+    if (!choice) return;
+
+    await removeAllOrders();
+
+    let localOrders = await getAllOrders();
+    if (Array.isArray(localOrders)) {
+      setOrders(localOrders.reverse());
     }
-  });
+  }
 
-  let xTotal = cashTotal + cardTotal;
+  const handleDeleteOrder = async (deletedOrder) => {
+    playBeep();
+    
+    const choice = await confirm();
+    if (!choice) return;
 
-  return (
-    <div className="reportsStatsInfoTable">
-      <div className="reportsStatsInfoTableEntry">
-        <div className="reportsStatsInfoTableEntryKey">Cash:</div>
-        <div className="reportsStatsInfoTableEntryValue">
-          €{cashTotal.toFixed(2)}
-        </div>
-      </div>
-      <div className="reportsStatsInfoTableEntry">
-        <div className="reportsStatsInfoTableEntryKey">Card:</div>
-        <div className="reportsStatsInfoTableEntryValue">
-          €{cardTotal.toFixed(2)}
-        </div>
-      </div>
-      <div className="reportsStatsInfoTableEntry reportsStatsInfoTableEntryLast">
-        <div className="reportsStatsInfoTableEntryKey">X-Total:</div>
-        <div className="reportsStatsInfoTableEntryValue">
-          €{xTotal.toFixed(2)}
-        </div>
-      </div>
-    </div>
-  );
-}
+    let localOrders = await removeOrder(deletedOrder);
 
-function createOrdersHTML(orders, setOrders) {
-  let ordersHTML;
-  if (Array.isArray(orders)) {
-    ordersHTML = orders.map((order, index) => {
-      let itemsHTML = createItemsHTML(order);
+    setOrders(localOrders.reverse());
+  };
 
-      const orderDateString = calculateDateString(order.time);
+  async function handleDeleteOldOrders() {
+    playBeep();
 
-      return (
-        <div key={order.time} className="reportsOrder y">
-          <div className="reportsOrderTableOrderNo y">
-            Order No. {orders.length - index}
+    let localOrders = await getAllOrders();
+
+    const currentDate = new Date().getDate();
+
+    let newOrders = [];
+    if (Array.isArray(localOrders)) {
+      localOrders.forEach((order, index) => {
+        const orderDate = new Date(order.time).getDate();
+        if (orderDate == currentDate) {
+          newOrders.push(order);
+        }
+      });
+      overwriteOrders(newOrders);
+
+      setOrders(newOrders.reverse());
+    }
+  }
+
+  // HTML GENERATORS
+
+  function createOrdersHTML() {
+    let ordersHTML;
+    if (Array.isArray(orders)) {
+      ordersHTML = orders.map((order, index) => {
+        let itemsHTML = createItemsHTML(order);
+
+        const orderDateString = calculateDateString(order.time);
+
+        return (
+          <div key={order.time} className="reportsOrder y">
+            <div className="reportsOrderTableOrderNo y">
+              Order No. {orders.length - index}
+            </div>
+            <div
+              className="reportsOrderTableDeleteOrder r"
+              onClick={(event) => handleDeleteOrder(order)}
+            >
+              X
+            </div>
+            <div className="reportsOrderTableTitle reportsOrderTableTitleTime ">
+              Time:
+            </div>
+            <div className="reportsOrderTableValue reportsOrderTableValueTime">
+              {orderDateString}
+            </div>
+            <div className="reportsOrderTableTitle reportsOrderTableTitleSubTotal">
+              Subtotal:
+            </div>
+            <div className="reportsOrderTableValue reportsOrderTableValueSubTotal num">
+              €{order.subtotal.toFixed(2)}
+            </div>
+            <div className="reportsOrderTableTitle reportsOrderTableTitlePayment">
+              Payment:
+            </div>
+            <div className="reportsOrderTableValue reportsOrderTableValuePayment">
+              {order.paymentMethod}
+            </div>
+            <div className="reportsOrderTableItems">{itemsHTML}</div>
+          </div>
+        );
+      });
+    }
+
+    return ordersHTML;
+  }
+
+  function reportsStatsHTML() {
+    return (
+      <div className="reportsStats">
+        {createReportsStatsInfo()}
+        <div className="reportsStatsButtonsContainer">
+          <div
+            className="reportsStatsButtons button b"
+            onClick={(event) => handleDeleteOldOrders()}
+          >
+            Del. Old Orders
           </div>
           <div
-            className="reportsOrderTableDeleteOrder r"
-            onClick={(event) =>
-              handleDeleteOrder(event, order, setOrders)
-            }
+            className="reportsStatsButtons button r"
+            onClick={(event) => handleEndOfDay()}
           >
-            X
+            End Of Day
           </div>
-          <div className="reportsOrderTableTitle reportsOrderTableTitleTime ">
-            Time:
+        </div>
+      </div>
+    );
+  }
+
+  function createReportsStatsInfo() {
+    let cashTotal = 0;
+    let cardTotal = 0;
+
+    orders.forEach((order) => {
+      if (order.paymentMethod === "Card") {
+        cardTotal += order.subtotal;
+      } else {
+        cashTotal += order.subtotal;
+      }
+    });
+
+    let xTotal = cashTotal + cardTotal;
+
+    return (
+      <div className="reportsStatsInfoTable">
+        <div className="reportsStatsInfoTableEntry">
+          <div className="reportsStatsInfoTableEntryKey">Cash:</div>
+          <div className="reportsStatsInfoTableEntryValue num">
+            €{cashTotal.toFixed(2)}
           </div>
-          <div className="reportsOrderTableValue reportsOrderTableValueTime">
-            {orderDateString}
+        </div>
+        <div className="reportsStatsInfoTableEntry">
+          <div className="reportsStatsInfoTableEntryKey">Card:</div>
+          <div className="reportsStatsInfoTableEntryValue num">
+            €{cardTotal.toFixed(2)}
           </div>
-          <div className="reportsOrderTableTitle reportsOrderTableTitleSubTotal">
-            Subtotal:
+        </div>
+        <div className="reportsStatsInfoTableEntry reportsStatsInfoTableEntryLast">
+          <div className="reportsStatsInfoTableEntryKey">X-Total:</div>
+          <div className="reportsStatsInfoTableEntryValue num">
+            €{xTotal.toFixed(2)}
           </div>
-          <div className="reportsOrderTableValue reportsOrderTableValueSubTotal">
-            €{order.subtotal.toFixed(2)}
+        </div>
+      </div>
+    );
+  }
+
+  function createItemsHTML(order) {
+    let itemsHTML = order.items.map((item) => {
+      if (item.value !== undefined || item.price === undefined) {
+        removeAllOrders();
+      }
+
+      //Should fix bugs on machines where the adjustment has a value instead of price
+
+      let formattedQuantity = "";
+      if (item.quantity === 1 || item.quantity === undefined) {
+      } else {
+        formattedQuantity = `(${item.quantity})`;
+      }
+
+      let formattedAddons = "";
+      if (Array.isArray(item.addons)) {
+        formattedAddons = item.addons.join(", ");
+      }
+
+      return (
+        <div
+          className="reportsOrderItem"
+          key={`${order.time}-${item.name}${formattedQuantity}(${item.price})`}
+        >
+          <div className="reportsOrderItemName">
+            {item.name} {formattedQuantity}
           </div>
-          <div className="reportsOrderTableTitle reportsOrderTableTitlePayment">
-            Payment:
+          <div className="reportsOrderTotalPrice">
+            €{(item.price * item.quantity).toFixed(2)}
           </div>
-          <div className="reportsOrderTableValue reportsOrderTableValuePayment">
-            {order.paymentMethod}
+          <div className="reportsOrderPriceEach">
+            €{item.price.toFixed(2)} EA
           </div>
-          <div className="reportsOrderTableItems">{itemsHTML}</div>
+          <div className="reportsOrderAddons">{formattedAddons}</div>
         </div>
       );
     });
+
+    return itemsHTML;
   }
 
-  return ordersHTML;
-}
-
-function createItemsHTML(order) {
-  let itemsHTML = order.items.map((item) => {
-    if (item.value !== undefined || item.price === undefined) {
-      removeAllOrders();
-    }
-
-    //Should fix bugs on machines where the adjustment has a value instead of price
-
-    let formattedQuantity = "";
-    if (item.quantity === 1 || item.quantity === undefined) {
-    } else {
-      formattedQuantity = `(${item.quantity})`;
-    }
-
-    let formattedAddons = "";
-    if (Array.isArray(item.addons)) {
-      formattedAddons = item.addons.join(", ");
-    }
-
-    return (
-      <div
-        className="reportsOrderItem"
-        key={`${order.time}-${item.name}${formattedQuantity}(${item.price})`}
-      >
-        <div className="reportsOrderItemName">
-          {item.name} {formattedQuantity}
+  return (
+    <>
+      <Dialog />
+      <div className="reports">
+        <div className="ordersTitle titleStyle y">Orders</div>
+        <div className="reportsTitle titleStyle y">Reports</div>
+        <div className="reportsOrders">
+          {createOrdersHTML()}
+          <div className="reportsOrderFiller"></div>
+          <div className="reportsOrderFiller"></div>
         </div>
-        <div className="reportsOrderTotalPrice">
-          €{(item.price * item.quantity).toFixed(2)}
-        </div>
-        <div className="reportsOrderPriceEach">€{item.price.toFixed(2)} EA</div>
-        <div className="reportsOrderAddons">{formattedAddons}</div>
+        {reportsStatsHTML()}
       </div>
-    );
-  });
-
-  return itemsHTML;
+    </>
+  );
 }
 
 function calculateDateString(time) {
@@ -202,53 +258,4 @@ function calculateDateString(time) {
   // dateString += date.getFullYear().toString().padStart(2, "0");
 
   return dateString;
-}
-
-async function handleDeleteOrder(event, deletedOrder, setOrders) {
-
-  playBeep();
-
-  const choice = await useConfirm({
-    title: "Delete all",
-    description: "Are you sure you want to delete everything?",
-    confirmBtnLabel: "Yes",
-  });
-
-  if (choice) {
-    let localOrders = await removeOrder(deletedOrder);
-
-    setOrders(localOrders.reverse());
-  }
-}
-
-async function handleDeleteOldOrders(orders, setOrders) {
-  playBeep();
-
-  let localOrders = await getAllOrders();
-
-  const currentDate = new Date().getDate();
-
-  let newOrders = [];
-  if (Array.isArray(localOrders)) {
-    localOrders.forEach((order, index) => {
-      const orderDate = new Date(order.time).getDate();
-      if (orderDate == currentDate) {
-        newOrders.push(order);
-      }
-    });
-    overwriteOrders(newOrders);
-
-    setOrders(newOrders.reverse());
-  }
-}
-
-async function handleEndOfDay(orders, setOrders) {
-  playBeep();
-
-  await removeAllOrders();
-
-  let localOrders = await getAllOrders();
-  if (Array.isArray(localOrders)) {
-    setOrders(localOrders.reverse());
-  }
 }

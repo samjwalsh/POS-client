@@ -78,10 +78,10 @@ export default function Order(props) {
             <div className="orderItemAddons">{orderItem.addons.join(", ")}</div>
           </div>
           <div className="priceAndPriceEach">
-            <div className="orderItemPrice">
+            <div className="orderItemPrice num">
               €{(orderItem.price * orderItem.quantity).toFixed(2)}
             </div>
-            <div className="orderItemPriceEach">
+            <div className="orderItemPriceEach num">
               €{orderItem.price.toFixed(2)} EA
             </div>
           </div>
@@ -111,7 +111,7 @@ export default function Order(props) {
               <div className="orderItemAddons"></div>
             </div>
             <div className="priceAndPriceEach">
-              <div className="orderItemPrice">
+              <div className="orderItemPrice num">
                 €
                 {orderItem.price < 0
                   ? `(${Math.abs(orderItem.price).toFixed(2)})`
@@ -151,7 +151,7 @@ export default function Order(props) {
         <div className="subTotal">
           <div className="subTotalTop">
             <div className="subTotalTitle">Subtotal</div>
-            <div className="subTotalPrice">€{subtotal.toFixed(2)}</div>
+            <div className="subTotalPrice num">€{subtotal.toFixed(2)}</div>
           </div>
           <div className="subTotalBottom">
             <div
@@ -187,7 +187,7 @@ export default function Order(props) {
       <div className="subTotal">
         <div className="subTotalTop">
           <div className="subTotalTitle">Subtotal</div>
-          <div className="subTotalPrice">€{subtotal.toFixed(2)}</div>
+          <div className="subTotalPrice num">€{subtotal.toFixed(2)}</div>
         </div>
         <div className="subTotalBottom">
           <div
@@ -254,9 +254,7 @@ function handleOrderItemQuantityChange(event, props, direction) {
       if (orderItem === item) {
         log(`Removing adjustment`);
         let temp_order = order;
-        let temp_orderItem = temp_order[index];
-        temp_orderItem.price = 0;
-        temp_order[index] = temp_orderItem;
+        temp_order.splice(index, 1);
         setOrder([...temp_order]);
       }
     });

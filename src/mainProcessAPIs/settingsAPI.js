@@ -26,3 +26,8 @@ ipcMain.handle("resetSettings", () => {
 ipcMain.handle("getVersionNo", () => {
   return app.getVersion();
 });
+
+ipcMain.handle("deleteLocalData", () => {
+  settingsStore.set("settings", settingsSchema);
+  settingsStore.set("orders", []);
+});

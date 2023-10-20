@@ -21,8 +21,8 @@ export default function Keypad(props) {
   return (
     <div className="keypadGrid">
       <div className="keypadDisplay ">
-        <div className="keypadDisplayText">€</div>
-        <div className="keypadDisplayTextValue">{keypadText}</div>
+        <div className="keypadDisplayText num ">€</div>
+        <div className="keypadDisplayTextValue num">{keypadText}</div>
       </div>
       <div
         className="keypadClose keypadButton r"

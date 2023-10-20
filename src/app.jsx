@@ -14,19 +14,15 @@ const root = ReactDOM.createRoot(domNode);
 
 (async () => {
   const settings = await getSettings();
-  executeSettings(settings)
+  executeSettings(settings);
 })();
 
 function App() {
   const [appState, setAppState] = useState("Register");
 
-
-
-
   const [hamburgerOpen, setHamburgerOpen] = useState(false);
 
   const [settings, setSettings] = useState();
-
 
   return (
     <div className="app">
@@ -42,7 +38,7 @@ function App() {
         } else if (appState === "Reports") {
           return <Reports />;
         } else if (appState === "Settings") {
-          return <Settings settings={settings} setSettings={setSettings}/>;
+          return <Settings settings={settings} setSettings={setSettings} />;
         }
       })()}
     </div>
@@ -50,4 +46,3 @@ function App() {
 }
 
 root.render(<App />);
-

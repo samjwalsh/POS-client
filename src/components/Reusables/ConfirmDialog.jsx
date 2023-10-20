@@ -1,42 +1,52 @@
-import {
-  createContext,
-  useCallback,
-  useContext,
-  useRef,
-  useState,
-} from 'react';
+import { useState } from "react";
+import * as React from "react";
 
-const ConfirmDialog = createContext();
+import playBeep from "../../tools/playBeep.js";
+const useConfirm = (title, message) => {
+  const [promise, setPromise] = useState(null);
 
-export function ConfirmDialogProvider({ children }) {
-  const [state, setState] = useState({ isOpen: false });
-  const fn = useRef();
+  const confirm = () =>
+    new Promise((resolve, reject) => {
+      setPromise({ resolve });
+    });
 
-  const confirm = useCallback(
-    (data) => {
-      return new Promise((resolve) => {
-        setState({ ...data, isOpen: true });
-        fn.current = (choice) => {
-          resolve(choice);
-          setState({ isOpen: false });
-        };
-      });
-    },
-    [setState]
-  );
+  const handleClose = () => {
+    setPromise(null);
+  };
 
-  return (
-    <ConfirmDialog.Provider value={confirm}>
-      {children}
-      <Alert
-        {...state}
-        onClose={() => fn.current(false)}
-        onConfirm={() => fn.current(true)}
-      />
-    </ConfirmDialog.Provider>
-  );
-}
+  const handleConfirm = () => {
+    playBeep();
+    promise?.resolve(true);
+    handleClose();
+  };
 
-export default function useConfirm() {
-  return useContext(ConfirmDialog);
-}
+  const handleCancel = () => {
+    playBeep();
+    promise?.resolve(false);
+    handleClose();
+  };
+  // You could replace the Dialog with your library's version
+  const ConfirmationDialog = () => {
+    if (promise !== null) {
+      return (
+        <div className="dialogContainer">
+          <div className="dialogBackground"></div>
+          <div className="dialog">
+            <div className="dialogTitle y">{title}</div>
+            <div className="dialogCancel button r" onClick={handleCancel}>
+              Cancel
+            </div>
+            <div className="dialogConfirm button g" onClick={handleConfirm}>
+              Continue
+            </div>
+          </div>
+        </div>
+      );
+    } else {
+      return;
+    }
+  };
+  return [ConfirmationDialog, confirm];
+};
+
+export default useConfirm;

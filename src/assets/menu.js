@@ -176,7 +176,7 @@ export const menu = [
     ],
   },
   {
-    name: "Family Special",
+    name: "Family Sp.",
     price: 10,
   },
   {
