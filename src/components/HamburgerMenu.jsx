@@ -5,11 +5,25 @@ import { getAllOrders, quit, removeAllOrders } from "../tools/ipc";
 
 import hamburger from "../assets/hamburger.svg";
 
+import useConfirm from "./Reusables/ConfirmDialog.jsx";
+
 export default function HamburgerMenu(props) {
   let hamburgerOpen = props.hamburgerOpen;
   let setHamburger = props.setHamburger;
   let appState = props.appState;
   let setAppState = props.setAppState;
+
+  const [Dialog, confirm] = useConfirm('Exit?');
+
+  async function handleTerminatePOS() {
+    playBeep();
+
+    const choice = await confirm();
+
+    if(!choice) return;
+
+    quit();
+  }
 
   if (hamburgerOpen === false) {
     return (
@@ -22,9 +36,9 @@ export default function HamburgerMenu(props) {
     );
   }
 
-  //move hamburger to this component, and have it float on top left when hamburger menu not open
-
   return (
+    <>
+    <Dialog/>
     <div id="sideMenuContainer">
       <div id="sideMenu">
         <div id="sideMenuContent">
@@ -78,6 +92,7 @@ export default function HamburgerMenu(props) {
         ></div>
       </div>
     </div>
+    </>
   );
 }
 
@@ -92,10 +107,7 @@ function handleSetAppState(setHamburger, setAppState, mode) {
   setHamburger(false);
 }
 
-function handleTerminatePOS() {
-  playBeep();
-  quit();
-}
+
 
 function handleClickHamburger(event, setHamburger) {
   playBeep();

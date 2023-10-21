@@ -27,7 +27,8 @@ const useConfirm = (title, message) => {
   };
   // You could replace the Dialog with your library's version
   const ConfirmationDialog = () => {
-    if (promise !== null) {
+    if (promise === null) return;
+    else
       return (
         <div className="dialogContainer">
           <div className="dialogBackground"></div>
@@ -42,9 +43,6 @@ const useConfirm = (title, message) => {
           </div>
         </div>
       );
-    } else {
-      return;
-    }
   };
   return [ConfirmationDialog, confirm];
 };
