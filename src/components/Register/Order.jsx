@@ -1,201 +1,139 @@
 import * as React from "react";
-import * as ReactDOM from "react-dom/client";
 import { useState } from "react";
 
 import log from "../../tools/logging";
+import playBeep from "../../tools/playBeep";
 
 import { addOrder } from "../../tools/ipc";
 
-import PayCash from "./PayCash.jsx";
-
-import { quit } from "../../tools/ipc";
-
-import playBeep from "../../tools/playBeep";
-
+import PayCash, { calculateSubtotal } from "./PayCash.jsx";
 import useKeypad from "../Reusables/Keypad.jsx";
 
 export default function Order(props) {
-  const order = props.order;
-  const setOrder = props.setOrder;
+  const { order, setOrder } = props;
 
   const [Keypad, keypad] = useKeypad();
+  const [payCash, setPayCash] = useState(false);
 
-  log(`Initiating payCash state`);
-  const [payCash, setPayCash] = useState({
-    state: false,
-    returnedKeypadValue: 0,
-  });
-
-  log(`Initiating change state`);
-  const [change, setChange] = useState(0);
-
-  const passProps = {
-    payCash,
-    setPayCash,
-    order,
-    setOrder,
-  };
-
-  async function handlePlusMinus(event) {
+  async function handlePlusMinus() {
     playBeep();
     const keypadValue = await keypad("currency");
-
-    console.log(keypadValue);
+    if (keypadValue === 0) return;
+    log(`Update the adjustment in the order`);
+    let temp_order = order;
+    temp_order.push({ name: "Adjustment", price: keypadValue, quantity: 1 });
+    setOrder([...temp_order]);
   }
 
-  let orderItems = [];
-  let subtotal = 0;
-  log(`Calculating subtotal`);
-  order.forEach((orderItem, index) => {
-    let passProps = { order, setOrder, orderItem };
-    if (!(orderItem.name === "Adjustment")) {
-      log(`Adding ${orderItem.name} to HTML and subtotal`);
-      subtotal += orderItem.price * orderItem.quantity;
-      orderItems.push(
-        <div
-          className="orderItem"
-          key={`${orderItem.name} [${orderItem.addons}]`}
-        >
-          <div className="nameAndAddons">
-            <div className="orderItemName">
-              {orderItem.name +
-                (orderItem.quantity > 1 ? ` (${orderItem.quantity})` : "")}
-            </div>
-            <div className="orderItemAddons">{orderItem.addons.join(", ")}</div>
+  function handlePayment(paymentType) {
+    playBeep();
+    if (paymentType === "card") {
+      log(`Payment type card selected, resetting order`);
+      addOrder(props.order, "Card");
+      props.setOrder([]);
+      setPayCash(false);
+    } else if (payCash === true) {
+      setPayCash(false);
+    } else {
+      log(`Payment type cash selected, turning on keypad`);
+      setPayCash(true);
+    }
+  }
+
+  function handleOrderItemQuantityChange(direction, orderItem) {
+    playBeep();
+
+    order.forEach((item, index) => {
+      log(`Reducing quantity of item ${item.name} in order by 1`);
+      if (orderItem == item) {
+        let temp_order = order;
+
+        if (direction === "up") {
+          temp_order[index].quantity++;
+        } else if (orderItem.quantity > 1) {
+          temp_order[index].quantity--;
+        } else {
+          temp_order.splice(index, 1);
+        }
+        setOrder([...temp_order]);
+      }
+    });
+  }
+
+  let subtotal = calculateSubtotal(order);
+  log(`Calculating subtotal and generating HTML`);
+  let orderItems = order.map((orderItem, index) => {
+    log(`Adding ${orderItem.name} to HTML`);
+    return (
+      <div
+        className="orderItem"
+        key={`${orderItem.name} [${orderItem.addons}]`}
+      >
+        <div className="nameAndAddons">
+          <div className="orderItemName">
+            {orderItem.name +
+              (orderItem.quantity > 1 ? ` (${orderItem.quantity})` : "")}
           </div>
-          <div className="priceAndPriceEach">
-            <div className="orderItemPrice num">
-              €{(orderItem.price * orderItem.quantity).toFixed(2)}
-            </div>
-            <div className="orderItemPriceEach num">
-              €{orderItem.price.toFixed(2)} EA
-            </div>
-          </div>
-          <div
-            className="orderItemDecrease button r"
-            onClick={(event) =>
-              handleOrderItemQuantityChange(event, passProps, "down")
-            }
-          >
-            -
-          </div>
-          <div
-            className="orderItemIncrease button g"
-            onClick={(event) =>
-              handleOrderItemQuantityChange(event, passProps, "up")
-            }
-          >
-            +
+          <div className="orderItemAddons">
+            {orderItem.addons === undefined ? "" : orderItem.addons.join(", ")}
           </div>
         </div>
-      );
-    } else {
-      //add code for displaying the adjustment
-      log(`Adding adjustment of ${orderItem.price} to HTML and subtotal`);
-      subtotal += orderItem.price;
-      if (orderItem.price != 0) {
-        orderItems.push(
-          <div className="orderItem" key={index}>
-            <div className="nameAndAddons">
-              <div className="orderItemName">Adjustment</div>
-              <div className="orderItemAddons"></div>
-            </div>
-            <div className="priceAndPriceEach">
-              <div className="orderItemPrice num">
-                €
-                {orderItem.price < 0
-                  ? `(${Math.abs(orderItem.price).toFixed(2)})`
-                  : `${orderItem.price.toFixed(2)}`}
-              </div>
-              <div className="orderItemPriceEach"></div>
-            </div>
-            <div
-              className="orderItemDecrease button r"
-              onClick={(event) =>
-                handleOrderItemQuantityChange(event, passProps, "down")
-              }
-            >
-              -
-            </div>
+        <div className="priceAndPriceEach">
+          <div className="orderItemPrice num">
+            €{(orderItem.price * orderItem.quantity).toFixed(2)}
           </div>
-        );
-      }
-    }
-  });
-
-  if (payCash.state === true) {
-    log(`Rendering interface for paying with cash`);
-
-    return (
-      <div className="orderContainer" id="order">
-        <PayCash
-          order={order}
-          setOrder={setOrder}
-          payCash={payCash}
-          setPayCash={setPayCash}
-          change={change}
-          setChange={setChange}
-        />
-        <div className="subTotal">
-          <div className="subTotalTop">
-            <div className="subTotalTitle">Subtotal</div>
-            <div className="subTotalPrice num">€{subtotal.toFixed(2)}</div>
+          <div className="orderItemPriceEach num">
+            €{orderItem.price.toFixed(2)} EA
           </div>
-          <div className="subTotalBottom">
-            <div
-              className="plusMinus"
-              onClick={(event) => handlePlusMinus(event)}
-            >
-              <div className="plusMinusContainer b">±</div>
-            </div>
-            <div
-              className="card "
-              onClick={(event) => handlePayment(passProps, "card")}
-            >
-              <div className="cardContainer g">Card</div>
-            </div>
-            <div
-              className="cash "
-              onClick={(event) => handlePayment(passProps, "cash")}
-            >
-              <div className="cashContainer g">Cash</div>
-            </div>
-          </div>
+        </div>
+        <div
+          className="orderItemDecrease button r"
+          onClick={() => handleOrderItemQuantityChange("down", orderItem)}
+        >
+          -
+        </div>
+        <div
+          className="orderItemIncrease button g"
+          onClick={() => handleOrderItemQuantityChange("up", orderItem)}
+        >
+          +
         </div>
       </div>
     );
-  }
-  log(`Rendering standard order container`);
+  });
+
+  log(`Rendering order container`);
   return (
     <>
       <Keypad />
       <div className="orderContainer" id="order">
-        <div className="orderItems">
-          <div className="hiddenOrderItem"></div>
-          {orderItems}
-        </div>
+        {payCash === true ? (
+          <PayCash
+            order={order}
+            setOrder={setOrder}
+            setPayCash={setPayCash}
+            keypad={keypad}
+          />
+        ) : (
+          <div className="orderItems">
+            <div className="hiddenOrderItem"></div>
+            {orderItems}
+          </div>
+        )}
+
         <div className="subTotal">
           <div className="subTotalTop">
             <div className="subTotalTitle">Subtotal</div>
             <div className="subTotalPrice num">€{subtotal.toFixed(2)}</div>
           </div>
           <div className="subTotalBottom">
-            <div
-              className="plusMinus"
-              onClick={(event) => handlePlusMinus(event)}
-            >
+            <div className="plusMinus" onClick={() => handlePlusMinus()}>
               <div className="plusMinusContainer b">±</div>
             </div>
-            <div
-              className="card"
-              onClick={(event) => handlePayment(passProps, "card")}
-            >
+            <div className="card" onClick={() => handlePayment("card")}>
               <div className="cardContainer g">Card</div>
             </div>
-            <div
-              className="cash"
-              onClick={(event) => handlePayment(passProps, "cash")}
-            >
+            <div className="cash" onClick={() => handlePayment("cash")}>
               <div className="cashContainer g">Cash</div>
             </div>
           </div>
@@ -203,73 +141,4 @@ export default function Order(props) {
       </div>
     </>
   );
-}
-
-function handlePayment(props, paymentType) {
-  playBeep();
-  const payCash = props.payCash;
-  const setPayCash = props.setPayCash;
-  //TODO add code to record all orders
-  if (paymentType === "card") {
-    log(`Payment type card selected, resetting order`);
-    addOrder(props.order, "Card");
-    props.setOrder([]);
-  } else if (payCash.state === true) {
-    setPayCash({
-      state: false,
-      returnedKeypadValue: 0,
-    });
-  } else {
-    log(`Payment type cash selected, turning on keypad`);
-    setPayCash({ state: true, returnedKeypadValue: 0 });
-  }
-}
-
-function handleOrderItemQuantityChange(event, props, direction) {
-  playBeep();
-  const orderItem = props.orderItem;
-  const order = props.order;
-  const setOrder = props.setOrder;
-
-  if (orderItem.name === "Adjustment") {
-    order.forEach((item, index) => {
-      if (orderItem === item) {
-        log(`Removing adjustment`);
-        let temp_order = order;
-        temp_order.splice(index, 1);
-        setOrder([...temp_order]);
-      }
-    });
-  } else if (direction === "up") {
-    order.forEach((item, index) => {
-      log(`Increasing quantity of item ${item.name} in order by 1`);
-      if (orderItem == item) {
-        let temp_order = order;
-        let temp_orderItem = temp_order[index];
-        temp_orderItem.quantity++;
-        temp_order[index] = temp_orderItem;
-        setOrder([...temp_order]);
-      }
-    });
-  } else if (orderItem.quantity > 1) {
-    order.forEach((item, index) => {
-      log(`Reducing quantity of item ${item.name} in order by 1`);
-      if (orderItem == item) {
-        let temp_order = order;
-        let temp_orderItem = temp_order[index];
-        temp_orderItem.quantity--;
-        temp_order[index] = temp_orderItem;
-        setOrder([...temp_order]);
-      }
-    });
-  } else {
-    order.forEach((item, index) => {
-      if (orderItem == item) {
-        log(`Removing item ${item.name} from order`);
-        let temp_order = order;
-        temp_order.splice(index, 1);
-        setOrder([...temp_order]);
-      }
-    });
-  }
 }

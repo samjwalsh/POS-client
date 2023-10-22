@@ -816,7 +816,7 @@ margin-left: var(--standardMargin); */
   padding: var(--standardMargin);
 
   grid-template-columns: 1fr 1fr 1fr;
-  grid-template-rows: 1.2fr 1fr 1fr 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr;
 
   font-weight: var(--categoryFontWeight);
   font-size: 2.5rem;
@@ -836,7 +836,7 @@ margin-left: var(--standardMargin); */
 .keypadDisplay {
   border: var(--borderStyle);
   grid-area: keypadDisplay;
-  font-size: 3rem;
+  font-size: 2.5rem;
   font-weight: var(--categoryFontWeight);
   /* Center text */
   display: grid;
@@ -1327,10 +1327,10 @@ margin-left: var(--standardMargin); */
   left: 0;
 
   margin: var(--standardMargin);
-
-  padding: var(--standardMargin);
+  padding: calc(var(--standardMargin) / 2);
   border: var(--borderStyle);
   font-size: 1rem;
+  font-weight: bold;  
 }
 
 .settingsTitle {

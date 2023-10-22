@@ -1,8 +1,6 @@
 import * as React from "react";
 import { useState, useEffect } from "react";
 
-import log from "../tools/logging";
-
 import useConfirm from "./Reusables/ConfirmDialog.jsx";
 
 import {
@@ -30,13 +28,9 @@ export default function Reports(props) {
 
   async function handleEndOfDay() {
     playBeep();
-
     const choice = await confirm();
-
     if (!choice) return;
-
     await removeAllOrders();
-
     let localOrders = await getAllOrders();
     if (Array.isArray(localOrders)) {
       setOrders(localOrders.reverse());
@@ -184,12 +178,10 @@ export default function Reports(props) {
   }
 
   function createItemsHTML(order) {
-    let itemsHTML = order.items.map((item) => {
+    let itemsHTML = order.items.map((item, index) => {
       if (item.value !== undefined || item.price === undefined) {
         removeAllOrders();
       }
-
-      //Should fix bugs on machines where the adjustment has a value instead of price
 
       let formattedQuantity = "";
       if (item.quantity === 1 || item.quantity === undefined) {
@@ -205,7 +197,7 @@ export default function Reports(props) {
       return (
         <div
           className="reportsOrderItem"
-          key={`${order.time}-${item.name}${formattedQuantity}(${item.price})`}
+          key={index}
         >
           <div className="reportsOrderItemName">
             {item.name} {formattedQuantity}
