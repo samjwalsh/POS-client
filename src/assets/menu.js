@@ -94,7 +94,7 @@ export const menu = [
             selectedAddons.includes("Choc Dip") &&
             !selectedAddons.includes("Flake")
           ) {
-            addonsCost -= 0.3;
+            addonsCost -= 0.2;
           }
 
           return addonsCost;
@@ -149,7 +149,7 @@ export const menu = [
         price: 0.5,
       },
       { name: "Crush Flake", price: 1.5 },
-      { name: "Choc Dip", price: 1.2 },
+      { name: "Choc Dip", price: 0.7 },
       {
         priceCheck: function (addons) {
           // Add code to check for chocolate dip, both choco dip with and without flake are 3.5
@@ -167,7 +167,7 @@ export const menu = [
             selectedAddons.includes("Choc Dip") &&
             selectedAddons.includes("Flake")
           ) {
-            addonsCost -= 0.2;
+            addonsCost += 0.3;
           }
 
           return addonsCost;
@@ -361,7 +361,7 @@ export const menu = [
     items: [
       {
         name: "Flake",
-        price: 0.6,
+        price: 0.5,
       },
       {
         name: "Cone",
@@ -371,6 +371,10 @@ export const menu = [
         name: "Waffle Cone",
         price: 1,
       },
+      {
+        name: "Toppings",
+        price: 0.5
+      }
     ],
   },
   {
