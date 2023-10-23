@@ -62,7 +62,7 @@ export default function Order(props) {
 
   let subtotal = calculateSubtotal(order);
   log(`Calculating subtotal and generating HTML`);
-  let orderItems = order.map((orderItem, index) => {
+  let orderItems = order.map((orderItem) => {
     log(`Adding ${orderItem.name} to HTML`);
     return (
       <div
