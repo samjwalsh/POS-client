@@ -3,7 +3,7 @@ import * as React from "react";
 import playBeep from "../tools/playBeep";
 import { getAllOrders, quit, removeAllOrders } from "../tools/ipc";
 
-import hamburger from "../assets/hamburger.svg";
+import hamburger from "../assets/appicons/hamburger.svg";
 
 import useConfirm from "./Reusables/ConfirmDialog.jsx";
 import useKeypad from "./Reusables/Keypad.jsx";

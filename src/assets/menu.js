@@ -84,7 +84,7 @@ export const menu = [
           let selectedAddons = [];
 
           addons.forEach((addon) => {
-            if (addon.selected == "X") {
+            if (addon.selected === true) {
               selectedAddons.push(addon.name);
               addonsCost += addon.price;
             }
@@ -157,7 +157,7 @@ export const menu = [
           let selectedAddons = [];
 
           addons.forEach((addon) => {
-            if (addon.selected == "X") {
+            if (addon.selected == true) {
               selectedAddons.push(addon.name);
               addonsCost += addon.price;
             }

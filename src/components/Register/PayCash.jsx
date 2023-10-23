@@ -38,7 +38,6 @@ export default function PayCash(props) {
 
     if (value === "custom") {
       log(`Enabling the keypad`);
-      console.log("here");
       const tendered = await keypad("currency");
       let change = 0;
       if (typeof tendered === "number") {

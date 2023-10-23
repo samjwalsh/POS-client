@@ -13,7 +13,9 @@ import useConfirm from "./Reusables/ConfirmDialog.jsx";
 
 import playBeep from "../tools/playBeep";
 
-import undo from "../assets/undo.svg";
+import undo from "../assets/appicons/undo.svg";
+import addSVG from "../assets/appicons/add.svg";
+import minusSVG from "../assets/appicons/minus.svg";
 
 export default function Settings(props) {
   let settings = props.settings;
@@ -79,7 +81,7 @@ export default function Settings(props) {
                   );
                 }}
               >
-                -
+                <img src={minusSVG} className="minusSVG r" />
               </div>
               <div className="settingsCategoryOptionRangeValue button">
                 {setting.value}
@@ -95,7 +97,7 @@ export default function Settings(props) {
                   );
                 }}
               >
-                +
+                <img src={addSVG} className="addSVG g" />
               </div>
               <div
                 className="settingsCategoryOptionRangeReset button b"

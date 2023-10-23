@@ -1,6 +1,13 @@
 import { useState } from "react";
 import * as React from "react";
 
+import closeSVG from "../../assets/appicons/close.svg";
+import addSVG from "../../assets/appicons/add.svg";
+import minusSVG from "../../assets/appicons/minus.svg"
+import backSVG from "../../assets/appicons/backspace.svg";
+import enterSVG from "../../assets/appicons/enter.svg";
+
+
 import playBeep from "../../tools/playBeep";
 
 const useKeypad = (numberFormat) => {
@@ -109,16 +116,17 @@ const useKeypad = (numberFormat) => {
           <div className="keypadDisplayTextValue num">{keypadValueString}</div>
         </div>
         <div className="keypadClose keypadBtn r" id="exit">
-          X
+          <img src={closeSVG} className="keypadSVG r" id="exit"/>
         </div>
         <div className="keypadMinus keypadBtn b" id="minus">
-          -
+        <img src={minusSVG} className="keypadSVG b" id="minus"/>
         </div>
         <div className="keypadPlus keypadBtn b" id="plus">
-          +
+        <img src={addSVG} className="keypadSVG b" id="plus"/>
+
         </div>
         <div className="keypadBack keypadBtn b" id="delete">
-          ←
+        <img src={backSVG} className="keypadSVG b" id="delete"/>
         </div>
         <div className="keypad7 keypadBtn b" id="7">
           7
@@ -151,7 +159,7 @@ const useKeypad = (numberFormat) => {
           0
         </div>
         <div className="keypadEnter keypadBtn g" id="enter">
-          →
+        <img src={enterSVG} className="keypadSVG g" id="enter"/>
         </div>
       </div>
     );

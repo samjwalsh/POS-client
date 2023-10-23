@@ -3,6 +3,8 @@ import { useState, useEffect } from "react";
 
 import useConfirm from "./Reusables/ConfirmDialog.jsx";
 
+import closeSVG from "../assets/appicons/close.svg";
+
 import {
   getAllOrders,
   overwriteOrders,
@@ -86,9 +88,9 @@ export default function Reports(props) {
             </div>
             <div
               className="reportsOrderTableDeleteOrder r"
-              onClick={(event) => handleDeleteOrder(order)}
+              onClick={(e) => handleDeleteOrder(order)}
             >
-              X
+              <img src={closeSVG} className="closeSVG r"/>
             </div>
             <div className="reportsOrderTableTitle reportsOrderTableTitleTime ">
               Time:

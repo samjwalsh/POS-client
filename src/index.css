@@ -52,18 +52,22 @@
   /* font-family: Epilogue;
   src: url(./assets/fonts/Epilogue.ttf); */
 
-  font-family: Fira Sans;
-  src: url(./assets/fonts/FiraSans/FiraSans-Regular.ttf);
+  font-family: Noto Sans;
+  src: url(./assets/fonts/NotoSans/NotoSans-Regular.ttf);
 }
 
 @font-face {
-  font-family: Fira Mono;
-  src: url(./assets/fonts/FiraMono/FiraMono-Medium.ttf)
+  font-family: Noto Sans Mono;
+  src: url(./assets/fonts/NotoMono/NotoSansMono-Regular.ttf);
 }
 
 html {
   font-size: 16px;
-  font-family: Fira Sans;
+  font-family: Noto Sans;
+}
+
+.num {
+  font-family: Noto Sans Mono;
 }
 
 * {
@@ -87,10 +91,6 @@ html {
 }
 .y {
   background-color: #4eb2da;
-}
-
-.num {
-  font-family: Fira Mono;
 }
 
 .container {
@@ -515,6 +515,10 @@ margin-left: var(--standardMargin); */
   width: 2rem;
 }
 
+.checkSVG {
+  width: 100%
+}
+
 .toggleAddonButton:hover {
   cursor: pointer;
 }
@@ -647,8 +651,6 @@ margin-left: var(--standardMargin); */
   width: auto;
 
   display: grid;
-  /* grid-template-areas: "nameAndAddons priceAndPriceEach orderItemDecrease orderItemIncrease";
-  grid-template-columns: auto min-content min-content min-content; */
   grid-template-areas: "orderItemDecrease nameAndAddons priceAndPriceEach orderItemIncrease";
   grid-template-columns: min-content auto min-content min-content min-content;
 }
@@ -697,21 +699,27 @@ margin-left: var(--standardMargin); */
 }
 
 .orderItemDecrease {
-  font-size: 1.5rem;
   grid-area: orderItemDecrease;
   border-right: var(--borderStyle);
   width: 2.5rem;
-  min-height: 2.5rem;
   height: auto;
 }
 
 .orderItemIncrease {
-  font-size: 1.5rem;
   grid-area: orderItemIncrease;
   border-left: var(--borderStyle);
   width: 2.5rem;
-  min-height: 2.5rem;
   height: auto;
+}
+
+.addSVG {
+  width: 100%;
+  height: 100%;
+}
+
+.minusSVG {
+  width: 100%;
+  height: 100%;
 }
 
 .subTotal {
@@ -729,6 +737,7 @@ margin-left: var(--standardMargin); */
   display: grid;
   grid-template-areas: "subTotalTitle subTotalPrice";
   grid-template-columns: auto auto;
+  grid-template-rows: auto auto;
   font-size: 2rem;
   margin: 0.5rem 0rem 0.5rem 0rem;
 }
@@ -749,56 +758,41 @@ margin-left: var(--standardMargin); */
   display: grid;
   grid-template-areas: "plusMinus card cash";
   grid-template-columns: min-content 1fr 1fr;
+  grid-template-rows: auto;
+
+  font-size: 2rem;
+
+  grid-gap: var(--standardMargin);
+
+  padding-left: var(--standardMargin);
+  padding-right: var(--standardMargin);
+  padding-bottom: var(--standardMargin);
 }
 
 .plusMinus {
   grid-area: plusMinus;
-  display: flex;
-  align-items: center;
+  border: var(--borderStyle);
+
+  height: 3.5rem;
+  width: 3.5rem;
 }
 
-.plusMinusContainer {
-  margin: var(--standardMargin);
-  margin-top: 0rem;
-  border: var(--borderStyle);
-  font-size: 2rem;
-  text-align: center;
-  width: 2.5rem;
+.euroSVG {
+width: 2.5rem;
 }
 
 .card {
   grid-area: card;
-  display: flex;
-  align-items: center;
-  width: 100%;
-}
-
-.cardContainer {
-  margin: var(--standardMargin);
-  margin-left: 0rem;
-  margin-top: 0rem;
-
   border: var(--borderStyle);
-  font-size: 2rem;
-  text-align: center;
-  width: 100%;
+
+  height: auto;
 }
 
 .cash {
   grid-area: cash;
-  display: flex;
-  align-items: center;
-  width: 100%;
-}
-
-.cashContainer {
-  margin: var(--standardMargin);
-  margin-left: 0rem;
-  margin-top: 0rem;
   border: var(--borderStyle);
-  font-size: 2rem;
-  text-align: center;
-  width: 100%;
+
+  height: auto;
 }
 
 .keypadGrid {
@@ -862,6 +856,11 @@ margin-left: var(--standardMargin); */
 
 .keypadText {
   font-size: 2.5rem;
+}
+
+.keypadSVG {
+  width: 3rem;
+  height: auto;
 }
 
 .keypadClose {
@@ -1189,10 +1188,7 @@ margin-left: var(--standardMargin); */
 
   font-size: 1.5rem;
 
-  padding-left: 0.5rem;
-  padding-right: 0.5rem;
-
-  width: 1.5rem;
+  width: 2.5rem;
 
   margin-right: var(--standardMargin);
   margin-bottom: var(--standardMargin);
@@ -1204,6 +1200,11 @@ margin-left: var(--standardMargin); */
   justify-content: end;
 
   flex: 1;
+}
+
+.closeSVG {
+  width: 100%;
+  height: 100%;
 }
 
 .reportsOrderTableTitleTime {
@@ -1330,7 +1331,7 @@ margin-left: var(--standardMargin); */
   padding: calc(var(--standardMargin) / 2);
   border: var(--borderStyle);
   font-size: 1rem;
-  font-weight: bold;  
+  font-weight: bold;
 }
 
 .settingsTitle {

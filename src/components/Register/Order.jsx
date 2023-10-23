@@ -4,6 +4,10 @@ import { useState } from "react";
 import log from "../../tools/logging";
 import playBeep from "../../tools/playBeep";
 
+import euro from "../../assets/appicons/euro.svg";
+import addSVG from "../../assets/appicons/add.svg";
+import minusSVG from "../../assets/appicons/minus.svg";
+
 import { addOrder } from "../../tools/ipc";
 
 import PayCash, { calculateSubtotal } from "./PayCash.jsx";
@@ -90,13 +94,13 @@ export default function Order(props) {
           className="orderItemDecrease button r"
           onClick={() => handleOrderItemQuantityChange("down", orderItem)}
         >
-          -
+          <img src={minusSVG} className="minusSVG r" />
         </div>
         <div
           className="orderItemIncrease button g"
           onClick={() => handleOrderItemQuantityChange("up", orderItem)}
         >
-          +
+          <img src={addSVG} className="addSVG g" />
         </div>
       </div>
     );
@@ -127,14 +131,23 @@ export default function Order(props) {
             <div className="subTotalPrice num">€{subtotal.toFixed(2)}</div>
           </div>
           <div className="subTotalBottom">
-            <div className="plusMinus" onClick={() => handlePlusMinus()}>
-              <div className="plusMinusContainer b">±</div>
+            <div
+              className="plusMinus b button"
+              onClick={() => handlePlusMinus()}
+            >
+              <img src={euro} className="b euroSVG" />
             </div>
-            <div className="card" onClick={() => handlePayment("card")}>
-              <div className="cardContainer g">Card</div>
+            <div
+              className="card g button"
+              onClick={() => handlePayment("card")}
+            >
+              Card
             </div>
-            <div className="cash" onClick={() => handlePayment("cash")}>
-              <div className="cashContainer g">Cash</div>
+            <div
+              className="cash g button"
+              onClick={() => handlePayment("cash")}
+            >
+              Cash
             </div>
           </div>
         </div>

@@ -5,6 +5,10 @@ import { useState } from "react";
 import log from "../../tools/logging";
 import playBeep from "../../tools/playBeep";
 
+import checkSVG from "../../assets/appicons/check.svg";
+import addSVG from "../../assets/appicons/add.svg";
+import minusSVG from "../../assets/appicons/minus.svg";
+
 export default function ItemPage(props) {
   const menuState = props.menuState;
   const setMenuState = props.setMenuState;
@@ -35,12 +39,12 @@ export default function ItemPage(props) {
     let selected;
     if (currentOrder.addons == undefined) {
       log(`Initialised addon selected string`);
-      selected = "";
-      addon.selected = "";
-    } else if (currentOrder.addons[index].selected === "X") {
-      selected = "X";
+      selected = false;
+      addon.selected = false;
+    } else if (currentOrder.addons[index].selected === true) {
+      selected = true;
     } else {
-      selected = "";
+      selected = false;
     }
 
     log(`Created HTML for addon ${addon.name}`);
@@ -70,7 +74,7 @@ export default function ItemPage(props) {
         </div>
         <div className="toggleAddon b">
           <div className="toggleAddonButton" id={index}>
-            {selected}
+            {selected ? <img src={checkSVG} className="checkSVG" /> : ""}
           </div>
         </div>
       </div>
@@ -163,7 +167,7 @@ export default function ItemPage(props) {
               handleDecreaseQuantity(event, item, currentOrder, setCurrentOrder)
             }
           >
-            -
+            <img src={minusSVG} className="minusSVG r" />
           </div>
           <div className="quantityValue">{quantity}</div>
           <div
@@ -172,7 +176,7 @@ export default function ItemPage(props) {
               handleIncreaseQuantity(event, item, currentOrder, setCurrentOrder)
             }
           >
-            +
+            <img src={addSVG} className="addSVG g" />
           </div>
         </div>
         <div className="priceSection">
@@ -208,7 +212,7 @@ function computePrice(item, currentOrder, setCurrentOrder) {
   } else if (currentOrder.priceCheck == "") {
     let addonsCost = 0;
     currentOrder.addons.forEach((addon) => {
-      if (addon.selected === "X") {
+      if (addon.selected === true) {
         addonsCost += addon.price;
       }
     });
@@ -234,11 +238,11 @@ function handleAddonToggle(
   //const index = event.target.id;
   log(`Addon ${item.addons[index].name} toggled`);
 
-  if (item.addons[index].selected === "X") {
-    item.addons[index].selected = "";
+  if (item.addons[index].selected === true) {
+    item.addons[index].selected = false;
     log(`Addon was toggled off`);
   } else {
-    item.addons[index].selected = "X";
+    item.addons[index].selected = true;
     log(`Addon was toggled on`);
   }
 
@@ -343,7 +347,7 @@ export function handleAddToOrder(
   parsedOrder.addons = [];
   if (currentOrder.addons !== undefined) {
     currentOrder.addons.forEach((addon) => {
-      if (addon.selected === "X") {
+      if (addon.selected === true) {
         log(`Addon ${addon.name} put into order`);
         parsedOrder.addons.push(addon.name);
       }
@@ -401,7 +405,7 @@ function computePriceNoQuantity(item, currentOrder) {
   } else if (currentOrder.priceCheck == "") {
     let addonsCost = 0;
     currentOrder.addons.forEach((addon) => {
-      if (addon.selected === "X") {
+      if (addon.selected === true) {
         addonsCost += addon.price;
       }
     });
@@ -437,7 +441,7 @@ function handleClickShortcut(
   addons.forEach((shortcutAddon) => {
     item.addons.forEach((itemAddon) => {
       if (shortcutAddon.name == itemAddon.name) {
-        itemAddon.selected = "X";
+        itemAddon.selected = true;
       }
     });
   });
@@ -450,7 +454,13 @@ function handleClickShortcut(
     item.quantity = currentOrder.quantity;
   }
 
-  handleAddToOrder(event, item, setMenuState, item, setCurrentOrder, order, setOrder)
-
-
+  handleAddToOrder(
+    event,
+    item,
+    setMenuState,
+    item,
+    setCurrentOrder,
+    order,
+    setOrder
+  );
 }
