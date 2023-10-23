@@ -16,7 +16,7 @@ export default function RegisterState(props) {
   const setHamburgerOpen = props.setHamburgerOpen;
 
   return (
-    <div className="container" id="Container">
+    <div className="grid grid-cols-10 grid-rows-12 ">
       <MenuBar menuState={menuState} setHamburger={setHamburgerOpen} />
       <OrderBar />
       <Menu
@@ -31,5 +31,3 @@ export default function RegisterState(props) {
     </div>
   );
 }
-
-//move hamburger menu into app.jsx, will need to move state things aswell as pass new state into registerState

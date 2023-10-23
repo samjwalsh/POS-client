@@ -2,6 +2,8 @@ import * as React from "react";
 import * as ReactDOM from "react-dom/client";
 import { useState } from "react";
 
+import "./index.css";
+
 import Register from "./components/Register/Register.jsx";
 import Reports from "./components/Reports.jsx";
 import Settings, { executeSettings } from "./components/Settings.jsx";
@@ -25,7 +27,7 @@ function App() {
   const [settings, setSettings] = useState();
 
   return (
-    <div className="app">
+    <>
       <HamburgerMenu
         hamburgerOpen={hamburgerOpen}
         setHamburger={setHamburgerOpen}
@@ -41,7 +43,7 @@ function App() {
           return <Settings settings={settings} setSettings={setSettings} />;
         }
       })()}
-    </div>
+    </>
   );
 }
 

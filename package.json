@@ -10,7 +10,7 @@
     "make": "electron-forge make",
     "publish": "electron-forge publish",
     "lint": "echo \"No linting configured\""
-    },
+  },
   "keywords": [],
   "author": {
     "name": "Sam Walsh",
@@ -33,7 +33,10 @@
     "electron": "^25.9.0",
     "electron-winstaller": "^5.1.0",
     "node-loader": "^2.0.0",
-    "style-loader": "^3.3.3"
+    "postcss-loader": "^7.3.3",
+    "prettier-plugin-tailwindcss": "^0.5.6",
+    "style-loader": "^3.3.3",
+    "tailwindcss": "^3.3.3"
   },
   "dependencies": {
     "electron-squirrel-startup": "^1.0.0",

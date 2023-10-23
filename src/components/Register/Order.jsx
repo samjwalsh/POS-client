@@ -1,17 +1,17 @@
-import * as React from "react";
-import { useState } from "react";
+import * as React from 'react';
+import { useState } from 'react';
 
-import log from "../../tools/logging";
-import playBeep from "../../tools/playBeep";
+import log from '../../tools/logging';
+import playBeep from '../../tools/playBeep';
 
-import euro from "../../assets/appicons/euro.svg";
-import addSVG from "../../assets/appicons/add.svg";
-import minusSVG from "../../assets/appicons/minus.svg";
+import euro from '../../assets/appicons/euro.svg';
+import addSVG from '../../assets/appicons/add.svg';
+import minusSVG from '../../assets/appicons/minus.svg';
 
-import { addOrder } from "../../tools/ipc";
+import { addOrder } from '../../tools/ipc';
 
-import PayCash, { calculateSubtotal } from "./PayCash.jsx";
-import useKeypad from "../Reusables/Keypad.jsx";
+import PayCash, { calculateSubtotal } from './PayCash.jsx';
+import useKeypad from '../Reusables/Keypad.jsx';
 
 export default function Order(props) {
   const { order, setOrder } = props;
@@ -21,19 +21,19 @@ export default function Order(props) {
 
   async function handlePlusMinus() {
     playBeep();
-    const keypadValue = await keypad("currency");
+    const keypadValue = await keypad('currency');
     if (keypadValue === 0) return;
     log(`Update the adjustment in the order`);
     let temp_order = order;
-    temp_order.push({ name: "Adjustment", price: keypadValue, quantity: 1 });
+    temp_order.push({ name: 'Adjustment', price: keypadValue, quantity: 1 });
     setOrder([...temp_order]);
   }
 
   function handlePayment(paymentType) {
     playBeep();
-    if (paymentType === "card") {
+    if (paymentType === 'card') {
       log(`Payment type card selected, resetting order`);
-      addOrder(props.order, "Card");
+      addOrder(props.order, 'Card');
       props.setOrder([]);
       setPayCash(false);
     } else if (payCash === true) {
@@ -52,7 +52,7 @@ export default function Order(props) {
       if (orderItem == item) {
         let temp_order = order;
 
-        if (direction === "up") {
+        if (direction === 'up') {
           temp_order[index].quantity++;
         } else if (orderItem.quantity > 1) {
           temp_order[index].quantity--;
@@ -70,37 +70,34 @@ export default function Order(props) {
     log(`Adding ${orderItem.name} to HTML`);
     return (
       <div
-        className="orderItem"
-        key={`${orderItem.name} [${orderItem.addons}]`}
-      >
-        <div className="nameAndAddons">
-          <div className="orderItemName">
+        className='orderItem'
+        key={`${orderItem.name} [${orderItem.addons}]`}>
+        <div className='nameAndAddons'>
+          <div className='orderItemName'>
             {orderItem.name +
-              (orderItem.quantity > 1 ? ` (${orderItem.quantity})` : "")}
+              (orderItem.quantity > 1 ? ` (${orderItem.quantity})` : '')}
           </div>
-          <div className="orderItemAddons">
-            {orderItem.addons === undefined ? "" : orderItem.addons.join(", ")}
+          <div className='orderItemAddons'>
+            {orderItem.addons === undefined ? '' : orderItem.addons.join(', ')}
           </div>
         </div>
-        <div className="priceAndPriceEach">
-          <div className="orderItemPrice num">
+        <div className='priceAndPriceEach'>
+          <div className='orderItemPrice num'>
             €{(orderItem.price * orderItem.quantity).toFixed(2)}
           </div>
-          <div className="orderItemPriceEach num">
+          <div className='orderItemPriceEach num'>
             €{orderItem.price.toFixed(2)} EA
           </div>
         </div>
         <div
-          className="orderItemDecrease button r"
-          onClick={() => handleOrderItemQuantityChange("down", orderItem)}
-        >
-          <img src={minusSVG} className="minusSVG r" />
+          className='orderItemDecrease button r'
+          onClick={() => handleOrderItemQuantityChange('down', orderItem)}>
+          <img src={minusSVG} className='minusSVG r' />
         </div>
         <div
-          className="orderItemIncrease button g"
-          onClick={() => handleOrderItemQuantityChange("up", orderItem)}
-        >
-          <img src={addSVG} className="addSVG g" />
+          className='orderItemIncrease button g'
+          onClick={() => handleOrderItemQuantityChange('up', orderItem)}>
+          <img src={addSVG} className='addSVG g' />
         </div>
       </div>
     );
@@ -110,7 +107,7 @@ export default function Order(props) {
   return (
     <>
       <Keypad />
-      <div className="orderContainer" id="order">
+      <div className='col-span-3 row-span-11'>
         {payCash === true ? (
           <PayCash
             order={order}
@@ -119,34 +116,31 @@ export default function Order(props) {
             keypad={keypad}
           />
         ) : (
-          <div className="orderItems">
-            <div className="hiddenOrderItem"></div>
+          <div className='orderItems'>
+            <div className='hiddenOrderItem'></div>
             {orderItems}
           </div>
         )}
 
-        <div className="subTotal">
-          <div className="subTotalTop">
-            <div className="subTotalTitle">Subtotal</div>
-            <div className="subTotalPrice num">€{subtotal.toFixed(2)}</div>
+        <div className='subTotal'>
+          <div className='subTotalTop'>
+            <div className='subTotalTitle'>Subtotal</div>
+            <div className='subTotalPrice num'>€{subtotal.toFixed(2)}</div>
           </div>
-          <div className="subTotalBottom">
+          <div className='subTotalBottom'>
             <div
-              className="plusMinus b button"
-              onClick={() => handlePlusMinus()}
-            >
-              <img src={euro} className="b euroSVG" />
+              className='plusMinus b button'
+              onClick={() => handlePlusMinus()}>
+              <img src={euro} className='b euroSVG' />
             </div>
             <div
-              className="card g button"
-              onClick={() => handlePayment("card")}
-            >
+              className='card g button'
+              onClick={() => handlePayment('card')}>
               Card
             </div>
             <div
-              className="cash g button"
-              onClick={() => handlePayment("cash")}
-            >
+              className='cash g button'
+              onClick={() => handlePayment('cash')}>
               Cash
             </div>
           </div>
