@@ -1,22 +1,21 @@
-import { useState } from "react";
-import * as React from "react";
+import { useState } from 'react';
+import * as React from 'react';
 
-import closeSVG from "../../assets/appicons/close.svg";
-import addSVG from "../../assets/appicons/add.svg";
-import minusSVG from "../../assets/appicons/minus.svg"
-import backSVG from "../../assets/appicons/backspace.svg";
-import enterSVG from "../../assets/appicons/enter.svg";
+import closeSVG from '../../assets/appicons/close.svg';
+import addSVG from '../../assets/appicons/add.svg';
+import minusSVG from '../../assets/appicons/minus.svg';
+import backSVG from '../../assets/appicons/backspace.svg';
+import enterSVG from '../../assets/appicons/enter.svg';
 
-
-import playBeep from "../../tools/playBeep";
+import playBeep from '../../tools/playBeep';
 
 const useKeypad = (numberFormat) => {
   const [promise, setPromise] = useState(null);
-  const [keypadState, setkeypadState] = useState({ value: "", sign: "+" });
+  const [keypadState, setkeypadState] = useState({ value: '', sign: '+' });
 
   // Code for creating the keypad text string to be shown to the user
   if (numberFormat === undefined) {
-    numberFormat = "currency";
+    numberFormat = 'currency';
   }
 
   const keypad = () =>
@@ -29,7 +28,7 @@ const useKeypad = (numberFormat) => {
     // calculate keypad value TODO
     promise?.resolve(keypadResult);
     setPromise(null);
-    setkeypadState({ value: "", sign: "+" });
+    setkeypadState({ value: '', sign: '+' });
   };
 
   function handleKeypadClick(event) {
@@ -37,36 +36,36 @@ const useKeypad = (numberFormat) => {
     playBeep();
 
     switch (button) {
-      case "exit": {
+      case 'exit': {
         handleClose(0);
         break;
       }
-      case "minus": {
-        setkeypadState({ value: keypadState.value, sign: "-" });
+      case 'minus': {
+        setkeypadState({ value: keypadState.value, sign: '-' });
         break;
       }
-      case "plus": {
-        setkeypadState({ value: keypadState.value, sign: "+" });
+      case 'plus': {
+        setkeypadState({ value: keypadState.value, sign: '+' });
         break;
       }
-      case "delete": {
+      case 'delete': {
         setkeypadState({
           value: keypadState.value.slice(0, -1),
           sign: keypadState.sign,
         });
         break;
       }
-      case "enter": {
+      case 'enter': {
         if (keypadState.value.length === 0) handleClose(0);
         else if (numberFormat === 'currency') {
           let keypadValue = parseInt(keypadState.value) / 100;
-          if (keypadState.sign === "-") {
+          if (keypadState.sign === '-') {
             keypadValue *= -1;
           }
           handleClose(keypadValue);
         } else if (numberFormat === 'passcode') {
           let keypadValue = parseInt(keypadState.value);
-          if (keypadState.sign === "-") {
+          if (keypadState.sign === '-') {
             keypadValue *= -1;
           }
           handleClose(keypadValue);
@@ -74,7 +73,7 @@ const useKeypad = (numberFormat) => {
         break;
       }
       default: {
-        if (numberFormat === "currency" && keypadState.value.length === 5) {
+        if (numberFormat === 'currency' && keypadState.value.length === 6) {
           break;
         }
         setkeypadState({
@@ -88,78 +87,79 @@ const useKeypad = (numberFormat) => {
 
   // creates the string that is shown in the html to represent the keypad value
   let keypadValueString;
-  if (numberFormat === "currency") {
+  if (numberFormat === 'currency') {
     if (parseInt(keypadState.value) > 0) {
       keypadValueString = (
-        (parseInt(keypadState.value) * (keypadState.sign === "-" ? -1 : 1)) /
+        (parseInt(keypadState.value) * (keypadState.sign === '-' ? -1 : 1)) /
         100
       ).toFixed(2);
     } else {
-      keypadValueString = (keypadState.sign === "-" ? "-" : "") + "0.00";
+      keypadValueString = (keypadState.sign === '-' ? '-' : '') + '0.00';
     }
-  } else if (numberFormat === "passcode") {
+  } else if (numberFormat === 'passcode') {
     if (parseInt(keypadState.value) > 0) {
       keypadValueString =
-        parseInt(keypadState.value) * (keypadState.sign === "-" ? -1 : 1);
+        parseInt(keypadState.value) * (keypadState.sign === '-' ? -1 : 1);
     } else {
-      keypadValueString = (keypadState.sign === "-" ? "-" : "") + "0 ";
+      keypadValueString = (keypadState.sign === '-' ? '-' : '') + '0 ';
     }
   }
 
   function createKeypadHTML() {
     return (
-      <div className="keypadGrid" onClick={(event) => handleKeypadClick(event)}>
-        <div className="keypadDisplay ">
-          <div className="keypadDisplayText num ">
-            {numberFormat === "currency" ? "€" : ""}
+      <div
+        className='grid grid-cols-3 grid-rows-6 w-full h-full text-white gap-1 p-1 text-3xl'
+        onClick={(event) => handleKeypadClick(event)}>
+        <div className=' col-span-2 row-span 1 flex flex-row text-3xl font-mono justify-between w-full text-black'>
+          <div className='text-left cnter-items'>
+            {numberFormat === 'currency' ? '€' : ''}
           </div>
-          <div className="keypadDisplayTextValue num">{keypadValueString}</div>
+          <div className='text-right justify-end cnter-items'>{keypadValueString}</div>
         </div>
-        <div className="keypadClose keypadBtn r" id="exit">
-          <img src={closeSVG} className="keypadSVG r" id="exit"/>
+        <div className='col-span-1 row-span-1 keypad gradientred' id='exit'>
+          <img src={closeSVG} className='w-8' id='exit' />
         </div>
-        <div className="keypadMinus keypadBtn b" id="minus">
-        <img src={minusSVG} className="keypadSVG b" id="minus"/>
+        <div className='col-span-1 row-span-1 keypad gradientblack' id='minus'>
+          <img src={minusSVG} className='w-8' id='minus' />
         </div>
-        <div className="keypadPlus keypadBtn b" id="plus">
-        <img src={addSVG} className="keypadSVG b" id="plus"/>
-
+        <div className='col-span-1 row-span-1 keypad gradientblack' id='plus'>
+          <img src={addSVG} className='w-8' id='plus' />
         </div>
-        <div className="keypadBack keypadBtn b" id="delete">
-        <img src={backSVG} className="keypadSVG b" id="delete"/>
+        <div className='col-span-1 row-span-1 keypad gradientblack' id='delete'>
+          <img src={backSVG} className='w-8' id='delete' />
         </div>
-        <div className="keypad7 keypadBtn b" id="7">
+        <div className='col-span-1 row-span-1 keypad gradientblack' id='7'>
           7
         </div>
-        <div className="keypad8 keypadBtn b" id="8">
+        <div className='col-span-1 row-span-1 keypad gradientblack' id='8'>
           8
         </div>
-        <div className="keypad9 keypadBtn b" id="9">
+        <div className='col-span-1 row-span-1 keypad gradientblack' id='9'>
           9
         </div>
-        <div className="keypad4 keypadBtn b" id="4">
+        <div className='col-span-1 row-span-1 keypad gradientblack' id='4'>
           4
         </div>
-        <div className="keypad5 keypadBtn b" id="5">
+        <div className='col-span-1 row-span-1 keypad gradientblack' id='5'>
           5
         </div>
-        <div className="keypad6 keypadBtn b" id="6">
+        <div className='col-span-1 row-span-1 keypad gradientblack' id='6'>
           6
         </div>
-        <div className="keypad1 keypadBtn b" id="1">
+        <div className='col-span-1 row-span-1 keypad gradientblack' id='1'>
           1
         </div>
-        <div className="keypad2 keypadBtn b" id="2">
+        <div className='col-span-1 row-span-1 keypad gradientblack' id='2'>
           2
         </div>
-        <div className="keypad3 keypadBtn b" id="3">
+        <div className='col-span-1 row-span-1 keypad gradientblack' id='3'>
           3
         </div>
-        <div className="keypad0 keypadBtn b" id="0">
+        <div className='col-span-2 row-span-1 keypad gradientblack' id='0'>
           0
         </div>
-        <div className="keypadEnter keypadBtn g" id="enter">
-        <img src={enterSVG} className="keypadSVG g" id="enter"/>
+        <div className='col-span-1 row-span-1 keypad gradientgreen' id='enter'>
+          <img src={enterSVG} className='w-8' id='enter' />
         </div>
       </div>
     );
@@ -167,16 +167,15 @@ const useKeypad = (numberFormat) => {
 
   const keypadHTML = () => {
     if (promise === null) return;
-    if (numberFormat === "currency") {
-      return <>{createKeypadHTML()}</>;
-    } else if (numberFormat === "passcode") {
-      return (
-        <div className="keypadDialogContainer">
-          <div className="keypadDialogBackground"></div>
-          <div className="keypadDialog">{createKeypadHTML()}</div>
+
+    return (
+      <div className='absolute h-screen w-screen '>
+        <div className='absolute bg-black opacity-50 z-10 h-screen w-screen'></div>
+        <div className='absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-20 bg-white w-4/12 h-5/6 rounded-lg shadow'>
+          {createKeypadHTML()}
         </div>
-      );
-    }
+      </div>
+    );
   };
 
   return [keypadHTML, keypad];

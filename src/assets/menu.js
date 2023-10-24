@@ -480,7 +480,7 @@ export const menu = [
     ],
   },
   {
-    name: "Crisps, Popcorn & Candyfloss",
+    name: "Crisps, Popcorn, Candyfloss, Slush",
     type: "category",
     items: [
       {

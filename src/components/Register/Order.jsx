@@ -70,34 +70,33 @@ export default function Order(props) {
     log(`Adding ${orderItem.name} to HTML`);
     return (
       <div
-        className='orderItem'
+        className='flex h-min w-full rounded shadow'
         key={`${orderItem.name} [${orderItem.addons}]`}>
-        <div className='nameAndAddons'>
-          <div className='orderItemName'>
+        <div
+          className='col-span-1 row-span-2 cnter-items btn--minus w-12 rounded-l'
+          onClick={() => handleOrderItemQuantityChange('down', orderItem)}>
+          <img src={minusSVG} className='w-6 stroke-white' />
+        </div>
+        <div className='w-full grid grid-cols-[1fr_min-content] grid-rows-[min-content, 1fr] p-1'>
+          <div className='col-span-1 row-span-1 text-lg'>
             {orderItem.name +
               (orderItem.quantity > 1 ? ` (${orderItem.quantity})` : '')}
           </div>
-          <div className='orderItemAddons'>
-            {orderItem.addons === undefined ? '' : orderItem.addons.join(', ')}
-          </div>
-        </div>
-        <div className='priceAndPriceEach'>
-          <div className='orderItemPrice num'>
+          <div className='col-span-1 row-span-1 text-lg font-mono text-right'>
             €{(orderItem.price * orderItem.quantity).toFixed(2)}
           </div>
-          <div className='orderItemPriceEach num'>
+
+          <div className='col-span-1 row-span-1 mr-1 text-sm '>
+            {orderItem.addons === undefined ? '' : orderItem.addons.join(', ')}
+          </div>
+          <div className='col-span-1 row-span-1 whitespace-nowrap text-sm font-mono text-right'>
             €{orderItem.price.toFixed(2)} EA
           </div>
         </div>
         <div
-          className='orderItemDecrease button r'
-          onClick={() => handleOrderItemQuantityChange('down', orderItem)}>
-          <img src={minusSVG} className='minusSVG r' />
-        </div>
-        <div
-          className='orderItemIncrease button g'
+          className='col-span-1 row-span-2 cnter-items justify-self-end btn--plus w-12 rounded-r'
           onClick={() => handleOrderItemQuantityChange('up', orderItem)}>
-          <img src={addSVG} className='addSVG g' />
+          <img src={addSVG} className='w-6 fill-white stroke-white' />
         </div>
       </div>
     );
@@ -107,7 +106,8 @@ export default function Order(props) {
   return (
     <>
       <Keypad />
-      <div className='col-span-3 row-span-11'>
+
+      <div className='col-span-4 row-span-1 h-full self-stretch flex flex-col border-2 border-t-0 overflow-hidden'>
         {payCash === true ? (
           <PayCash
             order={order}
@@ -116,32 +116,31 @@ export default function Order(props) {
             keypad={keypad}
           />
         ) : (
-          <div className='orderItems'>
-            <div className='hiddenOrderItem'></div>
-            {orderItems}
-          </div>
+          <div className='flex flex-col p-2 gap-2 h-full'>{orderItems}</div>
         )}
 
-        <div className='subTotal'>
-          <div className='subTotalTop'>
-            <div className='subTotalTitle'>Subtotal</div>
-            <div className='subTotalPrice num'>€{subtotal.toFixed(2)}</div>
+        <div className='border-t-2 grid grid-rows-[min-content, 1fr] grid-cols-1'>
+          <div className='row-span-1 col-span-1 flex justify-between w-full text-2xl pr-1 pl-1'>
+            <div className='text-left'>Subtotal</div>
+            <div className='text-right font-mono justify-end'>
+              €{subtotal.toFixed(2)}
+            </div>
           </div>
-          <div className='subTotalBottom'>
+          <div className='row-span-1 col-span-1 flex p-1 items-stretch h-20'>
             <div
-              className='plusMinus b button'
+              className='gradientblack p-1 rounded-lg shadow mr-1 cnter-items w-48'
               onClick={() => handlePlusMinus()}>
-              <img src={euro} className='b euroSVG' />
+              <img src={euro} className='w-8' />
             </div>
             <div
-              className='card g button'
+              className='btn--plus p-1 rounded-lg mr-1 cnter-items w-full text-3xl'
               onClick={() => handlePayment('card')}>
-              Card
+              CARD
             </div>
             <div
-              className='cash g button'
+              className='btn--plus p-1 rounded-lg cnter-items w-full text-3xl'
               onClick={() => handlePayment('cash')}>
-              Cash
+              CASH
             </div>
           </div>
         </div>
