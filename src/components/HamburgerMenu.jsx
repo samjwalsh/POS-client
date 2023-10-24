@@ -6,14 +6,14 @@ import { getAllOrders, quit, removeAllOrders } from "../tools/ipc";
 import hamburger from "../assets/hamburger.svg";
 
 import useConfirm from "./Reusables/ConfirmDialog.jsx";
+import useKeypad from "./Reusables/Keypad.jsx";
 
 export default function HamburgerMenu(props) {
-  let hamburgerOpen = props.hamburgerOpen;
-  let setHamburger = props.setHamburger;
-  let appState = props.appState;
-  let setAppState = props.setAppState;
+  const {hamburgerOpen, setHamburger, setAppState} = props;
 
   const [Dialog, confirm] = useConfirm('Exit?');
+
+  const [Keypad, keypad] = useKeypad('passcode');
 
   async function handleTerminatePOS() {
     playBeep();
@@ -23,6 +23,20 @@ export default function HamburgerMenu(props) {
     if(!choice) return;
 
     quit();
+  }
+
+  async function handleSetAppState(mode) {
+    playBeep();
+    if (mode !== 'Settings') {
+    setAppState(mode);
+    setHamburger(false);
+    } else {
+      const keypadValue = await keypad();
+      if (keypadValue === 415326897) {
+        setAppState(mode);
+        setHamburger(false)
+      }
+    }
   }
 
   if (hamburgerOpen === false) {
@@ -38,6 +52,7 @@ export default function HamburgerMenu(props) {
 
   return (
     <>
+    <Keypad/>
     <Dialog/>
     <div id="sideMenuContainer">
       <div id="sideMenu">
@@ -56,7 +71,7 @@ export default function HamburgerMenu(props) {
               <div
                 className="sideMenuOption b" 
                 onClick={() =>
-                  handleSetAppState(setHamburger, setAppState, "Register")
+                  handleSetAppState( "Register")
                 }
               >
                 Register
@@ -65,7 +80,7 @@ export default function HamburgerMenu(props) {
             <div
               className="sideMenuOption b"
               onClick={() =>
-                handleSetAppState(setHamburger, setAppState, "Reports")
+                handleSetAppState( "Reports")
               }
             >
               Reports
@@ -73,7 +88,7 @@ export default function HamburgerMenu(props) {
             <div
               className="sideMenuOption b"
               onClick={() =>
-                handleSetAppState(setHamburger, setAppState, "Settings")
+                handleSetAppState( "Settings")
               }
             >Settings</div>
           </div>
@@ -101,11 +116,7 @@ function handleCloseSideMenu(setHamburger) {
   setHamburger(false);
 }
 
-function handleSetAppState(setHamburger, setAppState, mode) {
-  playBeep();
-  setAppState(mode);
-  setHamburger(false);
-}
+
 
 
 

@@ -27,6 +27,7 @@ const useKeypad = (numberFormat) => {
 
   function handleKeypadClick(event) {
     const button = event.target.id;
+    playBeep();
 
     switch (button) {
       case "exit": {
@@ -50,8 +51,14 @@ const useKeypad = (numberFormat) => {
       }
       case "enter": {
         if (keypadState.value.length === 0) handleClose(0);
-        else {
+        else if (numberFormat === 'currency') {
           let keypadValue = parseInt(keypadState.value) / 100;
+          if (keypadState.sign === "-") {
+            keypadValue *= -1;
+          }
+          handleClose(keypadValue);
+        } else if (numberFormat === 'passcode') {
+          let keypadValue = parseInt(keypadState.value);
           if (keypadState.sign === "-") {
             keypadValue *= -1;
           }
@@ -60,17 +67,19 @@ const useKeypad = (numberFormat) => {
         break;
       }
       default: {
-        if (numberFormat === "currency" && keypadState.value.length < 5) {
-          setkeypadState({
-            value: keypadState.value + button,
-            sign: keypadState.sign,
-          });
+        if (numberFormat === "currency" && keypadState.value.length === 5) {
+          break;
         }
+        setkeypadState({
+          value: keypadState.value + button,
+          sign: keypadState.sign,
+        });
         break;
       }
     }
   }
 
+  // creates the string that is shown in the html to represent the keypad value
   let keypadValueString;
   if (numberFormat === "currency") {
     if (parseInt(keypadState.value) > 0) {
@@ -81,10 +90,16 @@ const useKeypad = (numberFormat) => {
     } else {
       keypadValueString = (keypadState.sign === "-" ? "-" : "") + "0.00";
     }
+  } else if (numberFormat === "passcode") {
+    if (parseInt(keypadState.value) > 0) {
+      keypadValueString =
+        parseInt(keypadState.value) * (keypadState.sign === "-" ? -1 : 1);
+    } else {
+      keypadValueString = (keypadState.sign === "-" ? "-" : "") + "0 ";
+    }
   }
 
-  const keypadHTML = () => {
-    if (promise === null) return;
+  function createKeypadHTML() {
     return (
       <div className="keypadGrid" onClick={(event) => handleKeypadClick(event)}>
         <div className="keypadDisplay ">
@@ -140,6 +155,20 @@ const useKeypad = (numberFormat) => {
         </div>
       </div>
     );
+  }
+
+  const keypadHTML = () => {
+    if (promise === null) return;
+    if (numberFormat === "currency") {
+      return <>{createKeypadHTML()}</>;
+    } else if (numberFormat === "passcode") {
+      return (
+        <div className="keypadDialogContainer">
+          <div className="keypadDialogBackground"></div>
+          <div className="keypadDialog">{createKeypadHTML()}</div>
+        </div>
+      );
+    }
   };
 
   return [keypadHTML, keypad];
