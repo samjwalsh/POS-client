@@ -3,6 +3,8 @@ import * as React from 'react';
 import playBeep from '../tools/playBeep';
 import { getAllOrders, quit, removeAllOrders } from '../tools/ipc';
 
+import closeSVG from '../assets/appicons/close.svg';
+
 import hamburger from '../assets/appicons/hamburger.svg';
 
 import useConfirm from './Reusables/ConfirmDialog.jsx';
@@ -42,7 +44,7 @@ export default function HamburgerMenu(props) {
   if (hamburgerOpen === false) {
     return (
       <div
-        className='absolute bg-white'
+        className='absolute'
         onClick={(event) => handleClickHamburger(event, setHamburger)}>
         <img src={hamburger} id='hamburgerSVG' className='r' />
       </div>
@@ -53,52 +55,44 @@ export default function HamburgerMenu(props) {
     <>
       <Keypad />
       <Dialog />
-      <div id='sideMenuContainer'>
-        <div id='sideMenu'>
-          <div id='sideMenuContent'>
-            <div id='sideMenuClose'>
-              <div id='sideMenuCloseText' className='y'>
-                Options
-              </div>
-              <div
-                id='sideMenuCloseButton'
-                className='r'
-                onClick={() => handleCloseSideMenu(setHamburger)}>
-                X
-              </div>
-            </div>
-            <div id='sideMenuOptions'>
-              <div id='sideMenuOption'>
-                <div
-                  className='sideMenuOption b'
-                  onClick={() => handleSetAppState('Register')}>
-                  Register
-                </div>
-              </div>
-              <div
-                className='sideMenuOption b'
-                onClick={() => handleSetAppState('Reports')}>
-                Reports
-              </div>
-              <div
-                className='sideMenuOption b'
-                onClick={() => handleSetAppState('Settings')}>
-                Settings
-              </div>
-            </div>
-            <div id='sideMenuTerminate'>
-              <div
-                id='sideMenuTerminateText'
-                className='r'
-                onClick={() => handleTerminatePOS()}>
-                Exit POS
-              </div>
+      <div className='absolute grid grid-cols-12 grid-rows-1 w-screen h-screen'>
+        <div className='row-span-1 col-span-3 flex flex-col bg-white'>
+          <div className='flex flex-row items-stretch  w-100 justify-between p-1 border-b-2'>
+            <div className='text-2xl cnter-items'>Menu</div>
+            <div
+              className='justify-end btn--minus btn shadow'
+              onClick={() => handleCloseSideMenu(setHamburger)}>
+              <img src={closeSVG} className='' />
             </div>
           </div>
-          <div
-            id='sideMenuBackground'
-            onClick={() => handleCloseSideMenu(setHamburger)}></div>
+          <div className='p-1 flex flex-col gap-2 '>
+            <div
+              className='side-menu-option'
+              onClick={() => handleSetAppState('Register')}>
+              Register
+            </div>
+            <div
+              className='side-menu-option'
+              onClick={() => handleSetAppState('Reports')}>
+              Reports
+            </div>
+            <div
+              className='side-menu-option'
+              onClick={() => handleSetAppState('Settings')}>
+              Settings
+            </div>
+          </div>
+          <div className='mt-auto p-1'>
+            <div
+              className='side-menu-option'
+              onClick={() => handleTerminatePOS()}>
+              Exit POS
+            </div>
+          </div>
         </div>
+        <div
+          className='row-span-1 col-span-9 bg-black opacity-50'
+          onClick={() => handleCloseSideMenu(setHamburger)}></div>
       </div>
     </>
   );

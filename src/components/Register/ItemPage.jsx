@@ -1,13 +1,13 @@
-import * as React from "react";
-import * as ReactDOM from "react-dom/client";
-import { useState } from "react";
+import * as React from 'react';
+import * as ReactDOM from 'react-dom/client';
+import { useState } from 'react';
 
-import log from "../../tools/logging";
-import playBeep from "../../tools/playBeep";
+import log from '../../tools/logging';
+import playBeep from '../../tools/playBeep';
 
-import checkSVG from "../../assets/appicons/check.svg";
-import addSVG from "../../assets/appicons/add.svg";
-import minusSVG from "../../assets/appicons/minus.svg";
+import checkSVG from '../../assets/appicons/check.svg';
+import addSVG from '../../assets/appicons/add.svg';
+import minusSVG from '../../assets/appicons/minus.svg';
 
 export default function ItemPage(props) {
   const menuState = props.menuState;
@@ -51,7 +51,7 @@ export default function ItemPage(props) {
     return (
       <div
         key={addon.name}
-        className="addon b"
+        className='addon b'
         id={index}
         onClick={(event) =>
           handleAddonToggle(
@@ -62,19 +62,18 @@ export default function ItemPage(props) {
             setCurrentOrder,
             index
           )
-        }
-      >
-        <div className="addonNameAndPrice b">
-          <div className="addonName b">
-            <div className="addonText b">{addon.name}</div>
+        }>
+        <div className='addonNameAndPrice b'>
+          <div className='addonName b'>
+            <div className='addonText b'>{addon.name}</div>
           </div>
-          <div className="addonPrice b">
-            <div className="addonText b num">€{addon.price.toFixed(2)}</div>
+          <div className='addonPrice b'>
+            <div className='addonText b num'>€{addon.price.toFixed(2)}</div>
           </div>
         </div>
-        <div className="toggleAddon b">
-          <div className="toggleAddonButton" id={index}>
-            {selected ? <img src={checkSVG} className="checkSVG" /> : ""}
+        <div className='toggleAddon b'>
+          <div className='toggleAddonButton' id={index}>
+            {selected ? <img src={checkSVG} className='checkSVG' /> : ''}
           </div>
         </div>
       </div>
@@ -83,14 +82,14 @@ export default function ItemPage(props) {
     //TODO add code for auto-checking default addon
   });
 
-  let shortcutsHTML = "";
+  let shortcutsHTML = '';
 
   if (item.shortcuts !== undefined) {
     let shortcutEachHTML = item.shortcuts.map((shortcut) => {
       let addons = shortcut.addons;
       return (
         <div
-          className="itemPageShortcut button g"
+          className='itemPageShortcut button g'
           onClick={(shortcut) =>
             handleClickShortcut(
               event,
@@ -103,16 +102,15 @@ export default function ItemPage(props) {
               addons
             )
           }
-          key={shortcut.name}
-        >
-          <div className="itemPageShortcutName g">{shortcut.name}</div>
-          <div className="itemPageShortcutPrice g num">
+          key={shortcut.name}>
+          <div className='itemPageShortcutName g'>{shortcut.name}</div>
+          <div className='itemPageShortcutPrice g num'>
             €{shortcut.price.toFixed(2)}
           </div>
         </div>
       );
     });
-    shortcutsHTML = <div className="itemPageShortcuts">{shortcutEachHTML}</div>;
+    shortcutsHTML = <div className='itemPageShortcuts'>{shortcutEachHTML}</div>;
   } else {
   }
 
@@ -128,13 +126,13 @@ export default function ItemPage(props) {
   6;
   log(`Created HTML for item page`);
   return (
-    <div className="itemPage">
-      <div className="itemPageTitleBar">
-        <div className="itemPageAddonsTitle">
-          <div className="itemPageTitleCenter">{menuState.name}</div>
+    <div className='flex flex-col grid-cols-1 h-full m-2 content-start '>
+      <div className='grid grid-cols-2 grid-rows-1 text-2xl h-min border-b border-slate-200'>
+        <div className='col-span-1 text-left w-auto h-auto whitespace-nowrap self-center'>
+          {menuState.name}
         </div>
         <div
-          className="itemPageExitButton r"
+          className='col-span-1 text-right self-end justify-self-end w-min h-min whitespace-nowrap p-2 btn--minus rounded shadow mb-2'
           onClick={(event) =>
             handleExitItemPage(
               event,
@@ -143,48 +141,45 @@ export default function ItemPage(props) {
               setCurrentOrder,
               currentOrder
             )
-          }
-        >
+          }>
           Cancel
         </div>
       </div>
-      <div className="itemPageAddonsShortcutsContainer">
+      <div className='itemPageAddonsShortcutsContainer'>
         {shortcutsHTML}
-        <div className="itemPageAddonsSection">
+        <div className='itemPageAddonsSection'>
           {addonsHTML}
-          <div className="addonFiller "></div>
-          <div className="addonFiller "></div>
-          <div className="addonFiller "></div>
-          <div className="addonFiller "></div>
+          <div className='addonFiller '></div>
+          <div className='addonFiller '></div>
+          <div className='addonFiller '></div>
+          <div className='addonFiller '></div>
         </div>
       </div>
 
-      <div className="bottomBar">
-        <div className="quantitySection">
+      <div className='bottomBar'>
+        <div className='quantitySection'>
           <div
-            className="subtractQuantity r"
+            className='subtractQuantity r'
             onClick={(event) =>
               handleDecreaseQuantity(event, item, currentOrder, setCurrentOrder)
-            }
-          >
-            <img src={minusSVG} className="minusSVG r" />
+            }>
+            <img src={minusSVG} className='minusSVG r' />
           </div>
-          <div className="quantityValue">{quantity}</div>
+          <div className='quantityValue'>{quantity}</div>
           <div
-            className="addQuantity g"
+            className='addQuantity g'
             onClick={(event) =>
               handleIncreaseQuantity(event, item, currentOrder, setCurrentOrder)
-            }
-          >
-            <img src={addSVG} className="addSVG g" />
+            }>
+            <img src={addSVG} className='addSVG g' />
           </div>
         </div>
-        <div className="priceSection">
-          <div className="priceContainer num ">€{price}</div>
+        <div className='priceSection'>
+          <div className='priceContainer num '>€{price}</div>
         </div>
-        <div className="orderAdd g">
+        <div className='orderAdd g'>
           <div
-            className="orderAddContainer g"
+            className='orderAddContainer g'
             onClick={(event) =>
               handleAddToOrder(
                 event,
@@ -195,8 +190,7 @@ export default function ItemPage(props) {
                 order,
                 setOrder
               )
-            }
-          >
+            }>
             Add
           </div>
         </div>
@@ -207,9 +201,9 @@ export default function ItemPage(props) {
 
 function computePrice(item, currentOrder, setCurrentOrder) {
   log(`Compute price of item ${item.name} multiplied by its quantity`);
-  if (currentOrder == "") {
+  if (currentOrder == '') {
     return item.price;
-  } else if (currentOrder.priceCheck == "") {
+  } else if (currentOrder.priceCheck == '') {
     let addonsCost = 0;
     currentOrder.addons.forEach((addon) => {
       if (addon.selected === true) {
@@ -260,7 +254,7 @@ function handleAddonToggle(
     name: item.name,
     price: item.price,
     quantity: quantity,
-    priceCheck: item.priceCheck == undefined ? "" : item.priceCheck,
+    priceCheck: item.priceCheck == undefined ? '' : item.priceCheck,
     addons: item.addons,
   });
 }
@@ -280,7 +274,7 @@ function handleIncreaseQuantity(event, item, currentOrder, setCurrentOrder) {
     name: item.name,
     price: item.price,
     quantity: quantity,
-    priceCheck: item.priceCheck === undefined ? "" : item.priceCheck,
+    priceCheck: item.priceCheck === undefined ? '' : item.priceCheck,
     addons: item.addons,
   });
 }
@@ -303,7 +297,7 @@ function handleDecreaseQuantity(event, item, currentOrder, setCurrentOrder) {
     name: item.name,
     price: item.price,
     quantity: quantity,
-    priceCheck: item.priceCheck === undefined ? "" : item.priceCheck,
+    priceCheck: item.priceCheck === undefined ? '' : item.priceCheck,
     addons: item.addons,
   });
 }
@@ -318,8 +312,8 @@ function handleExitItemPage(
   playBeep();
 
   log(`Exiting item page to main menu and deleting current order`);
-  setMenuState("");
-  setCurrentOrder("");
+  setMenuState('');
+  setCurrentOrder('');
 }
 
 export function handleAddToOrder(
@@ -400,9 +394,9 @@ export function handleAddToOrder(
 
 function computePriceNoQuantity(item, currentOrder) {
   log(`Computing price of individual item ${item.name}`);
-  if (currentOrder == "") {
+  if (currentOrder == '') {
     return item.price;
-  } else if (currentOrder.priceCheck == "") {
+  } else if (currentOrder.priceCheck == '') {
     let addonsCost = 0;
     currentOrder.addons.forEach((addon) => {
       if (addon.selected === true) {

@@ -11,7 +11,7 @@ export default function MenuBar(props) {
   }
   log(`Set menu title to ${menuState.name}`);
   return (
-      <div className="col-span-7 row-span-1 text-center bg-black text-white">Register</div>
+      <div className="col-span-12 row-span-1 text-center bg-white text-black cnter-items border-b-2 text-xl">Register</div>
   );
 }
 

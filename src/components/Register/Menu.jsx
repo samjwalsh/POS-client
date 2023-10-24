@@ -5,6 +5,8 @@ import { useState } from 'react';
 import getMenu from '../../tools/menuAPI';
 import { handleAddToOrder } from './ItemPage.jsx';
 
+import undoSVG from '../../assets/appicons/undo.svg';
+
 import ItemPage from './ItemPage.jsx';
 
 import log from '../../tools/logging';
@@ -50,16 +52,6 @@ export default function Menu(props) {
     items.forEach((item) => {
       //Code for adding relevent classes to each item
       let classes = 'menu-itm';
-      if (item.type === 'category') {
-        log(`Added class "category" to ${item.name}`);
-        classes += ' category b';
-      } else if (item.type === 'backButton') {
-        log(`Added class "category" to the back button`);
-
-        classes += ' backButton r';
-      } else {
-        classes += ' b';
-      }
 
       log(`Added item ${item.name} to HTML`);
       itemsHTML.push(
@@ -68,13 +60,17 @@ export default function Menu(props) {
           className={classes}
           id={item.name}
           onClick={(event) => handleItemClick(event, item, passProps)}>
-          {item.name}
+          {item.name === 'Back' ? (
+            <img src={undoSVG} className='w-12' />
+          ) : (
+            item.name.toUpperCase()
+          )}
         </div>
       );
     });
 
     return (
-      <div className='col-span-7 row-span-11 flex flex-wrap gap-2 p-1'>
+      <div className='col-span-8 row-span-1 flex flex-wrap gap-2 p-2 overflow-y-scroll no-scrollbar content-start'>
         {itemsHTML}
         <div className='menu-itm-filler'></div>
         <div className='menu-itm-filler'></div>
@@ -87,7 +83,7 @@ export default function Menu(props) {
   } else if (menuState.modifiers !== undefined) {
     log(`Rendering an item which has modifiers`);
     return (
-      <div className='col-span-7 row-span-11'>
+      <div className='col-span-8 row-span-1 overflow-y-scroll no-scrollbar'>
         <ItemPage
           menuState={menuState}
           setMenuState={setMenuState}

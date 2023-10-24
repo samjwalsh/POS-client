@@ -1,11 +1,11 @@
-import * as React from "react";
-import * as ReactDOM from "react-dom/client";
-import { useState } from "react";
+import * as React from 'react';
+import * as ReactDOM from 'react-dom/client';
+import { useState } from 'react';
 
-import log from "../../tools/logging";
-import playBeep from "../../tools/playBeep";
-import { addOrder } from "../../tools/ipc";
-import useKeypad from "../Reusables/Keypad.jsx";
+import log from '../../tools/logging';
+import playBeep from '../../tools/playBeep';
+import { addOrder } from '../../tools/ipc';
+import useKeypad from '../Reusables/Keypad.jsx';
 
 export default function PayCash(props) {
   const { order, setOrder, setPayCash, keypad } = props;
@@ -15,12 +15,12 @@ export default function PayCash(props) {
   async function handleButtonPress(value) {
     playBeep();
     log(`Button for paying with cash clicked`);
-    if (value === "exit") {
+    if (value === 'exit') {
       log(`Exiting the pay cash section and resetting the order`);
       setOrder([]);
       setPayCash(false);
       setChange(0);
-      addOrder(order, "Cash");
+      addOrder(order, 'Cash');
     }
 
     const subtotal = calculateSubtotal(order);
@@ -28,7 +28,7 @@ export default function PayCash(props) {
     log(`Calculating the subtotal`);
 
     let change = 0;
-    if (typeof value === "number") {
+    if (typeof value === 'number') {
       change = value - subtotal;
 
       setChange(change);
@@ -36,11 +36,11 @@ export default function PayCash(props) {
 
     log(`Calculating the change`);
 
-    if (value === "custom") {
+    if (value === 'custom') {
       log(`Enabling the keypad`);
-      const tendered = await keypad("currency");
+      const tendered = await keypad('currency');
       let change = 0;
-      if (typeof tendered === "number") {
+      if (typeof tendered === 'number') {
         change = tendered - subtotal;
         setChange(change);
       }
@@ -48,51 +48,44 @@ export default function PayCash(props) {
   }
 
   return (
-    <div className="payCash">
-      <div className="payCashOptions">
+    <div className='flex flex-col gap-2 h-full'>
+      <div className='grid grid-cols-2 grid-rows-5 gap-1 p-1 h-full'>
         <div
-          className="payCash50 payCashPreset b button num"
-          onClick={() => handleButtonPress(50)}
-        >
+          className='col-span-2 row-span-1  text-3xl gradientblack text-white rounded-lg shadow-lg cnter-items'
+          onClick={() => handleButtonPress('custom')}>
+          CUSTOM
+        </div>
+        <div
+          className='col-span-1 row-span-1 font-mono text-3xl gradientblack text-white rounded-lg shadow-lg cnter-items'
+          onClick={() => handleButtonPress(50)}>
           €50
         </div>
         <div
-          className="payCash20 payCashPreset b button num"
-          onClick={() => handleButtonPress(20)}
-        >
+          className='col-span-1 row-span-1 font-mono text-3xl gradientblack text-white rounded-lg shadow-lg cnter-items'
+          onClick={() => handleButtonPress(20)}>
           €20
         </div>
         <div
-          className="payCash10 payCashPreset b button num"
-          onClick={() => handleButtonPress(10)}
-        >
+          className='col-span-1 row-span-1 font-mono text-3xl gradientblack text-white rounded-lg shadow-lg cnter-items'
+          onClick={() => handleButtonPress(10)}>
           €10
         </div>
         <div
-          className="payCash5 payCashPreset b button num"
-          onClick={() => handleButtonPress(5)}
-        >
+          className='col-span-1 row-span-1 font-mono text-3xl gradientblack text-white rounded-lg shadow-lg cnter-items'
+          onClick={() => handleButtonPress(5)}>
           €5
         </div>
+
         <div
-          className="payCashCustom b button"
-          onClick={() => handleButtonPress("custom")}
-        >
-          Custom
-        </div>
-        <div
-          className="payCashExit g"
-          onClick={() => handleButtonPress("exit")}
-        >
-          Done
+          className='col-span-2 row-span-2 text-3xl gradientgreen text-white rounded-lg shadow-lg cnter-items'
+          onClick={() => handleButtonPress('exit')}>
+          DONE
         </div>
       </div>
-      <div className="payCashChange">
-        <div className="payCashChangeTitle">
-          <div className="payCashCenterText">Change</div>
-        </div>
-        <div className="payCashChangeValue">
-          <div className="payCashCenterText num">€{change.toFixed(2)}</div>
+      <div className='flex justify-between w-full text-2xl pr-1 pl-1'>
+        <div className=''>Change</div>
+        <div className='text-right font-mono justify-end'>
+          €{change.toFixed(2)}
         </div>
       </div>
     </div>

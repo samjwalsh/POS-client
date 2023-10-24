@@ -16,9 +16,8 @@ export default function RegisterState(props) {
   const setHamburgerOpen = props.setHamburgerOpen;
 
   return (
-    <div className="grid grid-cols-10 grid-rows-12 ">
+    <div className="grid grid-cols-12 grid-rows-layout h-screen">
       <MenuBar menuState={menuState} setHamburger={setHamburgerOpen} />
-      <OrderBar />
       <Menu
         menuState={menuState}
         setMenuState={setMenuState}
