@@ -108,9 +108,9 @@ const useKeypad = (numberFormat) => {
   function createKeypadHTML() {
     return (
       <div
-        className='grid grid-cols-3 grid-rows-6 w-full h-full text-white gap-1 p-1 text-3xl'
+        className='grid grid-cols-3 grid-rows-6 w-full h-full text-white gap-2 p-2 text-3xl'
         onClick={(event) => handleKeypadClick(event)}>
-        <div className=' col-span-2 row-span 1 flex flex-row text-3xl font-mono justify-between w-full text-black'>
+        <div className=' col-span-2 row-span 1 flex flex-row text-3xl font-mono justify-between w-full'>
           <div className='text-left cnter-items'>
             {numberFormat === 'currency' ? '€' : ''}
           </div>
@@ -171,7 +171,7 @@ const useKeypad = (numberFormat) => {
     return (
       <div className='absolute h-screen w-screen '>
         <div className='absolute bg-black opacity-50 z-10 h-screen w-screen'></div>
-        <div className='absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-20 bg-white w-4/12 h-5/6 rounded-lg shadow'>
+        <div className='absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-20 bg-stone-900 border-2 border-colour w-4/12 h-5/6 rounded-lg shadow'>
           {createKeypadHTML()}
         </div>
       </div>

@@ -127,7 +127,7 @@ export default function ItemPage(props) {
   log(`Created HTML for item page`);
   return (
     <div className='flex flex-col grid-cols-1 h-full m-2 content-start '>
-      <div className='grid grid-cols-2 grid-rows-1 text-2xl h-min border-b border-slate-200'>
+      <div className='grid grid-cols-2 grid-rows-1 text-2xl h-min '>
         <div className='col-span-1 text-left w-auto h-auto whitespace-nowrap self-center'>
           {menuState.name}
         </div>

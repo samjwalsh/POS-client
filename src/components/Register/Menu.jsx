@@ -53,6 +53,10 @@ export default function Menu(props) {
       //Code for adding relevent classes to each item
       let classes = 'menu-itm';
 
+      // let colours = ['bg-red-900', 'bg-orange-900', 'bg-yellow-900', 'bg-sky-900', 'bg-lime-900', 'bg-teal-900', 'bg-cyan-900', 'bg-rose-900', 'bg-emerald-900']
+
+      // classes += ' ' + colours[Math.floor(Math.random() * colours.length)]
+
       log(`Added item ${item.name} to HTML`);
       itemsHTML.push(
         <div
@@ -61,16 +65,16 @@ export default function Menu(props) {
           id={item.name}
           onClick={(event) => handleItemClick(event, item, passProps)}>
           {item.name === 'Back' ? (
-            <img src={undoSVG} className='w-12' />
+            <img src={undoSVG} className='w-8' />
           ) : (
-            item.name.toUpperCase()
+            item.name
           )}
         </div>
       );
     });
 
     return (
-      <div className='col-span-8 row-span-1 flex flex-wrap gap-2 p-2 overflow-y-scroll no-scrollbar content-start'>
+      <div className='col-span-8 row-span-1 flex flex-wrap gap-2 p-2 overflow-y-scroll no-scrollbar content-start '>
         {itemsHTML}
         <div className='menu-itm-filler'></div>
         <div className='menu-itm-filler'></div>

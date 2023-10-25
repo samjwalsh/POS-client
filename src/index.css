@@ -5,7 +5,7 @@
 html,
 body {
   height: 100%;
-  @apply no-scrollbar bg-white;
+  @apply no-scrollbar bg-stone-900 text-white;
 }
 
 @font-face {
@@ -46,23 +46,23 @@ body {
 }
 
 .menu-itm {
-  @apply  text-white  w-48 rounded-xl shadow-xl h-32 max-w-5xl flex-grow cnter-items p-1 text-xl text-center gradient1;
+  @apply  text-white  w-48 rounded shadow-xl h-32 max-w-5xl flex-grow flex  p-2 text-xl text-left items-end bg-cyan-900 ;
 }
 
 .gradient1 {
-  @apply bg-gradient-to-t from-cyan-500 to-sky-500
+  @apply bg-cyan-950
 }
 
 .gradientred {
-  @apply bg-gradient-to-t from-red-500 to-orange-500
+  @apply bg-red-800
 }
 
 .gradientgreen {
-  @apply bg-gradient-to-t from-emerald-500 to-green-500
+  @apply bg-green-800
 }
 
 .gradientblack {
-  @apply bg-gradient-to-t from-black to-gray-700
+  @apply bg-stone-700
 }
 
 .menu-itm-filler {
@@ -78,5 +78,9 @@ body {
 }
 
 .keypad {
-  @apply cnter-items rounded-lg shadow
+  @apply cnter-items rounded shadow
+}
+
+.border-colour {
+  @apply border-stone-500
 }

@@ -107,7 +107,7 @@ export default function Order(props) {
     <>
       <Keypad />
 
-      <div className='col-span-4 row-span-1 h-full self-stretch flex flex-col border-2 border-t-0 overflow-hidden'>
+      <div className='col-span-4 row-span-1 h-full self-stretch flex flex-col  overflow-hidden border-l-2 border-stone-500'>
         {payCash === true ? (
           <PayCash
             order={order}
@@ -116,31 +116,31 @@ export default function Order(props) {
             keypad={keypad}
           />
         ) : (
-          <div className='flex flex-col p-2 gap-2 h-full'>{orderItems}</div>
+          <div className='flex flex-col gap-2 h-full'>{orderItems}</div>
         )}
 
-        <div className='border-t-2 grid grid-rows-[min-content, 1fr] grid-cols-1'>
-          <div className='row-span-1 col-span-1 flex justify-between w-full text-2xl pr-1 pl-1'>
-            <div className='text-left'>Subtotal</div>
+        <div className=' grid grid-rows-[min-content, 1fr] grid-cols-1 gap-1 border-t-2 border-stone-500 p-2 pt-1'>
+          <div className='row-span-1 col-span-1 flex justify-between w-full text-2xl'>
+            <div className='text-left'>Total</div>
             <div className='text-right font-mono justify-end'>
               €{subtotal.toFixed(2)}
             </div>
           </div>
-          <div className='row-span-1 col-span-1 flex p-1 items-stretch h-20'>
+          <div className='row-span-1 col-span-1 flex gap-2 items-stretch h-20 text-lg uppercase font-bold'>
             <div
-              className='gradientblack p-1 rounded-lg shadow mr-1 cnter-items w-48'
+              className='gradientblack rounded shadow cnter-items w-48'
               onClick={() => handlePlusMinus()}>
-              <img src={euro} className='w-8' />
+              <img src={euro} className='w-6' />
             </div>
             <div
-              className='btn--plus p-1 rounded-lg mr-1 cnter-items w-full text-3xl'
+              className='btn--plus  rounded cnter-items w-full text-lg uppercase font-bold'
               onClick={() => handlePayment('card')}>
-              CARD
+              Card
             </div>
             <div
-              className='btn--plus p-1 rounded-lg cnter-items w-full text-3xl'
+              className='btn--plus rounded cnter-items w-full'
               onClick={() => handlePayment('cash')}>
-              CASH
+              Cash
             </div>
           </div>
         </div>

@@ -57,7 +57,7 @@ export default function HamburgerMenu(props) {
       <Dialog />
       <div className='absolute grid grid-cols-12 grid-rows-1 w-screen h-screen'>
         <div className='row-span-1 col-span-3 flex flex-col bg-white'>
-          <div className='flex flex-row items-stretch  w-100 justify-between p-1 border-b-2'>
+          <div className='flex flex-row items-stretch  w-100 justify-between p-1 '>
             <div className='text-2xl cnter-items'>Menu</div>
             <div
               className='justify-end btn--minus btn shadow'
