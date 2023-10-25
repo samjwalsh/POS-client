@@ -5,7 +5,7 @@
 html,
 body {
   height: 100%;
-  @apply no-scrollbar bg-stone-900 text-white;
+  @apply no-scrollbar bg-stone-900 text-white select-none;
 }
 
 @font-face {
@@ -34,7 +34,7 @@ body {
 }
 
 .btn {
-  @apply text-base font-medium rounded-lg p-3;
+  @apply font-bold uppercase text-lg rounded shadow-lg;
 }
 
 .btn--minus {
@@ -46,23 +46,23 @@ body {
 }
 
 .menu-itm {
-  @apply  text-white  w-48 rounded shadow-xl h-32 max-w-5xl flex-grow flex  p-2 text-xl text-left items-end bg-cyan-900 ;
+  @apply  text-white  w-48 rounded shadow-xl h-32 max-w-5xl flex-grow flex  p-2 text-xl text-left items-end gradient1 ;
 }
 
 .gradient1 {
-  @apply bg-cyan-950
+  @apply bg-cyan-900 border-2 border-cyan-700
 }
 
 .gradientred {
-  @apply bg-red-800
+  @apply bg-red-800 border-2 border-red-600
 }
 
 .gradientgreen {
-  @apply bg-green-800
+  @apply bg-green-800 border-2 border-green-600
 }
 
 .gradientblack {
-  @apply bg-stone-700
+  @apply bg-stone-700 border-2 border-stone-500
 }
 
 .menu-itm-filler {

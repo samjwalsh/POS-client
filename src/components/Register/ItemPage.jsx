@@ -51,7 +51,7 @@ export default function ItemPage(props) {
     return (
       <div
         key={addon.name}
-        className='addon b'
+        className='w-72 max-w-full flex-grow flex flex-row gradient1 rounded h-14 justify-between'
         id={index}
         onClick={(event) =>
           handleAddonToggle(
@@ -63,17 +63,13 @@ export default function ItemPage(props) {
             index
           )
         }>
-        <div className='addonNameAndPrice b'>
-          <div className='addonName b'>
-            <div className='addonText b'>{addon.name}</div>
-          </div>
-          <div className='addonPrice b'>
-            <div className='addonText b num'>€{addon.price.toFixed(2)}</div>
-          </div>
+        <div className='flex flex-row p-2'>
+          <div className='text-xl cnter-items'>{addon.name}</div>
+          <div className='pl-2 font-mono text-base cnter-items'>€{addon.price.toFixed(2)}</div>
         </div>
-        <div className='toggleAddon b'>
+        <div className='btn gradient1  cnter-items w-10 h-auto m-2'>
           <div className='toggleAddonButton' id={index}>
-            {selected ? <img src={checkSVG} className='checkSVG' /> : ''}
+            {selected ? <img src={checkSVG} className='w-6' /> : ''}
           </div>
         </div>
       </div>
@@ -89,7 +85,7 @@ export default function ItemPage(props) {
       let addons = shortcut.addons;
       return (
         <div
-          className='itemPageShortcut button g'
+          className='btn gradientgreen cnter-items w-full h-56 flex flex-col'
           onClick={(shortcut) =>
             handleClickShortcut(
               event,
@@ -103,14 +99,14 @@ export default function ItemPage(props) {
             )
           }
           key={shortcut.name}>
-          <div className='itemPageShortcutName g'>{shortcut.name}</div>
-          <div className='itemPageShortcutPrice g num'>
+          <div className=''>{shortcut.name}</div>
+          <div className='font-mono font-normal'>
             €{shortcut.price.toFixed(2)}
           </div>
         </div>
       );
     });
-    shortcutsHTML = <div className='itemPageShortcuts'>{shortcutEachHTML}</div>;
+    shortcutsHTML = shortcutEachHTML;
   } else {
   }
 
@@ -126,13 +122,13 @@ export default function ItemPage(props) {
   6;
   log(`Created HTML for item page`);
   return (
-    <div className='flex flex-col grid-cols-1 h-full m-2 content-start '>
-      <div className='grid grid-cols-2 grid-rows-1 text-2xl h-min '>
+    <div className='flex flex-col h-full content-start p-2'>
+      <div className='grid grid-cols-2 grid-rows-1 text-2xl h-min border-b-2 border-colour'>
         <div className='col-span-1 text-left w-auto h-auto whitespace-nowrap self-center'>
           {menuState.name}
         </div>
         <div
-          className='col-span-1 text-right self-end justify-self-end w-min h-min whitespace-nowrap p-2 btn--minus rounded shadow mb-2'
+          className='col-span-1 text-right self-end justify-self-end w-min h-min whitespace-nowrap p-2 btn--minus btn mb-2'
           onClick={(event) =>
             handleExitItemPage(
               event,
@@ -145,54 +141,56 @@ export default function ItemPage(props) {
           Cancel
         </div>
       </div>
-      <div className='itemPageAddonsShortcutsContainer'>
-        {shortcutsHTML}
-        <div className='itemPageAddonsSection'>
+      <div className='w-full h-full'>
+        <div className='flex flex-row justify-between gap-2 h-min pt-2'>
+          {shortcutsHTML}
+        </div>
+        <div className='flex flex-row flex-wrap flex-grow gap-2 pt-2 '>
           {addonsHTML}
-          <div className='addonFiller '></div>
-          <div className='addonFiller '></div>
-          <div className='addonFiller '></div>
-          <div className='addonFiller '></div>
+          <div className='w-72 max-w-full flex-grow flex flex-row '></div>
+          <div className='w-72 max-w-full flex-grow flex flex-row '></div>
+          <div className='w-72 max-w-full flex-grow flex flex-row '></div>
+          <div className='w-72 max-w-full flex-grow flex flex-row '></div>
         </div>
       </div>
 
-      <div className='bottomBar'>
-        <div className='quantitySection'>
+      <div className='w-full flex flex-row border-t-2 border-colour mt-auto gap-2 pt-2 h-20'>
+        <div className='flex flex-row '>
           <div
-            className='subtractQuantity r'
+            className='btn gradientred w-14 h-auto cnter-items '
             onClick={(event) =>
               handleDecreaseQuantity(event, item, currentOrder, setCurrentOrder)
             }>
-            <img src={minusSVG} className='minusSVG r' />
+            <img src={minusSVG} className='w-6' />
           </div>
-          <div className='quantityValue'>{quantity}</div>
+          <div className=' w-16 h-auto font-mono cnter-items text-2xl'>
+            {quantity}
+          </div>
           <div
-            className='addQuantity g'
+            className='btn gradientgreen w-14 h-auto cnter-items'
             onClick={(event) =>
               handleIncreaseQuantity(event, item, currentOrder, setCurrentOrder)
             }>
-            <img src={addSVG} className='addSVG g' />
+            <img src={addSVG} className='w-6' />
           </div>
         </div>
-        <div className='priceSection'>
-          <div className='priceContainer num '>€{price}</div>
+        <div className='text-2xl w-full h-auto font-mono cnter-items'>
+          €{price}
         </div>
-        <div className='orderAdd g'>
-          <div
-            className='orderAddContainer g'
-            onClick={(event) =>
-              handleAddToOrder(
-                event,
-                item,
-                setMenuState,
-                currentOrder,
-                setCurrentOrder,
-                order,
-                setOrder
-              )
-            }>
-            Add
-          </div>
+        <div
+          className='btn cnter-items gradientgreen w-72'
+          onClick={(event) =>
+            handleAddToOrder(
+              event,
+              item,
+              setMenuState,
+              currentOrder,
+              setCurrentOrder,
+              order,
+              setOrder
+            )
+          }>
+          Add
         </div>
       </div>
     </div>

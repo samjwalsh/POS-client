@@ -49,35 +49,35 @@ export default function PayCash(props) {
 
   return (
     <div className='flex flex-col h-full p-2 pb-1'>
-      <div className='grid grid-cols-2 grid-rows-5 gap-2 h-full uppercase font-bold text-lg'>
+      <div className='grid grid-cols-2 grid-rows-5 gap-2 h-full btn'>
         <div
-          className='col-span-2 row-span-1   gradientblack text-white rounded shadow-lg cnter-items'
+          className='col-span-2 row-span-1   gradientblack text-white btn  cnter-items'
           onClick={() => handleButtonPress('custom')}>
-          CUSTOM
+          Custom
         </div>
         <div
-          className='col-span-1 row-span-1 font-mono  gradientblack text-white rounded shadow-lg cnter-items'
+          className='col-span-1 row-span-1 font-mono  gradientblack text-white btn  cnter-items'
           onClick={() => handleButtonPress(50)}>
           €50
         </div>
         <div
-          className='col-span-1 row-span-1 font-mono  gradientblack text-white rounded shadow-lg cnter-items'
+          className='col-span-1 row-span-1 font-mono  gradientblack text-white btn  cnter-items'
           onClick={() => handleButtonPress(20)}>
           €20
         </div>
         <div
-          className='col-span-1 row-span-1 font-mono  gradientblack text-white rounded shadow-lg cnter-items'
+          className='col-span-1 row-span-1 font-mono  gradientblack text-white btn  cnter-items'
           onClick={() => handleButtonPress(10)}>
           €10
         </div>
         <div
-          className='col-span-1 row-span-1 font-mono  gradientblack text-white rounded shadow-lg cnter-items'
+          className='col-span-1 row-span-1 font-mono  gradientblack text-white btn  cnter-items'
           onClick={() => handleButtonPress(5)}>
           €5
         </div>
 
         <div
-          className='col-span-2 row-span-2  gradientgreen text-white rounded shadow-lg cnter-items'
+          className='col-span-2 row-span-2  gradientgreen text-white btn  cnter-items'
           onClick={() => handleButtonPress('exit')}>
           DONE
         </div>

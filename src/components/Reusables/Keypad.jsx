@@ -108,25 +108,25 @@ const useKeypad = (numberFormat) => {
   function createKeypadHTML() {
     return (
       <div
-        className='grid grid-cols-3 grid-rows-6 w-full h-full text-white gap-2 p-2 text-3xl'
+        className='grid grid-cols-3 grid-rows-6 w-full h-full text-white gap-2 p-2 text-xl '
         onClick={(event) => handleKeypadClick(event)}>
-        <div className=' col-span-2 row-span 1 flex flex-row text-3xl font-mono justify-between w-full'>
+        <div className=' col-span-2 row-span 1 flex flex-row text-2xl font-mono justify-between w-full'>
           <div className='text-left cnter-items'>
             {numberFormat === 'currency' ? '€' : ''}
           </div>
           <div className='text-right justify-end cnter-items'>{keypadValueString}</div>
         </div>
         <div className='col-span-1 row-span-1 keypad gradientred' id='exit'>
-          <img src={closeSVG} className='w-8' id='exit' />
+          <img src={closeSVG} className='w-6' id='exit' />
         </div>
         <div className='col-span-1 row-span-1 keypad gradientblack' id='minus'>
-          <img src={minusSVG} className='w-8' id='minus' />
+          <img src={minusSVG} className='w-6' id='minus' />
         </div>
         <div className='col-span-1 row-span-1 keypad gradientblack' id='plus'>
-          <img src={addSVG} className='w-8' id='plus' />
+          <img src={addSVG} className='w-6' id='plus' />
         </div>
         <div className='col-span-1 row-span-1 keypad gradientblack' id='delete'>
-          <img src={backSVG} className='w-8' id='delete' />
+          <img src={backSVG} className='w-6' id='delete' />
         </div>
         <div className='col-span-1 row-span-1 keypad gradientblack' id='7'>
           7
@@ -159,7 +159,7 @@ const useKeypad = (numberFormat) => {
           0
         </div>
         <div className='col-span-1 row-span-1 keypad gradientgreen' id='enter'>
-          <img src={enterSVG} className='w-8' id='enter' />
+          <img src={enterSVG} className='w-6' id='enter' />
         </div>
       </div>
     );

@@ -116,7 +116,7 @@ export default function Order(props) {
             keypad={keypad}
           />
         ) : (
-          <div className='flex flex-col gap-2 h-full'>{orderItems}</div>
+          <div className='flex flex-col gap-2 h-full overflow-scroll no-scrollbar'>{orderItems}</div>
         )}
 
         <div className=' grid grid-rows-[min-content, 1fr] grid-cols-1 gap-1 border-t-2 border-stone-500 p-2 pt-1'>
