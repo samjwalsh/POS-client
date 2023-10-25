@@ -5,7 +5,7 @@
 html,
 body {
   height: 100%;
-  @apply no-scrollbar bg-stone-900 text-white select-none;
+  @apply no-scrollbar bg-neutral-800 text-white select-none;
 }
 
 @font-face {
@@ -49,6 +49,10 @@ body {
   @apply  text-white  w-48 rounded shadow-xl h-32 max-w-5xl flex-grow flex  p-2 text-xl text-left items-end gradient1 ;
 }
 
+.menu-itm-filler {
+  @apply  w-48 h-0 max-w-5xl flex-grow;
+}
+
 .gradient1 {
   @apply bg-cyan-900 border-2 border-cyan-700
 }
@@ -65,6 +69,10 @@ body {
   @apply bg-stone-700 border-2 border-stone-500
 }
 
+.backgroundcolour {
+  @apply bg-neutral-800
+}
+
 .menu-itm-filler {
   @apply w-48 rounded max-w-5xl flex-grow cnter-items;
 }
@@ -74,7 +82,7 @@ body {
 }
 
 .side-menu-option {
-  @apply bg-black text-white rounded-lg shadow p-1 flex items-center text-2xl h-12;
+  @apply gradient1 text-white rounded-lg shadow p-2 flex text-xl h-12 text-left uppercase font-bold;
 }
 
 .keypad {

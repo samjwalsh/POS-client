@@ -66,14 +66,18 @@ export default function Order(props) {
 
   let subtotal = calculateSubtotal(order);
   log(`Calculating subtotal and generating HTML`);
-  let orderItems = order.map((orderItem) => {
+  let orderItems = order.map((orderItem, index) => {
     log(`Adding ${orderItem.name} to HTML`);
+    let itemClasses = 'flex h-min w-full shadow pb-2';
+    if ((index + 1) !== order.length) {
+      itemClasses += ' border-b-2 border-colour'
+    }
     return (
       <div
-        className='flex h-min w-full rounded shadow'
+        className={itemClasses} 
         key={`${orderItem.name} [${orderItem.addons}]`}>
         <div
-          className='col-span-1 row-span-2 cnter-items btn--minus w-12 rounded-l'
+          className='col-span-1 row-span-2 cnter-items btn--minus w-12 rounded'
           onClick={() => handleOrderItemQuantityChange('down', orderItem)}>
           <img src={minusSVG} className='w-6 stroke-white' />
         </div>
@@ -94,7 +98,7 @@ export default function Order(props) {
           </div>
         </div>
         <div
-          className='col-span-1 row-span-2 cnter-items justify-self-end btn--plus w-12 rounded-r'
+          className='col-span-1 row-span-2 cnter-items justify-self-end btn--plus w-12 rounded'
           onClick={() => handleOrderItemQuantityChange('up', orderItem)}>
           <img src={addSVG} className='w-6 fill-white stroke-white' />
         </div>
@@ -107,7 +111,7 @@ export default function Order(props) {
     <>
       <Keypad />
 
-      <div className='col-span-4 row-span-1 h-full self-stretch flex flex-col  overflow-hidden border-l-2 border-stone-500'>
+      <div className='col-span-4 row-span-1 h-auto self-stretch flex flex-col  overflow-hidden border-l-2 border-stone-500'>
         {payCash === true ? (
           <PayCash
             order={order}
@@ -116,7 +120,7 @@ export default function Order(props) {
             keypad={keypad}
           />
         ) : (
-          <div className='flex flex-col gap-2 h-full overflow-scroll no-scrollbar'>{orderItems}</div>
+          <div className='flex flex-col gap-2 h-full overflow-scroll no-scrollbar p-2'>{orderItems}</div>
         )}
 
         <div className=' grid grid-rows-[min-content, 1fr] grid-cols-1 gap-1 border-t-2 border-stone-500 p-2 pt-1'>

@@ -10,14 +10,10 @@ import Menu from "./Menu.jsx";
 export default function RegisterState(props) {
   const [menuState, setMenuState] = useState("");
   const [currentOrder, setCurrentOrder] = useState("");
-  const [order, setOrder] = useState([]);
-
-  const hamburgerOpen = props.hamburgerOpen;
-  const setHamburgerOpen = props.setHamburgerOpen;
+  const [order, setOrder] = useState([]); 
 
   return (
-    <div className="grid grid-cols-12 grid-rows-layout h-screen">
-      <MenuBar menuState={menuState} setHamburger={setHamburgerOpen} />
+    <div className="grid grid-cols-12 grid-rows-1 h-full mb-0">
       <Menu
         menuState={menuState}
         setMenuState={setMenuState}

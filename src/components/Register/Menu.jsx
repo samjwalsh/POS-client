@@ -74,11 +74,8 @@ export default function Menu(props) {
     });
 
     return (
-      <div className='col-span-8 row-span-1 flex flex-wrap gap-2 p-2 overflow-y-scroll no-scrollbar content-start '>
+      <div className='col-span-8 row-span-1 flex flex-wrap gap-2 p-2 overflow-y-scroll no-scrollbar content-start'>
         {itemsHTML}
-        <div className='menu-itm-filler'></div>
-        <div className='menu-itm-filler'></div>
-        <div className='menu-itm-filler'></div>
         <div className='menu-itm-filler'></div>
         <div className='menu-itm-filler'></div>
         <div className='menu-itm-filler'></div>

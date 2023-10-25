@@ -4,7 +4,7 @@ module.exports = {
   theme: {
     extend: {
       gridTemplateRows: {
-        layout: '2rem 1fr',
+        layout: 'h-min 1fr',
       },
       fontFamily: {
         sans: ['Roboto', 'system-ui'],

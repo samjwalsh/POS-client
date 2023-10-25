@@ -27,13 +27,16 @@ function App() {
   const [settings, setSettings] = useState();
 
   return (
-    <>
+    <div className="flex flex-col h-screen">
+      <div className="">
       <HamburgerMenu
         hamburgerOpen={hamburgerOpen}
         setHamburger={setHamburgerOpen}
         appState={appState}
         setAppState={setAppState}
       />
+      </div>
+      <div className="overflow-y-hidden h-full">
       {(() => {
         if (appState === "Register") {
           return <Register />;
@@ -43,7 +46,8 @@ function App() {
           return <Settings settings={settings} setSettings={setSettings} />;
         }
       })()}
-    </>
+      </div>
+    </div>
   );
 }
 

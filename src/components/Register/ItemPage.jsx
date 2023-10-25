@@ -74,8 +74,6 @@ export default function ItemPage(props) {
         </div>
       </div>
     );
-
-    //TODO add code for auto-checking default addon
   });
 
   let shortcutsHTML = '';
@@ -85,7 +83,7 @@ export default function ItemPage(props) {
       let addons = shortcut.addons;
       return (
         <div
-          className='btn gradientgreen cnter-items w-full h-56 flex flex-col'
+          className='btn gradientgreen cnter-items w-full h-auto flex flex-col'
           onClick={(shortcut) =>
             handleClickShortcut(
               event,
@@ -142,7 +140,7 @@ export default function ItemPage(props) {
         </div>
       </div>
       <div className='w-full h-full'>
-        <div className='flex flex-row justify-between gap-2 h-min pt-2'>
+        <div className='flex flex-row justify-between gap-2 h-48 pt-2'>
           {shortcutsHTML}
         </div>
         <div className='flex flex-row flex-wrap flex-grow gap-2 pt-2 '>
@@ -154,7 +152,7 @@ export default function ItemPage(props) {
         </div>
       </div>
 
-      <div className='w-full flex flex-row border-t-2 border-colour mt-auto gap-2 pt-2 h-20'>
+      <div className='w-full flex flex-row border-t-2 border-colour mt-auto gap-2 pt-2 h-24'>
         <div className='flex flex-row '>
           <div
             className='btn gradientred w-14 h-auto cnter-items '

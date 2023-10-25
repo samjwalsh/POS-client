@@ -9,6 +9,7 @@ import hamburger from '../assets/appicons/hamburger.svg';
 
 import useConfirm from './Reusables/ConfirmDialog.jsx';
 import useKeypad from './Reusables/Keypad.jsx';
+import TitleBar from './TitleBar.jsx';
 
 export default function HamburgerMenu(props) {
   const { hamburgerOpen, setHamburger, setAppState } = props;
@@ -42,30 +43,25 @@ export default function HamburgerMenu(props) {
   }
 
   if (hamburgerOpen === false) {
-    return (
-      <div
-        className='absolute'
-        onClick={(event) => handleClickHamburger(event, setHamburger)}>
-        <img src={hamburger} id='hamburgerSVG' className='r' />
-      </div>
-    );
+    return <TitleBar setHamburger={setHamburger} />;
   }
 
   return (
     <>
+      <TitleBar setHamburger={setHamburger} />
       <Keypad />
       <Dialog />
-      <div className='absolute grid grid-cols-12 grid-rows-1 w-screen h-screen'>
-        <div className='row-span-1 col-span-3 flex flex-col bg-white'>
-          <div className='flex flex-row items-stretch  w-100 justify-between p-1 '>
-            <div className='text-2xl cnter-items'>Menu</div>
+      <div className='fixed top-0 grid grid-cols-12 grid-rows-1 w-screen h-screen'>
+        <div className='row-span-1 col-span-3 flex backgroundcolour flex-col border-colour border-r-2'>
+          <div className='flex flex-row  w-100 justify-between p-2 border-b-2 border-colour text-left items-end'>
+            <div className='text-xl '>Menu</div>
             <div
-              className='justify-end btn--minus btn shadow'
+              className='justify-end btn--minus btn shadow w-8 h-8 cnter-items'
               onClick={() => handleCloseSideMenu(setHamburger)}>
-              <img src={closeSVG} className='' />
+              <img src={closeSVG} className='w-6' />
             </div>
           </div>
-          <div className='p-1 flex flex-col gap-2 '>
+          <div className=' flex flex-col gap-2 p-2'>
             <div
               className='side-menu-option'
               onClick={() => handleSetAppState('Register')}>
@@ -82,7 +78,7 @@ export default function HamburgerMenu(props) {
               Settings
             </div>
           </div>
-          <div className='mt-auto p-1'>
+          <div className='mt-auto p-2'>
             <div
               className='side-menu-option'
               onClick={() => handleTerminatePOS()}>
@@ -101,9 +97,4 @@ export default function HamburgerMenu(props) {
 function handleCloseSideMenu(setHamburger) {
   playBeep();
   setHamburger(false);
-}
-
-function handleClickHamburger(event, setHamburger) {
-  playBeep();
-  setHamburger(true);
 }
