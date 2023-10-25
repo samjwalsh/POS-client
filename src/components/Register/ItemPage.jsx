@@ -79,11 +79,11 @@ export default function ItemPage(props) {
   let shortcutsHTML = '';
 
   if (item.shortcuts !== undefined) {
-    let shortcutEachHTML = item.shortcuts.map((shortcut) => {
+    shortcutsHTML = item.shortcuts.map((shortcut) => {
       let addons = shortcut.addons;
       return (
         <div
-          className='btn gradientgreen cnter-items w-full h-auto flex flex-col'
+          className='mt-2 btn gradientgreen cnter-items w-full h-48 flex flex-col'
           onClick={(shortcut) =>
             handleClickShortcut(
               event,
@@ -104,7 +104,6 @@ export default function ItemPage(props) {
         </div>
       );
     });
-    shortcutsHTML = shortcutEachHTML;
   } else {
   }
 
@@ -140,7 +139,7 @@ export default function ItemPage(props) {
         </div>
       </div>
       <div className='w-full h-full'>
-        <div className='flex flex-row justify-between gap-2 h-48 pt-2'>
+        <div className='flex flex-row justify-between gap-2 h-auto'>
           {shortcutsHTML}
         </div>
         <div className='flex flex-row flex-wrap flex-grow gap-2 pt-2 '>

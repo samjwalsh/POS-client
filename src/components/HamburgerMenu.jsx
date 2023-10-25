@@ -53,8 +53,8 @@ export default function HamburgerMenu(props) {
       <Dialog />
       <div className='fixed top-0 grid grid-cols-12 grid-rows-1 w-screen h-screen'>
         <div className='row-span-1 col-span-3 flex backgroundcolour flex-col border-colour border-r-2'>
-          <div className='flex flex-row  w-100 justify-between p-2 border-b-2 border-colour text-left items-end'>
-            <div className='text-xl '>Menu</div>
+          <div className='flex flex-row  w-100 justify-between p-2 border-b-2 border-colour text-left items-stretch '>
+            <div className='text-2xl self-end'>Menu</div>
             <div
               className='justify-end btn--minus btn shadow w-8 h-8 cnter-items'
               onClick={() => handleCloseSideMenu(setHamburger)}>
@@ -63,24 +63,24 @@ export default function HamburgerMenu(props) {
           </div>
           <div className=' flex flex-col gap-2 p-2'>
             <div
-              className='side-menu-option'
+              className='side-menu-option gradient1'
               onClick={() => handleSetAppState('Register')}>
               Register
             </div>
             <div
-              className='side-menu-option'
+              className='side-menu-option gradient1'
               onClick={() => handleSetAppState('Reports')}>
               Reports
             </div>
             <div
-              className='side-menu-option'
+              className='side-menu-option gradient1'
               onClick={() => handleSetAppState('Settings')}>
               Settings
             </div>
           </div>
           <div className='mt-auto p-2'>
             <div
-              className='side-menu-option'
+              className='side-menu-option gradientred'
               onClick={() => handleTerminatePOS()}>
               Exit POS
             </div>

@@ -57,6 +57,10 @@ body {
   @apply bg-cyan-900 border-2 border-cyan-700
 }
 
+.blue {
+  @apply bg-cyan-900
+}
+
 .gradientred {
   @apply bg-red-800 border-2 border-red-600
 }
@@ -82,7 +86,7 @@ body {
 }
 
 .side-menu-option {
-  @apply gradient1 text-white rounded-lg shadow p-2 flex text-xl h-12 text-left uppercase font-bold;
+  @apply  text-white rounded-lg shadow p-2 flex text-xl h-12 text-left uppercase font-bold;
 }
 
 .keypad {
