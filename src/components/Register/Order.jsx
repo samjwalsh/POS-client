@@ -68,20 +68,20 @@ export default function Order(props) {
   log(`Calculating subtotal and generating HTML`);
   let orderItems = order.map((orderItem, index) => {
     log(`Adding ${orderItem.name} to HTML`);
-    let itemClasses = 'flex h-min w-full shadow pb-2';
-    if ((index + 1) !== order.length) {
-      itemClasses += ' border-b-2 border-colour'
-    }
+    let itemClasses = 'flex h-min w-full shadow gap-2';
+    // if (index + 1 !== order.length) {
+    //   itemClasses += ' border-b-2 border-colour';
+    // }
     return (
       <div
-        className={itemClasses} 
+        className={itemClasses}
         key={`${orderItem.name} [${orderItem.addons}]`}>
         <div
           className='col-span-1 row-span-2 cnter-items btn--minus w-12 rounded'
           onClick={() => handleOrderItemQuantityChange('down', orderItem)}>
           <img src={minusSVG} className='w-6 stroke-white' />
         </div>
-        <div className='w-full grid grid-cols-[1fr_min-content] grid-rows-[min-content, 1fr] p-1'>
+        <div className='w-full grid grid-cols-[1fr_min-content] grid-rows-[min-content, 1fr] p-1 border-2 gradient1 rounded'>
           <div className='col-span-1 row-span-1 text-lg'>
             {orderItem.name +
               (orderItem.quantity > 1 ? ` (${orderItem.quantity})` : '')}
@@ -120,7 +120,9 @@ export default function Order(props) {
             keypad={keypad}
           />
         ) : (
-          <div className='flex flex-col gap-2 h-full overflow-scroll no-scrollbar p-2'>{orderItems}</div>
+          <div className='flex flex-col gap-2 h-full overflow-scroll no-scrollbar p-2'>
+            {orderItems}
+          </div>
         )}
 
         <div className=' grid grid-rows-[min-content, 1fr] grid-cols-1 gap-1 border-t-2 border-stone-500 p-2 pt-1'>
