@@ -1,25 +1,39 @@
 import React, { useState, useEffect } from 'react';
+import { checkConnection } from '../../tools/ipc';
+import { string } from 'prop-types';
 
 export default function Connection() {
-  const [isOnline, setIsOnline] = useState(true);
+  const [isOnline, setIsOnline] = useState({ status: true, ping: 0 });
+
+  // const updateConnection = async () => {
+  //   const beginPing = Date.now();
+  //   setIsOnline(false)
+  //   const connection = await checkConnection();
+  //   const endPing = Date.now();
+
+  //   setIsOnline({status: connection, ping: endPing - beginPing});
+  // };
+  // setInterval(updateConnection, 5000);
+  // clearInterval();
+
   useEffect(() => {
-    function handleOnline() {
-      setIsOnline(true);
-    }
-    function handleOffline() {
+    const interval = setInterval(async () => {
+      const beginPing = Date.now();
       setIsOnline(false);
-    }
-    window.addEventListener('online', handleOnline);
-    window.addEventListener('offline', handleOffline);
+      const connection = await checkConnection();
+      const endPing = Date.now();
+
+      setIsOnline({ status: connection, ping: endPing - beginPing });
+    }, 5000);
     return () => {
-      window.removeEventListener('online', handleOnline);
-      window.removeEventListener('offline', handleOffline);
+      clearInterval(interval);
     };
-  });
+  }, []);
 
   return (
     <>
-      TCP<div className='font-emoji'>{isOnline ? '🟢' : '🔴'}</div>
+      TCP<div className='font-emoji'>{isOnline.status ? '🟢' : '🔴'}</div>[
+      {isOnline.ping}]
     </>
   );
 }

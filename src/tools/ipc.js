@@ -1,13 +1,13 @@
-import { calculateSubtotal } from "../components/Register/PayCash.jsx";
+import { calculateSubtotal } from '../components/Register/PayCash.jsx';
 
 const ipcRenderer = window.ipcRenderer;
 
 export function quit() {
-  ipcRenderer.send("quit");
+  ipcRenderer.send('quit');
 }
 
 export function getAllOrders() {
-  return ipcRenderer.invoke("getAllOrders");
+  return ipcRenderer.invoke('getAllOrders');
 }
 
 export function addOrder(order, paymentMethod) {
@@ -18,28 +18,28 @@ export function addOrder(order, paymentMethod) {
       subtotal: calculateSubtotal(order),
       items: order,
     };
-    return ipcRenderer.invoke("addOrder", orderItem);
+    return ipcRenderer.invoke('addOrder', orderItem);
   }
 }
 
 export function overwriteOrders(orders) {
-  return ipcRenderer.invoke("overwriteOrders", orders);
+  return ipcRenderer.invoke('overwriteOrders', orders);
 }
 
 export function removeAllOrders() {
-  return ipcRenderer.invoke("removeAllOrders");
+  return ipcRenderer.invoke('removeAllOrders');
 }
 
 export function removeOrder(order) {
-  return ipcRenderer.invoke("removeOrder", order);
+  return ipcRenderer.invoke('removeOrder', order);
 }
 
 export function getSettings() {
-  return ipcRenderer.invoke("getSettings");
+  return ipcRenderer.invoke('getSettings');
 }
 
 export function updateSettings(newSettings) {
-  return ipcRenderer.invoke("updateSettings", newSettings);
+  return ipcRenderer.invoke('updateSettings', newSettings);
 }
 
 export function resetSettings() {
@@ -47,9 +47,13 @@ export function resetSettings() {
 }
 
 export function getVersionNo() {
-  return ipcRenderer.invoke("getVersionNo");
+  return ipcRenderer.invoke('getVersionNo');
 }
 
-export function deleteLocalData(){
-  return ipcRenderer.invoke('deleteLocalData')
+export function deleteLocalData() {
+  return ipcRenderer.invoke('deleteLocalData');
+}
+
+export function checkConnection() {
+  return ipcRenderer.invoke('checkConnection');
 }
