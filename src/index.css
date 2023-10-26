@@ -63,7 +63,7 @@ body {
 }
 
 .menu-itm {
-  @apply w-48 rounded shadow-md h-32 max-w-5xl flex-grow flex  p-2 text-xl text-left items-end gradient1 ;
+  @apply w-48 rounded shadow-md h-32 max-w-5xl flex-grow flex p-2 text-xl text-left items-end gradient1 ;
 }
 
 .menu-itm-filler {
