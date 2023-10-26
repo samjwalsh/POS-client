@@ -109,7 +109,7 @@ export default function Reports(props) {
                 <div className=''>{order.paymentMethod}</div>
               </div>
             </div>
-            <div className='flex flex-col gap-2 p-2 h-64 overflow-y-scroll no-scrollbar'>
+            <div className='flex flex-col gap-2 p-2 max-h-full overflow-y-scroll no-scrollbar'>
               {itemsHTML}
             </div>
           </div>
