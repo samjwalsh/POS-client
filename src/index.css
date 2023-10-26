@@ -5,7 +5,7 @@
 html,
 body {
   height: 100%;
-  @apply no-scrollbar bg-neutral-800 text-white select-none;
+  @apply no-scrollbar dark:bg-neutral-800 bg-white text-black dark:text-white select-none;
 }
 
 @font-face {
@@ -33,48 +33,52 @@ body {
   }
 }
 
+img {
+  @apply dark:invert;
+}
+
 .btn {
   @apply font-bold uppercase text-lg rounded shadow-lg;
 }
 
 .btn--minus {
-  @apply gradientred text-white shadow;
+  @apply gradientred  shadow;
 }
 
 .btn--plus {
-  @apply gradientgreen text-white shadow;
+  @apply gradientgreen  shadow;
 }
 
 .menu-itm {
-  @apply  text-white  w-48 rounded shadow-xl h-32 max-w-5xl flex-grow flex  p-2 text-xl text-left items-end gradient1 ;
+  @apply w-48 rounded shadow-md h-32 max-w-5xl flex-grow flex  p-2 text-xl text-left items-end gradient1;
 }
 
 .menu-itm-filler {
-  @apply  w-48 h-0 max-w-5xl flex-grow;
+  @apply w-48 h-0 max-w-5xl flex-grow;
 }
 
 .gradient1 {
-  @apply bg-cyan-900 border-2 border-cyan-700
+  @apply dark:bg-cyan-900 border dark:border-cyan-700 bg-cyan-300 border-cyan-500;
 }
 
 .blue {
-  @apply bg-cyan-900
+  @apply dark:bg-cyan-900 bg-cyan-300;
 }
 
 .gradientred {
-  @apply bg-red-800 border-2 border-red-600
+  @apply dark:bg-red-800 border dark:border-red-600 bg-red-400 border-red-600;
 }
 
 .gradientgreen {
-  @apply bg-green-800 border-2 border-green-600
+  @apply dark:bg-green-800 border dark:border-green-600 bg-green-400 border-green-600;
 }
 
 .gradientblack {
-  @apply bg-stone-700 border-2 border-stone-500
+  @apply dark:bg-stone-700 border dark:border-stone-500 bg-stone-200 border-stone-400;
 }
 
 .backgroundcolour {
-  @apply bg-neutral-800
+  @apply dark:bg-neutral-800 bg-white;
 }
 
 .menu-itm-filler {
@@ -86,17 +90,17 @@ body {
 }
 
 .side-menu-option {
-  @apply  text-white rounded-lg shadow p-2 flex text-xl h-12 text-left uppercase font-bold;
+  @apply rounded-lg shadow p-2 flex text-xl h-12 text-left uppercase font-bold;
 }
 
 .keypad {
-  @apply cnter-items rounded shadow
+  @apply cnter-items rounded shadow;
 }
 
 .border-colour {
-  @apply border-stone-500
+  @apply dark:border-stone-500 border-stone-500;
 }
 
 .orderbox {
-  @apply max-w-3xl w-72 flex-grow
+  @apply max-w-3xl w-72 flex-grow;
 }

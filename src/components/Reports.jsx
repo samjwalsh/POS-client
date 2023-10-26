@@ -84,8 +84,8 @@ export default function Reports(props) {
         return (
           <div
             key={order.time}
-            className='orderbox border-2 border-colour rounded flex  flex-col '>
-            <div className='flex flex-row w-full p-2 justify-between border-b-2 border-colour blue rounded-t-sm'>
+            className='orderbox border border-colour rounded flex  flex-col '>
+            <div className='flex flex-row w-full p-2 justify-between border-b border-colour blue rounded-t-sm'>
               <div className='text-2xl self-end'>
                 Order No. {orders.length - index}
               </div>
@@ -95,7 +95,7 @@ export default function Reports(props) {
                 <img src={closeSVG} className='w-6' />
               </div>
             </div>
-            <div className='flex flex-col p-2 border-b-2 border-colour text-lg'>
+            <div className='flex flex-col p-2 border-b border-colour text-lg'>
               <div className='flex flex-row justify-between'>
                 <div className=''>Time:</div>
                 <div className=''>{orderDateString}</div>
@@ -109,7 +109,9 @@ export default function Reports(props) {
                 <div className=''>{order.paymentMethod}</div>
               </div>
             </div>
-            <div className='flex flex-col gap-2 p-2 h-64 overflow-y-scroll no-scrollbar'>{itemsHTML}</div>
+            <div className='flex flex-col gap-2 p-2 h-64 overflow-y-scroll no-scrollbar'>
+              {itemsHTML}
+            </div>
           </div>
         );
       });
@@ -122,7 +124,7 @@ export default function Reports(props) {
     return (
       <div className='flex flex-col h-full'>
         {createReportsStatsInfo()}
-        <div className='mt-auto border-t-2 border-colour p-2 flex flex-col gap-2'>
+        <div className='mt-auto border-t border-colour p-2 flex flex-col gap-2'>
           <div
             className='btn gradient1 h-auto p-2 cnter-items w-full'
             onClick={(event) => handleDeleteOldOrders()}>
@@ -154,13 +156,13 @@ export default function Reports(props) {
 
     return (
       <div className='flex flex-col w-full text-xl p-2 gap-2'>
-        <div className='flex flex-row w-full justify-between border-b-2 border-colour pb-2'>
+        <div className='flex flex-row w-full justify-between border-b border-colour pb-2'>
           <div className=''>Cash:</div>
           <div className='font-mono text-right justify-end'>
             €{cashTotal.toFixed(2)}
           </div>
         </div>
-        <div className='flex flex-row w-full justify-between border-b-2 border-colour pb-2'>
+        <div className='flex flex-row w-full justify-between border-b border-colour pb-2'>
           <div className=''>Card:</div>
           <div className='font-mono text-right justify-end '>
             €{cardTotal.toFixed(2)}
@@ -195,7 +197,7 @@ export default function Reports(props) {
 
       return (
         <div
-          className='w-full grid grid-cols-[auto_auto] grid-rows-[auto_min-content] text-lg p-2 border-2 border-colour rounded'
+          className='w-full grid grid-cols-[auto_auto] grid-rows-[auto_min-content] text-lg p-2 border border-colour rounded gradient1'
           key={index}>
           <div className='col-span-1 row-span-1'>
             {item.name} {formattedQuantity}
@@ -223,7 +225,9 @@ export default function Reports(props) {
           <div className='orderbox'></div>
           <div className='orderbox'></div>
         </div>
-        <div className='col-span-4 border-l-2 border-colour  w-full'>{reportsStatsHTML()}</div>
+        <div className='col-span-4 border-l border-colour  w-full'>
+          {reportsStatsHTML()}
+        </div>
       </div>
     </>
   );

@@ -65,7 +65,9 @@ export default function ItemPage(props) {
         }>
         <div className='flex flex-row p-2'>
           <div className='text-xl cnter-items'>{addon.name}</div>
-          <div className='pl-2 font-mono text-base cnter-items'>€{addon.price.toFixed(2)}</div>
+          <div className='pl-2 font-mono text-base cnter-items'>
+            €{addon.price.toFixed(2)}
+          </div>
         </div>
         <div className='btn gradient1  cnter-items w-10 h-auto m-2'>
           <div className='toggleAddonButton' id={index}>
@@ -120,7 +122,7 @@ export default function ItemPage(props) {
   log(`Created HTML for item page`);
   return (
     <div className='flex flex-col h-full content-start p-2'>
-      <div className='grid grid-cols-2 grid-rows-1 text-2xl h-min border-b-2 border-colour'>
+      <div className='grid grid-cols-2 grid-rows-1 text-2xl h-min border-b border-colour'>
         <div className='col-span-1 text-left w-auto h-auto whitespace-nowrap self-center'>
           {menuState.name}
         </div>
@@ -151,7 +153,7 @@ export default function ItemPage(props) {
         </div>
       </div>
 
-      <div className='w-full flex flex-row border-t-2 border-colour mt-auto gap-2 pt-2 h-24'>
+      <div className='w-full flex flex-row border-t border-colour mt-auto gap-2 pt-2 h-24'>
         <div className='flex flex-row '>
           <div
             className='btn gradientred w-14 h-auto cnter-items '

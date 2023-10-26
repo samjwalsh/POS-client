@@ -3,8 +3,6 @@ import * as ReactDOM from "react-dom/client";
 import { useState } from "react";
 
 import Order from "./Order.jsx";
-import OrderBar from "./OrderBar.jsx";
-import MenuBar from "./MenuBar.jsx";
 import Menu from "./Menu.jsx";
 
 export default function RegisterState(props) {
