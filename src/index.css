@@ -51,19 +51,19 @@ body {
 }
 
 .btn {
-  @apply font-bold uppercase text-lg rounded shadow active:opacity-75;
+  @apply font-bold uppercase text-lg rounded shadow ;
 }
 
 .btn--minus {
-  @apply gradientred  shadow active:opacity-75;
+  @apply gradientred  shadow ;
 }
 
 .btn--plus {
-  @apply gradientgreen  shadow active:opacity-75;
+  @apply gradientgreen  shadow ;
 }
 
 .menu-itm {
-  @apply w-48 rounded shadow-md h-32 max-w-5xl flex-grow flex  p-2 text-xl text-left items-end gradient1 active:opacity-75;
+  @apply w-48 rounded shadow-md h-32 max-w-5xl flex-grow flex  p-2 text-xl text-left items-end gradient1 ;
 }
 
 .menu-itm-filler {
@@ -71,27 +71,27 @@ body {
 }
 
 .gradient1 {
-  @apply dark:bg-cyan-900 border dark:border-cyan-700 border-sky-500 bg-sky-300 active:opacity-75;
+  @apply dark:bg-cyan-900 border dark:border-cyan-700 border-sky-500 bg-sky-300 ;
 }
 
 .blue {
-  @apply dark:bg-cyan-900 bg-sky-300 active:opacity-75;
+  @apply dark:bg-cyan-900 bg-sky-300 ;
 }
 
 .gradientred {
-  @apply dark:bg-red-800 border dark:border-red-600 bg-red-400 border-red-600 active:opacity-75;
+  @apply dark:bg-red-800 border dark:border-red-600 bg-red-400 border-red-600 ;
 }
 
 .gradientgreen {
-  @apply dark:bg-green-800 border dark:border-green-600 bg-green-400 border-green-600 active:opacity-75;
+  @apply dark:bg-green-800 border dark:border-green-600 bg-green-400 border-green-600 ;
 }
 
 .gradientblack {
-  @apply dark:bg-stone-700 border dark:border-stone-500 bg-stone-200 border-stone-400 active:opacity-75;
+  @apply dark:bg-neutral-700 border dark:border-neutral-500 bg-neutral-200 border-neutral-400;
 }
 
 .black {
-  @apply dark:bg-stone-700 bg-stone-200 active:opacity-75;
+  @apply dark:bg-neutral-700 bg-neutral-200 ;
 }
 
 .backgroundcolour {
@@ -111,7 +111,7 @@ body {
 }
 
 .border-colour {
-  @apply dark:border-stone-500 border-stone-500;
+  @apply dark:border-neutral-500 border-neutral-500;
 }
 
 .orderbox {
