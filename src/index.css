@@ -66,15 +66,15 @@ img {
 }
 
 .gradientred {
-  @apply dark:bg-red-800 border dark:border-red-600 bg-red-500 border-red-700;
+  @apply dark:bg-red-800 border dark:border-red-600 bg-red-400 border-red-600;
 }
 
 .gradientgreen {
-  @apply dark:bg-green-800 border dark:border-green-600 bg-green-500 border-green-700;
+  @apply dark:bg-green-800 border dark:border-green-600 bg-green-400 border-green-600;
 }
 
 .gradientblack {
-  @apply dark:bg-stone-700 border dark:border-stone-500 bg-stone-300 border-stone-500;
+  @apply dark:bg-stone-700 border dark:border-stone-500 bg-stone-200 border-stone-400;
 }
 
 .backgroundcolour {
@@ -98,7 +98,7 @@ img {
 }
 
 .border-colour {
-  @apply dark:border-stone-500 border-stone-200;
+  @apply dark:border-stone-500 border-stone-500;
 }
 
 .orderbox {
