@@ -52,8 +52,8 @@ export default function HamburgerMenu(props) {
       <Keypad />
       <Dialog />
       <div className='fixed top-0 grid grid-cols-12 grid-rows-1 w-screen h-screen'>
-        <div className='row-span-1 col-span-3 flex backgroundcolour flex-col border-colour border-r-2'>
-          <div className='flex flex-row  w-100 justify-between p-2 border-b-2 border-colour text-left items-stretch '>
+        <div className='row-span-1 col-span-3 flex backgroundcolour flex-col border-colour border-r'>
+          <div className='flex flex-row  w-100 justify-between p-2 border-b border-colour text-left items-stretch '>
             <div className='text-2xl self-end'>Menu</div>
             <div
               className='justify-end btn--minus btn shadow w-8 h-8 cnter-items'

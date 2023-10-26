@@ -20,7 +20,7 @@ const root = ReactDOM.createRoot(domNode);
 })();
 
 function App() {
-  const [appState, setAppState] = useState("Register");
+  const [appState, setAppState] = useState("Settings");
 
   const [hamburgerOpen, setHamburgerOpen] = useState(false);
 

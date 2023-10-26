@@ -81,7 +81,7 @@ export default function Order(props) {
           onClick={() => handleOrderItemQuantityChange('down', orderItem)}>
           <img src={minusSVG} className='w-6 stroke-white' />
         </div>
-        <div className='w-full grid grid-cols-[1fr_min-content] grid-rows-[min-content, 1fr] p-1 border gradient1 rounded shadow'>
+        <div className='w-full grid grid-cols-[1fr_min-content] grid-rows-[min-content, 1fr] p-1 gradient1 rounded shadow'>
           <div className='col-span-1 row-span-1 text-lg'>
             {orderItem.name +
               (orderItem.quantity > 1 ? ` (${orderItem.quantity})` : '')}
@@ -111,7 +111,7 @@ export default function Order(props) {
     <>
       <Keypad />
 
-      <div className='col-span-4 row-span-1 h-auto self-stretch flex flex-col  overflow-hidden border border-colour'>
+      <div className='col-span-4 row-span-1 h-auto self-stretch flex flex-col  overflow-hidden border-l border-colour'>
         {payCash === true ? (
           <PayCash
             order={order}

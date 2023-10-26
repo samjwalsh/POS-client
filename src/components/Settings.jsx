@@ -134,7 +134,7 @@ export default function Settings(props) {
         <div
           className='w-full border border-colour rounded p-2 '
           key={category.name}>
-          <div className='border border-colour text-2xl'>{category.name} </div>{' '}
+          <div className='border-b border-colour text-2xl'>{category.name} </div>{' '}
           <div className='flex flex-col justify-between pt-2 gap-2'>
             {' '}
             {categoryHTML}{' '}
@@ -149,7 +149,7 @@ export default function Settings(props) {
       <Dialog />
       <div className='h-full w-full '>
         <div className='flex flex-col flex-grow p-2 gap-2'>{settingsHTML}</div>
-        <div className='fixed bottom-0 right-0 border border-colour m-1'>
+        <div className='fixed bottom-0 right-0 border rounded p-1 border-colour m-1'>
           v{version}
         </div>
       </div>
