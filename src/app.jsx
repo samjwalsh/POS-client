@@ -22,6 +22,10 @@ const root = ReactDOM.createRoot(domNode);
 function App() {
   const [appState, setAppState] = useState("Register");
 
+  const [menuState, setMenuState] = useState("");
+  const [currentOrder, setCurrentOrder] = useState("");
+  const [order, setOrder] = useState([]);
+
   const [hamburgerOpen, setHamburgerOpen] = useState(false);
 
   const [settings, setSettings] = useState();
@@ -39,7 +43,7 @@ function App() {
       <div className="overflow-y-hidden h-full">
       {(() => {
         if (appState === "Register") {
-          return <Register />;
+          return <Register menuState={menuState} setMenuState={setMenuState} currentOrder={currentOrder} setCurrentOrder={setCurrentOrder} order={order} setOrder={setOrder}/>;
         } else if (appState === "Reports") {
           return <Reports />;
         } else if (appState === "Settings") {

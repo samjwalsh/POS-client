@@ -14,8 +14,7 @@ export const settingsSchema = [
       {
         name: "Dark Mode",
         type: "toggle",
-        value: true,
-        default: false,
+        value: false,
       }
     ],
   },
