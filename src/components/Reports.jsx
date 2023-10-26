@@ -84,7 +84,7 @@ export default function Reports(props) {
         return (
           <div
             key={order.time}
-            className='orderbox border border-colour rounded flex  flex-col '>
+            className='orderbox border border-colour rounded flex max-h-96 flex-col '>
             <div className='flex flex-row w-full p-2 justify-between border-b border-colour blue rounded-t'>
               <div className='text-2xl self-end'>
                 Order No. {orders.length - index}
