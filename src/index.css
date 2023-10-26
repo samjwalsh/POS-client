@@ -47,7 +47,7 @@ body {
 }
 
 .invert-icon {
-  @apply dark:invert;
+  @apply dark:invert dark:-z-0;
 }
 
 .btn {
