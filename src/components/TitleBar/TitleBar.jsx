@@ -12,7 +12,7 @@ export default function TitleBar(props) {
   return (
     <div className='flex flex-row justify-between border-b border-colour'>
       <div
-        className='p-1 border-r border-colour blue'
+        className='p-1 border-r border-colour black'
         onClick={(e) => handleClickHamburger(setHamburger)}>
         <img src={hamburger} className='w-6 invert-icon' />
       </div>

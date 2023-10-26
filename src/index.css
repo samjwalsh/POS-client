@@ -73,11 +73,11 @@ body {
 }
 
 .gradient1 {
-  @apply dark:bg-cyan-900 border dark:border-cyan-700 bg-cyan-300 border-cyan-500;
+  @apply dark:bg-cyan-900 border dark:border-cyan-700 border-sky-500 bg-sky-300;
 }
 
 .blue {
-  @apply dark:bg-cyan-900 bg-cyan-300;
+  @apply dark:bg-cyan-900 bg-sky-300;
 }
 
 .gradientred {
@@ -90,6 +90,10 @@ body {
 
 .gradientblack {
   @apply dark:bg-stone-700 border dark:border-stone-500 bg-stone-200 border-stone-400;
+}
+
+.black {
+  @apply dark:bg-stone-700 bg-stone-200 ;
 }
 
 .backgroundcolour {
