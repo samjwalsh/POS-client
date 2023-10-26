@@ -68,20 +68,20 @@ export default function Order(props) {
   log(`Calculating subtotal and generating HTML`);
   let orderItems = order.map((orderItem, index) => {
     log(`Adding ${orderItem.name} to HTML`);
-    let itemClasses = 'flex h-min w-full shadow gap-2';
+    let itemClasses = 'flex h-min w-full gap-2';
     // if (index + 1 !== order.length) {
-    //   itemClasses += ' border-b-2 border-colour';
+    //   itemClasses += ' border border-colour';
     // }
     return (
       <div
         className={itemClasses}
         key={`${orderItem.name} [${orderItem.addons}]`}>
         <div
-          className='col-span-1 row-span-2 cnter-items btn--minus w-12 rounded'
+          className='col-span-1 row-span-2 cnter-items btn--minus w-12 rounded shadow'
           onClick={() => handleOrderItemQuantityChange('down', orderItem)}>
           <img src={minusSVG} className='w-6 stroke-white' />
         </div>
-        <div className='w-full grid grid-cols-[1fr_min-content] grid-rows-[min-content, 1fr] p-1 border-2 gradient1 rounded'>
+        <div className='w-full grid grid-cols-[1fr_min-content] grid-rows-[min-content, 1fr] p-1 border gradient1 rounded shadow'>
           <div className='col-span-1 row-span-1 text-lg'>
             {orderItem.name +
               (orderItem.quantity > 1 ? ` (${orderItem.quantity})` : '')}
@@ -98,7 +98,7 @@ export default function Order(props) {
           </div>
         </div>
         <div
-          className='col-span-1 row-span-2 cnter-items justify-self-end btn--plus w-12 rounded'
+          className='col-span-1 row-span-2 cnter-items justify-self-end btn--plus w-12 rounded shadow'
           onClick={() => handleOrderItemQuantityChange('up', orderItem)}>
           <img src={addSVG} className='w-6 fill-white stroke-white' />
         </div>
@@ -111,7 +111,7 @@ export default function Order(props) {
     <>
       <Keypad />
 
-      <div className='col-span-4 row-span-1 h-auto self-stretch flex flex-col  overflow-hidden border-l-2 border-stone-500'>
+      <div className='col-span-4 row-span-1 h-auto self-stretch flex flex-col  overflow-hidden border border-colour'>
         {payCash === true ? (
           <PayCash
             order={order}
@@ -125,7 +125,7 @@ export default function Order(props) {
           </div>
         )}
 
-        <div className=' grid grid-rows-[min-content, 1fr] grid-cols-1 gap-1 border-t-2 border-stone-500 p-2 pt-1'>
+        <div className=' grid grid-rows-[min-content, 1fr] grid-cols-1 gap-1 border-t border-colour p-2 pt-1'>
           <div className='row-span-1 col-span-1 flex justify-between w-full text-2xl'>
             <div className='text-left'>Total</div>
             <div className='text-right font-mono justify-end'>

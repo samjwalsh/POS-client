@@ -9,9 +9,11 @@ module.exports = {
       fontFamily: {
         sans: ['Roboto', 'system-ui'],
         serif: ['ui-serif', 'Georgia'],
-        mono: ['Roboto Mono', 'SFMono-Regular']
+        mono: ['Roboto Mono', 'SFMono-Regular'],
       },
     },
   },
   plugins: [],
+  darkMode: 'class',
+
 };
