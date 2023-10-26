@@ -11,6 +11,12 @@ export const settingsSchema = [
         step: 2,
         default: 16,
       },
+      {
+        name: "Dark Mode",
+        type: "toggle",
+        value: true,
+        default: false,
+      }
     ],
   },
   {

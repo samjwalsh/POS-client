@@ -16,6 +16,7 @@ import playBeep from '../tools/playBeep';
 import undo from '../assets/appicons/undo.svg';
 import addSVG from '../assets/appicons/add.svg';
 import minusSVG from '../assets/appicons/minus.svg';
+import checkSVG from '../assets/appicons/check.svg';
 
 export default function Settings(props) {
   let settings = props.settings;
@@ -128,13 +129,36 @@ export default function Settings(props) {
               </div>
             </div>
           );
+        } else if (setting.type === 'toggle') {
+          return (
+            <div
+              className='w-full flex flex-row p-2 rounded whitespace-nowrap gap-2 justify-between'
+              key={setting.name}>
+              <div className='text-xl self-center'>{setting.name}</div>
+              <div className='flex flex-row gap-2'>
+                <div
+                  className='btn rounded gradient1 p-2 cnter-items '
+                  onClick={(e) => {
+                    handleClickToggleOption(setting, settings, setSettings);
+                  }}>
+                  {setting.value ? (
+                    <img src={checkSVG} className='w-6' />
+                  ) : (
+                    <div className='w-6 h-6'></div>
+                  )}
+                </div>
+              </div>
+            </div>
+          );
         }
       });
       return (
         <div
           className='w-full border border-colour rounded p-2 '
           key={category.name}>
-          <div className='border-b border-colour text-2xl'>{category.name} </div>{' '}
+          <div className='border-b border-colour text-2xl'>
+            {category.name}{' '}
+          </div>{' '}
           <div className='flex flex-col justify-between pt-2 gap-2'>
             {' '}
             {categoryHTML}{' '}
@@ -162,13 +186,9 @@ async function handleClickRangeOption(setting, method, settings, setSettings) {
 
   let localSettings = settings;
 
-  let foundCategoryIndex;
-  let foundSettingIndex;
-  settings.forEach((localCategory, categoryIndex) => {
-    let localSettingIndex;
-    localCategory.settings.forEach((localSetting, settingIndex) => {
+  settings.forEach((localCategory) => {
+    localCategory.settings.forEach((localSetting) => {
       if (localSetting === setting) {
-        localSettingIndex = settingIndex;
         //After finding the correct setting, we update its value according to the button pressed
         switch (method) {
           case 'increase':
@@ -185,10 +205,29 @@ async function handleClickRangeOption(setting, method, settings, setSettings) {
         }
       }
     });
-    if (typeof localSettingIndex === 'number') {
-      foundCategoryIndex = categoryIndex;
-      foundSettingIndex = localSettingIndex;
-    }
+  });
+
+  await updateSettings(localSettings);
+
+  localSettings = await getSettings();
+
+  executeSettings(localSettings);
+
+  setSettings(localSettings);
+}
+
+async function handleClickToggleOption(setting, settings, setSettings) {
+  playBeep();
+
+  let localSettings = settings;
+
+  settings.forEach((localCategory) => {
+    localCategory.settings.forEach((localSetting) => {
+      if (localSetting === setting) {
+        //After finding the correct setting, we update its value according to the button pressed
+        localSetting.value = !localSetting.value;
+      }
+    });
   });
 
   await updateSettings(localSettings);
@@ -206,6 +245,13 @@ export function executeSettings(settings) {
       switch (setting.name) {
         case 'Zoom Factor':
           document.querySelector(':root').style.fontSize = `${setting.value}px`;
+          break;
+        case 'Dark Mode':
+          if (setting.value === true) {
+            document.documentElement.setAttribute('class', 'dark');
+          } else {
+            document.documentElement.setAttribute('class', '');
+          }
           break;
       }
     });
