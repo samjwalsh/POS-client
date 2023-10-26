@@ -120,16 +120,16 @@ export default function Reports(props) {
 
   function reportsStatsHTML() {
     return (
-      <div className='reportsStats'>
+      <div className='flex flex-col h-full'>
         {createReportsStatsInfo()}
-        <div className='reportsStatsButtonsContainer'>
+        <div className='mt-auto border-t-2 border-colour p-2 flex flex-col gap-2'>
           <div
-            className='reportsStatsButtons button b'
+            className='btn gradient1 h-auto p-2 cnter-items w-full'
             onClick={(event) => handleDeleteOldOrders()}>
-            Del. Old Orders
+            Delete Old Orders
           </div>
           <div
-            className='reportsStatsButtons button r'
+            className='btn btn--minus h-auto p-2 cnter-items w-full'
             onClick={(event) => handleEndOfDay()}>
             End Of Day
           </div>
@@ -153,22 +153,22 @@ export default function Reports(props) {
     let xTotal = cashTotal + cardTotal;
 
     return (
-      <div className='reportsStatsInfoTable'>
-        <div className='reportsStatsInfoTableEntry'>
-          <div className='reportsStatsInfoTableEntryKey'>Cash:</div>
-          <div className='reportsStatsInfoTableEntryValue num'>
+      <div className='flex flex-col w-full text-xl p-2 gap-2'>
+        <div className='flex flex-row w-full justify-between border-b-2 border-colour pb-2'>
+          <div className=''>Cash:</div>
+          <div className='font-mono text-right justify-end'>
             €{cashTotal.toFixed(2)}
           </div>
         </div>
-        <div className='reportsStatsInfoTableEntry'>
-          <div className='reportsStatsInfoTableEntryKey'>Card:</div>
-          <div className='reportsStatsInfoTableEntryValue num'>
+        <div className='flex flex-row w-full justify-between border-b-2 border-colour pb-2'>
+          <div className=''>Card:</div>
+          <div className='font-mono text-right justify-end '>
             €{cardTotal.toFixed(2)}
           </div>
         </div>
-        <div className='reportsStatsInfoTableEntry reportsStatsInfoTableEntryLast'>
-          <div className='reportsStatsInfoTableEntryKey'>X-Total:</div>
-          <div className='reportsStatsInfoTableEntryValue num'>
+        <div className='flex flex-row w-full justify-between'>
+          <div className=''>X-Total:</div>
+          <div className='font-mono text-right justify-end'>
             €{xTotal.toFixed(2)}
           </div>
         </div>
@@ -218,12 +218,12 @@ export default function Reports(props) {
     <>
       <Dialog />
       <div className='overflow-y-scroll no-scrollbar h-full grid grid-cols-12 grid-rows-1'>
-        <div className='overflow-y-scroll no-scrollbar col-span-9 gap-2 p-2 flex flex-row flex-wrap'>
+        <div className='overflow-y-scroll no-scrollbar col-span-8 gap-2 p-2 flex flex-row flex-wrap'>
           {createOrdersHTML()}
           <div className='orderbox'></div>
           <div className='orderbox'></div>
         </div>
-        <div className='col-span-3'>{reportsStatsHTML()}</div>
+        <div className='col-span-4 border-l-2 border-colour  w-full'>{reportsStatsHTML()}</div>
       </div>
     </>
   );
