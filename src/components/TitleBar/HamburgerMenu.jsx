@@ -56,7 +56,7 @@ export default function HamburgerMenu(props) {
             <div
               className='justify-end btn--minus btn shadow w-8 h-8 cnter-items'
               onClick={() => handleCloseSideMenu(setHamburger)}>
-              <img src={closeSVG} className='w-6' />
+              <img src={closeSVG} className='w-6 invert-icon' />
             </div>
           </div>
           <div className=' flex flex-col gap-2 p-2 '>

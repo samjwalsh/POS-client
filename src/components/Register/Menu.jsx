@@ -65,7 +65,7 @@ export default function Menu(props) {
           id={item.name}
           onClick={(event) => handleItemClick(event, item, passProps)}>
           {item.name === 'Back' ? (
-            <img src={undoSVG} className='w-8' />
+            <img src={undoSVG} className='w-8 invert-icon' />
           ) : (
             item.name
           )}

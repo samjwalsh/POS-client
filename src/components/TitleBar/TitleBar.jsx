@@ -14,13 +14,13 @@ export default function TitleBar(props) {
       <div
         className='p-1 border-r border-colour blue'
         onClick={(e) => handleClickHamburger(setHamburger)}>
-        <img src={hamburger} id='hamburgerSVG' className='w-6' />
+        <img src={hamburger} className='w-6 invert-icon' />
       </div>
-      <div className='flex flex-row items-center justify-end w-full'>
+      <div className='flex flex-row items-center justify-end w-full font-mono'>
         <div className='border-l border-colour h-full cnter-items px-1'>
           <Connection />
         </div>
-        <div className='border-l border-colour h-full cnter-items px-1'>
+        <div className='border-l border-colour h-full cnter-items px-1 '>
           <Clock />
         </div>
       </div>

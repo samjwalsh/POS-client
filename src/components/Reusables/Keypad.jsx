@@ -119,16 +119,16 @@ const useKeypad = (numberFormat) => {
           </div>
         </div>
         <div className='col-span-1 row-span-1 keypad gradientred' id='exit'>
-          <img src={closeSVG} className='w-6' id='exit' />
+          <img src={closeSVG} className='w-6 invert-icon' id='exit' />
         </div>
         <div className='col-span-1 row-span-1 keypad gradientblack' id='minus'>
-          <img src={minusSVG} className='w-6' id='minus' />
+          <img src={minusSVG} className='w-6 invert-icon' id='minus' />
         </div>
         <div className='col-span-1 row-span-1 keypad gradientblack' id='plus'>
-          <img src={addSVG} className='w-6' id='plus' />
+          <img src={addSVG} className='w-6 invert-icon' id='plus' />
         </div>
         <div className='col-span-1 row-span-1 keypad gradientblack' id='delete'>
-          <img src={backSVG} className='w-6' id='delete' />
+          <img src={backSVG} className='w-6 invert-icon' id='delete' />
         </div>
         <div className='col-span-1 row-span-1 keypad gradientblack' id='7'>
           7
@@ -161,7 +161,7 @@ const useKeypad = (numberFormat) => {
           0
         </div>
         <div className='col-span-1 row-span-1 keypad gradientgreen' id='enter'>
-          <img src={enterSVG} className='w-6' id='enter' />
+          <img src={enterSVG} className='w-6 invert-icon' id='enter' />
         </div>
       </div>
     );

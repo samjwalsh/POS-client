@@ -81,7 +81,7 @@ export default function Settings(props) {
                       setSettings
                     );
                   }}>
-                  <img src={minusSVG} className='w-6' />
+                  <img src={minusSVG} className='w-6 invert-icon' />
                 </div>
                 <div className='cnter-items text-xl'>{setting.value}</div>
                 <div
@@ -94,7 +94,7 @@ export default function Settings(props) {
                       setSettings
                     );
                   }}>
-                  <img src={addSVG} className='w-6' />
+                  <img src={addSVG} className='w-6 invert-icon' />
                 </div>
                 <div
                   className='btn rounded gradient1 p-2 cnter-items '
@@ -107,7 +107,7 @@ export default function Settings(props) {
                     );
                   }}>
                   {' '}
-                  <img src={undo} className='w-6' />
+                  <img src={undo} className='w-6 invert-icon' />
                 </div>
               </div>
             </div>
@@ -142,7 +142,7 @@ export default function Settings(props) {
                     handleClickToggleOption(setting, settings, setSettings);
                   }}>
                   {setting.value ? (
-                    <img src={checkSVG} className='w-6' />
+                    <img src={checkSVG} className='w-6 invert-icon' />
                   ) : (
                     <div className='w-6 h-6'></div>
                   )}

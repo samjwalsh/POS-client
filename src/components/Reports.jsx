@@ -92,7 +92,7 @@ export default function Reports(props) {
               <div
                 className='btn btn--minus p-1 cnter-items'
                 onClick={(e) => handleDeleteOrder(order)}>
-                <img src={closeSVG} className='w-6' />
+                <img src={closeSVG} className='w-6 invert-icon' />
               </div>
             </div>
             <div className='flex flex-col p-2 border-b border-colour text-lg'>

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect } from 'react';
 
 export default function Connection() {
   const [isOnline, setIsOnline] = useState(true);
@@ -17,5 +17,9 @@ export default function Connection() {
     };
   });
 
-  return <div>TCP{isOnline ? '✅' : '❌'}</div>;
+  return (
+    <>
+      TCP<div className='font-emoji'>{isOnline ? '🟢' : '🔴'}</div>
+    </>
+  );
 }

@@ -79,7 +79,7 @@ export default function Order(props) {
         <div
           className='col-span-1 row-span-2 cnter-items btn--minus w-12 rounded shadow'
           onClick={() => handleOrderItemQuantityChange('down', orderItem)}>
-          <img src={minusSVG} className='w-6 stroke-white' />
+          <img src={minusSVG} className='w-6 invert-icon' />
         </div>
         <div className='w-full grid grid-cols-[1fr_min-content] grid-rows-[min-content, 1fr] p-1 gradient1 rounded shadow'>
           <div className='col-span-1 row-span-1 text-lg'>
@@ -100,7 +100,7 @@ export default function Order(props) {
         <div
           className='col-span-1 row-span-2 cnter-items justify-self-end btn--plus w-12 rounded shadow'
           onClick={() => handleOrderItemQuantityChange('up', orderItem)}>
-          <img src={addSVG} className='w-6 fill-white stroke-white' />
+          <img src={addSVG} className='w-6 fill-white invert-icon' />
         </div>
       </div>
     );
@@ -136,7 +136,7 @@ export default function Order(props) {
             <div
               className='gradientblack rounded shadow cnter-items w-48'
               onClick={() => handlePlusMinus()}>
-              <img src={euro} className='w-6' />
+              <img src={euro} className='w-6 invert-icon' />
             </div>
             <div
               className='btn--plus  rounded cnter-items w-full text-lg uppercase font-bold'

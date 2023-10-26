@@ -11,7 +11,7 @@ export default function Clock() {
   setInterval(updateTime, 1000);
   return (
     <>
-      <div>{ctime}</div>
+      <div >{ctime}</div>
     </>
   );
 }

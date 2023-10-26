@@ -71,7 +71,7 @@ export default function ItemPage(props) {
         </div>
         <div className='btn gradientblack  cnter-items w-10 h-auto m-2'>
           <div className='toggleAddonButton' id={index}>
-            {selected ? <img src={checkSVG} className='w-6' /> : ''}
+            {selected ? <img src={checkSVG} className='w-6 invert-icon' /> : ''}
           </div>
         </div>
       </div>
@@ -160,7 +160,7 @@ export default function ItemPage(props) {
             onClick={(event) =>
               handleDecreaseQuantity(event, item, currentOrder, setCurrentOrder)
             }>
-            <img src={minusSVG} className='w-6' />
+            <img src={minusSVG} className='w-6 invert-icon' />
           </div>
           <div className=' w-16 h-auto font-mono cnter-items text-2xl'>
             {quantity}
@@ -170,7 +170,7 @@ export default function ItemPage(props) {
             onClick={(event) =>
               handleIncreaseQuantity(event, item, currentOrder, setCurrentOrder)
             }>
-            <img src={addSVG} className='w-6' />
+            <img src={addSVG} className='w-6 invert-icon' />
           </div>
         </div>
         <div className='text-2xl w-full h-auto font-mono cnter-items'>

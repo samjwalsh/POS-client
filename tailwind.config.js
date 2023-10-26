@@ -7,9 +7,9 @@ module.exports = {
         layout: 'h-min 1fr',
       },
       fontFamily: {
-        sans: ['Roboto', 'system-ui'],
-        serif: ['ui-serif', 'Georgia'],
-        mono: ['Roboto Mono', 'SFMono-Regular'],
+        sans: ['Fira Sans', 'Roboto'],
+        mono: ['Fira Mono', 'Roboto Mono'],
+        emoji: ['Segoe UI Emoji']
       },
     },
   },
