@@ -1,23 +1,23 @@
-import * as React from "react";
-import { useState, useEffect } from "react";
+import * as React from 'react';
+import { useState, useEffect } from 'react';
 
-import useConfirm from "./Reusables/ConfirmDialog.jsx";
+import useConfirm from './Reusables/ConfirmDialog.jsx';
 
-import closeSVG from "../assets/appicons/close.svg";
+import closeSVG from '../assets/appicons/close.svg';
 
 import {
   getAllOrders,
   overwriteOrders,
   removeAllOrders,
   removeOrder,
-} from "../tools/ipc";
+} from '../tools/ipc';
 
-import playBeep from "../tools/playBeep";
+import playBeep from '../tools/playBeep';
 
 export default function Reports(props) {
   const [orders, setOrders] = useState([]);
 
-  const [Dialog, confirm] = useConfirm("Continue?", "");
+  const [Dialog, confirm] = useConfirm('Continue?', '');
 
   useEffect(() => {
     (async () => {
@@ -41,7 +41,7 @@ export default function Reports(props) {
 
   const handleDeleteOrder = async (deletedOrder) => {
     playBeep();
-    
+
     const choice = await confirm();
     if (!choice) return;
 
@@ -82,35 +82,34 @@ export default function Reports(props) {
         const orderDateString = calculateDateString(order.time);
 
         return (
-          <div key={order.time} className="reportsOrder y">
-            <div className="reportsOrderTableOrderNo y">
-              Order No. {orders.length - index}
+          <div
+            key={order.time}
+            className='orderbox border-2 border-colour rounded flex  flex-col'>
+            <div className='flex flex-row w-full p-2 justify-between border-b-2 border-colour'>
+              <div className='text-2xl self-end'>
+                Order No. {orders.length - index}
+              </div>
+              <div
+                className='btn btn--minus p-1 cnter-items'
+                onClick={(e) => handleDeleteOrder(order)}>
+                <img src={closeSVG} className='w-6' />
+              </div>
             </div>
-            <div
-              className="reportsOrderTableDeleteOrder r"
-              onClick={(e) => handleDeleteOrder(order)}
-            >
-              <img src={closeSVG} className="closeSVG r"/>
+            <div className='flex flex-col p-2 border-b-2 border-colour text-lg'>
+              <div className='flex flex-row justify-between'>
+                <div className=''>Time:</div>
+                <div className=''>{orderDateString}</div>
+              </div>
+              <div className='flex flex-row justify-between'>
+                <div className=''>Subtotal:</div>
+                <div className='font-mono'>€{order.subtotal.toFixed(2)}</div>
+              </div>
+              <div className='flex flex-row justify-between'>
+                <div className=''>Payment:</div>
+                <div className=''>{order.paymentMethod}</div>
+              </div>
             </div>
-            <div className="reportsOrderTableTitle reportsOrderTableTitleTime ">
-              Time:
-            </div>
-            <div className="reportsOrderTableValue reportsOrderTableValueTime">
-              {orderDateString}
-            </div>
-            <div className="reportsOrderTableTitle reportsOrderTableTitleSubTotal">
-              Subtotal:
-            </div>
-            <div className="reportsOrderTableValue reportsOrderTableValueSubTotal num">
-              €{order.subtotal.toFixed(2)}
-            </div>
-            <div className="reportsOrderTableTitle reportsOrderTableTitlePayment">
-              Payment:
-            </div>
-            <div className="reportsOrderTableValue reportsOrderTableValuePayment">
-              {order.paymentMethod}
-            </div>
-            <div className="reportsOrderTableItems">{itemsHTML}</div>
+            <div className='flex flex-col gap-2 p-2 h-64 overflow-y-scroll no-scrollbar'>{itemsHTML}</div>
           </div>
         );
       });
@@ -121,19 +120,17 @@ export default function Reports(props) {
 
   function reportsStatsHTML() {
     return (
-      <div className="reportsStats">
+      <div className='reportsStats'>
         {createReportsStatsInfo()}
-        <div className="reportsStatsButtonsContainer">
+        <div className='reportsStatsButtonsContainer'>
           <div
-            className="reportsStatsButtons button b"
-            onClick={(event) => handleDeleteOldOrders()}
-          >
+            className='reportsStatsButtons button b'
+            onClick={(event) => handleDeleteOldOrders()}>
             Del. Old Orders
           </div>
           <div
-            className="reportsStatsButtons button r"
-            onClick={(event) => handleEndOfDay()}
-          >
+            className='reportsStatsButtons button r'
+            onClick={(event) => handleEndOfDay()}>
             End Of Day
           </div>
         </div>
@@ -146,7 +143,7 @@ export default function Reports(props) {
     let cardTotal = 0;
 
     orders.forEach((order) => {
-      if (order.paymentMethod === "Card") {
+      if (order.paymentMethod === 'Card') {
         cardTotal += order.subtotal;
       } else {
         cashTotal += order.subtotal;
@@ -156,22 +153,22 @@ export default function Reports(props) {
     let xTotal = cashTotal + cardTotal;
 
     return (
-      <div className="reportsStatsInfoTable">
-        <div className="reportsStatsInfoTableEntry">
-          <div className="reportsStatsInfoTableEntryKey">Cash:</div>
-          <div className="reportsStatsInfoTableEntryValue num">
+      <div className='reportsStatsInfoTable'>
+        <div className='reportsStatsInfoTableEntry'>
+          <div className='reportsStatsInfoTableEntryKey'>Cash:</div>
+          <div className='reportsStatsInfoTableEntryValue num'>
             €{cashTotal.toFixed(2)}
           </div>
         </div>
-        <div className="reportsStatsInfoTableEntry">
-          <div className="reportsStatsInfoTableEntryKey">Card:</div>
-          <div className="reportsStatsInfoTableEntryValue num">
+        <div className='reportsStatsInfoTableEntry'>
+          <div className='reportsStatsInfoTableEntryKey'>Card:</div>
+          <div className='reportsStatsInfoTableEntryValue num'>
             €{cardTotal.toFixed(2)}
           </div>
         </div>
-        <div className="reportsStatsInfoTableEntry reportsStatsInfoTableEntryLast">
-          <div className="reportsStatsInfoTableEntryKey">X-Total:</div>
-          <div className="reportsStatsInfoTableEntryValue num">
+        <div className='reportsStatsInfoTableEntry reportsStatsInfoTableEntryLast'>
+          <div className='reportsStatsInfoTableEntryKey'>X-Total:</div>
+          <div className='reportsStatsInfoTableEntryValue num'>
             €{xTotal.toFixed(2)}
           </div>
         </div>
@@ -185,32 +182,31 @@ export default function Reports(props) {
         removeAllOrders();
       }
 
-      let formattedQuantity = "";
+      let formattedQuantity = '';
       if (item.quantity === 1 || item.quantity === undefined) {
       } else {
         formattedQuantity = `(${item.quantity})`;
       }
 
-      let formattedAddons = "";
+      let formattedAddons = '';
       if (Array.isArray(item.addons)) {
-        formattedAddons = item.addons.join(", ");
+        formattedAddons = item.addons.join(', ');
       }
 
       return (
         <div
-          className="reportsOrderItem"
-          key={index}
-        >
-          <div className="reportsOrderItemName">
+          className='w-full grid grid-cols-[auto_auto] grid-rows-[auto_min-content] text-lg p-2 border-2 border-colour rounded'
+          key={index}>
+          <div className='col-span-1 row-span-1'>
             {item.name} {formattedQuantity}
           </div>
-          <div className="reportsOrderTotalPrice">
+          <div className='col-span-1 row-span-1 text-right'>
             €{(item.price * item.quantity).toFixed(2)}
           </div>
-          <div className="reportsOrderPriceEach">
+          <div className='col-span-1 row-span-1 pr-4'>{formattedAddons}</div>
+          <div className='col-span-1 row-span-1 text-right'>
             €{item.price.toFixed(2)} EA
           </div>
-          <div className="reportsOrderAddons">{formattedAddons}</div>
         </div>
       );
     });
@@ -221,13 +217,13 @@ export default function Reports(props) {
   return (
     <>
       <Dialog />
-      <div className="overflow-y-scroll no-scrollbar h-full">
-        <div className="overflow-y-scroll no-scrollbar">
+      <div className='overflow-y-scroll no-scrollbar h-full grid grid-cols-12 grid-rows-1'>
+        <div className='overflow-y-scroll no-scrollbar col-span-9 gap-2 p-2 flex flex-row flex-wrap'>
           {createOrdersHTML()}
-          <div className="reportsOrderFiller"></div>
-          <div className="reportsOrderFiller"></div>
+          <div className='orderbox'></div>
+          <div className='orderbox'></div>
         </div>
-        {reportsStatsHTML()}
+        <div className='col-span-3'>{reportsStatsHTML()}</div>
       </div>
     </>
   );
@@ -236,16 +232,16 @@ export default function Reports(props) {
 function calculateDateString(time) {
   const date = new Date(time);
 
-  let dateString = "";
-  dateString += date.getHours().toString().padStart(2, "0");
-  dateString += ":";
-  dateString += date.getMinutes().toString().padStart(2, "0");
-  dateString += ":";
-  dateString += date.getSeconds().toString().padStart(2, "0");
-  dateString += " ";
-  dateString += date.getDate().toString().padStart(2, "0");
-  dateString += "/";
-  dateString += (date.getMonth() + 1).toString().padStart(2, "0");
+  let dateString = '';
+  dateString += date.getHours().toString().padStart(2, '0');
+  dateString += ':';
+  dateString += date.getMinutes().toString().padStart(2, '0');
+  dateString += ':';
+  dateString += date.getSeconds().toString().padStart(2, '0');
+  dateString += ' ';
+  dateString += date.getDate().toString().padStart(2, '0');
+  dateString += '/';
+  dateString += (date.getMonth() + 1).toString().padStart(2, '0');
   // dateString += "/";
   // dateString += date.getFullYear().toString().padStart(2, "0");
 

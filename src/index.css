@@ -92,3 +92,7 @@ body {
 .border-colour {
   @apply border-stone-500
 }
+
+.orderbox {
+  @apply max-w-3xl w-72 flex-grow
+}
