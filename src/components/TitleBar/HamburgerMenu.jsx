@@ -1,14 +1,12 @@
 import * as React from 'react';
 
-import playBeep from '../tools/playBeep';
-import { getAllOrders, quit, removeAllOrders } from '../tools/ipc';
+import playBeep from '../../tools/playBeep';
+import { getAllOrders, quit, removeAllOrders } from '../../tools/ipc';
 
-import closeSVG from '../assets/appicons/close.svg';
+import closeSVG from '../../assets/appicons/close.svg';
 
-import hamburger from '../assets/appicons/hamburger.svg';
-
-import useConfirm from './Reusables/ConfirmDialog.jsx';
-import useKeypad from './Reusables/Keypad.jsx';
+import useConfirm from '../Reusables/ConfirmDialog.jsx';
+import useKeypad from '../Reusables/Keypad.jsx';
 import TitleBar from './TitleBar.jsx';
 
 export default function HamburgerMenu(props) {
