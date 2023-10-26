@@ -221,10 +221,8 @@ export default function Reports(props) {
   return (
     <>
       <Dialog />
-      <div className="reports">
-        <div className="ordersTitle titleStyle y">Orders</div>
-        <div className="reportsTitle titleStyle y">Reports</div>
-        <div className="reportsOrders">
+      <div className="overflow-y-scroll no-scrollbar h-full">
+        <div className="overflow-y-scroll no-scrollbar">
           {createOrdersHTML()}
           <div className="reportsOrderFiller"></div>
           <div className="reportsOrderFiller"></div>
