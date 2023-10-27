@@ -59,7 +59,7 @@ export default function HamburgerMenu(props) {
               <img src={closeSVG} className='w-6' />
             </div>
           </div>
-          <div className=' flex flex-col gap-2 p-2'>
+          <div className=' flex flex-col gap-2 p-2 '>
             <div
               className='side-menu-option gradient1'
               onClick={() => handleSetAppState('Register')}>
