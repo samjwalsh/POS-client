@@ -69,7 +69,7 @@ export default function ItemPage(props) {
             €{addon.price.toFixed(2)}
           </div>
         </div>
-        <div className='btn gradient1  cnter-items w-10 h-auto m-2'>
+        <div className='btn gradientblack  cnter-items w-10 h-auto m-2'>
           <div className='toggleAddonButton' id={index}>
             {selected ? <img src={checkSVG} className='w-6' /> : ''}
           </div>

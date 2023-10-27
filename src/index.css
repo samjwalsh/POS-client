@@ -38,7 +38,7 @@ img {
 }
 
 .btn {
-  @apply font-bold uppercase text-lg rounded shadow-lg;
+  @apply font-bold uppercase text-lg rounded shadow;
 }
 
 .btn--minus {
