@@ -10,6 +10,10 @@ export default function Connection() {
 
   useEffect(() => {
     const connectionCheckInterval = setInterval(async () => {
+      setIsOnline({
+        status: false
+      })
+
       const beginPing = Date.now();
       const connection = await checkConnection();
       const endPing = Date.now();
