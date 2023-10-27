@@ -5,22 +5,18 @@ import { string } from 'prop-types';
 export default function Connection() {
   const [isOnline, setIsOnline] = useState({
     status: true,
-    ping: 0
+    ping: 0,
   });
 
   useEffect(() => {
     const connectionCheckInterval = setInterval(async () => {
-      setIsOnline({
-        status: false
-      })
-
       const beginPing = Date.now();
       const connection = await checkConnection();
       const endPing = Date.now();
 
       setIsOnline({
         status: connection,
-        ping: endPing - beginPing
+        ping: endPing - beginPing,
       });
     }, 5000);
     return () => {
@@ -30,8 +26,8 @@ export default function Connection() {
 
   return (
     <>
-      TCP<div className='font-emoji'>{isOnline.status ? '🟢' : '🔴'}</div>[
-      {isOnline.ping}]
+      TCP<div className='font-emoji'>{isOnline.status ? '🟢' : '🔴'}</div>
+      {isOnline.status ? `[${isOnline.ping}] ` : ''}
     </>
   );
 }
