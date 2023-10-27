@@ -90,7 +90,7 @@ img {
 }
 
 .side-menu-option {
-  @apply rounded-lg shadow p-2 flex text-xl h-min text-left uppercase font-bold ;
+  @apply rounded shadow p-2 flex text-xl h-min text-left uppercase font-bold ;
 }
 
 .keypad {
