@@ -73,7 +73,7 @@ const useKeypad = (numberFormat) => {
         break;
       }
       case '00': {
-        if (numberFormat === 'currency' && keypadState.value.length === 5) {
+        if (numberFormat === 'currency' && keypadState.value.length >= 5) {
           break;
         }
         setkeypadState({
