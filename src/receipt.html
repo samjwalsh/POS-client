@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Receipt</title>
+  </head>
+  <body>
+    <h1>Teddy's Ice Cream</h1>
+    <div class="order-container">
+      <div class="item">
+        <div class="name-and-price">
+          <div>Cone</div>
+          <div>7.00</div>
+        </div>
+        <div class="quantity">2 @ 3.50</div>
+        <div class="addons">Addons: Flake, Toppings</div>
+        <div class="item-gap"></div>
+      </div>
+      <div class="item">
+        <div class="name-and-price">
+          <div>Hot Ferrero</div>
+          <div>6.00</div>
+        </div>
+        <div class="item-gap"></div>
+      </div>
+      <div class="item">
+        <div class="name-and-price">
+          <div>Popcorn</div>
+          <div>7.50</div>
+        </div>
+        <div class="quantity">3 @ 2.5</div>
+        <div class="item-gap"></div>
+      </div>
+      <div class="item">
+        <div class="name-and-price">
+          <div>Cone</div>
+          <div>6.00</div>
+        </div>
+        <div class="quantity">2 @ 3.00</div>
+        <div class="addons">Addons: Flake</div>
+      </div>
+    </div>
+  </body>
+</html>
+
+<style>
+  body {
+    font-family: monospace;
+  }
+
+  .order-container {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .item {
+    display: flex;
+    flex-direction: column;
+    width: auto;
+  }
+
+  .name-and-price {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+
+  .quantity {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+
+  .addons {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+
+  .item-gap {
+    height: 1rem;
+  }
+</style>

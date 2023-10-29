@@ -8,6 +8,7 @@ import closeSVG from '../assets/appicons/close.svg';
 import {
   getAllOrders,
   overwriteOrders,
+  printOrder,
   removeAllOrders,
   removeOrder,
 } from '../tools/ipc';
@@ -86,13 +87,15 @@ export default function Reports(props) {
             key={order.time}
             className='orderbox border border-colour rounded flex max-h-96 flex-col '>
             <div className='flex flex-row w-full p-2 justify-between border-b border-colour blue rounded-t'>
-              <div className='text-2xl self-end'>
-                Order No. {orders.length - index}
+              <div
+                className=' btn cnter-items gradientblack p-2'
+                onClick={(e) => handlePrintReceipt(order)}>
+                Receipt{' '}
               </div>
               <div
                 className='btn btn--minus p-1 cnter-items'
                 onClick={(e) => handleDeleteOrder(order)}>
-                <img src={closeSVG} className='w-6 invert-icon' />
+                <img src={closeSVG} className='w-8 invert-icon' />
               </div>
             </div>
             <div className='flex flex-col p-2 border-b border-colour text-lg'>
@@ -231,6 +234,10 @@ export default function Reports(props) {
       </div>
     </>
   );
+}
+
+async function handlePrintReceipt(order) {
+  await printOrder(order);
 }
 
 function calculateDateString(time) {

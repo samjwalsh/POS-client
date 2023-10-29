@@ -57,3 +57,7 @@ export function deleteLocalData() {
 export function checkConnection() {
   return ipcRenderer.invoke('checkConnection');
 }
+
+export function printOrder(order) {
+  return ipcRenderer.invoke('printOrder', order);
+}
