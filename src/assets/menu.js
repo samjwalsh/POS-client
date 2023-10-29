@@ -23,36 +23,36 @@ items: [...]
 */
 export const menu = [
   {
-    name: "Cone",
+    name: 'Cone',
     price: 2.5,
     shortcuts: [
       {
-        name: "Plain Cone",
+        name: 'Plain Cone',
         price: 2.5,
         addons: [],
       },
       {
-        name: "99",
+        name: '99',
         price: 3,
         addons: [
           {
-            name: "Flake",
+            name: 'Flake',
             price: 0.5,
             default: true,
           },
         ],
       },
       {
-        name: "Special 99",
+        name: 'Special 99',
         price: 3.5,
         addons: [
           {
-            name: "Flake",
+            name: 'Flake',
             price: 0.5,
             default: true,
           },
           {
-            name: "Toppings",
+            name: 'Toppings',
             price: 0.5,
           },
         ],
@@ -60,23 +60,23 @@ export const menu = [
     ],
     modifiers: [
       {
-        name: "Flake",
+        name: 'Flake',
         price: 0.5,
         default: true,
       },
       {
-        name: "Toppings",
+        name: 'Toppings',
         price: 0.5,
       },
       {
-        name: "Waffle Cone",
+        name: 'Waffle Cone',
         price: 1,
       },
       {
-        name: "Crush Flake",
+        name: 'Crush Flake',
         price: 1.5,
       },
-      { name: "Choc Dip", price: 1.0 },
+      { name: 'Choc Dip', price: 1.0 },
       {
         priceCheck: function (addons) {
           // Add code to check for chocolate dip selection and adjust price accordingly: Choco cone = 3.3, Choco 99 = 4
@@ -91,8 +91,8 @@ export const menu = [
           });
 
           if (
-            selectedAddons.includes("Choc Dip") &&
-            !selectedAddons.includes("Flake")
+            selectedAddons.includes('Choc Dip') &&
+            !selectedAddons.includes('Flake')
           ) {
             addonsCost -= 0.2;
           }
@@ -116,7 +116,7 @@ export const menu = [
         price: 2.5,
         addons: [
           {
-            name: "Flake",
+            name: 'Flake',
             price: 0.2,
             default: true,
           },
@@ -127,12 +127,12 @@ export const menu = [
         price: 3,
         addons: [
           {
-            name: "Flake",
+            name: 'Flake',
             price: 0.2,
             default: true,
           },
           {
-            name: "Toppings",
+            name: 'Toppings',
             price: 0.5,
           },
         ],
@@ -140,16 +140,16 @@ export const menu = [
     ],
     modifiers: [
       {
-        name: "Flake",
+        name: 'Flake',
         price: 0.2,
         default: true,
       },
       {
-        name: "Toppings",
+        name: 'Toppings',
         price: 0.5,
       },
-      { name: "Crush Flake", price: 1.5 },
-      { name: "Choc Dip", price: 0.7 },
+      { name: 'Crush Flake', price: 1.5 },
+      { name: 'Choc Dip', price: 0.7 },
       {
         priceCheck: function (addons) {
           // Add code to check for chocolate dip, both choco dip with and without flake are 3.5
@@ -164,8 +164,8 @@ export const menu = [
           });
 
           if (
-            selectedAddons.includes("Choc Dip") &&
-            selectedAddons.includes("Flake")
+            selectedAddons.includes('Choc Dip') &&
+            selectedAddons.includes('Flake')
           ) {
             addonsCost += 0.3;
           }
@@ -176,241 +176,244 @@ export const menu = [
     ],
   },
   {
-    name: "Family Sp.",
+    name: 'Family Sp.',
     price: 10,
   },
   {
-    type: "category",
-    name: "Tubs",
+    type: 'category',
+    name: 'Tubs',
     items: [
       {
-        name: "Pink Tub",
+        name: 'Pink Tub',
         price: 2.5,
         modifiers: [
           {
-            name: "Flake",
+            name: 'Flake',
             price: 0.5,
             default: true,
           },
           {
-            name: "Toppings",
+            name: 'Toppings',
             price: 0.5,
           },
           {
-            name: "Crush Flake",
+            name: 'Crush Flake',
             price: 1.5,
           },
         ],
       },
       {
-        name: "Large Tub",
+        name: 'Large Tub',
         price: 4.0,
         modifiers: [
           {
-            name: "Flake",
+            name: 'Flake',
             price: 0.5,
             default: true,
           },
           {
-            name: "Toppings",
+            name: 'Toppings',
             price: 0.5,
           },
           {
-            name: "Crush Flake",
+            name: 'Crush Flake',
             price: 1.5,
           },
         ],
       },
       {
-        name: "Sundae",
+        name: 'Sundae',
         price: 4.0,
         modifiers: [
-          { name: "Flake", price: 0.5 },
-          { name: "Toppings", price: 0.5 },
-          { name: "Crush Flake", price: 1.5 },
+          { name: 'Flake', price: 0.5 },
+          { name: 'Toppings', price: 0.5 },
+          { name: 'Crush Flake', price: 1.5 },
         ],
       },
       {
-        name: "Screwball",
+        name: 'Screwball',
         price: 3,
         modifiers: [
-          { name: "Flake", price: 0.5 },
-          { name: "Toppings", price: 0.5 },
+          { name: 'Flake', price: 0.5 },
+          { name: 'Toppings', price: 0.5 },
         ],
       },
       {
-        name: "Boat (w/ Flake)",
+        name: 'Boat (w/ Flake)',
         price: 4,
-        modifiers: [{ name: "Toppings", price: 0.5 }],
+        modifiers: [{ name: 'Toppings', price: 0.5 }],
       },
       {
-        name: "Hot Ferrero",
+        name: 'Hot Ferrero',
         price: 6,
         modifiers: [
           {
-            name: "Flake",
+            name: 'Flake',
             price: 0.5,
           },
         ],
       },
       {
-        name: "Strawberries & Ice Cream",
+        name: 'Strawberries & Ice Cream',
         price: 6,
         modifiers: [
           {
-            name: "Flake",
+            name: 'Flake',
             price: 0.5,
           },
         ],
       },
       {
-        name: "Hot Ferrero & Strawberries",
+        name: 'Hot Ferrero & Strawberries',
         price: 6.5,
         modifiers: [
           {
-            name: "Flake",
+            name: 'Flake',
             price: 0.5,
           },
         ],
       },
       {
-        name: "Treat Tub",
+        name: 'Treat Tub',
         price: 6,
         modifiers: [
           {
-            name: "Flake",
+            name: 'Flake',
             price: 0.5,
           },
         ],
       },
       {
-        name: "Float",
+        name: 'Float',
         price: 6,
       },
       {
-        name: "Coffee Ice.",
+        name: 'Coffee Ice.',
         price: 5,
       },
     ],
   },
   {
-    type: "category",
-    name: "Cold Drinks",
+    type: 'category',
+    name: 'Cold Drinks',
     items: [
       {
-        name: "Soft Bottles",
+        name: 'Soft Bottles',
         price: 2.8,
       },
       {
-        name: "Water",
+        name: 'Water',
         price: 2,
       },
       {
-        name: "Cans",
+        name: 'Cans',
         price: 2,
       },
       {
-        name: "Ribena",
+        name: 'Ribena',
         price: 2,
       },
       {
-        name: "Capri-Sun",
+        name: 'Capri-Sun',
         price: 2,
       },
     ],
   },
   {
-    name: "Hot Drinks",
-    type: "category",
+    name: 'Hot Drinks',
+    type: 'category',
     items: [
       {
-        name: "Americano",
+        name: 'Americano',
         price: 2.8,
       },
       {
-        name: "Cappuccino",
+        name: 'Cappuccino',
         price: 3,
       },
       {
-        name: "Latte",
+        name: 'Latte',
         price: 3,
       },
       {
-        name: "Tea",
+        name: 'Tea',
         price: 2.5,
       },
       {
-        name: "Hot Chocolate",
+        name: 'Hot Chocolate',
         price: 3,
         modifiers: [
           {
-            name: "Marshmallows",
+            name: 'Marshmallows',
             price: 0.5,
           },
         ],
       },
       {
-        name: "Double Espresso",
+        name: 'Double Espresso',
         price: 2.8,
       },
     ],
   },
   {
-    name: "Extras",
-    type: "category",
+    name: 'Extras',
+    type: 'category',
     items: [
       {
-        name: "Flake",
+        name: 'Flake',
         price: 0.5,
       },
       {
-        name: "Cone",
+        name: 'Cone',
         price: 0.3,
       },
       {
-        name: "Waffle Cone",
+        name: 'Waffle Cone',
         price: 1,
       },
       {
-        name: "Toppings",
-        price: 0.5
-      }
+        name: 'Toppings',
+        price: 0.5,
+      },
+      { name: 'Ferrero', price: 1.5 },
+      { name: 'Strawberries', price: 1.5 },
+      { name: 'Chocolate Dip', price: 1.5 },
     ],
   },
   {
-    name: "Sweets",
-    type: "category",
+    name: 'Sweets',
+    type: 'category',
     items: [
       {
-        name: "Quarter of Sweets",
+        name: 'Quarter of Sweets',
         price: 3,
       },
       {
-        name: "Drumstick",
+        name: 'Drumstick',
         price: 1,
       },
       {
-        name: "Refresher",
+        name: 'Refresher',
         price: 0.8,
       },
       {
-        name: "Wham Bar",
+        name: 'Wham Bar',
         price: 0.8,
       },
       {
-        name: "Jawbreaker",
+        name: 'Jawbreaker',
         price: 1.2,
       },
       {
-        name: "Chewits",
+        name: 'Chewits',
         price: 1.3,
       },
       {
-        name: "Lipstick",
+        name: 'Lipstick',
         price: 0.8,
       },
       {
-        name: "Double Dip",
+        name: 'Double Dip',
         price: 0.8,
       },
       {
@@ -418,108 +421,108 @@ export const menu = [
         price: 1,
       },
       {
-        name: "Marshmallow",
-        price: 3,
+        name: '2 Euro Bag',
+        price: 2,
       },
       {
-        name: "Golf Balls",
+        name: 'Golf Balls',
         price: 1.2,
       },
     ],
   },
   {
-    name: "Chocolate Bars",
-    type: "category",
+    name: 'Chocolate Bars',
+    type: 'category',
     items: [
       {
-        name: "Standard Chocolate Bar",
+        name: 'Standard Chocolate Bar',
         price: 1.8,
       },
       {
-        name: "Purple Snack",
+        name: 'Purple Snack',
         price: 1.5,
       },
     ],
   },
   {
-    name: "Toys",
-    type: "category",
+    name: 'Toys',
+    type: 'category',
     items: [
       {
-        name: "Small Spade & Bucket",
+        name: 'Small Spade & Bucket',
         price: 3.5,
       },
       {
-        name: "Medium Spade & Bucket",
+        name: 'Medium Spade & Bucket',
         price: 4.5,
       },
       {
-        name: "Ice Cream Bucket",
+        name: 'Ice Cream Bucket',
         price: 6.5,
       },
       {
-        name: "Penguin Bucket",
+        name: 'Penguin Bucket',
         price: 6.5,
       },
       {
-        name: "Large Spade & Unicorn Bucket",
+        name: 'Large Spade & Unicorn Bucket',
         price: 7,
       },
       {
-        name: "Small Rainbow Ball",
+        name: 'Small Rainbow Ball',
         price: 5,
       },
       {
-        name: "Large Rainbow Ball",
+        name: 'Large Rainbow Ball',
         price: 7,
       },
       {
-        name: "Pump Blaster",
+        name: 'Pump Blaster',
         price: 3.5,
       },
     ],
   },
   {
-    name: "Crisps, Popcorn, Candyfloss, Slush",
-    type: "category",
+    name: 'Crisps, Popcorn, Candyfloss, Slush',
+    type: 'category',
     items: [
       {
-        name: "Crisps",
+        name: 'Crisps',
         price: 1.6,
       },
       {
-        name: "Snax, Hula Hoops",
+        name: 'Snax, Hula Hoops',
         price: 1.5,
       },
 
       {
-        name: "Popcorn Cone",
+        name: 'Popcorn Cone',
         price: 2.5,
       },
       {
-        name: "Popcorn Bag",
+        name: 'Popcorn Bag',
         price: 3.5,
       },
       {
-        name: "Candyfloss Bag or Stick",
+        name: 'Candyfloss Bag or Stick',
         price: 2.5,
       },
       {
-        name: "Candyfloss Tub",
+        name: 'Candyfloss Tub',
         price: 3.5,
       },
       {
-        name: "Yard Slush",
+        name: 'Yard Slush',
         price: 3.5,
       },
       {
-        name: "Small Slush",
+        name: 'Small Slush',
         price: 2.5,
       },
       {
-        name: "Large Slush",
+        name: 'Large Slush',
         price: 3.5,
-      }
+      },
     ],
   },
 ];
