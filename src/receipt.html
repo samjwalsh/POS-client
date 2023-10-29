@@ -15,14 +15,14 @@
         </div>
         <div class="quantity">2 @ 3.50</div>
         <div class="addons">Addons: Flake, Toppings</div>
-        <div class="item-gap"></div>
+        <div class="item-gap">---</div>
       </div>
       <div class="item">
         <div class="name-and-price">
           <div>Hot Ferrero</div>
           <div>6.00</div>
         </div>
-        <div class="item-gap"></div>
+        <div class="item-gap">---</div>
       </div>
       <div class="item">
         <div class="name-and-price">
@@ -30,7 +30,7 @@
           <div>7.50</div>
         </div>
         <div class="quantity">3 @ 2.5</div>
-        <div class="item-gap"></div>
+        <div class="item-gap">---</div>
       </div>
       <div class="item">
         <div class="name-and-price">
@@ -41,12 +41,26 @@
         <div class="addons">Addons: Flake</div>
       </div>
     </div>
+    <div class="area-divider"></div>
+    <div class="total-and-value">
+      <div>Total:</div>
+      <div>14.60</div>
+    </div>
+    <div class="vat-and-value">
+      <div>VAT Total:</div>
+      <div>2.62</div>
+    </div>
   </body>
 </html>
 
 <style>
-  body {
+  html {
     font-family: monospace;
+    font-size: 11px;
+  }
+
+  h1 {
+    font-size: 24px;
   }
 
   .order-container {
@@ -78,7 +92,23 @@
     justify-content: space-between;
   }
 
+  .total-and-value {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+
+  .vat-and-value {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+
   .item-gap {
+    height: 1rem;
+  }
+
+  .area-divider {
     height: 1rem;
   }
 </style>
