@@ -72,6 +72,16 @@ const useKeypad = (numberFormat) => {
         }
         break;
       }
+      case '00': {
+        if (numberFormat === 'currency' && keypadState.value.length === 5) {
+          break;
+        }
+        setkeypadState({
+          value: keypadState.value + button,
+          sign: keypadState.sign,
+        });
+        break;
+      }
       default: {
         if (numberFormat === 'currency' && keypadState.value.length === 6) {
           break;
@@ -157,8 +167,11 @@ const useKeypad = (numberFormat) => {
         <div className='col-span-1 row-span-1 keypad gradientblack' id='3'>
           3
         </div>
-        <div className='col-span-2 row-span-1 keypad gradientblack' id='0'>
+        <div className='col-span-1 row-span-1 keypad gradientblack' id='0'>
           0
+        </div>
+        <div className='col-span-1 row-span-1 keypad gradientblack' id='00'>
+          00
         </div>
         <div className='col-span-1 row-span-1 keypad gradientgreen' id='enter'>
           <img src={enterSVG} className='w-6 invert-icon' id='enter' />

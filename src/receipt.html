@@ -6,49 +6,42 @@
     <title>Receipt</title>
   </head>
   <body>
-    <h1>Teddy's Ice Cream</h1>
-    <div class="order-container">
-      <div class="item">
-        <div class="name-and-price">
-          <div>Cone</div>
-          <div>7.00</div>
-        </div>
-        <div class="quantity">2 @ 3.50</div>
-        <div class="addons">Addons: Flake, Toppings</div>
-        <div class="item-gap">---</div>
-      </div>
-      <div class="item">
-        <div class="name-and-price">
-          <div>Hot Ferrero</div>
-          <div>6.00</div>
-        </div>
-        <div class="item-gap">---</div>
-      </div>
-      <div class="item">
-        <div class="name-and-price">
-          <div>Popcorn</div>
-          <div>7.50</div>
-        </div>
-        <div class="quantity">3 @ 2.5</div>
-        <div class="item-gap">---</div>
-      </div>
-      <div class="item">
-        <div class="name-and-price">
-          <div>Cone</div>
-          <div>6.00</div>
-        </div>
-        <div class="quantity">2 @ 3.00</div>
-        <div class="addons">Addons: Flake</div>
-      </div>
+    <div class="center large">Teddy's Ice Cream</div>
+    <div class="divider">&nbsp</div>
+    <div class="row-entry">
+      <div>Cone</div>
+      <div>7.00</div>
     </div>
-    <div class="area-divider"></div>
-    <div class="total-and-value">
+    <div class="row-entry">
+      <div>Addons: Flake, Toppings</div>
+    </div>
+    <div class="row-entry">
+      <div>2 @ 3.50</div>
+    </div>
+    <div class="divider">&nbsp</div>
+    <div class="row-entry">
+      <div>Soft Drink Bottle</div>
+      <div>4.00</div>
+    </div>
+    <div class="row-entry">
+      <div>2 @ 2.00</div>
+    </div>
+    <div class="divider">&nbsp</div>
+    <div class="row-entry">
+      <div>Cone</div>
+      <div>3.50</div>
+    </div>
+    <div class="row-entry">
+      <div>Addons: Flake, Toppings</div>
+    </div>
+    <div class="divider">&nbsp</div>
+    <div class="row-entry large">
       <div>Total:</div>
-      <div>14.60</div>
+      <div>14.50</div>
     </div>
-    <div class="vat-and-value">
+    <div class="row-entry large">
       <div>VAT Total:</div>
-      <div>2.62</div>
+      <div>3.72</div>
     </div>
   </body>
 </html>
@@ -57,58 +50,35 @@
   html {
     font-family: monospace;
     font-size: 11px;
+    font-weight: bold;
   }
 
-  h1 {
-    font-size: 24px;
-  }
-
-  .order-container {
+  body {
+    padding: 0.2rem;
+    padding-right: 1rem;
     display: flex;
     flex-direction: column;
   }
 
-  .item {
-    display: flex;
-    flex-direction: column;
-    width: auto;
+  .divider {
+    width: 100%;
+    border-bottom: 1px dashed black;
+    height: 0rem;
+    margin-top: 0.2rem;
+    margin-bottom: 0.2rem;
   }
 
-  .name-and-price {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-  }
-
-  .quantity {
+  .row-entry {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
   }
 
-  .addons {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
+  .center {
+    text-align: center;
   }
 
-  .total-and-value {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-  }
-
-  .vat-and-value {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-  }
-
-  .item-gap {
-    height: 1rem;
-  }
-
-  .area-divider {
-    height: 1rem;
+  .large {
+    font-size: 2rem;
   }
 </style>
