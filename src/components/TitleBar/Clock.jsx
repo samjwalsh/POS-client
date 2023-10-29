@@ -1,15 +1,20 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 export default function Clock() {
   // For digital clock
-  let time = new Date().toLocaleTimeString();
   const [ctime, setCTime] = useState();
-  const updateTime = () => {
-    time = new Date().toLocaleTimeString('en-IE', { hour12: false });
-    setCTime(time);
-  };
 
-  setInterval(updateTime, 1000);
+
+  useEffect(() => {
+    const getTimeInterval = setInterval(async () => {
+      let time = new Date().toLocaleTimeString('en-IE', { hour12: false });
+      setCTime(time);
+    }, 1000);
+    return () => {
+      clearInterval(getTimeInterval);
+    };
+  }, []);
+  
   return (
     <>
       <div>{ctime}</div>
