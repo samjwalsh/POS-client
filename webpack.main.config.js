@@ -20,4 +20,5 @@ module.exports = {
       keyv: false, // openid-client build warning
     },
   },
+  // externals: ['puppeteer'],
 };

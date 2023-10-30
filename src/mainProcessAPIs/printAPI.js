@@ -1,6 +1,5 @@
 const { ipcMain, app } = require('electron');
-import puppeteer from 'puppeteer';
-// import { print, getPrinters, getDefaultPrinter } from 'pdf-to-printer';
+import { print, getPrinters, getDefaultPrinter } from 'pdf-to-printer';
 
 const fs = require('fs');
 
@@ -28,30 +27,8 @@ ipcMain.handle('printOrder', async (e, order) => {
     console.error(err);
   }
 
-  // Create a browser instance
-  const browser = await puppeteer.launch({ headless: 'new' });
-
-  // Create a new page
-  const page = await browser.newPage();
-
-  await page.setContent(receiptHTML, { waitUntil: 'domcontentloaded' });
-
-  // To reflect CSS used for screens instead of print
-  await page.emulateMediaType('screen');
-
-  // Downlaod the PDF
-  await page.pdf({
-    path: `${dir}/receipt.pdf`,
-    printBackground: true,
-    height: '1000mm',
-    width: '80mm',
-  });
-
-  // Close the browser instance
-  await browser.close();
-
-  // await getPrinters().then(console.log);
-  // await getDefaultPrinter().then(console.log);
+  await getPrinters().then(console.log);
+  await getDefaultPrinter().then(console.log);
 
   const options = {
     printer: 'Microsoft Print to PDF',
