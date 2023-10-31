@@ -1,77 +1,132 @@
 const { ipcMain, app } = require('electron');
-import { print, getPrinters, getDefaultPrinter } from 'pdf-to-printer';
-import pdfkit from 'pdfkit';
+// import { print, getPrinters, getDefaultPrinter } from 'pdf-to-printer';
+// import pdfkit from 'pdfkit';
+
+// const lineLength = 38;
 
 const fs = require('fs');
 
-ipcMain.handle('printOrder', async (e, order) => {
-  let dir = `${app.getPath('appData')}/pos-client/receipts/`;
+ipcMain.handle('printOrder', async (e, order) => {});
 
-  freeUpFolder(dir);
+// ipcMain.handle('printOrder', async (e, order) => {
+//   let dir = `${app.getPath('appData')}/pos-client/receipts/`;
 
-  createReceipt(order, dir);
+//   freeUpFolder(dir);
 
+//   createReceipt(order, dir);
 
+//   await getPrinters().then(console.log);
+//   await getDefaultPrinter().then(console.log);
 
-  await getPrinters().then(console.log);
-  await getDefaultPrinter().then(console.log);
+//   const options = {
+//     printer: 'Microsoft Print to PDF',
+//   };
 
-  const options = {
-    printer: 'Microsoft Print to PDF',
-  };
+//   // print(`${dir}/receipt.pdf`, options)
+//   //   .then(console.log)
+//   //   .catch((err) => {
+//   //     console.log(err);
+//   //   });
+// });
 
-  // print(`${dir}/receipt.pdf`, options)
-  //   .then(console.log)
-  //   .catch((err) => {
-  //     console.log(err);
-  //   });
-});
+// function freeUpFolder(dir) {
+//   // Making sure folder exists
+//   try {
+//     if (!fs.existsSync(dir)) {
+//       fs.mkdirSync(dir);
+//       console.log('Directory is created.');
+//     } else {
+//       console.log('Directory already exists.');
+//     }
+//   } catch (err) {
+//     console.log(err);
+//   }
 
-function freeUpFolder(dir) {
-  // Making sure folder exists
-  try {
-    if (!fs.existsSync(dir)) {
-      fs.mkdirSync(dir);
-      console.log('Directory is created.');
-    } else {
-      console.log('Directory already exists.');
-    }
-  } catch (err) {
-    console.log(err);
-  }
+//   // Emptying folder from last use
+//   try {
+//     fs.unlinkSync(`${dir}/receipt.pdf`);
+//   } catch (err) {
+//     console.error(err);
+//   }
+// }
 
-  // Emptying folder from last use
-  try {
-    fs.unlinkSync(`${dir}/receipt.pdf`);
-  } catch (err) {
-    console.error(err);
-  }
-}
+// function createReceipt(order, dir) {
+//   const doc = new pdfkit({
+//     size: [204.0948, 10000],
+//     margins: {
+//       // by default, all are 72
+//       top: 10,
+//       bottom: 10,
+//       left: 10,
+//       right: 10,
+//     },
+//   });
 
-function createReceipt(order, dir) {
-  const doc = new pdfkit({
-    size: [204.0948, 10000],
-    margins: {
-      // by default, all are 72
-      top: 10,
-      bottom: 10,
-      left: 10,
-      right: 10,
-    },
-  });
+//   doc.fontSize(8);
+//   doc.font('Courier-Bold');
 
-  order.forEach(item => {
+//   // order.items.forEach((item) => {
+//   //   padLine(doc, item.name, `€${(item.price * item.quantity).toFixed(2)}`);
 
-  })
+//   //   if (item.addons.length > 0) {
+//   //     let addonsString = '';
+//   //     item.addons.forEach((addon, index) => {
+//   //       if (index + 1 === item.addons.length) {
+//   //         addonsString += `${addon}`;
+//   //       } else {
+//   //         addonsString += `${addon}, `;
+//   //       }
+//   //     });
+//   //     padLine(doc, addonsString);
+//   //   }
 
-  doc.fontSize(11);
-  doc.font('Courier-Bold');
-  doc.text('this is some text text to see how things work');
-  doc.text('mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm');
+//   //   if (item.quantity > 1) {
+//   //     padLine(doc, `   ${item.quantity} @ ${item.price.toFixed(2)}`);
+//   //   }
+//   //   padLine(doc, '---', '---');
+//   // });
 
-  doc.pipe(fs.createWriteStream(`${dir}/receipt.pdf`)); // write to PDF
-  doc.end();
-}
+//   padLine(doc, '1234567890123456789012345678901234567');
+//   padLine(doc, '12345678901234567890123456789012345678');
+//   padLine(doc, '123456789012345678901234567890123456789');
+//   padLine(
+//     doc,
+//     '12345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890'
+//   );
+
+//   doc.pipe(fs.createWriteStream(`${dir}/receipt.pdf`)); // write to PDF
+//   doc.end();
+// }
+
+// function padLine(doc, leftString, rightString) {
+//   if (rightString === undefined) {
+//     rightString = '';
+//   }
+
+//   let leftGap = 5;
+
+//   const paddingChar = ' ';
+
+//   let charsRemaining = leftString.length + rightString.length;
+
+//   while (charsRemaining > 0) {
+//     if (rightString.length > lineLength - leftGap) {
+//       doc.text(`${rightString.slice(0, lineLength - leftGap)}${paddingChar.repeat(lineLength - rightString.slice(0, lineLength - leftGap).length)}`, { align: 'center' });
+//       rightString = rightString.slice(
+//         lineLength - leftGap + 1,
+//         rightString.length + 1
+//       );
+//     } else if ((rightString.length + leftString.length) <= lineLength - leftGap) {
+//       doc.text()
+//     }
+//   }
+
+//   console.log(totalLines);
+// }
+
+// function insertDivider(doc) {
+//   doc.text('-'.repeat(lineLength), { align: 'center' });
+// }
 
 /*
   let receiptHTML = `<!DOCTYPE html>
