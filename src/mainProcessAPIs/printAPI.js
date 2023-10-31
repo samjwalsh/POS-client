@@ -88,7 +88,7 @@ function createReceipt(order, dir) {
 
   let subtotal = 0;
 
-  order.items.forEach((item) => {
+  order.items.forEach((item) => { 
     subtotal += item.quantity * item.price;
 
     receiptHTML += `
