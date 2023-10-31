@@ -1,13 +1,33 @@
 const { ipcMain, app } = require('electron');
 import { print, getPrinters, getDefaultPrinter } from 'pdf-to-printer';
+import pdfkit from 'pdfkit';
 
 const fs = require('fs');
 
 ipcMain.handle('printOrder', async (e, order) => {
-  let receiptHTML = createReceiptHTML(order);
-
   let dir = `${app.getPath('appData')}/pos-client/receipts/`;
 
+  freeUpFolder(dir);
+
+  createReceipt(order, dir);
+
+
+
+  await getPrinters().then(console.log);
+  await getDefaultPrinter().then(console.log);
+
+  const options = {
+    printer: 'Microsoft Print to PDF',
+  };
+
+  // print(`${dir}/receipt.pdf`, options)
+  //   .then(console.log)
+  //   .catch((err) => {
+  //     console.log(err);
+  //   });
+});
+
+function freeUpFolder(dir) {
   // Making sure folder exists
   try {
     if (!fs.existsSync(dir)) {
@@ -26,22 +46,34 @@ ipcMain.handle('printOrder', async (e, order) => {
   } catch (err) {
     console.error(err);
   }
+}
 
-  await getPrinters().then(console.log);
-  await getDefaultPrinter().then(console.log);
+function createReceipt(order, dir) {
+  const doc = new pdfkit({
+    size: [204.0948, 10000],
+    margins: {
+      // by default, all are 72
+      top: 10,
+      bottom: 10,
+      left: 10,
+      right: 10,
+    },
+  });
 
-  const options = {
-    printer: 'Microsoft Print to PDF',
-  };
+  order.forEach(item => {
 
-  // print(`${dir}/receipt.pdf`, options)
-  //   .then(console.log)
-  //   .catch((err) => {
-  //     console.log(err);
-  //   });
-});
+  })
 
-function createReceiptHTML(order) {
+  doc.fontSize(11);
+  doc.font('Courier-Bold');
+  doc.text('this is some text text to see how things work');
+  doc.text('mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm');
+
+  doc.pipe(fs.createWriteStream(`${dir}/receipt.pdf`)); // write to PDF
+  doc.end();
+}
+
+/*
   let receiptHTML = `<!DOCTYPE html>
   <html lang="en">
     <head>
@@ -145,4 +177,4 @@ function createReceiptHTML(order) {
 </style>
 `;
   return receiptHTML;
-}
+*/
