@@ -1,12 +1,70 @@
 const { ipcMain, app } = require('electron');
+const ThermalPrinter = require('node-thermal-printer').printer;
+const PrinterTypes = require('node-thermal-printer').types;
 // import { print, getPrinters, getDefaultPrinter } from 'pdf-to-printer';
 // import pdfkit from 'pdfkit';
 
 // const lineLength = 38;
 
-const fs = require('fs');
+// const fs = require('fs');
 
-ipcMain.handle('printOrder', async (e, order) => {});
+ipcMain.handle('printOrder', async (e, order) => {
+  let printer = new ThermalPrinter({
+    type: PrinterTypes.EPSON,
+    interface: `//./COM3`,
+    // interface: '//localhost/printer', /*https://i.stack.imgur.com/IrHCi.png*/
+    characterSet: 'PC850_MULTILINGUAL',
+  });
+
+  printer.alignCenter();
+  printer.setTextQuadArea();
+  printer.println("Teddy's Ice Cream");
+  printer.drawLine(); // Draws a line
+
+  printer.setTextNormal();
+  printer.alignLeft(); // Align text to left
+
+  let total = 0;
+
+  order.items.forEach((item) => {
+    let price = item.price * item.quantity;
+    total += price;
+    printer.leftRight(item.name, `€${price.toFixed(2)}`); // Prints text left and right
+
+    if (item.addons.length > 0) {
+      let addonsString = '';
+      item.addons.forEach((addon, index) => {
+        if (index + 1 === item.addons.length) {
+          addonsString += `${addon}`;
+        } else {
+          addonsString += `${addon}, `;
+        }
+      });
+      printer.println(addonsString);
+    }
+
+    if (item.quantity > 1) {
+      printer.println(`${item.quantity} @ ${item.price.toFixed(2)}`);
+    }
+
+    printer.newLine();
+  });
+
+  printer.drawLine(); // Draws a line
+  printer.setTextQuadArea();
+  printer.leftRight('Total:', `€${total.toFixed(2)}`);
+  printer.leftRight('Vat Total:', `€${(0.23 * total).toFixed(2)}`);
+
+  printer.setTextNormal();
+  printer.leftRight('Paid By:', order.paymentMethod);
+
+  try {
+    let execute = await printer.execute();
+    console.log('Print done!');
+  } catch (error) {
+    console.error('Print failed:', error);
+  }
+});
 
 // ipcMain.handle('printOrder', async (e, order) => {
 //   let dir = `${app.getPath('appData')}/pos-client/receipts/`;
