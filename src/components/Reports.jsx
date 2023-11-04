@@ -237,7 +237,8 @@ export default function Reports(props) {
 }
 
 async function handlePrintReceipt(order) {
-  await printOrder(order);
+  const response = await printOrder(order);
+  alert(response)
 }
 
 function calculateDateString(time) {

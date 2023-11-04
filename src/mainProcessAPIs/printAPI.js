@@ -1,6 +1,12 @@
 const { ipcMain, app } = require('electron');
 const ThermalPrinter = require('node-thermal-printer').printer;
 const PrinterTypes = require('node-thermal-printer').types;
+
+// let path = require('path')
+// let driver = require(path.join(__dirname,'node_modules/@thiagoelg/node-printer/build/Release/node_printer.node'));
+// import driver from '@thiagoelg/node-printer';
+// const driver = require('@thiagoelg/node-printer');
+
 // import { print, getPrinters, getDefaultPrinter } from 'pdf-to-printer';
 // import pdfkit from 'pdfkit';
 
@@ -11,8 +17,10 @@ const PrinterTypes = require('node-thermal-printer').types;
 ipcMain.handle('printOrder', async (e, order) => {
   let printer = new ThermalPrinter({
     type: PrinterTypes.EPSON,
-    interface: `//./COM3`,
-    // interface: '//localhost/printer', /*https://i.stack.imgur.com/IrHCi.png*/
+    interface: 'printer:auto',
+    driver: require('@thiagoelg/node-printer'),
+    // interface: `//./COM3`,
+    // interface: '//localhost/printer' /*https://i.stack.imgur.com/IrHCi.png*/,
     characterSet: 'PC850_MULTILINGUAL',
   });
 
@@ -60,9 +68,9 @@ ipcMain.handle('printOrder', async (e, order) => {
 
   try {
     let execute = await printer.execute();
-    console.log('Print done!');
+    return execute;
   } catch (error) {
-    console.error('Print failed:', error);
+    return error;
   }
 });
 

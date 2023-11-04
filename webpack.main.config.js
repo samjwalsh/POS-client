@@ -20,5 +20,5 @@ module.exports = {
       keyv: false, // openid-client build warning
     },
   },
-  // externals: ['puppeteer'],
+  // externals: ['@thiagoelg/node-printer'],
 };
