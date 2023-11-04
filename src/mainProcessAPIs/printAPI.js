@@ -1,7 +1,7 @@
 const { ipcMain, app } = require('electron');
 const ThermalPrinter = require('node-thermal-printer').printer;
 const PrinterTypes = require('node-thermal-printer').types;
-
+const printerDriver = require('@thiagoelg/node-printer');
 // let path = require('path')
 // let driver = require(path.join(__dirname,'node_modules/@thiagoelg/node-printer/build/Release/node_printer.node'));
 // import driver from '@thiagoelg/node-printer';
@@ -15,56 +15,60 @@ const PrinterTypes = require('node-thermal-printer').types;
 // const fs = require('fs');
 
 ipcMain.handle('printOrder', async (e, order) => {
+  // return printerDriver.getPrinters();
   let printer = new ThermalPrinter({
     type: PrinterTypes.EPSON,
     interface: 'printer:auto',
-    driver: require('@thiagoelg/node-printer'),
+    driver: printerDriver,
     // interface: `//./COM3`,
     // interface: '//localhost/printer' /*https://i.stack.imgur.com/IrHCi.png*/,
     characterSet: 'PC850_MULTILINGUAL',
   });
 
-  printer.alignCenter();
-  printer.setTextQuadArea();
-  printer.println("Teddy's Ice Cream");
-  printer.drawLine(); // Draws a line
+  printer.println('Hello World!');
+  
 
-  printer.setTextNormal();
-  printer.alignLeft(); // Align text to left
+  // printer.alignCenter();
+  // printer.setTextQuadArea();
+  // printer.println("Teddy's Ice Cream");
+  // printer.drawLine(); // Draws a line
 
-  let total = 0;
+  // printer.setTextNormal();
+  // printer.alignLeft(); // Align text to left
 
-  order.items.forEach((item) => {
-    let price = item.price * item.quantity;
-    total += price;
-    printer.leftRight(item.name, `€${price.toFixed(2)}`); // Prints text left and right
+  // let total = 0;
 
-    if (item.addons.length > 0) {
-      let addonsString = '';
-      item.addons.forEach((addon, index) => {
-        if (index + 1 === item.addons.length) {
-          addonsString += `${addon}`;
-        } else {
-          addonsString += `${addon}, `;
-        }
-      });
-      printer.println(addonsString);
-    }
+  // order.items.forEach((item) => {
+  //   let price = item.price * item.quantity;
+  //   total += price;
+  //   printer.leftRight(item.name, `€${price.toFixed(2)}`); // Prints text left and right
 
-    if (item.quantity > 1) {
-      printer.println(`${item.quantity} @ ${item.price.toFixed(2)}`);
-    }
+  //   if (item.addons.length > 0) {
+  //     let addonsString = '';
+  //     item.addons.forEach((addon, index) => {
+  //       if (index + 1 === item.addons.length) {
+  //         addonsString += `${addon}`;
+  //       } else {
+  //         addonsString += `${addon}, `;
+  //       }
+  //     });
+  //     printer.println(addonsString);
+  //   }
 
-    printer.newLine();
-  });
+  //   if (item.quantity > 1) {
+  //     printer.println(`${item.quantity} @ ${item.price.toFixed(2)}`);
+  //   }
 
-  printer.drawLine(); // Draws a line
-  printer.setTextQuadArea();
-  printer.leftRight('Total:', `€${total.toFixed(2)}`);
-  printer.leftRight('Vat Total:', `€${(0.23 * total).toFixed(2)}`);
+  //   printer.newLine();
+  // });
 
-  printer.setTextNormal();
-  printer.leftRight('Paid By:', order.paymentMethod);
+  // printer.drawLine(); // Draws a line
+  // printer.setTextQuadArea();
+  // printer.leftRight('Total:', `€${total.toFixed(2)}`);
+  // printer.leftRight('Vat Total:', `€${(0.23 * total).toFixed(2)}`);
+
+  // printer.setTextNormal();
+  // printer.leftRight('Paid By:', order.paymentMethod);
 
   try {
     let execute = await printer.execute();
