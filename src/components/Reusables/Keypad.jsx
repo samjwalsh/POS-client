@@ -119,7 +119,7 @@ const useKeypad = (numberFormat) => {
     return (
       <div
         className='grid grid-cols-3 grid-rows-6 w-full h-full  gap-2 p-2 text-xl '
-        onClick={(event) => handleKeypadClick(event)}>
+        onClick={(event) => handleKeypadClick(event)}onTouchMove={(event) => handleKeypadClick(event)}>
         <div className=' col-span-2 row-span 1 flex flex-row text-2xl font-mono justify-between w-full'>
           <div className='text-left cnter-items'>
             {numberFormat === 'currency' ? '€' : ''}

@@ -55,38 +55,38 @@ export default function HamburgerMenu(props) {
             <div className='text-2xl self-end'>Menu</div>
             <div
               className='justify-end btn--minus btn shadow w-8 h-8 cnter-items'
-              onClick={() => handleCloseSideMenu(setHamburger)}>
+              onClick={() => handleCloseSideMenu(setHamburger)}onTouchMove={() => handleCloseSideMenu(setHamburger)}>
               <img src={closeSVG} className='w-6 invert-icon' />
             </div>
           </div>
           <div className=' flex flex-col gap-2 p-2 '>
             <div
               className='side-menu-option gradient1'
-              onClick={() => handleSetAppState('Register')}>
+              onClick={() => handleSetAppState('Register')}onTouchMove={() => handleSetAppState('Register')}>
               Register
             </div>
             <div
               className='side-menu-option gradient1'
-              onClick={() => handleSetAppState('Reports')}>
+              onClick={() => handleSetAppState('Reports')}onTouchMove={() => handleSetAppState('Reports')}>
               Reports
             </div>
             <div
               className='side-menu-option gradient1'
-              onClick={() => handleSetAppState('Settings')}>
+              onClick={() => handleSetAppState('Settings')}onTouchMove={() => handleSetAppState('Settings')}>
               Settings
             </div>
           </div>
           <div className='mt-auto p-2'>
             <div
               className='side-menu-option gradientred'
-              onClick={() => handleTerminatePOS()}>
+              onClick={() => handleTerminatePOS()}onTouchMove={() => handleTerminatePOS()}>
               Exit POS
             </div>
           </div>
         </div>
         <div
           className='row-span-1 col-span-9 bg-black opacity-50'
-          onClick={() => handleCloseSideMenu(setHamburger)}></div>
+          onClick={() => handleCloseSideMenu(setHamburger)}onTouchMove={() => handleCloseSideMenu(setHamburger)}></div>
       </div>
     </>
   );

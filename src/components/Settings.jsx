@@ -73,39 +73,59 @@ export default function Settings(props) {
               <div className='flex flex-row gap-2'>
                 <div
                   className='btn rounded btn--minus p-2 cnter-items'
-                  onClick={(e) => {
+                  onClick={(e) =>
                     handleClickRangeOption(
                       setting,
                       'decrease',
                       settings,
                       setSettings
-                    );
-                  }}>
+                    )
+                  }
+                  onTouchMove={(e) =>
+                    handleClickRangeOption(
+                      setting,
+                      'decrease',
+                      settings,
+                      setSettings
+                    )
+                  }>
                   <img src={minusSVG} className='w-6 invert-icon' />
                 </div>
                 <div className='cnter-items text-xl'>{setting.value}</div>
                 <div
                   className='btn rounded btn--plus p-2 cnter-items'
-                  onClick={(e) => {
+                  onClick={(e) => 
                     handleClickRangeOption(
                       setting,
                       'increase',
                       settings,
                       setSettings
-                    );
-                  }}>
+                    )
+                  }onTouchMove={(e) => 
+                    handleClickRangeOption(
+                      setting,
+                      'increase',
+                      settings,
+                      setSettings
+                    )}>
                   <img src={addSVG} className='w-6 invert-icon' />
                 </div>
                 <div
                   className='btn rounded gradient1 p-2 cnter-items '
-                  onClick={(e) => {
+                  onClick={(e) => 
                     handleClickRangeOption(
                       setting,
                       'reset',
                       settings,
                       setSettings
-                    );
-                  }}>
+                    )
+                  }onTouchMove={(e) => 
+                    handleClickRangeOption(
+                      setting,
+                      'reset',
+                      settings,
+                      setSettings
+                    )}>
                   {' '}
                   <img src={undo} className='w-6 invert-icon' />
                 </div>
@@ -121,9 +141,10 @@ export default function Settings(props) {
               <div className='flex flex-row gap-2'>
                 <div
                   className='btn rounded gradient1 p-2 cnter-items '
-                  onClick={(e) => {
-                    handleClickButtonOption(setting);
-                  }}>
+                  onClick={(e) => 
+                    handleClickButtonOption(setting)
+                  }onTouchMove={(e) => 
+                    handleClickButtonOption(setting)}>
                   {setting.label}
                 </div>
               </div>
@@ -138,9 +159,10 @@ export default function Settings(props) {
               <div className='flex flex-row gap-2'>
                 <div
                   className='btn rounded gradient1 p-2 cnter-items '
-                  onClick={(e) => {
-                    handleClickToggleOption(setting, settings, setSettings);
-                  }}>
+                  onClick={(e) => 
+                    handleClickToggleOption(setting, settings, setSettings)
+                  } onTouchMove={(e) => 
+                    handleClickToggleOption(setting, settings, setSettings)}>
                   {setting.value ? (
                     <img src={checkSVG} className='w-6 invert-icon' />
                   ) : (

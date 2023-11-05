@@ -62,7 +62,15 @@ export default function ItemPage(props) {
             setCurrentOrder,
             index
           )
-        }>
+        }onTouchMove={(event) =>
+          handleAddonToggle(
+            event,
+            item,
+            item.addons[index],
+            currentOrder,
+            setCurrentOrder,
+            index
+          )}>
         <div className='flex flex-row p-2'>
           <div className='text-xl cnter-items'>{addon.name}</div>
           <div className='pl-2 font-mono text-base cnter-items'>
@@ -97,7 +105,17 @@ export default function ItemPage(props) {
               setOrder,
               addons
             )
-          }
+          } onTouchMove={(shortcut) =>
+            handleClickShortcut(
+              event,
+              item,
+              setMenuState,
+              currentOrder,
+              setCurrentOrder,
+              order,
+              setOrder,
+              addons
+            )}
           key={shortcut.name}>
           <div className=''>{shortcut.name}</div>
           <div className='font-mono font-normal'>
@@ -136,7 +154,14 @@ export default function ItemPage(props) {
               setCurrentOrder,
               currentOrder
             )
-          }>
+          }onTouchMove={(event) =>
+            handleExitItemPage(
+              event,
+              item,
+              setMenuState,
+              setCurrentOrder,
+              currentOrder
+            )}>
           Cancel
         </div>
       </div>
@@ -159,7 +184,8 @@ export default function ItemPage(props) {
             className='btn gradientred w-14 h-auto cnter-items '
             onClick={(event) =>
               handleDecreaseQuantity(event, item, currentOrder, setCurrentOrder)
-            }>
+            }onTouchMove={(event) =>
+              handleDecreaseQuantity(event, item, currentOrder, setCurrentOrder)}>
             <img src={minusSVG} className='w-6 invert-icon' />
           </div>
           <div className=' w-16 h-auto font-mono cnter-items text-2xl'>
@@ -169,7 +195,8 @@ export default function ItemPage(props) {
             className='btn gradientgreen w-14 h-auto cnter-items'
             onClick={(event) =>
               handleIncreaseQuantity(event, item, currentOrder, setCurrentOrder)
-            }>
+            }onTouchMove={(event) =>
+              handleIncreaseQuantity(event, item, currentOrder, setCurrentOrder)}>
             <img src={addSVG} className='w-6 invert-icon' />
           </div>
         </div>
@@ -188,7 +215,16 @@ export default function ItemPage(props) {
               order,
               setOrder
             )
-          }>
+          }onTouchMove={(event) =>
+            handleAddToOrder(
+              event,
+              item,
+              setMenuState,
+              currentOrder,
+              setCurrentOrder,
+              order,
+              setOrder
+            )}>
           Add
         </div>
       </div>

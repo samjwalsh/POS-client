@@ -89,12 +89,12 @@ export default function Reports(props) {
             <div className='flex flex-row w-full p-2 justify-between border-b border-colour blue rounded-t'>
               <div
                 className=' btn cnter-items gradientblack p-2'
-                onClick={(e) => handlePrintReceipt(order)}>
+                onClick={(e) => handlePrintReceipt(order)}onTouchMove={(e) => handlePrintReceipt(order)}>
                 Receipt{' '}
               </div>
               <div
                 className='btn btn--minus p-1 cnter-items'
-                onClick={(e) => handleDeleteOrder(order)}>
+                onClick={(e) => handleDeleteOrder(order)}onTouchMove={(e) => handleDeleteOrder(order)}>
                 <img src={closeSVG} className='w-8 invert-icon' />
               </div>
             </div>
@@ -130,12 +130,12 @@ export default function Reports(props) {
         <div className='mt-auto border-t border-colour p-2 flex flex-col gap-2'>
           <div
             className='btn gradient1 h-auto p-2 cnter-items w-full'
-            onClick={(event) => handleDeleteOldOrders()}>
+            onClick={(event) => handleDeleteOldOrders()}onTouchMove={(event) => handleDeleteOldOrders()}>
             Delete Old Orders
           </div>
           <div
             className='btn btn--minus h-auto p-2 cnter-items w-full'
-            onClick={(event) => handleEndOfDay()}>
+            onClick={(event) => handleEndOfDay()}onTouchMove={(event) => handleEndOfDay()}>
             End Of Day
           </div>
         </div>

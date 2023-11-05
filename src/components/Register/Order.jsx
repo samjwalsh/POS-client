@@ -78,7 +78,7 @@ export default function Order(props) {
         key={`${orderItem.name} [${orderItem.addons}]`}>
         <div
           className='col-span-1 row-span-2 cnter-items btn--minus w-12 rounded shadow'
-          onClick={() => handleOrderItemQuantityChange('down', orderItem)}>
+          onClick={() => handleOrderItemQuantityChange('down', orderItem)}onTouchMove={() => handleOrderItemQuantityChange('down', orderItem)}>
           <img src={minusSVG} className='w-6 invert-icon' />
         </div>
         <div className='w-full grid grid-cols-[1fr_min-content] grid-rows-[min-content, 1fr] p-1 gradient1 rounded shadow'>
@@ -99,7 +99,7 @@ export default function Order(props) {
         </div>
         <div
           className='col-span-1 row-span-2 cnter-items justify-self-end btn--plus w-12 rounded shadow'
-          onClick={() => handleOrderItemQuantityChange('up', orderItem)}>
+          onClick={() => handleOrderItemQuantityChange('up', orderItem)}onTouchMove={() => handleOrderItemQuantityChange('up', orderItem)}>
           <img src={addSVG} className='w-6 fill-white invert-icon' />
         </div>
       </div>
@@ -135,17 +135,17 @@ export default function Order(props) {
           <div className='row-span-1 col-span-1 flex gap-2 items-stretch h-20 text-lg uppercase font-bold'>
             <div
               className='gradientblack rounded shadow cnter-items w-48'
-              onClick={() => handlePlusMinus()}>
+              onClick={() => handlePlusMinus()}onTouchMove={() => handlePlusMinus()}>
               <img src={euro} className='w-6 invert-icon' />
             </div>
             <div
               className='btn--plus  rounded cnter-items w-full text-lg uppercase font-bold'
-              onClick={() => handlePayment('card')}>
+              onClick={() => handlePayment('card')}onTouchMove={() => handlePayment('card')}>
               Card
             </div>
             <div
               className='btn--plus rounded cnter-items w-full'
-              onClick={() => handlePayment('cash')}>
+              onClick={() => handlePayment('cash')}onTouchMove={() => handlePayment('cash')}>
               Cash
             </div>
           </div>
