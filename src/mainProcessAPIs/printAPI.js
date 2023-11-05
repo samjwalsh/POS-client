@@ -26,7 +26,7 @@ ipcMain.handle('printOrder', async (e, order) => {
   });
 
   printer.println('Hello World!');
-  
+  printer.cut();
 
   // printer.alignCenter();
   // printer.setTextQuadArea();
