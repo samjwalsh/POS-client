@@ -1,6 +1,10 @@
 const { ipcMain, app } = require('electron');
-const ThermalPrinter = require('node-thermal-printer').printer;
-const PrinterTypes = require('node-thermal-printer').types;
+const {
+  ThermalPrinter,
+  PrinterTypes,
+  CharacterSet,
+  BreakLine,
+} = require('node-thermal-printer');
 const printerDriver = require('@thiagoelg/node-printer');
 // let path = require('path')
 // let driver = require(path.join(__dirname,'node_modules/@thiagoelg/node-printer/build/Release/node_printer.node'));
