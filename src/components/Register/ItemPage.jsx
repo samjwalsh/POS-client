@@ -98,6 +98,18 @@ export default function ItemPage(props) {
               addons
             )
           }
+          onTouchMove={(shortcut) =>
+            handleClickShortcut(
+              event,
+              item,
+              setMenuState,
+              currentOrder,
+              setCurrentOrder,
+              order,
+              setOrder,
+              addons
+            )
+          }
           key={shortcut.name}>
           <div className=''>{shortcut.name}</div>
           <div className='font-mono font-normal'>

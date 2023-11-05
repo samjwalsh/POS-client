@@ -25,7 +25,7 @@ export default function Order(props) {
     if (keypadValue === 0) return;
     log(`Update the adjustment in the order`);
     let temp_order = order;
-    temp_order.push({ name: 'Adjustment', price: keypadValue, quantity: 1 });
+    temp_order.push({ name: 'Adjustment', price: keypadValue, quantity: 1, addons:[] });
     setOrder([...temp_order]);
   }
 
