@@ -73,7 +73,7 @@ export default function Settings(props) {
               <div className='flex flex-row gap-2'>
                 <div
                   className='btn rounded btn--minus p-2 cnter-items'
-                  onClick={(e) =>
+                  onContextMenu={(e) =>
                     handleClickRangeOption(
                       setting,
                       'decrease',
@@ -81,7 +81,7 @@ export default function Settings(props) {
                       setSettings
                     )
                   }
-                  onTouchMove={(e) =>
+                  onTouchStart={(e) =>
                     handleClickRangeOption(
                       setting,
                       'decrease',
@@ -94,38 +94,42 @@ export default function Settings(props) {
                 <div className='cnter-items text-xl'>{setting.value}</div>
                 <div
                   className='btn rounded btn--plus p-2 cnter-items'
-                  onClick={(e) => 
+                  onContextMenu={(e) =>
                     handleClickRangeOption(
                       setting,
                       'increase',
                       settings,
                       setSettings
                     )
-                  }onTouchMove={(e) => 
+                  }
+                  onTouchStart={(e) =>
                     handleClickRangeOption(
                       setting,
                       'increase',
                       settings,
                       setSettings
-                    )}>
+                    )
+                  }>
                   <img src={addSVG} className='w-6 invert-icon' />
                 </div>
                 <div
                   className='btn rounded gradient1 p-2 cnter-items '
-                  onClick={(e) => 
+                  onContextMenu={(e) =>
                     handleClickRangeOption(
                       setting,
                       'reset',
                       settings,
                       setSettings
                     )
-                  }onTouchMove={(e) => 
+                  }
+                  onTouchStart={(e) =>
                     handleClickRangeOption(
                       setting,
                       'reset',
                       settings,
                       setSettings
-                    )}>
+                    )
+                  }>
                   {' '}
                   <img src={undo} className='w-6 invert-icon' />
                 </div>
@@ -141,10 +145,8 @@ export default function Settings(props) {
               <div className='flex flex-row gap-2'>
                 <div
                   className='btn rounded gradient1 p-2 cnter-items '
-                  onClick={(e) => 
-                    handleClickButtonOption(setting)
-                  }onTouchMove={(e) => 
-                    handleClickButtonOption(setting)}>
+                  onContextMenu={(e) => handleClickButtonOption(setting)}
+                  onTouchStart={(e) => handleClickButtonOption(setting)}>
                   {setting.label}
                 </div>
               </div>
@@ -159,10 +161,12 @@ export default function Settings(props) {
               <div className='flex flex-row gap-2'>
                 <div
                   className='btn rounded gradient1 p-2 cnter-items '
-                  onClick={(e) => 
+                  onContextMenu={(e) =>
                     handleClickToggleOption(setting, settings, setSettings)
-                  } onTouchMove={(e) => 
-                    handleClickToggleOption(setting, settings, setSettings)}>
+                  }
+                  onTouchStart={(e) =>
+                    handleClickToggleOption(setting, settings, setSettings)
+                  }>
                   {setting.value ? (
                     <img src={checkSVG} className='w-6 invert-icon' />
                   ) : (
@@ -172,6 +176,8 @@ export default function Settings(props) {
               </div>
             </div>
           );
+        } else if (setting.type === 'dropdown') {
+          return <></>;
         }
       });
       return (

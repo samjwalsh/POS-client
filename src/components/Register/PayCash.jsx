@@ -52,33 +52,39 @@ export default function PayCash(props) {
       <div className='grid grid-cols-2 grid-rows-5 gap-2 h-full btn'>
         <div
           className='col-span-2 row-span-1   gradientblack  btn  cnter-items'
-          onClick={() => handleButtonPress('custom')}onTouchMove={() => handleButtonPress('custom')}>
+          onContextMenu={() => handleButtonPress('custom')}
+          onTouchStart={() => handleButtonPress('custom')}>
           Custom
         </div>
         <div
           className='col-span-1 row-span-1 font-mono  gradientblack  btn  cnter-items'
-          onClick={() => handleButtonPress(50)}onTouchMove={() => handleButtonPress(50)}>
+          onContextMenu={() => handleButtonPress(50)}
+          onTouchStart={() => handleButtonPress(50)}>
           €50
         </div>
         <div
           className='col-span-1 row-span-1 font-mono  gradientblack  btn  cnter-items'
-          onClick={() => handleButtonPress(20)}onTouchMove={() => handleButtonPress(20)}>
+          onContextMenu={() => handleButtonPress(20)}
+          onTouchStart={() => handleButtonPress(20)}>
           €20
         </div>
         <div
           className='col-span-1 row-span-1 font-mono  gradientblack  btn  cnter-items'
-          onClick={() => handleButtonPress(10)}onTouchMove={() => handleButtonPress(10)}>
+          onContextMenu={() => handleButtonPress(10)}
+          onTouchStart={() => handleButtonPress(10)}>
           €10
         </div>
         <div
           className='col-span-1 row-span-1 font-mono  gradientblack  btn  cnter-items'
-          onClick={() => handleButtonPress(5)}onTouchMove={() => handleButtonPress(5)}>
+          onContextMenu={() => handleButtonPress(5)}
+          onTouchStart={() => handleButtonPress(5)}>
           €5
         </div>
 
         <div
           className='col-span-2 row-span-2  gradientgreen  btn  cnter-items'
-          onClick={() => handleButtonPress('exit')}onTouchMove={() => handleButtonPress('exit')}>
+          onContextMenu={() => handleButtonPress('exit')}
+          onTouchStart={() => handleButtonPress('exit')}>
           DONE
         </div>
       </div>

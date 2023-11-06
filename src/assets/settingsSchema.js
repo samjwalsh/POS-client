@@ -29,4 +29,13 @@ export const settingsSchema = [
       { name: "Delete All Local Data", label: "Delete", type: "button" },
     ],
   },
+  {
+    name: "Printer",
+    settings: [
+      {
+        name: "Printer Name",
+        type: "dropdown"
+      }
+    ]
+  }
 ];

@@ -33,12 +33,10 @@ ipcMain.handle('printOrder', async (e, order) => {
 
   let total = 0;
   order.items.forEach((item, index) => {
-    console.log(item);
     let price = item.price * item.quantity;
     total += price;
     printer.leftRight(item.name, `€${price.toFixed(2)}`);
     if (item.addons !== undefined && item.addons.length > 0) {
-      console.log('addons');
       let addonsString = 'Addons: ';
       item.addons.forEach((addon, index) => {
         if (index + 1 === item.addons.length) {

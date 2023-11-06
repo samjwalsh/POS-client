@@ -70,12 +70,12 @@ body {
   @apply w-48 h-0 max-w-5xl flex-grow;
 }
 
-.gradient1 {
+/* .gradient1 {
   @apply dark:bg-cyan-900 border dark:border-cyan-700 border-sky-500 bg-sky-300 ;
-}
+} */
 
-.blue {
-  @apply dark:bg-cyan-900 bg-sky-300 ;
+.gradient1 {
+  @apply dark:bg-yellow-900 border dark:border-yellow-700 border-orange-500 bg-orange-300 ;
 }
 
 .gradientred {

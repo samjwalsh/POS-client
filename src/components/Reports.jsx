@@ -86,15 +86,17 @@ export default function Reports(props) {
           <div
             key={order.time}
             className='orderbox border border-colour rounded flex max-h-96 flex-col '>
-            <div className='flex flex-row w-full p-2 justify-between border-b border-colour blue rounded-t'>
+            <div className='flex flex-row w-full p-2 justify-between border-b border-colour rounded-t'>
               <div
                 className=' btn cnter-items gradientblack p-2'
-                onClick={(e) => handlePrintReceipt(order)}onTouchMove={(e) => handlePrintReceipt(order)}>
+                onContextMenu={(e) => handlePrintReceipt(order)}
+                onTouchStart={(e) => handlePrintReceipt(order)}>
                 Receipt{' '}
               </div>
               <div
                 className='btn btn--minus p-1 cnter-items'
-                onClick={(e) => handleDeleteOrder(order)}onTouchMove={(e) => handleDeleteOrder(order)}>
+                onContextMenu={(e) => handleDeleteOrder(order)}
+                onTouchStart={(e) => handleDeleteOrder(order)}>
                 <img src={closeSVG} className='w-8 invert-icon' />
               </div>
             </div>
@@ -130,12 +132,14 @@ export default function Reports(props) {
         <div className='mt-auto border-t border-colour p-2 flex flex-col gap-2'>
           <div
             className='btn gradient1 h-auto p-2 cnter-items w-full'
-            onClick={(event) => handleDeleteOldOrders()}onTouchMove={(event) => handleDeleteOldOrders()}>
+            onContextMenu={(event) => handleDeleteOldOrders()}
+            onTouchStart={(event) => handleDeleteOldOrders()}>
             Delete Old Orders
           </div>
           <div
             className='btn btn--minus h-auto p-2 cnter-items w-full'
-            onClick={(event) => handleEndOfDay()}onTouchMove={(event) => handleEndOfDay()}>
+            onContextMenu={(event) => handleEndOfDay()}
+            onTouchStart={(event) => handleEndOfDay()}>
             End Of Day
           </div>
         </div>
@@ -238,7 +242,7 @@ export default function Reports(props) {
 
 async function handlePrintReceipt(order) {
   const response = await printOrder(order);
-return;
+  return;
 }
 
 function calculateDateString(time) {

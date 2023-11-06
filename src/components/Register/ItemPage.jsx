@@ -53,7 +53,7 @@ export default function ItemPage(props) {
         key={addon.name}
         className='w-72 max-w-full flex-grow flex flex-row gradient1 rounded h-14 justify-between'
         id={index}
-        onClick={(event) =>
+        onContextMenu={(event) =>
           handleAddonToggle(
             event,
             item,
@@ -62,7 +62,8 @@ export default function ItemPage(props) {
             setCurrentOrder,
             index
           )
-        }onTouchMove={(event) =>
+        }
+        onTouchStart={(event) =>
           handleAddonToggle(
             event,
             item,
@@ -70,7 +71,8 @@ export default function ItemPage(props) {
             currentOrder,
             setCurrentOrder,
             index
-          )}>
+          )
+        }>
         <div className='flex flex-row p-2'>
           <div className='text-xl cnter-items'>{addon.name}</div>
           <div className='pl-2 font-mono text-base cnter-items'>
@@ -94,7 +96,7 @@ export default function ItemPage(props) {
       return (
         <div
           className='mt-2 btn gradientgreen cnter-items w-full h-48 flex flex-col'
-          onClick={(shortcut) =>
+          onContextMenu={(shortcut) =>
             handleClickShortcut(
               event,
               item,
@@ -105,7 +107,8 @@ export default function ItemPage(props) {
               setOrder,
               addons
             )
-          } onTouchMove={(shortcut) =>
+          }
+          onTouchStart={(shortcut) =>
             handleClickShortcut(
               event,
               item,
@@ -115,7 +118,8 @@ export default function ItemPage(props) {
               order,
               setOrder,
               addons
-            )}
+            )
+          }
           key={shortcut.name}>
           <div className=''>{shortcut.name}</div>
           <div className='font-mono font-normal'>
@@ -146,7 +150,7 @@ export default function ItemPage(props) {
         </div>
         <div
           className='col-span-1 text-right self-end justify-self-end w-min h-min whitespace-nowrap p-2 btn--minus btn mb-2'
-          onClick={(event) =>
+          onContextMenu={(event) =>
             handleExitItemPage(
               event,
               item,
@@ -154,14 +158,16 @@ export default function ItemPage(props) {
               setCurrentOrder,
               currentOrder
             )
-          }onTouchMove={(event) =>
+          }
+          onTouchStart={(event) =>
             handleExitItemPage(
               event,
               item,
               setMenuState,
               setCurrentOrder,
               currentOrder
-            )}>
+            )
+          }>
           Cancel
         </div>
       </div>
@@ -182,10 +188,12 @@ export default function ItemPage(props) {
         <div className='flex flex-row '>
           <div
             className='btn gradientred w-14 h-auto cnter-items '
-            onClick={(event) =>
+            onContextMenu={(event) =>
               handleDecreaseQuantity(event, item, currentOrder, setCurrentOrder)
-            }onTouchMove={(event) =>
-              handleDecreaseQuantity(event, item, currentOrder, setCurrentOrder)}>
+            }
+            onTouchStart={(event) =>
+              handleDecreaseQuantity(event, item, currentOrder, setCurrentOrder)
+            }>
             <img src={minusSVG} className='w-6 invert-icon' />
           </div>
           <div className=' w-16 h-auto font-mono cnter-items text-2xl'>
@@ -193,10 +201,12 @@ export default function ItemPage(props) {
           </div>
           <div
             className='btn gradientgreen w-14 h-auto cnter-items'
-            onClick={(event) =>
+            onContextMenu={(event) =>
               handleIncreaseQuantity(event, item, currentOrder, setCurrentOrder)
-            }onTouchMove={(event) =>
-              handleIncreaseQuantity(event, item, currentOrder, setCurrentOrder)}>
+            }
+            onTouchStart={(event) =>
+              handleIncreaseQuantity(event, item, currentOrder, setCurrentOrder)
+            }>
             <img src={addSVG} className='w-6 invert-icon' />
           </div>
         </div>
@@ -205,7 +215,7 @@ export default function ItemPage(props) {
         </div>
         <div
           className='btn cnter-items gradientgreen w-72'
-          onClick={(event) =>
+          onContextMenu={(event) =>
             handleAddToOrder(
               event,
               item,
@@ -215,7 +225,8 @@ export default function ItemPage(props) {
               order,
               setOrder
             )
-          }onTouchMove={(event) =>
+          }
+          onTouchStart={(event) =>
             handleAddToOrder(
               event,
               item,
@@ -224,7 +235,8 @@ export default function ItemPage(props) {
               setCurrentOrder,
               order,
               setOrder
-            )}>
+            )
+          }>
           Add
         </div>
       </div>
