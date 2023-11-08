@@ -33,7 +33,7 @@ export default function HamburgerMenu(props) {
       setHamburger(false);
     } else {
       const keypadValue = await keypad();
-      if (keypadValue === 240205) {
+      if (keypadValue === 415326) {
         setAppState(mode);
         setHamburger(false);
       }
