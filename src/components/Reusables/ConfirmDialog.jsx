@@ -41,13 +41,13 @@ const useConfirm = () => {
                 <div
                   className='dialogConfirm button g row-span-1 btn btn--minus text-xl p-2 cnter-items w-full h-20'
                   onContextMenu={handleCancel}
-                  onClick={handleCancel}>
+                  onTouchStart={handleCancel}>
                   {text[1]}
                 </div>
                 <div
                   className='dialogConfirm button g row-span-1 btn btn--plus text-xl p-2 cnter-items w-full h-20'
                   onContextMenu={handleConfirm}
-                  onClick={handleConfirm}>
+                  onTouchStart={handleConfirm}>
                   {text[2]}
                 </div>
               </div>

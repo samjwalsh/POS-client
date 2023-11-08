@@ -15,7 +15,7 @@ export default function TitleBar(props) {
       <div
         className='p-1 border-r border-colour black h-full w-10 cnter-items '
         onContextMenu={(e) => handleClickHamburger(setHamburger)}
-        onClick={(e) => handleClickHamburger(setHamburger)}>
+        onTouchStart={(e) => handleClickHamburger(setHamburger)}>
         <img src={hamburger} className='w-10 invert-icon cnter-items h-full' />
       </div>
       <div className='flex flex-row items-center justify-end w-full font-mono'>

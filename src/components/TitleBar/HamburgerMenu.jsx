@@ -56,7 +56,7 @@ export default function HamburgerMenu(props) {
             <div
               className='justify-end btn--minus btn shadow w-8 h-8 cnter-items'
               onContextMenu={() => handleCloseSideMenu(setHamburger)}
-              onClick={() => handleCloseSideMenu(setHamburger)}>
+              onTouchStart={() => handleCloseSideMenu(setHamburger)}>
               <img src={closeSVG} className='w-6 invert-icon' />
             </div>
           </div>
@@ -64,19 +64,19 @@ export default function HamburgerMenu(props) {
             <div
               className='side-menu-option gradient1'
               onContextMenu={() => handleSetAppState('Register')}
-              onClick={() => handleSetAppState('Register')}>
+              onTouchStart={() => handleSetAppState('Register')}>
               Register
             </div>
             <div
               className='side-menu-option gradient1'
               onContextMenu={() => handleSetAppState('Reports')}
-              onClick={() => handleSetAppState('Reports')}>
+              onTouchStart={() => handleSetAppState('Reports')}>
               Reports
             </div>
             <div
               className='side-menu-option gradient1'
               onContextMenu={() => handleSetAppState('Settings')}
-              onClick={() => handleSetAppState('Settings')}>
+              onTouchStart={() => handleSetAppState('Settings')}>
               Settings
             </div>
           </div>
@@ -84,7 +84,7 @@ export default function HamburgerMenu(props) {
             <div
               className='side-menu-option gradientred'
               onContextMenu={() => handleTerminatePOS()}
-              onClick={() => handleTerminatePOS()}>
+              onTouchStart={() => handleTerminatePOS()}>
               Exit POS
             </div>
           </div>
@@ -92,7 +92,7 @@ export default function HamburgerMenu(props) {
         <div
           className='row-span-1 col-span-9 bg-black opacity-50'
           onContextMenu={() => handleCloseSideMenu(setHamburger)}
-          onClick={() => handleCloseSideMenu(setHamburger)}></div>
+          onTouchStart={() => handleCloseSideMenu(setHamburger)}></div>
       </div>
     </>
   );

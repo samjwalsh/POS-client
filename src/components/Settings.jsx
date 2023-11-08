@@ -119,7 +119,7 @@ export default function Settings(props) {
                       setSettings
                     )
                   }
-                  onClick={(e) =>
+                  onTouchStart={(e) =>
                     handleClickRangeOption(
                       setting,
                       'decrease',
@@ -140,7 +140,7 @@ export default function Settings(props) {
                       setSettings
                     )
                   }
-                  onClick={(e) =>
+                  onTouchStart={(e) =>
                     handleClickRangeOption(
                       setting,
                       'increase',
@@ -160,7 +160,7 @@ export default function Settings(props) {
                       setSettings
                     )
                   }
-                  onClick={(e) =>
+                  onTouchStart={(e) =>
                     handleClickRangeOption(
                       setting,
                       'reset',
@@ -184,7 +184,7 @@ export default function Settings(props) {
                 <div
                   className='btn rounded gradient1 p-2 cnter-items '
                   onContextMenu={(e) => handleClickButtonOption(setting)}
-                  onClick={(e) => handleClickButtonOption(setting)}>
+                  onTouchStart={(e) => handleClickButtonOption(setting)}>
                   {setting.label}
                 </div>
               </div>
@@ -202,7 +202,7 @@ export default function Settings(props) {
                   onContextMenu={(e) =>
                     handleClickToggleOption(setting, settings, setSettings)
                   }
-                  onClick={(e) =>
+                  onTouchStart={(e) =>
                     handleClickToggleOption(setting, settings, setSettings)
                   }>
                   {setting.value ? (
@@ -226,7 +226,7 @@ export default function Settings(props) {
                   onContextMenu={(e) =>
                     handleClickDropdownOption(setting, settings, setSettings)
                   }
-                  onClick={(e) =>
+                  onTouchStart={(e) =>
                     handleClickDropdownOption(setting, settings, setSettings)
                   }>
                   {setting.value == undefined

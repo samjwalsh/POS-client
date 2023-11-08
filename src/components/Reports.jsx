@@ -90,13 +90,13 @@ export default function Reports(props) {
               <div
                 className=' btn cnter-items gradientblack p-2'
                 onContextMenu={(e) => handlePrintReceipt(order)}
-                onClick={(e) => handlePrintReceipt(order)}>
+                onTouchStart={(e) => handlePrintReceipt(order)}>
                 Receipt{' '}
               </div>
               <div
                 className='btn btn--minus p-1 cnter-items'
                 onContextMenu={(e) => handleDeleteOrder(order)}
-                onClick={(e) => handleDeleteOrder(order)}>
+                onTouchStart={(e) => handleDeleteOrder(order)}>
                 <img src={closeSVG} className='w-8 invert-icon' />
               </div>
             </div>
@@ -133,13 +133,13 @@ export default function Reports(props) {
           <div
             className='btn gradient1 h-auto p-2 cnter-items w-full'
             onContextMenu={(event) => handleDeleteOldOrders()}
-            onClick={(event) => handleDeleteOldOrders()}>
+            onTouchStart={(event) => handleDeleteOldOrders()}>
             Delete Old Orders
           </div>
           <div
             className='btn btn--minus h-auto p-2 cnter-items w-full'
             onContextMenu={(event) => handleEndOfDay()}
-            onClick={(event) => handleEndOfDay()}>
+            onTouchStart={(event) => handleEndOfDay()}>
             End Of Day
           </div>
         </div>

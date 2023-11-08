@@ -29,7 +29,7 @@ const useListSelect = () => {
       <div
         className='p-2 cnter-items gradient1 btn min-w-[12rem]'
         onContextMenu={(e) => handleChooseOption(option)}
-        onClick={(e) => handleChooseOption(option)}
+        onTouchStart={(e) => handleChooseOption(option)}
         key={option}>
         {option}
       </div>
