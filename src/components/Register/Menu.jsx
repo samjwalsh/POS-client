@@ -85,7 +85,7 @@ export default function Menu(props) {
   } else if (menuState.modifiers !== undefined) {
     log(`Rendering an item which has modifiers`);
     return (
-      <div className='col-span-8 row-span-1 overflow-y-scroll no-scrollbar'>
+      <div className='col-span-8 row-span-1'>
         <ItemPage
           menuState={menuState}
           setMenuState={setMenuState}

@@ -145,7 +145,7 @@ export default function ItemPage(props) {
   return (
     <div className='flex flex-col h-full content-start p-2'>
       <div className='grid grid-cols-2 grid-rows-1 text-2xl h-min border-b border-colour'>
-        <div className='col-span-1 text-left w-auto h-auto whitespace-nowrap self-center'>
+        <div className='col-span-1 text-left w-auto h-min whitespace-nowrap self-center'>
           {menuState.name}
         </div>
         <div
@@ -171,11 +171,11 @@ export default function ItemPage(props) {
           Cancel
         </div>
       </div>
-      <div className='w-full h-full'>
+      <div className='w-full h-min flex-grow-0 overflow-y-scroll no-scrollbar'>
         <div className='flex flex-row justify-between gap-2 h-auto'>
           {shortcutsHTML}
         </div>
-        <div className='flex flex-row flex-wrap flex-grow gap-2 pt-2 '>
+        <div className='flex flex-row flex-wrap  gap-2 pt-2 overflow-y-scroll no-scrollbar flex-grow-0'>
           {addonsHTML}
           <div className='w-72 max-w-full flex-grow flex flex-row '></div>
           <div className='w-72 max-w-full flex-grow flex flex-row '></div>
@@ -183,8 +183,7 @@ export default function ItemPage(props) {
           <div className='w-72 max-w-full flex-grow flex flex-row '></div>
         </div>
       </div>
-
-      <div className='w-full flex flex-row border-t border-colour mt-auto gap-2 pt-2 h-24'>
+      <div className='w-full flex flex-row border-t border-colour mt-auto gap-2 pt-2 h-16'>
         <div className='flex flex-row '>
           <div
             className='btn gradientred w-14 h-auto cnter-items '
