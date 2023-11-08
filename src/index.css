@@ -75,7 +75,7 @@ body {
 } */
 
 .gradient1 {
-  @apply dark:bg-yellow-900 border dark:border-yellow-700 border-orange-500 bg-orange-300 ;
+  @apply dark:bg-cyan-900 border dark:border-cyan-700 border-orange-500 bg-orange-300 ;
 }
 
 .gradientred {
