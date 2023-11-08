@@ -63,7 +63,7 @@ export default function ItemPage(props) {
             index
           )
         }
-        onTouchStart={(event) =>
+        onClick={(event) =>
           handleAddonToggle(
             event,
             item,
@@ -108,7 +108,7 @@ export default function ItemPage(props) {
               addons
             )
           }
-          onTouchStart={(shortcut) =>
+          onClick={(shortcut) =>
             handleClickShortcut(
               event,
               item,
@@ -159,7 +159,7 @@ export default function ItemPage(props) {
               currentOrder
             )
           }
-          onTouchStart={(event) =>
+          onClick={(event) =>
             handleExitItemPage(
               event,
               item,
@@ -191,7 +191,7 @@ export default function ItemPage(props) {
             onContextMenu={(event) =>
               handleDecreaseQuantity(event, item, currentOrder, setCurrentOrder)
             }
-            onTouchStart={(event) =>
+            onClick={(event) =>
               handleDecreaseQuantity(event, item, currentOrder, setCurrentOrder)
             }>
             <img src={minusSVG} className='w-6 invert-icon' />
@@ -204,7 +204,7 @@ export default function ItemPage(props) {
             onContextMenu={(event) =>
               handleIncreaseQuantity(event, item, currentOrder, setCurrentOrder)
             }
-            onTouchStart={(event) =>
+            onClick={(event) =>
               handleIncreaseQuantity(event, item, currentOrder, setCurrentOrder)
             }>
             <img src={addSVG} className='w-6 invert-icon' />
@@ -226,7 +226,7 @@ export default function ItemPage(props) {
               setOrder
             )
           }
-          onTouchStart={(event) =>
+          onClick={(event) =>
             handleAddToOrder(
               event,
               item,

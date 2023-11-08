@@ -19,7 +19,7 @@ export default function HamburgerMenu(props) {
   async function handleTerminatePOS() {
     playBeep();
 
-    const choice = await confirm();
+    const choice = await confirm(['Exit Till Software?', 'No', 'Yes']);
 
     if (!choice) return;
 
@@ -33,7 +33,7 @@ export default function HamburgerMenu(props) {
       setHamburger(false);
     } else {
       const keypadValue = await keypad();
-      if (keypadValue === 2048) {
+      if (keypadValue === 240205) {
         setAppState(mode);
         setHamburger(false);
       }
@@ -56,7 +56,7 @@ export default function HamburgerMenu(props) {
             <div
               className='justify-end btn--minus btn shadow w-8 h-8 cnter-items'
               onContextMenu={() => handleCloseSideMenu(setHamburger)}
-              onTouchStart={() => handleCloseSideMenu(setHamburger)}>
+              onClick={() => handleCloseSideMenu(setHamburger)}>
               <img src={closeSVG} className='w-6 invert-icon' />
             </div>
           </div>
@@ -64,19 +64,19 @@ export default function HamburgerMenu(props) {
             <div
               className='side-menu-option gradient1'
               onContextMenu={() => handleSetAppState('Register')}
-              onTouchStart={() => handleSetAppState('Register')}>
+              onClick={() => handleSetAppState('Register')}>
               Register
             </div>
             <div
               className='side-menu-option gradient1'
               onContextMenu={() => handleSetAppState('Reports')}
-              onTouchStart={() => handleSetAppState('Reports')}>
+              onClick={() => handleSetAppState('Reports')}>
               Reports
             </div>
             <div
               className='side-menu-option gradient1'
               onContextMenu={() => handleSetAppState('Settings')}
-              onTouchStart={() => handleSetAppState('Settings')}>
+              onClick={() => handleSetAppState('Settings')}>
               Settings
             </div>
           </div>
@@ -84,7 +84,7 @@ export default function HamburgerMenu(props) {
             <div
               className='side-menu-option gradientred'
               onContextMenu={() => handleTerminatePOS()}
-              onTouchStart={() => handleTerminatePOS()}>
+              onClick={() => handleTerminatePOS()}>
               Exit POS
             </div>
           </div>
@@ -92,7 +92,7 @@ export default function HamburgerMenu(props) {
         <div
           className='row-span-1 col-span-9 bg-black opacity-50'
           onContextMenu={() => handleCloseSideMenu(setHamburger)}
-          onTouchStart={() => handleCloseSideMenu(setHamburger)}></div>
+          onClick={() => handleCloseSideMenu(setHamburger)}></div>
       </div>
     </>
   );
