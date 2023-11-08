@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { checkConnection } from '../../tools/ipc';
+import {checkPrinterConnection} from '../../tools/ipc';
 
-export default function Connection() {
+export default function PrinterConnection() {
   const [isOnline, setIsOnline] = useState({
     status: true,
     ping: 0,
@@ -10,7 +10,7 @@ export default function Connection() {
   useEffect(() => {
     const connectionCheckInterval = setInterval(async () => {
       const beginPing = Date.now();
-      const connection = await checkConnection();
+      const connection = await checkPrinterConnection();
       const endPing = Date.now();
 
       setIsOnline({
@@ -25,7 +25,7 @@ export default function Connection() {
 
   return (
     <>
-      TCP<div className='font-emoji'>{isOnline.status ? '🟢' : '🔴'}</div>
+      PTR<div className='font-emoji'>{isOnline.status ? '🟢' : '🔴'}</div>
       {isOnline.status ? `[${isOnline.ping}] ` : ''}
     </>
   );

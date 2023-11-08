@@ -18,7 +18,7 @@ import playBeep from '../tools/playBeep';
 export default function Reports(props) {
   const [orders, setOrders] = useState([]);
 
-  const [Dialog, confirm] = useConfirm('Continue?', '');
+  const [Dialog, confirm] = useConfirm();
 
   useEffect(() => {
     (async () => {
@@ -31,7 +31,7 @@ export default function Reports(props) {
 
   async function handleEndOfDay() {
     playBeep();
-    const choice = await confirm();
+    const choice = await confirm(['Delete All Orders?', 'No', 'Yes']);
     if (!choice) return;
     await removeAllOrders();
     let localOrders = await getAllOrders();
@@ -43,7 +43,7 @@ export default function Reports(props) {
   const handleDeleteOrder = async (deletedOrder) => {
     playBeep();
 
-    const choice = await confirm();
+    const choice = await confirm(['Delete This Order?', 'No', 'Yes']);
     if (!choice) return;
 
     let localOrders = await removeOrder(deletedOrder);
@@ -90,13 +90,13 @@ export default function Reports(props) {
               <div
                 className=' btn cnter-items gradientblack p-2'
                 onContextMenu={(e) => handlePrintReceipt(order)}
-                onTouchStart={(e) => handlePrintReceipt(order)}>
+                onClick={(e) => handlePrintReceipt(order)}>
                 Receipt{' '}
               </div>
               <div
                 className='btn btn--minus p-1 cnter-items'
                 onContextMenu={(e) => handleDeleteOrder(order)}
-                onTouchStart={(e) => handleDeleteOrder(order)}>
+                onClick={(e) => handleDeleteOrder(order)}>
                 <img src={closeSVG} className='w-8 invert-icon' />
               </div>
             </div>
@@ -133,13 +133,13 @@ export default function Reports(props) {
           <div
             className='btn gradient1 h-auto p-2 cnter-items w-full'
             onContextMenu={(event) => handleDeleteOldOrders()}
-            onTouchStart={(event) => handleDeleteOldOrders()}>
+            onClick={(event) => handleDeleteOldOrders()}>
             Delete Old Orders
           </div>
           <div
             className='btn btn--minus h-auto p-2 cnter-items w-full'
             onContextMenu={(event) => handleEndOfDay()}
-            onTouchStart={(event) => handleEndOfDay()}>
+            onClick={(event) => handleEndOfDay()}>
             End Of Day
           </div>
         </div>

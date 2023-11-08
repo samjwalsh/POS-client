@@ -1,10 +1,10 @@
 export const settingsSchema = [
   {
-    name: "Display",
+    name: 'Display',
     settings: [
       {
-        name: "Zoom Factor",
-        type: "range",
+        name: 'Zoom Factor',
+        type: 'range',
         value: 16,
         min: 10,
         max: 40,
@@ -12,30 +12,61 @@ export const settingsSchema = [
         default: 16,
       },
       {
-        name: "Dark Mode",
-        type: "toggle",
+        name: 'Dark Mode',
+        type: 'toggle',
         value: false,
-      }
-    ],
-  },
-  {
-    name: "System",
-    settings: [
-      {
-        name: "Reset All Settings",
-        label: "Reset",
-        type: "button",
       },
-      { name: "Delete All Local Data", label: "Delete", type: "button" },
     ],
   },
   {
-    name: "Printer",
+    name: 'Shop',
     settings: [
       {
-        name: "Printer Name",
-        type: "dropdown"
-      }
-    ]
-  }
+        name: 'Shop Name',
+        type: 'dropdown',
+        value: 'Main',
+        list: ['Main', 'Lighthouse', 'West Pier', 'Bray'],
+      },
+      {
+        name: 'Till Number',
+        type: 'dropdown',
+        value: '1',
+        list: ['1', '2', '3'],
+      },
+    ],
+  },
+
+  {
+    name: 'Printer',
+    settings: [
+      {
+        name: 'Printer Name',
+        type: 'dropdown',
+        value: 'Select Printer',
+      },
+      {
+        name: 'Printer Type',
+        type: 'dropdown',
+        value: 'EPSON',
+        list: ['EPSON', 'STAR', 'TANCA', 'DARUMA'],
+      },
+      {
+        name: 'Printer Character Set',
+        type: 'dropdown',
+        value: 'WPC1252',
+        list: ['PC437_USA', 'PC850_MULTILINGUAL', 'WPC1252', 'PC858_EURO'],
+      },
+    ],
+  },
+  {
+    name: 'System',
+    settings: [
+      {
+        name: 'Reset All Settings',
+        label: 'Reset',
+        type: 'button',
+      },
+      { name: 'Delete All Local Data', label: 'Delete', type: 'button' },
+    ],
+  },
 ];

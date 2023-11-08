@@ -61,3 +61,11 @@ export function checkConnection() {
 export function printOrder(order) {
   return ipcRenderer.invoke('printOrder', order);
 }
+
+export function getAllPrinters() {
+  return ipcRenderer.invoke('getAllPrinters');
+}
+
+export function checkPrinterConnection() {
+  return ipcRenderer.invoke('checkPrinterConnection');
+}
