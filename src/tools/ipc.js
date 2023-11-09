@@ -22,8 +22,8 @@ export function addOrder(order, paymentMethod) {
   }
 }
 
-export function overwriteOrders(orders) {
-  return ipcRenderer.invoke('overwriteOrders', orders);
+export function removeOldOrders(orders) {
+  return ipcRenderer.invoke('removeOldOrders', orders);
 }
 
 export function removeAllOrders() {

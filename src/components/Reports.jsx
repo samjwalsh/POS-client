@@ -7,9 +7,9 @@ import closeSVG from '../assets/appicons/close.svg';
 
 import {
   getAllOrders,
-  overwriteOrders,
   printOrder,
   removeAllOrders,
+  removeOldOrders,
   removeOrder,
 } from '../tools/ipc';
 
@@ -54,22 +54,10 @@ export default function Reports(props) {
   async function handleDeleteOldOrders() {
     playBeep();
 
-    let localOrders = await getAllOrders();
+    await removeOldOrders();
+    const orders = await getAllOrders();
 
-    const currentDate = new Date().getDate();
-
-    let newOrders = [];
-    if (Array.isArray(localOrders)) {
-      localOrders.forEach((order, index) => {
-        const orderDate = new Date(order.time).getDate();
-        if (orderDate == currentDate) {
-          newOrders.push(order);
-        }
-      });
-      overwriteOrders(newOrders);
-
-      setOrders(newOrders.reverse());
-    }
+    setOrders(orders);
   }
 
   // HTML GENERATORS

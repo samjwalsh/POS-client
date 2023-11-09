@@ -37,15 +37,15 @@ const useConfirm = () => {
           <div className='fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-50 backgroundcolour border border-colour rounded shadow'>
             <div className='flex flex-col p-2 gap-2'>
               <div className='text-2xl flex items-start'>{text[0]}</div>
-              <div className='text-2xl items-center  flex flex-row min-w-[18rem] w-min gap-2 '>
+              <div className='text-2xl items-center  flex flex-row min-w-[18rem] w-min gap-2 h-16'>
                 <div
-                  className='dialogConfirm button g row-span-1 btn btn--minus text-xl p-2 cnter-items w-full h-20'
+                  className='dialogConfirm button g row-span-1 btn btn--minus text-xl p-2 cnter-items w-full h-full'
                   onContextMenu={handleCancel}
                   onTouchStart={handleCancel}>
                   {text[1]}
                 </div>
                 <div
-                  className='dialogConfirm button g row-span-1 btn btn--plus text-xl p-2 cnter-items w-full h-20'
+                  className='dialogConfirm button g row-span-1 btn btn--plus text-xl p-2 cnter-items w-full h-full'
                   onContextMenu={handleConfirm}
                   onTouchStart={handleConfirm}>
                   {text[2]}
