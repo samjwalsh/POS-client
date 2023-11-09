@@ -57,7 +57,7 @@ export default function Reports(props) {
     await removeOldOrders();
     const orders = await getAllOrders();
 
-    setOrders(orders);
+    setOrders(orders.reverse());
   }
 
   // HTML GENERATORS
