@@ -82,7 +82,7 @@ export default function Order(props) {
         className={itemClasses}
         key={`${orderItem.name} [${orderItem.addons}]`}>
         <div
-          className='col-span-1 row-span-2 cnter-items btn--minus w-12 rnd shadow'
+          className='col-span-1 row-span-2 cnter-items btn--minus w-20 rnd shadow'
           onContextMenu={() => handleOrderItemQuantityChange('down', orderItem)}
           onTouchStart={() => handleOrderItemQuantityChange('down', orderItem)}>
           <img src={minusSVG} className='w-6 invert-icon' />
@@ -104,7 +104,7 @@ export default function Order(props) {
           </div>
         </div>
         <div
-          className='col-span-1 row-span-2 cnter-items justify-self-end btn--plus w-12 rnd shadow'
+          className='col-span-1 row-span-2 cnter-items justify-self-end btn--plus w-20 rnd shadow'
           onContextMenu={() => handleOrderItemQuantityChange('up', orderItem)}
           onTouchStart={() => handleOrderItemQuantityChange('up', orderItem)}>
           <img src={addSVG} className='w-6 fill-white invert-icon' />
