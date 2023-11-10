@@ -76,13 +76,13 @@ export default function Reports(props) {
             className='orderbox border border-colour rnd flex max-h-96 flex-col '>
             <div className='flex flex-row w-full p-2 justify-between border-b border-colour rnd-t'>
               <div
-                className=' btn cnter-items gradientblack p-2'
+                className=' btn cnter-items grey p-2'
                 onContextMenu={(e) => handlePrintReceipt(order)}
                 onTouchStart={(e) => handlePrintReceipt(order)}>
                 Receipt{' '}
               </div>
               <div
-                className='btn btn--minus p-1 cnter-items'
+                className='btn  negative  p-1 cnter-items'
                 onContextMenu={(e) => handleDeleteOrder(order)}
                 onTouchStart={(e) => handleDeleteOrder(order)}>
                 <img src={closeSVG} className='w-8 invert-icon' />
@@ -119,13 +119,13 @@ export default function Reports(props) {
         {createReportsStatsInfo()}
         <div className='mt-auto border-t border-colour p-2 flex flex-col gap-2'>
           <div
-            className='btn gradient1 h-auto p-2 cnter-items w-full'
+            className='btn primary h-auto p-2 cnter-items w-full'
             onContextMenu={(event) => handleDeleteOldOrders()}
             onTouchStart={(event) => handleDeleteOldOrders()}>
             Delete Old Orders
           </div>
           <div
-            className='btn btn--minus h-auto p-2 cnter-items w-full'
+            className='btn  negative  h-auto p-2 cnter-items w-full'
             onContextMenu={(event) => handleEndOfDay()}
             onTouchStart={(event) => handleEndOfDay()}>
             End Of Day
@@ -192,7 +192,7 @@ export default function Reports(props) {
 
       return (
         <div
-          className='w-full grid grid-cols-[auto_auto] grid-rows-[auto_min-content] text-lg p-2 border border-colour rnd gradient1'
+          className='w-full grid grid-cols-[auto_auto] grid-rows-[auto_min-content] text-lg p-2 border border-colour rnd primary'
           key={index}>
           <div className='col-span-1 row-span-1'>
             {item.name} {formattedQuantity}

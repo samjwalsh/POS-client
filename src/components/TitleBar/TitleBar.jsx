@@ -13,7 +13,7 @@ export default function TitleBar(props) {
   return (
     <div className='flex flex-row justify-between border-b border-colour h-10'>
       <div
-        className='p-1 border-r border-colour h-full w-10 cnter-items '
+        className='p-1 h-full w-10 cnter-items negativeFill border-r border-colour'
         onContextMenu={(e) => handleClickHamburger(setHamburger)}
         onTouchStart={(e) => handleClickHamburger(setHamburger)}>
         <img src={hamburger} className='w-10 invert-icon cnter-items h-full' />

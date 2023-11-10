@@ -129,52 +129,52 @@ const useKeypad = (numberFormat) => {
             {keypadValueString}
           </div>
         </div>
-        <div className='col-span-1 row-span-1 keypad gradientred' id='exit'>
+        <div className='col-span-1 row-span-1 keypad negative' id='exit'>
           <img src={closeSVG} className='w-6 invert-icon' id='exit' />
         </div>
-        <div className='col-span-1 row-span-1 keypad gradientblack' id='minus'>
+        <div className='col-span-1 row-span-1 keypad grey' id='minus'>
           <img src={minusSVG} className='w-6 invert-icon' id='minus' />
         </div>
-        <div className='col-span-1 row-span-1 keypad gradientblack' id='plus'>
+        <div className='col-span-1 row-span-1 keypad grey' id='plus'>
           <img src={addSVG} className='w-6 invert-icon' id='plus' />
         </div>
-        <div className='col-span-1 row-span-1 keypad gradientblack' id='delete'>
+        <div className='col-span-1 row-span-1 keypad grey' id='delete'>
           <img src={backSVG} className='w-6 invert-icon' id='delete' />
         </div>
-        <div className='col-span-1 row-span-1 keypad gradientblack' id='7'>
+        <div className='col-span-1 row-span-1 keypad grey' id='7'>
           7
         </div>
-        <div className='col-span-1 row-span-1 keypad gradientblack' id='8'>
+        <div className='col-span-1 row-span-1 keypad grey' id='8'>
           8
         </div>
-        <div className='col-span-1 row-span-1 keypad gradientblack' id='9'>
+        <div className='col-span-1 row-span-1 keypad grey' id='9'>
           9
         </div>
-        <div className='col-span-1 row-span-1 keypad gradientblack' id='4'>
+        <div className='col-span-1 row-span-1 keypad grey' id='4'>
           4
         </div>
-        <div className='col-span-1 row-span-1 keypad gradientblack' id='5'>
+        <div className='col-span-1 row-span-1 keypad grey' id='5'>
           5
         </div>
-        <div className='col-span-1 row-span-1 keypad gradientblack' id='6'>
+        <div className='col-span-1 row-span-1 keypad grey' id='6'>
           6
         </div>
-        <div className='col-span-1 row-span-1 keypad gradientblack' id='1'>
+        <div className='col-span-1 row-span-1 keypad grey' id='1'>
           1
         </div>
-        <div className='col-span-1 row-span-1 keypad gradientblack' id='2'>
+        <div className='col-span-1 row-span-1 keypad grey' id='2'>
           2
         </div>
-        <div className='col-span-1 row-span-1 keypad gradientblack' id='3'>
+        <div className='col-span-1 row-span-1 keypad grey' id='3'>
           3
         </div>
-        <div className='col-span-1 row-span-1 keypad gradientblack' id='0'>
+        <div className='col-span-1 row-span-1 keypad grey' id='0'>
           0
         </div>
-        <div className='col-span-1 row-span-1 keypad gradientblack' id='00'>
+        <div className='col-span-1 row-span-1 keypad grey' id='00'>
           00
         </div>
-        <div className='col-span-1 row-span-1 keypad gradientgreen' id='enter'>
+        <div className='col-span-1 row-span-1 keypad positive' id='enter'>
           <img src={enterSVG} className='w-6 invert-icon' id='enter' />
         </div>
       </div>
@@ -187,7 +187,7 @@ const useKeypad = (numberFormat) => {
     return (
       <div className='fixed h-screen w-screen z-20'>
         <div className='fixed top-0 left-0 m-0 p-0 bg-black opacity-50 z-20 h-screen w-screen'></div>
-        <div className='fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-30 backgroundcolour border border-colour w-4/12 h-5/6 rnd-md '>
+        <div className='fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-30 background border border-colour w-4/12 h-5/6 rnd-md '>
           {createKeypadHTML()}
         </div>
       </div>

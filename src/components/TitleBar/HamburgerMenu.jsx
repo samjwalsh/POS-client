@@ -50,11 +50,11 @@ export default function HamburgerMenu(props) {
       <Keypad />
       <Dialog />
       <div className='fixed top-0 grid grid-cols-12 grid-rows-1 w-screen h-screen z-10'>
-        <div className='row-span-1 col-span-3 flex backgroundcolour flex-col border-colour border-r '>
+        <div className='row-span-1 col-span-3 flex background flex-col border-colour border-r '>
           <div className='flex flex-row  w-100 justify-between p-2 border-b border-colour text-left items-stretch '>
             <div className='text-2xl self-end'>Menu</div>
             <div
-              className='justify-end btn--minus btn  w-8 h-8 cnter-items'
+              className='justify-end  negative  btn  w-8 h-8 cnter-items'
               onContextMenu={() => handleCloseSideMenu(setHamburger)}
               onTouchStart={() => handleCloseSideMenu(setHamburger)}>
               <img src={closeSVG} className='w-6 invert-icon' />
@@ -62,19 +62,19 @@ export default function HamburgerMenu(props) {
           </div>
           <div className=' flex flex-col gap-2 p-2 '>
             <div
-              className='side-menu-option gradient1'
+              className='side-menu-option primary'
               onContextMenu={() => handleSetAppState('Register')}
               onTouchStart={() => handleSetAppState('Register')}>
               Register
             </div>
             <div
-              className='side-menu-option gradient1'
+              className='side-menu-option primary'
               onContextMenu={() => handleSetAppState('Reports')}
               onTouchStart={() => handleSetAppState('Reports')}>
               Reports
             </div>
             <div
-              className='side-menu-option gradient1'
+              className='side-menu-option primary'
               onContextMenu={() => handleSetAppState('Settings')}
               onTouchStart={() => handleSetAppState('Settings')}>
               Settings
@@ -82,7 +82,7 @@ export default function HamburgerMenu(props) {
           </div>
           <div className='mt-auto p-2'>
             <div
-              className='side-menu-option gradientred'
+              className='side-menu-option negative'
               onContextMenu={() => handleTerminatePOS()}
               onTouchStart={() => handleTerminatePOS()}>
               Exit POS

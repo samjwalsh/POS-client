@@ -54,47 +54,55 @@ body {
   @apply font-bold uppercase text-lg rnd;
 }
 
-.btn--minus {
-  @apply gradientred;
-}
-
-.btn--plus {
-  @apply gradientgreen;
-}
-
 .menu-itm {
-  @apply w-48 rnd  h-32 max-w-5xl flex-grow flex p-2 text-2xl text-left items-end gradient1;
+  @apply w-48 rnd  h-32 max-w-5xl flex-grow flex p-2 text-2xl text-left items-end primary;
 }
 
 .menu-itm-filler {
   @apply w-48 h-0 max-w-5xl flex-grow;
 }
 
-/* .gradient1 {
+/* .primary {
   @apply dark:bg-cyan-900 border dark:border-cyan-700 border-sky-500 bg-sky-300 ;
 } */
 
-.gradient1 {
+.primary {
   @apply dark:bg-dark_primary border dark:border-dark_primary_border border-light_primary_border  bg-light_primary;
 }
 
-.gradientred {
+.primaryFill {
+  @apply dark:bg-dark_primary  bg-light_primary;
+}
+
+.negative {
   @apply dark:bg-dark_negative border dark:border-dark_negative_border bg-light_negative border-light_negative_border;
 }
 
-.gradientgreen {
+.negativeFill {
+  @apply dark:bg-dark_negative  bg-light_negative;
+}
+
+.positive {
   @apply dark:bg-dark_positive border dark:border-dark_positive_border bg-light_positive border-light_positive_border;
 }
 
-.gradientblack {
+.positiveFill {
+  @apply dark:bg-dark_positive   bg-light_positive;
+}
+
+.grey {
   @apply dark:bg-dark_grey border dark:border-dark_grey_border bg-light_grey border-light_grey_border;
+}
+
+.greyFill {
+  @apply dark:bg-dark_grey   bg-light_grey;
 }
 
 .rnd {
   @apply rounded-none shadow-none;
 }
 
-.backgroundcolour {
+.background {
   @apply dark:bg-dark_background bg-light_background;
 }
 

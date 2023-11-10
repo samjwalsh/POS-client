@@ -51,7 +51,7 @@ export default function ItemPage(props) {
     return (
       <div
         key={addon.name}
-        className='w-72 max-w-full flex-grow flex flex-row gradient1 rnd h-16 justify-between'
+        className='w-72 max-w-full flex-grow flex flex-row primary rnd h-16 justify-between'
         id={index}
         onContextMenu={(event) =>
           handleAddonToggle(
@@ -79,7 +79,7 @@ export default function ItemPage(props) {
             €{addon.price.toFixed(2)}
           </div>
         </div>
-        <div className='btn gradientblack  cnter-items w-10 h-auto m-2'>
+        <div className='btn border-0  cnter-items w-10 h-auto m-2'>
           <div className='toggleAddonButton' id={index}>
             {selected ? <img src={checkSVG} className='w-6 invert-icon' /> : ''}
           </div>
@@ -95,7 +95,7 @@ export default function ItemPage(props) {
       let addons = shortcut.addons;
       return (
         <div
-          className='mt-2 btn gradientgreen cnter-items w-full h-48 flex flex-col'
+          className='mt-2 btn positive cnter-items w-full h-48 flex flex-col'
           onContextMenu={(shortcut) =>
             handleClickShortcut(
               event,
@@ -149,7 +149,7 @@ export default function ItemPage(props) {
           {menuState.name}
         </div>
         <div
-          className='col-span-1 text-right self-end justify-self-end w-min h-min whitespace-nowrap p-2 btn--minus btn mb-2'
+          className='col-span-1 text-right self-end justify-self-end w-min h-min whitespace-nowrap p-2  negative  btn mb-2'
           onContextMenu={(event) =>
             handleExitItemPage(
               event,
@@ -186,7 +186,7 @@ export default function ItemPage(props) {
       <div className='w-full flex flex-row border-t border-colour mt-auto gap-2 pt-2 h-16'>
         <div className='flex flex-row '>
           <div
-            className='btn gradientred w-14 h-auto cnter-items '
+            className='btn negative w-14 h-auto cnter-items '
             onContextMenu={(event) =>
               handleDecreaseQuantity(event, item, currentOrder, setCurrentOrder)
             }
@@ -199,7 +199,7 @@ export default function ItemPage(props) {
             {quantity}
           </div>
           <div
-            className='btn gradientgreen w-14 h-auto cnter-items'
+            className='btn positive w-14 h-auto cnter-items'
             onContextMenu={(event) =>
               handleIncreaseQuantity(event, item, currentOrder, setCurrentOrder)
             }
@@ -213,7 +213,7 @@ export default function ItemPage(props) {
           €{price}
         </div>
         <div
-          className='btn cnter-items gradientgreen w-72'
+          className='btn cnter-items positive w-72'
           onContextMenu={(event) =>
             handleAddToOrder(
               event,
