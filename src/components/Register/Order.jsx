@@ -82,12 +82,12 @@ export default function Order(props) {
         className={itemClasses}
         key={`${orderItem.name} [${orderItem.addons}]`}>
         <div
-          className='col-span-1 row-span-2 cnter-items btn--minus w-20 rnd shadow'
+          className='col-span-1 row-span-2 cnter-items btn--minus w-20 rnd '
           onContextMenu={() => handleOrderItemQuantityChange('down', orderItem)}
           onTouchStart={() => handleOrderItemQuantityChange('down', orderItem)}>
           <img src={minusSVG} className='w-6 invert-icon' />
         </div>
-        <div className='w-full grid grid-cols-[1fr_min-content] grid-rows-[min-content, 1fr] p-1 gradient1 rnd shadow'>
+        <div className='w-full grid grid-cols-[1fr_min-content] grid-rows-[min-content, 1fr] p-1 gradient1 rnd '>
           <div className='col-span-1 row-span-1 text-lg'>
             {orderItem.name +
               (orderItem.quantity > 1 ? ` (${orderItem.quantity})` : '')}
@@ -104,7 +104,7 @@ export default function Order(props) {
           </div>
         </div>
         <div
-          className='col-span-1 row-span-2 cnter-items justify-self-end btn--plus w-20 rnd shadow'
+          className='col-span-1 row-span-2 cnter-items justify-self-end btn--plus w-20 rnd '
           onContextMenu={() => handleOrderItemQuantityChange('up', orderItem)}
           onTouchStart={() => handleOrderItemQuantityChange('up', orderItem)}>
           <img src={addSVG} className='w-6 fill-white invert-icon' />
@@ -141,7 +141,7 @@ export default function Order(props) {
           </div>
           <div className='row-span-1 col-span-1 flex gap-2 items-stretch h-20 text-lg uppercase font-bold'>
             <div
-              className='gradientblack rnd shadow cnter-items w-48'
+              className='gradientblack rnd  cnter-items w-48'
               onContextMenu={() => handlePlusMinus()}
               onTouchStart={() => handlePlusMinus()}>
               <img src={euro} className='w-6 invert-icon' />

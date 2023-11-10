@@ -187,7 +187,7 @@ const useKeypad = (numberFormat) => {
     return (
       <div className='fixed h-screen w-screen z-20'>
         <div className='fixed top-0 left-0 m-0 p-0 bg-black opacity-50 z-20 h-screen w-screen'></div>
-        <div className='fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-30 backgroundcolour border border-colour w-4/12 h-5/6 rnd-md shadow'>
+        <div className='fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-30 backgroundcolour border border-colour w-4/12 h-5/6 rnd-md '>
           {createKeypadHTML()}
         </div>
       </div>

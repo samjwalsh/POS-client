@@ -51,19 +51,19 @@ body {
 }
 
 .btn {
-  @apply font-bold uppercase text-lg rnd shadow;
+  @apply font-bold uppercase text-lg rnd;
 }
 
 .btn--minus {
-  @apply gradientred  shadow;
+  @apply gradientred;
 }
 
 .btn--plus {
-  @apply gradientgreen  shadow;
+  @apply gradientgreen;
 }
 
 .menu-itm {
-  @apply w-48 rnd shadow-md h-32 max-w-5xl flex-grow flex p-2 text-2xl text-left items-end gradient1;
+  @apply w-48 rnd  h-32 max-w-5xl flex-grow flex p-2 text-2xl text-left items-end gradient1;
 }
 
 .menu-itm-filler {
@@ -91,7 +91,7 @@ body {
 }
 
 .rnd {
-  @apply rounded-none;
+  @apply rounded-none shadow-none;
 }
 
 .backgroundcolour {
@@ -103,11 +103,11 @@ body {
 }
 
 .side-menu-option {
-  @apply rnd shadow p-2 flex text-xl h-min text-left uppercase font-bold;
+  @apply rnd  p-2 flex text-xl h-min text-left uppercase font-bold;
 }
 
 .keypad {
-  @apply cnter-items rnd shadow;
+  @apply cnter-items rnd;
 }
 
 .border-colour {
