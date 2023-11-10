@@ -105,12 +105,12 @@ export default function Settings(props) {
         if (setting.type === 'range') {
           return (
             <div
-              className='w-full flex flex-row p-2 rounded whitespace-nowrap gap-2 justify-between'
+              className='w-full flex flex-row p-2 rnd whitespace-nowrap gap-2 justify-between'
               key={setting.name}>
               <div className='text-xl self-center'>{setting.name}</div>
               <div className='flex flex-row gap-2'>
                 <div
-                  className='btn rounded btn--minus p-2 cnter-items'
+                  className='btn rnd btn--minus p-2 cnter-items'
                   onContextMenu={(e) =>
                     handleClickRangeOption(
                       setting,
@@ -131,7 +131,7 @@ export default function Settings(props) {
                 </div>
                 <div className='cnter-items text-xl'>{setting.value}</div>
                 <div
-                  className='btn rounded btn--plus p-2 cnter-items'
+                  className='btn rnd btn--plus p-2 cnter-items'
                   onContextMenu={(e) =>
                     handleClickRangeOption(
                       setting,
@@ -151,7 +151,7 @@ export default function Settings(props) {
                   <img src={addSVG} className='w-6 invert-icon' />
                 </div>
                 <div
-                  className='btn rounded gradient1 p-2 cnter-items '
+                  className='btn rnd gradient1 p-2 cnter-items '
                   onContextMenu={(e) =>
                     handleClickRangeOption(
                       setting,
@@ -177,12 +177,12 @@ export default function Settings(props) {
         } else if (setting.type === 'button') {
           return (
             <div
-              className='w-full flex flex-row p-2 rounded whitespace-nowrap gap-2 justify-between'
+              className='w-full flex flex-row p-2 rnd whitespace-nowrap gap-2 justify-between'
               key={setting.name}>
               <div className='text-xl self-center'>{setting.name}</div>
               <div className='flex flex-row gap-2'>
                 <div
-                  className='btn rounded gradient1 p-2 cnter-items '
+                  className='btn rnd gradient1 p-2 cnter-items '
                   onContextMenu={(e) => handleClickButtonOption(setting)}
                   onTouchStart={(e) => handleClickButtonOption(setting)}>
                   {setting.label}
@@ -193,12 +193,12 @@ export default function Settings(props) {
         } else if (setting.type === 'toggle') {
           return (
             <div
-              className='w-full flex flex-row p-2 rounded whitespace-nowrap gap-2 justify-between'
+              className='w-full flex flex-row p-2 rnd whitespace-nowrap gap-2 justify-between'
               key={setting.name}>
               <div className='text-xl self-center'>{setting.name}</div>
               <div className='flex flex-row gap-2'>
                 <div
-                  className='btn rounded gradient1 p-2 cnter-items '
+                  className='btn rnd gradient1 p-2 cnter-items '
                   onContextMenu={(e) =>
                     handleClickToggleOption(setting, settings, setSettings)
                   }
@@ -217,12 +217,12 @@ export default function Settings(props) {
         } else if (setting.type === 'dropdown') {
           return (
             <div
-              className='w-full flex flex-row p-2 rounded whitespace-nowrap gap-2 justify-between'
+              className='w-full flex flex-row p-2 rnd whitespace-nowrap gap-2 justify-between'
               key={setting.name}>
               <div className='text-xl self-center'>{setting.name}</div>
               <div className='flex flex-row gap-2'>
                 <div
-                  className='btn rounded gradient1 p-2 cnter-items '
+                  className='btn rnd gradient1 p-2 cnter-items '
                   onContextMenu={(e) =>
                     handleClickDropdownOption(setting, settings, setSettings)
                   }
@@ -243,7 +243,7 @@ export default function Settings(props) {
       });
       return (
         <div
-          className='w-full border border-colour rounded p-2 '
+          className='w-full border border-colour rnd p-2 '
           key={category.name}>
           <div className='border-b border-colour text-2xl'>
             {category.name}{' '}
@@ -266,7 +266,7 @@ export default function Settings(props) {
           {settingsHTML}
           <div className='h-8'></div>
         </div>
-        <div className='fixed bottom-0 right-0 border rounded p-1 border-colour m-1 backgroundcolour'>
+        <div className='fixed bottom-0 right-0 border rnd p-1 border-colour m-1 backgroundcolour'>
           v{version}
         </div>
       </div>

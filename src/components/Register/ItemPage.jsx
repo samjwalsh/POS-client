@@ -51,7 +51,7 @@ export default function ItemPage(props) {
     return (
       <div
         key={addon.name}
-        className='w-72 max-w-full flex-grow flex flex-row gradient1 rounded h-16 justify-between'
+        className='w-72 max-w-full flex-grow flex flex-row gradient1 rnd h-16 justify-between'
         id={index}
         onContextMenu={(event) =>
           handleAddonToggle(

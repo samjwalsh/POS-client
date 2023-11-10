@@ -5,7 +5,7 @@
 html,
 body {
   height: 100%;
-  @apply no-scrollbar dark:bg-zinc-900 bg-white text-black dark:text-white select-none;
+  @apply no-scrollbar dark:bg-dark_background bg-light_background text-black dark:text-white select-none;
 }
 
 @font-face {
@@ -51,7 +51,7 @@ body {
 }
 
 .btn {
-  @apply font-bold uppercase text-lg rounded shadow;
+  @apply font-bold uppercase text-lg rnd shadow;
 }
 
 .btn--minus {
@@ -63,7 +63,7 @@ body {
 }
 
 .menu-itm {
-  @apply w-48 rounded shadow-md h-32 max-w-5xl flex-grow flex p-2 text-2xl text-left items-end gradient1;
+  @apply w-48 rnd shadow-md h-32 max-w-5xl flex-grow flex p-2 text-2xl text-left items-end gradient1;
 }
 
 .menu-itm-filler {
@@ -75,27 +75,27 @@ body {
 } */
 
 .gradient1 {
-  @apply dark:bg-cyan-900 border dark:border-cyan-700 border-orange-500 bg-orange-300;
+  @apply dark:bg-dark_primary border dark:border-dark_primary_border border-light_primary_border  bg-light_primary;
 }
 
 .gradientred {
-  @apply dark:bg-red-800 border dark:border-red-600 bg-red-400 border-red-600;
+  @apply dark:bg-dark_negative border dark:border-dark_negative_border bg-light_negative border-light_negative_border;
 }
 
 .gradientgreen {
-  @apply dark:bg-green-800 border dark:border-green-600 bg-green-400 border-green-600;
+  @apply dark:bg-dark_positive border dark:border-dark_positive_border bg-light_positive border-light_positive_border;
 }
 
 .gradientblack {
-  @apply dark:bg-neutral-700 border dark:border-neutral-500 bg-neutral-200 border-neutral-400;
+  @apply dark:bg-dark_grey border dark:border-dark_grey_border bg-light_grey border-light_grey_border;
 }
 
-.black {
-  @apply dark:bg-zinc-900 bg-neutral-200;
+.rnd {
+  @apply rounded-none;
 }
 
 .backgroundcolour {
-  @apply dark:bg-zinc-900 bg-white;
+  @apply dark:bg-dark_background bg-light_background;
 }
 
 .cnter-items {
@@ -103,15 +103,15 @@ body {
 }
 
 .side-menu-option {
-  @apply rounded shadow p-2 flex text-xl h-min text-left uppercase font-bold;
+  @apply rnd shadow p-2 flex text-xl h-min text-left uppercase font-bold;
 }
 
 .keypad {
-  @apply cnter-items rounded shadow;
+  @apply cnter-items rnd shadow;
 }
 
 .border-colour {
-  @apply dark:border-neutral-500 border-neutral-500;
+  @apply dark:border-dark_grey_divider border-light_grey_divider;
 }
 
 .orderbox {
