@@ -5,8 +5,9 @@ const { settingsSchema } = require('../assets/settingsSchema');
 const settingsStore = new Store();
 
 // add code here to check that all the settings match the newest schema, it will run once on startup
-
-const localSettings = settingsStore.get('settings');
+(()=>{
+let localSettings = settingsStore.get('settings');
+let newSettings = settingsSchema;
 settingsSchema.forEach((category, categoryIndex) => {
   if (categoryIndex + 1 <= localSettings.length) {
     if (category.name !== localSettings[categoryIndex].name) {
@@ -25,6 +26,7 @@ settingsSchema.forEach((category, categoryIndex) => {
     }
   });
 });
+})();
 
 ipcMain.handle('getSettings', () => {
   let settings = settingsStore.get('settings');
