@@ -191,9 +191,6 @@ export default function ItemPage(props) {
         <div className='flex flex-row flex-wrap  gap-2 pt-2 overflow-y-scroll no-scrollbar flex-grow-0'>
           {addonsHTML}
           <div className='w-72 max-w-full flex-grow flex flex-row '></div>
-          <div className='w-72 max-w-full flex-grow flex flex-row '></div>
-          <div className='w-72 max-w-full flex-grow flex flex-row '></div>
-          <div className='w-72 max-w-full flex-grow flex flex-row '></div>
         </div>
       </div>
       <div className='w-full flex flex-row border-t border-colour mt-auto gap-2 pt-2 h-16'>
