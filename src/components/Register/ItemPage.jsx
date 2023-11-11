@@ -94,10 +94,9 @@ export default function ItemPage(props) {
     shortcutsHTML = item.shortcuts.map((shortcut) => {
       let addons = shortcut.addons;
       let addonsString = '';
-      let displayAddons = [];
-      if (displayAddons.length > 0) {
-        displayAddons.forEach((addon, index) => {
-          if (index + 1 !== displayAddons.length) {
+      if (addons.length > 0) {
+        addons.forEach((addon, index) => {
+          if (index + 1 !== addons.length) {
             addonsString += `${addon.name}, `;
           } else {
             addonsString += `${addon.name}`;
