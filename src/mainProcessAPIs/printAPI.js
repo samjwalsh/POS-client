@@ -15,24 +15,38 @@ ipcMain.handle('getAllPrinters', () => {
 const createPrinter = () => {
   let printerOptions = { name: '', type: '', characterSet: '' };
   const settings = settingsStore.get('settings');
+  let useCOM = false;
+  settings.forEach((category) => {
+    category.settings.forEach((setting) => {
+      if (setting.name === 'Use COM Port') useCOM = setting.value;
+    });
+  });
   settings.forEach((category) => {
     category.settings.forEach((setting) => {
       switch (setting.name) {
         case 'Printer Name': {
-          printerOptions.name = setting.value;
+          printerOptions.name = 'printer:' + setting.value;
+          break;
+        }
+        case 'COM Port': {
+          printerOptions.port = setting.value;
+          break;
         }
         case 'Printer Type': {
           printerOptions.type = setting.value;
+          break;
         }
         case 'Printer Character Set': {
           printerOptions.characterSet = setting.value;
+          break;
         }
       }
     });
   });
+
   return new ThermalPrinter({
     type: PrinterTypes[printerOptions.type],
-    interface: 'printer:' + printerOptions.name,
+    interface: useCOM ? printerOptions.port : printerOptions.name,
     driver: printerDriver,
     characterSet: CharacterSet[printerOptions.characterSet],
   });
@@ -143,7 +157,21 @@ ipcMain.handle('printOrder', async (e, order) => {
 ipcMain.handle('printTestPage', async () => {
   try {
     const printer = createPrinter();
-    printer.println('Test Page');
+    const testString =
+      '!"#$%&\'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~';
+    printer.setTextQuadArea();
+    printer.println(testString);
+
+    printer.setTextDoubleHeight();
+    printer.println(testString);
+
+    printer.setTextDoubleWidth();
+    printer.println(testString);
+
+    printer.setTextNormal();
+    printer.println(testString);
+
+    printer.cut();
     let execute = await printer.execute();
   } catch (e) {
     console.log(e);
