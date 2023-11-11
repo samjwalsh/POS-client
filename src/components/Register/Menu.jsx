@@ -53,10 +53,6 @@ export default function Menu(props) {
       //Code for adding relevent classes to each item
       let classes = 'menu-itm';
 
-      // let colours = ['bg-red-900', 'bg-orange-900', 'bg-yellow-900', 'bg-sky-900', 'bg-lime-900', 'bg-teal-900', 'bg-cyan-900', 'bg-rose-900', 'bg-emerald-900']
-
-      // classes += ' ' + colours[Math.floor(Math.random() * colours.length)]
-
       log(`Added item ${item.name} to HTML`);
       itemsHTML.push(
         <div

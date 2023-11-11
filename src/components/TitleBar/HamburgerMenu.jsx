@@ -90,7 +90,7 @@ export default function HamburgerMenu(props) {
           </div>
         </div>
         <div
-          className='row-span-1 col-span-9 bg-black opacity-50'
+          className='row-span-1 col-span-9 transparent'
           onContextMenu={() => handleCloseSideMenu(setHamburger)}
           onTouchStart={() => handleCloseSideMenu(setHamburger)}></div>
       </div>

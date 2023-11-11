@@ -102,6 +102,10 @@ body {
   @apply rounded-none shadow-none;
 }
 
+.transparent {
+  @apply bg-black bg-opacity-50 
+}
+
 .background {
   @apply dark:bg-dark_background bg-light_background;
 }
