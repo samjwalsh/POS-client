@@ -93,6 +93,19 @@ export default function ItemPage(props) {
   if (item.shortcuts !== undefined) {
     shortcutsHTML = item.shortcuts.map((shortcut) => {
       let addons = shortcut.addons;
+      let addonsString = '';
+      let displayAddons = [];
+      if (displayAddons.length > 0) {
+        displayAddons.forEach((addon, index) => {
+          if (index + 1 !== displayAddons.length) {
+            addonsString += `${addon.name}, `;
+          } else {
+            addonsString += `${addon.name}`;
+          }
+        });
+      } else {
+        addonsString = 'No Addons';
+      }
       return (
         <div
           className='mt-2 btn positive cnter-items w-full h-48 flex flex-col'
@@ -125,6 +138,7 @@ export default function ItemPage(props) {
           <div className='font-mono font-normal'>
             €{shortcut.price.toFixed(2)}
           </div>
+          <div className='text-sm'>{addonsString}</div>
         </div>
       );
     });
