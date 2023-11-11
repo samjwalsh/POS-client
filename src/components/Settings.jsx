@@ -6,6 +6,7 @@ import {
   getAllPrinters,
   getSettings,
   getVersionNo,
+  printTestPage,
   resetSettings,
   updateSettings,
 } from '../tools/ipc';
@@ -56,6 +57,11 @@ export default function Settings(props) {
         let localSettings = await getSettings();
         executeSettings(localSettings);
         setSettings(localSettings);
+        break;
+      }
+      case 'Print Test Page': {
+        await printTestPage();
+        break;
       }
     }
   }

@@ -56,6 +56,11 @@ export const settingsSchema = [
         value: 'WPC1252',
         list: ['PC437_USA', 'PC850_MULTILINGUAL', 'WPC1252', 'PC858_EURO'],
       },
+      {
+        name: "Print Test Page",
+        label: "Print",
+        type: "button"
+      }
     ],
   },
   {

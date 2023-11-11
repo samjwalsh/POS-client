@@ -140,6 +140,16 @@ ipcMain.handle('printOrder', async (e, order) => {
   }
 });
 
+ipcMain.handle('printTestPage', async () => {
+  try {
+    const printer = createPrinter();
+    printer.println('Test Page');
+    let execute = await printer.execute();
+  } catch (e) {
+    console.log(e);
+  }
+});
+
 function calculateDateString(time) {
   const date = new Date(time);
   let dateString = '';

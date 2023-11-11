@@ -62,6 +62,10 @@ export function printOrder(order) {
   return ipcRenderer.invoke('printOrder', order);
 }
 
+export function printTestPage() {
+  return ipcRenderer.invoke('printTestPage');
+}
+
 export function getAllPrinters() {
   return ipcRenderer.invoke('getAllPrinters');
 }
