@@ -26,7 +26,7 @@ export default function Order(props) {
     log(`Update the adjustment in the order`);
     let temp_order = order;
     temp_order.push({
-      name: 'Adjustment',
+      name: 'Misc',
       price: keypadValue,
       quantity: 1,
       addons: [],
@@ -88,11 +88,11 @@ export default function Order(props) {
           <img src={minusSVG} className='w-6 invert-icon' />
         </div>
         <div className='w-full grid grid-cols-[1fr_min-content] grid-rows-[min-content, 1fr] p-1 primary rnd '>
-          <div className='col-span-1 row-span-1 text-lg'>
+          <div className='col-span-1 row-span-1 text-md'>
             {orderItem.name +
               (orderItem.quantity > 1 ? ` (${orderItem.quantity})` : '')}
           </div>
-          <div className='col-span-1 row-span-1 text-lg font-mono text-right'>
+          <div className='col-span-1 row-span-1 text-md font-mono text-right'>
             €{(orderItem.price * orderItem.quantity).toFixed(2)}
           </div>
 
