@@ -5,25 +5,21 @@ import question from '../../assets/appicons/question.svg';
 import useHelpPage from './HelpPage.jsx';
 
 export default function HelpPageButton() {
-  const [HelpPage, help] = useHelpPage()
-  ;
-  async function openHelp() {
-    const result = await useHelpPage();
-  }
+  const [HelpPage, help] = useHelpPage();
+
+async function useHelp() {
+  //const result = await help();
+}
 
   return (
     <>
-    <HelpPage/>
+      <HelpPage />
       <div className='h-full cnter-items positiveFill'>
         <img
           src={question}
           className='w-8 invert-icon cnter-items h-full'
-          onContextMenu={() => {
-            help('hullo');
-          }}
-          onClick={() => {
-            help('hullo');
-          }}
+          onContextMenu={useHelp}
+          onClick={useHelp}
         />
       </div>
     </>
