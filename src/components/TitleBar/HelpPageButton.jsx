@@ -8,7 +8,7 @@ export default function HelpPageButton() {
   const [HelpPage, help] = useHelpPage();
 
 async function useHelp() {
-  //const result = await help();
+  const result = await help();
 }
 
   return (
