@@ -93,6 +93,18 @@ export default function ItemPage(props) {
   if (item.shortcuts !== undefined) {
     shortcutsHTML = item.shortcuts.map((shortcut) => {
       let addons = shortcut.addons;
+      let addonsString = '';
+      if (addons.length > 0) {
+        addons.forEach((addon, index) => {
+          if (index + 1 !== addons.length) {
+            addonsString += `${addon.name}, `;
+          } else {
+            addonsString += `${addon.name}`;
+          }
+        });
+      } else {
+        addonsString = 'No Addons';
+      }
       return (
         <div
           className='mt-2 btn positive cnter-items w-full h-48 flex flex-col'
@@ -125,6 +137,7 @@ export default function ItemPage(props) {
           <div className='font-mono font-normal'>
             €{shortcut.price.toFixed(2)}
           </div>
+          <div className='text-sm'>{addonsString}</div>
         </div>
       );
     });
@@ -177,9 +190,6 @@ export default function ItemPage(props) {
         </div>
         <div className='flex flex-row flex-wrap  gap-2 pt-2 overflow-y-scroll no-scrollbar flex-grow-0'>
           {addonsHTML}
-          <div className='w-72 max-w-full flex-grow flex flex-row '></div>
-          <div className='w-72 max-w-full flex-grow flex flex-row '></div>
-          <div className='w-72 max-w-full flex-grow flex flex-row '></div>
           <div className='w-72 max-w-full flex-grow flex flex-row '></div>
         </div>
       </div>

@@ -6,6 +6,7 @@ import playBeep from '../../tools/playBeep';
 import Connection from './Connection.jsx';
 import Clock from './Clock.jsx';
 import PrinterConnection from './PrinterConnection.jsx';
+import HelpPageButton from './HelpPageButton.jsx';
 
 export default function TitleBar(props) {
   const { setHamburger } = props;
@@ -19,6 +20,9 @@ export default function TitleBar(props) {
         <img src={hamburger} className='w-10 invert-icon cnter-items h-full' />
       </div>
       <div className='flex flex-row items-center justify-end w-full font-mono'>
+        {/* <div className='border-l border-colour h-full cnter-items px-1 positiveFill w-10'>
+          <HelpPageButton />
+        </div> */}
         <div className='border-l border-colour h-full cnter-items px-1 '>
           <PrinterConnection />
         </div>

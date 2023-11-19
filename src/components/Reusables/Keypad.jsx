@@ -73,7 +73,25 @@ const useKeypad = (numberFormat) => {
         break;
       }
       case '00': {
-        if (numberFormat === 'currency' && keypadState.value.length >= 5) {
+        if (
+          keypadState.value.length >= 5 ||
+          keypadState.value === '' ||
+          keypadState.value === '0'
+        ) {
+          break;
+        }
+        setkeypadState({
+          value: keypadState.value + button,
+          sign: keypadState.sign,
+        });
+        break;
+      }
+      case '0': {
+        if (
+          keypadState.value.length >= 6 ||
+          keypadState.value === '' ||
+          keypadState.value === '0'
+        ) {
           break;
         }
         setkeypadState({
@@ -93,6 +111,7 @@ const useKeypad = (numberFormat) => {
         break;
       }
     }
+    console.log(keypadState.value);
   }
 
   // creates the string that is shown in the html to represent the keypad value

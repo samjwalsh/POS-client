@@ -24,13 +24,24 @@ export default function Order(props) {
     const keypadValue = await keypad('currency');
     if (keypadValue === 0) return;
     log(`Update the adjustment in the order`);
+
     let temp_order = order;
-    temp_order.push({
-      name: 'Misc',
-      price: keypadValue,
-      quantity: 1,
-      addons: [],
+
+    let miscWasDupe = false;
+    temp_order.forEach((item, index) => {
+      if (item.name === 'Misc' && item.price === keypadValue) {
+        item.quantity ++;
+        miscWasDupe = true;
+      }
     });
+    if (!miscWasDupe) {
+      temp_order.push({
+        name: 'Misc',
+        price: keypadValue,
+        quantity: 1,
+        addons: [],
+      });
+    }
     setOrder([...temp_order]);
   }
 
