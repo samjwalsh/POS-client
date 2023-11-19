@@ -364,7 +364,7 @@ export const menu = [
         price: 0.5,
       },
       {
-        name: 'Cone',
+        name: 'Empty Cone',
         price: 0.3,
       },
       {

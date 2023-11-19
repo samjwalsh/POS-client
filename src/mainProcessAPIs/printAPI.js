@@ -141,6 +141,8 @@ ipcMain.handle('printOrder', async (e, order) => {
 
     printer.leftRight('Shop:', shopName + '-' + tillNo);
 
+    // printer.openCashDrawer();
+
     printer.cut();
     try {
       let execute = await printer.execute();
