@@ -8,6 +8,7 @@ import closeSVG from '../assets/appicons/close.svg';
 import {
   getAllOrders,
   printOrder,
+  printEndOfDay,
   removeAllOrders,
   removeOldOrders,
   removeOrder,
@@ -33,8 +34,10 @@ export default function Reports(props) {
     playBeep();
     const choice = await confirm(['Delete All Orders?', 'No', 'Yes']);
     if (!choice) return;
-    await removeAllOrders();
     let localOrders = await getAllOrders();
+    await printEndOfDay(localOrders)
+    await removeAllOrders();
+    localOrders = await getAllOrders();
     if (Array.isArray(localOrders)) {
       setOrders(localOrders.reverse());
     }

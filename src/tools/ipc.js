@@ -62,6 +62,10 @@ export function printOrder(order) {
   return ipcRenderer.invoke('printOrder', order);
 }
 
+export function printEndOfDay(orders) {
+  return ipcRenderer.invoke('printEndOfDay', orders);
+}
+
 export function printTestPage() {
   return ipcRenderer.invoke('printTestPage');
 }

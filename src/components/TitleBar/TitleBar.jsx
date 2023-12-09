@@ -7,6 +7,7 @@ import Connection from './Connection.jsx';
 import Clock from './Clock.jsx';
 import PrinterConnection from './PrinterConnection.jsx';
 import HelpPageButton from './HelpPageButton.jsx';
+import { getAllOrders, printOrder } from '../../tools/ipc.js';
 
 export default function TitleBar(props) {
   const { setHamburger } = props;
@@ -19,10 +20,18 @@ export default function TitleBar(props) {
         onTouchStart={(e) => handleClickHamburger(setHamburger)}>
         <img src={hamburger} className='w-10 invert-icon cnter-items h-full' />
       </div>
+
       <div className='flex flex-row items-center justify-end w-full font-mono'>
         {/* <div className='border-l border-colour h-full cnter-items px-1 positiveFill w-10'>
           <HelpPageButton />
         </div> */}
+        <div
+          className='negativeFill border-l h-full cnter-items px-1 uppercase font-bold'
+          onContextMenu={(e) => handlePrintRecentOrder()}
+          onTouchStart={(e) => handlePrintRecentOrder()}>
+          Print Receipt
+        </div>
+
         <div className='border-l border-colour h-full cnter-items px-1 '>
           <PrinterConnection />
         </div>
@@ -35,6 +44,12 @@ export default function TitleBar(props) {
       </div>
     </div>
   );
+}
+
+async function handlePrintRecentOrder() {
+  let localOrders = await getAllOrders();
+  localOrders = localOrders.reverse();
+  await printOrder(localOrders[0]);
 }
 
 function handleClickHamburger(setHamburger) {

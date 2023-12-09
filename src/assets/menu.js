@@ -299,7 +299,7 @@ export const menu = [
     items: [
       {
         name: 'Soft Bottles',
-        price: 2.8,
+        price: 2.5,
       },
       {
         name: 'Water',
@@ -316,6 +316,10 @@ export const menu = [
       {
         name: 'Capri-Sun',
         price: 2,
+      },
+      {
+        name: 'Monster',
+        price: 2.8,
       },
     ],
   },

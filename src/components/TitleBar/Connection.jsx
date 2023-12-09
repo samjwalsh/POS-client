@@ -26,7 +26,7 @@ export default function Connection() {
   return (
     <>
       TCP<div className='font-emoji'>{isOnline.status ? '🟢' : '🔴'}</div>
-      {isOnline.status ? `[${isOnline.ping}] ` : ''}
+      {isOnline.status ? `[${String(isOnline.ping).padStart(3, '0')}] ` : ''}
     </>
   );
 }

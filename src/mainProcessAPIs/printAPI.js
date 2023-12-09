@@ -112,7 +112,7 @@ ipcMain.handle('printOrder', async (e, order) => {
     printer.drawLine();
     printer.setTextQuadArea();
     printer.leftRight('Total:', `€${total.toFixed(2)}`);
-    printer.leftRight('Vat Total:', `€${(0.23 * total).toFixed(2)}`);
+    printer.leftRight('VAT Total:', `€${(0.23 * total).toFixed(2)}`);
     printer.setTextNormal();
     printer.newLine();
     printer.leftRight('Paid By:', order.paymentMethod);
@@ -142,6 +142,127 @@ ipcMain.handle('printOrder', async (e, order) => {
     printer.leftRight('Shop:', shopName + '-' + tillNo);
 
     // printer.openCashDrawer();
+
+    printer.cut();
+    try {
+      let execute = await printer.execute();
+      return execute;
+    } catch (error) {
+      return error;
+    }
+  } catch (e) {
+    console.log(e);
+    return e;
+  }
+});
+
+ipcMain.handle('printEndOfDay', async (e, orders) => {
+  try {
+    const printer = createPrinter();
+
+    // MUST SET USB002 PORT ON PRINTER PROPERTIES IN WINDOWS
+    printer.bold(true);
+
+    printer.alignCenter();
+    printer.setTextQuadArea();
+    printer.underlineThick(true);
+    printer.println("Teddy's Ice Cream");
+    printer.underlineThick(false);
+    printer.setTextNormal();
+    printer.newLine();
+    printer.println('1a Windsor Terrace');
+    printer.println('Dún Laoghaire');
+    printer.println('Co. Dublin');
+    printer.newLine();
+    printer.alignCenter();
+    printer.setTextQuadArea();
+    printer.underlineThick(false);
+    printer.println('End Of Day');
+    printer.setTextNormal();
+    printer.drawLine();
+    printer.setTextDoubleWidth();
+
+    let shopName = '';
+    let tillNo = '';
+    const settings = settingsStore.get('settings');
+    settings.forEach((category) => {
+      category.settings.forEach((setting) => {
+        switch (setting.name) {
+          case 'Shop Name': {
+            shopName = setting.value;
+            break;
+          }
+          case 'Till Number': {
+            tillNo = setting.value;
+            break;
+          }
+        }
+      });
+    });
+
+    printer.leftRight('Shop:', shopName + '-' + tillNo);
+    var date = new Date();
+    var dd = String(date.getDate()).padStart(2, '0');
+    var mm = String(date.getMonth() + 1).padStart(2, '0'); //January is 0!
+    var yyyy = date.getFullYear();
+
+    let dateString =
+      date.toLocaleString('en-IE', { weekday: 'short' }) +
+      ' ' +
+      dd +
+      '/' +
+      mm +
+      '/' +
+      yyyy;
+    printer.leftRight('Date:', dateString);
+
+    printer.setTextNormal();
+    printer.alignLeft();
+    printer.drawLine();
+
+    let cashTotal = 0;
+    let cardTotal = 0;
+    let quantityItems = 0;
+    let quantityOrders = orders.length;
+
+    orders.forEach((order) => {
+      if (order.paymentMethod === 'Card') {
+        cardTotal += order.subtotal;
+      } else {
+        cashTotal += order.subtotal;
+      }
+
+      order.items.forEach((item) => {
+        if (item.quantity === undefined) {
+          quantityItems++;
+        } else {
+          quantityItems += item.quantity;
+        }
+      });
+    });
+
+    let xTotal = cashTotal + cardTotal;
+
+    printer.setTextDoubleWidth();
+    printer.leftRight('Cash:', `€${cashTotal.toFixed(2)}`);
+    printer.newLine();
+    printer.leftRight('Card:', `€${cardTotal.toFixed(2)}`);
+    printer.newLine();
+    printer.setTextQuadArea();
+    printer.leftRight('Total:', `€${xTotal.toFixed(2)}`);
+    printer.newLine();
+    printer.setTextDoubleWidth();
+    printer.leftRight('VAT Total:', `€${(0.23 * xTotal).toFixed(2)}`);
+    printer.setTextNormal();
+    printer.newLine();
+    printer.leftRight('Total Items:', quantityItems);
+    printer.leftRight('Total Orders:', quantityOrders);
+    printer.leftRight(
+      'Average Sale:',
+      `€${(xTotal / quantityOrders === 0 ? 1 : quantityOrders).toFixed(2)}`
+    );
+    printer.newLine();
+    printer.leftRight('Time:', calculateDateString(new Date().getTime()));
 
     printer.cut();
     try {
