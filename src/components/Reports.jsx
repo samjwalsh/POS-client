@@ -76,7 +76,7 @@ export default function Reports(props) {
         return (
           <div
             key={order.time}
-            className='orderbox border border-colour rnd flex max-h-96 flex-col '>
+            className='orderbox borderD border-colour rnd flex max-h-96 flex-col '>
             <div className='flex flex-row w-full p-2 justify-between border-b border-colour rnd-t'>
               <div
                 className=' btn cnter-items grey p-2'

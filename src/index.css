@@ -9,6 +9,11 @@ body {
 }
 
 @font-face {
+  font-family: Inter;
+  src: url(./assets/fonts/Inter/Inter.ttf);
+}
+
+@font-face {
   font-family: Roboto;
   src: url(./assets/fonts/Roboto/Roboto.ttf);
 }
@@ -67,15 +72,23 @@ body {
 } */
 
 .primary {
-  @apply dark:bg-dark_primary border dark:border-dark_primary_border border-light_primary_border  bg-light_primary;
+  @apply dark:bg-dark_primary borderD dark:border-dark_primary_border border-light_primary_border  bg-light_primary;
 }
 
 .primaryFill {
   @apply dark:bg-dark_primary  bg-light_primary;
 }
 
+.secondary {
+  @apply dark:bg-dark_secondary borderD dark:border-dark_secondary_border border-light_secondary_border  bg-light_secondary;
+}
+
+.secondaryFill {
+  @apply dark:bg-dark_secondary  bg-light_secondary;
+}
+
 .negative {
-  @apply dark:bg-dark_negative border dark:border-dark_negative_border bg-light_negative border-light_negative_border;
+  @apply dark:bg-dark_negative borderD dark:border-dark_negative_border bg-light_negative border-light_negative_border;
 }
 
 .negativeFill {
@@ -83,7 +96,7 @@ body {
 }
 
 .positive {
-  @apply dark:bg-dark_positive border dark:border-dark_positive_border bg-light_positive border-light_positive_border;
+  @apply dark:bg-dark_positive borderD dark:border-dark_positive_border bg-light_positive border-light_positive_border;
 }
 
 .positiveFill {
@@ -91,15 +104,19 @@ body {
 }
 
 .grey {
-  @apply dark:bg-dark_grey border dark:border-dark_grey_border bg-light_grey border-light_grey_border;
+  @apply dark:bg-dark_grey borderD dark:border-dark_grey_border bg-light_grey border-light_grey_border;
 }
 
 .greyFill {
   @apply dark:bg-dark_grey   bg-light_grey;
 }
 
+.borderD {
+  @apply border-2;
+}
+
 .rnd {
-  @apply rounded-none shadow-none;
+  @apply rounded-sm shadow-inner;
 }
 
 .transparent {
