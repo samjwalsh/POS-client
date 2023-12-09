@@ -26,7 +26,7 @@ export default function TitleBar(props) {
           <HelpPageButton />
         </div> */}
         <div
-          className='negativeFill border-l h-full cnter-items px-1 uppercase font-bold'
+          className='secondaryFill border-l border-colour h-full cnter-items px-1 uppercase font-bold'
           onContextMenu={(e) => handlePrintRecentOrder()}
           onTouchStart={(e) => handlePrintRecentOrder()}>
           Print Receipt

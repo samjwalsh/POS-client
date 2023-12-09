@@ -152,7 +152,7 @@ export default function Order(props) {
           </div>
           <div className='row-span-1 col-span-1 flex gap-2 items-stretch h-20 text-lg uppercase font-bold'>
             <div
-              className='grey rnd  cnter-items w-48'
+              className='secondary rnd  cnter-items w-48'
               onContextMenu={() => handlePlusMinus()}
               onTouchStart={() => handlePlusMinus()}>
               <img src={euro} className='w-6 invert-icon' />

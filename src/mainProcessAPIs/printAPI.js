@@ -243,6 +243,11 @@ ipcMain.handle('printEndOfDay', async (e, orders) => {
 
     let xTotal = cashTotal + cardTotal;
 
+    let averageSale = 0;
+    if (quantityOrders !== 0 && quantityOrders !== undefined) {
+      averageSale = xTotal / quantityOrders;
+    }
+
     printer.setTextDoubleWidth();
     printer.leftRight('Cash:', `€${cashTotal.toFixed(2)}`);
     printer.newLine();
@@ -257,10 +262,7 @@ ipcMain.handle('printEndOfDay', async (e, orders) => {
     printer.newLine();
     printer.leftRight('Total Items:', quantityItems);
     printer.leftRight('Total Orders:', quantityOrders);
-    printer.leftRight(
-      'Average Sale:',
-      `€${(xTotal / quantityOrders === 0 ? 1 : quantityOrders).toFixed(2)}`
-    );
+    printer.leftRight('Average Sale:', `€${averageSale.toFixed(2)}`);
     printer.newLine();
     printer.leftRight('Time:', calculateDateString(new Date().getTime()));
 

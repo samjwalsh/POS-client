@@ -151,13 +151,13 @@ const useKeypad = (numberFormat) => {
         <div className='col-span-1 row-span-1 keypad negative' id='exit'>
           <img src={closeSVG} className='w-6 invert-icon' id='exit' />
         </div>
-        <div className='col-span-1 row-span-1 keypad grey' id='minus'>
+        <div className='col-span-1 row-span-1 keypad negative' id='minus'>
           <img src={minusSVG} className='w-6 invert-icon' id='minus' />
         </div>
-        <div className='col-span-1 row-span-1 keypad grey' id='plus'>
+        <div className='col-span-1 row-span-1 keypad positive' id='plus'>
           <img src={addSVG} className='w-6 invert-icon' id='plus' />
         </div>
-        <div className='col-span-1 row-span-1 keypad grey' id='delete'>
+        <div className='col-span-1 row-span-1 keypad secondary' id='delete'>
           <img src={backSVG} className='w-6 invert-icon' id='delete' />
         </div>
         <div className='col-span-1 row-span-1 keypad grey' id='7'>
