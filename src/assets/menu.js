@@ -321,6 +321,14 @@ export const menu = [
         name: 'Monster',
         price: 2.8,
       },
+      {
+        name: 'Small Slush',
+        price: 2.5,
+      },
+      {
+        name: 'Large Slush',
+        price: 3.5,
+      },
     ],
   },
   {
@@ -487,7 +495,7 @@ export const menu = [
     ],
   },
   {
-    name: 'Crisps, Popcorn, Candyfloss, Slush',
+    name: 'Crisps, Popcorn & Candyfloss',
     type: 'category',
     items: [
       {
@@ -513,18 +521,6 @@ export const menu = [
       },
       {
         name: 'Candyfloss Tub',
-        price: 3.5,
-      },
-      {
-        name: 'Yard Slush',
-        price: 3.5,
-      },
-      {
-        name: 'Small Slush',
-        price: 2.5,
-      },
-      {
-        name: 'Large Slush',
         price: 3.5,
       },
     ],
