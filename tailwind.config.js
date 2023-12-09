@@ -8,7 +8,7 @@ module.exports = {
         layout: 'h-min 1fr',
       },
       fontFamily: {
-        sans: ['Inter', 'Roboto'],
+        sans: ['Inter SemiBold', 'Roboto'],
         mono: ['Fira Mono', 'Roboto Mono'],
         emoji: ['Segoe UI Emoji'],
       },
