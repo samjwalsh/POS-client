@@ -54,10 +54,10 @@ export default function HamburgerMenu(props) {
           <div className='flex flex-row  w-100 justify-between p-2 border-b border-colour items-stretch '>
             <div className='text-2xl self-end'>Menu</div>
             <div
-              className='justify-end  negative  btn  w-8 h-8 cnter-items'
+              className='justify-end negative btn w-10 h-10 cnter-items'
               onContextMenu={() => handleCloseSideMenu(setHamburger)}
               onTouchStart={() => handleCloseSideMenu(setHamburger)}>
-              <img src={closeSVG} className='w-6 invert-icon' />
+              <img src={closeSVG} className='w-10 invert-icon' />
             </div>
           </div>
           <div className=' flex flex-col gap-2 p-2 '>

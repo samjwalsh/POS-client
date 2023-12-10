@@ -57,25 +57,25 @@ export default function PayCash(props) {
           Custom
         </div>
         <div
-          className='col-span-1 row-span-1 font-mono  grey  btn  cnter-items'
+          className='col-span-1 row-span-1 num  grey  btn  cnter-items'
           onContextMenu={() => handleButtonPress(50)}
           onTouchStart={() => handleButtonPress(50)}>
           €50
         </div>
         <div
-          className='col-span-1 row-span-1 font-mono  grey  btn  cnter-items'
+          className='col-span-1 row-span-1 num  grey  btn  cnter-items'
           onContextMenu={() => handleButtonPress(20)}
           onTouchStart={() => handleButtonPress(20)}>
           €20
         </div>
         <div
-          className='col-span-1 row-span-1 font-mono  grey  btn  cnter-items'
+          className='col-span-1 row-span-1 num  grey  btn  cnter-items'
           onContextMenu={() => handleButtonPress(10)}
           onTouchStart={() => handleButtonPress(10)}>
           €10
         </div>
         <div
-          className='col-span-1 row-span-1 font-mono  grey  btn  cnter-items'
+          className='col-span-1 row-span-1 num  grey  btn  cnter-items'
           onContextMenu={() => handleButtonPress(5)}
           onTouchStart={() => handleButtonPress(5)}>
           €5
@@ -90,7 +90,7 @@ export default function PayCash(props) {
       </div>
       <div className='flex justify-between w-full text-2xl pt-1'>
         <div className=''>Change</div>
-        <div className='text-right font-mono justify-end'>
+        <div className='text-right num justify-end'>
           €{change.toFixed(2)}
         </div>
       </div>

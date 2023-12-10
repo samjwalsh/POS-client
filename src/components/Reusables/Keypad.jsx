@@ -137,10 +137,10 @@ const useKeypad = (numberFormat) => {
   function createKeypadHTML() {
     return (
       <div
-        className='grid grid-cols-3 grid-rows-6 w-full h-full  gap-2 p-2 text-2xl rnd background borderD border-colour'
+        className='grid grid-cols-3 grid-rows-6 w-full h-full  gap-2 p-2 text-2xl rnd background borderD border-colour '
         onContextMenu={(event) => handleKeypadClick(event)}
         onTouchStart={(event) => handleKeypadClick(event)}>
-        <div className='borderD border-colour rnd p-2 col-span-2 row-span 1 flex flex-row text-3xl font-mono justify-between w-full'>
+        <div className='borderD border-colour rnd p-2 col-span-2 row-span 1 flex flex-row text-3xl justify-between w-full num'>
           <div className='text-left cnter-items'>
             {numberFormat === 'currency' ? '€' : ''}
           </div>

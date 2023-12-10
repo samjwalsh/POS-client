@@ -17,7 +17,7 @@ module.exports = {
       },
       fontFamily: {
         sans: ['Gabarito', 'Roboto'],
-        mono: ['Roboto Mono', 'Roboto Mono'],
+        mono: ['Noto Sans Mono'],
         emoji: ['Segoe UI Emoji'],
       },
       colors: {

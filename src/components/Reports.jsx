@@ -76,10 +76,10 @@ export default function Reports(props) {
         return (
           <div
             key={order.time}
-            className='orderbox borderD border-colour rnd flex max-h-96 flex-col '>
-            <div className='flex flex-row w-full p-2 justify-between border-b border-colour rnd-t'>
+            className='orderbox borderD border-colour rnd flex max-h-96 flex-col'>
+            <div className='flex flex-row w-full p-2 justify-between border-b border-colour'>
               <div
-                className=' btn cnter-items grey p-2'
+                className=' btn cnter-items primary p-2'
                 onContextMenu={(e) => handlePrintReceipt(order)}
                 onTouchStart={(e) => handlePrintReceipt(order)}>
                 Receipt{' '}
@@ -98,7 +98,7 @@ export default function Reports(props) {
               </div>
               <div className='flex flex-row justify-between'>
                 <div className=''>Subtotal:</div>
-                <div className='font-mono'>€{order.subtotal.toFixed(2)}</div>
+                <div className='num'>€{order.subtotal.toFixed(2)}</div>
               </div>
               <div className='flex flex-row justify-between'>
                 <div className=''>Payment:</div>
@@ -153,22 +153,22 @@ export default function Reports(props) {
     let xTotal = cashTotal + cardTotal;
 
     return (
-      <div className='flex flex-col w-full text-xl p-2 gap-2'>
+      <div className='flex flex-col w-full text-3xl p-2 gap-2'>
         <div className='flex flex-row w-full justify-between border-b border-colour pb-2'>
           <div className=''>Cash:</div>
-          <div className='font-mono text-right justify-end'>
+          <div className='num text-right justify-end'>
             €{cashTotal.toFixed(2)}
           </div>
         </div>
         <div className='flex flex-row w-full justify-between border-b border-colour pb-2'>
           <div className=''>Card:</div>
-          <div className='font-mono text-right justify-end '>
+          <div className='num text-right justify-end '>
             €{cardTotal.toFixed(2)}
           </div>
         </div>
         <div className='flex flex-row w-full justify-between'>
           <div className=''>X-Total:</div>
-          <div className='font-mono text-right justify-end'>
+          <div className='num text-right justify-end'>
             €{xTotal.toFixed(2)}
           </div>
         </div>
@@ -195,16 +195,16 @@ export default function Reports(props) {
 
       return (
         <div
-          className='w-full grid grid-cols-[auto_auto] grid-rows-[auto_min-content] text-lg p-2 border border-colour rnd primary'
+          className='w-full grid grid-cols-[auto_auto] grid-rows-[auto_min-content] text-lg p-2 border border-colour rnd grey'
           key={index}>
           <div className='col-span-1 row-span-1'>
             {item.name} {formattedQuantity}
           </div>
-          <div className='col-span-1 row-span-1 text-right'>
+          <div className='col-span-1 row-span-1 text-right num'>
             €{(item.price * item.quantity).toFixed(2)}
           </div>
-          <div className='col-span-1 row-span-1 pr-4'>{formattedAddons}</div>
-          <div className='col-span-1 row-span-1 text-right'>
+          <div className='col-span-1 row-span-1 pr-4 text-sm'>{formattedAddons}</div>
+          <div className='col-span-1 row-span-1 text-right num text-sm'>
             €{item.price.toFixed(2)} EA
           </div>
         </div>

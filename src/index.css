@@ -9,13 +9,18 @@ body {
 }
 
 @font-face {
-  font-family: Inter;
-  src: url(./assets/fonts/Inter/Inter.ttf);
+  font-family: Gabarito;
+  src: url(./assets/fonts/Gabarito.ttf);
 }
 
 @font-face {
-  font-family: Gabarito;
-  src: url(./assets/fonts/Gabarito.ttf);
+  font-family: Noto Sans Mono;
+  src: url(./assets/fonts/NotoMono/NotoSansMono.ttf);
+}
+
+@font-face {
+  font-family: Inter;
+  src: url(./assets/fonts/Inter/Inter.ttf);
 }
 
 @font-face {
@@ -125,7 +130,7 @@ body {
 }
 
 .transparent {
-  @apply bg-black bg-opacity-50 
+  @apply bg-black bg-opacity-50;
 }
 
 .background {
@@ -150,4 +155,8 @@ body {
 
 .orderbox {
   @apply max-w-3xl w-72 flex-grow;
+}
+
+.num {
+  @apply font-mono;
 }

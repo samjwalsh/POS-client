@@ -103,14 +103,14 @@ export default function Order(props) {
             {orderItem.name +
               (orderItem.quantity > 1 ? ` (${orderItem.quantity})` : '')}
           </div>
-          <div className='col-span-1 row-span-1 text-md font-mono text-right'>
+          <div className='col-span-1 row-span-1 text-md num text-right'>
             €{(orderItem.price * orderItem.quantity).toFixed(2)}
           </div>
 
           <div className='col-span-1 row-span-1 mr-1 text-sm '>
             {orderItem.addons === undefined ? '' : orderItem.addons.join(', ')}
           </div>
-          <div className='col-span-1 row-span-1 whitespace-nowrap text-sm font-mono text-right'>
+          <div className='col-span-1 row-span-1 whitespace-nowrap text-sm num text-right'>
             €{orderItem.price.toFixed(2)} EA
           </div>
         </div>
@@ -146,7 +146,7 @@ export default function Order(props) {
         <div className=' grid grid-rows-[min-content, 1fr] grid-cols-1 gap-1 border-t border-colour p-2 pt-1'>
           <div className='row-span-1 col-span-1 flex justify-between w-full text-2xl'>
             <div className='text-left'>Total</div>
-            <div className='text-right font-mono justify-end'>
+            <div className='text-right num justify-end'>
               €{subtotal.toFixed(2)}
             </div>
           </div>

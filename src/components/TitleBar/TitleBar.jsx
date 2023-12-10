@@ -21,7 +21,7 @@ export default function TitleBar(props) {
         <img src={hamburger} className='w-10 invert-icon cnter-items h-full' />
       </div>
 
-      <div className='flex flex-row items-center justify-end w-full font-mono'>
+      <div className='flex flex-row items-center justify-end w-full num'>
         {/* <div className='border-l border-colour h-full cnter-items px-1 positiveFill w-10'>
           <HelpPageButton />
         </div> */}
