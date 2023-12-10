@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import {checkPrinterConnection} from '../../tools/ipc';
+import { checkPrinterConnection } from '../../tools/ipc';
 
 export default function PrinterConnection() {
   const [isOnline, setIsOnline] = useState({

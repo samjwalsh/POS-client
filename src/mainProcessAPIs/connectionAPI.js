@@ -17,5 +17,5 @@ ipcMain.handle('checkConnection', async () => {
     .catch((ex) => {
       return false;
     });
-    return connected
+  return connected;
 });

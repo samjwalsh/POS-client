@@ -35,7 +35,7 @@ export default function Reports(props) {
     const choice = await confirm(['Delete All Orders?', 'No', 'Yes']);
     if (!choice) return;
     let localOrders = await getAllOrders();
-    await printEndOfDay(localOrders)
+    await printEndOfDay(localOrders);
     await removeAllOrders();
     localOrders = await getAllOrders();
     if (Array.isArray(localOrders)) {
@@ -168,9 +168,7 @@ export default function Reports(props) {
         </div>
         <div className='flex flex-row w-full justify-between'>
           <div className=''>X-Total:</div>
-          <div className='num text-right justify-end'>
-            €{xTotal.toFixed(2)}
-          </div>
+          <div className='num text-right justify-end'>€{xTotal.toFixed(2)}</div>
         </div>
       </div>
     );
@@ -203,7 +201,9 @@ export default function Reports(props) {
           <div className='col-span-1 row-span-1 text-right num'>
             €{(item.price * item.quantity).toFixed(2)}
           </div>
-          <div className='col-span-1 row-span-1 pr-4 text-sm'>{formattedAddons}</div>
+          <div className='col-span-1 row-span-1 pr-4 text-sm'>
+            {formattedAddons}
+          </div>
           <div className='col-span-1 row-span-1 text-right num text-sm'>
             €{item.price.toFixed(2)} EA
           </div>

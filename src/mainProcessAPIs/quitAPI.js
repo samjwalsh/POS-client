@@ -1,5 +1,5 @@
-const { ipcMain, app } = require("electron");
+const { ipcMain, app } = require('electron');
 
-ipcMain.on("quit", () => {
+ipcMain.on('quit', () => {
   app.quit();
 });

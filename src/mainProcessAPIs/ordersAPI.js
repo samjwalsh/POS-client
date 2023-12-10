@@ -82,4 +82,4 @@ ipcMain.handle('removeOrder', (e, deletedOrder) => {
     store.set('orders', orders);
   }
   return store.get('orders');
-w});
+});

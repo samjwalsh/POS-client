@@ -7,9 +7,9 @@ import useHelpPage from './HelpPage.jsx';
 export default function HelpPageButton() {
   const [HelpPage, help] = useHelpPage();
 
-async function useHelp() {
-  const result = await help();
-}
+  async function useHelp() {
+    const result = await help();
+  }
 
   return (
     <>

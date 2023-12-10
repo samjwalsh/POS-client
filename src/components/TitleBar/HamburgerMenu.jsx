@@ -73,10 +73,9 @@ export default function HamburgerMenu(props) {
               onTouchStart={() => handleSetAppState('Reports')}>
               Reports
             </div>
-
           </div>
           <div className='mt-auto p-2 flex flex-col gap-2'>
-          <div
+            <div
               className='side-menu-option secondary'
               onContextMenu={() => handleSetAppState('Settings')}
               onTouchStart={() => handleSetAppState('Settings')}>
