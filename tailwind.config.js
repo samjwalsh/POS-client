@@ -16,7 +16,7 @@ module.exports = {
         layout: 'h-min 1fr',
       },
       fontFamily: {
-        sans: ['Gabarito', 'Roboto'],
+        sans: ['Gabarito'],
         mono: ['Noto Sans Mono'],
         emoji: ['Segoe UI Emoji'],
       },

@@ -22,7 +22,7 @@ export default function TitleBar(props) {
       </div>
 
       <div className='flex flex-row items-center justify-end w-full num'>
-        {/* <div className='border-l border-colour h-full cnter-items px-1 positiveFill w-10'>
+        {/* <div className='border-l border-colour h-full cnter-items px-1 primaryFill w-10'>
           <HelpPageButton />
         </div> */}
         <div

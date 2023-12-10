@@ -14,7 +14,7 @@ async function useHelp() {
   return (
     <>
       <HelpPage />
-      <div className='h-full cnter-items positiveFill'>
+      <div className='h-full cnter-items primaryFill'>
         <img
           src={question}
           className='w-8 invert-icon cnter-items h-full'

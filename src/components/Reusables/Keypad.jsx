@@ -193,7 +193,7 @@ const useKeypad = (numberFormat) => {
         <div className='col-span-1 row-span-1 keypad grey' id='00'>
           00
         </div>
-        <div className='col-span-1 row-span-1 keypad positive' id='enter'>
+        <div className='col-span-1 row-span-1 keypad primary' id='enter'>
           <img src={enterSVG} className='w-6 invert-icon' id='enter' />
         </div>
       </div>

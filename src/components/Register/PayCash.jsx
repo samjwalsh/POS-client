@@ -48,34 +48,34 @@ export default function PayCash(props) {
   }
 
   return (
-    <div className='flex flex-col h-full p-2 pb-1'>
-      <div className='grid grid-cols-2 grid-rows-5 gap-2 h-full btn'>
+    <div className='flex flex-col h-full'>
+      <div className='grid grid-cols-2 grid-rows-5 gap-2 h-full p-2 pb-1 text-3xl'>
         <div
-          className='col-span-2 row-span-1   grey  btn  cnter-items'
+          className='col-span-2 row-span-1  primary btn cnter-items'
           onContextMenu={() => handleButtonPress('custom')}
           onTouchStart={() => handleButtonPress('custom')}>
           Custom
         </div>
         <div
-          className='col-span-1 row-span-1 num  grey  btn  cnter-items'
+          className='col-span-1 row-span-1 num  secondary btn cnter-items'
           onContextMenu={() => handleButtonPress(50)}
           onTouchStart={() => handleButtonPress(50)}>
           €50
         </div>
         <div
-          className='col-span-1 row-span-1 num  grey  btn  cnter-items'
+          className='col-span-1 row-span-1 num  secondary  btn  cnter-items'
           onContextMenu={() => handleButtonPress(20)}
           onTouchStart={() => handleButtonPress(20)}>
           €20
         </div>
         <div
-          className='col-span-1 row-span-1 num  grey  btn  cnter-items'
+          className='col-span-1 row-span-1 num  secondary  btn  cnter-items'
           onContextMenu={() => handleButtonPress(10)}
           onTouchStart={() => handleButtonPress(10)}>
           €10
         </div>
         <div
-          className='col-span-1 row-span-1 num  grey  btn  cnter-items'
+          className='col-span-1 row-span-1 num  secondary  btn  cnter-items'
           onContextMenu={() => handleButtonPress(5)}
           onTouchStart={() => handleButtonPress(5)}>
           €5
@@ -88,8 +88,8 @@ export default function PayCash(props) {
           DONE
         </div>
       </div>
-      <div className='flex justify-between w-full text-2xl pt-1'>
-        <div className=''>Change</div>
+      <div className='flex justify-between w-full text-2xl px-2 pb-1'>
+        <div className=''>Change:</div>
         <div className='text-right num justify-end'>
           €{change.toFixed(2)}
         </div>
