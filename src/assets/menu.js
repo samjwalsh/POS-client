@@ -10,7 +10,6 @@ Modifier:
 {
 name: '',
 price: #,
-default: true //can be omitted to indicate false
 }
 
 Category:
@@ -38,7 +37,6 @@ export const menu = [
           {
             name: 'Flake',
             price: 0.5,
-            default: true,
           },
         ],
       },
@@ -49,7 +47,6 @@ export const menu = [
           {
             name: 'Flake',
             price: 0.5,
-            default: true,
           },
           {
             name: 'Toppings',
@@ -62,7 +59,6 @@ export const menu = [
       {
         name: 'Flake',
         price: 0.5,
-        default: true,
       },
       {
         name: 'Toppings',
@@ -118,7 +114,6 @@ export const menu = [
           {
             name: 'Flake',
             price: 0.2,
-            default: true,
           },
         ],
       },
@@ -129,7 +124,6 @@ export const menu = [
           {
             name: 'Flake',
             price: 0.2,
-            default: true,
           },
           {
             name: 'Toppings',
@@ -142,7 +136,6 @@ export const menu = [
       {
         name: 'Flake',
         price: 0.2,
-        default: true,
       },
       {
         name: 'Toppings',
@@ -190,7 +183,6 @@ export const menu = [
           {
             name: 'Flake',
             price: 0.5,
-            default: true,
           },
           {
             name: 'Toppings',
@@ -201,6 +193,37 @@ export const menu = [
             price: 1.5,
           },
         ],
+        shortcuts: [
+          {
+            name: 'Plain Pink Tub',
+            price: 2.5,
+            addons: [],
+          },
+          {
+            name: '99 Pink Tub',
+            price: 3,
+            addons: [
+              {
+                name: 'Flake',
+                price: 0.5,
+              },
+            ],
+          },
+          {
+            name: 'Special 99 Pink Tub',
+            price: 3.5,
+            addons: [
+              {
+                name: 'Flake',
+                price: 0.5,
+              },
+              {
+                name: 'Toppings',
+                price: 0.5,
+              },
+            ],
+          },
+        ],
       },
       {
         name: 'Large Tub',
@@ -209,7 +232,6 @@ export const menu = [
           {
             name: 'Flake',
             price: 0.5,
-            default: true,
           },
           {
             name: 'Toppings',
@@ -218,6 +240,37 @@ export const menu = [
           {
             name: 'Crush Flake',
             price: 1.5,
+          },
+        ],
+        shortcuts: [
+          {
+            name: 'Plain Large Tub',
+            price: 4,
+            addons: [],
+          },
+          {
+            name: '99 Large Tub',
+            price: 4.5,
+            addons: [
+              {
+                name: 'Flake',
+                price: 0.5,
+              },
+            ],
+          },
+          {
+            name: 'Special 99 Large Tub',
+            price: 5,
+            addons: [
+              {
+                name: 'Flake',
+                price: 0.5,
+              },
+              {
+                name: 'Toppings',
+                price: 0.5,
+              },
+            ],
           },
         ],
       },
@@ -229,6 +282,37 @@ export const menu = [
           { name: 'Toppings', price: 0.5 },
           { name: 'Crush Flake', price: 1.5 },
         ],
+        shortcuts: [
+          {
+            name: 'Plain Sundae',
+            price: 4,
+            addons: [],
+          },
+          {
+            name: '99 Sundae',
+            price: 4.5,
+            addons: [
+              {
+                name: 'Flake',
+                price: 0.5,
+              },
+            ],
+          },
+          {
+            name: 'Special 99 Sundae',
+            price: 5,
+            addons: [
+              {
+                name: 'Flake',
+                price: 0.5,
+              },
+              {
+                name: 'Toppings',
+                price: 0.5,
+              },
+            ],
+          },
+        ],
       },
       {
         name: 'Screwball',
@@ -237,11 +321,59 @@ export const menu = [
           { name: 'Flake', price: 0.5 },
           { name: 'Toppings', price: 0.5 },
         ],
+        shortcuts: [
+          {
+            name: 'Plain Screwball',
+            price: 3,
+            addons: [],
+          },
+          {
+            name: '99 Screwball',
+            price: 3.5,
+            addons: [
+              {
+                name: 'Flake',
+                price: 0.5,
+              },
+            ],
+          },
+          {
+            name: 'Special 99 Screwball',
+            price: 3.5,
+            addons: [
+              {
+                name: 'Flake',
+                price: 0.5,
+              },
+              {
+                name: 'Toppings',
+                price: 0.5,
+              },
+            ],
+          },
+        ],
       },
       {
         name: 'Boat (w/ Flake)',
         price: 4,
         modifiers: [{ name: 'Toppings', price: 0.5 }],
+        shortcuts: [
+          {
+            name: 'Boat (w/ Flake)',
+            price: 4,
+            addons: [],
+          },
+          {
+            name: 'Special Boat (w/ Flake)',
+            price: 4.5,
+            addons: [
+              {
+                name: 'Toppings',
+                price: 0.5,
+              },
+            ],
+          },
+        ],
       },
       {
         name: 'Hot Ferrero',
@@ -250,6 +382,23 @@ export const menu = [
           {
             name: 'Flake',
             price: 0.5,
+          },
+        ],
+        shortcuts: [
+          {
+            name: 'Hot Ferrero',
+            price: 6,
+            addons: [],
+          },
+          {
+            name: '99 Hot Ferrero',
+            price: 6.5,
+            addons: [
+              {
+                name: 'Flake',
+                price: 0.5,
+              },
+            ],
           },
         ],
       },
@@ -262,6 +411,23 @@ export const menu = [
             price: 0.5,
           },
         ],
+        shortcuts: [
+          {
+            name: 'Strawberries & Ice Cream',
+            price: 6,
+            addons: [],
+          },
+          {
+            name: '99 Strawberries & Ice Cream',
+            price: 6.5,
+            addons: [
+              {
+                name: 'Flake',
+                price: 0.5,
+              },
+            ],
+          },
+        ],
       },
       {
         name: 'Hot Ferrero & Strawberries',
@@ -272,6 +438,23 @@ export const menu = [
             price: 0.5,
           },
         ],
+        shortcuts: [
+          {
+            name: 'Hot Ferrero & Strawberries',
+            price: 6.5,
+            addons: [],
+          },
+          {
+            name: '99 Hot Ferrero & Strawberries',
+            price: 7,
+            addons: [
+              {
+                name: 'Flake',
+                price: 0.5,
+              },
+            ],
+          },
+        ],
       },
       {
         name: 'Treat Tub',
@@ -280,6 +463,23 @@ export const menu = [
           {
             name: 'Flake',
             price: 0.5,
+          },
+        ],
+        shortcuts: [
+          {
+            name: 'Treat Tub',
+            price: 6,
+            addons: [],
+          },
+          {
+            name: '99 Treat Tub',
+            price: 6.5,
+            addons: [
+              {
+                name: 'Flake',
+                price: 0.5,
+              },
+            ],
           },
         ],
       },
@@ -358,6 +558,23 @@ export const menu = [
           {
             name: 'Marshmallows',
             price: 0.5,
+          },
+        ],
+        shortcuts: [
+          {
+            name: 'Hot Chocolate',
+            price: 3,
+            addons: [],
+          },
+          {
+            name: 'Hot Chocolate w/ Marshmallows',
+            price: 3.5,
+            addons: [
+              {
+                name: 'Marshmallows',
+                price: 0.5,
+              },
+            ],
           },
         ],
       },

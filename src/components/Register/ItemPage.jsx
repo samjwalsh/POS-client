@@ -450,7 +450,10 @@ function computePriceNoQuantity(item, currentOrder) {
   log(`Computing price of individual item ${item.name}`);
   if (currentOrder == '') {
     return item.price;
-  } else if (currentOrder.priceCheck == '') {
+  } else if (
+    currentOrder.priceCheck == '' ||
+    currentOrder.priceCheck === undefined
+  ) {
     let addonsCost = 0;
     currentOrder.addons.forEach((addon) => {
       if (addon.selected === true) {
