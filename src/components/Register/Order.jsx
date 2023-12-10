@@ -151,24 +151,37 @@ export default function Order(props) {
             </div>
           </div>
           <div className='row-span-1 col-span-1 flex gap-2 items-stretch h-20 text-lg uppercase font-bold'>
-            <div
-              className='secondary rnd  cnter-items w-48'
-              onContextMenu={() => handlePlusMinus()}
-              onTouchStart={() => handlePlusMinus()}>
-              <img src={euro} className='w-6 invert-icon' />
-            </div>
-            <div
-              className='positive  rnd cnter-items w-full text-lg uppercase font-bold'
-              onContextMenu={() => handlePayment('card')}
-              onTouchStart={() => handlePayment('card')}>
-              Card
-            </div>
-            <div
-              className='positive rnd cnter-items w-full'
-              onContextMenu={() => handlePayment('cash')}
-              onTouchStart={() => handlePayment('cash')}>
-              Cash
-            </div>
+
+            {payCash === true ? (
+          <div
+          className='negative rnd cnter-items w-full'
+          onContextMenu={() => handlePayment('cash')}
+          onTouchStart={() => handlePayment('cash')}>
+          Back
+        </div>
+        ) : (
+          <>
+          <div
+          className='secondary rnd  cnter-items w-48'
+          onContextMenu={() => handlePlusMinus()}
+          onTouchStart={() => handlePlusMinus()}>
+          <img src={euro} className='w-6 invert-icon' />
+        </div>
+        <div
+          className='positive  rnd cnter-items w-full text-lg uppercase font-bold'
+          onContextMenu={() => handlePayment('card')}
+          onTouchStart={() => handlePayment('card')}>
+          Card
+        </div>
+          <div
+          className='positive rnd cnter-items w-full'
+          onContextMenu={() => handlePayment('cash')}
+          onTouchStart={() => handlePayment('cash')}>
+          Cash
+        </div>
+        </>
+        )}
+
           </div>
         </div>
       </div>
