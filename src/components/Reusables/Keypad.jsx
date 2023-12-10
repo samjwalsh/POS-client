@@ -137,7 +137,7 @@ const useKeypad = (numberFormat) => {
   function createKeypadHTML() {
     return (
       <div
-        className='grid grid-cols-3 grid-rows-6 w-full h-full  gap-2 p-2 text-xl '
+        className='grid grid-cols-3 grid-rows-6 w-full h-full  gap-2 p-2 text-2xl rnd background borderD border-colour'
         onContextMenu={(event) => handleKeypadClick(event)}
         onTouchStart={(event) => handleKeypadClick(event)}>
         <div className=' col-span-2 row-span 1 flex flex-row text-2xl font-mono justify-between w-full'>
@@ -206,7 +206,7 @@ const useKeypad = (numberFormat) => {
     return (
       <div className='fixed h-screen w-screen z-20'>
         <div className='fixed top-0 left-0 m-0 p-0 transparent z-20 h-screen w-screen'></div>
-        <div className='fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-30 background border border-colour w-4/12 h-5/6 rnd-md '>
+        <div className='fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-30 w-4/12 h-5/6'>
           {createKeypadHTML()}
         </div>
       </div>
