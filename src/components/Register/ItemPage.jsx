@@ -74,7 +74,7 @@ export default function ItemPage(props) {
           )
         }>
         <div className='flex flex-row justify-between w-full gap-2'>
-          <div className='flex-grow flex flex-row justify-between primary p-2'>
+          <div className='flex-grow flex flex-row justify-between primary p-2 rnd'>
             <div className='text-xl cnter-items'>{addon.name}</div>
             <div className='num cnter-items'>€{addon.price.toFixed(2)}</div>
           </div>
