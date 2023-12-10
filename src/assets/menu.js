@@ -339,7 +339,7 @@ export const menu = [
           },
           {
             name: 'Special 99 Screwball',
-            price: 3.5,
+            price: 4,
             addons: [
               {
                 name: 'Flake',

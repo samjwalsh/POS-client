@@ -111,7 +111,7 @@ export default function Settings(props) {
         if (setting.type === 'range') {
           return (
             <div
-              className='w-full flex flex-row p-2 rnd whitespace-nowrap gap-2 justify-between'
+              className='w-full flex flex-row p-2 whitespace-nowrap gap-2 justify-between'
               key={setting.name}>
               <div className='text-xl self-center'>{setting.name}</div>
               <div className='flex flex-row gap-2'>
@@ -183,7 +183,7 @@ export default function Settings(props) {
         } else if (setting.type === 'button') {
           return (
             <div
-              className='w-full flex flex-row p-2 rnd whitespace-nowrap gap-2 justify-between'
+              className='w-full flex flex-row p-2 whitespace-nowrap gap-2 justify-between'
               key={setting.name}>
               <div className='text-xl self-center'>{setting.name}</div>
               <div className='flex flex-row gap-2'>
@@ -199,7 +199,7 @@ export default function Settings(props) {
         } else if (setting.type === 'toggle') {
           return (
             <div
-              className='w-full flex flex-row p-2 rnd whitespace-nowrap gap-2 justify-between'
+              className='w-full flex flex-row p-2 whitespace-nowrap gap-2 justify-between'
               key={setting.name}>
               <div className='text-xl self-center'>{setting.name}</div>
               <div className='flex flex-row gap-2'>
@@ -223,7 +223,7 @@ export default function Settings(props) {
         } else if (setting.type === 'dropdown') {
           return (
             <div
-              className='w-full flex flex-row p-2 rnd whitespace-nowrap gap-2 justify-between'
+              className='w-full flex flex-row p-2 whitespace-nowrap gap-2 justify-between'
               key={setting.name}>
               <div className='text-xl self-center'>{setting.name}</div>
               <div className='flex flex-row gap-2'>

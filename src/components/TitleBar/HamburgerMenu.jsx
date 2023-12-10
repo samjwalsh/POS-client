@@ -51,7 +51,7 @@ export default function HamburgerMenu(props) {
       <Dialog />
       <div className='fixed top-0 grid grid-cols-12 grid-rows-1 w-screen h-screen z-10'>
         <div className='row-span-1 col-span-3 flex background flex-col border-colour border-r '>
-          <div className='flex flex-row  w-100 justify-between p-2 border-b border-colour text-left items-stretch '>
+          <div className='flex flex-row  w-100 justify-between p-2 border-b border-colour items-stretch '>
             <div className='text-2xl self-end'>Menu</div>
             <div
               className='justify-end  negative  btn  w-8 h-8 cnter-items'
@@ -73,14 +73,15 @@ export default function HamburgerMenu(props) {
               onTouchStart={() => handleSetAppState('Reports')}>
               Reports
             </div>
-            <div
-              className='side-menu-option primary'
+
+          </div>
+          <div className='mt-auto p-2 flex flex-col gap-2'>
+          <div
+              className='side-menu-option secondary'
               onContextMenu={() => handleSetAppState('Settings')}
               onTouchStart={() => handleSetAppState('Settings')}>
               Settings
             </div>
-          </div>
-          <div className='mt-auto p-2'>
             <div
               className='side-menu-option negative'
               onContextMenu={() => handleTerminatePOS()}

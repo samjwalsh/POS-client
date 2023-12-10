@@ -61,7 +61,7 @@ body {
 }
 
 .btn {
-  @apply font-bold uppercase text-lg rnd;
+  @apply font-bold uppercase text-lg rnd p-2;
 }
 
 .menu-itm {
@@ -137,7 +137,7 @@ body {
 }
 
 .side-menu-option {
-  @apply rnd  p-2 flex text-xl h-min text-left uppercase font-bold;
+  @apply rnd p-2 btn text-left;
 }
 
 .keypad {
