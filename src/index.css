@@ -158,3 +158,7 @@ body {
 .num {
   @apply font-mono;
 }
+
+.keyboardKey {
+  @apply flex-grow cnter-items rnd;
+}

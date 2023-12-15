@@ -13,6 +13,7 @@ import {
 
 import useConfirm from './Reusables/ConfirmDialog.jsx';
 import useListSelect from './Reusables/ListSelect.jsx';
+import usekeyboard from './Reusables/textInput.jsx';
 
 import playBeep from '../tools/playBeep';
 
@@ -28,7 +29,8 @@ export default function Settings(props) {
 
   const [version, setVersion] = useState();
   const [ConfirmDialog, confirm] = useConfirm();
-  const [ListSelect, chooseOption] = useListSelect('');
+  const [ListSelect, chooseOption] = useListSelect();
+  const [Keyboard, keyboard] = usekeyboard();
 
   useEffect(() => {
     (async () => {
@@ -98,6 +100,30 @@ export default function Settings(props) {
     await updateSettings(localSettings);
 
     localSettings = await getSettings();
+
+    setSettings(localSettings);
+  }
+
+  async function handleClickTextInputOption(setting, settings, getSettings) {
+    playBeep();
+
+
+    let localSettings = settings;
+
+    settings.forEach((localCategory) => {
+      localCategory.settings.forEach(async (localSetting) => {
+        if (localSetting === setting) {
+          //After finding the correct setting, we update its value according to the button pressed
+          console.log(localSetting.value)
+          const response = await keyboard(localSetting.value);
+          if (response === '') return;
+
+          localSetting.value = response;
+        }
+      });
+    });
+
+    await updateSettings(localSettings);
 
     setSettings(localSettings);
   }
@@ -245,6 +271,31 @@ export default function Settings(props) {
               </div>
             </div>
           );
+        } else if (setting.type === 'textInput') {
+          return (
+            <div
+              className='w-full flex flex-row p-2 whitespace-nowrap gap-2 justify-between'
+              key={setting.name}>
+              <div className='text-xl self-center'>{setting.name}</div>
+              <div className='flex flex-row gap-2'>
+                <div
+                  className='btn rnd primary p-2 cnter-items '
+                  onContextMenu={(e) =>
+                    handleClickTextInputOption(setting, settings, setSettings)
+                  }
+                  onTouchStart={(e) =>
+                    handleClickTextInputOption(setting, settings, setSettings)
+                  }>
+                  {setting.value == undefined
+                    ? 'Enter'
+                    : setting.value.length > 0
+                    ? setting.value
+                    : 'Enter'}
+                  <img src={dropdownSVG} className='w-6 invert-icon' />
+                </div>
+              </div>
+            </div>
+          );
         }
       });
       return (
@@ -267,6 +318,7 @@ export default function Settings(props) {
     <>
       <ConfirmDialog />
       <ListSelect />
+      <Keyboard />
       <div className='h-full w-full overflow-scroll no-scrollbar'>
         <div className='flex flex-col flex-grow p-2 gap-2'>
           {settingsHTML}

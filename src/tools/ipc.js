@@ -97,9 +97,3 @@ export function getAllPrinters() {
 export function checkPrinterConnection() {
   return ipcRenderer.invoke('checkPrinterConnection');
 }
-
-export function checkForPeers() {
-  return ipcRenderer.invoke('checkForPeers');
-}
-
-checkForPeers();

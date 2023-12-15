@@ -33,9 +33,24 @@ export const settingsSchema = [
         value: '1',
         list: ['1', '2', '3'],
       },
+
     ],
   },
-
+  {
+    name: 'Network',
+    settings: [
+      {
+        name: 'Sync Server',
+        type: 'textInput',
+        value: '',
+      },
+      {
+        name: "Sync Server Key",
+        type: 'textInput',
+        value: '',
+      }
+    ],
+  },
   {
     name: 'Printer',
     settings: [
@@ -66,7 +81,6 @@ export const settingsSchema = [
           '//./COM4',
           '//./COM5',
           '//./COM6',
-
         ],
       },
       {

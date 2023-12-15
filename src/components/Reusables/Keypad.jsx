@@ -25,7 +25,6 @@ const useKeypad = (numberFormat) => {
 
   const handleClose = (keypadResult) => {
     playBeep();
-    // calculate keypad value TODO
     promise?.resolve(keypadResult);
     setPromise(null);
     setkeypadState({ value: '', sign: '+' });
