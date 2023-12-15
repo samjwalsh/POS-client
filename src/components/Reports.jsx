@@ -82,7 +82,7 @@ export default function Reports(props) {
                 className=' btn cnter-items primary p-2'
                 onContextMenu={(e) => handlePrintReceipt(order)}
                 onTouchStart={(e) => handlePrintReceipt(order)}>
-                Receipt{' '}
+                Receipt
               </div>
               <div
                 className='btn  negative  p-1 cnter-items'
@@ -95,6 +95,10 @@ export default function Reports(props) {
               <div className='flex flex-row justify-between'>
                 <div className=''>Time:</div>
                 <div className=''>{orderDateString}</div>
+              </div>
+              <div className='flex flex-row justify-between'>
+                <div className=''>Till:</div>
+                <div className=''>{order.till ? order.till : 'Unknown'}</div>
               </div>
               <div className='flex flex-row justify-between'>
                 <div className=''>Subtotal:</div>

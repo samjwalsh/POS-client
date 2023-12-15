@@ -7,7 +7,6 @@ const store = new Store();
   const completedOrders = store.get('completedOrders');
   if (Array.isArray(completedOrders) === false) {
     store.set('completedOrders', []);
-    console.log('ran');
   }
 })();
 

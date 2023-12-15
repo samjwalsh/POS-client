@@ -10,14 +10,34 @@ export function getAllOrders() {
   return ipcRenderer.invoke('getAllOrders');
 }
 
-export function addOrder(order, paymentMethod) {
+export async function addOrder(order, paymentMethod) {
   if (order.length !== 0) {
+    let shopName = '';
+    let tillNo = '';
+    const settings = await getSettings();
+    settings.forEach((category) => {
+      category.settings.forEach((setting) => {
+        switch (setting.name) {
+          case 'Shop Name': {
+            shopName = setting.value;
+            break;
+          }
+          case 'Till Number': {
+            tillNo = setting.value;
+            break;
+          }
+        }
+      });
+    });
+
     const orderItem = {
       paymentMethod,
       time: Date.now(),
       subtotal: calculateSubtotal(order),
       items: order,
+      till: shopName + '-' + tillNo,
     };
+    console.log(orderItem);
     return ipcRenderer.invoke('addOrder', orderItem);
   }
 }
@@ -77,3 +97,9 @@ export function getAllPrinters() {
 export function checkPrinterConnection() {
   return ipcRenderer.invoke('checkPrinterConnection');
 }
+
+export function checkForPeers() {
+  return ipcRenderer.invoke('checkForPeers');
+}
+
+checkForPeers();

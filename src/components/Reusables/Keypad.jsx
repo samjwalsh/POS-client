@@ -111,7 +111,6 @@ const useKeypad = (numberFormat) => {
         break;
       }
     }
-    console.log(keypadState.value);
   }
 
   // creates the string that is shown in the html to represent the keypad value
