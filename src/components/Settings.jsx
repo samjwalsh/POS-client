@@ -116,7 +116,7 @@ export default function Settings(props) {
           //After finding the correct setting, we update its value according to the button pressed
           console.log(localSetting.value)
           const response = await keyboard(localSetting.value);
-          if (response === '') return;
+          if (response === null) return;
 
           localSetting.value = response;
         }

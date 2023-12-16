@@ -35,7 +35,7 @@ const useKeyboard = () => {
 
     switch (button) {
       case 'exit': {
-        handleClose('');
+        handleClose(null);
         break;
       }
       case 'delete': {
@@ -71,6 +71,7 @@ const useKeyboard = () => {
         break;
       }
       default: {
+        if (keyboardValue.length > 47) return;
         if (keyboardState === 'shift') {
           setKeyboardValue(keyboardValue + button.toUpperCase());
           setKeyboardState('normal');
@@ -95,7 +96,7 @@ const useKeyboard = () => {
         onContextMenu={(event) => handleKeyboardClick(event)}
         onTouchStart={(event) => handleKeyboardClick(event)}>
         <div className='borderD border-colour rnd p-2 col-span-1 row-span 1 text-3xl justify-between w-full num text-left normal-case'>
-          {keyboardValue + "_"}
+          {keyboardValue + '_'}
         </div>
         <div className='col-span-1 row-span-1 flex justify-between gap-2'>
           <div className='keyboardKey negative' id='exit'>
@@ -184,7 +185,11 @@ const useKeyboard = () => {
           </div>
         </div>
         <div className='col-span-1 row-span-1 flex justify-between gap-2'>
-          <div className='keyboardKey grey' id='caps'>
+          <div
+            className={`keyboardKey ${
+              keyboardState === 'caps' ? 'positive' : 'grey'
+            }`}
+            id='caps'>
             CAPS
           </div>
           <div className='keyboardKey grey' id='a'>
@@ -226,7 +231,11 @@ const useKeyboard = () => {
           </div>
         </div>
         <div className='col-span-1 row-span-1 flex justify-between gap-2'>
-          <div className='keyboardKey grey w-24' id='shift'>
+          <div
+            className={`keyboardKey ${
+              keyboardState === 'shift' ? 'positive' : 'grey'
+            } w-24`}
+            id='shift'>
             SHIFT
           </div>
           <div className='keyboardKey grey' id='z'>
@@ -259,7 +268,11 @@ const useKeyboard = () => {
           <div className='keyboardKey grey' id='/'>
             /
           </div>
-          <div className='keyboardKey grey w-24' id='shift'>
+          <div
+            className={`keyboardKey ${
+              keyboardState === 'shift' ? 'positive' : 'grey'
+            } w-24`}
+            id='shift'>
             SHIFT
           </div>
         </div>
