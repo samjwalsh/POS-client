@@ -51,6 +51,8 @@ export default function Reports(props) {
 
     let localOrders = await removeOrder(deletedOrder);
 
+    localOrders = await getAllOrders();
+
     setOrders(localOrders.reverse());
   };
 
@@ -98,7 +100,7 @@ export default function Reports(props) {
               </div>
               <div className='flex flex-row justify-between'>
                 <div className=''>Till:</div>
-                <div className=''>{order.shop + "-" + order.till}</div>
+                <div className=''>{order.shop + '-' + order.till}</div>
               </div>
               <div className='flex flex-row justify-between'>
                 <div className=''>Subtotal:</div>

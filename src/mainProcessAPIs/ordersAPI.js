@@ -33,7 +33,6 @@ ipcMain.handle('addOrder', (e, order) => {
     store.set('orders', [order]);
   } else {
     orders.push(order);
-    console.log(order.items[0].addons);
     store.set('orders', orders);
   }
 });
