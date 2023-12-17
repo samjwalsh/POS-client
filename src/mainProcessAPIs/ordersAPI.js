@@ -24,7 +24,7 @@ ipcMain.handle('getAllOrders', () => {
       notDeletedOrders.push(order);
     }
   });
-  notDeletedOrders.sort((a, b) => (a.time > b.time ? -1 : 1))
+  notDeletedOrders.sort((a, b) => (a.time > b.time ? -1 : 1));
 
   return notDeletedOrders;
 });
@@ -118,7 +118,6 @@ ipcMain.handle('syncOrders', async () => {
       headers: {},
       data,
     });
-    console.log(res.data);
     const missingOrders = res.data.missingOrders;
     const deletedOrders = res.data.deletedOrders;
 
