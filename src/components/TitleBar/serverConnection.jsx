@@ -16,7 +16,7 @@ export default function ServerConnection() {
         status: connection,
         ping: endPing - beginPing,
       });
-    }, 10000);
+    }, 5000);
     return () => {
       clearInterval(connectionCheckInterval);
     };

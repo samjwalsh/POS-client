@@ -117,6 +117,24 @@ ipcMain.handle('syncOrders', async () => {
       data,
     });
     console.log(res.data);
+    const missingOrders = res.data.missingOrders;
+    const deletedOrders = res.data.deletedOrders;
+
+    // delete the relevant orders
+    deletedOrders.forEach(deletedOrder => {
+      const orderToDeleteIndex = orders.findIndex((order) => order.time = deletedOrder.time)
+      orders[orderToDeleteIndex].deleted = true;
+    })
+    
+
+    // add the relevant orders
+    missingOrders.forEach((missingOrder) => {
+      orders.push(missingOrder);
+    });
+
+    
+
+    store.set('orders', orders)
   } catch (e) {
     console.log(e);
     return false;
