@@ -381,16 +381,11 @@ export function handleAddToOrder(
 ) {
   playBeep();
 
-  let parsedOrder = {};
-
-  parsedOrder.name = item.name;
-  parsedOrder.price = computePriceNoQuantity(item, currentOrder);
-
-  if (currentOrder.quantity == undefined) {
-    parsedOrder.quantity = 1;
-  } else {
-    parsedOrder.quantity = currentOrder.quantity;
-  }
+  let parsedOrder = {
+    name: item.name,
+    price: computePriceNoQuantity(item, currentOrder),
+    quantity: currentOrder.quantity === undefined ? 1 : currentOrder.quantity,
+  };
 
   parsedOrder.addons = [];
   if (currentOrder.addons !== undefined) {

@@ -37,6 +37,32 @@ ipcMain.handle('getSettings', () => {
   return settings;
 });
 
+ipcMain.handle('getSetting', (e, settingName) => {
+  let foundValue;
+  const settings = settingsStore.get('settings');
+  settings.forEach((category) => {
+    category.settings.forEach((setting) => {
+      if (setting.name == settingName) {
+        foundValue = setting.value;
+      }
+    });
+  });
+  return foundValue;
+});
+
+export const getSetting = async (setting) => {
+  let foundSetting = '';
+  const settings = settingsStore.get('settings');
+  settings.forEach((localCategory) => {
+    localCategory.settings.forEach((localSetting) => {
+      if (localSetting.name == setting) {
+        foundSetting = localSetting.value;
+      }
+    });
+  });
+  return foundSetting;
+};
+
 ipcMain.handle('updateSettings', (e, newSettings) => {
   settingsStore.set('settings', newSettings);
 });

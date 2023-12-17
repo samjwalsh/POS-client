@@ -1511,7 +1511,7 @@ chalk@^4.0.0, chalk@^4.1.0:
 
 check-internet-connected@^2.0.6:
   version "2.0.6"
-  resolved "https://registry.npmjs.org/check-internet-connected/-/check-internet-connected-2.0.6.tgz"
+  resolved "https://registry.yarnpkg.com/check-internet-connected/-/check-internet-connected-2.0.6.tgz#5fea9998ca2173d9ac77b1e47c17c4f90c731997"
   integrity sha512-ZoU3ovnutroET6nWLp7zt7Er03aLQc4VqMZEBEuWhU/uI8B1x8j3v3rFcufEugNXUxZ7SPF4eMCufJ3vY7Ha2A==
   dependencies:
     bluebird "^3.7.2"

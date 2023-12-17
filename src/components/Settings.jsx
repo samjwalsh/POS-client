@@ -9,11 +9,13 @@ import {
   printTestPage,
   resetSettings,
   updateSettings,
+  getSetting,
 } from '../tools/ipc';
 
 import useConfirm from './Reusables/ConfirmDialog.jsx';
 import useListSelect from './Reusables/ListSelect.jsx';
 import usekeyboard from './Reusables/textInput.jsx';
+import useKeypad from './Reusables/Keypad.jsx';
 
 import playBeep from '../tools/playBeep';
 
@@ -31,6 +33,7 @@ export default function Settings(props) {
   const [ConfirmDialog, confirm] = useConfirm();
   const [ListSelect, chooseOption] = useListSelect();
   const [Keyboard, keyboard] = usekeyboard();
+  const [Keypad, keypad] = useKeypad('passcode');
 
   useEffect(() => {
     (async () => {
@@ -107,23 +110,45 @@ export default function Settings(props) {
   async function handleClickTextInputOption(setting, settings, getSettings) {
     playBeep();
 
+    const response = await keyboard(setting.value);
 
     let localSettings = settings;
 
     settings.forEach((localCategory) => {
-      localCategory.settings.forEach(async (localSetting) => {
+      localCategory.settings.forEach((localSetting) => {
         if (localSetting === setting) {
           //After finding the correct setting, we update its value according to the button pressed
-          console.log(localSetting.value)
-          const response = await keyboard(localSetting.value);
-          if (response === null) return;
-
           localSetting.value = response;
         }
       });
     });
 
     await updateSettings(localSettings);
+
+    localSettings = await getSettings();
+
+    setSettings(localSettings);
+  }
+
+  async function handleClickNumberInputOption(setting, settings, getSettings) {
+    playBeep();
+
+    const response = await keypad();
+
+    let localSettings = settings;
+
+    settings.forEach((localCategory) => {
+      localCategory.settings.forEach((localSetting) => {
+        if (localSetting === setting) {
+          //After finding the correct setting, we update its value according to the button pressed
+          localSetting.value = response;
+        }
+      });
+    });
+
+    await updateSettings(localSettings);
+
+    localSettings = await getSettings();
 
     setSettings(localSettings);
   }
@@ -281,16 +306,37 @@ export default function Settings(props) {
                 <div
                   className='btn rnd primary p-2 cnter-items '
                   onContextMenu={(e) =>
-                    handleClickTextInputOption(setting, settings, setSettings)
+                    handleClickTextInputOption(setting, settings, getSettings)
                   }
                   onTouchStart={(e) =>
-                    handleClickTextInputOption(setting, settings, setSettings)
+                    handleClickTextInputOption(setting, settings, getSettings)
                   }>
                   {setting.value == undefined
                     ? 'Enter'
                     : setting.value.length > 0
                     ? setting.value
                     : 'Enter'}
+                  <img src={dropdownSVG} className='w-6 invert-icon' />
+                </div>
+              </div>
+            </div>
+          );
+        } else if (setting.type === 'numberInput') {
+          return (
+            <div
+              className='w-full flex flex-row p-2 whitespace-nowrap gap-2 justify-between'
+              key={setting.name}>
+              <div className='text-xl self-center'>{setting.name}</div>
+              <div className='flex flex-row gap-2'>
+                <div
+                  className='btn rnd primary p-2 cnter-items '
+                  onContextMenu={(e) =>
+                    handleClickNumberInputOption(setting, settings, getSettings)
+                  }
+                  onTouchStart={(e) =>
+                    handleClickNumberInputOption(setting, settings, getSettings)
+                  }>
+                  {setting.value == undefined ? 'Enter' : setting.value}
                   <img src={dropdownSVG} className='w-6 invert-icon' />
                 </div>
               </div>
@@ -319,6 +365,7 @@ export default function Settings(props) {
       <ConfirmDialog />
       <ListSelect />
       <Keyboard />
+      <Keypad />
       <div className='h-full w-full overflow-scroll no-scrollbar'>
         <div className='flex flex-col flex-grow p-2 gap-2'>
           {settingsHTML}

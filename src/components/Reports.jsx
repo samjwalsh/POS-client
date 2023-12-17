@@ -73,6 +73,10 @@ export default function Reports(props) {
 
         const orderDateString = calculateDateString(order.time);
 
+        if (order.deleted) {
+          return;
+        }
+
         return (
           <div
             key={order.time}
@@ -98,7 +102,7 @@ export default function Reports(props) {
               </div>
               <div className='flex flex-row justify-between'>
                 <div className=''>Till:</div>
-                <div className=''>{order.till ? order.till : 'Unknown'}</div>
+                <div className=''>{order.shop + "-" + order.till}</div>
               </div>
               <div className='flex flex-row justify-between'>
                 <div className=''>Subtotal:</div>

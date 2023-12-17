@@ -33,7 +33,6 @@ export const settingsSchema = [
         value: '1',
         list: ['1', '2', '3'],
       },
-
     ],
   },
   {
@@ -42,13 +41,23 @@ export const settingsSchema = [
       {
         name: 'Sync Server',
         type: 'textInput',
-        value: '',
+        value: 'localhost:8080',
       },
       {
-        name: "Sync Server Key",
+        name: 'Sync Server Key',
         type: 'textInput',
-        value: '',
-      }
+        value: 'aab324b21c1f',
+      },
+      {
+        name: 'HTTPS',
+        type: 'toggle',
+        value: false,
+      },
+      {
+        name: 'Sync Frequency',
+        type: 'numberInput',
+        value: 60,
+      },
     ],
   },
   {

@@ -1,7 +1,9 @@
-const { ipcMain } = require('electron');
+const { ipcMain, ipcRenderer } = require('electron');
 
+const axios = require('axios');
 const Store = require('electron-store');
 const store = new Store();
+import { getSetting } from './settingsAPI';
 
 (() => {
   const completedOrders = store.get('completedOrders');
@@ -11,11 +13,18 @@ const store = new Store();
 })();
 
 ipcMain.handle('getAllOrders', () => {
-  const orders = store.get('orders');
+  let orders = store.get('orders');
   if (Array.isArray(orders) === false) {
     store.set('orders', []);
+    orders = [];
   }
-  return store.get('orders');
+  let notDeletedOrders = [];
+  orders.forEach((order) => {
+    if (!order.deleted) {
+      notDeletedOrders.push(order);
+    }
+  });
+  return notDeletedOrders;
 });
 
 ipcMain.handle('addOrder', (e, order) => {
@@ -76,9 +85,42 @@ ipcMain.handle('removeOrder', (e, deletedOrder) => {
   let deletedOrderIndex = orders.indexOf(deletedOrderLocalEntry);
 
   if (deletedOrderIndex > -1) {
-    orders.splice(deletedOrderIndex, 1);
-
+    orders[deletedOrderIndex].deleted = true;
     store.set('orders', orders);
   }
   return store.get('orders');
+});
+
+ipcMain.handle('syncOrders', async () => {
+  let orders = store.get('orders');
+  if (Array.isArray(orders) === false) {
+    store.set('orders', []);
+    orders = [];
+  }
+  try {
+    const syncServer = await getSetting('Sync Server');
+    const https = await getSetting('HTTPS');
+    const shop = await getSetting('Shop Name');
+    const till = await getSetting('Till Number');
+    const key = await getSetting('Sync Server Key');
+    const data = {
+      shop,
+      till,
+      key,
+      orders,
+    };
+
+    let res = await axios({
+      method: 'get',
+      url: `${https ? 'https' : 'http'}://${syncServer}/api/syncOrders`,
+      headers: {},
+      data,
+    });
+    console.log(res.data);
+  } catch (e) {
+    console.log(e);
+    return false;
+  }
+
+  return true;
 });

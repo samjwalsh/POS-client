@@ -35,7 +35,9 @@ export async function addOrder(order, paymentMethod) {
       time: Date.now(),
       subtotal: calculateSubtotal(order),
       items: order,
-      till: shopName + '-' + tillNo,
+      shop: shopName,
+      till: tillNo,
+      deleted: false
     };
     console.log(orderItem);
     return ipcRenderer.invoke('addOrder', orderItem);
@@ -56,6 +58,10 @@ export function removeOrder(order) {
 
 export function getSettings() {
   return ipcRenderer.invoke('getSettings');
+}
+
+export function getSetting(settingName) {
+  return ipcRenderer.invoke('getSetting', settingName)
 }
 
 export function updateSettings(newSettings) {
@@ -96,4 +102,8 @@ export function getAllPrinters() {
 
 export function checkPrinterConnection() {
   return ipcRenderer.invoke('checkPrinterConnection');
+}
+
+export function syncOrders() {
+  return ipcRenderer.invoke('syncOrders')
 }

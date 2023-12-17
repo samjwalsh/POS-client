@@ -123,6 +123,9 @@ const useKeyboard = () => {
           <div className='keyboardKey grey' id='7'>
             7
           </div>
+          <div className='keyboardKey grey' id='8'>
+            8
+          </div>
           <div className='keyboardKey grey' id='9'>
             9
           </div>

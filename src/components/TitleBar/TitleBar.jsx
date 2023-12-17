@@ -6,6 +6,7 @@ import playBeep from '../../tools/playBeep';
 import Connection from './Connection.jsx';
 import Clock from './Clock.jsx';
 import PrinterConnection from './PrinterConnection.jsx';
+import ServerConnection from './serverConnection.jsx';
 import HelpPageButton from './HelpPageButton.jsx';
 import { getAllOrders, printOrder } from '../../tools/ipc.js';
 
@@ -37,6 +38,9 @@ export default function TitleBar(props) {
         </div>
         <div className='border-l border-colour h-full cnter-items px-1'>
           <Connection />
+        </div>
+        <div className='border-l border-colour h-full cnter-items px-1'>
+          <ServerConnection />
         </div>
         <div className='border-l border-colour h-full cnter-items px-1 '>
           <Clock />
