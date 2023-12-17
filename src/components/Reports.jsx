@@ -73,10 +73,6 @@ export default function Reports(props) {
 
         const orderDateString = calculateDateString(order.time);
 
-        if (order.deleted) {
-          return;
-        }
-
         return (
           <div
             key={order.time}

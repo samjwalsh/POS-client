@@ -33,6 +33,7 @@ ipcMain.handle('addOrder', (e, order) => {
     store.set('orders', [order]);
   } else {
     orders.push(order);
+    console.log(order.items[0].addons);
     store.set('orders', orders);
   }
 });
@@ -121,20 +122,20 @@ ipcMain.handle('syncOrders', async () => {
     const deletedOrders = res.data.deletedOrders;
 
     // delete the relevant orders
-    deletedOrders.forEach(deletedOrder => {
-      const orderToDeleteIndex = orders.findIndex((order) => order.time = deletedOrder.time)
-      orders[orderToDeleteIndex].deleted = true;
-    })
-    
+    deletedOrders.forEach((deletedOrder) => {
+      orders.forEach((order) => {
+        if (deletedOrder.time == order.time) {
+          order.deleted = true;
+        }
+      });
+    });
 
     // add the relevant orders
     missingOrders.forEach((missingOrder) => {
       orders.push(missingOrder);
     });
 
-    
-
-    store.set('orders', orders)
+    store.set('orders', orders);
   } catch (e) {
     console.log(e);
     return false;
