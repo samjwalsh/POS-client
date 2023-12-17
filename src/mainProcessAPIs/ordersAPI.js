@@ -24,6 +24,8 @@ ipcMain.handle('getAllOrders', () => {
       notDeletedOrders.push(order);
     }
   });
+  notDeletedOrders.sort((a, b) => (a.time > b.time ? -1 : 1))
+
   return notDeletedOrders;
 });
 

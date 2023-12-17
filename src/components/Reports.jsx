@@ -24,7 +24,7 @@ export default function Reports(props) {
   useEffect(() => {
     (async () => {
       const localOrders = await getAllOrders();
-      setOrders(localOrders.reverse());
+      setOrders(localOrders);
     })();
   }, []);
 
@@ -39,8 +39,14 @@ export default function Reports(props) {
     await removeAllOrders();
     localOrders = await getAllOrders();
     if (Array.isArray(localOrders)) {
-      setOrders(localOrders.reverse());
+      setOrders(localOrders);
     }
+  }
+
+  const handleRefreshOrders = async () => {
+    playBeep();
+    const localOrders = await getAllOrders();
+    setOrders(localOrders);
   }
 
   const handleDeleteOrder = async (deletedOrder) => {
@@ -53,7 +59,7 @@ export default function Reports(props) {
 
     localOrders = await getAllOrders();
 
-    setOrders(localOrders.reverse());
+    setOrders(localOrders);
   };
 
   async function handleDeleteOldOrders() {
@@ -62,7 +68,7 @@ export default function Reports(props) {
     await removeOldOrders();
     const orders = await getAllOrders();
 
-    setOrders(orders.reverse());
+    setOrders(orders);
   }
 
   // HTML GENERATORS
@@ -127,6 +133,12 @@ export default function Reports(props) {
       <div className='flex flex-col h-full'>
         {createReportsStatsInfo()}
         <div className='mt-auto border-t border-colour p-2 flex flex-col gap-2'>
+        <div
+            className='btn secondary h-auto p-2 cnter-items w-full'
+            onContextMenu={(event) => handleRefreshOrders()}
+            onTouchStart={(event) => handleRefreshOrders()}>
+            Refresh Orders
+          </div>
           <div
             className='btn primary h-auto p-2 cnter-items w-full'
             onContextMenu={(event) => handleDeleteOldOrders()}
