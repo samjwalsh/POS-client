@@ -39,7 +39,6 @@ export async function addOrder(order, paymentMethod) {
       till: tillNo,
       deleted: false
     };
-    console.log(orderItem);
     return ipcRenderer.invoke('addOrder', orderItem);
   }
 }

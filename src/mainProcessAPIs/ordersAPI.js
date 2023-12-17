@@ -120,7 +120,7 @@ ipcMain.handle('syncOrders', async () => {
     });
     const missingOrders = res.data.missingOrders;
     const deletedOrders = res.data.deletedOrders;
-
+    orders = store.get('orders');
     // delete the relevant orders
     deletedOrders.forEach((deletedOrder) => {
       orders.forEach((order) => {
@@ -135,6 +135,8 @@ ipcMain.handle('syncOrders', async () => {
       orders.push(missingOrder);
     });
 
+    // WHAT HAPPENS IF AN ORDER IS ADDED OR DELETED WHILE THE ORDER STORE IS BEING SET?????
+    //TODO
     store.set('orders', orders);
   } catch (e) {
     console.log(e);
