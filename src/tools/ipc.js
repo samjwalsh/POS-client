@@ -31,13 +31,14 @@ export async function addOrder(order, paymentMethod) {
     });
 
     const orderItem = {
-      paymentMethod,
+      id: Date.now() + Math.random(),
       time: Date.now(),
       subtotal: calculateSubtotal(order),
-      items: order,
+      paymentMethod,
       shop: shopName,
       till: tillNo,
-      deleted: false
+      deleted: false,
+      items: order,
     };
     return ipcRenderer.invoke('addOrder', orderItem);
   }
@@ -60,7 +61,7 @@ export function getSettings() {
 }
 
 export function getSetting(settingName) {
-  return ipcRenderer.invoke('getSetting', settingName)
+  return ipcRenderer.invoke('getSetting', settingName);
 }
 
 export function updateSettings(newSettings) {
@@ -104,5 +105,5 @@ export function checkPrinterConnection() {
 }
 
 export function syncOrders() {
-  return ipcRenderer.invoke('syncOrders')
+  return ipcRenderer.invoke('syncOrders');
 }

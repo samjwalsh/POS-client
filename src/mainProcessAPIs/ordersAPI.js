@@ -81,7 +81,7 @@ ipcMain.handle('removeOrder', (e, deletedOrder) => {
   let orders = store.get('orders');
 
   let deletedOrderLocalEntry = orders.find(
-    (order) => order.time === deletedOrder.time
+    (order) => order.id === deletedOrder.id
   );
 
   let deletedOrderIndex = orders.indexOf(deletedOrderLocalEntry);
@@ -124,7 +124,7 @@ ipcMain.handle('syncOrders', async () => {
     // delete the relevant orders
     deletedOrders.forEach((deletedOrder) => {
       orders.forEach((order) => {
-        if (deletedOrder.time == order.time) {
+        if (deletedOrder.id == order.id) {
           order.deleted = true;
         }
       });
