@@ -50,7 +50,7 @@ ipcMain.handle('getSetting', (e, settingName) => {
   return foundValue;
 });
 
-export const getSetting = async (setting) => {
+export const getSetting = (setting) => {
   let foundSetting = '';
   const settings = settingsStore.get('settings');
   settings.forEach((localCategory) => {

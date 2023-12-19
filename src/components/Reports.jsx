@@ -12,6 +12,7 @@ import {
   removeAllOrders,
   removeOldOrders,
   removeOrder,
+  endOfDay,
 } from '../tools/ipc';
 
 import playBeep from '../tools/playBeep';
@@ -36,7 +37,7 @@ export default function Reports(props) {
     if (!choice) return;
     let localOrders = await getAllOrders();
     await printEndOfDay(localOrders);
-    await removeAllOrders();
+    await endOfDay();
     localOrders = await getAllOrders();
     if (Array.isArray(localOrders)) {
       setOrders(localOrders);

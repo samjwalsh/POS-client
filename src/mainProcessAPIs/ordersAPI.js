@@ -18,55 +18,71 @@ ipcMain.handle('getAllOrders', () => {
     store.set('orders', []);
     orders = [];
   }
-  let notDeletedOrders = [];
+  let notDeletedOrEodOrders = [];
   orders.forEach((order) => {
-    if (!order.deleted) {
-      notDeletedOrders.push(order);
+    if (!order.deleted && !order.eod) {
+      notDeletedOrEodOrders.push(order);
     }
   });
-  notDeletedOrders.sort((a, b) => (a.time > b.time ? -1 : 1));
+  notDeletedOrEodOrders.sort((a, b) => (a.time > b.time ? -1 : 1));
 
-  return notDeletedOrders;
+  return notDeletedOrEodOrders;
 });
 
-ipcMain.handle('addOrder', (e, order) => {
-  const orders = store.get('orders');
-  if (Array.isArray(orders) === false) {
-    store.set('orders', [order]);
-  } else {
-    orders.push(order);
-    store.set('orders', orders);
+ipcMain.handle('addOrder', async (e, args) => {
+  let items = args.order;
+  if (items.length !== 0) {
+    let subtotal = 0;
+    items.forEach((item) => {
+      subtotal += item.price * item.quantity;
+    });
+
+    const order = {
+      id: (Date.now() + Math.random()).toString(),
+      time: Date.now(),
+      subtotal,
+      paymentMethod: args.paymentMethod,
+      shop: getSetting('Shop Name'),
+      till: getSetting('Till Number'),
+      deleted: false,
+      eod: false,
+      items,
+    };
+
+    const orders = store.get('orders');
+    if (Array.isArray(orders) === false) {
+      store.set('orders', [order]);
+    } else {
+      orders.push(order);
+      store.set('orders', orders);
+    }
   }
 });
 
 ipcMain.handle('removeOldOrders', (e, orders) => {
-  let localOrders = store.get('orders');
-  const currentDate = new Date().getDate();
-  let newOrders = [];
-  let oldOrders = [];
-
-  if (Array.isArray(localOrders)) {
-    localOrders.forEach((order, index) => {
-      const orderDate = new Date(order.time).getDate();
-      if (orderDate == currentDate) {
-        newOrders.push(order);
-      } else {
-        oldOrders.push(order);
-      }
-    });
-  }
-
-  store.set('orders', newOrders);
-
-  let completedOrders;
-  if (store.get('completedOrders') === undefined) {
-    completedOrders = [];
-  } else {
-    completedOrders = store.get('completedOrders');
-  }
-
-  completedOrders = completedOrders.concat(oldOrders);
-  store.set('completedOrders', completedOrders);
+  // let localOrders = store.get('orders');
+  // const currentDate = new Date().getDate();
+  // let newOrders = [];
+  // let oldOrders = [];
+  // if (Array.isArray(localOrders)) {
+  //   localOrders.forEach((order, index) => {
+  //     const orderDate = new Date(order.time).getDate();
+  //     if (orderDate == currentDate) {
+  //       newOrders.push(order);
+  //     } else {
+  //       oldOrders.push(order);
+  //     }
+  //   });
+  // }
+  // store.set('orders', newOrders);
+  // let completedOrders;
+  // if (store.get('completedOrders') === undefined) {
+  //   completedOrders = [];
+  // } else {
+  //   completedOrders = store.get('completedOrders');
+  // }
+  // completedOrders = completedOrders.concat(oldOrders);
+  // store.set('completedOrders', completedOrders);
 });
 
 ipcMain.handle('removeAllOrders', () => {
@@ -75,6 +91,14 @@ ipcMain.handle('removeAllOrders', () => {
   completedOrders = completedOrders.concat(orders);
   store.set('completedOrders', completedOrders);
   store.set('orders', []);
+});
+
+ipcMain.handle('endOfDay', () => {
+  const orders = store.get('orders');
+  orders.forEach((order) => {
+    order.eod = true;
+  });
+  store.set('orders', orders);
 });
 
 ipcMain.handle('removeOrder', (e, deletedOrder) => {
@@ -100,17 +124,19 @@ ipcMain.handle('syncOrders', async () => {
     orders = [];
   }
   try {
-    const syncServer = await getSetting('Sync Server');
-    const https = await getSetting('HTTPS');
-    const shop = await getSetting('Shop Name');
-    const till = await getSetting('Till Number');
-    const key = await getSetting('Sync Server Key');
+    const syncServer = getSetting('Sync Server');
+    const https = getSetting('HTTPS');
+    const shop = getSetting('Shop Name');
+    const till = getSetting('Till Number');
+    const key = getSetting('Sync Server Key');
     const data = {
       shop,
       till,
       key,
       orders,
     };
+
+    console.log(JSON.stringify(data));
 
     let res = await axios({
       method: 'get',
@@ -119,27 +145,36 @@ ipcMain.handle('syncOrders', async () => {
       data,
     });
     const missingOrders = res.data.missingOrders;
-    const deletedOrders = res.data.deletedOrders;
+    const deletedOrderIds = res.data.deletedOrderIds;
+    const completedEodIds = res.data.completedEodIds;
+
     orders = store.get('orders');
-    // delete the relevant orders
-    deletedOrders.forEach((deletedOrder) => {
-      orders.forEach((order) => {
-        if (deletedOrder.id == order.id) {
-          order.deleted = true;
-        }
-      });
-    });
 
     // add the relevant orders
     missingOrders.forEach((missingOrder) => {
       orders.push(missingOrder);
     });
 
-    // WHAT HAPPENS IF AN ORDER IS ADDED OR DELETED WHILE THE ORDER STORE IS BEING SET?????
-    //TODO
+    // delete the relevant orders
+    deletedOrderIds.forEach((deletedOrderId) => {
+      orders.forEach((order) => {
+        if (deletedOrderId == order.id) {
+          order.deleted = true;
+        }
+      });
+    });
+
+    completedEodIds.forEach((completedEodId) => {
+      orders.forEach((order, index) => {
+        if ((order.id = completedEodId)) {
+          orders.splice(index, 1);
+        }
+      });
+    });
+
     store.set('orders', orders);
   } catch (e) {
-    console.log(e);
+    console.log('Request failed');
     return false;
   }
 

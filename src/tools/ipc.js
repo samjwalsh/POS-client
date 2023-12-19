@@ -1,5 +1,3 @@
-import { calculateSubtotal } from '../components/Register/PayCash.jsx';
-
 const ipcRenderer = window.ipcRenderer;
 
 export function quit() {
@@ -11,37 +9,7 @@ export function getAllOrders() {
 }
 
 export async function addOrder(order, paymentMethod) {
-  if (order.length !== 0) {
-    let shopName = '';
-    let tillNo = '';
-    const settings = await getSettings();
-    settings.forEach((category) => {
-      category.settings.forEach((setting) => {
-        switch (setting.name) {
-          case 'Shop Name': {
-            shopName = setting.value;
-            break;
-          }
-          case 'Till Number': {
-            tillNo = setting.value;
-            break;
-          }
-        }
-      });
-    });
-
-    const orderItem = {
-      id: Date.now() + Math.random(),
-      time: Date.now(),
-      subtotal: calculateSubtotal(order),
-      paymentMethod,
-      shop: shopName,
-      till: tillNo,
-      deleted: false,
-      items: order,
-    };
-    return ipcRenderer.invoke('addOrder', orderItem);
-  }
+  return ipcRenderer.invoke('addOrder', { order, paymentMethod });
 }
 
 export function removeOldOrders(orders) {
@@ -50,6 +18,10 @@ export function removeOldOrders(orders) {
 
 export function removeAllOrders() {
   return ipcRenderer.invoke('removeAllOrders');
+}
+
+export function endOfDay() {
+  return ipcRenderer.invoke('endOfDay');
 }
 
 export function removeOrder(order) {
