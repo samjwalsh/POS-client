@@ -17,16 +17,23 @@ export default function PrinterConnection() {
         status: connection,
         ping: endPing - beginPing,
       });
-    }, 5000);
+    }, 2000);
     return () => {
       clearInterval(connectionCheckInterval);
     };
   }, []);
 
   return (
-    <>
-      PTR<div className='font-emoji'>{isOnline.status ? '🟢' : '🔴'}</div>
-      {isOnline.status ? `[${String(isOnline.ping).padStart(2, '0')}] ` : ''}
-    </>
+    <div
+      className={`grid grid-rows-2 grid-cols-1 text-sm ${
+        isOnline.status ? 'positiveFill' : 'negativeFill'
+      }`}>
+      <div className='row-span-1 col-span-1'>
+        P-{isOnline.status ? 'OK' : 'NC'}
+      </div>
+      <div className='row-span-1 col-span-1'>
+        {isOnline.status ? `[${String(isOnline.ping).padStart(3, '0')}] ` : ''}
+      </div>
+    </div>
   );
 }

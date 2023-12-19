@@ -24,7 +24,6 @@ ipcMain.handle('getAllOrders', () => {
       notDeletedOrEodOrders.push(order);
     }
   });
-  notDeletedOrEodOrders.sort((a, b) => (a.time > b.time ? -1 : 1));
 
   return notDeletedOrEodOrders;
 });
@@ -60,10 +59,9 @@ ipcMain.handle('addOrder', async (e, args) => {
 });
 
 ipcMain.handle('removeOldOrders', () => {
-
   const orders = store.get('orders');
   if (!Array.isArray(orders)) {
-    store.set('orders', [])
+    store.set('orders', []);
     return;
   }
   const currentDate = new Date().toLocaleDateString('en-ie');
@@ -74,7 +72,7 @@ ipcMain.handle('removeOldOrders', () => {
     }
   }
 
-  store.set('orders', orders)
+  store.set('orders', orders);
 });
 
 ipcMain.handle('removeAllOrders', () => {
@@ -128,7 +126,6 @@ ipcMain.handle('syncOrders', async () => {
       orders,
     };
 
-
     let res = await axios({
       method: 'get',
       url: `${https ? 'https' : 'http'}://${syncServer}/api/syncOrders`,
@@ -138,7 +135,6 @@ ipcMain.handle('syncOrders', async () => {
     const missingOrders = res.data.missingOrders;
     const deletedOrderIds = res.data.deletedOrderIds;
     const completedEodIds = res.data.completedEodIds;
-
 
     orders = store.get('orders');
 
@@ -164,11 +160,55 @@ ipcMain.handle('syncOrders', async () => {
       });
     });
 
+
+    orders.sort((a, b) => (a.time > b.time ? -1 : 1));
+
     store.set('orders', orders);
+
+    // return {
+    //   success: true,
+    //   ordersToAdd: missingOrders.length,
+    //   ordersToDelete: deletedOrderIds.length,
+    //   ordersToEod: completedEodIds.length,
+    //   ordersMissingInDb: res.data.ordersMissingInDb,
+    //   ordersDeletedInDb: res.data.ordersDeletedInDb,
+    //   ordersEodedInDb: res.data.eodsCompletedInDb,
+    // };
+
+    const ordersToAdd =
+      missingOrders.length === undefined ? missingOrders.length : 0;
+    const ordersToDelete =
+      deletedOrderIds.length === undefined ? deletedOrderIds.length : 0;
+    const ordersToEod =
+      completedEodIds.length === undefined ? completedEodIds.length : 0;
+    const ordersMissingInDb =
+      res.data.ordersMissingInDb !== undefined ? res.data.ordersMissingInDb : 0;
+    const ordersDeletedInDb =
+      res.data.ordersDeletedInDb !== undefined ? res.data.ordersDeletedInDb : 0;
+    const ordersEodedInDb =
+      res.data.eodsCompletedInDb !== undefined ? res.data.eodsCompletedInDb : 0;
+
+    return {
+      success: true,
+      ordersToAdd,
+      ordersToDelete,
+      ordersToEod,
+      ordersMissingInDb,
+      ordersDeletedInDb,
+      ordersEodedInDb,
+    };
+
+
   } catch (e) {
     console.log(e);
-    return false;
+    return {
+      success: false,
+      ordersToAdd: 0,
+      ordersToDelete: 0,
+      ordersToEod: 0,
+      ordersMissingInDb: 0,
+      ordersDeletedInDb: 0,
+      ordersEodedInDb: 0,
+    };
   }
-
-  return true;
 });

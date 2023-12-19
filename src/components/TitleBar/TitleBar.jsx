@@ -32,17 +32,18 @@ export default function TitleBar(props) {
           onTouchStart={(e) => handlePrintRecentOrder()}>
           Print Receipt
         </div>
-
-        <div className='border-l border-colour h-full cnter-items px-1 '>
+        <div className='border-l border-colour h-full cnter-items font-bold w-16'>
+        </div>
+        <div className='border-l border-b border-colour h-full cnter-items font-bold'>
           <PrinterConnection />
         </div>
-        <div className='border-l border-colour h-full cnter-items px-1'>
+        <div className='border-l border-b border-colour h-full cnter-items font-bold'>
           <Connection />
         </div>
-        <div className='border-l border-colour h-full cnter-items px-1'>
+        <div className='border-l border-b border-colour h-full cnter-items font-bold'>
           <ServerConnection />
         </div>
-        <div className='border-l border-colour h-full cnter-items px-1 '>
+        <div className='border-l border-colour h-full cnter-items font-bold px-1'>
           <Clock />
         </div>
       </div>

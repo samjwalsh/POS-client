@@ -39,16 +39,14 @@ export default function Reports(props) {
     await printEndOfDay(localOrders);
     await endOfDay();
     localOrders = await getAllOrders();
-    if (Array.isArray(localOrders)) {
-      setOrders(localOrders);
-    }
+    setOrders(localOrders);
   }
 
   const handleRefreshOrders = async () => {
     playBeep();
     const localOrders = await getAllOrders();
     setOrders(localOrders);
-  }
+  };
 
   const handleDeleteOrder = async (deletedOrder) => {
     playBeep();
@@ -75,55 +73,59 @@ export default function Reports(props) {
   // HTML GENERATORS
 
   function createOrdersHTML() {
-    let ordersHTML;
-    if (Array.isArray(orders)) {
-      ordersHTML = orders.map((order, index) => {
-        let itemsHTML = createItemsHTML(order);
+    let ordersHTML = [];
 
-        const orderDateString = calculateDateString(order.time);
+    for (
+      let noOrdersRendered = 0;
+      noOrdersRendered < 100 && noOrdersRendered < orders.length;
+      noOrdersRendered++
+    ) {
+      const order = orders[noOrdersRendered];
+      let itemsHTML = createItemsHTML(order);
 
-        return (
-          <div
-            key={order.time}
-            className='orderbox borderD border-colour rnd flex max-h-96 flex-col'>
-            <div className='flex flex-row w-full p-2 justify-between border-b border-colour'>
-              <div
-                className=' btn cnter-items primary p-2'
-                onContextMenu={(e) => handlePrintReceipt(order)}
-                onTouchStart={(e) => handlePrintReceipt(order)}>
-                Receipt
-              </div>
-              <div
-                className='btn  negative  p-1 cnter-items'
-                onContextMenu={(e) => handleDeleteOrder(order)}
-                onTouchStart={(e) => handleDeleteOrder(order)}>
-                <img src={closeSVG} className='w-8 invert-icon' />
-              </div>
+      const orderDateString = calculateDateString(order.time);
+      console.log('here');
+      ordersHTML.push(
+        <div
+          key={order.time}
+          className='orderbox borderD border-colour rnd flex max-h-96 flex-col'>
+          <div className='flex flex-row w-full p-2 justify-between border-b border-colour'>
+            <div
+              className=' btn cnter-items primary p-2'
+              onContextMenu={(e) => handlePrintReceipt(order)}
+              onTouchStart={(e) => handlePrintReceipt(order)}>
+              Receipt
             </div>
-            <div className='flex flex-col p-2 border-b border-colour text-lg'>
-              <div className='flex flex-row justify-between'>
-                <div className=''>Time:</div>
-                <div className=''>{orderDateString}</div>
-              </div>
-              <div className='flex flex-row justify-between'>
-                <div className=''>Till:</div>
-                <div className=''>{order.shop + '-' + order.till}</div>
-              </div>
-              <div className='flex flex-row justify-between'>
-                <div className=''>Subtotal:</div>
-                <div className='num'>€{order.subtotal.toFixed(2)}</div>
-              </div>
-              <div className='flex flex-row justify-between'>
-                <div className=''>Payment:</div>
-                <div className=''>{order.paymentMethod}</div>
-              </div>
-            </div>
-            <div className='flex flex-col gap-2 p-2 max-h-full overflow-y-scroll no-scrollbar'>
-              {itemsHTML}
+            <div
+              className='btn  negative  p-1 cnter-items'
+              onContextMenu={(e) => handleDeleteOrder(order)}
+              onTouchStart={(e) => handleDeleteOrder(order)}>
+              <img src={closeSVG} className='w-8 invert-icon' />
             </div>
           </div>
-        );
-      });
+          <div className='flex flex-col p-2 border-b border-colour text-lg'>
+            <div className='flex flex-row justify-between'>
+              <div className=''>Time:</div>
+              <div className=''>{orderDateString}</div>
+            </div>
+            <div className='flex flex-row justify-between'>
+              <div className=''>Till:</div>
+              <div className=''>{order.shop + '-' + order.till}</div>
+            </div>
+            <div className='flex flex-row justify-between'>
+              <div className=''>Subtotal:</div>
+              <div className='num'>€{order.subtotal.toFixed(2)}</div>
+            </div>
+            <div className='flex flex-row justify-between'>
+              <div className=''>Payment:</div>
+              <div className=''>{order.paymentMethod}</div>
+            </div>
+          </div>
+          <div className='flex flex-col gap-2 p-2 max-h-full overflow-y-scroll no-scrollbar'>
+            {itemsHTML}
+          </div>
+        </div>
+      );
     }
 
     return ordersHTML;
@@ -134,7 +136,7 @@ export default function Reports(props) {
       <div className='flex flex-col h-full'>
         {createReportsStatsInfo()}
         <div className='mt-auto border-t border-colour p-2 flex flex-col gap-2'>
-        <div
+          <div
             className='btn secondary h-auto p-2 cnter-items w-full'
             onContextMenu={(event) => handleRefreshOrders()}
             onTouchStart={(event) => handleRefreshOrders()}>

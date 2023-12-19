@@ -4,7 +4,7 @@ const checkInternetConnected = require('check-internet-connected');
 const config = {
   timeout: 5000, //timeout connecting to each server, each try
   retries: 0, //number of retries to do before failing
-  domain: 'https://pos-1.samjw.xyz/api/connectionTest', //the domain to check DNS record of
+  domain: 'https://https://ipv4.icanhazip.com/', //the domain to check DNS record of
 };
 checkInternetConnected(config);
 
