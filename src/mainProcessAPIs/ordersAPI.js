@@ -128,7 +128,6 @@ ipcMain.handle('syncOrders', async () => {
       orders,
     };
 
-    console.log(JSON.stringify(data));
 
     let res = await axios({
       method: 'get',
@@ -140,7 +139,6 @@ ipcMain.handle('syncOrders', async () => {
     const deletedOrderIds = res.data.deletedOrderIds;
     const completedEodIds = res.data.completedEodIds;
 
-    console.log(res.data);
 
     orders = store.get('orders');
 
@@ -168,7 +166,7 @@ ipcMain.handle('syncOrders', async () => {
 
     store.set('orders', orders);
   } catch (e) {
-    console.log('Request failed');
+    console.log(e);
     return false;
   }
 
