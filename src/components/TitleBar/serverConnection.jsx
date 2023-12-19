@@ -25,8 +25,6 @@ export default function ServerConnection() {
         const connection = await syncOrders();
         const endPing = Date.now();
 
-        console.log(connection);
-
         setIsOnline({
           status: connection.success,
           ping: endPing - beginPing,
@@ -46,15 +44,15 @@ export default function ServerConnection() {
   }, []);
 
   return (
-    <div className={`flex flex-row text-sm ${isOnline.status ? 'positiveFill' : 'negativeFill'}`}>
+    <div className={`flex flex-row text-sm h-full ${isOnline.status ? 'positiveFill' : 'negativeFill'}`}>
       <div className='grid grid-rows-2 grid-cols-1'>
         <div className='row-span-1 col-span-1'>
           S-{isOnline.status ? 'OK' : 'NC'}
         </div>
         <div className='row-span-1 col-span-1'>
           {isOnline.status
-            ? `[${String(isOnline.ping).padStart(3, '0')}] `
-            : ''}
+            ? `[${String(isOnline.ping).padStart(3, '0')}]`
+            : '[---]'}
         </div>
       </div>
 

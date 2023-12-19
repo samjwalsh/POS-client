@@ -84,7 +84,6 @@ export default function Reports(props) {
       let itemsHTML = createItemsHTML(order);
 
       const orderDateString = calculateDateString(order.time);
-      console.log('here');
       ordersHTML.push(
         <div
           key={order.time}

@@ -34,13 +34,13 @@ export default function TitleBar(props) {
         </div>
         <div className='border-l border-colour h-full cnter-items font-bold w-16'>
         </div>
-        <div className='border-l border-b border-colour h-full cnter-items font-bold'>
+        <div className='border-l border-colour h-full cnter-items font-bold'>
           <PrinterConnection />
         </div>
-        <div className='border-l border-b border-colour h-full cnter-items font-bold'>
+        <div className='border-l border-colour h-full cnter-items font-bold'>
           <Connection />
         </div>
-        <div className='border-l border-b border-colour h-full cnter-items font-bold'>
+        <div className='border-l border-colour h-full cnter-items font-bold'>
           <ServerConnection />
         </div>
         <div className='border-l border-colour h-full cnter-items font-bold px-1'>

@@ -23,6 +23,11 @@ body {
   src: url(./assets/fonts/SegoeEmoji.ttf);
 }
 
+@font-face {
+  font-family: Afacad;
+  src: url(./assets/fonts/Afacad.ttf);
+}
+
 /* @font-face {
   font-family: Inter;
   src: url(./assets/fonts/Inter/Inter.ttf);
@@ -66,7 +71,7 @@ body {
 }
 
 .btn {
-  @apply font-bold uppercase text-lg rnd p-2;
+  @apply font-bold uppercase rnd p-2;
 }
 
 .menu-itm {
@@ -122,7 +127,7 @@ body {
 }
 
 .rnd {
-  @apply rounded-sm shadow-none;
+  @apply rounded-none shadow-md;
 }
 
 /* shadow-[5px_5px_0px_2px_rgba(0,0,0,0.5)] */
