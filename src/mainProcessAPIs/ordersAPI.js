@@ -59,30 +59,22 @@ ipcMain.handle('addOrder', async (e, args) => {
   }
 });
 
-ipcMain.handle('removeOldOrders', (e, orders) => {
-  // let localOrders = store.get('orders');
-  // const currentDate = new Date().getDate();
-  // let newOrders = [];
-  // let oldOrders = [];
-  // if (Array.isArray(localOrders)) {
-  //   localOrders.forEach((order, index) => {
-  //     const orderDate = new Date(order.time).getDate();
-  //     if (orderDate == currentDate) {
-  //       newOrders.push(order);
-  //     } else {
-  //       oldOrders.push(order);
-  //     }
-  //   });
-  // }
-  // store.set('orders', newOrders);
-  // let completedOrders;
-  // if (store.get('completedOrders') === undefined) {
-  //   completedOrders = [];
-  // } else {
-  //   completedOrders = store.get('completedOrders');
-  // }
-  // completedOrders = completedOrders.concat(oldOrders);
-  // store.set('completedOrders', completedOrders);
+ipcMain.handle('removeOldOrders', () => {
+
+  const orders = store.get('orders');
+  if (!Array.isArray(orders)) {
+    store.set('orders', [])
+    return;
+  }
+  const currentDate = new Date().toLocaleDateString('en-ie');
+
+  for (const order of orders) {
+    if (currentDate !== new Date(order.time).toLocaleDateString('en-ie')) {
+      order.eod = true;
+    }
+  }
+
+  store.set('orders', orders)
 });
 
 ipcMain.handle('removeAllOrders', () => {
@@ -147,6 +139,8 @@ ipcMain.handle('syncOrders', async () => {
     const missingOrders = res.data.missingOrders;
     const deletedOrderIds = res.data.deletedOrderIds;
     const completedEodIds = res.data.completedEodIds;
+
+    console.log(res.data);
 
     orders = store.get('orders');
 

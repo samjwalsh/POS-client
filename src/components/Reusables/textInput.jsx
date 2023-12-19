@@ -13,12 +13,14 @@ const useKeyboard = () => {
   const [promise, setPromise] = useState(null);
   const [keyboardValue, setKeyboardValue] = useState('');
   const [keyboardState, setKeyboardState] = useState('normal');
+  const [initialValue, setInitialValue] = useState('')
 
   // Code for creating the keyboard text string to be shown to the user
 
   const keyboard = (initialValue) =>
     new Promise((resolve) => {
       setKeyboardValue(initialValue);
+      setInitialValue(initialValue)
       setPromise({ resolve });
     });
 
@@ -35,7 +37,7 @@ const useKeyboard = () => {
 
     switch (button) {
       case 'exit': {
-        handleClose(null);
+        handleClose(initialValue);
         break;
       }
       case 'delete': {
