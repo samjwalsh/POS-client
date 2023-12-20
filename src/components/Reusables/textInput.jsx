@@ -224,8 +224,8 @@ const useKeyboard = () => {
           <div className='keyboardKey grey' id='l'>
             l
           </div>
-          <div className='keyboardKey grey' id=':'>
-            :
+          <div className='keyboardKey grey' id=';'>
+            ;
           </div>
           <div className='keyboardKey grey' id="'">
             '
