@@ -38,7 +38,7 @@ export default function PayCash(props) {
 
     if (value === 'custom') {
       log(`Enabling the keypad`);
-      const tendered = await keypad('currency');
+      const tendered = await keypad(0, 'currency');
       let change = 0;
       if (typeof tendered === 'number') {
         change = tendered - subtotal;

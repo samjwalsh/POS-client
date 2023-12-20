@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { checkPrinterConnection } from '../../tools/ipc';
+import { checkPrinterConnection, getSetting } from '../../tools/ipc';
 
 export default function PrinterConnection() {
   const [isOnline, setIsOnline] = useState({
@@ -15,7 +15,7 @@ export default function PrinterConnection() {
 
   useEffect(() => {
     const connectionCheckInterval = setInterval(async () => {
-      setIsOnline(checkPrinterInterval());
+      setIsOnline(await checkPrinterInterval());
     }, 2000);
     return () => {
       clearInterval(connectionCheckInterval);
@@ -26,7 +26,6 @@ export default function PrinterConnection() {
     const beginPing = Date.now();
     const connection = await checkPrinterConnection();
     const endPing = Date.now();
-
     return {
       status: connection,
       ping: endPing - beginPing,

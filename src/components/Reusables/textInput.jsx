@@ -185,8 +185,8 @@ const useKeyboard = () => {
           <div className='keyboardKey grey' id=')'>
             )
           </div>
-          <div className='keyboardKey grey' id=':'>
-            :
+          <div className='keyboardKey grey' id=';'>
+            ;
           </div>
         </div>
         <div className='col-span-1 row-span-1 flex justify-between gap-2'>
@@ -224,8 +224,8 @@ const useKeyboard = () => {
           <div className='keyboardKey grey' id='l'>
             l
           </div>
-          <div className='keyboardKey grey' id=';'>
-            ;
+          <div className='keyboardKey grey' id=':'>
+            :
           </div>
           <div className='keyboardKey grey' id="'">
             '

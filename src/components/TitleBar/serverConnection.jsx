@@ -66,7 +66,6 @@ export default function ServerConnection() {
       default : {
         shop = 'XX'
       }
-
     }
 
     return {

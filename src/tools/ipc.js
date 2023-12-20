@@ -83,3 +83,7 @@ export function checkPrinterConnection() {
 export function syncOrders() {
   return ipcRenderer.invoke('syncOrders');
 }
+
+export function createVouchers(quantity, value) {
+  return ipcRenderer.invoke('createVouchers', quantity, value)
+}

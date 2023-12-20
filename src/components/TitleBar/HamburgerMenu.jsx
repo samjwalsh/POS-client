@@ -10,11 +10,11 @@ import useKeypad from '../Reusables/Keypad.jsx';
 import TitleBar from './TitleBar.jsx';
 
 export default function HamburgerMenu(props) {
-  const { hamburgerOpen, setHamburger, setAppState } = props;
+  const { hamburgerOpen, setHamburger, setAppState, currentOrder, setCurrentOrder } = props;
 
   const [Dialog, confirm] = useConfirm('Exit?');
 
-  const [Keypad, keypad] = useKeypad('passcode');
+  const [Keypad, keypad] = useKeypad();
 
   async function handleTerminatePOS() {
     playBeep();
@@ -32,7 +32,7 @@ export default function HamburgerMenu(props) {
       setAppState(mode);
       setHamburger(false);
     } else {
-      const keypadValue = await keypad();
+      const keypadValue = await keypad(0, 'passcode');
       if (keypadValue === 415326) {
         setAppState(mode);
         setHamburger(false);
@@ -41,7 +41,8 @@ export default function HamburgerMenu(props) {
   }
 
   if (hamburgerOpen === false) {
-    return <TitleBar setHamburger={setHamburger} />;
+    return <TitleBar setHamburger={setHamburger}                 currentOrder={currentOrder}
+    setCurrentOrder={setCurrentOrder} />;
   }
 
   return (

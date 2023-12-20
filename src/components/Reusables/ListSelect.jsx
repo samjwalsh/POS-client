@@ -27,7 +27,7 @@ const useListSelect = () => {
   const optionsHTML = options.map((option) => {
     return (
       <div
-        className='p-2 cnter-items primary btn min-w-[12rem]'
+        className='p-4 cnter-items primary uppercase font-bold text-xl w-full'
         onContextMenu={(e) => handleChooseOption(option)}
         onTouchStart={(e) => handleChooseOption(option)}
         key={option}>

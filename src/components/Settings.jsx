@@ -34,7 +34,7 @@ export default function Settings(props) {
   const [ConfirmDialog, confirm] = useConfirm();
   const [ListSelect, chooseOption] = useListSelect();
   const [Keyboard, keyboard] = usekeyboard();
-  const [Keypad, keypad] = useKeypad('passcode');
+  const [Keypad, keypad] = useKeypad();
 
   useEffect(() => {
     (async () => {
@@ -105,7 +105,7 @@ export default function Settings(props) {
   async function handleClickNumberInputOption(setting, settings, getSettings) {
     playBeep();
 
-    const response = await keypad(setting.value);
+    let response = await keypad(setting.value, 'passcode');
     if (response < 1 && setting.name === 'Sync Frequency') {
       response = 1;
     }
