@@ -176,11 +176,11 @@ ipcMain.handle('syncOrders', async () => {
     // };
 
     const ordersToAdd =
-      missingOrders.length === undefined ? missingOrders.length : 0;
+      missingOrders.length !== undefined ? missingOrders.length : 0;
     const ordersToDelete =
-      deletedOrderIds.length === undefined ? deletedOrderIds.length : 0;
+      deletedOrderIds.length !== undefined ? deletedOrderIds.length : 0;
     const ordersToEod =
-      completedEodIds.length === undefined ? completedEodIds.length : 0;
+      completedEodIds.length !== undefined ? completedEodIds.length : 0;
     const ordersMissingInDb =
       res.data.ordersMissingInDb !== undefined ? res.data.ordersMissingInDb : 0;
     const ordersDeletedInDb =

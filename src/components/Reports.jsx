@@ -175,6 +175,12 @@ export default function Reports(props) {
     return (
       <div className='flex flex-col w-full text-3xl p-2 gap-2'>
         <div className='flex flex-row w-full justify-between border-b border-colour pb-2'>
+          <div className=''>No. Orders:</div>
+          <div className='num text-right justify-end'>
+            {orders.length}
+          </div>
+        </div>
+        <div className='flex flex-row w-full justify-between border-b border-colour pb-2'>
           <div className=''>Cash:</div>
           <div className='num text-right justify-end'>
             €{cashTotal.toFixed(2)}
