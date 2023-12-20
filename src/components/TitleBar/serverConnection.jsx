@@ -18,6 +18,7 @@ export default function ServerConnection() {
     ordersDeletedInDb: 0,
     ordersEodedInDb: 0,
   });
+
   useEffect(() => {
     const connectionCheckInterval = setInterval(
       async () => {

@@ -9,17 +9,25 @@ import enterSVG from '../../assets/appicons/enter.svg';
 
 import playBeep from '../../tools/playBeep';
 
-const useKeypad = (numberFormat) => {
+const useKeypad = (numberFormat, initialValue) => {
   const [promise, setPromise] = useState(null);
   const [keypadState, setkeypadState] = useState({ value: '', sign: '+' });
 
-  // Code for creating the keypad text string to be shown to the user
   if (numberFormat === undefined) {
     numberFormat = 'currency';
   }
 
-  const keypad = () =>
+  const keypad = (initialValue) =>
     new Promise((resolve) => {
+      if (typeof initialValue !== 'number') {
+        initialValue = '';
+      } else {
+        initialValue = initialValue.toString();
+      }
+      setkeypadState({
+        value: initialValue,
+        sign: '+',
+      });
       setPromise({ resolve });
     });
 

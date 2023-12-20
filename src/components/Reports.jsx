@@ -35,11 +35,15 @@ export default function Reports(props) {
     playBeep();
     const choice = await confirm(['Delete All Orders?', 'No', 'Yes']);
     if (!choice) return;
-    let localOrders = await getAllOrders();
-    await printEndOfDay(localOrders);
+    let orders = await getAllOrders();
+    await printEndOfDay(orders);
+    const printCorrectly = await confirm(['Did the sheet print?', 'No', 'Yes']);
+    if (!printCorrectly) {
+      
+    }
     await endOfDay();
-    localOrders = await getAllOrders();
-    setOrders(localOrders);
+    orders = await getAllOrders();
+    setOrders(orders);
   }
 
   const handleRefreshOrders = async () => {
@@ -173,13 +177,7 @@ export default function Reports(props) {
     let xTotal = cashTotal + cardTotal;
 
     return (
-      <div className='flex flex-col w-full text-3xl p-2 gap-2'>
-        <div className='flex flex-row w-full justify-between border-b border-colour pb-2'>
-          <div className=''>No. Orders:</div>
-          <div className='num text-right justify-end'>
-            {orders.length}
-          </div>
-        </div>
+      <div className='flex flex-col w-full text-2xl p-2 gap-2'>
         <div className='flex flex-row w-full justify-between border-b border-colour pb-2'>
           <div className=''>Cash:</div>
           <div className='num text-right justify-end'>
@@ -192,9 +190,19 @@ export default function Reports(props) {
             €{cardTotal.toFixed(2)}
           </div>
         </div>
-        <div className='flex flex-row w-full justify-between'>
+        <div className='flex flex-row w-full justify-between border-b border-colour pb-2'>
           <div className=''>X-Total:</div>
           <div className='num text-right justify-end'>€{xTotal.toFixed(2)}</div>
+        </div>
+        <div className='flex flex-row w-full justify-between border-b border-colour pb-2'>
+          <div className=''>No. Orders:</div>
+          <div className='num text-right justify-end'>{orders.length}</div>
+        </div>
+        <div className='flex flex-row w-full justify-between pb-2'>
+          <div className=''>Average Sale:</div>
+          <div className='num text-right justify-end'>
+            €{(xTotal / (orders.length === 0 ? 1 : orders.length)).toFixed(2)}
+          </div>
         </div>
       </div>
     );

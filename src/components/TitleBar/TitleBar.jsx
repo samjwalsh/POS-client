@@ -8,7 +8,7 @@ import Clock from './Clock.jsx';
 import PrinterConnection from './PrinterConnection.jsx';
 import ServerConnection from './serverConnection.jsx';
 import HelpPageButton from './HelpPageButton.jsx';
-import { getAllOrders, printOrder } from '../../tools/ipc.js';
+import { getAllOrders, printOrder, getSetting } from '../../tools/ipc.js';
 
 export default function TitleBar(props) {
   const { setHamburger } = props;
@@ -32,8 +32,7 @@ export default function TitleBar(props) {
           onTouchStart={(e) => handlePrintRecentOrder()}>
           Print Receipt
         </div>
-        <div className='border-l border-colour h-full cnter-items font-bold w-16'>
-        </div>
+        <div className='border-l border-colour h-full cnter-items font-bold w-16'></div>
         <div className='border-l border-colour h-full cnter-items font-bold'>
           <PrinterConnection />
         </div>
@@ -52,9 +51,17 @@ export default function TitleBar(props) {
 }
 
 async function handlePrintRecentOrder() {
-  let localOrders = await getAllOrders();
-  localOrders = localOrders.reverse();
-  await printOrder(localOrders[0]);
+  let orders = await getAllOrders();
+  let till = await getSetting('Till Number');
+  let recentOrder;
+    for (const order of orders) {
+      if (order.till == till) {
+        recentOrder = order;
+        break;
+      }
+    }
+  console.log(recentOrder)
+  if (recentOrder !== undefined) await printOrder(recentOrder);
 }
 
 function handleClickHamburger(setHamburger) {

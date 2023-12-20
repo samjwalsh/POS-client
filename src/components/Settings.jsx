@@ -133,7 +133,10 @@ export default function Settings(props) {
   async function handleClickNumberInputOption(setting, settings, getSettings) {
     playBeep();
 
-    const response = await keypad();
+    const response = await keypad(setting.value);
+    if (response < 1 && setting.name === 'Sync Frequency') {
+      response = 1;
+    }
 
     let localSettings = settings;
 

@@ -21,7 +21,7 @@ export default function Order(props) {
 
   async function handlePlusMinus() {
     playBeep();
-    const keypadValue = await keypad('currency');
+    const keypadValue = await keypad();
     if (keypadValue === 0) return;
     log(`Update the adjustment in the order`);
 
