@@ -75,16 +75,15 @@ export const menu = [
       { name: 'Choc Dip', price: 1.0 },
       {
         priceCheck: function (addons) {
-          // Add code to check for chocolate dip selection and adjust price accordingly: Choco cone = 3.3, Choco 99 = 4
           let addonsCost = 0;
           let selectedAddons = [];
 
-          addons.forEach((addon) => {
+          for (const addon of addons) {
             if (addon.selected === true) {
               selectedAddons.push(addon.name);
               addonsCost += addon.price;
             }
-          });
+          }
 
           if (
             selectedAddons.includes('Choc Dip') &&
@@ -149,12 +148,12 @@ export const menu = [
           let addonsCost = 0;
           let selectedAddons = [];
 
-          addons.forEach((addon) => {
+          for (const addon of addons) {
             if (addon.selected == true) {
               selectedAddons.push(addon.name);
               addonsCost += addon.price;
             }
-          });
+          }
 
           if (
             selectedAddons.includes('Choc Dip') &&

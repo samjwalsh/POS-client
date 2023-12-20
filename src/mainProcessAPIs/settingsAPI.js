@@ -2,16 +2,16 @@ const { ipcMain, app } = require('electron');
 
 const Store = require('electron-store');
 const { settingsSchema } = require('../assets/settingsSchema');
-const settingsStore = new Store();
+const store = new Store();
 
 // add code here to check that all the settings match the newest schema, it will run once on startup
 (() => {
-  let localSettings = settingsStore.get('settings');
+  let localSettings = store.get('settings');
   let newSettings = settingsSchema;
   settingsSchema.forEach((category, categoryIndex) => {
     if (categoryIndex + 1 <= localSettings.length) {
       if (category.name !== localSettings[categoryIndex].name) {
-        settingsStore.set('settings', newSettings);
+        store.set('settings', newSettings);
         return;
       }
     } else {
@@ -29,17 +29,17 @@ const settingsStore = new Store();
 })();
 
 ipcMain.handle('getSettings', () => {
-  let settings = settingsStore.get('settings');
+  let settings = store.get('settings');
   if (Array.isArray(settings) != true) {
     settings = settingsSchema;
-    settingsStore.set('settings', settings);
+    store.set('settings', settings);
   }
   return settings;
 });
 
 ipcMain.handle('getSetting', (e, settingName) => {
   let foundValue;
-  const settings = settingsStore.get('settings');
+  const settings = store.get('settings');
   settings.forEach((category) => {
     category.settings.forEach((setting) => {
       if (setting.name == settingName) {
@@ -50,9 +50,23 @@ ipcMain.handle('getSetting', (e, settingName) => {
   return foundValue;
 });
 
+ipcMain.handle('setSetting', (e, settingName, value) => {
+  const settings = store.get('settings');
+
+  for (const category of settings) {
+    for (const setting of category.settings) {
+      if (setting.name === settingName) {
+        setting.value = value;
+        store.set('settings', settings)
+        break;
+      }
+    }
+  }
+});
+
 export const getSetting = (setting) => {
   let foundSetting = '';
-  const settings = settingsStore.get('settings');
+  const settings = store.get('settings');
   settings.forEach((localCategory) => {
     localCategory.settings.forEach((localSetting) => {
       if (localSetting.name == setting) {
@@ -64,11 +78,11 @@ export const getSetting = (setting) => {
 };
 
 ipcMain.handle('updateSettings', (e, newSettings) => {
-  settingsStore.set('settings', newSettings);
+  store.set('settings', newSettings);
 });
 
 ipcMain.handle('resetSettings', () => {
-  settingsStore.set('settings', settingsSchema);
+  store.set('settings', settingsSchema);
 });
 
 ipcMain.handle('getVersionNo', () => {
@@ -76,6 +90,6 @@ ipcMain.handle('getVersionNo', () => {
 });
 
 ipcMain.handle('deleteLocalData', () => {
-  settingsStore.set('settings', settingsSchema);
-  settingsStore.set('orders', []);
+  store.set('settings', settingsSchema);
+  store.set('orders', []);
 });

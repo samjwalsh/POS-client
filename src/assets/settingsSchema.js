@@ -24,8 +24,8 @@ export const settingsSchema = [
       {
         name: 'Shop Name',
         type: 'dropdown',
-        value: 'DEV',
-        list: ['DEV', 'Main', 'Lighthouse', 'West Pier', 'Bray'],
+        value: 'DV',
+        list: ['DV', 'MN', 'LH', 'WP', 'BR'],
       },
       {
         name: 'Till Number',
@@ -46,7 +46,7 @@ export const settingsSchema = [
       {
         name: 'Sync Server Key',
         type: 'textInput',
-        value: 'aab324b21c1f',
+        value: 'password',
       },
       {
         name: 'HTTPS',
@@ -56,7 +56,7 @@ export const settingsSchema = [
       {
         name: 'Sync Frequency',
         type: 'numberInput',
-        value: 30,
+        value: 20,
       },
     ],
   },

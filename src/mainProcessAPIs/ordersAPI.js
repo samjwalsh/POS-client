@@ -131,6 +131,7 @@ ipcMain.handle('syncOrders', async () => {
       url: `${https ? 'https' : 'http'}://${syncServer}/api/syncOrders`,
       headers: {},
       data,
+      timeout: 30000
     });
     const missingOrders = res.data.missingOrders;
     const deletedOrderIds = res.data.deletedOrderIds;
@@ -204,5 +205,3 @@ ipcMain.handle('syncOrders', async () => {
     };
   }
 });
-
-

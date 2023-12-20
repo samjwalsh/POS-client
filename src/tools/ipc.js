@@ -36,6 +36,10 @@ export function getSetting(settingName) {
   return ipcRenderer.invoke('getSetting', settingName);
 }
 
+export function setSetting(settingName, value) {
+  return ipcRenderer.invoke('setSetting', settingName, value)
+}
+
 export function updateSettings(newSettings) {
   return ipcRenderer.invoke('updateSettings', newSettings);
 }

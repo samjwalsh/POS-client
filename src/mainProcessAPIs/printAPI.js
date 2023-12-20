@@ -201,19 +201,8 @@ ipcMain.handle('printEndOfDay', async (e, orders) => {
     });
 
     printer.leftRight('Shop:', shopName + '-' + tillNo);
-    var date = new Date();
-    var dd = String(date.getDate()).padStart(2, '0');
-    var mm = String(date.getMonth() + 1).padStart(2, '0'); //January is 0!
-    var yyyy = date.getFullYear();
+    let dateString = new Date().toLocaleDateString('en-ie');
 
-    let dateString =
-      date.toLocaleString('en-IE', { weekday: 'short' }) +
-      ' ' +
-      dd +
-      '/' +
-      mm +
-      '/' +
-      yyyy;
     printer.leftRight('Date:', dateString);
 
     printer.setTextNormal();

@@ -73,7 +73,7 @@ module.exports = {
 
         // 400 and 800 border for light
         light_background: '#ffffff',
-        light_primary: '#14b8a6',
+        light_primary: '#2dd4bf',
         light_primary_border: '#064e3b',
         light_secondary: '#f59e0b',
         light_secondary_border: '#78350f',

@@ -3,7 +3,11 @@ import { useState, useEffect } from 'react';
 
 import useConfirm from './Reusables/ConfirmDialog.jsx';
 
+import useAlert from './Reusables/Alert.jsx';
+
 import closeSVG from '../assets/appicons/close.svg';
+
+import { getSetting } from '../tools/ipc';
 
 import {
   getAllOrders,
@@ -22,6 +26,8 @@ export default function Reports(props) {
 
   const [Dialog, confirm] = useConfirm();
 
+  const [Alert, alert] = useAlert();
+
   useEffect(() => {
     (async () => {
       const localOrders = await getAllOrders();
@@ -39,7 +45,79 @@ export default function Reports(props) {
     await printEndOfDay(orders);
     const printCorrectly = await confirm(['Did the sheet print?', 'No', 'Yes']);
     if (!printCorrectly) {
-      
+      let cashTotal = 0;
+      let cardTotal = 0;
+      let quantityItems = 0;
+      let quantityOrders = orders.length;
+
+      for (const order of orders) {
+        if (order.paymentMethod === 'Card') {
+          cardTotal += order.subtotal;
+        } else {
+          cashTotal += order.subtotal;
+        }
+
+        for (const item of order.items) {
+          if (item.quantity === undefined) {
+            quantityItems++;
+          } else {
+            quantityItems += item.quantity;
+          }
+        }
+      }
+
+      let xTotal = cashTotal + cardTotal;
+
+      let averageSale = 0;
+      if (quantityOrders !== 0 && quantityOrders !== undefined) {
+        averageSale = xTotal / quantityOrders;
+      }
+
+      const EodHTML = (
+        <div className='text-xl'>
+          <div className='flex flex-row justify-between'>
+            <div>Shop:</div>
+            <div>{await getSetting('Shop Name')}</div>
+          </div>
+          <div className='flex flex-row justify-between'>
+            <div>Date:</div>
+            <div>{new Date().toLocaleDateString('en-ie')}</div>
+          </div>
+          <div className='flex flex-row justify-between'>
+            <div>Cash:</div>
+            <div>{`€${cashTotal.toFixed(2)}`}</div>
+          </div>
+          <div className='flex flex-row justify-between'>
+            <div>Card:</div>
+            <div>{`€${cardTotal.toFixed(2)}`}</div>
+          </div>
+          <div className='flex flex-row justify-between'>
+            <div>Total:</div>
+            <div>{`€${xTotal.toFixed(2)}`}</div>
+          </div>
+          <div className='flex flex-row justify-between'>
+            <div>Vat Total:</div>
+            <div>{`€${(0.23 * xTotal).toFixed(2)}`}</div>
+          </div>
+          <div className='flex flex-row justify-between'>
+            <div>Total Items:</div>
+            <div>{quantityItems}</div>
+          </div>
+          <div className='flex flex-row justify-between'>
+            <div>Total Orders:</div>
+            <div>{quantityOrders}</div>
+          </div>
+          <div className='flex flex-row justify-between'>
+            <div>Average Sale:</div>
+            <div>{`€${averageSale.toFixed(2)}`}</div>
+          </div>
+          <div className='flex flex-row justify-between'>
+            <div>Time</div>
+            <div>{calculateDateString(new Date().getTime())}</div>
+          </div>
+        </div>
+      );
+      await alert(EodHTML);
     }
     await endOfDay();
     orders = await getAllOrders();
@@ -166,18 +244,43 @@ export default function Reports(props) {
     let cashTotal = 0;
     let cardTotal = 0;
 
-    orders.forEach((order) => {
+    let quantityItems = 0;
+    for (const order of orders) {
       if (order.paymentMethod === 'Card') {
         cardTotal += order.subtotal;
       } else {
         cashTotal += order.subtotal;
       }
-    });
+      for (const item of order.items) {
+        if (item.quantity === undefined) {
+          quantityItems++;
+        } else {
+          quantityItems += item.quantity;
+        }
+      }
+    }
 
     let xTotal = cashTotal + cardTotal;
 
     return (
       <div className='flex flex-col w-full text-2xl p-2 gap-2'>
+        <div className='flex flex-row w-full justify-between border-b border-colour pb-2 text-xl'>
+          <div className=''>No. Orders:</div>
+          <div className='num text-right justify-end'>{orders.length}</div>
+        </div>
+        <div className='flex flex-row w-full justify-between border-b border-colour pb-2 text-xl'>
+          <div className=''>No. Items:</div>
+          <div className='num text-right justify-end'>{quantityItems}</div>
+        </div>
+        <div className='flex flex-row w-full justify-between pb-2 text-xl'>
+          <div className=''>Average Sale:</div>
+          <div className='num text-right justify-end'>
+            €{(xTotal / (orders.length === 0 ? 1 : orders.length)).toFixed(2)}
+          </div>
+        </div>
+        <div className='flex flex-row w-full justify-between pb-2 text-xl'>
+          <div className=''></div>
+        </div>
         <div className='flex flex-row w-full justify-between border-b border-colour pb-2'>
           <div className=''>Cash:</div>
           <div className='num text-right justify-end'>
@@ -190,19 +293,9 @@ export default function Reports(props) {
             €{cardTotal.toFixed(2)}
           </div>
         </div>
-        <div className='flex flex-row w-full justify-between border-b border-colour pb-2'>
+        <div className='flex flex-row w-full justify-between pb-2'>
           <div className=''>X-Total:</div>
           <div className='num text-right justify-end'>€{xTotal.toFixed(2)}</div>
-        </div>
-        <div className='flex flex-row w-full justify-between border-b border-colour pb-2'>
-          <div className=''>No. Orders:</div>
-          <div className='num text-right justify-end'>{orders.length}</div>
-        </div>
-        <div className='flex flex-row w-full justify-between pb-2'>
-          <div className=''>Average Sale:</div>
-          <div className='num text-right justify-end'>
-            €{(xTotal / (orders.length === 0 ? 1 : orders.length)).toFixed(2)}
-          </div>
         </div>
       </div>
     );
@@ -251,6 +344,7 @@ export default function Reports(props) {
   return (
     <>
       <Dialog />
+      <Alert />
       <div className='overflow-y-scroll no-scrollbar h-full grid grid-cols-12 grid-rows-1'>
         <div className='overflow-y-scroll no-scrollbar col-span-8 gap-2 p-2 flex flex-row flex-wrap'>
           {createOrdersHTML()}

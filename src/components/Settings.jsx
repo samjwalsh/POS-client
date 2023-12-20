@@ -10,6 +10,7 @@ import {
   resetSettings,
   updateSettings,
   getSetting,
+  setSetting
 } from '../tools/ipc';
 
 import useConfirm from './Reusables/ConfirmDialog.jsx';
@@ -88,23 +89,8 @@ export default function Settings(props) {
     }
 
     const choice = await chooseOption(options);
-
-    let localSettings = settings;
-
-    settings.forEach((localCategory) => {
-      localCategory.settings.forEach((localSetting) => {
-        if (localSetting === setting) {
-          //After finding the correct setting, we update its value according to the button pressed
-          localSetting.value = choice;
-        }
-      });
-    });
-
-    await updateSettings(localSettings);
-
-    localSettings = await getSettings();
-
-    setSettings(localSettings);
+    await setSetting(setting.name, choice);
+    setSettings(await getSettings());
   }
 
   async function handleClickTextInputOption(setting, settings, getSettings) {
@@ -112,22 +98,8 @@ export default function Settings(props) {
 
     const response = await keyboard(setting.value);
 
-    let localSettings = settings;
-
-    settings.forEach((localCategory) => {
-      localCategory.settings.forEach((localSetting) => {
-        if (localSetting === setting) {
-          //After finding the correct setting, we update its value according to the button pressed
-          localSetting.value = response;
-        }
-      });
-    });
-
-    await updateSettings(localSettings);
-
-    localSettings = await getSettings();
-
-    setSettings(localSettings);
+    await setSetting(setting.name, response);
+    setSettings(await getSettings());
   }
 
   async function handleClickNumberInputOption(setting, settings, getSettings) {
@@ -137,23 +109,8 @@ export default function Settings(props) {
     if (response < 1 && setting.name === 'Sync Frequency') {
       response = 1;
     }
-
-    let localSettings = settings;
-
-    settings.forEach((localCategory) => {
-      localCategory.settings.forEach((localSetting) => {
-        if (localSetting === setting) {
-          //After finding the correct setting, we update its value according to the button pressed
-          localSetting.value = response;
-        }
-      });
-    });
-
-    await updateSettings(localSettings);
-
-    localSettings = await getSettings();
-
-    setSettings(localSettings);
+    await setSetting(setting.name, response);
+    setSettings(await getSettings());
   }
 
   let settingsHTML = [];
@@ -385,64 +342,47 @@ export default function Settings(props) {
 async function handleClickRangeOption(setting, method, settings, setSettings) {
   playBeep();
 
-  let localSettings = settings;
+  let settingName = setting.name
+  let value = await getSetting(settingName);
 
-  settings.forEach((localCategory) => {
-    localCategory.settings.forEach((localSetting) => {
-      if (localSetting === setting) {
+  for (const category of settings) {
+    for (const setting of category.settings) {
+      if (setting.name === settingName) {
         //After finding the correct setting, we update its value according to the button pressed
         switch (method) {
           case 'increase':
-            if (localSetting.value + localSetting.step <= localSetting.max) {
-              localSetting.value += localSetting.step;
+            if (setting.value + setting.step <= setting.max) {
+              value += setting.step;
             }
             break;
           case 'decrease':
-            if (localSetting.value - localSetting.step >= localSetting.min)
-              localSetting.value -= localSetting.step;
+            if (setting.value - setting.step >= setting.min)
+              value -= setting.step;
             break;
           case 'reset':
-            localSetting.value = localSetting.default;
+            value = setting.default;
         }
+        break;
       }
-    });
-  });
+    }
+  }
 
-  await updateSettings(localSettings);
-
-  localSettings = await getSettings();
-
-  executeSettings(localSettings);
-
-  setSettings(localSettings);
+  await setSetting(settingName, value);
+  setSettings(await getSettings());
+  executeSettings(await getSettings())
 }
 
 async function handleClickToggleOption(setting, settings, setSettings) {
   playBeep();
-
-  let localSettings = settings;
-
-  settings.forEach((localCategory) => {
-    localCategory.settings.forEach((localSetting) => {
-      if (localSetting === setting) {
-        //After finding the correct setting, we update its value according to the button pressed
-        localSetting.value = !localSetting.value;
-      }
-    });
-  });
-
-  await updateSettings(localSettings);
-
-  localSettings = await getSettings();
-
-  executeSettings(localSettings);
-
-  setSettings(localSettings);
+  let value = !(await getSetting(setting.name));
+  await setSetting(setting.name, value);
+  setSettings(await getSettings());
+  executeSettings(await getSettings());
 }
 
 export function executeSettings(settings) {
-  settings.forEach((category) => {
-    category.settings.forEach((setting) => {
+  for (const category of settings) {
+    for (const setting of category.settings) {
       switch (setting.name) {
         case 'Zoom Factor':
           document.querySelector(':root').style.fontSize = `${setting.value}px`;
@@ -455,6 +395,6 @@ export function executeSettings(settings) {
           }
           break;
       }
-    });
-  });
+    }
+  }
 }
