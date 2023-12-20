@@ -160,10 +160,44 @@ ipcMain.handle('syncOrders', async () => {
       });
     });
 
+    // Find duplicate orders
+    // let uniqueOrders = [];
 
-    orders.sort((a, b) => (a.time > b.time ? -1 : 1));
+    // for (const order1 of orders) {
+    //   let duplicateOrders = [];
+    //   for (const order2 of orders) {
+    //     if (order1.id === order2.id) {
+    //       duplicateOrders.push(order1);
+    //     }
+    //   }
+    //   if (duplicateOrders.length <= 2) {
+    //     uniqueOrders.push(order1);
+    //   } else {
+    //     let selectedOrder = { time: 0 };
+    //     for (const duplicateOrder in duplicateOrders) {
+    //       if (duplicateOrder.time > selectedOrder.time) {
+    //         selectedOrder = duplicateOrder;
+    //       }
+    //     }
+    //     uniqueOrders.push(selectedOrder);
+    //   }
+    // }
 
-    store.set('orders', orders);
+    const uniqueOrders = orders.filter(
+      (order, index) =>
+        orders.findIndex((currentOrder) => currentOrder.id === order.id) ===
+        index
+    );
+
+    console.log(
+      orders.length === uniqueOrders.length
+        ? 'ok'
+        : orders.length + ' - ' + uniqueOrders.length
+    );
+
+    uniqueOrders.sort((a, b) => (a.time > b.time ? -1 : 1));
+
+    store.set('orders', uniqueOrders);
 
     // return {
     //   success: true,
@@ -197,8 +231,6 @@ ipcMain.handle('syncOrders', async () => {
       ordersDeletedInDb,
       ordersEodedInDb,
     };
-
-
   } catch (e) {
     console.log(e);
     return {
