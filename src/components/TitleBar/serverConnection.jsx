@@ -20,24 +20,15 @@ export default function ServerConnection() {
   });
 
   useEffect(() => {
+    (async () => {
+      setIsOnline(await syncOrdersInterval());
+    })();
+  }, []);
+
+  useEffect(() => {
     const connectionCheckInterval = setInterval(
       async () => {
-
-        const beginPing = Date.now();
-        const connection = await syncOrders();
-        const endPing = Date.now();
-        setIsOnline({
-          status: connection.success,
-          ping: endPing - beginPing,
-          ordersToAdd: connection.ordersToAdd,
-          ordersToDelete: connection.ordersToDelete,
-          ordersToEod: connection.ordersToEod,
-          ordersMissingInDb: connection.ordersMissingInDb,
-          ordersDeletedInDb: connection.ordersDeletedInDb,
-          ordersEodedInDb: connection.ordersEodedInDb,
-          shop: await getSetting('Shop Name'),
-          till: await getSetting('Till Number')
-        });
+        setIsOnline(await syncOrdersInterval());
       },
       typeof syncFrequency === 'number' ? syncFrequency : 5000
     );
@@ -45,6 +36,52 @@ export default function ServerConnection() {
       clearInterval(connectionCheckInterval);
     };
   }, []);
+
+  async function syncOrdersInterval() {
+    const beginPing = Date.now();
+    const connection = await syncOrders();
+    const endPing = Date.now();
+    let shop = await getSetting('Shop Name');
+    switch (shop) {
+      case 'DEV': {
+        shop = 'DV';
+        break;
+      }
+      case 'Main' : {
+        shop = 'MN';
+        break;
+      }
+      case 'Lighthouse' : {
+        shop = 'LH';
+        break;
+      }
+      case 'West Pier' : {
+        shop = 'WP';
+        break;
+      }
+      case 'Bray' : {
+        shop = 'BR';
+        break;
+      }
+      default : {
+        shop = 'XX'
+      }
+
+    }
+
+    return {
+      status: connection.success,
+      ping: endPing - beginPing,
+      ordersToAdd: connection.ordersToAdd,
+      ordersToDelete: connection.ordersToDelete,
+      ordersToEod: connection.ordersToEod,
+      ordersMissingInDb: connection.ordersMissingInDb,
+      ordersDeletedInDb: connection.ordersDeletedInDb,
+      ordersEodedInDb: connection.ordersEodedInDb,
+      shop,
+      till: await getSetting('Till Number'),
+    };
+  }
 
   return (
     <div
@@ -84,7 +121,9 @@ export default function ServerConnection() {
       </div>
       <div className='grid grid-rows-2 grid-cols-1 text-sm'>
         <div className='col-span-1 row-span-1'>{isOnline.shop}</div>
-        <div className='col-span-1 row-span-1'>{`${isOnline.till != undefined? '[' + isOnline.till + ']' : '' }`}</div>
+        <div className='col-span-1 row-span-1'>{`${
+          isOnline.till != undefined ? '[' + isOnline.till + ']' : ''
+        }`}</div>
       </div>
     </div>
   );

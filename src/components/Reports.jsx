@@ -30,9 +30,20 @@ export default function Reports(props) {
 
   useEffect(() => {
     (async () => {
-      const localOrders = await getAllOrders();
-      setOrders(localOrders);
+      setOrders(await getAllOrders());
     })();
+  }, []);
+
+  useEffect(() => {
+    const syncOrdersInterval = setInterval(
+      async () => {
+        setOrders(await getAllOrders());
+      },
+      typeof syncFrequency === 'number' ? syncFrequency : 5000
+    );
+    return () => {
+      clearInterval(syncOrdersInterval);
+    };
   }, []);
 
   // FUNCTIONS
@@ -124,12 +135,6 @@ export default function Reports(props) {
     setOrders(orders);
   }
 
-  const handleRefreshOrders = async () => {
-    playBeep();
-    const localOrders = await getAllOrders();
-    setOrders(localOrders);
-  };
-
   const handleDeleteOrder = async (deletedOrder) => {
     playBeep();
 
@@ -219,12 +224,6 @@ export default function Reports(props) {
         <div className='mt-auto border-t border-colour p-2 flex flex-col gap-2'>
           <div
             className='btn secondary h-auto p-2 cnter-items w-full'
-            onContextMenu={(event) => handleRefreshOrders()}
-            onTouchStart={(event) => handleRefreshOrders()}>
-            Refresh Orders
-          </div>
-          <div
-            className='btn primary h-auto p-2 cnter-items w-full'
             onContextMenu={(event) => handleDeleteOldOrders()}
             onTouchStart={(event) => handleDeleteOldOrders()}>
             Delete Old Orders

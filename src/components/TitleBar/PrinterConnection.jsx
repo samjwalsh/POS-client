@@ -8,20 +8,30 @@ export default function PrinterConnection() {
   });
 
   useEffect(() => {
-    const connectionCheckInterval = setInterval(async () => {
-      const beginPing = Date.now();
-      const connection = await checkPrinterConnection();
-      const endPing = Date.now();
+    (async () => {
+      setIsOnline(await checkPrinterInterval());
+    })();
+  }, []);
 
-      setIsOnline({
-        status: connection,
-        ping: endPing - beginPing,
-      });
+  useEffect(() => {
+    const connectionCheckInterval = setInterval(async () => {
+      setIsOnline(checkPrinterInterval());
     }, 2000);
     return () => {
       clearInterval(connectionCheckInterval);
     };
   }, []);
+
+  async function checkPrinterInterval() {
+    const beginPing = Date.now();
+    const connection = await checkPrinterConnection();
+    const endPing = Date.now();
+
+    return {
+      status: connection,
+      ping: endPing - beginPing,
+    };
+  }
 
   return (
     <div
@@ -32,7 +42,9 @@ export default function PrinterConnection() {
         P-{isOnline.status ? 'OK' : 'NC'}
       </div>
       <div className='row-span-1 col-span-1'>
-        {isOnline.status ? `[${String(isOnline.ping).padStart(3, '0')}] ` : '[---]'}
+        {isOnline.status
+          ? `[${String(isOnline.ping).padStart(3, '0')}] `
+          : '[---]'}
       </div>
     </div>
   );

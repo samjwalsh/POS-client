@@ -49,7 +49,7 @@ export default function PayCash(props) {
 
   return (
     <div className='flex flex-col h-full'>
-      <div className='grid grid-cols-2 grid-rows-5 gap-2 h-full p-2 pb-1 text-3xl'>
+      <div className='grid grid-cols-2 grid-rows-5 gap-2 h-full p-2 pb-1 text-2xl'>
         <div
           className='col-span-2 row-span-1  primary btn cnter-items'
           onContextMenu={() => handleButtonPress('custom')}

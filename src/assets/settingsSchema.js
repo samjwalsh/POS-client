@@ -24,8 +24,8 @@ export const settingsSchema = [
       {
         name: 'Shop Name',
         type: 'dropdown',
-        value: 'DV',
-        list: ['DV', 'MN', 'LH', 'WP', 'BR'],
+        value: 'DEV',
+        list: ['DEV', 'Main', 'Lighthouse', 'West Pier', 'Bray'],
       },
       {
         name: 'Till Number',
