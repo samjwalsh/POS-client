@@ -4,20 +4,16 @@ import * as React from 'react';
 import dropdownSVG from '../../assets/appicons/dropdown.svg';
 import useKeyboard from '../Reusables/textInput.jsx';
 import playBeep from '../../tools/playBeep.js';
-import {
-  createVouchers,
-  printVouchers,
-  redeemVoucher,
-} from '../../tools/ipc.js';
+import { checkVoucher } from '../../tools/ipc.js';
 import useAlert from '../Reusables/Alert.jsx';
 import { handleAddToOrder } from './ItemPage.jsx';
-const useVoucherRedeemer = (order, setOrder) => {
+const useVoucherChecker = (order, setOrder) => {
   const [promise, setPromise] = useState(null);
   const [clickable, setClickable] = useState(true);
   const [Keyboard, keyboard] = useKeyboard();
   const [Alert, alert] = useAlert();
 
-  const voucherRedeemer = () =>
+  const voucherChecker = () =>
     new Promise((resolve, reject) => {
       setPromise({ resolve });
     });
@@ -35,32 +31,48 @@ const useVoucherRedeemer = (order, setOrder) => {
       return;
     }
     setClickable(false);
-    const voucherResult = await redeemVoucher(code);
+    const res = await checkVoucher(code);
 
-    if (!voucherResult.success) {
-      if (voucherResult.dateRedeemed === undefined) {
-        await alert(
-          'Something went wrong. Check you typed the code correctly and that the till is connected to the internet.'
-        );
-      } else {
-        await alert(
-          `Sorry, this voucher was redeemed on ${voucherResult.dateRedeemed}.`
-        );
-      }
+    if (!res.success) {
+      await alert(
+        'Something went wrong. Check that the till is connected to the internet.'
+      );
+
       handleClose();
       return;
     }
-    let temp_order = order;
-    temp_order.push({
-      addons: [code],
-      name: 'Redeem Voucher',
-      quantity: 1,
-      price: voucherResult.value * -1,
-    });
 
-    setOrder([...temp_order]);
+    if (!res.exists) {
+      await alert('A voucher with this code does not exist');
+      handleClose();
+      return;
+    }
 
+    let alertHTML = [];
+    alertHTML.push(
+      addToAlertHTML('Redeemed', res.voucher.redeemed ? 'Yes' : 'No')
+    );
+    alertHTML.push(addToAlertHTML('Date Created', res.voucher.dateCreated));
+    alertHTML.push(addToAlertHTML('Shop Created', res.voucher.shopCreated));
+
+    if (res.voucher.redeemed) {
+      alertHTML.push(addToAlertHTML('Date Redeemed', res.voucher.dateRedeemed));
+      alertHTML.push(addToAlertHTML('Shop Redeemed', res.voucher.shopRedeemed));
+    }
+    alertHTML.push(addToAlertHTML('Value', '€' + res.voucher.value.toFixed(2)));
+    alertHTML.push(addToAlertHTML('Code', res.voucher.code));
+
+    await alert(<div className='flex flex-col'>{alertHTML}</div>);
     handleClose();
+  };
+
+  const addToAlertHTML = (title, value) => {
+    return (
+      <div className='flex flex-row justify-between'>
+        <div>{title}:</div>
+        <div>{value}</div>
+      </div>
+    );
   };
 
   const createHTML = () => {
@@ -68,7 +80,7 @@ const useVoucherRedeemer = (order, setOrder) => {
       return (
         <div className='w-96 flex flex-col gap-2 text-2xl'>
           <div className='flex flex-row justify-between'>
-            <div className='text-3xl cnter-items'>Voucher Redeemer</div>
+            <div className='text-3xl cnter-items'>Voucher Checker</div>
             <div
               className='negative cnter-items p-2 uppercase font-bold'
               onContextMenu={(event) => handleClose()}
@@ -94,7 +106,7 @@ const useVoucherRedeemer = (order, setOrder) => {
     }
   };
 
-  const VoucherRedeemerDialog = () => {
+  const VoucherCheckerDialog = () => {
     if (promise === null) return;
     else
       return (
@@ -110,7 +122,7 @@ const useVoucherRedeemer = (order, setOrder) => {
         </>
       );
   };
-  return [VoucherRedeemerDialog, voucherRedeemer];
+  return [VoucherCheckerDialog, voucherChecker];
 };
 
-export default useVoucherRedeemer;
+export default useVoucherChecker;

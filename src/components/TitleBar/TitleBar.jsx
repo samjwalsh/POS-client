@@ -10,28 +10,42 @@ import ServerConnection from './serverConnection.jsx';
 import HelpPageButton from './HelpPageButton.jsx';
 import useListSelect from '../Reusables/ListSelect.jsx';
 import useVoucherCreator from '../Register/VoucherCreator.jsx';
+import useVoucherRedeemer from '../Register/VoucherRedeemer.jsx';
+import useVoucherChecker from '../Register/VoucherChecker.jsx';
 import { getAllOrders, printOrder, getSetting } from '../../tools/ipc.js';
 
 export default function TitleBar(props) {
-  const { setHamburger, currentOrder, setCurrentOrder } = props;
+  const { setHamburger, order, setOrder } = props;
   const [ListSelect, choose] = useListSelect();
-  const [VoucherCreator, voucherCreator] = useVoucherCreator(
-    currentOrder,
-    setCurrentOrder
+  const [VoucherCreator, voucherCreator] = useVoucherCreator(order, setOrder);
+  const [VoucherRedeemer, voucherRedeemer] = useVoucherRedeemer(
+    order,
+    setOrder
   );
+  const [VoucherChecker, voucherChecker] = useVoucherChecker();
 
   async function handleClickVoucherMenu() {
-    const choice = await choose(['Create Vouchers', 'Redeem Vouchers']);
+    const choice = await choose([
+      'Create Vouchers',
+      'Redeem Voucher',
+      'Check Voucher',
+    ]);
     if (choice == 'Create Vouchers') {
       await voucherCreator();
-    } else if (choice == 'Redeem Vouchers') {
-      await VoucherRedeemer();
+    } else if (choice == 'Redeem Voucher') {
+      await voucherRedeemer();
+    } else if (choice == 'Check Voucher') {
+      await voucherChecker();
+    } else {
+      return;
     }
   }
 
   return (
     <>
       <VoucherCreator />
+      <VoucherRedeemer />
+      <VoucherChecker />
       <ListSelect />
       <div className='flex flex-row justify-between border-b border-colour h-10'>
         <div

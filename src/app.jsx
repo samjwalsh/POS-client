@@ -38,8 +38,8 @@ function App() {
           setHamburger={setHamburgerOpen}
           appState={appState}
           setAppState={setAppState}
-          currentOrder={currentOrder}
-          setCurrentOrder={setCurrentOrder}
+          order={order}
+          setOrder={setOrder}
         />
       </div>
       <div className='overflow-y-hidden h-full'>

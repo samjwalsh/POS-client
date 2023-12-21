@@ -37,7 +37,7 @@ export function getSetting(settingName) {
 }
 
 export function setSetting(settingName, value) {
-  return ipcRenderer.invoke('setSetting', settingName, value)
+  return ipcRenderer.invoke('setSetting', settingName, value);
 }
 
 export function updateSettings(newSettings) {
@@ -76,6 +76,10 @@ export function getAllPrinters() {
   return ipcRenderer.invoke('getAllPrinters');
 }
 
+export function printVouchers(vouchers) {
+  return ipcRenderer.invoke('printVouchers', vouchers);
+}
+
 export function checkPrinterConnection() {
   return ipcRenderer.invoke('checkPrinterConnection');
 }
@@ -85,5 +89,13 @@ export function syncOrders() {
 }
 
 export function createVouchers(quantity, value) {
-  return ipcRenderer.invoke('createVouchers', quantity, value)
+  return ipcRenderer.invoke('createVouchers', quantity, value);
+}
+
+export function redeemVoucher(voucherCode) {
+  return ipcRenderer.invoke('redeemVoucher', voucherCode);
+}
+
+export function checkVoucher(voucherCode) {
+  return ipcRenderer.invoke('checkVoucher', voucherCode);
 }

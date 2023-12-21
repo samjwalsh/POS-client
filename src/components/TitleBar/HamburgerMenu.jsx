@@ -10,7 +10,7 @@ import useKeypad from '../Reusables/Keypad.jsx';
 import TitleBar from './TitleBar.jsx';
 
 export default function HamburgerMenu(props) {
-  const { hamburgerOpen, setHamburger, setAppState, currentOrder, setCurrentOrder } = props;
+  const { hamburgerOpen, setHamburger, setAppState, order, setOrder } = props;
 
   const [Dialog, confirm] = useConfirm('Exit?');
 
@@ -41,8 +41,9 @@ export default function HamburgerMenu(props) {
   }
 
   if (hamburgerOpen === false) {
-    return <TitleBar setHamburger={setHamburger}                 currentOrder={currentOrder}
-    setCurrentOrder={setCurrentOrder} />;
+    return (
+      <TitleBar setHamburger={setHamburger} order={order} setOrder={setOrder} />
+    );
   }
 
   return (

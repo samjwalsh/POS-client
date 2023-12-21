@@ -12,11 +12,13 @@ import { addOrder } from '../../tools/ipc';
 
 import PayCash, { calculateSubtotal } from './PayCash.jsx';
 import useKeypad from '../Reusables/Keypad.jsx';
+import useAlert from '../Reusables/Alert.jsx';
 
 export default function Order(props) {
   const { order, setOrder } = props;
 
   const [Keypad, keypad] = useKeypad();
+  const [Alert, alert] = useAlert();
   const [payCash, setPayCash] = useState(false);
 
   async function handlePlusMinus() {
@@ -45,7 +47,7 @@ export default function Order(props) {
     setOrder([...temp_order]);
   }
 
-  function handlePayment(paymentType) {
+  async function handlePayment(paymentType) {
     playBeep();
     if (paymentType === 'card') {
       log(`Payment type card selected, resetting order`);
@@ -60,19 +62,39 @@ export default function Order(props) {
     }
   }
 
-  function handleOrderItemQuantityChange(direction, orderItem) {
+  async function handleOrderItemQuantityChange(direction, orderItem) {
     playBeep();
 
-    order.forEach((item, index) => {
+    order.forEach(async (item, index) => {
       log(`Reducing quantity of item ${item.name} in order by 1`);
       if (orderItem == item) {
         let temp_order = order;
 
         if (direction === 'up') {
+          if (orderItem.name === 'Voucher') {
+            await alert('Use the voucher creator to create more vouchers');
+            return;
+          }
+          if (orderItem.name === 'Redeem Voucher') {
+            await alert('Use the voucher redeemer to redeem more vouchers');
+            return;
+          }
           temp_order[index].quantity++;
         } else if (orderItem.quantity > 1) {
+          if (orderItem.name === 'Redeem Voucher') {
+            await alert(
+              'You cannot unredeem a voucher, you can create a new one with the same value in the voucher creator'
+            );
+            return;
+          }
           temp_order[index].quantity--;
         } else {
+          if (orderItem.name === 'Redeem Voucher') {
+            await alert(
+              'You cannot unredeem a voucher, you can create a new one with the same value in the voucher creator'
+            );
+            return;
+          }
           temp_order.splice(index, 1);
         }
         setOrder([...temp_order]);
@@ -128,7 +150,7 @@ export default function Order(props) {
   return (
     <>
       <Keypad />
-
+      <Alert />
       <div className='col-span-4 row-span-1 h-auto self-stretch flex flex-col overflow-hidden border-l border-colour'>
         {payCash === true ? (
           <PayCash

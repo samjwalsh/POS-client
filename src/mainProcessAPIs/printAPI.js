@@ -292,6 +292,11 @@ ipcMain.handle('printTestPage', async () => {
   }
 });
 
+ipcMain.handle('printVouchers', async (e, vouchers) => {
+  
+})
+
+
 function calculateDateString(time) {
   const date = new Date(time);
   let dateString = '';

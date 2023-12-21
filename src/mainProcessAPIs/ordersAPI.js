@@ -52,7 +52,7 @@ ipcMain.handle('addOrder', async (e, args) => {
     if (Array.isArray(orders) === false) {
       store.set('orders', [order]);
     } else {
-      orders.push(order);
+      orders.unshift(order);
       store.set('orders', orders);
     }
   }
