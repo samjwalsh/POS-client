@@ -25,6 +25,7 @@ export default function TitleBar(props) {
   const [VoucherChecker, voucherChecker] = useVoucherChecker();
 
   async function handleClickVoucherMenu() {
+    playBeep();
     const choice = await choose([
       'Create Vouchers',
       'Redeem Voucher',

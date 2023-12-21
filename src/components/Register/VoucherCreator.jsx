@@ -99,6 +99,19 @@ const useVoucherCreator = (order, setOrder) => {
             'Yes',
           ]);
           if (printedCorrectly) break;
+        } else {
+          let vouchersHTML = [];
+          for (const voucher of voucherResult.vouchers) {
+            vouchersHTML.push(<div className='text-center'>{voucher.code}</div>);
+          }
+          await alert(
+            <div className='flex flex-col overflow-y-hidden'>
+              <div>{`Write the vouchers manually using the codes. Each voucher is for €${voucherResult.vouchers[0].value.toFixed(
+                2
+              )}.`}</div>
+              {vouchersHTML}
+            </div>
+          );
         }
       }
     }
