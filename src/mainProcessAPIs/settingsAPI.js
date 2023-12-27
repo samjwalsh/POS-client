@@ -9,6 +9,9 @@ const store = new Store();
   let localSettings = store.get('settings');
   let newSettings = settingsSchema;
   settingsSchema.forEach((category, categoryIndex) => {
+    if (localSettings === undefined) {
+      localSettings = [];
+    }
     if (categoryIndex + 1 <= localSettings.length) {
       if (category.name !== localSettings[categoryIndex].name) {
         store.set('settings', newSettings);
@@ -57,7 +60,7 @@ ipcMain.handle('setSetting', (e, settingName, value) => {
     for (const setting of category.settings) {
       if (setting.name === settingName) {
         setting.value = value;
-        store.set('settings', settings)
+        store.set('settings', settings);
         break;
       }
     }

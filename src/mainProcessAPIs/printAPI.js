@@ -62,6 +62,15 @@ ipcMain.handle('checkPrinterConnection', async () => {
   }
 });
 
+export async function openCashDrawer () {
+  try {
+    const printer = createPrinter();
+    printer.openCashDrawer();
+    await printer.execute();
+  } catch (e) {}
+}
+
+
 ipcMain.handle('printOrder', async (e, order) => {
   try {
     // return printerDriver.getPrinters();
@@ -292,10 +301,7 @@ ipcMain.handle('printTestPage', async () => {
   }
 });
 
-ipcMain.handle('printVouchers', async (e, vouchers) => {
-  
-})
-
+ipcMain.handle('printVouchers', async (e, vouchers) => {});
 
 function calculateDateString(time) {
   const date = new Date(time);

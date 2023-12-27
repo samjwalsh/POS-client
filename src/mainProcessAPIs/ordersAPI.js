@@ -3,6 +3,7 @@ const { ipcMain, ipcRenderer } = require('electron');
 const axios = require('axios');
 const Store = require('electron-store');
 const store = new Store();
+import { openCashDrawer } from './printAPI';
 import { getSetting } from './settingsAPI';
 
 (() => {
@@ -30,6 +31,9 @@ ipcMain.handle('getAllOrders', () => {
 
 ipcMain.handle('addOrder', async (e, args) => {
   let items = args.order;
+  if (!Array.isArray(items)) {
+    items = [];
+  }
   if (items.length !== 0) {
     let subtotal = 0;
     items.forEach((item) => {
@@ -47,6 +51,10 @@ ipcMain.handle('addOrder', async (e, args) => {
       eod: false,
       items,
     };
+
+    if (args.paymentMethod === 'Cash') {
+      openCashDrawer();
+    }
 
     const orders = store.get('orders');
     if (Array.isArray(orders) === false) {
@@ -131,7 +139,7 @@ ipcMain.handle('syncOrders', async () => {
       url: `${https ? 'https' : 'http'}://${syncServer}/api/syncOrders`,
       headers: {},
       data,
-      timeout: 30000
+      timeout: 30000,
     });
     const missingOrders = res.data.missingOrders;
     const deletedOrderIds = res.data.deletedOrderIds;
