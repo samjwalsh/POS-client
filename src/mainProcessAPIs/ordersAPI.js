@@ -52,9 +52,6 @@ ipcMain.handle('addOrder', async (e, args) => {
       items,
     };
 
-    if (args.paymentMethod === 'Cash') {
-      openCashDrawer();
-    }
 
     const orders = store.get('orders');
     if (Array.isArray(orders) === false) {

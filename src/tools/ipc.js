@@ -72,6 +72,10 @@ export function printTestPage() {
   return ipcRenderer.invoke('printTestPage');
 }
 
+export function openCashDrawer() {
+  return ipcRenderer.invoke('openCashDrawer')
+}
+
 export function getAllPrinters() {
   return ipcRenderer.invoke('getAllPrinters');
 }

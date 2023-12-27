@@ -28,30 +28,10 @@ body {
   src: url(./assets/fonts/Afacad.ttf);
 }
 
-/* @font-face {
+@font-face {
   font-family: Inter;
-  src: url(./assets/fonts/Inter/Inter.ttf);
+  src: url(./assets/fonts/Inter.ttf);
 }
-
-@font-face {
-  font-family: Roboto;
-  src: url(./assets/fonts/Roboto/Roboto.ttf);
-}
-
-@font-face {
-  font-family: Roboto Mono;
-  src: url(./assets/fonts/Roboto/RobotoMono.ttf);
-}
-
-@font-face {
-  font-family: Fira Sans;
-  src: url(./assets/fonts/FiraSans/FiraSans-Regular.ttf);
-}
-
-@font-face {
-  font-family: Fira Mono;
-  src: url(./assets/fonts/FiraMono/FiraMono-Regular.ttf);
-} */
 
 @layer utilities {
   /* Hide scrollbar for Chrome, Safari and Opera */

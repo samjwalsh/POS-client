@@ -4,7 +4,7 @@ import { useState } from 'react';
 
 import log from '../../tools/logging';
 import playBeep from '../../tools/playBeep';
-import { addOrder } from '../../tools/ipc';
+import { addOrder, openCashDrawer } from '../../tools/ipc';
 import useKeypad from '../Reusables/Keypad.jsx';
 
 export default function PayCash(props) {
@@ -12,6 +12,7 @@ export default function PayCash(props) {
 
   const [change, setChange] = useState(0);
 
+  openCashDrawer();
   async function handleButtonPress(value) {
     playBeep();
     log(`Button for paying with cash clicked`);

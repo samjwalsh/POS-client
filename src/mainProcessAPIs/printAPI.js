@@ -62,14 +62,13 @@ ipcMain.handle('checkPrinterConnection', async () => {
   }
 });
 
-export async function openCashDrawer () {
+ipcMain.handle('openCashDrawer', async () => {
   try {
     const printer = createPrinter();
     printer.openCashDrawer();
     await printer.execute();
   } catch (e) {}
-}
-
+});
 
 ipcMain.handle('printOrder', async (e, order) => {
   try {
