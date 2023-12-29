@@ -113,7 +113,7 @@ export const settingsSchema = [
         label: 'Reset',
         type: 'button',
       },
-      { name: 'Delete All Local Data', label: 'Delete', type: 'button' },
+      { name: 'Delete All Local Orders', label: 'Delete', type: 'button' },
     ],
   },
 ];
