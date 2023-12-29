@@ -70,7 +70,7 @@ const useVoucherRedeemer = (order, setOrder) => {
           <div className='flex flex-row justify-between'>
             <div className='text-3xl cnter-items'>Voucher Redeemer</div>
             <div
-              className='negative cnter-items p-2 uppercase font-bold'
+              className='negative cnter-items p-2 uppercase font-bold btn'
               onContextMenu={(event) => handleClose()}
               onTouchStart={(event) => handleClose()}>
               Cancel

@@ -102,7 +102,9 @@ const useVoucherCreator = (order, setOrder) => {
         } else {
           let vouchersHTML = [];
           for (const voucher of voucherResult.vouchers) {
-            vouchersHTML.push(<div className='text-center'>{voucher.code}</div>);
+            vouchersHTML.push(
+              <div className='text-center'>{voucher.code.toUpperCase()}</div>
+            );
           }
           await alert(
             <div className='flex flex-col overflow-y-hidden'>
@@ -119,7 +121,7 @@ const useVoucherCreator = (order, setOrder) => {
 
     for (const voucher of voucherResult.vouchers) {
       temp_order.push({
-        addons: [voucher.code],
+        addons: [voucher.code.toUpperCase()],
         name: 'Voucher',
         quantity: 1,
         price: voucher.value,
@@ -139,7 +141,7 @@ const useVoucherCreator = (order, setOrder) => {
           <div className='flex flex-row justify-between'>
             <div className='text-3xl cnter-items'>Voucher Creator</div>
             <div
-              className='negative cnter-items p-2 uppercase font-bold'
+              className='negative cnter-items p-2 uppercase font-bold btn'
               onContextMenu={(event) => handleClose()}
               onTouchStart={(event) => handleClose()}>
               Cancel

@@ -70,6 +70,59 @@ ipcMain.handle('openCashDrawer', async () => {
   } catch (e) {}
 });
 
+ipcMain.handle('printVouchers', async (e, vouchers) => {
+  try {
+    const printer = createPrinter();
+
+    for (const voucher of vouchers) {
+      printHeader(printer);
+
+      printer.alignCenter();
+      printer.setTextQuadArea();
+      printer.println('VOUCHER');
+      printer.setTextNormal();
+      printer.println("To be redeemed at any Teddy's outlet");
+      printer.drawLine();
+      printer.setTextQuadArea();
+      printer.leftRight('Value:', `${voucher.value.toFixed(2)}`);
+
+      printer.leftRight('Code:', voucher.code.toUpperCase());
+      printer.setTextNormal();
+
+      printer.newLine();
+      printer.drawLine();
+      printer.leftRight('Time:', calculateDateString(new Date()));
+
+      printer.leftRight(
+        'Shop:',
+        `${voucher.shopCreated}-${voucher.tillCreated}`
+      );
+
+      printer.cut();
+    }
+    await printer.execute();
+  } catch (e) {
+    console.log(e);
+  }
+});
+
+const printHeader = (printer) => {
+  printer.bold(true);
+
+  printer.alignCenter();
+  printer.setTextQuadArea();
+  printer.underlineThick(true);
+  printer.println("Teddy's Ice Cream");
+  printer.underlineThick(false);
+  printer.setTextNormal();
+  printer.newLine();
+  printer.println('1a Windsor Terrace');
+  printer.println('Dún Laoghaire');
+  printer.println('Co. Dublin');
+  printer.alignLeft();
+  printer.drawLine();
+};
+
 ipcMain.handle('printOrder', async (e, order) => {
   try {
     // return printerDriver.getPrinters();
@@ -299,8 +352,6 @@ ipcMain.handle('printTestPage', async () => {
     console.log(e);
   }
 });
-
-ipcMain.handle('printVouchers', async (e, vouchers) => {});
 
 function calculateDateString(time) {
   const date = new Date(time);

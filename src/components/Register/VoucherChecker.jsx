@@ -60,7 +60,7 @@ const useVoucherChecker = (order, setOrder) => {
       alertHTML.push(addToAlertHTML('Shop Redeemed', res.voucher.shopRedeemed));
     }
     alertHTML.push(addToAlertHTML('Value', '€' + res.voucher.value.toFixed(2)));
-    alertHTML.push(addToAlertHTML('Code', res.voucher.code));
+    alertHTML.push(addToAlertHTML('Code', res.voucher.code.toUpperCase()));
 
     await alert(<div className='flex flex-col'>{alertHTML}</div>);
     handleClose();
@@ -82,7 +82,7 @@ const useVoucherChecker = (order, setOrder) => {
           <div className='flex flex-row justify-between'>
             <div className='text-3xl cnter-items'>Voucher Checker</div>
             <div
-              className='negative cnter-items p-2 uppercase font-bold'
+              className='negative cnter-items p-2  btn uppercase font-bold'
               onContextMenu={(event) => handleClose()}
               onTouchStart={(event) => handleClose()}>
               Cancel
