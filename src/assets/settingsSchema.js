@@ -56,7 +56,7 @@ export const settingsSchema = [
       {
         name: 'Sync Frequency',
         type: 'numberInput',
-        value: 20,
+        value: 30,
       },
     ],
   },

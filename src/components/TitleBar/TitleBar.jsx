@@ -16,7 +16,7 @@ import { getAllOrders, printOrder, getSetting } from '../../tools/ipc.js';
 
 export default function TitleBar(props) {
   const { setHamburger, order, setOrder } = props;
-  const [ListSelect, choose] = useListSelect();
+  const [ListSelect, chooseOption] = useListSelect();
   const [VoucherCreator, voucherCreator] = useVoucherCreator(order, setOrder);
   const [VoucherRedeemer, voucherRedeemer] = useVoucherRedeemer(
     order,
@@ -26,11 +26,14 @@ export default function TitleBar(props) {
 
   async function handleClickVoucherMenu() {
     playBeep();
-    const choice = await choose([
+    const choice = await chooseOption([
       'Create Vouchers',
       'Redeem Voucher',
       'Check Voucher',
     ]);
+    if (!choice) {
+      return;
+    }
     if (choice == 'Create Vouchers') {
       await voucherCreator();
     } else if (choice == 'Redeem Voucher') {

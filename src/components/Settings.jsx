@@ -89,6 +89,9 @@ export default function Settings(props) {
     }
 
     const choice = await chooseOption(options);
+    if (!choice) {
+      return;
+    }
     await setSetting(setting.name, choice);
     setSettings(await getSettings());
   }
