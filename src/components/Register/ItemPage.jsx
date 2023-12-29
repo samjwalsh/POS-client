@@ -164,7 +164,7 @@ export default function ItemPage(props) {
           {menuState.name}
         </div>
         <div
-          className='col-span-1 text-right self-end justify-self-end w-min h-min whitespace-nowrap p-2  negative  btn mb-2'
+          className='col-span-1 text-right self-end justify-self-end w-min h-min whitespace-nowrap p-2  negative text-lg btn mb-2'
           onContextMenu={(event) =>
             handleExitItemPage(
               event,

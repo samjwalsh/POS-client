@@ -51,7 +51,7 @@ body {
 }
 
 .btn {
-  @apply font-bold uppercase rnd p-2;
+  @apply font-bold uppercase  text-lg rnd p-2;
 }
 
 .menu-itm {
@@ -107,7 +107,7 @@ body {
 }
 
 .rnd {
-  @apply rounded-none shadow-md;
+  @apply rounded-none shadow-none;
 }
 
 /* shadow-[5px_5px_0px_2px_rgba(0,0,0,0.5)] */
