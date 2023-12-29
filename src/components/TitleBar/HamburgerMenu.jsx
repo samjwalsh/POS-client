@@ -1,7 +1,7 @@
 import * as React from 'react';
 
 import playBeep from '../../tools/playBeep';
-import { getAllOrders, quit, removeAllOrders } from '../../tools/ipc';
+import {quit } from '../../tools/ipc';
 
 import closeSVG from '../../assets/appicons/close.svg';
 

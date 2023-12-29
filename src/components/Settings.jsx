@@ -10,7 +10,7 @@ import {
   resetSettings,
   updateSettings,
   getSetting,
-  setSetting
+  setSetting,
 } from '../tools/ipc';
 
 import useConfirm from './Reusables/ConfirmDialog.jsx';
@@ -60,9 +60,6 @@ export default function Settings(props) {
       }
       case 'Delete All Local Data': {
         await deleteLocalData();
-        let localSettings = await getSettings();
-        executeSettings(localSettings);
-        setSettings(localSettings);
         break;
       }
       case 'Print Test Page': {
@@ -345,7 +342,7 @@ export default function Settings(props) {
 async function handleClickRangeOption(setting, method, settings, setSettings) {
   playBeep();
 
-  let settingName = setting.name
+  let settingName = setting.name;
   let value = await getSetting(settingName);
 
   for (const category of settings) {
@@ -372,7 +369,7 @@ async function handleClickRangeOption(setting, method, settings, setSettings) {
 
   await setSetting(settingName, value);
   setSettings(await getSettings());
-  executeSettings(await getSettings())
+  executeSettings(await getSettings());
 }
 
 async function handleClickToggleOption(setting, settings, setSettings) {

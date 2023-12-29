@@ -93,6 +93,5 @@ ipcMain.handle('getVersionNo', () => {
 });
 
 ipcMain.handle('deleteLocalData', () => {
-  store.set('settings', settingsSchema);
   store.set('orders', []);
 });

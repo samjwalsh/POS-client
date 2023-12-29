@@ -3,15 +3,8 @@ const { ipcMain, ipcRenderer } = require('electron');
 const axios = require('axios');
 const Store = require('electron-store');
 const store = new Store();
-import { openCashDrawer } from './printAPI';
 import { getSetting } from './settingsAPI';
 
-(() => {
-  const completedOrders = store.get('completedOrders');
-  if (Array.isArray(completedOrders) === false) {
-    store.set('completedOrders', []);
-  }
-})();
 
 ipcMain.handle('getAllOrders', () => {
   let orders = store.get('orders');
@@ -81,10 +74,6 @@ ipcMain.handle('removeOldOrders', () => {
 });
 
 ipcMain.handle('removeAllOrders', () => {
-  const orders = store.get('orders');
-  let completedOrders = store.get('completedOrders');
-  completedOrders = completedOrders.concat(orders);
-  store.set('completedOrders', completedOrders);
   store.set('orders', []);
 });
 
