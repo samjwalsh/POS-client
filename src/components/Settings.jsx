@@ -58,7 +58,7 @@ export default function Settings(props) {
         setSettings(localSettings);
         break;
       }
-      case 'Delete All Local Data': {
+      case 'Delete All Local Orders': {
         await deleteLocalData();
         break;
       }
