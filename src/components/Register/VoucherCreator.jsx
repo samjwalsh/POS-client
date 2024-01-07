@@ -36,6 +36,12 @@ const useVoucherCreator = (order, setOrder) => {
   const handleSetQuantity = async () => {
     playBeep();
     const quantity = await keypad(0, 'passcode');
+    if (quantity > 20) {
+      await alert(
+        'If you need to create more than 20 vouchers, you have to create them in multiple batches.'
+      );
+      return;
+    }
     if (quantity >= 0) {
       setVoucherState({
         value: voucherState.value,
@@ -59,6 +65,7 @@ const useVoucherCreator = (order, setOrder) => {
     if (!clickable) return;
     playBeep();
     const quantity = voucherState.quantity;
+
     const value = voucherState.value;
     if (quantity < 1 || value <= 0) {
       handleClose();
@@ -101,11 +108,13 @@ const useVoucherCreator = (order, setOrder) => {
           if (printedCorrectly) break;
         } else {
           let vouchersHTML = [];
-          for (const voucher of voucherResult.vouchers) {
+          voucherResult.vouchers.forEach((voucher, index) => {
             vouchersHTML.push(
-              <div className='text-center'>{voucher.code.toUpperCase()}</div>
+              <div className='text-left font-mono'>
+                {index + 1}. {voucher.code.toUpperCase()}
+              </div>
             );
-          }
+          });
           await alert(
             <div className='flex flex-col overflow-y-hidden'>
               <div>{`Write the vouchers manually using the codes. Each voucher is for €${voucherResult.vouchers[0].value.toFixed(
