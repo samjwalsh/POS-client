@@ -1,7 +1,7 @@
 import * as React from 'react';
 
 import playBeep from '../../tools/playBeep';
-import {quit } from '../../tools/ipc';
+import { quit } from '../../tools/ipc';
 
 import closeSVG from '../../assets/appicons/close.svg';
 
@@ -24,6 +24,18 @@ export default function HamburgerMenu(props) {
     if (!choice) return;
 
     quit();
+  }
+
+  async function handleCleanScreen() {
+    const choice = await confirm([
+      'Disable touch screen for 15 seconds?',
+      'No',
+      'Yes',
+    ]);
+    if (!choice) {
+      return;
+    }
+    
   }
 
   async function handleSetAppState(mode) {
@@ -77,6 +89,12 @@ export default function HamburgerMenu(props) {
             </div>
           </div>
           <div className='mt-auto p-2 flex flex-col gap-2'>
+            <div
+              className='side-menu-option primary'
+              onContextMenu={() => handleCleanScreen()}
+              onTouchStart={() => handleCleanScreen()}>
+              Clean Screen
+            </div>
             <div
               className='side-menu-option secondary'
               onContextMenu={() => handleSetAppState('Settings')}

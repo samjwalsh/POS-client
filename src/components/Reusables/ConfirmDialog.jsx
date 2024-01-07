@@ -34,10 +34,10 @@ const useConfirm = () => {
       return (
         <div className='fixed h-screen w-screen z-50'>
           <div className='fixed top-0 left-0 m-0 p-0 transparent h-screen w-screen z-50'></div>
-          <div className='fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-50 background border border-colour rnd '>
+          <div className='fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-50 background border border-colour rnd w-min'>
             <div className='flex flex-col p-2 gap-2'>
               <div className='text-2xl flex items-start'>{text[0]}</div>
-              <div className='text-2xl items-center  flex flex-row min-w-[18rem] w-min gap-2 h-16'>
+              <div className='text-2xl items-center  flex flex-row min-w-[18rem] gap-2 h-16'>
                 <div
                   className='dialogConfirm button g row-span-1 btn  negative  text-xl p-2 cnter-items w-full h-full'
                   onContextMenu={handleCancel}
