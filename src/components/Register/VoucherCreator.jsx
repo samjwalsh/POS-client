@@ -33,6 +33,11 @@ const useVoucherCreator = (order, setOrder) => {
     setClickable(true);
   };
 
+  const handleClickClose = () => {
+    playBeep();
+    handleClose();
+  };
+
   const handleSetQuantity = async () => {
     playBeep();
     const quantity = await keypad(0, 'passcode');
@@ -136,20 +141,19 @@ const useVoucherCreator = (order, setOrder) => {
 
     setOrder([...temp_order]);
 
-    // TODO then figure out how to add the items to the cart
     handleClose();
   };
 
   const createHTML = () => {
     if (clickable) {
       return (
-        <div className='w-96 flex flex-col gap-2 text-2xl'>
+        <div className='w-96 flex flex-col gap-2 text-2xl p-4'>
           <div className='flex flex-row justify-between'>
             <div className='text-3xl cnter-items'>Voucher Creator</div>
             <div
               className='negative cnter-items p-2 btn'
-              onContextMenu={(event) => handleClose()}
-              onTouchStart={(event) => handleClose()}>
+              onContextMenu={(event) => handleClickClose()}
+              onTouchStart={(event) => handleClickClose()}>
               Cancel
             </div>
           </div>
@@ -172,7 +176,7 @@ const useVoucherCreator = (order, setOrder) => {
               className='btn rnd primary p-2 cnter-items '
               onContextMenu={(e) => handleSetValue()}
               onTouchStart={(e) => handleSetValue()}>
-              €{voucherState.value == undefined ? 'Enter' : voucherState.value}
+              €{voucherState.value == undefined ? 'Enter' : voucherState.value.toFixed(2)}
               <img src={dropdownSVG} className='w-6 invert-icon' />
             </div>
           </div>

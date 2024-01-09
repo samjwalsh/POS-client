@@ -59,7 +59,7 @@ body {
 }
 
 .menu-itm {
-  @apply w-48 rnd  h-32 max-w-5xl flex-grow flex p-2 text-2xl text-left items-end primary;
+  @apply w-48 rnd h-32 max-w-5xl flex-grow flex p-2 text-2xl items-end primary;
 }
 
 .menu-itm-filler {
@@ -121,8 +121,6 @@ body {
 .rndmd {
   @apply rounded-md shadow-lg;
 }
-
-/* shadow-[5px_5px_0px_2px_rgba(0,0,0,0.5)] */
 
 .transparent {
   @apply bg-black bg-opacity-25;

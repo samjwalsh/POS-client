@@ -151,7 +151,7 @@ export default function Order(props) {
     <>
       <Keypad />
       <Alert />
-      <div className='col-span-4 row-span-1 h-auto self-stretch flex flex-col overflow-hidden border-l border-colour'>
+      <div className='col-span-4 row-span-1 h-auto self-stretch flex flex-col overflow-hidden border-l border-colour my-2'>
         {payCash === true ? (
           <PayCash
             order={order}
@@ -160,12 +160,12 @@ export default function Order(props) {
             keypad={keypad}
           />
         ) : (
-          <div className='flex flex-col gap-2 h-full overflow-scroll no-scrollbar p-2'>
+          <div className='flex flex-col gap-2 h-full overflow-scroll no-scrollbar mx-2'>
             {orderItems}
           </div>
         )}
 
-        <div className=' grid grid-rows-[min-content, 1fr] grid-cols-1 gap-1 border-t border-colour p-2 pt-1'>
+        <div className=' grid grid-rows-[min-content, 1fr] grid-cols-1 gap-1 border-t border-colour mx-2 pt-1'>
           <div className='row-span-1 col-span-1 flex justify-between w-full text-2xl'>
             <div className='text-left'>Total:</div>
             <div className='text-right num justify-end'>
@@ -178,7 +178,7 @@ export default function Order(props) {
                 className='negative p-2 rnd cnter-items w-full'
                 onContextMenu={() => handlePayment('cash')}
                 onTouchStart={() => handlePayment('cash')}>
-                Back
+                Cancel
               </div>
             ) : (
               <>

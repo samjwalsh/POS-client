@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { useState, useEffect } from 'react';
 
 import playBeep from '../../tools/playBeep';
 import { quit } from '../../tools/ipc';
@@ -9,11 +10,20 @@ import useConfirm from '../Reusables/ConfirmDialog.jsx';
 import useKeypad from '../Reusables/Keypad.jsx';
 import TitleBar from './TitleBar.jsx';
 import useDisableTouch from '../Reusables/DisableTouch.jsx';
+import { getVersionNo } from '../../tools/ipc';
 
 export default function HamburgerMenu(props) {
   const { hamburgerOpen, setHamburger, setAppState, order, setOrder } = props;
 
   const [Dialog, confirm] = useConfirm('Exit?');
+
+  const [version, setVersion] = useState();
+
+  useEffect(() => {
+    (async () => {
+      setVersion(await getVersionNo());
+    })();
+  }, []);
 
   const [DisableTouch, disableTouch] = useDisableTouch();
 
@@ -22,7 +32,12 @@ export default function HamburgerMenu(props) {
   async function handleTerminatePOS() {
     playBeep();
 
-    const choice = await confirm(['Exit?', 'Cancel', 'Continue', `This will close the till software.`]);
+    const choice = await confirm([
+      'Exit?',
+      'Cancel',
+      'Continue',
+      `This will close the till software.`,
+    ]);
 
     if (!choice) return;
 
@@ -34,7 +49,7 @@ export default function HamburgerMenu(props) {
       'Enter cleaning mode?',
       'Cancel',
       'Continue',
-      `This will diable the touchscreen for 15 seconds so the screen can be cleaned.`
+      `This will disable the touchscreen for 15 seconds so the screen can be cleaned.`,
     ]);
     if (!choice) {
       return;
@@ -67,7 +82,7 @@ export default function HamburgerMenu(props) {
       <TitleBar setHamburger={setHamburger} />
       <Keypad />
       <Dialog />
-      <DisableTouch/>
+      <DisableTouch />
       <div className='fixed top-0 grid grid-cols-12 grid-rows-1 w-screen h-screen z-10'>
         <div className='row-span-1 col-span-3 flex background flex-col border-colour border-r '>
           <div className='flex flex-row w-100 justify-between p-2 items-stretch '>
@@ -120,6 +135,9 @@ export default function HamburgerMenu(props) {
           className='row-span-1 col-span-9 transparent'
           onContextMenu={() => handleCloseSideMenu(setHamburger)}
           onTouchStart={() => handleCloseSideMenu(setHamburger)}></div>
+      </div>
+      <div className='fixed bottom-0 right-0 border rnd p-1 border-colour m-1 background z-50'>
+        v{version}
       </div>
     </>
   );

@@ -35,16 +35,16 @@ export default function Connection() {
 
   return (
     <div
-      className={`grid grid-rows-2 grid-cols-1 text-sm h-full ${
+      className={`grid grid-rows-2 grid-cols-1 text-sm h-full rnd px-1 ${
         isOnline.status ? 'positiveFill' : 'negativeFill'
       }`}>
       <div className='row-span-1 col-span-1'>
-        N-{isOnline.status ? 'OK' : 'NC'}
+        NET
       </div>
       <div className='row-span-1 col-span-1'>
         {isOnline.status
-          ? `[${String(isOnline.ping).padStart(3, '0')}] `
-          : '[---]'}
+          ? `${String(isOnline.ping).padStart(3, '0')} `
+          : '---'}
       </div>
     </div>
   );
