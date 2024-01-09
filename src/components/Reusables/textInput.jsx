@@ -37,7 +37,7 @@ const useKeyboard = () => {
 
     switch (button) {
       case 'exit': {
-        handleClose(initialValue);
+        handleClose(false);
         break;
       }
       case 'delete': {

@@ -30,6 +30,7 @@ const useVoucherRedeemer = (order, setOrder) => {
   const handleEnterCode = async () => {
     playBeep();
     const code = await keyboard('');
+    if (!code) return;
     if (code.length < 5) {
       await alert('Voucher codes are at least 5 characters long.');
       return;
@@ -70,7 +71,7 @@ const useVoucherRedeemer = (order, setOrder) => {
           <div className='flex flex-row justify-between'>
             <div className='text-3xl cnter-items'>Voucher Redeemer</div>
             <div
-              className='negative cnter-items p-2 uppercase font-bold btn'
+              className='negative cnter-items p-2 btn'
               onContextMenu={(event) => handleClose()}
               onTouchStart={(event) => handleClose()}>
               Cancel
@@ -103,7 +104,7 @@ const useVoucherRedeemer = (order, setOrder) => {
           <Alert />
           <div className='fixed h-screen w-screen z-1'>
             <div className='fixed top-0 left-0 m-0 p-0 transparent h-screen w-screen z-50'></div>
-            <div className='fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-50 background border border-colour rnd  flex flex-col gap-2 p-2'>
+            <div className='fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-50 background border border-colour rnd  flex flex-col gap-2 p-2 rndmd'>
               {createHTML()}
             </div>
           </div>

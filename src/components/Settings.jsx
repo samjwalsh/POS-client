@@ -46,7 +46,7 @@ export default function Settings(props) {
   async function handleClickButtonOption(setting) {
     playBeep();
 
-    const choice = await confirm([setting.name + '?', 'No', 'Yes']);
+    const choice = await confirm([setting.name + '?', 'Cancel', 'Continue', 'This cannot be undone and may have negative side effects.']);
 
     if (!choice) return;
 

@@ -172,7 +172,7 @@ export default function Order(props) {
               €{subtotal.toFixed(2)}
             </div>
           </div>
-          <div className='row-span-1 col-span-1 flex gap-2 items-stretch h-20 text-lg uppercase font-bold'>
+          <div className='row-span-1 col-span-1 flex gap-2 items-stretch h-20 text-2xl'>
             {payCash === true ? (
               <div
                 className='negative p-2 rnd cnter-items w-full'
@@ -189,13 +189,13 @@ export default function Order(props) {
                   <img src={euro} className='w-6 invert-icon' />
                 </div>
                 <div
-                  className='positive  rnd cnter-items w-full text-lg uppercase font-bold'
+                  className='positive rnd cnter-items w-full btnlg'
                   onContextMenu={() => handlePayment('card')}
                   onTouchStart={() => handlePayment('card')}>
                   Card
                 </div>
                 <div
-                  className='positive rnd cnter-items w-full'
+                  className='positive rnd cnter-items w-full btnlg'
                   onContextMenu={() => handlePayment('cash')}
                   onTouchStart={() => handlePayment('cash')}>
                   Cash

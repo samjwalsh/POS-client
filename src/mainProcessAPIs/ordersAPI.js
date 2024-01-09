@@ -19,6 +19,8 @@ ipcMain.handle('getAllOrders', () => {
     }
   });
 
+
+
   return notDeletedOrEodOrders;
 });
 
@@ -149,7 +151,7 @@ ipcMain.handle('syncOrders', async () => {
 
     completedEodIds.forEach((completedEodId) => {
       orders.forEach((order, index) => {
-        if ((order.id = completedEodId)) {
+        if ((order.id === completedEodId)) {
           orders.splice(index, 1);
         }
       });
@@ -188,6 +190,7 @@ ipcMain.handle('syncOrders', async () => {
     };
   } catch (e) {
     console.log(e);
+    console.log('fail')
     return {
       success: false,
       ordersToAdd: 0,

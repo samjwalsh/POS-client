@@ -93,19 +93,16 @@ const useVoucherCreator = (order, setOrder) => {
       'Did the vouchers print?',
       'No',
       'Yes',
+      `If the vouchers did not print correctly, you can view the codes or try to print them again.`
     ]);
     if (!printedCorrectly) {
       let tryAgain = true;
       while (tryAgain) {
-        tryAgain = await confirm(['Try Again?', 'No', 'Yes']);
+        tryAgain = await confirm(['Try Again?', 'View Codes', 'Print Again', `You can choose to attempt to print the vouchers again or view the codes on the screen`]);
         if (tryAgain) {
           await printVouchers(voucherResult.vouchers);
-          const printedCorrectly = await confirm([
-            'Did the vouchers print?',
-            'No',
-            'Yes',
-          ]);
-          if (printedCorrectly) break;
+          const attemptPrintAgain = await confirm(['Try Again?', 'View Codes', 'Print Again', `You can choose to attempt to print the vouchers again or view the codes on the screen`]);
+          if (!attemptPrintAgain) tryAgain=false;
         } else {
           let vouchersHTML = [];
           voucherResult.vouchers.forEach((voucher, index) => {
@@ -119,7 +116,7 @@ const useVoucherCreator = (order, setOrder) => {
             <div className='flex flex-col overflow-y-hidden'>
               <div>{`Write the vouchers manually using the codes. Each voucher is for €${voucherResult.vouchers[0].value.toFixed(
                 2
-              )}.`}</div>
+              )}. Don't forget to sign each one and date it.`}</div>
               {vouchersHTML}
             </div>
           );
@@ -150,7 +147,7 @@ const useVoucherCreator = (order, setOrder) => {
           <div className='flex flex-row justify-between'>
             <div className='text-3xl cnter-items'>Voucher Creator</div>
             <div
-              className='negative cnter-items p-2 uppercase font-bold btn'
+              className='negative cnter-items p-2 btn'
               onContextMenu={(event) => handleClose()}
               onTouchStart={(event) => handleClose()}>
               Cancel
@@ -215,7 +212,7 @@ const useVoucherCreator = (order, setOrder) => {
           <Keypad />
           <div className='fixed h-screen w-screen z-1'>
             <div className='fixed top-0 left-0 m-0 p-0 transparent h-screen w-screen z-50'></div>
-            <div className='fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-50 background border border-colour rnd  flex flex-col gap-2 p-2'>
+            <div className='fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-50 background border border-colour rnd  flex flex-col gap-2 p-2 rndmd'>
               {createHTML()}
             </div>
           </div>

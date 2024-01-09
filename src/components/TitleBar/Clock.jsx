@@ -28,7 +28,7 @@ export default function Clock() {
 
   return (
     <>
-      <div className='grid grid-rows-2 grid-cols-1 text-sm'>
+      <div className='grid grid-rows-2 grid-cols-1 text-sm px-1'>
         <div className='row-span-1 col-span-1'>{clock.time}</div>
         <div className='row-span-1 col-span-1'>{clock.date}</div>
       </div>

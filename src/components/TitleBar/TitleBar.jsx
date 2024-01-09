@@ -51,45 +51,39 @@ export default function TitleBar(props) {
       <VoucherRedeemer />
       <VoucherChecker />
       <ListSelect />
-      <div className='flex flex-row justify-between border-b border-colour h-10'>
+      <div className='flex flex-row justify-between  h-12 shadow-md'>
         <div
-          className='p-1 h-full w-10 cnter-items negativeFill border-r border-colour'
+          className='h-auto btn m-1 negativeFill aspect-square'
           onContextMenu={(e) => handleClickHamburger(setHamburger)}
           onTouchStart={(e) => handleClickHamburger(setHamburger)}>
-          <img
-            src={hamburger}
-            className='w-10 invert-icon cnter-items h-full'
-          />
+          <img src={hamburger} className=' invert-icon h-full w-auto' />
         </div>
 
         <div className='flex flex-row items-center justify-end w-full num'>
-          {/* <div className='border-l border-colour h-full cnter-items px-1 primaryFill w-10'>
-          <HelpPageButton />
-        </div> */}
           <div
-            className='secondaryFill border-l border-colour h-full cnter-items px-1 uppercase font-bold font-sans'
+            className='secondaryFill h-10 btn mx-1 font-sans'
             onContextMenu={(e) => handlePrintRecentOrder()}
             onTouchStart={(e) => handlePrintRecentOrder()}>
             Print Receipt
           </div>
-          <div className='border-l border-colour h-full cnter-items font-bold w-8'></div>
+          <div className='cnter-items h-10 pl-5 mr-5'></div>
           <div
-            className='secondaryFill border-l border-colour h-full cnter-items px-1 uppercase font-bold font-sans'
+            className='secondaryFill h-10 btn mx-1 font-sans'
             onContextMenu={(e) => handleClickVoucherMenu()}
             onTouchStart={(e) => handleClickVoucherMenu()}>
-            Voucher
+            Vouchers
           </div>
-          <div className='border-l border-colour h-full cnter-items font-bold w-16'></div>
-          <div className='border-l border-colour h-full cnter-items font-bold'>
+          <div className='cnter-items border-r border-colour h-10 pl-5 mr-5'></div>
+          <div className='cnter-items pr-1 my-1'>
             <PrinterConnection />
           </div>
-          <div className='border-l border-colour h-full cnter-items font-bold'>
+          <div className='cnter-items pr-1 my-1 '>
             <Connection />
           </div>
-          <div className='border-l border-colour h-full cnter-items font-bold'>
+          <div className='cnter-items pr-1 my-1'>
             <ServerConnection />
           </div>
-          <div className='border-l border-colour h-full cnter-items font-bold px-1'>
+          <div className='cnter-items pr-1 my-1'>
             <Clock />
           </div>
         </div>

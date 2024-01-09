@@ -51,7 +51,11 @@ body {
 }
 
 .btn {
-  @apply font-bold uppercase  text-lg rnd p-2;
+  @apply rnd p-2 cnter-items text-lg;
+}
+
+.btnlg {
+  @apply rnd p-2 cnter-items text-2xl;
 }
 
 .menu-itm {
@@ -103,17 +107,25 @@ body {
 }
 
 .borderD {
-  @apply border-2;
+  @apply border;
+}
+
+.borderB {
+  @apply border border-colour;
 }
 
 .rnd {
-  @apply rounded-none shadow-none;
+  @apply rounded-sm shadow-md;
+}
+
+.rndmd {
+  @apply rounded-md shadow-lg;
 }
 
 /* shadow-[5px_5px_0px_2px_rgba(0,0,0,0.5)] */
 
 .transparent {
-  @apply bg-black bg-opacity-50;
+  @apply bg-black bg-opacity-25;
 }
 
 .background {
@@ -122,10 +134,6 @@ body {
 
 .cnter-items {
   @apply flex items-center justify-center text-center;
-}
-
-.side-menu-option {
-  @apply rnd p-2 btn text-left;
 }
 
 .keypad {
