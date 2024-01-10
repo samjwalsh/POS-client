@@ -70,6 +70,7 @@ ipcMain.handle('redeemVoucher', async (e, voucherCode) => {
   } catch (e) {
     return {
       success: false,
+      error: true
     };
   }
 });

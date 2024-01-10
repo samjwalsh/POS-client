@@ -38,19 +38,24 @@ const useVoucherRedeemer = (order, setOrder) => {
     setClickable(false);
     const voucherResult = await redeemVoucher(code);
 
+    if (voucherResult.error) {
+      await alert(
+        'Something went wrong. Check you typed the code correctly and that the till is connected to the internet.'
+      );
+      handleClose();
+      return;
+    }
+
     if (!voucherResult.success) {
       if (voucherResult.dateRedeemed === undefined) {
-        await alert(
-          'Something went wrong. Check you typed the code correctly and that the till is connected to the internet.'
-        );
-      } else {
+        await alert('There is no voucher with this code.');
+      } else if (!voucherResult.error) {
         await alert(
           `Sorry, this voucher was redeemed on ${voucherResult.dateRedeemed}.`
         );
       }
-      handleClose();
-      return;
     }
+    
     let temp_order = order;
     temp_order.push({
       addons: [code],
