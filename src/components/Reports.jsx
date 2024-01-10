@@ -45,7 +45,6 @@ export default function Reports(props) {
       clearInterval(syncOrdersInterval);
     };
   }, []);
-
   // FUNCTIONS
 
   async function handleEndOfDay() {
@@ -85,7 +84,7 @@ export default function Reports(props) {
       }
 
       const EodHTML = (
-        <div className='text-xl'>
+        <div className='text-xl w-full'>
           <div className='flex flex-row justify-between'>
             <div>Shop:</div>
             <div>{await getSetting('Shop Name')}</div>
@@ -174,19 +173,19 @@ export default function Reports(props) {
       ordersHTML.push(
         <div
           key={order.time}
-          className='orderbox borderD border-colour rnd flex max-h-96 flex-col'>
+          className='orderbox borderD border-colour flex max-h-96 flex-col'>
           <div className='flex flex-row w-full p-2 justify-between border-b border-colour'>
             <div
-              className=' btn cnter-items primary p-2'
+              className=' btn btn-primary text-lg'
               onContextMenu={(e) => handlePrintReceipt(order)}
               onTouchStart={(e) => handlePrintReceipt(order)}>
               Receipt
             </div>
             <div
-              className='btn  negative  p-1 cnter-items'
+              className='btn-error btn'
               onContextMenu={(e) => handleDeleteOrder(order)}
               onTouchStart={(e) => handleDeleteOrder(order)}>
-              <img src={closeSVG} className='w-8 invert-icon' />
+              <img src={closeSVG} className='w-6 invert-icon' />
             </div>
           </div>
           <div className='flex flex-col p-2 border-b border-colour text-lg'>
@@ -223,13 +222,13 @@ export default function Reports(props) {
         {createReportsStatsInfo()}
         <div className='mt-auto border-t border-colour pt-2 mx-2 flex flex-col gap-2'>
           <div
-            className='btn secondary h-auto p-2 cnter-items w-full'
+            className='btn btn-warning h-auto text-lg cnter-items w-full'
             onContextMenu={(event) => handleDeleteOldOrders()}
             onTouchStart={(event) => handleDeleteOldOrders()}>
             Delete Old Orders
           </div>
           <div
-            className='btn  negative  h-auto p-2 cnter-items w-full'
+            className='btn-error btn text-lg h-auto p-2 cnter-items w-full'
             onContextMenu={(event) => handleEndOfDay()}
             onTouchStart={(event) => handleEndOfDay()}>
             End Of Day
@@ -319,7 +318,7 @@ export default function Reports(props) {
 
       return (
         <div
-          className='w-full grid grid-cols-[auto_auto] grid-rows-[auto_min-content] text-lg p-2 border border-colour rnd grey'
+          className='w-full grid grid-cols-[auto_auto] grid-rows-[auto_min-content] text-lg p-2 rounded-btn bg-secondary'
           key={index}>
           <div className='col-span-1 row-span-1'>
             {item.name} {formattedQuantity}

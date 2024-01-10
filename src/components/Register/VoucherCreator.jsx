@@ -73,6 +73,7 @@ const useVoucherCreator = (order, setOrder) => {
 
     const value = voucherState.value;
     if (quantity < 1 || value <= 0) {
+      await alert("You must create at least 1 voucher with a value above €0.00")
       handleClose();
       return;
     }
@@ -151,7 +152,7 @@ const useVoucherCreator = (order, setOrder) => {
           <div className='flex flex-row justify-between'>
             <div className='text-3xl cnter-items mt-2'>Voucher Creator</div>
             <div
-              className='negative cnter-items p-2 btn'
+              className='btn btn-error text-lg'
               onContextMenu={(event) => handleClickClose()}
               onTouchStart={(event) => handleClickClose()}>
               Cancel
@@ -161,7 +162,7 @@ const useVoucherCreator = (order, setOrder) => {
           <div className='flex flex-row justify-between'>
             <div className='cnter-items'>Quantity:</div>
             <div
-              className='btn rnd primary p-2 cnter-items '
+              className='btn btn-primary text-lg'
               onContextMenu={(e) => handleSetQuantity()}
               onTouchStart={(e) => handleSetQuantity()}>
               {voucherState.quantity == undefined
@@ -173,7 +174,7 @@ const useVoucherCreator = (order, setOrder) => {
           <div className='flex flex-row justify-between'>
             <div className='cnter-items'>Value:</div>
             <div
-              className='btn rnd primary p-2 cnter-items '
+              className='btn btn-primary text-lg'
               onContextMenu={(e) => handleSetValue()}
               onTouchStart={(e) => handleSetValue()}>
               €{voucherState.value == undefined ? 'Enter' : voucherState.value.toFixed(2)}
@@ -190,7 +191,7 @@ const useVoucherCreator = (order, setOrder) => {
           </div>
           <div className='w-full border-b border-colour'></div>
           <div
-            className='w-full btn positive p-2 text-center'
+            className='w-full btn h-full btn-primary text-lg'
             onContextMenu={(e) => handleCreateVouchers()}
             onTouchStart={(e) => handleCreateVouchers()}>{`Create ${
             voucherState.quantity
@@ -216,7 +217,7 @@ const useVoucherCreator = (order, setOrder) => {
           <Keypad />
           <div className='fixed h-screen w-screen z-1'>
             <div className='fixed top-0 left-0 m-0 p-0 transparent h-screen w-screen z-50'></div>
-            <div className='fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-50 background border border-colour rnd  flex flex-col gap-2 p-2 rndmd'>
+            <div className='fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-50 background rounded-box'>
               {createHTML()}
             </div>
           </div>

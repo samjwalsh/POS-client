@@ -106,38 +106,33 @@ export default function Order(props) {
   log(`Calculating subtotal and generating HTML`);
   let orderItems = order.map((orderItem, index) => {
     log(`Adding ${orderItem.name} to HTML`);
-    let itemClasses = 'flex h-min w-full gap-2';
-    // if (index + 1 !== order.length) {
-    //   itemClasses += ' border border-colour';
-    // }
     return (
       <div
-        className={itemClasses}
+        className='flex flex-row h-min w-full max-w-full gap-2'
         key={`${orderItem.name} [${orderItem.addons}]`}>
         <div
-          className='col-span-1 row-span-2 cnter-items  negative  w-20 rnd '
+          className='btn btn-error h-full'
           onContextMenu={() => handleOrderItemQuantityChange('down', orderItem)}
           onTouchStart={() => handleOrderItemQuantityChange('down', orderItem)}>
           <img src={minusSVG} className='w-6 invert-icon' />
         </div>
-        <div className='w-full grid grid-cols-[1fr_min-content] grid-rows-[min-content, 1fr] p-1 primary rnd '>
-          <div className='col-span-1 row-span-1 text-md'>
+        <div className='bg-primary h-full px-1 flex-grow grid grid-rows-[min-content_1fr] grid-cols-[1fr_min-content] p-2 rounded-btn text-primary-content'>
+          <div className='w-auto text-lg text-left'>
             {orderItem.name +
               (orderItem.quantity > 1 ? ` (${orderItem.quantity})` : '')}
           </div>
-          <div className='col-span-1 row-span-1 text-md num text-right'>
+          <div className='text-lg text-right'>
             €{(orderItem.price * orderItem.quantity).toFixed(2)}
           </div>
-
-          <div className='col-span-1 row-span-1 mr-1 text-sm '>
+          <div className='text-left pr-1'>
             {orderItem.addons === undefined ? '' : orderItem.addons.join(', ')}
           </div>
-          <div className='col-span-1 row-span-1 whitespace-nowrap text-sm num text-right'>
+          <div className='whitespace-nowrap text-right'>
             €{orderItem.price.toFixed(2)} EA
           </div>
         </div>
         <div
-          className='col-span-1 row-span-2 cnter-items justify-self-end positive w-20 rnd '
+          className='btn btn-success h-full'
           onContextMenu={() => handleOrderItemQuantityChange('up', orderItem)}
           onTouchStart={() => handleOrderItemQuantityChange('up', orderItem)}>
           <img src={addSVG} className='w-6 fill-white invert-icon' />
@@ -175,7 +170,7 @@ export default function Order(props) {
           <div className='row-span-1 col-span-1 flex gap-2 items-stretch h-20 text-2xl'>
             {payCash === true ? (
               <div
-                className='negative p-2 rnd cnter-items w-full'
+                className='p-2 btn btn-error h-full w-full text-2xl'
                 onContextMenu={() => handlePayment('cash')}
                 onTouchStart={() => handlePayment('cash')}>
                 Cancel
@@ -183,19 +178,19 @@ export default function Order(props) {
             ) : (
               <>
                 <div
-                  className='secondary rnd  cnter-items w-48'
+                  className='btn btn-secondary h-full aspect-square'
                   onContextMenu={() => handlePlusMinus()}
                   onTouchStart={() => handlePlusMinus()}>
                   <img src={euro} className='w-6 invert-icon' />
                 </div>
                 <div
-                  className='positive rnd cnter-items w-full btnlg'
+                  className='btn text-2xl btn-primary h-full flex-grow'
                   onContextMenu={() => handlePayment('card')}
                   onTouchStart={() => handlePayment('card')}>
                   Card
                 </div>
                 <div
-                  className='positive rnd cnter-items w-full btnlg'
+                  className='btn text-2xl btn-primary h-full flex-grow'
                   onContextMenu={() => handlePayment('cash')}
                   onTouchStart={() => handlePayment('cash')}>
                   Cash

@@ -34,19 +34,19 @@ const useConfirm = () => {
       return (
         <div className='fixed h-screen w-screen z-50'>
           <div className='fixed top-0 left-0 m-0 p-0 transparent h-screen w-screen z-50'></div>
-          <div className='fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-50 background border border-colour rndmd max-w-[25rem]'>
+          <div className='fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-50 background rounded-box max-w-[25rem]'>
             <div className='flex flex-col p-4 gap-2'>
               <div className='text-2xl flex items-start'>{text[0]}</div>
               <div className='text-lg flex items-start'>{text[3]}</div>
               <div className='justify-end flex flex-row min-w-[18rem] gap-2 whitespace-nowrap'>
                 <div
-                  className='row-span-1 btn negative w-min h-full'
+                  className='row-span-1 btn btn-error text-lg w-min h-full'
                   onContextMenu={handleCancel}
                   onTouchStart={handleCancel}>
                   {text[1]}
                 </div>
                 <div
-                  className='row-span-1 btn positive w-min h-full'
+                  className='row-span-1 btn btn-primary text-lg w-min h-full'
                   onContextMenu={handleConfirm}
                   onTouchStart={handleConfirm}>
                   {text[2]}

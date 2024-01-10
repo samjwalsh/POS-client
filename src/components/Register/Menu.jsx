@@ -57,7 +57,11 @@ export default function Menu(props) {
       itemsHTML.push(
         <div
           key={item.name}
-          className={`${classes} ${item.name === 'Back' ? 'negative' : ''}`}
+          className={`${
+            item.name === 'Back'
+              ? 'btn-error'
+              : 'btn-neutral text-neutral-content'
+          } ${classes}`}
           id={item.name}
           onContextMenu={(event) => handleItemClick(event, item, passProps)}
           onTouchStart={(event) => handleItemClick(event, item, passProps)}>
