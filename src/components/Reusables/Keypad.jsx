@@ -187,9 +187,7 @@ const useKeypad = () => {
         <div className='col-span-1 row-span-1 keypad btn-warning' id='delete'>
           <img src={backSVG} className='w-6 invert-icon' id='delete' />
         </div>
-        <div
-          className='col-span-1 row-span-1 keypad btn btn-neutral'
-          id='7'>
+        <div className='col-span-1 row-span-1 keypad btn btn-neutral' id='7'>
           7
         </div>
         <div

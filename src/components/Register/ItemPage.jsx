@@ -32,7 +32,7 @@ export default function ItemPage(props) {
       item.priceCheck = addon.priceCheck;
     }
   }
-  
+
   item.shortcuts = menuState.shortcuts;
 
   const addonsHTML = item.addons.map((addon, index) => {
@@ -187,9 +187,7 @@ export default function ItemPage(props) {
         </button>
       </div>
       <div className='w-full h-min flex-grow-0 overflow-y-scroll no-scrollbar'>
-        <div className='flex flex-row gap-2 h-auto'>
-          {shortcutsHTML}
-        </div>
+        <div className='flex flex-row gap-2 h-auto'>{shortcutsHTML}</div>
         <div className='flex flex-row flex-wrap gap-2 py-2 overflow-y-scroll no-scrollbar flex-grow-0 '>
           {addonsHTML}
           <div className='w-72 max-w-full flex-grow flex flex-row '></div>

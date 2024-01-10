@@ -5,7 +5,7 @@
 html,
 body {
   height: 100%;
-  @apply no-scrollbar select-none;
+  @apply no-scrollbar select-none no-animation;
 }
 
 @font-face {
@@ -47,7 +47,7 @@ body {
 }
 
 .invert-icon {
-  @apply dark:invert dark:z-0;
+  @apply invert dark:z-0;
 }
 
 /* .btn {

@@ -63,7 +63,7 @@ const useVoucherRedeemer = (order, setOrder) => {
       handleClose();
       return;
     }
-    
+
     let temp_order = order;
     temp_order.push({
       addons: [code],
@@ -82,7 +82,9 @@ const useVoucherRedeemer = (order, setOrder) => {
       return (
         <div className='w-min flex flex-col gap-2 text-2xl p-4'>
           <div className='flex flex-row justify-between'>
-            <div className='text-3xl cnter-items whitespace-nowrap pr-2'>Voucher Redeemer</div>
+            <div className='text-3xl cnter-items whitespace-nowrap pr-2'>
+              Voucher Redeemer
+            </div>
             <div
               className='btn btn-error text-lg'
               onContextMenu={(event) => handleClickClose()}

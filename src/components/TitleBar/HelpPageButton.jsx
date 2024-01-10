@@ -19,7 +19,7 @@ export default function HelpPageButton() {
           src={question}
           className='w-8 invert-icon cnter-items h-full'
           onContextMenu={useHelp}
-          onClick={useHelp}
+          onTouchStart={useHelp}
         />
       </div>
     </>

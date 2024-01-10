@@ -50,7 +50,9 @@ const useVoucherChecker = (order, setOrder) => {
     }
 
     if (!res.exists) {
-      await alert('A voucher with this code does not exist. Check you typed the code correctly.');
+      await alert(
+        'A voucher with this code does not exist. Check you typed the code correctly.'
+      );
       handleClose();
       return;
     }

@@ -97,7 +97,7 @@ export default function Settings(props) {
     await setSetting(setting.name, choice);
     setSettings(await getSettings());
 
-    if (setting.name === "Theme") {
+    if (setting.name === 'Theme') {
       executeSettings(await getSettings());
     }
   }

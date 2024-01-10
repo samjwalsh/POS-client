@@ -49,11 +49,21 @@ export default function Reports(props) {
 
   async function handleEndOfDay() {
     playBeep();
-    const choice = await confirm(['End of day?', 'Cancel', 'Continue', 'This will print an end of day sheet and upload all of today\'s orders to the cloud.']);
+    const choice = await confirm([
+      'End of day?',
+      'Cancel',
+      'Continue',
+      "This will print an end of day sheet and upload all of today's orders to the cloud.",
+    ]);
     if (!choice) return;
     let orders = await getAllOrders();
     await printEndOfDay(orders);
-    const printFailed = await confirm(['View sheet on screen?', 'No', 'Yes', `If the end of day sheet didn't print correctly you can view the sheet on the till`]);
+    const printFailed = await confirm([
+      'View sheet on screen?',
+      'No',
+      'Yes',
+      `If the end of day sheet didn't print correctly you can view the sheet on the till`,
+    ]);
     if (printFailed) {
       let cashTotal = 0;
       let cardTotal = 0;
@@ -137,7 +147,14 @@ export default function Reports(props) {
   const handleDeleteOrder = async (deletedOrder) => {
     playBeep();
 
-    const choice = await confirm([`Delete order?`, 'Cancel', 'Delete', `Delete this order for €${deletedOrder.subtotal.toFixed(2)}, this action cannot be undone.`]);
+    const choice = await confirm([
+      `Delete order?`,
+      'Cancel',
+      'Delete',
+      `Delete this order for €${deletedOrder.subtotal.toFixed(
+        2
+      )}, this action cannot be undone.`,
+    ]);
     if (!choice) return;
 
     let localOrders = await removeOrder(deletedOrder);
@@ -295,7 +312,7 @@ export default function Reports(props) {
             €{(xTotal / (orders.length === 0 ? 1 : orders.length)).toFixed(2)}
           </div>
         </div>
-        </div>
+      </div>
     );
   }
 

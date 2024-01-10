@@ -25,7 +25,6 @@ export default function PayCash(props) {
 
     const subtotal = calculateSubtotal(order);
 
-
     log(`Calculating the subtotal`);
 
     let change = 0;
