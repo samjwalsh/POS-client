@@ -190,7 +190,6 @@ ipcMain.handle('syncOrders', async () => {
     };
   } catch (e) {
     console.log(e);
-    console.log('fail')
     return {
       success: false,
       ordersToAdd: 0,

@@ -55,28 +55,30 @@ module.exports = {
       {
         teddys: {
           primary: '#115e59',
+          'primary-focus': '#115e59',
           'primary-content': '#fff',
-
           secondary: '#0284c7',
+          'secondary-focus': '#0284c7',
           'secondary-content': '#fff',
-
           neutral: '#1f2937',
+          'neutral-focus': '#1f2937',
           'neutral-content': '#fff',
-
-          'base-100': '#fffafc',
-
+          'base-100': '#fff',
           success: '#16a34a',
+          'success-focus': '#16a34a',
           'success-content': '#fff',
           warning: '#ff7e00',
+          'warning-focus': '#ff7e00',
           'warning-content': '#fff',
           error: '#b91c1c',
+          'error-focus': '#b91c1c',
           'error-content': '#fff',
 
           '--rounded-box': '1rem',
           '--rounded-btn': '0.25rem',
           '--rounded-badge': '0.75rem',
-          '--animation-btn': '0s',
-          '--animation-input': '0s',
+          '--animation-btn': '0.25s',
+          '--animation-input': '0.25s',
           '--btn-text-case': 'uppercase',
           '--navbar-padding': '.5rem',
           '--border-btn': '1px',
