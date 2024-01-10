@@ -51,40 +51,40 @@ export default function TitleBar(props) {
       <VoucherRedeemer />
       <VoucherChecker />
       <ListSelect />
-      <div className='flex flex-row justify-between  h-12 shadow-md'>
+      <div className='flex flex-row justify-between h-14 shadow-md '>
         <div
-          className='h-auto btn m-1 negative'
+          className='h-auto btn btn-primary text-lg m-1 negative px-1'
           onContextMenu={(e) => handleClickHamburger(setHamburger)}
           onTouchStart={(e) => handleClickHamburger(setHamburger)}>
-          <img src={hamburger} className=' invert-icon h-full w-auto' />
-          <div className='px-1'>Menu</div>
+          <img src={hamburger} className=' invert-icon w-8' />
+          <div className=''>Menu</div>
         </div>
 
-        <div className='flex flex-row items-center justify-end w-full num'>
+        <div className='flex flex-row items-center justify-end w-full'>
           <div
-            className='secondary h-10 btn mx-1 font-sans'
+            className=' h-10 btn btn-primary mx-1 my-2 text-lg'
             onContextMenu={(e) => handlePrintRecentOrder()}
             onTouchStart={(e) => handlePrintRecentOrder()}>
             Print Receipt
           </div>
           <div className='cnter-items h-10 mx-5'></div>
           <div
-            className='secondary h-10 btn font-sans'
+            className=' h-10 btn btn-primary text-lg'
             onContextMenu={(e) => handleClickVoucherMenu()}
             onTouchStart={(e) => handleClickVoucherMenu()}>
             Vouchers
           </div>
-          <div className='cnter-items border-r border-colour h-10 mx-5'></div>
-          <div className='cnter-items pr-1 my-1'>
-            <PrinterConnection/>
+          <div className='border-r border-colour h-10 mx-5'></div>
+          <div className='pr-1 num'>
+            <PrinterConnection />
           </div>
-          <div className='cnter-items pr-1 my-1 '>
+          <div className='pr-1 num'>
             <Connection />
           </div>
-          <div className='cnter-items pr-1 my-1'>
+          <div className='pr-1 num'>
             <ServerConnection />
           </div>
-          <div className='cnter-items pr-1 my-1'>
+          <div className='pr-1 num'>
             <Clock />
           </div>
         </div>

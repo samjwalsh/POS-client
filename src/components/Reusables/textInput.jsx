@@ -13,14 +13,14 @@ const useKeyboard = () => {
   const [promise, setPromise] = useState(null);
   const [keyboardValue, setKeyboardValue] = useState('');
   const [keyboardState, setKeyboardState] = useState('normal');
-  const [initialValue, setInitialValue] = useState('')
+  const [initialValue, setInitialValue] = useState('');
 
   // Code for creating the keyboard text string to be shown to the user
 
   const keyboard = (initialValue) =>
     new Promise((resolve) => {
       setKeyboardValue(initialValue);
-      setInitialValue(initialValue)
+      setInitialValue(initialValue);
       setPromise({ resolve });
     });
 
@@ -101,188 +101,196 @@ const useKeyboard = () => {
           {keyboardValue + '_'}
         </div>
         <div className='col-span-1 row-span-1 flex justify-between gap-2'>
-          <div className='keyboardKey negative' id='exit'>
+          <div className='keyboardKey btn-error' id='exit'>
             <img src={closeSVG} className='w-6 invert-icon' id='exit' />
           </div>
-          <div className='keyboardKey grey' id='1'>
+          <div className='keyboardKey btn-neutral text-neutral-content' id='1'>
             1
           </div>
-          <div className='keyboardKey grey' id='2'>
+          <div className='keyboardKey btn-neutral text-neutral-content' id='2'>
             2
           </div>
-          <div className='keyboardKey grey' id='3'>
+          <div className='keyboardKey btn-neutral text-neutral-content' id='3'>
             3
           </div>
-          <div className='keyboardKey grey' id='4'>
+          <div className='keyboardKey btn-neutral text-neutral-content' id='4'>
             4
           </div>
-          <div className='keyboardKey grey' id='5'>
+          <div className='keyboardKey btn-neutral text-neutral-content' id='5'>
             5
           </div>
-          <div className='keyboardKey grey' id='6'>
+          <div className='keyboardKey btn-neutral text-neutral-content' id='6'>
             6
           </div>
-          <div className='keyboardKey grey' id='7'>
+          <div className='keyboardKey btn-neutral text-neutral-content' id='7'>
             7
           </div>
-          <div className='keyboardKey grey' id='8'>
+          <div className='keyboardKey btn-neutral text-neutral-content' id='8'>
             8
           </div>
-          <div className='keyboardKey grey' id='9'>
+          <div className='keyboardKey btn-neutral text-neutral-content' id='9'>
             9
           </div>
-          <div className='keyboardKey grey' id='0'>
+          <div className='keyboardKey btn-neutral text-neutral-content' id='0'>
             0
           </div>
-          <div className='keyboardKey grey' id='-'>
+          <div className='keyboardKey btn-neutral text-neutral-content' id='-'>
             -
           </div>
-          <div className='keyboardKey grey' id='+'>
+          <div className='keyboardKey btn-neutral text-neutral-content' id='+'>
             +
           </div>
 
-          <div className='keyboardKey secondary w-20' id='delete'>
+          <div className='keyboardKey btn-warning w-20' id='delete'>
             <img src={backSVG} className='w-6 invert-icon' id='delete' />
           </div>
         </div>
         <div className='col-span-1 row-span-1 flex justify-between gap-2'>
-          <div className='keyboardKey grey w-12' id='clear'>
+          <div
+            className='keyboardKey btn-neutral text-neutral-content w-12'
+            id='clear'>
             CLEAR
           </div>
-          <div className='keyboardKey grey' id='q'>
+          <div className='keyboardKey btn-neutral text-neutral-content' id='q'>
             q
           </div>
-          <div className='keyboardKey grey' id='w'>
+          <div className='keyboardKey btn-neutral text-neutral-content' id='w'>
             w
           </div>
-          <div className='keyboardKey grey' id='e'>
+          <div className='keyboardKey btn-neutral text-neutral-content' id='e'>
             e
           </div>
-          <div className='keyboardKey grey' id='r'>
+          <div className='keyboardKey btn-neutral text-neutral-content' id='r'>
             r
           </div>
-          <div className='keyboardKey grey' id='t'>
+          <div className='keyboardKey btn-neutral text-neutral-content' id='t'>
             t
           </div>
-          <div className='keyboardKey grey' id='y'>
+          <div className='keyboardKey btn-neutral text-neutral-content' id='y'>
             y
           </div>
-          <div className='keyboardKey grey' id='u'>
+          <div className='keyboardKey btn-neutral text-neutral-content' id='u'>
             u
           </div>
-          <div className='keyboardKey grey' id='i'>
+          <div className='keyboardKey btn-neutral text-neutral-content' id='i'>
             i
           </div>
-          <div className='keyboardKey grey' id='o'>
+          <div className='keyboardKey btn-neutral text-neutral-content' id='o'>
             o
           </div>
-          <div className='keyboardKey grey' id='p'>
+          <div className='keyboardKey btn-neutral text-neutral-content' id='p'>
             p
           </div>
-          <div className='keyboardKey grey' id='('>
+          <div className='keyboardKey btn-neutral text-neutral-content' id='('>
             (
           </div>
-          <div className='keyboardKey grey' id=')'>
+          <div className='keyboardKey btn-neutral text-neutral-content' id=')'>
             )
           </div>
-          <div className='keyboardKey grey' id=';'>
+          <div className='keyboardKey btn-neutral text-neutral-content' id=';'>
             ;
           </div>
         </div>
         <div className='col-span-1 row-span-1 flex justify-between gap-2'>
           <div
             className={`keyboardKey ${
-              keyboardState === 'caps' ? 'positive' : 'grey'
+              keyboardState === 'caps'
+                ? 'btn-success'
+                : 'btn-neutral text-neutral-content'
             }`}
             id='caps'>
             CAPS
           </div>
-          <div className='keyboardKey grey' id='a'>
+          <div className='keyboardKey btn-neutral text-neutral-content' id='a'>
             a
           </div>
-          <div className='keyboardKey grey' id='s'>
+          <div className='keyboardKey btn-neutral text-neutral-content' id='s'>
             s
           </div>
-          <div className='keyboardKey grey' id='d'>
+          <div className='keyboardKey btn-neutral text-neutral-content' id='d'>
             d
           </div>
-          <div className='keyboardKey grey' id='f'>
+          <div className='keyboardKey btn-neutral text-neutral-content' id='f'>
             f
           </div>
-          <div className='keyboardKey grey' id='g'>
+          <div className='keyboardKey btn-neutral text-neutral-content' id='g'>
             g
           </div>
-          <div className='keyboardKey grey' id='h'>
+          <div className='keyboardKey btn-neutral text-neutral-content' id='h'>
             h
           </div>
-          <div className='keyboardKey grey' id='j'>
+          <div className='keyboardKey btn-neutral text-neutral-content' id='j'>
             j
           </div>
-          <div className='keyboardKey grey' id='k'>
+          <div className='keyboardKey btn-neutral text-neutral-content' id='k'>
             k
           </div>
-          <div className='keyboardKey grey' id='l'>
+          <div className='keyboardKey btn-neutral text-neutral-content' id='l'>
             l
           </div>
-          <div className='keyboardKey grey' id=':'>
+          <div className='keyboardKey btn-neutral text-neutral-content' id=':'>
             :
           </div>
-          <div className='keyboardKey grey' id="'">
+          <div className='keyboardKey btn-neutral text-neutral-content' id="'">
             '
           </div>
 
-          <div className='keyboardKey positive w-20' id='enter'>
+          <div className='keyboardKey btn-primary w-20' id='enter'>
             <img src={enterSVG} className='w-6 invert-icon' id='enter' />
           </div>
         </div>
         <div className='col-span-1 row-span-1 flex justify-between gap-2'>
           <div
             className={`keyboardKey ${
-              keyboardState === 'shift' ? 'positive' : 'grey'
+              keyboardState === 'shift'
+                ? 'btn-success'
+                : 'btn-neutral text-neutral-content'
             } w-24`}
             id='shift'>
             SHIFT
           </div>
-          <div className='keyboardKey grey' id='z'>
+          <div className='keyboardKey btn-neutral text-neutral-content' id='z'>
             z
           </div>
-          <div className='keyboardKey grey' id='x'>
+          <div className='keyboardKey btn-neutral text-neutral-content' id='x'>
             x
           </div>
-          <div className='keyboardKey grey' id='c'>
+          <div className='keyboardKey btn-neutral text-neutral-content' id='c'>
             c
           </div>
-          <div className='keyboardKey grey' id='v'>
+          <div className='keyboardKey btn-neutral text-neutral-content' id='v'>
             v
           </div>
-          <div className='keyboardKey grey' id='b'>
+          <div className='keyboardKey btn-neutral text-neutral-content' id='b'>
             b
           </div>
-          <div className='keyboardKey grey' id='n'>
+          <div className='keyboardKey btn-neutral text-neutral-content' id='n'>
             n
           </div>
-          <div className='keyboardKey grey' id='m'>
+          <div className='keyboardKey btn-neutral text-neutral-content' id='m'>
             m
           </div>
-          <div className='keyboardKey grey' id=','>
+          <div className='keyboardKey btn-neutral text-neutral-content' id=','>
             ,
           </div>
-          <div className='keyboardKey grey' id='.'>
+          <div className='keyboardKey btn-neutral text-neutral-content' id='.'>
             .
           </div>
-          <div className='keyboardKey grey' id='/'>
+          <div className='keyboardKey btn-neutral text-neutral-content' id='/'>
             /
           </div>
           <div
             className={`keyboardKey ${
-              keyboardState === 'shift' ? 'positive' : 'grey'
+              keyboardState === 'shift'
+                ? 'btn-success'
+                : 'btn-neutral text-neutral-content'
             } w-24`}
             id='shift'>
             SHIFT
           </div>
         </div>
         <div className='col-span-1 row-span-1 flex justify-between gap-2'>
-          <div className='keyboardKey grey' id=' '>
+          <div className='keyboardKey btn-neutral text-neutral-content' id=' '>
             SPACE
           </div>
         </div>

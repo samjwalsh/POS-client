@@ -46,7 +46,12 @@ export default function Settings(props) {
   async function handleClickButtonOption(setting) {
     playBeep();
 
-    const choice = await confirm([setting.name + '?', 'Cancel', 'Continue', 'This cannot be undone and may have negative side effects.']);
+    const choice = await confirm([
+      setting.name + '?',
+      'Cancel',
+      'Continue',
+      'This cannot be undone and may have negative side effects.',
+    ]);
 
     if (!choice) return;
 
@@ -91,6 +96,10 @@ export default function Settings(props) {
     }
     await setSetting(setting.name, choice);
     setSettings(await getSettings());
+
+    if (setting.name === "Theme") {
+      executeSettings(await getSettings());
+    }
   }
 
   async function handleClickTextInputOption(setting, settings, getSettings) {
@@ -127,7 +136,7 @@ export default function Settings(props) {
               <div className='text-xl self-center'>{setting.name}</div>
               <div className='flex flex-row gap-2'>
                 <div
-                  className='btn rnd  negative  p-2 cnter-items'
+                  className='btn text-lg   btn-error  p-2 cnter-items'
                   onContextMenu={(e) =>
                     handleClickRangeOption(
                       setting,
@@ -148,7 +157,7 @@ export default function Settings(props) {
                 </div>
                 <div className='cnter-items text-xl'>{setting.value}</div>
                 <div
-                  className='btn rnd positive p-2 cnter-items'
+                  className='btn text-lg  btn-success p-2 cnter-items'
                   onContextMenu={(e) =>
                     handleClickRangeOption(
                       setting,
@@ -168,7 +177,7 @@ export default function Settings(props) {
                   <img src={addSVG} className='w-6 invert-icon' />
                 </div>
                 <div
-                  className='btn rnd primary p-2 cnter-items '
+                  className=' btn text-lg btn-primary p-2 cnter-items '
                   onContextMenu={(e) =>
                     handleClickRangeOption(
                       setting,
@@ -199,7 +208,7 @@ export default function Settings(props) {
               <div className='text-xl self-center'>{setting.name}</div>
               <div className='flex flex-row gap-2'>
                 <div
-                  className='btn rnd primary p-2 cnter-items '
+                  className='btn text-lg btn-primary p-2 cnter-items '
                   onContextMenu={(e) => handleClickButtonOption(setting)}
                   onTouchStart={(e) => handleClickButtonOption(setting)}>
                   {setting.label}
@@ -215,7 +224,7 @@ export default function Settings(props) {
               <div className='text-xl self-center'>{setting.name}</div>
               <div className='flex flex-row gap-2'>
                 <div
-                  className='btn rnd primary p-2 cnter-items '
+                  className='btn text-lg btn-primary p-2 cnter-items '
                   onContextMenu={(e) =>
                     handleClickToggleOption(setting, settings, setSettings)
                   }
@@ -239,7 +248,7 @@ export default function Settings(props) {
               <div className='text-xl self-center'>{setting.name}</div>
               <div className='flex flex-row gap-2'>
                 <div
-                  className='btn rnd primary p-2 cnter-items '
+                  className='btn text-lg btn-primary p-2 cnter-items '
                   onContextMenu={(e) =>
                     handleClickDropdownOption(setting, settings, setSettings)
                   }
@@ -264,7 +273,7 @@ export default function Settings(props) {
               <div className='text-xl self-center'>{setting.name}</div>
               <div className='flex flex-row gap-2'>
                 <div
-                  className='btn rnd primary p-2 cnter-items '
+                  className='btn text-lg btn-primary p-2 cnter-items '
                   onContextMenu={(e) =>
                     handleClickTextInputOption(setting, settings, getSettings)
                   }
@@ -289,7 +298,7 @@ export default function Settings(props) {
               <div className='text-xl self-center'>{setting.name}</div>
               <div className='flex flex-row gap-2'>
                 <div
-                  className='btn rnd primary p-2 cnter-items '
+                  className='btn text-lg btn-primary p-2 cnter-items '
                   onContextMenu={(e) =>
                     handleClickNumberInputOption(setting, settings, getSettings)
                   }
@@ -306,7 +315,7 @@ export default function Settings(props) {
       });
       return (
         <div
-          className='w-full border border-colour rnd p-2 '
+          className='w-full border border-colour  p-2 rounded-box'
           key={category.name}>
           <div className='border-b border-colour text-2xl'>
             {category.name}{' '}
@@ -331,7 +340,7 @@ export default function Settings(props) {
           {settingsHTML}
           <div className='h-8'></div>
         </div>
-        <div className='fixed bottom-0 right-0 border rnd p-1 border-colour m-1 background'>
+        <div className='fixed bottom-0 right-0 border  p-1 border-colour m-1 background'>
           v{version}
         </div>
       </div>
@@ -387,12 +396,8 @@ export function executeSettings(settings) {
         case 'Zoom Factor':
           document.querySelector(':root').style.fontSize = `${setting.value}px`;
           break;
-        case 'Dark Mode':
-          if (setting.value === true) {
-            document.documentElement.setAttribute('class', 'dark');
-          } else {
-            document.documentElement.setAttribute('class', '');
-          }
+        case 'Theme':
+          document.documentElement.setAttribute('data-theme', setting.value);
           break;
       }
     }

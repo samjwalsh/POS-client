@@ -60,6 +60,8 @@ const useVoucherRedeemer = (order, setOrder) => {
           `Sorry, this voucher was redeemed on ${voucherResult.dateRedeemed}.`
         );
       }
+      handleClose();
+      return;
     }
     
     let temp_order = order;
@@ -78,11 +80,11 @@ const useVoucherRedeemer = (order, setOrder) => {
   const createHTML = () => {
     if (clickable) {
       return (
-        <div className='w-96 flex flex-col gap-2 text-2xl p-4'>
+        <div className='w-min flex flex-col gap-2 text-2xl p-4'>
           <div className='flex flex-row justify-between'>
-            <div className='text-3xl cnter-items'>Voucher Redeemer</div>
+            <div className='text-3xl cnter-items whitespace-nowrap pr-2'>Voucher Redeemer</div>
             <div
-              className='negative cnter-items p-2 btn'
+              className='btn btn-error text-lg'
               onContextMenu={(event) => handleClickClose()}
               onTouchStart={(event) => handleClickClose()}>
               Cancel
@@ -92,7 +94,7 @@ const useVoucherRedeemer = (order, setOrder) => {
           <div className='flex flex-row justify-between'>
             <div className='cnter-items'>Code:</div>
             <div
-              className='btn rnd primary p-2 cnter-items '
+              className='btn btn-primary text-lg'
               onContextMenu={(e) => handleEnterCode()}
               onTouchStart={(e) => handleEnterCode()}>
               Enter Code
@@ -115,7 +117,7 @@ const useVoucherRedeemer = (order, setOrder) => {
           <Alert />
           <div className='fixed h-screen w-screen z-1'>
             <div className='fixed top-0 left-0 m-0 p-0 transparent h-screen w-screen z-50'></div>
-            <div className='fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-50 background border border-colour rnd  flex flex-col gap-2 p-2 rndmd'>
+            <div className='fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-50 background rounded-box'>
               {createHTML()}
             </div>
           </div>

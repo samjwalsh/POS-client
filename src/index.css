@@ -5,7 +5,7 @@
 html,
 body {
   height: 100%;
-  @apply no-scrollbar dark:bg-dark_background bg-light_background text-black dark:text-white select-none;
+  @apply no-scrollbar select-none;
 }
 
 @font-face {
@@ -50,23 +50,24 @@ body {
   @apply dark:invert dark:z-0;
 }
 
-.btn {
-  @apply rnd p-2 cnter-items text-lg;
+/* .btn {
+  @apply   p-2 cnter-items text-lg;
 }
 
 .btnlg {
-  @apply rnd p-2 cnter-items text-2xl;
-}
+  @apply   p-2 cnter-items text-2xl;
+} */
+
 
 .menu-itm {
-  @apply w-48 rnd h-32 max-w-5xl flex-grow flex p-2 text-2xl items-end primary;
+  @apply btn w-48 h-32 max-w-5xl flex-grow flex p-2 text-left text-2xl items-end justify-start text-neutral-content;
 }
 
 .menu-itm-filler {
   @apply w-48 h-0 max-w-5xl flex-grow;
 }
 
-.primary {
+/* .primary {
   @apply dark:bg-dark_primary  bg-light_primary;
 }
 
@@ -84,22 +85,14 @@ body {
 
 .grey {
   @apply dark:bg-dark_grey bg-light_grey 
-}
+} */
 
 .borderD {
-  @apply border;
+  @apply border
 }
 
 .borderB {
   @apply border border-colour;
-}
-
-.rnd {
-  @apply rounded-sm shadow-md;
-}
-
-.rndmd {
-  @apply rounded-md shadow-lg;
 }
 
 .transparent {
@@ -107,7 +100,7 @@ body {
 }
 
 .background {
-  @apply dark:bg-dark_background bg-light_background;
+  @apply bg-base-100;
 }
 
 .cnter-items {
@@ -115,15 +108,15 @@ body {
 }
 
 .keypad {
-  @apply cnter-items rnd;
+  @apply btn w-full h-full text-2xl text-neutral-content;
 }
 
 .border-colour {
-  @apply dark:border-dark_grey_divider border-light_grey_divider;
+  @apply border-base-content;
 }
 
 .orderbox {
-  @apply max-w-3xl w-72 flex-grow;
+  @apply max-w-3xl w-72 flex-grow rounded-btn;
 }
 
 .num {
@@ -131,5 +124,5 @@ body {
 }
 
 .keyboardKey {
-  @apply flex-grow cnter-items rnd;
+  @apply flex-grow btn h-full text-xl text-neutral-content;
 }

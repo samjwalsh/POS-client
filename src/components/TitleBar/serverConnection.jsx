@@ -84,8 +84,8 @@ export default function ServerConnection() {
 
   return (
     <div
-      className={`flex flex-row text-sm h-full rnd px-1
-       ${isOnline.status ? 'positive' : 'negative'}`}>
+      className={`flex flex-row text-sm h-full px-1 rounded-btn
+       ${isOnline.status ? 'bg-success' : 'bg-error'}`}>
       <div className='grid grid-rows-2 grid-cols-1'>
         <div className='row-span-1 col-span-1'>SRV</div>
         <div className='row-span-1 col-span-1'>
@@ -96,20 +96,20 @@ export default function ServerConnection() {
       </div>
 
       <div className='grid grid-rows-2 grid-cols-3 text-sm px-1'>
-        <div className='col-span-1 row-span-1'>{isOnline.ordersToAdd}</div>
-        <div className='col-span-1 row-span-1'>{isOnline.ordersToDelete}</div>
-        <div className='col-span-1 row-span-1'>{isOnline.ordersToEod}</div>
+        <div className='col-span-1 row-span-1'>{isOnline.ordersToAdd == 0? '-' : isOnline.ordersToAdd}</div>
+        <div className='col-span-1 row-span-1'>{isOnline.ordersToDelete== 0? '-' : isOnline.ordersToDelete}</div>
+        <div className='col-span-1 row-span-1'>{isOnline.ordersToEod== 0? '-' : isOnline.ordersToEod}</div>
         <div className='col-span-1 row-span-1'>
-          {isOnline.ordersMissingInDb}
+          {isOnline.ordersMissingInDb== 0? '-' : isOnline.ordersMissingInDb}
         </div>
         <div className='col-span-1 row-span-1'>
-          {isOnline.ordersDeletedInDb}
+          {isOnline.ordersDeletedInDb== 0? '-' : isOnline.ordersDeletedInDb}
         </div>
-        <div className='col-span-1 row-span-1'>{isOnline.ordersEodedInDb}</div>
+        <div className='col-span-1 row-span-1'>{isOnline.ordersEodedInDb== 0? '-' : isOnline.ordersEodedInDb}</div>
       </div>
       <div className='grid grid-rows-2 grid-cols-1 text-sm'>
         <div className='col-span-1 row-span-1'>{isOnline.shop}</div>
-        <div className='col-span-1 row-span-1'>{`${
+        <div className='col-span-1 row-span-1 text-center'>{`${
           isOnline.till != undefined ? '' + isOnline.till + '' : ''
         }`}</div>
       </div>

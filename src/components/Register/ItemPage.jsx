@@ -74,11 +74,11 @@ export default function ItemPage(props) {
           )
         }>
         <div className='flex flex-row justify-between w-full gap-2'>
-          <div className='flex-grow flex flex-row justify-between primary p-2 rnd'>
+          <div className='flex-grow flex flex-row justify-between p-2 btn-secondary btn h-full'>
             <div className='text-xl cnter-items'>{addon.name}</div>
             <div className='num cnter-items'>€{addon.price.toFixed(2)}</div>
           </div>
-          <div className='cnter-items w-16 h-full secondary rnd'>
+          <div className='cnter-items w-16 h-full btn btn-accent'>
             <div className='toggleAddonButton' id={index}>
               {selected ? (
                 <img src={checkSVG} className='w-8 invert-icon' />
@@ -111,7 +111,7 @@ export default function ItemPage(props) {
       }
       return (
         <div
-          className='mt-2 btn positive cnter-items w-full h-48 flex flex-col'
+          className='mt-2 btn btn-primary flex-grow w-48 h-48 flex flex-col'
           onContextMenu={(shortcut) =>
             handleClickShortcut(
               event,
@@ -163,8 +163,8 @@ export default function ItemPage(props) {
         <div className='col-span-1 text-left w-auto h-min whitespace-nowrap mt-2'>
           {menuState.name}
         </div>
-        <div
-          className='col-span-1 text-right self-end justify-self-end w-min h-min whitespace-nowrap p-2 negative text-lg btn'
+        <button
+          className='col-span-1 text-right self-end justify-self-end w-min h-min whitespace-nowrap p-2 text-lg btn btn-error'
           onContextMenu={(event) =>
             handleExitItemPage(
               event,
@@ -184,10 +184,10 @@ export default function ItemPage(props) {
             )
           }>
           Cancel
-        </div>
+        </button>
       </div>
       <div className='w-full h-min flex-grow-0 overflow-y-scroll no-scrollbar'>
-        <div className='flex flex-row justify-between gap-2 h-auto'>
+        <div className='flex flex-row gap-2 h-auto'>
           {shortcutsHTML}
         </div>
         <div className='flex flex-row flex-wrap gap-2 py-2 overflow-y-scroll no-scrollbar flex-grow-0 '>
@@ -198,7 +198,7 @@ export default function ItemPage(props) {
       <div className='w-full flex flex-row mt-auto gap-2 pt-2 h-16'>
         <div className='flex flex-row '>
           <div
-            className='btn negative w-14 h-auto cnter-items '
+            className='w-14 h-auto cnter-items btn btn-error '
             onContextMenu={(event) =>
               handleDecreaseQuantity(event, item, currentOrder, setCurrentOrder)
             }
@@ -211,7 +211,7 @@ export default function ItemPage(props) {
             {quantity}
           </div>
           <div
-            className='btn positive w-14 h-auto cnter-items'
+            className='btn btn-success w-14 h-auto cnter-items'
             onContextMenu={(event) =>
               handleIncreaseQuantity(event, item, currentOrder, setCurrentOrder)
             }
@@ -223,7 +223,7 @@ export default function ItemPage(props) {
         </div>
         <div className='text-2xl w-full h-auto num cnter-items'>€{price}</div>
         <div
-          className='btn cnter-items positive w-72'
+          className='btn btn-primary text-xl h-full positive w-48'
           onContextMenu={(event) =>
             handleAddToOrder(
               event,
