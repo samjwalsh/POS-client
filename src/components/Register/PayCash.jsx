@@ -53,38 +53,38 @@ export default function PayCash(props) {
         <div
           className='col-span-2 row-span-1 btn btn-accent h-full text-2xl'
           onContextMenu={() => handleButtonPress('custom')}
-          onTouchStart={() => handleButtonPress('custom')}>
+          onTouchEnd={() => handleButtonPress('custom')}>
           Custom
         </div>
         <div
           className='col-span-1 row-span-1 num btn btn-secondary h-full text-2xl'
           onContextMenu={() => handleButtonPress(50)}
-          onTouchStart={() => handleButtonPress(50)}>
+          onTouchEnd={() => handleButtonPress(50)}>
           €50
         </div>
         <div
           className='col-span-1 row-span-1 num btn btn-secondary h-full text-2xl'
           onContextMenu={() => handleButtonPress(20)}
-          onTouchStart={() => handleButtonPress(20)}>
+          onTouchEnd={() => handleButtonPress(20)}>
           €20
         </div>
         <div
           className='col-span-1 row-span-1 num btn btn-secondary h-full text-2xl'
           onContextMenu={() => handleButtonPress(10)}
-          onTouchStart={() => handleButtonPress(10)}>
+          onTouchEnd={() => handleButtonPress(10)}>
           €10
         </div>
         <div
           className='col-span-1 row-span-1 num btn btn-secondary h-full text-2xl'
           onContextMenu={() => handleButtonPress(5)}
-          onTouchStart={() => handleButtonPress(5)}>
+          onTouchEnd={() => handleButtonPress(5)}>
           €5
         </div>
 
         <div
           className='col-span-2 row-span-2 btn btn-primary h-full text-2xl'
           onContextMenu={() => handleButtonPress('exit')}
-          onTouchStart={() => handleButtonPress('exit')}>
+          onTouchEnd={() => handleButtonPress('exit')}>
           Done
         </div>
       </div>

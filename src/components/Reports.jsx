@@ -195,13 +195,13 @@ export default function Reports(props) {
             <div
               className=' btn btn-primary text-lg'
               onContextMenu={(e) => handlePrintReceipt(order)}
-              onTouchStart={(e) => handlePrintReceipt(order)}>
+              onTouchEnd={(e) => handlePrintReceipt(order)}>
               Receipt
             </div>
             <div
               className='btn-error btn'
               onContextMenu={(e) => handleDeleteOrder(order)}
-              onTouchStart={(e) => handleDeleteOrder(order)}>
+              onTouchEnd={(e) => handleDeleteOrder(order)}>
               <img src={closeSVG} className='w-6 invert-icon' />
             </div>
           </div>
@@ -241,13 +241,13 @@ export default function Reports(props) {
           <div
             className='btn btn-warning h-auto text-lg cnter-items w-full'
             onContextMenu={(event) => handleDeleteOldOrders()}
-            onTouchStart={(event) => handleDeleteOldOrders()}>
+            onTouchEnd={(event) => handleDeleteOldOrders()}>
             Delete Old Orders
           </div>
           <div
             className='btn-error btn text-lg h-auto p-2 cnter-items w-full'
             onContextMenu={(event) => handleEndOfDay()}
-            onTouchStart={(event) => handleEndOfDay()}>
+            onTouchEnd={(event) => handleEndOfDay()}>
             End Of Day
           </div>
         </div>

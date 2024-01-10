@@ -166,7 +166,7 @@ const useVoucherCreator = (order, setOrder) => {
             <div
               className='btn btn-error text-lg'
               onContextMenu={(event) => handleClickClose()}
-              onTouchStart={(event) => handleClickClose()}>
+              onTouchEnd={(event) => handleClickClose()}>
               Cancel
             </div>
           </div>
@@ -176,7 +176,7 @@ const useVoucherCreator = (order, setOrder) => {
             <div
               className='btn btn-primary text-lg'
               onContextMenu={(e) => handleSetQuantity()}
-              onTouchStart={(e) => handleSetQuantity()}>
+              onTouchEnd={(e) => handleSetQuantity()}>
               {voucherState.quantity == undefined
                 ? 'Enter'
                 : voucherState.quantity}
@@ -188,7 +188,7 @@ const useVoucherCreator = (order, setOrder) => {
             <div
               className='btn btn-primary text-lg'
               onContextMenu={(e) => handleSetValue()}
-              onTouchStart={(e) => handleSetValue()}>
+              onTouchEnd={(e) => handleSetValue()}>
               €
               {voucherState.value == undefined
                 ? 'Enter'
@@ -208,7 +208,7 @@ const useVoucherCreator = (order, setOrder) => {
           <div
             className='w-full btn h-full btn-primary text-lg'
             onContextMenu={(e) => handleCreateVouchers()}
-            onTouchStart={(e) => handleCreateVouchers()}>{`Create ${
+            onTouchEnd={(e) => handleCreateVouchers()}>{`Create ${
             voucherState.quantity
           } voucher${
             voucherState.quantity !== 1 ? 's' : ''

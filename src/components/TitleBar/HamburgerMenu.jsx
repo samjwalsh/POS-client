@@ -90,7 +90,7 @@ export default function HamburgerMenu(props) {
             <div
               className='negative btn btn-error aspect-square p-0'
               onContextMenu={() => handleCloseSideMenu(setHamburger)}
-              onTouchStart={() => handleCloseSideMenu(setHamburger)}>
+              onTouchEnd={() => handleCloseSideMenu(setHamburger)}>
               <img src={closeSVG} className='w-6 invert-icon' />
             </div>
           </div>
@@ -100,13 +100,13 @@ export default function HamburgerMenu(props) {
             <div
               className='btn btn-primary text-lg'
               onContextMenu={() => handleSetAppState('Register')}
-              onTouchStart={() => handleSetAppState('Register')}>
+              onTouchEnd={() => handleSetAppState('Register')}>
               Register
             </div>
             <div
               className='btn btn-primary text-lg'
               onContextMenu={() => handleSetAppState('Reports')}
-              onTouchStart={() => handleSetAppState('Reports')}>
+              onTouchEnd={() => handleSetAppState('Reports')}>
               Reports
             </div>
           </div>
@@ -114,19 +114,19 @@ export default function HamburgerMenu(props) {
             <div
               className='btn btn-primary text-lg'
               onContextMenu={() => handleCleanScreen()}
-              onTouchStart={() => handleCleanScreen()}>
+              onTouchEnd={() => handleCleanScreen()}>
               Cleaning Mode
             </div>
             <div
               className='btn btn-secondary text-lg'
               onContextMenu={() => handleSetAppState('Settings')}
-              onTouchStart={() => handleSetAppState('Settings')}>
+              onTouchEnd={() => handleSetAppState('Settings')}>
               Settings
             </div>
             <div
               className='btn btn-error text-lg'
               onContextMenu={() => handleTerminatePOS()}
-              onTouchStart={() => handleTerminatePOS()}>
+              onTouchEnd={() => handleTerminatePOS()}>
               Exit POS
             </div>
           </div>
@@ -134,7 +134,7 @@ export default function HamburgerMenu(props) {
         <div
           className='row-span-1 col-span-9 transparent'
           onContextMenu={() => handleCloseSideMenu(setHamburger)}
-          onTouchStart={() => handleCloseSideMenu(setHamburger)}></div>
+          onTouchEnd={() => handleCloseSideMenu(setHamburger)}></div>
       </div>
       <div className='fixed bottom-0 right-0 border rounded-btn p-1 border-colour m-1 background z-50'>
         v{version}
