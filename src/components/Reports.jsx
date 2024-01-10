@@ -221,7 +221,7 @@ export default function Reports(props) {
     return (
       <div className='flex flex-col h-full'>
         {createReportsStatsInfo()}
-        <div className='mt-auto border-t border-colour p-2 flex flex-col gap-2'>
+        <div className='mt-auto border-t border-colour pt-2 mx-2 flex flex-col gap-2'>
           <div
             className='btn secondary h-auto p-2 cnter-items w-full'
             onContextMenu={(event) => handleDeleteOldOrders()}
@@ -262,24 +262,7 @@ export default function Reports(props) {
     let xTotal = cashTotal + cardTotal;
 
     return (
-      <div className='flex flex-col w-full text-2xl p-2 gap-2'>
-        <div className='flex flex-row w-full justify-between border-b border-colour pb-2 text-xl'>
-          <div className=''>No. Orders:</div>
-          <div className='num text-right justify-end'>{orders.length}</div>
-        </div>
-        <div className='flex flex-row w-full justify-between border-b border-colour pb-2 text-xl'>
-          <div className=''>No. Items:</div>
-          <div className='num text-right justify-end'>{quantityItems}</div>
-        </div>
-        <div className='flex flex-row w-full justify-between pb-2 text-xl'>
-          <div className=''>Average Sale:</div>
-          <div className='num text-right justify-end'>
-            €{(xTotal / (orders.length === 0 ? 1 : orders.length)).toFixed(2)}
-          </div>
-        </div>
-        <div className='flex flex-row w-full justify-between pb-2 text-xl'>
-          <div className=''></div>
-        </div>
+      <div className='flex flex-col w-full text-2xl p-2 pt-0 gap-2'>
         <div className='flex flex-row w-full justify-between border-b border-colour pb-2'>
           <div className=''>Cash:</div>
           <div className='num text-right justify-end'>
@@ -296,7 +279,24 @@ export default function Reports(props) {
           <div className=''>X-Total:</div>
           <div className='num text-right justify-end'>€{xTotal.toFixed(2)}</div>
         </div>
-      </div>
+        <div className='flex flex-row w-full justify-between pb-2 text-xl'>
+          <div className=''></div>
+        </div>
+        <div className='flex flex-row w-full justify-between border-b border-colour pb-2 text-base'>
+          <div className=''>No. Orders:</div>
+          <div className='num text-right justify-end'>{orders.length}</div>
+        </div>
+        <div className='flex flex-row w-full justify-between border-b border-colour pb-2 text-base'>
+          <div className=''>No. Items:</div>
+          <div className='num text-right justify-end'>{quantityItems}</div>
+        </div>
+        <div className='flex flex-row w-full justify-between pb-2 text-base'>
+          <div className=''>Average Sale:</div>
+          <div className='num text-right justify-end'>
+            €{(xTotal / (orders.length === 0 ? 1 : orders.length)).toFixed(2)}
+          </div>
+        </div>
+        </div>
     );
   }
 
@@ -350,7 +350,7 @@ export default function Reports(props) {
           <div className='orderbox'></div>
           <div className='orderbox'></div>
         </div>
-        <div className='col-span-4 border-l border-colour  w-full'>
+        <div className='col-span-4 border-l border-colour my-2  w-full'>
           {reportsStatsHTML()}
         </div>
       </div>

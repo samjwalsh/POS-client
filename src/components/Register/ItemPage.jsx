@@ -137,8 +137,8 @@ export default function ItemPage(props) {
             )
           }
           key={shortcut.name}>
-          <div className=''>{shortcut.name}</div>
-          <div className='num font-normal'>€{shortcut.price.toFixed(2)}</div>
+          <div className='text-xl'>{shortcut.name}</div>
+          <div className='num text-sm'>€{shortcut.price.toFixed(2)}</div>
           <div className='text-sm'>{addonsString}</div>
         </div>
       );
@@ -159,12 +159,12 @@ export default function ItemPage(props) {
   log(`Created HTML for item page`);
   return (
     <div className='flex flex-col h-full content-start p-2'>
-      <div className='grid grid-cols-2 grid-rows-1 text-2xl h-min border-b border-colour'>
-        <div className='col-span-1 text-left w-auto h-min whitespace-nowrap self-center'>
+      <div className='grid grid-cols-2 grid-rows-1 text-2xl h-min'>
+        <div className='col-span-1 text-left w-auto h-min whitespace-nowrap mt-2'>
           {menuState.name}
         </div>
         <div
-          className='col-span-1 text-right self-end justify-self-end w-min h-min whitespace-nowrap p-2  negative text-lg btn mb-2'
+          className='col-span-1 text-right self-end justify-self-end w-min h-min whitespace-nowrap p-2 negative text-lg btn'
           onContextMenu={(event) =>
             handleExitItemPage(
               event,
@@ -195,7 +195,7 @@ export default function ItemPage(props) {
           <div className='w-72 max-w-full flex-grow flex flex-row '></div>
         </div>
       </div>
-      <div className='w-full flex flex-row border-t border-colour mt-auto gap-2 pt-2 h-16'>
+      <div className='w-full flex flex-row mt-auto gap-2 pt-2 h-16'>
         <div className='flex flex-row '>
           <div
             className='btn negative w-14 h-auto cnter-items '

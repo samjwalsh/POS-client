@@ -48,8 +48,8 @@ module.exports = {
         // dark_grey_divider: '#3f3f46',
 
         light_background: '#ffffff',
-        light_primary: '#12cfd7',
-        light_primary_border: '#12cfd7',
+        light_primary: '#00b5ff',
+        light_primary_border: '#00b5ff',
         light_secondary: '#ffbe00',
         light_secondary_border: '#ffbe00',
         light_negative: '#ff5861',

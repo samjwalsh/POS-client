@@ -16,11 +16,17 @@ const useVoucherChecker = (order, setOrder) => {
   const voucherChecker = () =>
     new Promise((resolve, reject) => {
       setPromise({ resolve });
+      handleEnterCode();
     });
 
   const handleClose = () => {
     setPromise(null);
     setClickable(true);
+  };
+
+  const handleClickClose = () => {
+    playBeep();
+    handleClose();
   };
 
   const handleEnterCode = async () => {
@@ -63,7 +69,7 @@ const useVoucherChecker = (order, setOrder) => {
     alertHTML.push(addToAlertHTML('Value', '€' + res.voucher.value.toFixed(2)));
     alertHTML.push(addToAlertHTML('Code', res.voucher.code.toUpperCase()));
 
-    await alert(<div className='flex flex-col'>{alertHTML}</div>);
+    await alert(<div className='flex flex-col w-full'>{alertHTML}</div>);
     handleClose();
   };
 
@@ -79,13 +85,13 @@ const useVoucherChecker = (order, setOrder) => {
   const createHTML = () => {
     if (clickable) {
       return (
-        <div className='w-96 flex flex-col gap-2 text-2xl'>
+        <div className='w-96 flex flex-col gap-2 text-2xl p-4'>
           <div className='flex flex-row justify-between'>
             <div className='text-3xl cnter-items'>Voucher Checker</div>
             <div
               className='negative cnter-items p-2  btn '
-              onContextMenu={(event) => handleClose()}
-              onTouchStart={(event) => handleClose()}>
+              onContextMenu={(event) => handleClickClose()}
+              onTouchStart={(event) => handleClickClose()}>
               Cancel
             </div>
           </div>

@@ -47,24 +47,24 @@ export default function ServerConnection() {
         shop = 'DV';
         break;
       }
-      case 'Main' : {
+      case 'Main': {
         shop = 'MN';
         break;
       }
-      case 'Lighthouse' : {
+      case 'Lighthouse': {
         shop = 'LH';
         break;
       }
-      case 'West Pier' : {
+      case 'West Pier': {
         shop = 'WP';
         break;
       }
-      case 'Bray' : {
+      case 'Bray': {
         shop = 'BR';
         break;
       }
-      default : {
-        shop = 'XX'
+      default: {
+        shop = 'XX';
       }
     }
 
@@ -84,44 +84,33 @@ export default function ServerConnection() {
 
   return (
     <div
-      className={`flex flex-row text-sm h-full ${
-        isOnline.status ? 'positiveFill' : 'negativeFill'
-      }`}>
+      className={`flex flex-row text-sm h-full rnd px-1
+       ${isOnline.status ? 'positive' : 'negative'}`}>
       <div className='grid grid-rows-2 grid-cols-1'>
-        <div className='row-span-1 col-span-1'>
-          S-{isOnline.status ? 'OK' : 'NC'}
-        </div>
+        <div className='row-span-1 col-span-1'>SRV</div>
         <div className='row-span-1 col-span-1'>
           {isOnline.status
-            ? `[${String(isOnline.ping).padStart(3, '0')}]`
-            : '[---]'}
+            ? `${String(isOnline.ping).padStart(3, '0')}`
+            : '---'}
         </div>
       </div>
 
-      <div className='grid grid-rows-2 grid-cols-3 text-sm'>
+      <div className='grid grid-rows-2 grid-cols-3 text-sm px-1'>
+        <div className='col-span-1 row-span-1'>{isOnline.ordersToAdd}</div>
+        <div className='col-span-1 row-span-1'>{isOnline.ordersToDelete}</div>
+        <div className='col-span-1 row-span-1'>{isOnline.ordersToEod}</div>
         <div className='col-span-1 row-span-1'>
-          {isOnline.ordersToAdd === 0 ? '-' : isOnline.ordersToAdd}
+          {isOnline.ordersMissingInDb}
         </div>
         <div className='col-span-1 row-span-1'>
-          {isOnline.ordersToDelete === 0 ? '-' : isOnline.ordersToDelete}
+          {isOnline.ordersDeletedInDb}
         </div>
-        <div className='col-span-1 row-span-1'>
-          {isOnline.ordersToEod === 0 ? '-' : isOnline.ordersToEod}
-        </div>
-        <div className='col-span-1 row-span-1'>
-          {isOnline.ordersMissingInDb === 0 ? '-' : isOnline.ordersMissingInDb}
-        </div>
-        <div className='col-span-1 row-span-1'>
-          {isOnline.ordersDeletedInDb === 0 ? '-' : isOnline.ordersDeletedInDb}
-        </div>
-        <div className='col-span-1 row-span-1'>
-          {isOnline.ordersEodedInDb === 0 ? '-' : isOnline.ordersEodedInDb}
-        </div>
+        <div className='col-span-1 row-span-1'>{isOnline.ordersEodedInDb}</div>
       </div>
       <div className='grid grid-rows-2 grid-cols-1 text-sm'>
         <div className='col-span-1 row-span-1'>{isOnline.shop}</div>
         <div className='col-span-1 row-span-1'>{`${
-          isOnline.till != undefined ? '[' + isOnline.till + ']' : ''
+          isOnline.till != undefined ? '' + isOnline.till + '' : ''
         }`}</div>
       </div>
     </div>

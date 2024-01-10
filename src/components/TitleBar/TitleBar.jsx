@@ -53,29 +53,30 @@ export default function TitleBar(props) {
       <ListSelect />
       <div className='flex flex-row justify-between  h-12 shadow-md'>
         <div
-          className='h-auto btn m-1 negativeFill aspect-square'
+          className='h-auto btn m-1 negative'
           onContextMenu={(e) => handleClickHamburger(setHamburger)}
           onTouchStart={(e) => handleClickHamburger(setHamburger)}>
           <img src={hamburger} className=' invert-icon h-full w-auto' />
+          <div className='px-1'>Menu</div>
         </div>
 
         <div className='flex flex-row items-center justify-end w-full num'>
           <div
-            className='secondaryFill h-10 btn mx-1 font-sans'
+            className='secondary h-10 btn mx-1 font-sans'
             onContextMenu={(e) => handlePrintRecentOrder()}
             onTouchStart={(e) => handlePrintRecentOrder()}>
             Print Receipt
           </div>
-          <div className='cnter-items h-10 pl-5 mr-5'></div>
+          <div className='cnter-items h-10 mx-5'></div>
           <div
-            className='secondaryFill h-10 btn mx-1 font-sans'
+            className='secondary h-10 btn font-sans'
             onContextMenu={(e) => handleClickVoucherMenu()}
             onTouchStart={(e) => handleClickVoucherMenu()}>
             Vouchers
           </div>
-          <div className='cnter-items border-r border-colour h-10 pl-5 mr-5'></div>
+          <div className='cnter-items border-r border-colour h-10 mx-5'></div>
           <div className='cnter-items pr-1 my-1'>
-            <PrinterConnection />
+            <PrinterConnection/>
           </div>
           <div className='cnter-items pr-1 my-1 '>
             <Connection />
