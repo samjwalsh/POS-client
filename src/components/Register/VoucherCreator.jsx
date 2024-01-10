@@ -149,7 +149,7 @@ const useVoucherCreator = (order, setOrder) => {
       return (
         <div className='w-96 flex flex-col gap-2 text-2xl p-4'>
           <div className='flex flex-row justify-between'>
-            <div className='text-3xl cnter-items'>Voucher Creator</div>
+            <div className='text-3xl cnter-items mt-2'>Voucher Creator</div>
             <div
               className='negative cnter-items p-2 btn'
               onContextMenu={(event) => handleClickClose()}

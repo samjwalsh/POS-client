@@ -42,7 +42,7 @@ const useVoucherChecker = (order, setOrder) => {
 
     if (!res.success) {
       await alert(
-        'Something went wrong. Check that the till is connected to the internet.'
+        'Something went wrong. Check you typed the code correctly and that the till is connected to the internet.'
       );
 
       handleClose();
@@ -50,7 +50,7 @@ const useVoucherChecker = (order, setOrder) => {
     }
 
     if (!res.exists) {
-      await alert('A voucher with this code does not exist');
+      await alert('A voucher with this code does not exist. Check you typed the code correctly.');
       handleClose();
       return;
     }
