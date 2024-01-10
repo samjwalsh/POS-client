@@ -32,7 +32,7 @@ export default function ItemPage(props) {
       item.priceCheck = addon.priceCheck;
     }
   }
-  
+
   item.shortcuts = menuState.shortcuts;
 
   const addonsHTML = item.addons.map((addon, index) => {
@@ -78,7 +78,7 @@ export default function ItemPage(props) {
             <div className='text-xl cnter-items'>{addon.name}</div>
             <div className='num cnter-items'>€{addon.price.toFixed(2)}</div>
           </div>
-          <div className='cnter-items w-16 h-full btn btn-accent'>
+          <div className='cnter-items w-16 h-full btn btn-neutral'>
             <div className='toggleAddonButton' id={index}>
               {selected ? (
                 <img src={checkSVG} className='w-8 invert-icon' />
@@ -187,9 +187,7 @@ export default function ItemPage(props) {
         </button>
       </div>
       <div className='w-full h-min flex-grow-0 overflow-y-scroll no-scrollbar'>
-        <div className='flex flex-row gap-2 h-auto'>
-          {shortcutsHTML}
-        </div>
+        <div className='flex flex-row gap-2 h-auto'>{shortcutsHTML}</div>
         <div className='flex flex-row flex-wrap gap-2 py-2 overflow-y-scroll no-scrollbar flex-grow-0 '>
           {addonsHTML}
           <div className='w-72 max-w-full flex-grow flex flex-row '></div>

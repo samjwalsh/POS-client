@@ -47,7 +47,7 @@ body {
 }
 
 .invert-icon {
-  @apply dark:invert dark:z-0;
+  @apply invert z-0;
 }
 
 /* .btn {
@@ -57,7 +57,6 @@ body {
 .btnlg {
   @apply   p-2 cnter-items text-2xl;
 } */
-
 
 .menu-itm {
   @apply btn w-48 h-32 max-w-5xl flex-grow flex p-2 text-left text-2xl items-end justify-start text-neutral-content;
@@ -88,7 +87,7 @@ body {
 } */
 
 .borderD {
-  @apply border
+  @apply border;
 }
 
 .borderB {

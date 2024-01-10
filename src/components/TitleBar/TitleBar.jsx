@@ -75,16 +75,16 @@ export default function TitleBar(props) {
             Vouchers
           </div>
           <div className='border-r border-colour h-10 mx-5'></div>
-          <div className='pr-1 num'>
+          <div className='pr-1 num font-bold text-white'>
             <PrinterConnection />
           </div>
-          <div className='pr-1 num'>
+          <div className='pr-1 num font-bold text-white'>
             <Connection />
           </div>
-          <div className='pr-1 num'>
+          <div className='pr-1 num font-bold text-white'>
             <ServerConnection />
           </div>
-          <div className='pr-1 num'>
+          <div className='pr-1 num font-bold'>
             <Clock />
           </div>
         </div>
