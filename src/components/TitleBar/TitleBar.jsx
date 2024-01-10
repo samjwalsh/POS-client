@@ -55,7 +55,7 @@ export default function TitleBar(props) {
         <div
           className='h-auto btn btn-primary text-lg m-1 negative px-1'
           onContextMenu={(e) => handleClickHamburger(setHamburger)}
-          onTouchStart={(e) => handleClickHamburger(setHamburger)}>
+          onTouchEnd={(e) => handleClickHamburger(setHamburger)}>
           <img src={hamburger} className=' invert-icon w-8' />
           <div className=''>Menu</div>
         </div>
@@ -64,14 +64,14 @@ export default function TitleBar(props) {
           <div
             className=' h-10 btn btn-primary mx-1 my-2 text-lg'
             onContextMenu={(e) => handlePrintRecentOrder()}
-            onTouchStart={(e) => handlePrintRecentOrder()}>
+            onTouchEnd={(e) => handlePrintRecentOrder()}>
             Print Receipt
           </div>
           <div className='cnter-items h-10 mx-5'></div>
           <div
             className=' h-10 btn btn-primary text-lg'
             onContextMenu={(e) => handleClickVoucherMenu()}
-            onTouchStart={(e) => handleClickVoucherMenu()}>
+            onTouchEnd={(e) => handleClickVoucherMenu()}>
             Vouchers
           </div>
           <div className='border-r border-colour h-10 mx-5'></div>

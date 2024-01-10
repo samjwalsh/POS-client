@@ -33,7 +33,7 @@ const useHelpPage = () => {
           <div
             className='fixed top-0 left-0 m-0 transparent h-screen w-screen z-50 p-2'
             onContextMenu={handleCancel}
-            onTouchStart={handleCancel}></div>
+            onTouchEnd={handleCancel}></div>
           <div className='fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-50 background border border-colour rnd h-full overflow-y-scroll no-scrollbar'>
             Printing Receipts NOTE: The order has to have already been completed
             to print a receipt Tap the red menu button in the top left Tap on

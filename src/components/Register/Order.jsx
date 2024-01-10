@@ -113,7 +113,7 @@ export default function Order(props) {
         <div
           className='btn btn-error h-full'
           onContextMenu={() => handleOrderItemQuantityChange('down', orderItem)}
-          onTouchStart={() => handleOrderItemQuantityChange('down', orderItem)}>
+          onTouchEnd={() => handleOrderItemQuantityChange('down', orderItem)}>
           <img src={minusSVG} className='w-6 invert-icon' />
         </div>
         <div className='bg-primary h-full flex-grow grid grid-rows-[min-content_1fr] grid-cols-[1fr_min-content] p-2 py-1 rounded-btn text-primary-content'>
@@ -121,20 +121,20 @@ export default function Order(props) {
             {orderItem.name +
               (orderItem.quantity > 1 ? ` (${orderItem.quantity})` : '')}
           </div>
-          <div className='text-lg text-right'>
+          <div className='text-right'>
             €{(orderItem.price * orderItem.quantity).toFixed(2)}
           </div>
-          <div className='text-left pr-1'>
+          <div className='text-left text-sm'>
             {orderItem.addons === undefined ? '' : orderItem.addons.join(', ')}
           </div>
-          <div className='whitespace-nowrap text-right'>
+          <div className='whitespace-nowrap text-right text-sm'>
             €{orderItem.price.toFixed(2)} EA
           </div>
         </div>
         <div
           className='btn btn-success h-full'
           onContextMenu={() => handleOrderItemQuantityChange('up', orderItem)}
-          onTouchStart={() => handleOrderItemQuantityChange('up', orderItem)}>
+          onTouchEnd={() => handleOrderItemQuantityChange('up', orderItem)}>
           <img src={addSVG} className='w-6 fill-white invert-icon' />
         </div>
       </div>
@@ -172,7 +172,7 @@ export default function Order(props) {
               <div
                 className='p-2 btn btn-error h-full w-full text-2xl'
                 onContextMenu={() => handlePayment('cash')}
-                onTouchStart={() => handlePayment('cash')}>
+                onTouchEnd={() => handlePayment('cash')}>
                 Cancel
               </div>
             ) : (
@@ -180,19 +180,19 @@ export default function Order(props) {
                 <div
                   className='btn btn-secondary h-full aspect-square'
                   onContextMenu={() => handlePlusMinus()}
-                  onTouchStart={() => handlePlusMinus()}>
+                  onTouchEnd={() => handlePlusMinus()}>
                   <img src={euro} className='w-6 invert-icon' />
                 </div>
                 <div
                   className='btn text-2xl btn-primary h-full flex-grow'
                   onContextMenu={() => handlePayment('card')}
-                  onTouchStart={() => handlePayment('card')}>
+                  onTouchEnd={() => handlePayment('card')}>
                   Card
                 </div>
                 <div
                   className='btn text-2xl btn-primary h-full flex-grow'
                   onContextMenu={() => handlePayment('cash')}
-                  onTouchStart={() => handlePayment('cash')}>
+                  onTouchEnd={() => handlePayment('cash')}>
                   Cash
                 </div>
               </>

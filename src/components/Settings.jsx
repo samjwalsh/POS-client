@@ -97,7 +97,7 @@ export default function Settings(props) {
     await setSetting(setting.name, choice);
     setSettings(await getSettings());
 
-    if (setting.name === "Theme") {
+    if (setting.name === 'Theme') {
       executeSettings(await getSettings());
     }
   }
@@ -145,7 +145,7 @@ export default function Settings(props) {
                       setSettings
                     )
                   }
-                  onTouchStart={(e) =>
+                  onTouchEnd={(e) =>
                     handleClickRangeOption(
                       setting,
                       'decrease',
@@ -166,7 +166,7 @@ export default function Settings(props) {
                       setSettings
                     )
                   }
-                  onTouchStart={(e) =>
+                  onTouchEnd={(e) =>
                     handleClickRangeOption(
                       setting,
                       'increase',
@@ -186,7 +186,7 @@ export default function Settings(props) {
                       setSettings
                     )
                   }
-                  onTouchStart={(e) =>
+                  onTouchEnd={(e) =>
                     handleClickRangeOption(
                       setting,
                       'reset',
@@ -210,7 +210,7 @@ export default function Settings(props) {
                 <div
                   className='btn text-lg btn-primary p-2 cnter-items '
                   onContextMenu={(e) => handleClickButtonOption(setting)}
-                  onTouchStart={(e) => handleClickButtonOption(setting)}>
+                  onTouchEnd={(e) => handleClickButtonOption(setting)}>
                   {setting.label}
                 </div>
               </div>
@@ -228,7 +228,7 @@ export default function Settings(props) {
                   onContextMenu={(e) =>
                     handleClickToggleOption(setting, settings, setSettings)
                   }
-                  onTouchStart={(e) =>
+                  onTouchEnd={(e) =>
                     handleClickToggleOption(setting, settings, setSettings)
                   }>
                   {setting.value ? (
@@ -252,7 +252,7 @@ export default function Settings(props) {
                   onContextMenu={(e) =>
                     handleClickDropdownOption(setting, settings, setSettings)
                   }
-                  onTouchStart={(e) =>
+                  onTouchEnd={(e) =>
                     handleClickDropdownOption(setting, settings, setSettings)
                   }>
                   {setting.value == undefined
@@ -277,7 +277,7 @@ export default function Settings(props) {
                   onContextMenu={(e) =>
                     handleClickTextInputOption(setting, settings, getSettings)
                   }
-                  onTouchStart={(e) =>
+                  onTouchEnd={(e) =>
                     handleClickTextInputOption(setting, settings, getSettings)
                   }>
                   {setting.value == undefined
@@ -302,7 +302,7 @@ export default function Settings(props) {
                   onContextMenu={(e) =>
                     handleClickNumberInputOption(setting, settings, getSettings)
                   }
-                  onTouchStart={(e) =>
+                  onTouchEnd={(e) =>
                     handleClickNumberInputOption(setting, settings, getSettings)
                   }>
                   {setting.value == undefined ? 'Enter' : setting.value}

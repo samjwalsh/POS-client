@@ -73,7 +73,9 @@ const useVoucherCreator = (order, setOrder) => {
 
     const value = voucherState.value;
     if (quantity < 1 || value <= 0) {
-      await alert("You must create at least 1 voucher with a value above €0.00")
+      await alert(
+        'You must create at least 1 voucher with a value above €0.00'
+      );
       handleClose();
       return;
     }
@@ -99,16 +101,26 @@ const useVoucherCreator = (order, setOrder) => {
       'Did the vouchers print?',
       'No',
       'Yes',
-      `If the vouchers did not print correctly, you can view the codes or try to print them again.`
+      `If the vouchers did not print correctly, you can view the codes or try to print them again.`,
     ]);
     if (!printedCorrectly) {
       let tryAgain = true;
       while (tryAgain) {
-        tryAgain = await confirm(['Try Again?', 'View Codes', 'Print Again', `You can choose to attempt to print the vouchers again or view the codes on the screen`]);
+        tryAgain = await confirm([
+          'Try Again?',
+          'View Codes',
+          'Print Again',
+          `You can choose to attempt to print the vouchers again or view the codes on the screen`,
+        ]);
         if (tryAgain) {
           await printVouchers(voucherResult.vouchers);
-          const attemptPrintAgain = await confirm(['Try Again?', 'View Codes', 'Print Again', `You can choose to attempt to print the vouchers again or view the codes on the screen`]);
-          if (!attemptPrintAgain) tryAgain=false;
+          const attemptPrintAgain = await confirm([
+            'Try Again?',
+            'View Codes',
+            'Print Again',
+            `You can choose to attempt to print the vouchers again or view the codes on the screen`,
+          ]);
+          if (!attemptPrintAgain) tryAgain = false;
         } else {
           let vouchersHTML = [];
           voucherResult.vouchers.forEach((voucher, index) => {
@@ -154,7 +166,7 @@ const useVoucherCreator = (order, setOrder) => {
             <div
               className='btn btn-error text-lg'
               onContextMenu={(event) => handleClickClose()}
-              onTouchStart={(event) => handleClickClose()}>
+              onTouchEnd={(event) => handleClickClose()}>
               Cancel
             </div>
           </div>
@@ -164,7 +176,7 @@ const useVoucherCreator = (order, setOrder) => {
             <div
               className='btn btn-primary text-lg'
               onContextMenu={(e) => handleSetQuantity()}
-              onTouchStart={(e) => handleSetQuantity()}>
+              onTouchEnd={(e) => handleSetQuantity()}>
               {voucherState.quantity == undefined
                 ? 'Enter'
                 : voucherState.quantity}
@@ -176,8 +188,11 @@ const useVoucherCreator = (order, setOrder) => {
             <div
               className='btn btn-primary text-lg'
               onContextMenu={(e) => handleSetValue()}
-              onTouchStart={(e) => handleSetValue()}>
-              €{voucherState.value == undefined ? 'Enter' : voucherState.value.toFixed(2)}
+              onTouchEnd={(e) => handleSetValue()}>
+              €
+              {voucherState.value == undefined
+                ? 'Enter'
+                : voucherState.value.toFixed(2)}
               <img src={dropdownSVG} className='w-6 invert-icon' />
             </div>
           </div>
@@ -193,7 +208,7 @@ const useVoucherCreator = (order, setOrder) => {
           <div
             className='w-full btn h-full btn-primary text-lg'
             onContextMenu={(e) => handleCreateVouchers()}
-            onTouchStart={(e) => handleCreateVouchers()}>{`Create ${
+            onTouchEnd={(e) => handleCreateVouchers()}>{`Create ${
             voucherState.quantity
           } voucher${
             voucherState.quantity !== 1 ? 's' : ''

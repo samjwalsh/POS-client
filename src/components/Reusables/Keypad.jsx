@@ -166,7 +166,7 @@ const useKeypad = () => {
       <div
         className='grid grid-cols-3 grid-rows-6 w-full h-full gap-2 text-2xl rounded-box background p-4'
         onContextMenu={(event) => handleKeypadClick(event)}
-        onTouchStart={(event) => handleKeypadClick(event)}>
+        onTouchEnd={(event) => handleKeypadClick(event)}>
         <div className='border rounded-btn p-2 col-span-2 row-span 1 flex flex-row text-3xl justify-between w-full num'>
           <div className='text-left cnter-items'>
             {keypadState.numberFormat === 'currency' ? '€' : ''}
@@ -187,9 +187,7 @@ const useKeypad = () => {
         <div className='col-span-1 row-span-1 keypad btn-warning' id='delete'>
           <img src={backSVG} className='w-6 invert-icon' id='delete' />
         </div>
-        <div
-          className='col-span-1 row-span-1 keypad btn btn-neutral'
-          id='7'>
+        <div className='col-span-1 row-span-1 keypad btn btn-neutral' id='7'>
           7
         </div>
         <div

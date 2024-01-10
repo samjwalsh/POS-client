@@ -96,7 +96,7 @@ const useKeyboard = () => {
           keyboardState !== 'normal' ? 'uppercase' : ''
         }`}
         onContextMenu={(event) => handleKeyboardClick(event)}
-        onTouchStart={(event) => handleKeyboardClick(event)}>
+        onTouchEnd={(event) => handleKeyboardClick(event)}>
         <div className='borderD border-colour rnd p-2 col-span-1 row-span 1 text-3xl justify-between w-full num text-left normal-case'>
           {keyboardValue + '_'}
         </div>

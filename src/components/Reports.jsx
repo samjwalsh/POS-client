@@ -49,11 +49,21 @@ export default function Reports(props) {
 
   async function handleEndOfDay() {
     playBeep();
-    const choice = await confirm(['End of day?', 'Cancel', 'Continue', 'This will print an end of day sheet and upload all of today\'s orders to the cloud.']);
+    const choice = await confirm([
+      'End of day?',
+      'Cancel',
+      'Continue',
+      "This will print an end of day sheet and upload all of today's orders to the cloud.",
+    ]);
     if (!choice) return;
     let orders = await getAllOrders();
     await printEndOfDay(orders);
-    const printFailed = await confirm(['View sheet on screen?', 'No', 'Yes', `If the end of day sheet didn't print correctly you can view the sheet on the till`]);
+    const printFailed = await confirm([
+      'View sheet on screen?',
+      'No',
+      'Yes',
+      `If the end of day sheet didn't print correctly you can view the sheet on the till`,
+    ]);
     if (printFailed) {
       let cashTotal = 0;
       let cardTotal = 0;
@@ -137,7 +147,14 @@ export default function Reports(props) {
   const handleDeleteOrder = async (deletedOrder) => {
     playBeep();
 
-    const choice = await confirm([`Delete order?`, 'Cancel', 'Delete', `Delete this order for €${deletedOrder.subtotal.toFixed(2)}, this action cannot be undone.`]);
+    const choice = await confirm([
+      `Delete order?`,
+      'Cancel',
+      'Delete',
+      `Delete this order for €${deletedOrder.subtotal.toFixed(
+        2
+      )}, this action cannot be undone.`,
+    ]);
     if (!choice) return;
 
     let localOrders = await removeOrder(deletedOrder);
@@ -178,13 +195,13 @@ export default function Reports(props) {
             <div
               className=' btn btn-primary text-lg'
               onContextMenu={(e) => handlePrintReceipt(order)}
-              onTouchStart={(e) => handlePrintReceipt(order)}>
+              onTouchEnd={(e) => handlePrintReceipt(order)}>
               Receipt
             </div>
             <div
               className='btn-error btn'
               onContextMenu={(e) => handleDeleteOrder(order)}
-              onTouchStart={(e) => handleDeleteOrder(order)}>
+              onTouchEnd={(e) => handleDeleteOrder(order)}>
               <img src={closeSVG} className='w-6 invert-icon' />
             </div>
           </div>
@@ -224,13 +241,13 @@ export default function Reports(props) {
           <div
             className='btn btn-warning h-auto text-lg cnter-items w-full'
             onContextMenu={(event) => handleDeleteOldOrders()}
-            onTouchStart={(event) => handleDeleteOldOrders()}>
+            onTouchEnd={(event) => handleDeleteOldOrders()}>
             Delete Old Orders
           </div>
           <div
             className='btn-error btn text-lg h-auto p-2 cnter-items w-full'
             onContextMenu={(event) => handleEndOfDay()}
-            onTouchStart={(event) => handleEndOfDay()}>
+            onTouchEnd={(event) => handleEndOfDay()}>
             End Of Day
           </div>
         </div>
@@ -295,7 +312,7 @@ export default function Reports(props) {
             €{(xTotal / (orders.length === 0 ? 1 : orders.length)).toFixed(2)}
           </div>
         </div>
-        </div>
+      </div>
     );
   }
 
