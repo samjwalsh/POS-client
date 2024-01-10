@@ -85,7 +85,7 @@ export default function ServerConnection() {
   return (
     <div
       className={`flex flex-row text-sm h-full rnd px-1
-       ${isOnline.status ? 'positiveFill' : 'negativeFill'}`}>
+       ${isOnline.status ? 'positive' : 'negative'}`}>
       <div className='grid grid-rows-2 grid-cols-1'>
         <div className='row-span-1 col-span-1'>SRV</div>
         <div className='row-span-1 col-span-1'>

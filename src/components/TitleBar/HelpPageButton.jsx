@@ -14,7 +14,7 @@ export default function HelpPageButton() {
   return (
     <>
       <HelpPage />
-      <div className='h-full cnter-items primaryFill'>
+      <div className='h-full cnter-items primary'>
         <img
           src={question}
           className='w-8 invert-icon cnter-items h-full'
