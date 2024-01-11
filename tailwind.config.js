@@ -56,7 +56,7 @@ module.exports = {
         teddys: {
           primary: '#115e59',
           'primary-content': '#fff',
-          secondary: '#0284c7',
+          secondary: '#ff7e00',
           'secondary-content': '#fff',
           neutral: '#1f2937',
           'neutral-content': '#fff',

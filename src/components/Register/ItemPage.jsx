@@ -5,17 +5,31 @@ import { useState } from 'react';
 import log from '../../tools/logging';
 import playBeep from '../../tools/playBeep';
 
+import useAlert from '../Reusables/Alert.jsx';
+
 import checkSVG from '../../assets/appicons/check.svg';
 import addSVG from '../../assets/appicons/add.svg';
 import minusSVG from '../../assets/appicons/minus.svg';
 
-export default function ItemPage(props) {
-  const menuState = props.menuState;
-  const setMenuState = props.setMenuState;
-  const currentOrder = props.currentOrder;
-  const setCurrentOrder = props.setCurrentOrder;
-  const order = props.order;
-  const setOrder = props.setOrder;
+export default function ItemPage({
+  menuState,
+  setMenuState,
+  currentOrder,
+  setCurrentOrder,
+  order,
+  setOrder,
+}) {
+  const [Alert, alert] = useAlert();
+  const handleClickHelp = async () => {
+    await alert(<div className='w-[80vw]'>
+      <div className='text-xl'>Shortcut Buttons</div>
+      <div className='text-base whitespace-pre-line'>The large buttons at the top of the container are shortcut buttons, pressing a shortcut button is the same as manually clicking the addon buttons for the shortcut you clicked (if you clicked Special 99 it would add a flake and toppings) and then adding the item to the cart.{"\n\n"}
+      If you have already selected some addons, like crushed flake, and changed the quantity, these changes will stay after you click a shortcut button, so if you add crushed flake and increase the quantity to 2 before pressing the 99 shortcut button, 2 99s with crushed flake will be added to the cart.{"\n\n"}</div>
+      <div className='text-xl'>Addon Buttons</div>
+      <div className='text-base whitespace-pre-line'>The addon buttons are in the bottom half of the container, clicking an addon button will toggle it on or off (so if you tap flake once it adds a flake but if you tap it again it takes it away).{"\n\n"}
+      If you select an addon like a flake and then press the shortcut button for a 99, a 99 will be added to the cart with only 1 flake, not 0 or 2.If you want to add a second flake you can find it in the extras section.</div>
+    </div>);
+  };
 
   // Create addon HTML
   const item = {};
@@ -158,33 +172,43 @@ export default function ItemPage(props) {
   6;
   log(`Created HTML for item page`);
   return (
+    <>
+    <Alert/>
     <div className='flex flex-col h-full content-start p-2'>
       <div className='grid grid-cols-2 grid-rows-1 text-2xl h-min'>
         <div className='col-span-1 text-left w-auto h-min whitespace-nowrap mt-2'>
           {menuState.name}
         </div>
-        <button
-          className='col-span-1 text-right self-end justify-self-end w-min h-min whitespace-nowrap p-2 text-lg btn btn-error'
-          onContextMenu={(event) =>
-            handleExitItemPage(
-              event,
-              item,
-              setMenuState,
-              setCurrentOrder,
-              currentOrder
-            )
-          }
-          onTouchEnd={(event) =>
-            handleExitItemPage(
-              event,
-              item,
-              setMenuState,
-              setCurrentOrder,
-              currentOrder
-            )
-          }>
-          Cancel
-        </button>
+        <div className='col-span-1 text-right self-end justify-self-end flex flex-row gap-2'>
+          <button
+            className=' w-min h-min whitespace-nowrap p-2 text-lg btn btn-secondary'
+            onContextMenu={(event) => handleClickHelp()}
+            onTouchEnd={(event) => handleClickHelp()}>
+            Help
+          </button>
+          <button
+            className='col-span-1 text-right self-end justify-self-end w-min h-min whitespace-nowrap p-2 text-lg btn btn-error'
+            onContextMenu={(event) =>
+              handleExitItemPage(
+                event,
+                item,
+                setMenuState,
+                setCurrentOrder,
+                currentOrder
+              )
+            }
+            onTouchEnd={(event) =>
+              handleExitItemPage(
+                event,
+                item,
+                setMenuState,
+                setCurrentOrder,
+                currentOrder
+              )
+            }>
+            Cancel
+          </button>
+        </div>
       </div>
       <div className='w-full h-min flex-grow-0 overflow-y-scroll no-scrollbar'>
         <div className='flex flex-row gap-2 h-auto'>{shortcutsHTML}</div>
@@ -248,6 +272,7 @@ export default function ItemPage(props) {
         </div>
       </div>
     </div>
+    </>
   );
 }
 
