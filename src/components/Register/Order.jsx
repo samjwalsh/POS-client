@@ -116,18 +116,20 @@ export default function Order(props) {
           onTouchEnd={() => handleOrderItemQuantityChange('down', orderItem)}>
           <img src={minusSVG} className='w-6 invert-icon' />
         </div>
-        <div className='bg-neutral h-full flex-grow grid grid-rows-[min-content_1fr] grid-cols-[1fr_min-content] p-2 py-1 text-neutral-content rounded-btn gap-2'>
-          <div className='w-auto text-base text-left'>
+        <div
+          className='w-full grid grid-cols-[auto_auto] grid-rows-[auto_min-content] text-lg py-1 px-2 rounded-btn bg-neutral text-neutral-content'
+          key={index}>
+          <div className='col-span-1 row-span-1'>
             {orderItem.name +
               (orderItem.quantity > 1 ? ` (${orderItem.quantity})` : '')}
           </div>
-          <div className='text-right'>
+          <div className='col-span-1 row-span-1 text-right num'>
             €{(orderItem.price * orderItem.quantity).toFixed(2)}
           </div>
-          <div className='text-left text-sm'>
+          <div className='col-span-1 row-span-1 pr-4 text-sm'>
             {orderItem.addons === undefined ? '' : orderItem.addons.join(', ')}
           </div>
-          <div className='whitespace-nowrap text-right text-sm'>
+          <div className='col-span-1 row-span-1 text-right num text-sm'>
             €{orderItem.price.toFixed(2)} EA
           </div>
         </div>

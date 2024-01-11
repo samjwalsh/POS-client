@@ -291,7 +291,7 @@ export default function Reports(props) {
             €{cardTotal.toFixed(2)}
           </div>
         </div>
-        <div className='flex flex-row w-full justify-between pb-2'>
+        <div className='flex flex-row w-full justify-between pb-2 font-bold'>
           <div className=''>X-Total:</div>
           <div className='num text-right justify-end'>€{xTotal.toFixed(2)}</div>
         </div>
@@ -335,7 +335,7 @@ export default function Reports(props) {
 
       return (
         <div
-          className='w-full grid grid-cols-[auto_auto] grid-rows-[auto_min-content] text-lg p-2 rounded-btn bg-secondary'
+          className='w-full grid grid-cols-[auto_auto] grid-rows-[auto_min-content] text-lg p-2 rounded-btn bg-neutral text-neutral-content'
           key={index}>
           <div className='col-span-1 row-span-1'>
             {item.name} {formattedQuantity}

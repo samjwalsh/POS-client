@@ -55,7 +55,7 @@ module.exports = {
         teddys: {
           primary: '#115e59',
           'primary-content': '#fff',
-          secondary: '#ff7e00',
+          secondary: '#377cfb',
           'secondary-content': '#fff',
           neutral: '#1f2937',
           'neutral-content': '#fff',
@@ -69,9 +69,9 @@ module.exports = {
 
           '--rounded-box': '1rem',
           '--rounded-btn': '0.25rem',
-          '--rounded-badge': '0.75rem',
-          '--animation-btn': '10s',
-          '--animation-input': '0.25s',
+          '--rounded-badge': '0.5rem',
+          '--animation-btn': '0s',
+          '--animation-input': '0s',
           '--btn-text-case': 'uppercase',
           '--navbar-padding': '.5rem',
           '--border-btn': '1px',
