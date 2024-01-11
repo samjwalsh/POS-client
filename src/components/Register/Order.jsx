@@ -111,13 +111,13 @@ export default function Order(props) {
         className='flex flex-row h-min w-full max-w-full gap-2'
         key={`${orderItem.name} [${orderItem.addons}]`}>
         <div
-          className='btn btn-error h-full'
+          className='btn btn-error h-full p-0 w-12'
           onContextMenu={() => handleOrderItemQuantityChange('down', orderItem)}
           onTouchEnd={() => handleOrderItemQuantityChange('down', orderItem)}>
           <img src={minusSVG} className='w-6 invert-icon' />
         </div>
-        <div className='bg-primary h-full flex-grow grid grid-rows-[min-content_1fr] grid-cols-[1fr_min-content] p-2 py-1 rounded-btn text-primary-content'>
-          <div className='w-auto text-lg text-left'>
+        <div className='bg-neutral h-full flex-grow grid grid-rows-[min-content_1fr] grid-cols-[1fr_min-content] p-2 py-1 rounded-btn text-primary-content'>
+          <div className='w-auto text-base text-left'>
             {orderItem.name +
               (orderItem.quantity > 1 ? ` (${orderItem.quantity})` : '')}
           </div>
@@ -132,7 +132,7 @@ export default function Order(props) {
           </div>
         </div>
         <div
-          className='btn btn-success h-full'
+          className='btn btn-success h-full p-0 w-12'
           onContextMenu={() => handleOrderItemQuantityChange('up', orderItem)}
           onTouchEnd={() => handleOrderItemQuantityChange('up', orderItem)}>
           <img src={addSVG} className='w-6 fill-white invert-icon' />

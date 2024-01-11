@@ -174,7 +174,7 @@ const useVoucherCreator = (order, setOrder) => {
           <div className='flex flex-row justify-between'>
             <div className='cnter-items'>Quantity:</div>
             <div
-              className='btn btn-primary text-lg'
+              className='btn btn-neutral text-lg'
               onContextMenu={(e) => handleSetQuantity()}
               onTouchEnd={(e) => handleSetQuantity()}>
               {voucherState.quantity == undefined
@@ -186,7 +186,7 @@ const useVoucherCreator = (order, setOrder) => {
           <div className='flex flex-row justify-between'>
             <div className='cnter-items'>Value:</div>
             <div
-              className='btn btn-primary text-lg'
+              className='btn btn-neutral text-lg'
               onContextMenu={(e) => handleSetValue()}
               onTouchEnd={(e) => handleSetValue()}>
               €

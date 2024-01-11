@@ -14,7 +14,7 @@ export const settingsSchema = [
       {
         name: 'Theme',
         type: 'dropdown',
-        value: 'emerald',
+        value: 'teddys',
         list: [
           'light',
           'dark',

@@ -177,7 +177,7 @@ export default function Settings(props) {
                   <img src={addSVG} className='w-6 invert-icon' />
                 </div>
                 <div
-                  className=' btn text-lg btn-primary p-2 cnter-items '
+                  className=' btn text-lg btn-neutral p-2 cnter-items '
                   onContextMenu={(e) =>
                     handleClickRangeOption(
                       setting,
@@ -208,7 +208,7 @@ export default function Settings(props) {
               <div className='text-xl self-center'>{setting.name}</div>
               <div className='flex flex-row gap-2'>
                 <div
-                  className='btn text-lg btn-primary p-2 cnter-items '
+                  className='btn text-lg btn-neutral p-2 cnter-items '
                   onContextMenu={(e) => handleClickButtonOption(setting)}
                   onTouchEnd={(e) => handleClickButtonOption(setting)}>
                   {setting.label}
@@ -224,7 +224,7 @@ export default function Settings(props) {
               <div className='text-xl self-center'>{setting.name}</div>
               <div className='flex flex-row gap-2'>
                 <div
-                  className='btn text-lg btn-primary p-2 cnter-items '
+                  className='btn text-lg btn-neutral p-2 cnter-items '
                   onContextMenu={(e) =>
                     handleClickToggleOption(setting, settings, setSettings)
                   }
@@ -248,7 +248,7 @@ export default function Settings(props) {
               <div className='text-xl self-center'>{setting.name}</div>
               <div className='flex flex-row gap-2'>
                 <div
-                  className='btn text-lg btn-primary p-2 cnter-items '
+                  className='btn text-lg btn-neutral p-2 cnter-items '
                   onContextMenu={(e) =>
                     handleClickDropdownOption(setting, settings, setSettings)
                   }
@@ -273,7 +273,7 @@ export default function Settings(props) {
               <div className='text-xl self-center'>{setting.name}</div>
               <div className='flex flex-row gap-2'>
                 <div
-                  className='btn text-lg btn-primary p-2 cnter-items '
+                  className='btn text-lg btn-neutral p-2 cnter-items '
                   onContextMenu={(e) =>
                     handleClickTextInputOption(setting, settings, getSettings)
                   }
@@ -298,7 +298,7 @@ export default function Settings(props) {
               <div className='text-xl self-center'>{setting.name}</div>
               <div className='flex flex-row gap-2'>
                 <div
-                  className='btn text-lg btn-primary p-2 cnter-items '
+                  className='btn text-lg btn-neutral p-2 cnter-items '
                   onContextMenu={(e) =>
                     handleClickNumberInputOption(setting, settings, getSettings)
                   }

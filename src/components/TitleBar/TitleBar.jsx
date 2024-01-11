@@ -53,23 +53,23 @@ export default function TitleBar(props) {
       <ListSelect />
       <div className='flex flex-row justify-between h-14 shadow-md '>
         <div
-          className='h-auto btn btn-primary text-lg m-1 negative px-1'
+          className='h-10 btn btn-primary text-lg m-1'
           onContextMenu={(e) => handleClickHamburger(setHamburger)}
           onTouchEnd={(e) => handleClickHamburger(setHamburger)}>
-          <img src={hamburger} className=' invert-icon w-8' />
+          {/* <img src={hamburger} className=' invert-icon w-6' /> */}
           <div className=''>Menu</div>
         </div>
 
-        <div className='flex flex-row items-center justify-end w-full'>
+        <div className='flex flex-row items-center justify-end w-full px-1'>
           <div
-            className=' h-10 btn btn-primary mx-1 my-2 text-lg'
+            className=' h-10 btn btn-secondary mx-1 my-2 text-lg'
             onContextMenu={(e) => handlePrintRecentOrder()}
             onTouchEnd={(e) => handlePrintRecentOrder()}>
             Print Receipt
           </div>
           <div className='cnter-items h-10 mx-5'></div>
           <div
-            className=' h-10 btn btn-primary text-lg'
+            className=' h-10 btn btn-secondary text-lg'
             onContextMenu={(e) => handleClickVoucherMenu()}
             onTouchEnd={(e) => handleClickVoucherMenu()}>
             Vouchers

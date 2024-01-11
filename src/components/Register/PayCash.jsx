@@ -51,31 +51,31 @@ export default function PayCash(props) {
     <div className='flex flex-col h-full'>
       <div className='grid grid-cols-2 grid-rows-5 gap-2 h-full p-2 pb-1'>
         <div
-          className='col-span-2 row-span-1 btn btn-neutral h-full text-2xl'
+          className='col-span-2 row-span-1 btn btn-secondary h-full text-2xl'
           onContextMenu={() => handleButtonPress('custom')}
           onTouchEnd={() => handleButtonPress('custom')}>
           Custom
         </div>
         <div
-          className='col-span-1 row-span-1 num btn btn-secondary h-full text-2xl'
+          className='col-span-1 row-span-1 num btn btn-neutral h-full text-2xl'
           onContextMenu={() => handleButtonPress(50)}
           onTouchEnd={() => handleButtonPress(50)}>
           €50
         </div>
         <div
-          className='col-span-1 row-span-1 num btn btn-secondary h-full text-2xl'
+          className='col-span-1 row-span-1 num btn btn-neutral h-full text-2xl'
           onContextMenu={() => handleButtonPress(20)}
           onTouchEnd={() => handleButtonPress(20)}>
           €20
         </div>
         <div
-          className='col-span-1 row-span-1 num btn btn-secondary h-full text-2xl'
+          className='col-span-1 row-span-1 num btn btn-neutral h-full text-2xl'
           onContextMenu={() => handleButtonPress(10)}
           onTouchEnd={() => handleButtonPress(10)}>
           €10
         </div>
         <div
-          className='col-span-1 row-span-1 num btn btn-secondary h-full text-2xl'
+          className='col-span-1 row-span-1 num btn btn-neutral h-full text-2xl'
           onContextMenu={() => handleButtonPress(5)}
           onTouchEnd={() => handleButtonPress(5)}>
           €5

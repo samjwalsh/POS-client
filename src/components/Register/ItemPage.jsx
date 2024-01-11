@@ -74,11 +74,11 @@ export default function ItemPage(props) {
           )
         }>
         <div className='flex flex-row justify-between w-full gap-2'>
-          <div className='flex-grow flex flex-row justify-between p-2 btn-secondary btn h-full'>
+          <div className='flex-grow flex flex-row justify-between p-2 btn-neutral btn h-full'>
             <div className='text-xl cnter-items'>{addon.name}</div>
             <div className='num cnter-items'>€{addon.price.toFixed(2)}</div>
           </div>
-          <div className='cnter-items w-16 h-full btn btn-neutral'>
+          <div className='cnter-items w-16 h-full btn btn-secondary'>
             <div className='toggleAddonButton' id={index}>
               {selected ? (
                 <img src={checkSVG} className='w-8 invert-icon' />
