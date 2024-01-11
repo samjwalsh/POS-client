@@ -117,20 +117,26 @@ export default function Order(props) {
           <img src={minusSVG} className='w-6 invert-icon' />
         </div>
         <div
-          className='w-full grid grid-cols-[auto_auto] grid-rows-[auto_min-content] text-lg py-1 px-2 rounded-btn bg-neutral text-neutral-content'
+          className='w-full grid grid-cols-1 grid-rows-[min-content_min-content] text-base py-1 px-2 rounded-btn bg-neutral text-neutral-content'
           key={index}>
-          <div className='col-span-1 row-span-1'>
-            {orderItem.name +
-              (orderItem.quantity > 1 ? ` (${orderItem.quantity})` : '')}
+          <div className='flex flex-row justify-between'>
+            <div className='pr-1'>
+              {orderItem.name +
+                (orderItem.quantity > 1 ? ` (${orderItem.quantity})` : '')}
+            </div>
+            <div className=' text-right num'>
+              €{(orderItem.price * orderItem.quantity).toFixed(2)}
+            </div>
           </div>
-          <div className='col-span-1 row-span-1 text-right num'>
-            €{(orderItem.price * orderItem.quantity).toFixed(2)}
-          </div>
-          <div className='col-span-1 row-span-1 pr-4 text-sm'>
-            {orderItem.addons === undefined ? '' : orderItem.addons.join(', ')}
-          </div>
-          <div className='col-span-1 row-span-1 text-right num text-sm'>
-            €{orderItem.price.toFixed(2)} EA
+          <div className='flex flex-row justify-between'>
+            <div className='pr-4 text-sm'>
+              {orderItem.addons === undefined
+                ? ''
+                : orderItem.addons.join(', ')}
+            </div>
+            <div className='text-right num text-sm whitespace-nowrap'>
+              €{orderItem.price.toFixed(2)} EA
+            </div>
           </div>
         </div>
         <div
