@@ -49,7 +49,6 @@ module.exports = {
   },
   daisyui: {
     themes: [
-      'light',
       'dark',
       'emerald',
       {
@@ -82,15 +81,9 @@ module.exports = {
       'synthwave',
       'retro',
       'cyberpunk',
-      'halloween',
-      'lofi',
-      'fantasy',
       'black',
-      'dracula',
-      'cmyk',
       'business',
       'night',
-      'coffee',
     ],
   },
   plugins: [require('daisyui')],

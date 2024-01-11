@@ -116,7 +116,7 @@ export default function Order(props) {
           onTouchEnd={() => handleOrderItemQuantityChange('down', orderItem)}>
           <img src={minusSVG} className='w-6 invert-icon' />
         </div>
-        <div className='bg-neutral h-full flex-grow grid grid-rows-[min-content_1fr] grid-cols-[1fr_min-content] p-2 py-1 text-neutral-content rounded-btn'>
+        <div className='bg-neutral h-full flex-grow grid grid-rows-[min-content_1fr] grid-cols-[1fr_min-content] p-2 py-1 text-neutral-content rounded-btn gap-2'>
           <div className='w-auto text-base text-left'>
             {orderItem.name +
               (orderItem.quantity > 1 ? ` (${orderItem.quantity})` : '')}
