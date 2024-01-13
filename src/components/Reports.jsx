@@ -175,7 +175,7 @@ export default function Reports(props) {
   }
 
   async function handleDeleteOldOrdersHelp() {
-    await alert(`This will end of day any orders currently saved on the till that are not from today, so if the last person forgot to end of day the till you can press this.`)
+    await alert(`This will end of day any orders currently saved on the till that are not from today, so if the last person forgot to end of day the till you can press this to remove any orders that weren't made today.`)
   }
 
   // HTML GENERATORS

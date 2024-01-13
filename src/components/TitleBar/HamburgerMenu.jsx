@@ -136,11 +136,24 @@ export default function HamburgerMenu(props) {
           onContextMenu={() => handleCloseSideMenu(setHamburger)}
           onTouchEnd={() => handleCloseSideMenu(setHamburger)}></div>
       </div>
-      <div className='fixed bottom-0 right-0 bg-white text-xs h-min w-min rounded-btn font-bold p-1 m-1 background z-50'>
-        v{version}
+      <div className='fixed bottom-0 right-0 bg-white text-xs h-min w-min rounded-btn font-bold p-1 m-1 background z-50 whitespace-nowrap'>
+        {createVersionString(version)}
       </div>
     </>
   );
+}
+
+function createVersionString(versionString) {
+  try {
+    let versionArr = versionString.split('-');
+    let version = versionArr[0];
+    if (versionArr[1]) {
+      version += `-A`;
+    }
+    return version;
+  } catch (e) {
+    console.log(e);
+  }
 }
 
 function handleCloseSideMenu(setHamburger) {

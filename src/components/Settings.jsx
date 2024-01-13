@@ -340,9 +340,6 @@ export default function Settings(props) {
           {settingsHTML}
           <div className='h-8'></div>
         </div>
-        <div className='fixed bottom-0 right-0 bg-white text-xs h-min w-min rounded-btn font-bold p-1 m-1 background z-50'>
-        v{version}
-      </div>
       </div>
     </>
   );
