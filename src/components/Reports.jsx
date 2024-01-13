@@ -59,86 +59,107 @@ export default function Reports(props) {
     if (!choice) return;
     let orders = await getAllOrders();
     await printEndOfDay(orders);
-    const printFailed = await confirm([
-      'View sheet on screen?',
+    const printedCorrectly = await confirm([
+      'Did the sheet print correctly?',
       'No',
       'Yes',
-      `If the end of day sheet didn't print correctly you can view the sheet on the till`,
+      `If the end of day sheet didn't print correctly you can view the sheet on the till or try to print it again.`,
     ]);
-    if (printFailed) {
-      let cashTotal = 0;
-      let cardTotal = 0;
-      let quantityItems = 0;
-      let quantityOrders = orders.length;
-
-      for (const order of orders) {
-        if (order.paymentMethod === 'Card') {
-          cardTotal += order.subtotal;
+    if (!printedCorrectly) {
+      let tryAgain = true;
+      while (tryAgain) {
+        tryAgain = await confirm([
+          'Try Again?',
+          'View On Screen',
+          'Print Again',
+          `You can choose to attempt to print the end of day sheet again or view it on the screen.`,
+        ]);
+        if (tryAgain) {
+          await printEndOfDay(orders);
+          console.log('print attempt');
+          const printedCorrectly = await confirm([
+            'Did the sheet print correctly?',
+            'No',
+            'Yes',
+            `If the end of day sheet didn't print correctly you can view the sheet on the till or try to print it again.`,
+          ]);
+          if (printedCorrectly) tryAgain = false;
         } else {
-          cashTotal += order.subtotal;
-        }
+          let cashTotal = 0;
+          let cardTotal = 0;
+          let quantityItems = 0;
+          let quantityOrders = orders.length;
 
-        for (const item of order.items) {
-          if (item.quantity === undefined) {
-            quantityItems++;
-          } else {
-            quantityItems += item.quantity;
+          for (const order of orders) {
+            if (order.paymentMethod === 'Card') {
+              cardTotal += order.subtotal;
+            } else {
+              cashTotal += order.subtotal;
+            }
+
+            for (const item of order.items) {
+              if (item.quantity === undefined) {
+                quantityItems++;
+              } else {
+                quantityItems += item.quantity;
+              }
+            }
           }
+
+          let xTotal = cashTotal + cardTotal;
+
+          let averageSale = 0;
+          if (quantityOrders !== 0 && quantityOrders !== undefined) {
+            averageSale = xTotal / quantityOrders;
+          }
+
+          const EodHTML = (
+            <div className='text-xl w-full'>
+              <div className='flex flex-row justify-between'>
+                <div>Shop:</div>
+                <div>{await getSetting('Shop Name')}</div>
+              </div>
+              <div className='flex flex-row justify-between'>
+                <div>Date:</div>
+                <div>{new Date().toLocaleDateString('en-ie')}</div>
+              </div>
+              <div className='flex flex-row justify-between font-bold'>
+                <div>Cash:</div>
+                <div>{`€${cashTotal.toFixed(2)}`}</div>
+              </div>
+              <div className='flex flex-row justify-between font-bold'>
+                <div>Card:</div>
+                <div>{`€${cardTotal.toFixed(2)}`}</div>
+              </div>
+              <div className='flex flex-row justify-between font-bold'>
+                <div>Total:</div>
+                <div>{`€${xTotal.toFixed(2)}`}</div>
+              </div>
+              <div className='flex flex-row justify-between'>
+                <div>Vat Total:</div>
+                <div>{`€${(0.23 * xTotal).toFixed(2)}`}</div>
+              </div>
+              <div className='flex flex-row justify-between'>
+                <div>Total Items:</div>
+                <div>{quantityItems}</div>
+              </div>
+              <div className='flex flex-row justify-between'>
+                <div>Total Orders:</div>
+                <div>{quantityOrders}</div>
+              </div>
+              <div className='flex flex-row justify-between'>
+                <div>Average Sale:</div>
+                <div>{`€${averageSale.toFixed(2)}`}</div>
+              </div>
+              <div className='flex flex-row justify-between'>
+                <div>Time</div>
+                <div>{calculateDateString(new Date().getTime())}</div>
+              </div>
+            </div>
+          );
+          await alert(EodHTML);
         }
       }
-
-      let xTotal = cashTotal + cardTotal;
-
-      let averageSale = 0;
-      if (quantityOrders !== 0 && quantityOrders !== undefined) {
-        averageSale = xTotal / quantityOrders;
-      }
-
-      const EodHTML = (
-        <div className='text-xl w-full'>
-          <div className='flex flex-row justify-between'>
-            <div>Shop:</div>
-            <div>{await getSetting('Shop Name')}</div>
-          </div>
-          <div className='flex flex-row justify-between'>
-            <div>Date:</div>
-            <div>{new Date().toLocaleDateString('en-ie')}</div>
-          </div>
-          <div className='flex flex-row justify-between'>
-            <div>Cash:</div>
-            <div>{`€${cashTotal.toFixed(2)}`}</div>
-          </div>
-          <div className='flex flex-row justify-between'>
-            <div>Card:</div>
-            <div>{`€${cardTotal.toFixed(2)}`}</div>
-          </div>
-          <div className='flex flex-row justify-between'>
-            <div>Total:</div>
-            <div>{`€${xTotal.toFixed(2)}`}</div>
-          </div>
-          <div className='flex flex-row justify-between'>
-            <div>Vat Total:</div>
-            <div>{`€${(0.23 * xTotal).toFixed(2)}`}</div>
-          </div>
-          <div className='flex flex-row justify-between'>
-            <div>Total Items:</div>
-            <div>{quantityItems}</div>
-          </div>
-          <div className='flex flex-row justify-between'>
-            <div>Total Orders:</div>
-            <div>{quantityOrders}</div>
-          </div>
-          <div className='flex flex-row justify-between'>
-            <div>Average Sale:</div>
-            <div>{`€${averageSale.toFixed(2)}`}</div>
-          </div>
-          <div className='flex flex-row justify-between'>
-            <div>Time</div>
-            <div>{calculateDateString(new Date().getTime())}</div>
-          </div>
-        </div>
-      );
-      await alert(EodHTML);
     }
     await endOfDay();
     orders = await getAllOrders();
