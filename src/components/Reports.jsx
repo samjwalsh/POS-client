@@ -251,7 +251,7 @@ export default function Reports(props) {
               Delete Old Orders
             </div>
             <div
-              className='btn-accent btn'
+              className='btn-primary btn'
               onContextMenu={(e) => handleDeleteOldOrdersHelp()}
               onTouchEnd={(e) => handleDeleteOldOrdersHelp()}>
               <img src={infoSVG} className='w-6 invert-icon' />

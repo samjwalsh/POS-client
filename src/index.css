@@ -48,17 +48,7 @@ body {
 
 .invert-icon {
   @apply invert z-0;
-
 }
-
-/* .btn {
-  @apply   p-2 cnter-items text-lg;
-}
-
-.btnlg {
-  @apply   p-2 cnter-items text-2xl;
-} */
-
 .menu-itm {
   @apply btn w-48 h-32 max-w-5xl flex-grow flex p-2 text-left text-2xl items-end justify-start text-neutral-content;
 }
@@ -66,26 +56,6 @@ body {
 .menu-itm-filler {
   @apply w-48 h-0 max-w-5xl flex-grow;
 }
-
-/* .primary {
-  @apply dark:bg-dark_primary  bg-light_primary;
-}
-
-.secondary {
-  @apply dark:bg-dark_secondary  bg-light_secondary;
-}
-
-.negative {
-  @apply dark:bg-dark_negative bg-light_negative
-}
-
-.positive {
-  @apply dark:bg-dark_positive  bg-light_positive
-}
-
-.grey {
-  @apply dark:bg-dark_grey bg-light_grey 
-} */
 
 .borderD {
   @apply border;

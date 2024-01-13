@@ -1,5 +1,4 @@
-/** @type {import('tailwindcss').Config} */
-module.exports = {
+/** @type {import('tailwindcss').Config} */ module.exports = {
   content: ['./src/**/*.{html,jsx}'],
   theme: {
     borderWidth: {
@@ -11,46 +10,45 @@ module.exports = {
       8: '8px',
     },
     extend: {
-      gridTemplateRows: {
-        layout: 'h-min 1fr',
-      },
+      gridTemplateRows: { layout: 'h-min 1fr' },
       fontFamily: {
         sans: ['Rubik'],
         mono: ['Noto Sans Mono'],
         emoji: ['Segoe UI Emoji'],
-      },
-      colors: {
-        light_background: '#ffffff',
-        // light_primary: '#00b5ff',
-        // light_primary_border: '#00b5ff',
-        // light_secondary: '#ffbe00',
-        // light_secondary_border: '#ffbe00',
-        // light_negative: '#ff5861',
-        // light_negative_border: '#ff5861',
-        // light_positive: '#00a96e',
-        // light_positive_border: '#00a96e',
-        // light_grey: '#c7c8c8',
-        // light_grey_border: '#c7c8c8',
-        light_grey_divider: '#bbb',
-        dark_background: '#1d232a',
-        // dark_primary: '#00b5ff',
-        // dark_primary_border: '#00b5ff',
-        // dark_secondary: '#ffbe00',
-        // dark_secondary_border: '#ffbe00',
-        // dark_negative: '#ff5861',
-        // dark_negative_border: '#ff5861',
-        // dark_positive: '#00a96e',
-        // dark_positive_border: '#00a96e',
-        // dark_grey: '#232a33',
-        // dark_grey_border: '#232a33',
-        dark_grey_divider: '#3f3f46',
       },
     },
   },
   daisyui: {
     themes: [
       'dark',
-      'emerald',
+      {
+        emerald: {
+          primary: '#41be6d',
+          'primary-content': '#f9fafb',
+          secondary: '#0452e3',
+          'secondary-content': '#f9fafb',
+          accent: '#d03516',
+          'accent-content': '#f9fafb',
+          neutral: '#333c4d',
+          'neutral-content': '#f9fafb',
+          'base-100': '#ffffff',
+          'base-200': '#f9fafb',
+          'base-300': '#f0f0f0',
+          'base-content': '#333c4d',
+          info: '#1c92f2',
+          success: '#009485',
+          warning: '#ff9900',
+          error: '#ff5724',
+          '--rounded-box': '0.5rem',
+          '--rounded-btn': '.25rem',
+          '--rounded-badge': '0.5rem',
+          '--animation-btn': '0',
+          '--animation-input': '0',
+          '--btn-text-case': 'uppercase',
+          '--navbar-padding': '.5rem',
+          '--border-btn': '1px',
+        },
+      },
       {
         teddys: {
           primary: '#115e59',
@@ -66,7 +64,6 @@ module.exports = {
           'warning-content': '#fff',
           error: '#b91c1c',
           'error-content': '#fff',
-
           '--rounded-box': '0.5rem',
           '--rounded-btn': '0.25rem',
           '--rounded-badge': '0.5rem',
