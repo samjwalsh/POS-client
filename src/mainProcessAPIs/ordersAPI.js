@@ -5,7 +5,6 @@ const Store = require('electron-store');
 const store = new Store();
 import { getSetting } from './settingsAPI';
 
-
 ipcMain.handle('getAllOrders', () => {
   let orders = store.get('orders');
   if (Array.isArray(orders) === false) {
@@ -18,8 +17,6 @@ ipcMain.handle('getAllOrders', () => {
       notDeletedOrEodOrders.push(order);
     }
   });
-
-
 
   return notDeletedOrEodOrders;
 });
@@ -47,7 +44,6 @@ ipcMain.handle('addOrder', async (e, args) => {
       items,
     };
 
-
     const orders = store.get('orders');
     if (Array.isArray(orders) === false) {
       store.set('orders', [order]);
@@ -64,10 +60,19 @@ ipcMain.handle('removeOldOrders', () => {
     store.set('orders', []);
     return;
   }
-  const currentDate = new Date().toLocaleDateString('en-ie');
+
+  // get current time for UTC timezone
+  const d = new Date();
+  const year = d.getUTCFullYear();
+  const month = d.getUTCMonth();
+  const day = d.getUTCDate();
+  // set time to begin day UTC
+  const currentDate = Date.UTC(year, month, day, 0, 0, 0, 0);
 
   for (const order of orders) {
-    if (currentDate !== new Date(order.time).toLocaleDateString('en-ie')) {
+    const orderDate = new Date(order.time);
+
+    if (currentDate > orderDate) {
       order.eod = true;
     }
   }
@@ -151,7 +156,7 @@ ipcMain.handle('syncOrders', async () => {
 
     completedEodIds.forEach((completedEodId) => {
       orders.forEach((order, index) => {
-        if ((order.id === completedEodId)) {
+        if (order.id === completedEodId) {
           orders.splice(index, 1);
         }
       });

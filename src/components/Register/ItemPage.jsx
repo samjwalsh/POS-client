@@ -43,7 +43,7 @@ export default function ItemPage({
           adds a flake but if you tap it again it takes it away).{'\n\n'}
           If you select an addon like a flake and then press the shortcut button
           for a 99, a 99 will be added to the cart with only 1 flake, not 0 or
-          2.If you want to add a second flake you can find it in the extras
+          2. If you want to add a second flake you can find it in the extras
           section.
         </div>
       </div>
