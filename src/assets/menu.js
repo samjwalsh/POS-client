@@ -484,7 +484,7 @@ export const menu = [
       },
       {
         name: 'Float',
-        price: 6,
+        price: 5,
       },
       {
         name: 'Coffee Ice.',
