@@ -17,7 +17,6 @@ export default function PayCash(props) {
 
   const [Alert, alert] = useAlert();
 
-
   openCashDrawer();
   async function handleButtonPress(value) {
     playBeep();
@@ -55,70 +54,70 @@ export default function PayCash(props) {
   }
 
   async function handlePayCashHelp() {
-    await alert(`You can use the buttons labelled with 5, 10, 20 and 50 euro to calculate your change, or press custom and key in an amount. You don't have to use these buttons if you already know what the change is. Press done to finish the transaction.`)
+    await alert(
+      `You can use the buttons labelled with 5, 10, 20 and 50 euro to calculate your change, or press custom and key in an amount. You don't have to use these buttons if you already know what the change is. Press done to finish the transaction.`
+    );
   }
 
   return (
     <>
-    <Alert/>
-    <div className='flex flex-col h-full'>
-      <div className='grid grid-cols-2 grid-rows-5 gap-2 h-full p-2 pb-1'>
-        <div className='col-span-2 row-span-1 flex flex-row gap-2'>
-          <div
-            className=' btn btn-secondary h-full text-2xl flex-grow '
-            onContextMenu={() => handleButtonPress('custom')}
-            onTouchEnd={() => handleButtonPress('custom')}>
-            Custom
+      <Alert />
+      <div className='flex flex-col h-full'>
+        <div className='grid grid-cols-2 grid-rows-5 gap-2 h-full p-2 pb-1'>
+          <div className='col-span-2 row-span-1 flex flex-row gap-2'>
+            <div
+              className=' btn btn-secondary h-full text-2xl flex-grow '
+              onContextMenu={() => handleButtonPress('custom')}
+              onTouchEnd={() => handleButtonPress('custom')}>
+              Custom
+            </div>
+            <div
+              className='btn-primary btn h-full aspect-square'
+              onContextMenu={(e) => handlePayCashHelp()}
+              onTouchEnd={(e) => handlePayCashHelp()}>
+              <img src={infoSVG} className='w-8 invert-icon' />
+            </div>
           </div>
           <div
-            className='btn-primary btn h-full aspect-square'
-            onContextMenu={(e) => handlePayCashHelp()}
-            onTouchEnd={(e) => handlePayCashHelp()}>
-            <img src={infoSVG} className='w-8 invert-icon' />
+            className='col-span-1 row-span-1 num btn btn-neutral h-full text-2xl'
+            onContextMenu={() => handleButtonPress(50)}
+            onTouchEnd={() => handleButtonPress(50)}>
+            €50
           </div>
-        </div>
-        <div
-          className='col-span-1 row-span-1 num btn btn-neutral h-full text-2xl'
-          onContextMenu={() => handleButtonPress(50)}
-          onTouchEnd={() => handleButtonPress(50)}>
-          €50
-        </div>
-        <div
-          className='col-span-1 row-span-1 num btn btn-neutral h-full text-2xl'
-          onContextMenu={() => handleButtonPress(20)}
-          onTouchEnd={() => handleButtonPress(20)}>
-          €20
-        </div>
-        <div
-          className='col-span-1 row-span-1 num btn btn-neutral h-full text-2xl'
-          onContextMenu={() => handleButtonPress(10)}
-          onTouchEnd={() => handleButtonPress(10)}>
-          €10
-        </div>
-        <div
-          className='col-span-1 row-span-1 num btn btn-neutral h-full text-2xl'
-          onContextMenu={() => handleButtonPress(5)}
-          onTouchEnd={() => handleButtonPress(5)}>
-          €5
-        </div>
+          <div
+            className='col-span-1 row-span-1 num btn btn-neutral h-full text-2xl'
+            onContextMenu={() => handleButtonPress(20)}
+            onTouchEnd={() => handleButtonPress(20)}>
+            €20
+          </div>
+          <div
+            className='col-span-1 row-span-1 num btn btn-neutral h-full text-2xl'
+            onContextMenu={() => handleButtonPress(10)}
+            onTouchEnd={() => handleButtonPress(10)}>
+            €10
+          </div>
+          <div
+            className='col-span-1 row-span-1 num btn btn-neutral h-full text-2xl'
+            onContextMenu={() => handleButtonPress(5)}
+            onTouchEnd={() => handleButtonPress(5)}>
+            €5
+          </div>
 
-        <div
-          className='col-span-2 row-span-2 btn btn-primary h-full text-2xl'
-          onContextMenu={() => handleButtonPress('exit')}
-          onTouchEnd={() => handleButtonPress('exit')}>
-          Done
+          <div
+            className='col-span-2 row-span-2 btn btn-primary h-full text-2xl'
+            onContextMenu={() => handleButtonPress('exit')}
+            onTouchEnd={() => handleButtonPress('exit')}>
+            Done
+          </div>
+        </div>
+        <div className='flex justify-between w-full text-2xl px-2 pb-1'>
+          <div className=''>Change:</div>
+          <div className='text-right num justify-end'>€{change.toFixed(2)}</div>
         </div>
       </div>
-      <div className='flex justify-between w-full text-2xl px-2 pb-1'>
-        <div className=''>Change:</div>
-        <div className='text-right num justify-end'>€{change.toFixed(2)}</div>
-      </div>
-    </div>
     </>
   );
 }
-
-
 
 export function calculateSubtotal(order) {
   let subtotal = 0;
