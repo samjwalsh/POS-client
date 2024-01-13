@@ -7,9 +7,9 @@ import playBeep from '../../tools/playBeep';
 
 import useAlert from '../Reusables/Alert.jsx';
 
-import checkSVG from '../../assets/appicons/check.svg';
 import addSVG from '../../assets/appicons/add.svg';
 import minusSVG from '../../assets/appicons/minus.svg';
+import infoSVG from '../../assets/appicons/info.svg';
 
 export default function ItemPage({
   menuState,
@@ -210,10 +210,10 @@ export default function ItemPage({
           </div>
           <div className='col-span-1 text-right self-end justify-self-end flex flex-row gap-4'>
             <button
-              className=' w-min h-min whitespace-nowrap p-2 text-lg btn btn-secondary'
+              className='whitespace-nowrap text-lg btn btn-primary'
               onContextMenu={(event) => handleClickHelp()}
               onTouchEnd={(event) => handleClickHelp()}>
-              Help
+              <img src={infoSVG} className='w-6 invert-icon' />
             </button>
             <button
               className='col-span-1 text-right self-end justify-self-end w-min h-min whitespace-nowrap p-2 text-lg btn btn-error'
