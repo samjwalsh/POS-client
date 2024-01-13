@@ -20,7 +20,6 @@
   },
   daisyui: {
     themes: [
-      'dark',
       {
         emerald: {
           primary: '#41be6d',
@@ -64,8 +63,8 @@
           'warning-content': '#fff',
           error: '#b91c1c',
           'error-content': '#fff',
-          '--rounded-box': '0.5rem',
-          '--rounded-btn': '0.25rem',
+          '--rounded-box': '0rem',
+          '--rounded-btn': '0rem',
           '--rounded-badge': '0.5rem',
           '--animation-btn': '0s',
           '--animation-input': '0s',
@@ -75,11 +74,8 @@
         },
       },
       'corporate',
-      'synthwave',
       'retro',
       'cyberpunk',
-      'black',
-      'business',
       'night',
     ],
   },

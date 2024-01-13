@@ -96,19 +96,27 @@ export default function ServerConnection() {
       </div>
 
       <div className='grid grid-rows-2 grid-cols-3 text-sm px-1'>
-        <div className='col-span-1 row-span-1'>{isOnline.ordersToAdd == 0? '-' : isOnline.ordersToAdd}</div>
-        <div className='col-span-1 row-span-1'>{isOnline.ordersToDelete== 0? '-' : isOnline.ordersToDelete}</div>
-        <div className='col-span-1 row-span-1'>{isOnline.ordersToEod== 0? '-' : isOnline.ordersToEod}</div>
         <div className='col-span-1 row-span-1'>
-          {isOnline.ordersMissingInDb== 0? '-' : isOnline.ordersMissingInDb}
+          {isOnline.ordersToAdd == 0 ? '-' : isOnline.ordersToAdd}
         </div>
         <div className='col-span-1 row-span-1'>
-          {isOnline.ordersDeletedInDb== 0? '-' : isOnline.ordersDeletedInDb}
+          {isOnline.ordersToDelete == 0 ? '-' : isOnline.ordersToDelete}
         </div>
-        <div className='col-span-1 row-span-1'>{isOnline.ordersEodedInDb== 0? '-' : isOnline.ordersEodedInDb}</div>
+        <div className='col-span-1 row-span-1'>
+          {isOnline.ordersToEod == 0 ? '-' : isOnline.ordersToEod}
+        </div>
+        <div className='col-span-1 row-span-1'>
+          {isOnline.ordersMissingInDb == 0 ? '-' : isOnline.ordersMissingInDb}
+        </div>
+        <div className='col-span-1 row-span-1'>
+          {isOnline.ordersDeletedInDb == 0 ? '-' : isOnline.ordersDeletedInDb}
+        </div>
+        <div className='col-span-1 row-span-1'>
+          {isOnline.ordersEodedInDb == 0 ? '-' : isOnline.ordersEodedInDb}
+        </div>
       </div>
       <div className='grid grid-rows-2 grid-cols-1 text-sm'>
-        <div className='col-span-1 row-span-1'>{isOnline.shop}</div>
+        <div className='col-span-1 row-span-1 text-center'>{isOnline.shop}</div>
         <div className='col-span-1 row-span-1 text-center'>{`${
           isOnline.till != undefined ? '' + isOnline.till + '' : ''
         }`}</div>
