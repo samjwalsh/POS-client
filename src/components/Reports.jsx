@@ -6,6 +6,7 @@ import useConfirm from './Reusables/ConfirmDialog.jsx';
 import useAlert from './Reusables/Alert.jsx';
 
 import closeSVG from '../assets/appicons/close.svg';
+import infoSVG from '../assets/appicons/info.svg';
 
 import { getSetting } from '../tools/ipc';
 
@@ -173,6 +174,10 @@ export default function Reports(props) {
     setOrders(orders);
   }
 
+  async function handleDeleteOldOrdersHelp() {
+    await alert(`This will end of day any orders currently saved on the till that are not from today, so if the last person forgot to end of day the till you can press this.`)
+  }
+
   // HTML GENERATORS
 
   function createOrdersHTML() {
@@ -238,14 +243,23 @@ export default function Reports(props) {
       <div className='flex flex-col h-full'>
         {createReportsStatsInfo()}
         <div className='mt-auto border-t border-colour pt-2 mx-2 flex flex-col gap-2'>
-          <div
-            className='btn btn-warning h-auto text-lg cnter-items w-full'
-            onContextMenu={(event) => handleDeleteOldOrders()}
-            onTouchEnd={(event) => handleDeleteOldOrders()}>
-            Delete Old Orders
+          <div className='flex flex-row h-auto w-full gap-2'>
+            <div
+              className='btn btn-warning text-lg h-auto flex-grow'
+              onContextMenu={(event) => handleDeleteOldOrders()}
+              onTouchEnd={(event) => handleDeleteOldOrders()}>
+              Delete Old Orders
+            </div>
+            <div
+              className='btn-accent btn'
+              onContextMenu={(e) => handleDeleteOldOrdersHelp()}
+              onTouchEnd={(e) => handleDeleteOldOrdersHelp()}>
+              <img src={infoSVG} className='w-6 invert-icon' />
+            </div>
           </div>
+
           <div
-            className='btn-error btn text-lg h-auto p-2 cnter-items w-full'
+            className='btn-error btn text-lg h-auto p-2 w-full'
             onContextMenu={(event) => handleEndOfDay()}
             onTouchEnd={(event) => handleEndOfDay()}>
             End Of Day
