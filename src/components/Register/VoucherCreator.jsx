@@ -110,17 +110,17 @@ const useVoucherCreator = (order, setOrder) => {
           'Try Again?',
           'View Codes',
           'Print Again',
-          `You can choose to attempt to print the vouchers again or view the codes on the screen`,
+          `You can choose to attempt to print the vouchers again or view the codes on the screen.`,
         ]);
         if (tryAgain) {
           await printVouchers(voucherResult.vouchers);
-          const attemptPrintAgain = await confirm([
-            'Try Again?',
-            'View Codes',
-            'Print Again',
-            `You can choose to attempt to print the vouchers again or view the codes on the screen`,
+          const printedCorrectly = await confirm([
+            'Did the vouchers print?',
+            'No',
+            'Yes',
+            `If the vouchers did not print correctly, you can view the codes or try to print them again.`,
           ]);
-          if (!attemptPrintAgain) tryAgain = false;
+          if (printedCorrectly) tryAgain = false;
         } else {
           let vouchersHTML = [];
           voucherResult.vouchers.forEach((voucher, index) => {
