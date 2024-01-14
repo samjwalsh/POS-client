@@ -51,9 +51,9 @@ export default function TitleBar(props) {
       <VoucherRedeemer />
       <VoucherChecker />
       <ListSelect />
-      <div className='flex flex-row justify-between h-14 shadow-md '>
+      <div className='flex flex-row justify-between h-14 shadow-md'>
         <div
-          className='h-10 btn btn-primary text-lg m-1'
+          className='h-10 btn btn-primary text-lg ml-2 m-1'
           onContextMenu={(e) => handleClickHamburger(setHamburger)}
           onTouchEnd={(e) => handleClickHamburger(setHamburger)}>
           {/* <img src={hamburger} className=' invert-icon w-6' /> */}
