@@ -6,7 +6,6 @@ import useKeyboard from '../Reusables/textInput.jsx';
 import playBeep from '../../tools/playBeep.js';
 import { checkVoucher } from '../../tools/ipc.js';
 import useAlert from '../Reusables/Alert.jsx';
-import { handleAddToOrder } from './ItemPage.jsx';
 const useVoucherChecker = (order, setOrder) => {
   const [promise, setPromise] = useState(null);
   const [clickable, setClickable] = useState(true);
@@ -61,6 +60,7 @@ const useVoucherChecker = (order, setOrder) => {
     alertHTML.push(
       addToAlertHTML('Redeemed', res.voucher.redeemed ? 'Yes' : 'No')
     );
+
     alertHTML.push(addToAlertHTML('Date Created', res.voucher.dateCreated));
     alertHTML.push(addToAlertHTML('Shop Created', res.voucher.shopCreated));
 
@@ -68,6 +68,7 @@ const useVoucherChecker = (order, setOrder) => {
       alertHTML.push(addToAlertHTML('Date Redeemed', res.voucher.dateRedeemed));
       alertHTML.push(addToAlertHTML('Shop Redeemed', res.voucher.shopRedeemed));
     }
+
     alertHTML.push(addToAlertHTML('Value', '€' + res.voucher.value.toFixed(2)));
     alertHTML.push(addToAlertHTML('Code', res.voucher.code.toUpperCase()));
 

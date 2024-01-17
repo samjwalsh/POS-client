@@ -1,26 +1,24 @@
 import * as React from 'react';
 import { useState, useEffect } from 'react';
 
-import useConfirm from './Reusables/ConfirmDialog.jsx';
+import useConfirm from '../Reusables/ConfirmDialog.jsx';
 
-import useAlert from './Reusables/Alert.jsx';
+import useAlert from '../Reusables/Alert.jsx';
 
-import closeSVG from '../assets/appicons/close.svg';
-import infoSVG from '../assets/appicons/info.svg';
+import infoSVG from '../../assets/appicons/info.svg';
 
-import { getSetting } from '../tools/ipc';
+import { getSetting } from '../../tools/ipc.js';
 
 import {
   getAllOrders,
   printOrder,
   printEndOfDay,
-  removeAllOrders,
   removeOldOrders,
-  removeOrder,
   endOfDay,
-} from '../tools/ipc';
+} from '../../tools/ipc.js';
 
-import playBeep from '../tools/playBeep';
+import playBeep from '../../tools/playBeep.js';
+import { OrderBox } from './OrderBox.jsx';
 
 export default function Reports(props) {
   const [orders, setOrders] = useState([]);
@@ -166,26 +164,6 @@ export default function Reports(props) {
     setOrders(orders);
   }
 
-  const handleDeleteOrder = async (deletedOrder) => {
-    playBeep();
-
-    const choice = await confirm([
-      `Delete order?`,
-      'Cancel',
-      'Delete',
-      `Delete this order for €${deletedOrder.subtotal.toFixed(
-        2
-      )}, this action cannot be undone.`,
-    ]);
-    if (!choice) return;
-
-    let localOrders = await removeOrder(deletedOrder);
-
-    localOrders = await getAllOrders();
-
-    setOrders(localOrders);
-  };
-
   async function handleDeleteOldOrders() {
     playBeep();
 
@@ -201,8 +179,6 @@ export default function Reports(props) {
     );
   }
 
-  // HTML GENERATORS
-
   function createOrdersHTML() {
     let ordersHTML = [];
 
@@ -212,49 +188,12 @@ export default function Reports(props) {
       noOrdersRendered++
     ) {
       const order = orders[noOrdersRendered];
-      let itemsHTML = createItemsHTML(order);
-
-      const orderDateString = calculateDateString(order.time);
       ordersHTML.push(
-        <div
-          key={order.time}
-          className='orderbox borderD border-colour flex max-h-96 flex-col'>
-          <div className='flex flex-row w-full p-2 justify-between border-b border-colour'>
-            <div
-              className=' btn btn-primary text-lg'
-              onContextMenu={(e) => handlePrintReceipt(order)}
-              onTouchEnd={(e) => handlePrintReceipt(order)}>
-              Receipt
-            </div>
-            <div
-              className='btn-error btn'
-              onContextMenu={(e) => handleDeleteOrder(order)}
-              onTouchEnd={(e) => handleDeleteOrder(order)}>
-              <img src={closeSVG} className='w-6 invert-icon' />
-            </div>
-          </div>
-          <div className='flex flex-col p-2 border-b border-colour text-lg'>
-            <div className='flex flex-row justify-between'>
-              <div className=''>Time:</div>
-              <div className=''>{orderDateString}</div>
-            </div>
-            <div className='flex flex-row justify-between'>
-              <div className=''>Till:</div>
-              <div className=''>{order.shop + '-' + order.till}</div>
-            </div>
-            <div className='flex flex-row justify-between'>
-              <div className=''>Subtotal:</div>
-              <div className='num'>€{order.subtotal.toFixed(2)}</div>
-            </div>
-            <div className='flex flex-row justify-between'>
-              <div className=''>Payment:</div>
-              <div className=''>{order.paymentMethod}</div>
-            </div>
-          </div>
-          <div className='flex flex-col gap-2 p-2 max-h-full overflow-y-scroll no-scrollbar'>
-            {itemsHTML}
-          </div>
-        </div>
+        <OrderBox
+          order={order}
+          setOrders={setOrders}
+          key={order.time.toString()}
+        />
       );
     }
 
@@ -353,46 +292,6 @@ export default function Reports(props) {
     );
   }
 
-  function createItemsHTML(order) {
-    let itemsHTML = order.items.map((item, index) => {
-      if (item.value !== undefined || item.price === undefined) {
-        removeAllOrders();
-      }
-
-      let formattedQuantity = '';
-      if (item.quantity === 1 || item.quantity === undefined) {
-      } else {
-        formattedQuantity = `(${item.quantity})`;
-      }
-
-      let formattedAddons = '';
-      if (Array.isArray(item.addons)) {
-        formattedAddons = item.addons.join(', ');
-      }
-
-      return (
-        <div
-          className='w-full grid grid-cols-[auto_auto] grid-rows-[auto_min-content] text-lg p-2 rounded-btn bg-neutral text-neutral-content'
-          key={index}>
-          <div className='col-span-1 row-span-1'>
-            {item.name} {formattedQuantity}
-          </div>
-          <div className='col-span-1 row-span-1 text-right num'>
-            €{(item.price * item.quantity).toFixed(2)}
-          </div>
-          <div className='col-span-1 row-span-1 pr-4 text-sm'>
-            {formattedAddons}
-          </div>
-          <div className='col-span-1 row-span-1 text-right num text-sm'>
-            €{item.price.toFixed(2)} EA
-          </div>
-        </div>
-      );
-    });
-
-    return itemsHTML;
-  }
-
   return (
     <>
       <Dialog />
@@ -411,12 +310,7 @@ export default function Reports(props) {
   );
 }
 
-async function handlePrintReceipt(order) {
-  const response = await printOrder(order);
-  return;
-}
-
-function calculateDateString(time) {
+export function calculateDateString(time) {
   const date = new Date(time);
 
   let dateString = '';

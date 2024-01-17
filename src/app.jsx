@@ -5,7 +5,7 @@ import { useState } from 'react';
 import './index.css';
 
 import Register from './components/Register/Register.jsx';
-import Reports from './components/Reports.jsx';
+import Reports from './components/Reports/Reports.jsx';
 import Settings, { executeSettings } from './components/Settings.jsx';
 
 import HamburgerMenu from './components/TitleBar/HamburgerMenu.jsx';

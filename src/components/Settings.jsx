@@ -107,6 +107,10 @@ export default function Settings(props) {
 
     const response = await keyboard(setting.value);
 
+    if (response === null) {
+      return;
+    }
+
     await setSetting(setting.name, response);
     setSettings(await getSettings());
   }

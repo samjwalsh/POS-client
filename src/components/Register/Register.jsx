@@ -1,6 +1,4 @@
 import * as React from 'react';
-import * as ReactDOM from 'react-dom/client';
-import { useState } from 'react';
 
 import Order from './Order.jsx';
 import Menu from './Menu.jsx';

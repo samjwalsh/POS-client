@@ -37,13 +37,9 @@ export default function PrinterConnection() {
       className={`grid grid-rows-2 grid-cols-1 text-sm h-full rounded-btn px-1 bg${
         isOnline.status ? '-success' : '-error'
       }`}>
+      <div className='row-span-1 col-span-1'>PTR</div>
       <div className='row-span-1 col-span-1'>
-        PTR
-      </div>
-      <div className='row-span-1 col-span-1'>
-        {isOnline.status
-          ? `${String(isOnline.ping).padStart(3, '0')} `
-          : '---'}
+        {isOnline.status ? `${String(isOnline.ping).padStart(3, '0')} ` : '---'}
       </div>
     </div>
   );

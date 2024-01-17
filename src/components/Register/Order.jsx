@@ -13,6 +13,7 @@ import { addOrder } from '../../tools/ipc';
 import PayCash, { calculateSubtotal } from './PayCash.jsx';
 import useKeypad from '../Reusables/Keypad.jsx';
 import useAlert from '../Reusables/Alert.jsx';
+import OrderItem from '../Reusables/OrderItem.jsx';
 
 export default function Order(props) {
   const { order, setOrder } = props;
@@ -116,29 +117,7 @@ export default function Order(props) {
           onTouchEnd={() => handleOrderItemQuantityChange('down', orderItem)}>
           <img src={minusSVG} className='w-6 invert-icon' />
         </div>
-        <div
-          className='w-full grid grid-cols-1 grid-rows-[min-content_min-content] text-base py-1 px-2 rounded-btn bg-neutral text-neutral-content'
-          key={index}>
-          <div className='flex flex-row justify-between'>
-            <div className='pr-1'>
-              {orderItem.name +
-                (orderItem.quantity > 1 ? ` (${orderItem.quantity})` : '')}
-            </div>
-            <div className=' text-right num'>
-              €{(orderItem.price * orderItem.quantity).toFixed(2)}
-            </div>
-          </div>
-          <div className='flex flex-row justify-between'>
-            <div className='pr-4 text-sm'>
-              {orderItem.addons === undefined
-                ? ''
-                : orderItem.addons.join(', ')}
-            </div>
-            <div className='text-right num text-sm whitespace-nowrap'>
-              €{orderItem.price.toFixed(2)} EA
-            </div>
-          </div>
-        </div>
+        <OrderItem orderItem={orderItem} index={index} key={index.toString()}/>
         <div
           className='btn btn-success h-full p-0 w-12'
           onContextMenu={() => handleOrderItemQuantityChange('up', orderItem)}

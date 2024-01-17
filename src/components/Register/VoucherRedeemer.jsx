@@ -4,11 +4,7 @@ import * as React from 'react';
 import dropdownSVG from '../../assets/appicons/dropdown.svg';
 import useKeyboard from '../Reusables/textInput.jsx';
 import playBeep from '../../tools/playBeep.js';
-import {
-  createVouchers,
-  printVouchers,
-  redeemVoucher,
-} from '../../tools/ipc.js';
+import { redeemVoucher } from '../../tools/ipc.js';
 import useAlert from '../Reusables/Alert.jsx';
 import { handleAddToOrder } from './ItemPage.jsx';
 const useVoucherRedeemer = (order, setOrder) => {

@@ -1,15 +1,14 @@
 import * as React from 'react';
-import * as ReactDOM from 'react-dom/client';
-import { useState } from 'react';
 
 import log from '../../tools/logging';
 import playBeep from '../../tools/playBeep';
 
 import useAlert from '../Reusables/Alert.jsx';
+import AddonBox from './AddonBox.jsx';
+import ShortcutBox from './ShortcutBox.jsx';
 
 import addSVG from '../../assets/appicons/add.svg';
 import minusSVG from '../../assets/appicons/minus.svg';
-import infoSVG from '../../assets/appicons/info.svg';
 
 export default function ItemPage({
   menuState,
@@ -54,6 +53,7 @@ export default function ItemPage({
   const item = {};
   item.name = menuState.name;
   item.price = menuState.price;
+  item.shortcuts = menuState.shortcuts;
 
   item.addons = [];
   for (const addon of menuState.modifiers) {
@@ -66,131 +66,8 @@ export default function ItemPage({
     }
   }
 
-  item.shortcuts = menuState.shortcuts;
-
-  const addonsHTML = item.addons.map((addon, index) => {
-    let selected;
-    if (currentOrder.addons == undefined) {
-      log(`Initialised addon selected string`);
-      selected = false;
-      addon.selected = false;
-    } else if (currentOrder.addons[index].selected === true) {
-      selected = true;
-    } else {
-      selected = false;
-    }
-
-    log(`Created HTML for addon ${addon.name}`);
-    return (
-      <div
-        key={addon.name}
-        className='w-72 max-w-full flex-grow flex flex-row h-16'
-        id={index}
-        onContextMenu={(event) =>
-          handleAddonToggle(
-            event,
-            item,
-            item.addons[index],
-            currentOrder,
-            setCurrentOrder,
-            index
-          )
-        }
-        onTouchEnd={(event) =>
-          handleAddonToggle(
-            event,
-            item,
-            item.addons[index],
-            currentOrder,
-            setCurrentOrder,
-            index
-          )
-        }>
-        <div className='flex flex-row justify-between w-full gap-2'>
-          <div className='flex-grow flex flex-row justify-between p-2 btn-neutral btn h-full'>
-            <div className='flex flex-row gap-2'>
-              <div className='text-xl cnter-items'>{addon.name}</div>
-              <div className='num cnter-items'>€{addon.price.toFixed(2)}</div>
-            </div>
-            <div className='cnter-items h-full'>
-              <input
-                type='checkbox'
-                checked={selected ? 'checked' : ''}
-                className='checkbox checkbox-lg checkbox-secondary border-0 '
-              />
-            </div>
-          </div>
-          {/* <div className='cnter-items w-16 h-full btn btn-secondary'> */}
-
-          {/* <div className='toggleAddonButton' id={index}>
-              {selected ? (
-                <img src={checkSVG} className='w-8 invert-icon' />
-              ) : (
-                ''
-              )}
-            </div> */}
-          {/* </div> */}
-        </div>
-      </div>
-    );
-  });
-
-  let shortcutsHTML = '';
-
-  if (item.shortcuts !== undefined) {
-    shortcutsHTML = item.shortcuts.map((shortcut) => {
-      let addons = shortcut.addons;
-      let addonsString = '';
-      if (addons.length > 0) {
-        addons.forEach((addon, index) => {
-          if (index + 1 !== addons.length) {
-            addonsString += `${addon.name}, `;
-          } else {
-            addonsString += `${addon.name}`;
-          }
-        });
-      } else {
-        addonsString = 'No Addons';
-      }
-      return (
-        <div
-          className='mt-2 btn btn-primary flex-grow w-48 h-48 flex flex-col'
-          onContextMenu={(shortcut) =>
-            handleClickShortcut(
-              event,
-              item,
-              setMenuState,
-              currentOrder,
-              setCurrentOrder,
-              order,
-              setOrder,
-              addons
-            )
-          }
-          onTouchEnd={(shortcut) =>
-            handleClickShortcut(
-              event,
-              item,
-              setMenuState,
-              currentOrder,
-              setCurrentOrder,
-              order,
-              setOrder,
-              addons
-            )
-          }
-          key={shortcut.name}>
-          <div className='text-xl'>{shortcut.name}</div>
-          <div className='num text-sm'>€{shortcut.price.toFixed(2)}</div>
-          <div className='text-sm'>{addonsString}</div>
-        </div>
-      );
-    });
-  } else {
-  }
-
   let quantity;
-  if (currentOrder.quantity == undefined) {
+  if (currentOrder.quantity === undefined) {
     quantity = 1;
   } else {
     quantity = currentOrder.quantity;
@@ -198,7 +75,6 @@ export default function ItemPage({
 
   log(`Computed price for item and addons`);
   const price = computePrice(item, currentOrder, setCurrentOrder).toFixed(2);
-  6;
   log(`Created HTML for item page`);
   return (
     <>
@@ -211,38 +87,52 @@ export default function ItemPage({
           <div className='col-span-1 text-right self-end justify-self-end flex flex-row gap-4'>
             <button
               className='whitespace-nowrap text-lg btn btn-primary'
-              onContextMenu={(event) => handleClickHelp()}
-              onTouchEnd={(event) => handleClickHelp()}>
-              <img src={infoSVG} className='w-6 invert-icon' />
+              onContextMenu={() => handleClickHelp()}
+              onTouchEnd={() => handleClickHelp()}>
+              Help
             </button>
             <button
               className='col-span-1 text-right self-end justify-self-end w-min h-min whitespace-nowrap p-2 text-lg btn btn-error'
-              onContextMenu={(event) =>
-                handleExitItemPage(
-                  event,
-                  item,
-                  setMenuState,
-                  setCurrentOrder,
-                  currentOrder
-                )
+              onContextMenu={() =>
+                handleExitItemPage(setMenuState, setCurrentOrder)
               }
-              onTouchEnd={(event) =>
-                handleExitItemPage(
-                  event,
-                  item,
-                  setMenuState,
-                  setCurrentOrder,
-                  currentOrder
-                )
+              onTouchEnd={() =>
+                handleExitItemPage(setMenuState, setCurrentOrder)
               }>
               Cancel
             </button>
           </div>
         </div>
         <div className='w-full h-min flex-grow-0 overflow-y-scroll no-scrollbar'>
-          <div className='flex flex-row gap-2 h-auto'>{shortcutsHTML}</div>
+          <div className='flex flex-row gap-2 h-auto'>
+            {item.shortcuts.map((shortcut) => {
+              return (
+                <ShortcutBox
+                  key={shortcut.name}
+                  shortcut={shortcut}
+                  item={item}
+                  setMenuState={setMenuState}
+                  currentOrder={currentOrder}
+                  setCurrentOrder={setCurrentOrder}
+                  order={order}
+                  setOrder={setOrder}
+                />
+              );
+            })}
+          </div>
           <div className='flex flex-row flex-wrap gap-2 py-2 overflow-y-scroll no-scrollbar flex-grow-0 '>
-            {addonsHTML}
+            {item.addons.map((addon, index) => {
+              return (
+                <AddonBox
+                  key={addon.name}
+                  addon={addon}
+                  index={index}
+                  item={item}
+                  currentOrder={currentOrder}
+                  setCurrentOrder={setCurrentOrder}
+                />
+              );
+            })}
             <div className='w-72 max-w-full flex-grow flex flex-row '></div>
           </div>
         </div>
@@ -250,20 +140,20 @@ export default function ItemPage({
           <div className='flex flex-row '>
             <div
               className='w-14 h-auto cnter-items btn btn-error '
-              onContextMenu={(event) =>
-                handleDecreaseQuantity(
-                  event,
+              onContextMenu={() =>
+                handleChangeQuantity(
                   item,
                   currentOrder,
-                  setCurrentOrder
+                  setCurrentOrder,
+                  'down'
                 )
               }
-              onTouchEnd={(event) =>
-                handleDecreaseQuantity(
-                  event,
+              onTouchEnd={() =>
+                handleChangeQuantity(
                   item,
                   currentOrder,
-                  setCurrentOrder
+                  setCurrentOrder,
+                  'down'
                 )
               }>
               <img src={minusSVG} className='w-6 invert-icon' />
@@ -273,21 +163,11 @@ export default function ItemPage({
             </div>
             <div
               className='btn btn-success w-14 h-auto cnter-items'
-              onContextMenu={(event) =>
-                handleIncreaseQuantity(
-                  event,
-                  item,
-                  currentOrder,
-                  setCurrentOrder
-                )
+              onContextMenu={() =>
+                handleChangeQuantity(item, currentOrder, setCurrentOrder, 'up')
               }
-              onTouchEnd={(event) =>
-                handleIncreaseQuantity(
-                  event,
-                  item,
-                  currentOrder,
-                  setCurrentOrder
-                )
+              onTouchEnd={() =>
+                handleChangeQuantity(item, currentOrder, setCurrentOrder, 'up')
               }>
               <img src={addSVG} className='w-6 invert-icon' />
             </div>
@@ -295,9 +175,8 @@ export default function ItemPage({
           <div className='text-2xl w-full h-auto num cnter-items'>€{price}</div>
           <div
             className='btn btn-primary text-xl h-full positive w-48'
-            onContextMenu={(event) =>
+            onContextMenu={() =>
               handleAddToOrder(
-                event,
                 item,
                 setMenuState,
                 currentOrder,
@@ -306,9 +185,8 @@ export default function ItemPage({
                 setOrder
               )
             }
-            onTouchEnd={(event) =>
+            onTouchEnd={() =>
               handleAddToOrder(
-                event,
                 item,
                 setMenuState,
                 currentOrder,
@@ -325,7 +203,7 @@ export default function ItemPage({
   );
 }
 
-function computePrice(item, currentOrder, setCurrentOrder) {
+function computePrice(item, currentOrder) {
   log(`Compute price of item ${item.name} multiplied by its quantity`);
   if (currentOrder == '') {
     return item.price;
@@ -346,95 +224,26 @@ function computePrice(item, currentOrder, setCurrentOrder) {
   }
 }
 
-function handleAddonToggle(
-  event,
-  item,
-  addon,
-  currentOrder,
-  setCurrentOrder,
-  index
-) {
+function handleChangeQuantity(item, currentOrder, setCurrentOrder, direction) {
   playBeep();
-  //const index = event.target.id;
-  log(`Addon ${item.addons[index].name} toggled`);
-
-  if (item.addons[index].selected === true) {
-    item.addons[index].selected = false;
-    log(`Addon was toggled off`);
-  } else {
-    item.addons[index].selected = true;
-    log(`Addon was toggled on`);
-  }
-
-  let quantity;
-  if (currentOrder.quantity == undefined) {
-    log(`Quantity set to 1`);
-    quantity = 1;
-  } else {
-    log(`Quantity set to ${currentOrder.quantity}`);
-    quantity = currentOrder.quantity;
-  }
-
-  log(`Current order updated`);
-  setCurrentOrder({
-    name: item.name,
-    price: item.price,
-    quantity: quantity,
-    priceCheck: item.priceCheck == undefined ? '' : item.priceCheck,
-    addons: item.addons,
-  });
-}
-
-function handleIncreaseQuantity(event, item, currentOrder, setCurrentOrder) {
-  playBeep();
-  let quantity;
-  if (currentOrder.quantity == undefined) {
+  let quantity = 1;
+  if (currentOrder.quantity === undefined && direction === 'up') {
     quantity = 2;
-    log(`Increasing quantity of item from undefined to 2`);
-  } else {
+  } else if (direction === 'up') {
     quantity = currentOrder.quantity + 1;
-    log(`Increasing quantity of item from ${quantity - 1} to ${quantity}`);
-  }
-
-  setCurrentOrder({
-    name: item.name,
-    price: item.price,
-    quantity: quantity,
-    priceCheck: item.priceCheck === undefined ? '' : item.priceCheck,
-    addons: item.addons,
-  });
-}
-
-function handleDecreaseQuantity(event, item, currentOrder, setCurrentOrder) {
-  playBeep();
-  let quantity;
-  if (currentOrder.quantity == undefined) {
-    log(`Quantity of item was undefined, setting to 1`);
-    quantity = 1;
-  } else if (currentOrder.quantity == 1) {
-    log(`Quantity of item already 1`);
-    quantity = 1;
-  } else {
+  } else if (direction === 'down' && currentOrder.quantity > 1) {
     quantity = currentOrder.quantity - 1;
-    log(`Decreasing quantity of item from ${quantity + 1} to ${quantity}`);
   }
-
   setCurrentOrder({
     name: item.name,
     price: item.price,
-    quantity: quantity,
+    quantity,
     priceCheck: item.priceCheck === undefined ? '' : item.priceCheck,
     addons: item.addons,
   });
 }
 
-function handleExitItemPage(
-  event,
-  item,
-  setMenuState,
-  setCurrentOrder,
-  currentOrder
-) {
+function handleExitItemPage(setMenuState, setCurrentOrder) {
   playBeep();
 
   log(`Exiting item page to main menu and deleting current order`);
@@ -443,7 +252,6 @@ function handleExitItemPage(
 }
 
 export function handleAddToOrder(
-  event,
   item,
   setMenuState,
   currentOrder,
@@ -479,27 +287,8 @@ export function handleAddToOrder(
       arrayEquals(parsedOrder.addons, orderItem.addons)
     ) {
       log(`Detected duplicate item in order`);
-      //Fucky stuff to allow me to edit an element in the array with only the react State shit
-
-      // 1. Make a shallow copy of the array
-      let temp_order = order;
-
-      // 2. Make a shallow copy of the element you want to mutate
-      let temp_orderItem = temp_order[index];
-
-      // 3. Update the property you're interested in
-      temp_orderItem.quantity += parsedOrder.quantity;
-
-      log(`Changing quantity of already existing item in order`);
-
-      // 4. Put it back into our array. N.B. we *are* mutating the array here, but that's why we made a copy first
-      temp_order[index] = temp_orderItem;
-
-      // 5. Set the state to our new copy
-      // More fuckery because react doesnt see changing quantity as a change to state, so we have to manually trigger a rerender with this method (destructuring?)
-
-      setOrder([...temp_order]);
-
+      order[index].quantity += parsedOrder.quantity;
+      setOrder([...order]);
       itemWasDupe = true;
     }
   }
@@ -510,10 +299,11 @@ export function handleAddToOrder(
   }
 
   log(`Exiting item page`);
-  handleExitItemPage(event, item, setMenuState, setCurrentOrder, currentOrder);
+  handleExitItemPage(setMenuState, setCurrentOrder);
 }
 
 function computePriceNoQuantity(item, currentOrder) {
+  console.log(currentOrder);
   log(`Computing price of individual item ${item.name}`);
   if (currentOrder == '') {
     return item.price;
@@ -542,43 +332,5 @@ function arrayEquals(a, b) {
     Array.isArray(b) &&
     a.length === b.length &&
     a.every((val, index) => val === b[index])
-  );
-}
-
-function handleClickShortcut(
-  event,
-  item,
-  setMenuState,
-  currentOrder,
-  setCurrentOrder,
-  order,
-  setOrder,
-  addons
-) {
-  playBeep();
-  addons.forEach((shortcutAddon) => {
-    item.addons.forEach((itemAddon) => {
-      if (shortcutAddon.name == itemAddon.name) {
-        itemAddon.selected = true;
-      }
-    });
-  });
-
-  if (currentOrder.quantity == undefined) {
-    log(`Quantity set to 1`);
-    item.quantity = 1;
-  } else {
-    log(`Quantity set to ${item.quantity}`);
-    item.quantity = currentOrder.quantity;
-  }
-
-  handleAddToOrder(
-    event,
-    item,
-    setMenuState,
-    item,
-    setCurrentOrder,
-    order,
-    setOrder
   );
 }

@@ -1,6 +1,4 @@
 import * as React from 'react';
-import * as ReactDOM from 'react-dom/client';
-import { useState } from 'react';
 
 import getMenu from '../../tools/menuAPI';
 import { handleAddToOrder } from './ItemPage.jsx';
@@ -63,8 +61,8 @@ export default function Menu(props) {
               : 'btn-neutral text-neutral-content'
           } ${classes}`}
           id={item.name}
-          onContextMenu={(event) => handleItemClick(event, item, passProps)}
-          onTouchEnd={(event) => handleItemClick(event, item, passProps)}>
+          onContextMenu={() => handleItemClick(item, passProps)}
+          onTouchEnd={() => handleItemClick(item, passProps)}>
           {item.name === 'Back' ? (
             <img src={undoSVG} className='w-8 invert-icon' />
           ) : (
@@ -99,7 +97,7 @@ export default function Menu(props) {
   }
 }
 
-function handleItemClick(event, item, props) {
+function handleItemClick(item, props) {
   playBeep();
   const setMenuState = props.setMenuState;
   const currentOrder = props.currentOrder;
@@ -116,7 +114,6 @@ function handleItemClick(event, item, props) {
   } else if (item.type === undefined && item.modifiers === undefined) {
     log(`Item had no modifiers, adding to order`);
     handleAddToOrder(
-      event,
       item,
       setMenuState,
       currentOrder,
