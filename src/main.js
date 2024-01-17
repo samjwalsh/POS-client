@@ -15,8 +15,7 @@ const createWindow = () => {
     width: 1024,
     height: 600,
     backgroundColor: '#144541',
-    thickFrame: 'false',
-    closable: 'false',
+    thickFrame: false,
     webPreferences: {
       nodeIntegration: true,
       contextIsolation: false,
