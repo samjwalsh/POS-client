@@ -106,8 +106,7 @@ export default function Settings(props) {
     playBeep();
 
     const response = await keyboard(setting.value);
-
-    if (response === null) {
+    if (!response) {
       return;
     }
 
