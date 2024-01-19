@@ -19,6 +19,7 @@ import {
 
 import playBeep from '../../tools/playBeep.js';
 import { OrderBox } from './OrderBox.jsx';
+import OrdersStats from './OrdersStats.jsx';
 
 export default function Reports(props) {
   const [orders, setOrders] = useState([]);
@@ -200,98 +201,6 @@ export default function Reports(props) {
     return ordersHTML;
   }
 
-  function reportsStatsHTML() {
-    return (
-      <div className='flex flex-col h-full'>
-        {createReportsStatsInfo()}
-        <div className='mt-auto border-t border-colour pt-2 mx-2 flex flex-col gap-2'>
-          <div className='flex flex-row h-auto w-full gap-2'>
-            <div
-              className='btn btn-warning text-lg h-auto flex-grow'
-              onContextMenu={(event) => handleDeleteOldOrders()}
-              onTouchEnd={(event) => handleDeleteOldOrders()}>
-              Delete Old Orders
-            </div>
-            <div
-              className='btn-primary btn'
-              onContextMenu={(e) => handleDeleteOldOrdersHelp()}
-              onTouchEnd={(e) => handleDeleteOldOrdersHelp()}>
-              <img src={infoSVG} className='w-6 invert-icon' />
-            </div>
-          </div>
-
-          <div
-            className='btn-error btn text-lg h-auto p-2 w-full'
-            onContextMenu={(event) => handleEndOfDay()}
-            onTouchEnd={(event) => handleEndOfDay()}>
-            End Of Day
-          </div>
-        </div>
-      </div>
-    );
-  }
-
-  function createReportsStatsInfo() {
-    let cashTotal = 0;
-    let cardTotal = 0;
-
-    let quantityItems = 0;
-    for (const order of orders) {
-      if (order.paymentMethod === 'Card') {
-        cardTotal += order.subtotal;
-      } else {
-        cashTotal += order.subtotal;
-      }
-      for (const item of order.items) {
-        if (item.quantity === undefined) {
-          quantityItems++;
-        } else {
-          quantityItems += item.quantity;
-        }
-      }
-    }
-
-    let xTotal = cashTotal + cardTotal;
-
-    return (
-      <div className='flex flex-col w-full text-2xl p-2 pt-0 gap-2'>
-        <div className='flex flex-row w-full justify-between border-b border-colour pb-2'>
-          <div className=''>Cash:</div>
-          <div className='num text-right justify-end'>
-            €{cashTotal.toFixed(2)}
-          </div>
-        </div>
-        <div className='flex flex-row w-full justify-between border-b border-colour pb-2'>
-          <div className=''>Card:</div>
-          <div className='num text-right justify-end '>
-            €{cardTotal.toFixed(2)}
-          </div>
-        </div>
-        <div className='flex flex-row w-full justify-between pb-2 font-bold'>
-          <div className=''>X-Total:</div>
-          <div className='num text-right justify-end'>€{xTotal.toFixed(2)}</div>
-        </div>
-        <div className='flex flex-row w-full justify-between pb-2 text-xl'>
-          <div className=''></div>
-        </div>
-        <div className='flex flex-row w-full justify-between border-b border-colour pb-2 text-base'>
-          <div className=''>No. Orders:</div>
-          <div className='num text-right justify-end'>{orders.length}</div>
-        </div>
-        <div className='flex flex-row w-full justify-between border-b border-colour pb-2 text-base'>
-          <div className=''>No. Items:</div>
-          <div className='num text-right justify-end'>{quantityItems}</div>
-        </div>
-        <div className='flex flex-row w-full justify-between pb-2 text-base'>
-          <div className=''>Average Sale:</div>
-          <div className='num text-right justify-end'>
-            €{(xTotal / (orders.length === 0 ? 1 : orders.length)).toFixed(2)}
-          </div>
-        </div>
-      </div>
-    );
-  }
-
   return (
     <>
       <Dialog />
@@ -303,7 +212,31 @@ export default function Reports(props) {
           <div className='orderbox'></div>
         </div>
         <div className='col-span-4 border-l border-colour my-2  w-full'>
-          {reportsStatsHTML()}
+          <div className='flex flex-col h-full'>
+            <OrdersStats orders={orders} />
+            <div className='mt-auto border-t border-colour pt-2 mx-2 flex flex-col gap-2'>
+              <div className='flex flex-row h-auto w-full gap-2'>
+                <div
+                  className='btn btn-warning text-lg h-auto flex-grow'
+                  onContextMenu={(event) => handleDeleteOldOrders()}
+                  onTouchEnd={(event) => handleDeleteOldOrders()}>
+                  Delete Old Orders
+                </div>
+                <div
+                  className='btn-primary btn'
+                  onContextMenu={(e) => handleDeleteOldOrdersHelp()}
+                  onTouchEnd={(e) => handleDeleteOldOrdersHelp()}>
+                  <img src={infoSVG} className='w-6 invert-icon' />
+                </div>
+              </div>
+              <div
+                className='btn-error btn text-lg h-auto p-2 w-full'
+                onContextMenu={(event) => handleEndOfDay()}
+                onTouchEnd={(event) => handleEndOfDay()}>
+                End Of Day
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </>

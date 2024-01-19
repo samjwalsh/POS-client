@@ -74,7 +74,7 @@ body {
 }
 
 .cnter-items {
-  @apply flex items-center justify-center text-center;
+  @apply flex items-center justify-center text-center ;
 }
 
 .keypad {
