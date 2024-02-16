@@ -19,10 +19,11 @@ const useVoucherCreator = (order, setOrder) => {
   const [Confirm, confirm] = useConfirm();
   const [Alert, alert] = useAlert();
 
-  const voucherCreator = () =>
+  const voucherCreator = () => {
     new Promise((resolve, reject) => {
       setPromise({ resolve });
     });
+  };
 
   const handleClose = () => {
     setPromise(null);
@@ -67,8 +68,19 @@ const useVoucherCreator = (order, setOrder) => {
   };
 
   const handleCreateVouchers = async () => {
+    const discouraged = await confirm([
+      'Not enabled',
+      'Continue',
+      'Cancel',
+      `Vouchers from the till are not finished yet, use a printed voucher instead.`,
+    ]);
+    if (discouraged) {
+      handleClose();
+      return;
+    }
     if (!clickable) return;
     playBeep();
+
     const quantity = voucherState.quantity;
 
     const value = voucherState.value;
@@ -76,7 +88,7 @@ const useVoucherCreator = (order, setOrder) => {
       await alert(
         'You must create at least 1 voucher with a value above €0.00'
       );
-      handleClose();
+      // handleClose();
       return;
     }
     setClickable(false);

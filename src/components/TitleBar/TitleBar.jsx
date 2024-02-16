@@ -28,15 +28,6 @@ export default function TitleBar(props) {
 
   async function handleClickVoucherMenu() {
     playBeep();
-    if (
-      await confirm([
-        'Not enabled',
-        'Continue',
-        'Cancel',
-        `Vouchers from the till are not finished yet, use a printed voucher instead.`,
-      ])
-    )
-      return;
     const choice = await chooseOption([
       'Create Vouchers',
       'Redeem Voucher',
