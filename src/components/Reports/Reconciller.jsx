@@ -65,28 +65,28 @@ const useReconciller = (orders, setOrders) => {
       }
     }
     if (reconcileAmt.card != totalCard) {
-        addOrder(
-          [
-            {
-              name: 'Reconcilliation Balance Adjustment',
-              price: reconcileAmt.card - totalCard,
-              quantity: 1,
-            },
-          ],
-          'Card'
-        );
+      addOrder(
+        [
+          {
+            name: 'Reconcilliation Balance Adjustment',
+            price: reconcileAmt.card - totalCard,
+            quantity: 1,
+          },
+        ],
+        'Card'
+      );
     }
     if (reconcileAmt.cash != totalCash) {
-        addOrder(
-          [
-            {
-              name: 'Reconcilliation Balance Adjustment',
-              price: reconcileAmt.cash - totalCash,
-              quantity: 1,
-            },
-          ],
-          'Cash'
-        );
+      addOrder(
+        [
+          {
+            name: 'Reconcilliation Balance Adjustment',
+            price: reconcileAmt.cash - totalCash,
+            quantity: 1,
+          },
+        ],
+        'Cash'
+      );
     }
     const storedOrders = await getAllOrders();
     setOrders([...storedOrders]);
@@ -106,7 +106,10 @@ const useReconciller = (orders, setOrders) => {
             Cancel
           </div>
         </div>
-        <div className='text-xl'>Enter the total amount of cash and card for the day. This must match the totals written on the day sheet.</div>
+        <div className='text-xl'>
+          Enter the total amount of cash and card for the day. This must match
+          the totals written on the day sheet.
+        </div>
         <div className='w-full border-b border-colour'></div>
         <div className='flex flex-row justify-between'>
           <div className='cnter-items'>Total Cash:</div>
@@ -131,7 +134,7 @@ const useReconciller = (orders, setOrders) => {
         <div className='w-full border-b border-colour'></div>
 
         <div className='flex flex-row justify-between text-3xl'>
-          <div className='cnter-items'>X-Total:</div>
+          <div className='cnter-items'>Z-Total:</div>
           <div className='cnter-items'>
             €{(reconcileAmt.cash + reconcileAmt.card).toFixed(2)}
           </div>
@@ -140,7 +143,7 @@ const useReconciller = (orders, setOrders) => {
         <div
           className='w-full btn h-full btn-primary text-lg'
           onContextMenu={(e) => handleReconcile()}
-          onTouchEnd={(e) => handleReconcile()}>{`Update X-Total to €${(
+          onTouchEnd={(e) => handleReconcile()}>{`Record Z-Total as €${(
           reconcileAmt.card + reconcileAmt.cash
         ).toFixed(2)}`}</div>
       </div>
