@@ -13,10 +13,12 @@ import useVoucherCreator from '../Register/VoucherCreator.jsx';
 import useVoucherRedeemer from '../Register/VoucherRedeemer.jsx';
 import useVoucherChecker from '../Register/VoucherChecker.jsx';
 import { getAllOrders, printOrder, getSetting } from '../../tools/ipc.js';
+import useConfirm from '../Reusables/ConfirmDialog.jsx';
 
 export default function TitleBar(props) {
   const { setHamburger, order, setOrder } = props;
   const [ListSelect, chooseOption] = useListSelect();
+  const [Confirm, confirm] = useConfirm();
   const [VoucherCreator, voucherCreator] = useVoucherCreator(order, setOrder);
   const [VoucherRedeemer, voucherRedeemer] = useVoucherRedeemer(
     order,
@@ -26,6 +28,15 @@ export default function TitleBar(props) {
 
   async function handleClickVoucherMenu() {
     playBeep();
+    if (
+      await confirm([
+        'Not enabled',
+        'Continue',
+        'Cancel',
+        `Vouchers from the till are not finished yet, use a printed voucher instead.`,
+      ])
+    )
+      return;
     const choice = await chooseOption([
       'Create Vouchers',
       'Redeem Voucher',
@@ -47,6 +58,7 @@ export default function TitleBar(props) {
 
   return (
     <>
+      <Confirm />
       <VoucherCreator />
       <VoucherRedeemer />
       <VoucherChecker />

@@ -61,6 +61,7 @@ app.on('activate', () => {
 // code. You can also put them in separate files and import them here.
 
 //importing APIs
+import './mainProcessAPIs/loggingAPI';
 import './mainProcessAPIs/ordersAPI';
 import './mainProcessAPIs/quitAPI';
 import './mainProcessAPIs/settingsAPI';

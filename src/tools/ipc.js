@@ -73,7 +73,7 @@ export function printTestPage() {
 }
 
 export function openCashDrawer() {
-  return ipcRenderer.invoke('openCashDrawer')
+  return ipcRenderer.invoke('openCashDrawer');
 }
 
 export function getAllPrinters() {
@@ -102,4 +102,8 @@ export function redeemVoucher(voucherCode) {
 
 export function checkVoucher(voucherCode) {
   return ipcRenderer.invoke('checkVoucher', voucherCode);
+}
+
+export async function log(errMsg, note, objsOfInterest) {
+  return ipcRenderer.invoke('log', errMsg, note, objsOfInterest);
 }

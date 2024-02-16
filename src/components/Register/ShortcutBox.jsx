@@ -2,7 +2,6 @@ import * as React from 'react';
 
 import { handleAddToOrder } from './ItemPage.jsx';
 import playBeep from '../../tools/playBeep';
-import log from '../../tools/logging';
 
 export default function ShortcutBox({
   shortcut,
@@ -80,10 +79,8 @@ function handleClickShortcut(
   });
 
   if (currentOrder.quantity == undefined) {
-    log(`Quantity set to 1`);
     item.quantity = 1;
   } else {
-    log(`Quantity set to ${item.quantity}`);
     item.quantity = currentOrder.quantity;
   }
 

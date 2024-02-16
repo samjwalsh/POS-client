@@ -1,0 +1,36 @@
+import { ipcMain } from 'electron';
+import { getSetting } from './settingsAPI';
+import axios from 'axios';
+
+ipcMain.handle('log', async (e, errMsg, note, objsOfInterest) => {
+  log( errMsg, note, objsOfInterest);
+});
+
+export const log = async ( errMsg, note, objsOfInterest) => {
+  console.log("Log attempted to send");
+  const syncServer = getSetting('Sync Server');
+  const https = getSetting('HTTPS');
+  const shop = getSetting('Shop Name');
+  const till = getSetting('Till Number');
+
+  try {
+    const data = {
+      shop,
+      till,
+      note,
+      objsOfInterest,
+      errMsg,
+    };
+    let res = await axios({
+      method: 'get',
+      url: `${https ? 'https' : 'http'}://${syncServer}/api/sendLog`,
+      headers: {},
+      data,
+      timeout: 30000,
+    });
+    console.log(note);
+  } catch (e) {
+    // console.log(e)
+    console.log('Error in sending log for ' + note)
+  }
+}

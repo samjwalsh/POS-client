@@ -1,32 +1,42 @@
 import * as React from 'react';
 import { useState } from 'react';
 
-import log from '../../tools/logging';
 import playBeep from '../../tools/playBeep';
 
 import euro from '../../assets/appicons/euro.svg';
 import addSVG from '../../assets/appicons/add.svg';
 import minusSVG from '../../assets/appicons/minus.svg';
 
-import { addOrder } from '../../tools/ipc';
+import { addOrder, openCashDrawer } from '../../tools/ipc';
 
 import PayCash, { calculateSubtotal } from './PayCash.jsx';
 import useKeypad from '../Reusables/Keypad.jsx';
 import useAlert from '../Reusables/Alert.jsx';
 import OrderItem from '../Reusables/OrderItem.jsx';
+import useConfirm from '../Reusables/ConfirmDialog.jsx';
 
 export default function Order(props) {
   const { order, setOrder } = props;
 
   const [Keypad, keypad] = useKeypad();
+  const [Confirm, confirm] = useConfirm();
   const [Alert, alert] = useAlert();
   const [payCash, setPayCash] = useState(false);
 
   async function handlePlusMinus() {
     playBeep();
+    if (
+      await confirm([
+        'Use keypad?',
+        'Continue',
+        'Cancel',
+        'Only use the keypad if there is no applicable item in the menu.',
+      ])
+    )
+      return;
+
     const keypadValue = await keypad();
     if (keypadValue === 0) return;
-    log(`Update the adjustment in the order`);
 
     let temp_order = order;
 
@@ -51,14 +61,13 @@ export default function Order(props) {
   async function handlePayment(paymentType) {
     playBeep();
     if (paymentType === 'card') {
-      log(`Payment type card selected, resetting order`);
       addOrder(props.order, 'Card');
       props.setOrder([]);
       setPayCash(false);
     } else if (payCash === true) {
       setPayCash(false);
     } else {
-      log(`Payment type cash selected, turning on keypad`);
+      openCashDrawer();
       setPayCash(true);
     }
   }
@@ -67,7 +76,6 @@ export default function Order(props) {
     playBeep();
 
     order.forEach(async (item, index) => {
-      log(`Reducing quantity of item ${item.name} in order by 1`);
       if (orderItem == item) {
         let temp_order = order;
 
@@ -104,9 +112,7 @@ export default function Order(props) {
   }
 
   let subtotal = calculateSubtotal(order);
-  log(`Calculating subtotal and generating HTML`);
   let orderItems = order.map((orderItem, index) => {
-    log(`Adding ${orderItem.name} to HTML`);
     return (
       <div
         className='flex flex-row h-min w-full max-w-full gap-2'
@@ -117,7 +123,7 @@ export default function Order(props) {
           onTouchEnd={() => handleOrderItemQuantityChange('down', orderItem)}>
           <img src={minusSVG} className='w-6 invert-icon' />
         </div>
-        <OrderItem orderItem={orderItem} index={index} key={index.toString()}/>
+        <OrderItem orderItem={orderItem} index={index} key={index.toString()} />
         <div
           className='btn btn-success h-full p-0 w-12'
           onContextMenu={() => handleOrderItemQuantityChange('up', orderItem)}
@@ -128,11 +134,11 @@ export default function Order(props) {
     );
   });
 
-  log(`Rendering order container`);
   return (
     <>
       <Keypad />
       <Alert />
+      <Confirm />
       <div className='col-span-4 row-span-1 h-auto self-stretch flex flex-col overflow-hidden border-l border-colour my-2'>
         {payCash === true ? (
           <PayCash

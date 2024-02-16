@@ -1,6 +1,5 @@
 import * as React from 'react';
 
-import log from '../../tools/logging';
 import playBeep from '../../tools/playBeep';
 
 import useAlert from '../Reusables/Alert.jsx';
@@ -59,9 +58,7 @@ export default function ItemPage({
   for (const addon of menuState.modifiers) {
     if (addon.name !== undefined) {
       item.addons.push(addon);
-      log(`Detected an addon`);
     } else {
-      log(`Detected a priceCheck function`);
       item.priceCheck = addon.priceCheck;
     }
   }
@@ -73,9 +70,7 @@ export default function ItemPage({
     quantity = currentOrder.quantity;
   }
 
-  log(`Computed price for item and addons`);
   const price = computePrice(item, currentOrder, setCurrentOrder).toFixed(2);
-  log(`Created HTML for item page`);
   return (
     <>
       <Alert />
@@ -204,7 +199,6 @@ export default function ItemPage({
 }
 
 function computePrice(item, currentOrder) {
-  log(`Compute price of item ${item.name} multiplied by its quantity`);
   if (currentOrder == '') {
     return item.price;
   } else if (currentOrder.priceCheck == '') {
@@ -216,9 +210,6 @@ function computePrice(item, currentOrder) {
     });
     return (currentOrder.price + addonsCost) * currentOrder.quantity;
   } else {
-    log(
-      `Computing price of ${item.name} multiplied by its quantity using a priceCheck function`
-    );
     const addonsCost = currentOrder.priceCheck(currentOrder.addons);
     return (currentOrder.price + addonsCost) * currentOrder.quantity;
   }
@@ -246,7 +237,6 @@ function handleChangeQuantity(item, currentOrder, setCurrentOrder, direction) {
 function handleExitItemPage(setMenuState, setCurrentOrder) {
   playBeep();
 
-  log(`Exiting item page to main menu and deleting current order`);
   setMenuState('');
   setCurrentOrder('');
 }
@@ -271,7 +261,6 @@ export function handleAddToOrder(
   if (currentOrder.addons !== undefined) {
     currentOrder.addons.forEach((addon) => {
       if (addon.selected === true) {
-        log(`Addon ${addon.name} put into order`);
         parsedOrder.addons.push(addon.name);
       }
     });
@@ -286,7 +275,6 @@ export function handleAddToOrder(
       parsedOrder.name === orderItem.name &&
       arrayEquals(parsedOrder.addons, orderItem.addons)
     ) {
-      log(`Detected duplicate item in order`);
       order[index].quantity += parsedOrder.quantity;
       setOrder([...order]);
       itemWasDupe = true;
@@ -294,17 +282,13 @@ export function handleAddToOrder(
   }
 
   if (!itemWasDupe) {
-    log(`Added item ${item.name} to order, was not a duplicate`);
     setOrder((order) => [...order, parsedOrder]);
   }
 
-  log(`Exiting item page`);
   handleExitItemPage(setMenuState, setCurrentOrder);
 }
 
 function computePriceNoQuantity(item, currentOrder) {
-  console.log(currentOrder);
-  log(`Computing price of individual item ${item.name}`);
   if (currentOrder == '') {
     return item.price;
   } else if (
@@ -319,14 +303,12 @@ function computePriceNoQuantity(item, currentOrder) {
     });
     return currentOrder.price + addonsCost;
   } else {
-    log(`Computing price of addons using priceCheck function`);
     const addonsCost = currentOrder.priceCheck(currentOrder.addons);
     return currentOrder.price + addonsCost;
   }
 }
 
 function arrayEquals(a, b) {
-  log(`Detecting if two orders are equal`);
   return (
     Array.isArray(a) &&
     Array.isArray(b) &&

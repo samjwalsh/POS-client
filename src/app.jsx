@@ -9,7 +9,7 @@ import Reports from './components/Reports/Reports.jsx';
 import Settings, { executeSettings } from './components/Settings/Settings.jsx';
 
 import HamburgerMenu from './components/TitleBar/HamburgerMenu.jsx';
-import { getSettings } from './tools/ipc.js';
+import { getSettings, log } from './tools/ipc.js';
 
 const domNode = document.getElementById('App');
 const root = ReactDOM.createRoot(domNode);

@@ -1,7 +1,6 @@
 import * as React from 'react';
 
 import playBeep from '../../tools/playBeep';
-import log from '../../tools/logging';
 
 export default function AddonBox({
   addon,
@@ -45,26 +44,20 @@ export default function AddonBox({
 
 function handleAddonToggle(item, currentOrder, setCurrentOrder, index) {
   playBeep();
-  log(`Addon ${item.addons[index].name} toggled`);
 
   if (item.addons[index].selected === true) {
     item.addons[index].selected = false;
-    log(`Addon was toggled off`);
   } else {
     item.addons[index].selected = true;
-    log(`Addon was toggled on`);
   }
 
   let quantity;
   if (currentOrder.quantity == undefined) {
-    log(`Quantity set to 1`);
     quantity = 1;
   } else {
-    log(`Quantity set to ${currentOrder.quantity}`);
     quantity = currentOrder.quantity;
   }
 
-  log(`Current order updated`);
   setCurrentOrder({
     name: item.name,
     price: item.price,

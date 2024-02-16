@@ -14,10 +14,11 @@ export const settingsSchema = [
       {
         name: 'Theme',
         type: 'dropdown',
-        value: 'teddys',
+        value: 'default',
         list: [
           'emerald',
           'teddys',
+          'default',
           'corporate',
           'retro',
           'cyberpunk',

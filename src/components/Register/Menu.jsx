@@ -7,7 +7,6 @@ import undoSVG from '../../assets/appicons/undo.svg';
 
 import ItemPage from './ItemPage.jsx';
 
-import log from '../../tools/logging';
 import playBeep from '../../tools/playBeep';
 
 export default function Menu(props) {
@@ -22,14 +21,11 @@ export default function Menu(props) {
 
   if (menuState === '' || menuState.type === 'category') {
     if (menuState === '') {
-      log(`Rendering default menu`);
       // Render top-level menu if state is ''
       items = getMenu();
     } else if (menuState.type === 'category') {
-      log(`Rendering a category`);
       items = menuState.items;
       if (items[0].type !== 'backButton') {
-        log(`Added a back button`);
         items.unshift({
           name: 'Back',
           type: 'backButton',
@@ -51,7 +47,6 @@ export default function Menu(props) {
       //Code for adding relevent classes to each item
       let classes = 'menu-itm';
 
-      log(`Added item ${item.name} to HTML`);
       itemsHTML.push(
         <div
           key={item.name}
@@ -81,7 +76,6 @@ export default function Menu(props) {
       </div>
     );
   } else if (menuState.modifiers !== undefined) {
-    log(`Rendering an item which has modifiers`);
     return (
       <div className='col-span-8 row-span-1'>
         <ItemPage
@@ -105,14 +99,11 @@ function handleItemClick(item, props) {
   const order = props.order;
   const setOrder = props.setOrder;
 
-  log(`Item clicked`);
   if (item.type === 'backButton') {
-    log(`Item was the back button`);
     setMenuState('');
     //Back button pressed
     return;
   } else if (item.type === undefined && item.modifiers === undefined) {
-    log(`Item had no modifiers, adding to order`);
     handleAddToOrder(
       item,
       setMenuState,
@@ -125,12 +116,10 @@ function handleItemClick(item, props) {
     return;
     // Item with no mods pressed
   } else if (item.type === undefined) {
-    log(`Item had modifiers, opening item page`);
     //Item with mods pressed
     setMenuState(item);
   } else {
     // category pressed
-    log(`Item was a category, opening category`);
     setMenuState(item);
   }
 }

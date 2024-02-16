@@ -3,6 +3,7 @@ const { ipcMain, ipcRenderer } = require('electron');
 const axios = require('axios');
 const Store = require('electron-store');
 const store = new Store();
+import { log } from './loggingAPI';
 import { getSetting } from './settingsAPI';
 
 ipcMain.handle('getAllOrders', () => {
@@ -13,7 +14,7 @@ ipcMain.handle('getAllOrders', () => {
   }
   let notDeletedOrEodOrders = [];
   orders.forEach((order) => {
-    if (!order.deleted && !order.eod) {
+    if (!order.deleted && !order.eod && order.shop == getSetting('Shop Name')) {
       notDeletedOrEodOrders.push(order);
     }
   });
@@ -22,11 +23,12 @@ ipcMain.handle('getAllOrders', () => {
 });
 
 ipcMain.handle('addOrder', async (e, args) => {
-  let items = args.order;
-  if (!Array.isArray(items)) {
-    items = [];
-  }
-  if (items.length !== 0) {
+  try {
+    let items = args.order;
+    if (!Array.isArray(items)) {
+      items = [];
+    }
+    if (items.length === 0) return;
     let subtotal = 0;
     items.forEach((item) => {
       subtotal += item.price * item.quantity;
@@ -51,6 +53,8 @@ ipcMain.handle('addOrder', async (e, args) => {
       orders.unshift(order);
       store.set('orders', orders);
     }
+  } catch (e) {
+    log(JSON.stringify(e), 'Error in adding order', [args]);
   }
 });
 
@@ -114,6 +118,14 @@ ipcMain.handle('syncOrders', async () => {
     store.set('orders', []);
     orders = [];
   }
+  const shopOrders = [];
+  for (const order of orders) {
+    if (
+      order.shop == getSetting('Shop Name')
+    ) {
+      shopOrders.push(order);
+    }
+  }
   try {
     const syncServer = getSetting('Sync Server');
     const https = getSetting('HTTPS');
@@ -124,7 +136,7 @@ ipcMain.handle('syncOrders', async () => {
       shop,
       till,
       key,
-      orders,
+      orders: shopOrders,
     };
 
     let res = await axios({
@@ -194,7 +206,7 @@ ipcMain.handle('syncOrders', async () => {
       ordersEodedInDb,
     };
   } catch (e) {
-    console.log(e);
+    log(JSON.stringify(e), 'Error in syncing orders', [orders]);
     return {
       success: false,
       ordersToAdd: 0,

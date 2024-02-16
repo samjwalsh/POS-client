@@ -2,8 +2,8 @@ import * as React from 'react';
 import { useState, useEffect } from 'react';
 
 import useConfirm from '../Reusables/ConfirmDialog.jsx';
-
 import useAlert from '../Reusables/Alert.jsx';
+import useReconciller from './Reconciller.jsx';
 
 import infoSVG from '../../assets/appicons/info.svg';
 
@@ -11,7 +11,6 @@ import { getSetting } from '../../tools/ipc.js';
 
 import {
   getAllOrders,
-  printOrder,
   printEndOfDay,
   removeOldOrders,
   endOfDay,
@@ -25,6 +24,7 @@ export default function Reports(props) {
   const [orders, setOrders] = useState([]);
 
   const [Dialog, confirm] = useConfirm();
+  const [Reconciller, reconcile] = useReconciller(orders, setOrders);
 
   const [Alert, alert] = useAlert();
 
@@ -45,7 +45,6 @@ export default function Reports(props) {
       clearInterval(syncOrdersInterval);
     };
   }, []);
-  // FUNCTIONS
 
   async function handleEndOfDay() {
     playBeep();
@@ -56,107 +55,28 @@ export default function Reports(props) {
       "This will print an end of day sheet and upload all of today's orders to the cloud.",
     ]);
     if (!choice) return;
+    const hasReconciled = await reconcile();
+    if (!hasReconciled) return;
     let orders = await getAllOrders();
     await printEndOfDay(orders);
-    const printedCorrectly = await confirm([
-      'Did the sheet print correctly?',
-      'No',
-      'Yes',
-      `If the end of day sheet didn't print correctly you can view the sheet on the till or try to print it again.`,
-    ]);
-    if (!printedCorrectly) {
-      let tryAgain = true;
-      while (tryAgain) {
-        tryAgain = await confirm([
+    let userFinished = false;
+    while (!userFinished) {
+      userFinished = await confirm([
+        'Did the sheet print correctly?',
+        'No',
+        'Yes',
+        `If the end of day sheet didn't print correctly you can view the sheet on the till or try to print it again.`,
+      ]);
+      if (!userFinished) {
+        let tryAgain = await confirm([
           'Try Again?',
           'View On Screen',
           'Print Again',
           `You can choose to attempt to print the end of day sheet again or view it on the screen.`,
         ]);
-        if (tryAgain) {
-          await printEndOfDay(orders);
-          console.log('print attempt');
-          const printedCorrectly = await confirm([
-            'Did the sheet print correctly?',
-            'No',
-            'Yes',
-            `If the end of day sheet didn't print correctly you can view the sheet on the till or try to print it again.`,
-          ]);
-          if (printedCorrectly) tryAgain = false;
-        } else {
-          let cashTotal = 0;
-          let cardTotal = 0;
-          let quantityItems = 0;
-          let quantityOrders = orders.length;
-
-          for (const order of orders) {
-            if (order.paymentMethod === 'Card') {
-              cardTotal += order.subtotal;
-            } else {
-              cashTotal += order.subtotal;
-            }
-
-            for (const item of order.items) {
-              if (item.quantity === undefined) {
-                quantityItems++;
-              } else {
-                quantityItems += item.quantity;
-              }
-            }
-          }
-
-          let xTotal = cashTotal + cardTotal;
-
-          let averageSale = 0;
-          if (quantityOrders !== 0 && quantityOrders !== undefined) {
-            averageSale = xTotal / quantityOrders;
-          }
-
-          const EodHTML = (
-            <div className='text-xl w-full'>
-              <div className='flex flex-row justify-between'>
-                <div>Shop:</div>
-                <div>{await getSetting('Shop Name')}</div>
-              </div>
-              <div className='flex flex-row justify-between'>
-                <div>Date:</div>
-                <div>{new Date().toLocaleDateString('en-ie')}</div>
-              </div>
-              <div className='flex flex-row justify-between font-bold'>
-                <div>Cash:</div>
-                <div>{`€${cashTotal.toFixed(2)}`}</div>
-              </div>
-              <div className='flex flex-row justify-between font-bold'>
-                <div>Card:</div>
-                <div>{`€${cardTotal.toFixed(2)}`}</div>
-              </div>
-              <div className='flex flex-row justify-between font-bold'>
-                <div>Total:</div>
-                <div>{`€${xTotal.toFixed(2)}`}</div>
-              </div>
-              <div className='flex flex-row justify-between'>
-                <div>Vat Total:</div>
-                <div>{`€${(0.23 * xTotal).toFixed(2)}`}</div>
-              </div>
-              <div className='flex flex-row justify-between'>
-                <div>Total Items:</div>
-                <div>{quantityItems}</div>
-              </div>
-              <div className='flex flex-row justify-between'>
-                <div>Total Orders:</div>
-                <div>{quantityOrders}</div>
-              </div>
-              <div className='flex flex-row justify-between'>
-                <div>Average Sale:</div>
-                <div>{`€${averageSale.toFixed(2)}`}</div>
-              </div>
-              <div className='flex flex-row justify-between'>
-                <div>Time</div>
-                <div>{calculateDateString(new Date().getTime())}</div>
-              </div>
-            </div>
-          );
-          await alert(EodHTML);
+        if (!tryAgain) {
+          await alert(await createEodHTML(orders));
+          userFinished = true;
         }
       }
     }
@@ -205,6 +125,7 @@ export default function Reports(props) {
     <>
       <Dialog />
       <Alert />
+      <Reconciller />
       <div className='overflow-y-scroll no-scrollbar h-full grid grid-cols-12 grid-rows-1'>
         <div className='overflow-y-scroll no-scrollbar col-span-8 gap-2 p-2 flex flex-row flex-wrap'>
           {createOrdersHTML()}
@@ -218,21 +139,21 @@ export default function Reports(props) {
               <div className='flex flex-row h-auto w-full gap-2'>
                 <div
                   className='btn btn-warning text-lg h-auto flex-grow'
-                  onContextMenu={(event) => handleDeleteOldOrders()}
-                  onTouchEnd={(event) => handleDeleteOldOrders()}>
+                  onContextMenu={() => handleDeleteOldOrders()}
+                  onTouchEnd={() => handleDeleteOldOrders()}>
                   Delete Old Orders
                 </div>
                 <div
                   className='btn-primary btn'
-                  onContextMenu={(e) => handleDeleteOldOrdersHelp()}
-                  onTouchEnd={(e) => handleDeleteOldOrdersHelp()}>
+                  onContextMenu={() => handleDeleteOldOrdersHelp()}
+                  onTouchEnd={() => handleDeleteOldOrdersHelp()}>
                   <img src={infoSVG} className='w-6 invert-icon' />
                 </div>
               </div>
               <div
                 className='btn-error btn text-lg h-auto p-2 w-full'
-                onContextMenu={(event) => handleEndOfDay()}
-                onTouchEnd={(event) => handleEndOfDay()}>
+                onContextMenu={() => handleEndOfDay()}
+                onTouchEnd={() => handleEndOfDay()}>
                 End Of Day
               </div>
             </div>
@@ -261,3 +182,78 @@ export function calculateDateString(time) {
 
   return dateString;
 }
+
+const createEodHTML = async (orders) => {
+  let cashTotal = 0;
+  let cardTotal = 0;
+  let quantityItems = 0;
+  let quantityOrders = orders.length;
+
+  for (const order of orders) {
+    if (order.paymentMethod === 'Card') {
+      cardTotal += order.subtotal;
+    } else {
+      cashTotal += order.subtotal;
+    }
+
+    for (const item of order.items) {
+      if (item.quantity === undefined) {
+        quantityItems++;
+      } else {
+        quantityItems += item.quantity;
+      }
+    }
+  }
+
+  let xTotal = cashTotal + cardTotal;
+
+  let averageSale = 0;
+  if (quantityOrders !== 0 && quantityOrders !== undefined) {
+    averageSale = xTotal / quantityOrders;
+  }
+
+  return (
+    <div className='text-xl w-full'>
+      <div className='flex flex-row justify-between'>
+        <div>Shop:</div>
+        <div>{await getSetting('Shop Name')}</div>
+      </div>
+      <div className='flex flex-row justify-between'>
+        <div>Date:</div>
+        <div>{new Date().toLocaleDateString('en-ie')}</div>
+      </div>
+      <div className='flex flex-row justify-between font-bold'>
+        <div>Cash:</div>
+        <div>{`€${cashTotal.toFixed(2)}`}</div>
+      </div>
+      <div className='flex flex-row justify-between font-bold'>
+        <div>Card:</div>
+        <div>{`€${cardTotal.toFixed(2)}`}</div>
+      </div>
+      <div className='flex flex-row justify-between font-bold'>
+        <div>Total:</div>
+        <div>{`€${xTotal.toFixed(2)}`}</div>
+      </div>
+      <div className='flex flex-row justify-between'>
+        <div>Vat Total:</div>
+        <div>{`€${(0.23 * xTotal).toFixed(2)}`}</div>
+      </div>
+      <div className='flex flex-row justify-between'>
+        <div>Total Items:</div>
+        <div>{quantityItems}</div>
+      </div>
+      <div className='flex flex-row justify-between'>
+        <div>Total Orders:</div>
+        <div>{quantityOrders}</div>
+      </div>
+      <div className='flex flex-row justify-between'>
+        <div>Average Sale:</div>
+        <div>{`€${averageSale.toFixed(2)}`}</div>
+      </div>
+      <div className='flex flex-row justify-between'>
+        <div>Time</div>
+        <div>{calculateDateString(new Date().getTime())}</div>
+      </div>
+    </div>
+  );
+};

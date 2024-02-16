@@ -102,7 +102,7 @@ ipcMain.handle('printVouchers', async (e, vouchers) => {
     }
     await printer.execute();
   } catch (e) {
-    console.log(e);
+    log(JSON.stringify(e), 'Error in printing vouchers', [vouchers])
   }
 });
 
@@ -212,7 +212,7 @@ ipcMain.handle('printOrder', async (e, order) => {
       return error;
     }
   } catch (e) {
-    console.log(e);
+    log(JSON.stringify(e), 'Error in printing receipt', [order]);
     return e;
   }
 });
@@ -324,7 +324,7 @@ ipcMain.handle('printEndOfDay', async (e, orders) => {
       return error;
     }
   } catch (e) {
-    console.log(e);
+    log(JSON.stringify(e), 'Error in printing end of day', [orders])
     return e;
   }
 });

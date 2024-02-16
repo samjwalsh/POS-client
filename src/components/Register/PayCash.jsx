@@ -5,7 +5,6 @@ import infoSVG from '../../assets/appicons/info.svg';
 
 import useAlert from '../Reusables/Alert.jsx';
 
-import log from '../../tools/logging';
 import playBeep from '../../tools/playBeep';
 import { addOrder, openCashDrawer } from '../../tools/ipc';
 
@@ -16,12 +15,9 @@ export default function PayCash(props) {
 
   const [Alert, alert] = useAlert();
 
-  openCashDrawer();
   async function handleButtonPress(value) {
     playBeep();
-    log(`Button for paying with cash clicked`);
     if (value === 'exit') {
-      log(`Exiting the pay cash section and resetting the order`);
       setOrder([]);
       setPayCash(false);
       setChange(0);
@@ -30,7 +26,6 @@ export default function PayCash(props) {
 
     const subtotal = calculateSubtotal(order);
 
-    log(`Calculating the subtotal`);
 
     let change = 0;
     if (typeof value === 'number') {
@@ -39,10 +34,8 @@ export default function PayCash(props) {
       setChange(change);
     }
 
-    log(`Calculating the change`);
 
     if (value === 'custom') {
-      log(`Enabling the keypad`);
       const tendered = await keypad(0, 'currency');
       let change = 0;
       if (typeof tendered === 'number') {
