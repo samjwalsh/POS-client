@@ -105,7 +105,7 @@ export default function Reports(props) {
 
     for (
       let noOrdersRendered = 0;
-      noOrdersRendered < 100 && noOrdersRendered < orders.length;
+      noOrdersRendered < 50 && noOrdersRendered < orders.length;
       noOrdersRendered++
     ) {
       const order = orders[noOrdersRendered];

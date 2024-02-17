@@ -167,7 +167,7 @@ ipcMain.handle('printOrder', async (e, order) => {
     printer.leftRight('Paid By:', order.paymentMethod);
     printer.newLine();
     printer.leftRight('Items:', quantityItems);
-    printer.leftRight('Order No:', order.time);
+    printer.leftRight('Order No:', order.id);
     printer.leftRight('Time:', calculateDateString(new Date(order.time)));
 
     let shopName = '';
