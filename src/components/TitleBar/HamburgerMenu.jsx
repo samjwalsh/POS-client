@@ -10,7 +10,7 @@ import useConfirm from '../Reusables/ConfirmDialog.jsx';
 import useKeypad from '../Reusables/Keypad.jsx';
 import TitleBar from './TitleBar.jsx';
 import useDisableTouch from '../Reusables/DisableTouch.jsx';
-import { getVersionNo } from '../../tools/ipc';
+import { getVersionNo, log } from '../../tools/ipc';
 
 export default function HamburgerMenu(props) {
   const { hamburgerOpen, setHamburger, setAppState, order, setOrder } = props;
@@ -152,7 +152,7 @@ function createVersionString(versionString) {
     }
     return version;
   } catch (e) {
-    console.log(e);
+    log(JSON.stringify(e), 'Error creating version string', [versionString]);
   }
 }
 

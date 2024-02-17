@@ -33,7 +33,7 @@ ipcMain.handle('createVouchers', async (e, quantity, value) => {
     const vouchers = res.data;
     return { vouchers, success: true };
   } catch (e) {
-    console.log(e);
+    log(JSON.stringify(e), 'Error in creating vouchers', [quantity, value]);
     return {
       success: false,
       message: 'Sorry, something went wrong',
@@ -68,6 +68,7 @@ ipcMain.handle('redeemVoucher', async (e, voucherCode) => {
     const voucherResult = res.data;
     return voucherResult;
   } catch (e) {
+    log(JSON.stringify(e), 'Error in redeeming vouchers', [voucherCode]);
     return {
       success: false,
       error: true
@@ -101,6 +102,7 @@ ipcMain.handle('checkVoucher', async (e, voucherCode) => {
     const voucherResult = res.data;
     return voucherResult;
   } catch (e) {
+    log(JSON.stringify(e), 'Error in checking vouchers', [voucherCode]);
     return {
       success: false,
     };

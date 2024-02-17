@@ -102,7 +102,7 @@ ipcMain.handle('printVouchers', async (e, vouchers) => {
     }
     await printer.execute();
   } catch (e) {
-    log(JSON.stringify(e), 'Error in printing vouchers', [vouchers])
+    log(JSON.stringify(e), 'Error in printing vouchers', [vouchers]);
   }
 });
 
@@ -129,20 +129,8 @@ ipcMain.handle('printOrder', async (e, order) => {
     const printer = createPrinter();
 
     // MUST SET USB002 PORT ON PRINTER PROPERTIES IN WINDOWS
-    printer.bold(true);
+    printHeader(printer);
 
-    printer.alignCenter();
-    printer.setTextQuadArea();
-    printer.underlineThick(true);
-    printer.println("Teddy's Ice Cream");
-    printer.underlineThick(false);
-    printer.setTextNormal();
-    printer.newLine();
-    printer.println('1a Windsor Terrace');
-    printer.println('Dún Laoghaire');
-    printer.println('Co. Dublin');
-    printer.alignLeft();
-    printer.drawLine();
 
     let quantityItems = 0;
     let total = 0;
@@ -222,19 +210,8 @@ ipcMain.handle('printEndOfDay', async (e, orders) => {
     const printer = createPrinter();
 
     // MUST SET USB002 PORT ON PRINTER PROPERTIES IN WINDOWS
-    printer.bold(true);
+    printHeader(printer);
 
-    printer.alignCenter();
-    printer.setTextQuadArea();
-    printer.underlineThick(true);
-    printer.println("Teddy's Ice Cream");
-    printer.underlineThick(false);
-    printer.setTextNormal();
-    printer.newLine();
-    printer.println('1a Windsor Terrace');
-    printer.println('Dún Laoghaire');
-    printer.println('Co. Dublin');
-    printer.newLine();
     printer.alignCenter();
     printer.setTextQuadArea();
     printer.underlineThick(false);
@@ -324,7 +301,7 @@ ipcMain.handle('printEndOfDay', async (e, orders) => {
       return error;
     }
   } catch (e) {
-    log(JSON.stringify(e), 'Error in printing end of day', [orders])
+    log(JSON.stringify(e), 'Error in printing end of day', [orders]);
     return e;
   }
 });
@@ -349,7 +326,7 @@ ipcMain.handle('printTestPage', async () => {
     printer.cut();
     let execute = await printer.execute();
   } catch (e) {
-    console.log(e);
+    log(JSON.stringify(e), 'Error in printing test page', []);
   }
 });
 

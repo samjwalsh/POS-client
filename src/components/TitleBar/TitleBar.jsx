@@ -106,7 +106,6 @@ async function handlePrintRecentOrder() {
       break;
     }
   }
-  console.log(recentOrder);
   if (recentOrder !== undefined) await printOrder(recentOrder);
 }
 

@@ -36,7 +36,7 @@ ipcMain.handle('addOrder', async (e, args) => {
 
     const order = {
       id: (Date.now() + Math.random()).toString(),
-      time: Date.now(),
+      time: new Date(),
       subtotal,
       paymentMethod: args.paymentMethod,
       shop: getSetting('Shop Name'),
@@ -74,7 +74,10 @@ ipcMain.handle('removeOldOrders', () => {
   const currentDate = Date.UTC(year, month, day, 0, 0, 0, 0);
 
   for (const order of orders) {
-    const orderDate = new Date(order.time);
+    let orderDate = order.time;
+    if (!(order.time instanceof Date)) { // Just to make sure the order.time is a date object
+      orderDate = new Date(order.time);
+    }
 
     if (currentDate > orderDate) {
       order.eod = true;
@@ -120,9 +123,7 @@ ipcMain.handle('syncOrders', async () => {
   }
   const shopOrders = [];
   for (const order of orders) {
-    if (
-      order.shop == getSetting('Shop Name')
-    ) {
+    if (order.shop == getSetting('Shop Name')) {
       shopOrders.push(order);
     }
   }
