@@ -27,7 +27,6 @@ const useConfirm = () => {
     promise?.resolve(false);
     handleClose();
   };
-  // You could replace the Dialog with your library's version
   const ConfirmationDialog = () => {
     if (promise === null) return;
     else

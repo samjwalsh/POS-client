@@ -16,7 +16,6 @@ const useDisableTouch = () => {
     setPromise(null);
   };
 
-  // You could replace the Dialog with your library's version
   const disableTouchArea = () => {
     if (promise === null) return;
     else

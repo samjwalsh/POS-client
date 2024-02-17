@@ -22,7 +22,6 @@ const useAlert = () => {
     handleClose();
   };
 
-  // You could replace the Dialog with your library's version
   const alertDialog = () => {
     if (promise === null) return;
     else

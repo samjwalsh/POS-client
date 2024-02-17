@@ -145,6 +145,7 @@ export default function HamburgerMenu(props) {
 
 function createVersionString(versionString) {
   try {
+    if (versionString == null) return 'ERR'
     let versionArr = versionString.split('-');
     let version = versionArr[0];
     if (versionArr[1]) {

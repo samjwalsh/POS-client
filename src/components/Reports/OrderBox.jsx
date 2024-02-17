@@ -34,9 +34,8 @@ export function OrderBox({ order, setOrders }) {
   }
   return (
     <>
-    <Dialog/>   
-      <div
-        className='orderbox borderD border-colour flex max-h-96 flex-col'>
+      <Dialog />
+      <div className='orderbox borderD border-colour flex max-h-96 flex-col'>
         <div className='flex flex-row w-full p-2 justify-between border-b border-colour'>
           <div
             className=' btn btn-primary text-lg'
@@ -71,11 +70,17 @@ export function OrderBox({ order, setOrders }) {
         </div>
         <div className='flex flex-col gap-2 p-2 max-h-full overflow-y-scroll no-scrollbar'>
           {order.items.map((orderItem, index) => {
-            return <OrderItem orderItem={orderItem} index={index} key={index.toString()}/>;
+            return (
+              <OrderItem
+                orderItem={orderItem}
+                index={index}
+                key={index.toString()}
+              />
+            );
           })}
         </div>
       </div>
-</>
+    </>
   );
 }
 

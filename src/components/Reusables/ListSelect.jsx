@@ -22,7 +22,6 @@ const useListSelect = () => {
     handleClose();
   };
 
-  // You could replace the Dialog with your library's version
 
   const optionsHTML = options.map((option) => {
     return (

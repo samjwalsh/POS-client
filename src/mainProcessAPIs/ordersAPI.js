@@ -121,12 +121,7 @@ ipcMain.handle('syncOrders', async () => {
     store.set('orders', []);
     orders = [];
   }
-  const shopOrders = [];
-  for (const order of orders) {
-    if (order.shop == getSetting('Shop Name')) {
-      shopOrders.push(order);
-    }
-  }
+
   try {
     const syncServer = getSetting('Sync Server');
     const https = getSetting('HTTPS');
@@ -137,7 +132,7 @@ ipcMain.handle('syncOrders', async () => {
       shop,
       till,
       key,
-      orders: shopOrders,
+      orders,
     };
 
     let res = await axios({
