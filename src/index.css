@@ -13,7 +13,6 @@ body {
   src: url(./assets/fonts/Gabarito.ttf);
 }
 
-
 @font-face {
   font-family: Noto Sans Mono;
   src: url(./assets/fonts/NotoSansMono.ttf);
@@ -75,7 +74,7 @@ body {
 }
 
 .cnter-items {
-  @apply flex items-center justify-center text-center ;
+  @apply flex items-center justify-center text-center;
 }
 
 .keypad {
