@@ -14,6 +14,7 @@ import {
   printEndOfDay,
   removeOldOrders,
   endOfDay,
+  getOrdersPerformant,
 } from '../../tools/ipc.js';
 
 import playBeep from '../../tools/playBeep.js';
@@ -22,6 +23,14 @@ import OrdersStats from './OrdersStats.jsx';
 
 export default function Reports(props) {
   const [orders, setOrders] = useState([]);
+  const [stats, setStats] = useState({
+    cashTotal: 0,
+    cardTotal: 0,
+    quantityItems: 0,
+    quantityOrders: 0,
+    averageSale: 0,
+    xTotal: 0,
+  });
 
   const [Dialog, confirm] = useConfirm();
   const [Reconciller, reconcile] = useReconciller(orders, setOrders);
@@ -30,20 +39,22 @@ export default function Reports(props) {
 
   useEffect(() => {
     (() => {
-      getAllOrders().then((orders) => {
-        setOrders(orders);
+      getOrdersPerformant(1).then((obj) => {
+        setOrders(obj.orders);
+        setStats(obj.stats);
       });
     })();
   }, []);
 
   useEffect(() => {
-    const syncOrdersInterval = setInterval(async () => {
+    const syncOrdersInterval = setInterval( () => {
       console.log('start');
-      await getAllOrders().then((orders) => {
-        setOrders(orders);
+      getOrdersPerformant(1).then(obj => {
+        setOrders(obj.orders);
+        setStats(obj.stats);
       });
-      console.log('end')
-    }, 30000);
+      console.log('end');
+    }, 1000);
     return () => {
       clearInterval(syncOrdersInterval);
     };
@@ -136,7 +147,7 @@ export default function Reports(props) {
         </div>
         <div className='col-span-4 border-l border-colour my-2  w-full'>
           <div className='flex flex-col h-full'>
-            <OrdersStats orders={orders} />
+            <OrdersStats stats={stats} />
             <div className='mt-auto border-t border-colour pt-2 mx-2 flex flex-col gap-2'>
               <div className='flex flex-row h-auto w-full gap-2'>
                 <div

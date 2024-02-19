@@ -58,6 +58,68 @@ ipcMain.handle('addOrder', async (e, args) => {
   }
 });
 
+ipcMain.handle('getOrdersPerformant', (e, limit) => {
+  // return {
+  //   orders: [],
+  //   stats: {
+  //     cashTotal:0,
+  //     cardTotal:0,
+  //     quantityItems:0,
+  //     quantityOrders:0,
+  //     averageSale:0,
+  //     xTotal:0,
+  //   },
+  // };
+  let orders = store.get('orders');
+  if (Array.isArray(orders) === false) {
+    store.set('orders', []);
+    orders = [];
+  }
+
+  let returnedOrders = [];
+  let noOrdersReturned = 0;
+  let cashTotal = 0;
+  let cardTotal = 0;
+  let quantityOrders = 0;
+  let quantityItems = 0;
+  for (const order of orders) {
+    if (order.deleted || order.eod || order.shop != getSetting('Shop Name'))
+      continue;
+    quantityOrders++;
+
+    if (order.paymentMethod === 'Card') {
+      cardTotal += order.subtotal;
+    } else {
+      cashTotal += order.subtotal;
+    }
+    for (const item of order.items) {
+      if (item.quantity === undefined) {
+        quantityItems++;
+      } else {
+        quantityItems += item.quantity;
+      }
+    }
+
+    if (noOrdersReturned >= limit) continue;
+    returnedOrders.push(order);
+    noOrdersReturned++;
+  }
+  const xTotal = cashTotal + cardTotal;
+  const averageSale = xTotal / (quantityOrders == 0 ? 1 : quantityOrders);
+
+  return {
+    orders: returnedOrders,
+    stats: {
+      cashTotal,
+      cardTotal,
+      quantityItems,
+      quantityOrders,
+      averageSale,
+      xTotal,
+    },
+  };
+});
+
 ipcMain.handle('removeOldOrders', () => {
   const orders = store.get('orders');
   if (!Array.isArray(orders)) {
