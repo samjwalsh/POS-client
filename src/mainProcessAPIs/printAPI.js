@@ -102,7 +102,7 @@ ipcMain.handle('printVouchers', async (e, vouchers) => {
     }
     await printer.execute();
   } catch (e) {
-    log(JSON.stringify(e), 'Error in printing vouchers', [vouchers]);
+    log(JSON.stringify(e), 'Error while printing vouchers', [vouchers]);
   }
 });
 
@@ -130,7 +130,6 @@ ipcMain.handle('printOrder', async (e, order) => {
 
     // MUST SET USB002 PORT ON PRINTER PROPERTIES IN WINDOWS
     printHeader(printer);
-
 
     let quantityItems = 0;
     let total = 0;
@@ -200,7 +199,7 @@ ipcMain.handle('printOrder', async (e, order) => {
       return error;
     }
   } catch (e) {
-    log(JSON.stringify(e), 'Error in printing receipt', [order]);
+    log(JSON.stringify(e), 'Error while printing receipt', [order]);
     return e;
   }
 });
@@ -301,7 +300,7 @@ ipcMain.handle('printEndOfDay', async (e, orders) => {
       return error;
     }
   } catch (e) {
-    log(JSON.stringify(e), 'Error in printing end of day', [orders]);
+    log(JSON.stringify(e), 'Error while printing end of day', [orders]);
     return e;
   }
 });
@@ -326,7 +325,7 @@ ipcMain.handle('printTestPage', async () => {
     printer.cut();
     let execute = await printer.execute();
   } catch (e) {
-    log(JSON.stringify(e), 'Error in printing test page', []);
+    log(JSON.stringify(e), 'Error while printing test page', []);
   }
 });
 

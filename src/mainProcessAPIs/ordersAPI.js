@@ -54,7 +54,7 @@ ipcMain.handle('addOrder', async (e, args) => {
       store.set('orders', orders);
     }
   } catch (e) {
-    log(JSON.stringify(e), 'Error in adding order', [args]);
+    log(JSON.stringify(e), 'Error while adding order', [args]);
   }
 });
 
@@ -75,7 +75,8 @@ ipcMain.handle('removeOldOrders', () => {
 
   for (const order of orders) {
     let orderDate = order.time;
-    if (!(order.time instanceof Date)) { // Just to make sure the order.time is a date object
+    if (!(order.time instanceof Date)) {
+      // Just to make sure the order.time is a date object
       orderDate = new Date(order.time);
     }
 
@@ -202,7 +203,7 @@ ipcMain.handle('syncOrders', async () => {
       ordersEodedInDb,
     };
   } catch (e) {
-    log(JSON.stringify(e), 'Error in syncing orders', [orders]);
+    log(JSON.stringify(e), 'Error while syncing orders', [orders]);
     return {
       success: false,
       ordersToAdd: 0,

@@ -29,18 +29,21 @@ export default function Reports(props) {
   const [Alert, alert] = useAlert();
 
   useEffect(() => {
-    (async () => {
-      setOrders(await getAllOrders());
+    (() => {
+      getAllOrders().then((orders) => {
+        setOrders(orders);
+      });
     })();
   }, []);
 
   useEffect(() => {
-    const syncOrdersInterval = setInterval(
-      async () => {
-        setOrders(await getAllOrders());
-      },
-      typeof syncFrequency === 'number' ? syncFrequency : 5000
-    );
+    const syncOrdersInterval = setInterval(async () => {
+      console.log('start');
+      await getAllOrders().then((orders) => {
+        setOrders(orders);
+      });
+      console.log('end')
+    }, 30000);
     return () => {
       clearInterval(syncOrdersInterval);
     };
@@ -102,7 +105,6 @@ export default function Reports(props) {
 
   function createOrdersHTML() {
     let ordersHTML = [];
-
     for (
       let noOrdersRendered = 0;
       noOrdersRendered < 50 && noOrdersRendered < orders.length;

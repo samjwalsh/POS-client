@@ -3,10 +3,10 @@ import { getSetting } from './settingsAPI';
 import axios from 'axios';
 
 ipcMain.handle('log', async (e, errMsg, note, objsOfInterest) => {
-  log( errMsg, note, objsOfInterest);
+  log(errMsg, note, objsOfInterest);
 });
 
-export const log = async ( errMsg, note, objsOfInterest) => {
+export const log = async (errMsg, note, objsOfInterest) => {
   const syncServer = getSetting('Sync Server');
   const https = getSetting('HTTPS');
   const shop = getSetting('Shop Name');
@@ -29,6 +29,6 @@ export const log = async ( errMsg, note, objsOfInterest) => {
     });
     console.log(note);
   } catch (e) {
-    console.log('Error in sending log for ' + note)
+    console.log('Error while sending log for ' + note);
   }
-}
+};
