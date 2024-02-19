@@ -41,32 +41,32 @@ export default function ServerConnection() {
     const beginPing = Date.now();
     const connection = await syncOrders();
     const endPing = Date.now();
-    let shop = await getSetting('Shop Name');
-    switch (shop) {
-      case 'DEV': {
-        shop = 'DV';
-        break;
-      }
-      case 'Main': {
-        shop = 'MN';
-        break;
-      }
-      case 'Lighthouse': {
-        shop = 'LH';
-        break;
-      }
-      case 'West Pier': {
-        shop = 'WP';
-        break;
-      }
-      case 'Bray': {
-        shop = 'BR';
-        break;
-      }
-      default: {
-        shop = 'XX';
-      }
-    }
+    let shop = (await getSetting('Shop Name')).slice(0,2).toUpperCase();
+    // switch (shop) {
+    //   case 'DEV': {
+    //     shop = 'DV';
+    //     break;
+    //   }
+    //   case 'Main': {
+    //     shop = 'MN';
+    //     break;
+    //   }
+    //   case 'Lighthouse': {
+    //     shop = 'LH';
+    //     break;
+    //   }
+    //   case 'West Pier': {
+    //     shop = 'WP';
+    //     break;
+    //   }
+    //   case 'Bray': {
+    //     shop = 'BR';
+    //     break;
+    //   }
+    //   default: {
+    //     shop = 'XX';
+    //   }
+    // }
 
     return {
       status: connection.success,
@@ -87,8 +87,8 @@ export default function ServerConnection() {
       className={`flex flex-row text-sm h-full px-1 rounded-btn
        ${isOnline.status ? 'bg-success' : 'bg-error'}`}>
       <div className='grid grid-rows-2 grid-cols-1'>
-        <div className='row-span-1 col-span-1'>SRV</div>
-        <div className='row-span-1 col-span-1'>
+        <div className='row-span-1 col-span-1 text-center'>SRV</div>
+        <div className='row-span-1 col-span-1 text-center'>
           {isOnline.status
             ? `${String(isOnline.ping).padStart(3, '0')}`
             : '---'}
