@@ -23,14 +23,15 @@ import OrdersStats from './OrdersStats.jsx';
 
 export default function Reports(props) {
   const [orders, setOrders] = useState([]);
-  const [stats, setStats] = useState({
+  const statsDefault = {
     cashTotal: 0,
     cardTotal: 0,
     quantityItems: 0,
     quantityOrders: 0,
     averageSale: 0,
     xTotal: 0,
-  });
+  };
+  const [stats, setStats] = useState(statsDefault);
 
   const [Dialog, confirm] = useConfirm();
   const [Reconciller, reconcile] = useReconciller(orders, setOrders);
@@ -39,26 +40,32 @@ export default function Reports(props) {
 
   useEffect(() => {
     (() => {
-      getOrdersPerformant(1).then((obj) => {
+      getOrdersPerformant(50).then((obj) => {
         setOrders(obj.orders);
         setStats(obj.stats);
       });
     })();
   }, []);
 
-  useEffect(() => {
-    const syncOrdersInterval = setInterval( () => {
-      console.log('start');
-      getOrdersPerformant(1).then(obj => {
-        setOrders(obj.orders);
-        setStats(obj.stats);
-      });
-      console.log('end');
-    }, 1000);
-    return () => {
-      clearInterval(syncOrdersInterval);
-    };
-  }, []);
+  // useEffect(() => {
+  //   const syncOrdersInterval = setInterval( () => {
+  //     console.log('start');
+  //     getOrdersPerformant(1).then(obj => {
+  //       setOrders(obj.orders);
+  //       setStats(obj.stats);
+  //     });
+  //     console.log('end');
+  //   }, 1000);
+  //   return () => {
+  //     clearInterval(syncOrdersInterval);
+  //   };
+  // }, []);
+
+  async function refreshOrders() {
+    const obj = await getOrdersPerformant(50);
+    setOrders(obj.orders);
+    setStats(obj.stats);
+  }
 
   async function handleEndOfDay() {
     playBeep();
@@ -97,6 +104,7 @@ export default function Reports(props) {
     await endOfDay();
     orders = await getAllOrders();
     setOrders(orders);
+    setStats(statsDefault)
   }
 
   async function handleDeleteOldOrders() {
@@ -148,7 +156,13 @@ export default function Reports(props) {
         <div className='col-span-4 border-l border-colour my-2  w-full'>
           <div className='flex flex-col h-full'>
             <OrdersStats stats={stats} />
-            <div className='mt-auto border-t border-colour pt-2 mx-2 flex flex-col gap-2'>
+            <div className='mt-auto mx-2 flex flex-col gap-2'>
+              <div
+                className='btn btn-neutral text-lg h-auto w-full flex-grow'
+                onContextMenu={() => refreshOrders()}
+                onTouchEnd={() => refreshOrders()}>
+                Refresh Orders
+              </div>
               <div className='flex flex-row h-auto w-full gap-2'>
                 <div
                   className='btn btn-warning text-lg h-auto flex-grow'
