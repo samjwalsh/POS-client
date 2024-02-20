@@ -59,17 +59,6 @@ ipcMain.handle('addOrder', async (e, args) => {
 });
 
 ipcMain.handle('getOrdersPerformant', (e, limit) => {
-  // return {
-  //   orders: [],
-  //   stats: {
-  //     cashTotal:0,
-  //     cardTotal:0,
-  //     quantityItems:0,
-  //     quantityOrders:0,
-  //     averageSale:0,
-  //     xTotal:0,
-  //   },
-  // };
   let orders = store.get('orders');
   if (Array.isArray(orders) === false) {
     store.set('orders', []);

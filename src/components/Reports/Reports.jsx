@@ -47,20 +47,6 @@ export default function Reports(props) {
     })();
   }, []);
 
-  // useEffect(() => {
-  //   const syncOrdersInterval = setInterval( () => {
-  //     console.log('start');
-  //     getOrdersPerformant(1).then(obj => {
-  //       setOrders(obj.orders);
-  //       setStats(obj.stats);
-  //     });
-  //     console.log('end');
-  //   }, 1000);
-  //   return () => {
-  //     clearInterval(syncOrdersInterval);
-  //   };
-  // }, []);
-
   async function refreshOrders() {
     const obj = await getOrdersPerformant(50);
     setOrders(obj.orders);
@@ -79,6 +65,9 @@ export default function Reports(props) {
     const hasReconciled = await reconcile();
     if (!hasReconciled) return;
     let orders = await getAllOrders();
+    const obj = await getOrdersPerformant(50);
+    setOrders(obj.orders);
+    setStats(obj.stats);
     await printEndOfDay(orders);
     let userFinished = false;
     while (!userFinished) {
