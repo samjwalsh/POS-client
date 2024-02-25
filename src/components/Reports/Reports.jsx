@@ -93,7 +93,7 @@ export default function Reports(props) {
     await endOfDay();
     orders = await getAllOrders();
     setOrders(orders);
-    setStats(statsDefault)
+    setStats(statsDefault);
   }
 
   async function handleDeleteOldOrders() {

@@ -64,7 +64,7 @@ const useReconciller = (orders, setOrders) => {
         totalCash += order.subtotal;
       }
     }
-    if (reconcileAmt.card != totalCard) {
+    if (Math.abs(reconcileAmt.card - totalCard) >= 0.005) {
       addOrder(
         [
           {
@@ -76,7 +76,7 @@ const useReconciller = (orders, setOrders) => {
         'Card'
       );
     }
-    if (reconcileAmt.cash != totalCash) {
+    if (Math.abs(reconcileAmt.cash - totalCash) >= 0.005) {
       addOrder(
         [
           {
