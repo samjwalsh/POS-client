@@ -9,6 +9,7 @@ import useConfirm from '../Reusables/ConfirmDialog.jsx';
 import useAlert from '../Reusables/Alert.jsx';
 import { addOrder, getAllOrders } from '../../tools/ipc.js';
 const useReconciller = (orders, setOrders) => {
+  
   const [promise, setPromise] = useState(null);
   const [reconcileAmt, setReconcileAmt] = useState({
     card: 0,

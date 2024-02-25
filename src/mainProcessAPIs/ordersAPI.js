@@ -65,6 +65,8 @@ ipcMain.handle('getOrdersPerformant', (e, limit) => {
     orders = [];
   }
 
+  if (limit == undefined) limit = orders.length;
+
   let returnedOrders = [];
   let noOrdersReturned = 0;
   let cashTotal = 0;
