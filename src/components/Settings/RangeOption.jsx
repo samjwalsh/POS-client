@@ -9,11 +9,7 @@ import { setSetting, getSettings, getSetting } from '../../tools/ipc';
 import { executeSettings } from './Settings.jsx';
 
 export function RangeOption({ setting, settings, setSettings }) {
-  async function handleClickRangeOption(
-    setting,
-    method,
-    settings
-  ) {
+  async function handleClickRangeOption(setting, method, settings) {
     playBeep();
 
     let settingName = setting.name;
@@ -55,7 +51,7 @@ export function RangeOption({ setting, settings, setSettings }) {
           onContextMenu={(e) =>
             handleClickRangeOption(setting, 'decrease', settings)
           }
-          onTouchEnd={(e) =>
+          onClick={(e) =>
             handleClickRangeOption(setting, 'decrease', settings)
           }>
           <img src={minusSVG} className='w-6 invert-icon' />
@@ -66,7 +62,7 @@ export function RangeOption({ setting, settings, setSettings }) {
           onContextMenu={(e) =>
             handleClickRangeOption(setting, 'increase', settings)
           }
-          onTouchEnd={(e) =>
+          onClick={(e) =>
             handleClickRangeOption(setting, 'increase', settings)
           }>
           <img src={addSVG} className='w-6 invert-icon' />
@@ -76,9 +72,7 @@ export function RangeOption({ setting, settings, setSettings }) {
           onContextMenu={(e) =>
             handleClickRangeOption(setting, 'reset', settings)
           }
-          onTouchEnd={(e) =>
-            handleClickRangeOption(setting, 'reset', settings)
-          }>
+          onClick={(e) => handleClickRangeOption(setting, 'reset', settings)}>
           {' '}
           <img src={undo} className='w-6 invert-icon' />
         </div>

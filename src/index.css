@@ -5,8 +5,13 @@
 html,
 body {
   height: 100%;
-  @apply no-scrollbar select-none no-animation;
+  @apply no-scrollbar select-none no-animation ;
 }
+
+/* body {
+  height: 100%;
+  @apply no-scrollbar select-none no-animation;
+} */
 
 @font-face {
   font-family: Gabarito;
@@ -33,6 +38,11 @@ body {
   src: url(./assets/fonts/Inter.ttf);
 }
 
+@font-face {
+  font-family: IBM Plex Mono;
+  src: url('./assets/fonts/IBMPlexMono-Regular.ttf');
+}
+
 @layer utilities {
   /* Hide scrollbar for Chrome, Safari and Opera */
   .no-scrollbar::-webkit-scrollbar {
@@ -51,7 +61,7 @@ body {
   /* @apply invert z-0; */
 }
 .menu-itm {
-  @apply btn w-48 h-32 max-w-5xl flex-grow flex p-2 text-left text-2xl items-end justify-start text-neutral-content;
+  @apply btn w-48 h-32 max-w-5xl flex-grow flex p-2 text-left text-2xl items-end justify-start;
 }
 
 .menu-itm-filler {
@@ -87,7 +97,7 @@ body {
 }
 
 .orderbox {
-  @apply max-w-3xl w-72 flex-grow rounded-btn;
+  @apply max-w-3xl w-72 flex-grow;
 }
 
 .num {
@@ -97,3 +107,4 @@ body {
 .keyboardKey {
   @apply flex-grow btn h-full text-xl text-neutral-content;
 }
+

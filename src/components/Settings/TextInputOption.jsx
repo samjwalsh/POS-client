@@ -23,18 +23,13 @@ export function TextInputOption({ setting, setSettings }) {
   return (
     <>
       <Keyboard />
-      <div
-        className='w-full flex flex-row p-2 whitespace-nowrap gap-2 justify-between'>
+      <div className='w-full flex flex-row p-2 whitespace-nowrap gap-2 justify-between'>
         <div className='text-xl self-center'>{setting.name}</div>
         <div className='flex flex-row gap-2'>
           <div
             className='btn text-lg btn-neutral p-2 cnter-items '
-            onContextMenu={(e) =>
-              handleClickTextInputOption(setting)
-            }
-            onTouchEnd={(e) =>
-              handleClickTextInputOption(setting)
-            }>
+            onContextMenu={(e) => handleClickTextInputOption(setting)}
+            onClick={(e) => handleClickTextInputOption(setting)}>
             {setting.value == undefined
               ? 'Enter'
               : setting.value.length > 0

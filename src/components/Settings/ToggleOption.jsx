@@ -22,7 +22,7 @@ export function ToggleOption({ setting, setSettings }) {
         <div
           className='btn text-lg btn-neutral p-2 cnter-items '
           onContextMenu={(e) => handleClickToggleOption(setting)}
-          onTouchEnd={(e) => handleClickToggleOption(setting)}>
+          onClick={(e) => handleClickToggleOption(setting)}>
           {setting.value ? (
             <img src={checkSVG} className='w-6 invert-icon' />
           ) : (

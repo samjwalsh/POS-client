@@ -2,13 +2,13 @@ import * as React from 'react';
 
 export default function OrderItem({ orderItem, index }) {
   return (
-    <div className='w-full grid grid-cols-1 grid-rows-[min-content_min-content] text-base py-1 px-2 rounded-btn bg-neutral text-neutral-content'>
+    <div className='w-full grid grid-cols-1 grid-rows-[min-content_min-content] text-base py-1 px-2 rounded-btn bg-secondary text-neutral-content'>
       <div className='flex flex-row justify-between'>
-        <div className='pr-1'>
+        <div className='pr-1 font-bold'>
           {orderItem.name +
             (orderItem.quantity > 1 ? ` (${orderItem.quantity})` : '')}
         </div>
-        <div className=' text-right num'>
+        <div className=' text-right num font-bold'>
           €{(orderItem.price * orderItem.quantity).toFixed(2)}
         </div>
       </div>

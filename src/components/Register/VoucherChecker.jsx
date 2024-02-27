@@ -90,11 +90,13 @@ const useVoucherChecker = (order, setOrder) => {
       return (
         <div className='w-96 flex flex-col gap-2 text-2xl p-4'>
           <div className='flex flex-row justify-between'>
-            <div className='text-3xl cnter-items'>Voucher Checker</div>
+            <div className='text-3xl cnter-items font-bold'>
+              Voucher Checker
+            </div>
             <div
               className='btn btn-error text-lg'
               onContextMenu={(event) => handleClickClose()}
-              onTouchEnd={(event) => handleClickClose()}>
+              onClick={(event) => handleClickClose()}>
               Cancel
             </div>
           </div>
@@ -104,7 +106,7 @@ const useVoucherChecker = (order, setOrder) => {
             <div
               className='btn btn-primary text-lg'
               onContextMenu={(e) => handleEnterCode()}
-              onTouchEnd={(e) => handleEnterCode()}>
+              onClick={(e) => handleEnterCode()}>
               Enter Code
               <img src={dropdownSVG} className='w-6 invert-icon' />
             </div>

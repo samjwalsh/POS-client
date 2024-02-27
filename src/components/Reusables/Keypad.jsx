@@ -166,8 +166,8 @@ const useKeypad = () => {
       <div
         className='grid grid-cols-3 grid-rows-6 w-full h-full gap-2 text-2xl rounded-box background p-4'
         onContextMenu={(event) => handleKeypadClick(event)}
-        onTouchEnd={(event) => handleKeypadClick(event)}>
-        <div className='border rounded-btn p-2 col-span-2 row-span 1 flex flex-row text-3xl justify-between w-full num'>
+        onClick={(event) => handleKeypadClick(event)}>
+        <div className=' rounded-btn p-2 col-span-2 row-span 1 flex flex-row text-3xl justify-between w-full num'>
           <div className='text-left cnter-items'>
             {keypadState.numberFormat === 'currency' ? '€' : ''}
           </div>
@@ -187,56 +187,56 @@ const useKeypad = () => {
         <div className='col-span-1 row-span-1 keypad btn-warning' id='delete'>
           <img src={backSVG} className='w-6 invert-icon' id='delete' />
         </div>
-        <div className='col-span-1 row-span-1 keypad btn btn-neutral' id='7'>
+        <div className='col-span-1 row-span-1 keypad btn btn-secondary' id='7'>
           7
         </div>
         <div
-          className='col-span-1 row-span-1 keypad btn-neutral text-neutral-content'
+          className='col-span-1 row-span-1 keypad btn-secondary text-neutral-content'
           id='8'>
           8
         </div>
         <div
-          className='col-span-1 row-span-1 keypad btn-neutral text-neutral-content'
+          className='col-span-1 row-span-1 keypad btn-secondary text-neutral-content'
           id='9'>
           9
         </div>
         <div
-          className='col-span-1 row-span-1 keypad btn-neutral text-neutral-content'
+          className='col-span-1 row-span-1 keypad btn-secondary text-neutral-content'
           id='4'>
           4
         </div>
         <div
-          className='col-span-1 row-span-1 keypad btn-neutral text-neutral-content'
+          className='col-span-1 row-span-1 keypad btn-secondary text-neutral-content'
           id='5'>
           5
         </div>
         <div
-          className='col-span-1 row-span-1 keypad btn-neutral text-neutral-content'
+          className='col-span-1 row-span-1 keypad btn-secondary text-neutral-content'
           id='6'>
           6
         </div>
         <div
-          className='col-span-1 row-span-1 keypad btn-neutral text-neutral-content'
+          className='col-span-1 row-span-1 keypad btn-secondary text-neutral-content'
           id='1'>
           1
         </div>
         <div
-          className='col-span-1 row-span-1 keypad btn-neutral text-neutral-content'
+          className='col-span-1 row-span-1 keypad btn-secondary text-neutral-content'
           id='2'>
           2
         </div>
         <div
-          className='col-span-1 row-span-1 keypad btn-neutral text-neutral-content'
+          className='col-span-1 row-span-1 keypad btn-secondary text-neutral-content'
           id='3'>
           3
         </div>
         <div
-          className='col-span-1 row-span-1 keypad btn-neutral text-neutral-content'
+          className='col-span-1 row-span-1 keypad btn-secondary text-neutral-content'
           id='0'>
           0
         </div>
         <div
-          className='col-span-1 row-span-1 keypad btn-neutral text-neutral-content'
+          className='col-span-1 row-span-1 keypad btn-secondary text-neutral-content'
           id='00'>
           00
         </div>

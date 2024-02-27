@@ -40,7 +40,7 @@ export default function ShortcutBox({
             addons
           )
         }
-        onTouchEnd={() =>
+        onClick={() =>
           handleClickShortcut(
             item,
             setMenuState,

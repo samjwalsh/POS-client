@@ -57,7 +57,7 @@ export default function Menu(props) {
           } ${classes}`}
           id={item.name}
           onContextMenu={() => handleItemClick(item, passProps)}
-          onTouchEnd={() => handleItemClick(item, passProps)}>
+          onClick={() => handleItemClick(item, passProps)}>
           {item.name === 'Back' ? (
             <img src={undoSVG} className='w-8 invert-icon' />
           ) : (

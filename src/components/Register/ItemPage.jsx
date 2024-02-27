@@ -83,7 +83,7 @@ export default function ItemPage({
             <button
               className='whitespace-nowrap text-lg btn btn-primary'
               onContextMenu={() => handleClickHelp()}
-              onTouchEnd={() => handleClickHelp()}>
+              onClick={() => handleClickHelp()}>
               Help
             </button>
             <button
@@ -91,9 +91,7 @@ export default function ItemPage({
               onContextMenu={() =>
                 handleExitItemPage(setMenuState, setCurrentOrder)
               }
-              onTouchEnd={() =>
-                handleExitItemPage(setMenuState, setCurrentOrder)
-              }>
+              onClick={() => handleExitItemPage(setMenuState, setCurrentOrder)}>
               Cancel
             </button>
           </div>
@@ -143,7 +141,7 @@ export default function ItemPage({
                   'down'
                 )
               }
-              onTouchEnd={() =>
+              onClick={() =>
                 handleChangeQuantity(
                   item,
                   currentOrder,
@@ -161,7 +159,7 @@ export default function ItemPage({
               onContextMenu={() =>
                 handleChangeQuantity(item, currentOrder, setCurrentOrder, 'up')
               }
-              onTouchEnd={() =>
+              onClick={() =>
                 handleChangeQuantity(item, currentOrder, setCurrentOrder, 'up')
               }>
               <img src={addSVG} className='w-6 invert-icon' />
@@ -180,7 +178,7 @@ export default function ItemPage({
                 setOrder
               )
             }
-            onTouchEnd={() =>
+            onClick={() =>
               handleAddToOrder(
                 item,
                 setMenuState,

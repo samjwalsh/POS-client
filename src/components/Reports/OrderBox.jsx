@@ -4,18 +4,12 @@ import OrderItem from '../Reusables/OrderItem.jsx';
 import closeSVG from '../../assets/appicons/close.svg';
 import useConfirm from '../Reusables/ConfirmDialog.jsx';
 import playBeep from '../../tools/playBeep.js';
-import {
-  removeOrder,
-  getAllOrders,
-  printOrder,
-  getOrdersPerformant,
-} from '../../tools/ipc.js';
+import { removeOrder, getAllOrders, printOrder, getOrderStats } from '../../tools/ipc.js';
 
 import { calculateDateString } from './Reports.jsx';
 
-export function OrderBox({ order, setOrders, stats, setStats }) {
+export function OrderBox({ order, setOrders, setReady , setStats}) {
   const orderDateString = calculateDateString(order.time);
-
   const [Dialog, confirm] = useConfirm();
 
   async function handleDeleteOrder(deletedOrder) {
@@ -31,11 +25,12 @@ export function OrderBox({ order, setOrders, stats, setStats }) {
     ]);
     if (!choice) return;
 
-    let localOrders = await removeOrder(deletedOrder);
+    await removeOrder(deletedOrder);
 
-    const obj = await getOrdersPerformant();
-    setOrders(obj.orders);
-    setStats(obj.stats);
+    setReady(false);
+    setOrders(await getAllOrders());
+    setStats(await getOrderStats());
+    setReady(true);
   }
   return (
     <>
@@ -45,13 +40,13 @@ export function OrderBox({ order, setOrders, stats, setStats }) {
           <div
             className=' btn btn-primary text-lg'
             onContextMenu={(e) => handlePrintReceipt(order)}
-            onTouchEnd={(e) => handlePrintReceipt(order)}>
+            onClick={(e) => handlePrintReceipt(order)}>
             Receipt
           </div>
           <div
             className='btn-error btn'
             onContextMenu={(e) => handleDeleteOrder(order)}
-            onTouchEnd={(e) => handleDeleteOrder(order)}>
+            onClick={(e) => handleDeleteOrder(order)}>
             <img src={closeSVG} className='w-6 invert-icon' />
           </div>
         </div>

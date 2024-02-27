@@ -29,7 +29,7 @@ export function NumberInputOption({ setting, setSettings }) {
           <div
             className='btn text-lg btn-neutral p-2 cnter-items '
             onContextMenu={(e) => handleClickNumberInputOption(setting)}
-            onTouchEnd={(e) => handleClickNumberInputOption(setting)}>
+            onClick={(e) => handleClickNumberInputOption(setting)}>
             {setting.value == undefined ? 'Enter' : setting.value}
             <img src={dropdownSVG} className='w-6 invert-icon' />
           </div>

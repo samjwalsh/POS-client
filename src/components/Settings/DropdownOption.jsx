@@ -45,10 +45,8 @@ export function DropdownOption({ setting, setSettings }) {
         <div className='flex flex-row gap-2'>
           <div
             className='btn text-lg btn-neutral p-2 cnter-items '
-            onContextMenu={(e) =>
-              handleClickDropdownOption(setting)
-            }
-            onTouchEnd={(e) => handleClickDropdownOption(setting)}>
+            onContextMenu={(e) => handleClickDropdownOption(setting)}
+            onClick={(e) => handleClickDropdownOption(setting)}>
             {setting.value == undefined
               ? 'Select'
               : setting.value.length > 0

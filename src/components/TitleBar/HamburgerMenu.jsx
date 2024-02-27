@@ -73,14 +73,7 @@ export default function HamburgerMenu(props) {
 
   if (hamburgerOpen === false) {
     return (
-      <>
-        <TitleBar
-          setHamburger={setHamburger}
-          order={order}
-          setOrder={setOrder}
-        />
-        <div className='border-b border-colour mx-2'></div>
-      </>
+      <TitleBar setHamburger={setHamburger} order={order} setOrder={setOrder} />
     );
   }
 
@@ -97,23 +90,23 @@ export default function HamburgerMenu(props) {
             <div
               className='negative btn btn-error aspect-square p-0'
               onContextMenu={() => handleCloseSideMenu(setHamburger)}
-              onTouchEnd={() => handleCloseSideMenu(setHamburger)}>
+              onClick={() => handleCloseSideMenu(setHamburger)}>
               <img src={closeSVG} className='w-6 invert-icon' />
             </div>
           </div>
-          <div className='border-b border-colour mx-2'></div>
+          <div className='border-b border-colour px-2'></div>
 
           <div className=' flex flex-col gap-2 p-2 '>
             <div
               className='btn btn-neutral text-lg'
               onContextMenu={() => handleSetAppState('Register')}
-              onTouchEnd={() => handleSetAppState('Register')}>
+              onClick={() => handleSetAppState('Register')}>
               Register
             </div>
             <div
               className='btn btn-neutral text-lg'
               onContextMenu={() => handleSetAppState('Reports')}
-              onTouchEnd={() => handleSetAppState('Reports')}>
+              onClick={() => handleSetAppState('Reports')}>
               Reports
             </div>
           </div>
@@ -121,19 +114,19 @@ export default function HamburgerMenu(props) {
             <div
               className='btn btn-neutral text-lg'
               onContextMenu={() => handleCleanScreen()}
-              onTouchEnd={() => handleCleanScreen()}>
+              onClick={() => handleCleanScreen()}>
               Cleaning Mode
             </div>
             <div
               className='btn btn-warning text-lg'
               onContextMenu={() => handleSetAppState('Settings')}
-              onTouchEnd={() => handleSetAppState('Settings')}>
+              onClick={() => handleSetAppState('Settings')}>
               Settings
             </div>
             <div
               className='btn btn-error text-lg'
               onContextMenu={() => handleTerminatePOS()}
-              onTouchEnd={() => handleTerminatePOS()}>
+              onClick={() => handleTerminatePOS()}>
               Exit POS
             </div>
           </div>
@@ -141,7 +134,7 @@ export default function HamburgerMenu(props) {
         <div
           className='row-span-1 col-span-9 transparent'
           onContextMenu={() => handleCloseSideMenu(setHamburger)}
-          onTouchEnd={() => handleCloseSideMenu(setHamburger)}></div>
+          onClick={() => handleCloseSideMenu(setHamburger)}></div>
       </div>
       <div className='fixed bottom-0 right-0 bg-white text-xs h-min w-min rounded-btn font-bold p-1 m-1 background z-50 whitespace-nowrap'>
         {createVersionString(version)}

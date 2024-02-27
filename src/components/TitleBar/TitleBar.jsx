@@ -54,38 +54,35 @@ export default function TitleBar(props) {
       <VoucherRedeemer />
       <VoucherChecker />
       <ListSelect />
-      <div className='flex flex-row justify-between h-14 px-2 cnter-items'>
+      <div className='flex flex-row justify-between h-16 px-2 border-b border-colour cnter-items'>
         <div
-          className='h-10 btn btn-primary text-lg'
+          className=' btn btn-primary text-lg'
           onContextMenu={(e) => handleClickHamburger(setHamburger)}
-          onTouchEnd={(e) => handleClickHamburger(setHamburger)}>
+          onClick={(e) => handleClickHamburger(setHamburger)}>
           <div className=''>Menu</div>
         </div>
-        <div className='flex flex-row items-center justify-end w-full'>
+        {/* <div className='text-2xl'>**Be careful! Items have moved!**</div> */}
+
+        <div className='flex flex-row h-full items-center justify-end w-full'>
           <div
-            className=' h-10 btn btn-secondary text-lg'
+            className='  btn btn-secondary  text-lg'
             onContextMenu={(e) => handlePrintRecentOrder()}
-            onTouchEnd={(e) => handlePrintRecentOrder()}>
+            onClick={(e) => handlePrintRecentOrder()}>
             Print Receipt
           </div>
           <div className='cnter-items h-10 mx-5'></div>
           <div
-            className=' h-10 btn btn-secondary text-lg'
+            className=' btn btn-secondary text-lg'
             onContextMenu={(e) => handleClickVoucherMenu()}
-            onTouchEnd={(e) => handleClickVoucherMenu()}>
+            onClick={(e) => handleClickVoucherMenu()}>
             Vouchers
           </div>
-          <div className='border-r border-colour h-10 mx-5'></div>
-          <div className='pr-1 num font-bold'>
+          <div className='border-r border-colour h-16 mx-5'></div>
+
+          <div className='flex flex-row gap-1 h-12 font-bold'>
             <PrinterConnection />
-          </div>
-          <div className='pr-1 num font-bold'>
             <Connection />
-          </div>
-          <div className='pr-1 num font-bold'>
             <ServerConnection />
-          </div>
-          <div className='num font-bold'>
             <Clock />
           </div>
         </div>

@@ -35,7 +35,7 @@ const useAlert = () => {
                 <div
                   className='row-span-1 btn btn-primary text-lg w-min h-full'
                   onContextMenu={handleConfirm}
-                  onTouchEnd={handleConfirm}>
+                  onClick={handleConfirm}>
                   Okay
                 </div>
               </div>

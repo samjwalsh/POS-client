@@ -9,7 +9,6 @@ import useConfirm from '../Reusables/ConfirmDialog.jsx';
 import useAlert from '../Reusables/Alert.jsx';
 import { addOrder, getAllOrders } from '../../tools/ipc.js';
 const useReconciller = (orders, setOrders) => {
-  
   const [promise, setPromise] = useState(null);
   const [reconcileAmt, setReconcileAmt] = useState({
     card: 0,
@@ -99,11 +98,13 @@ const useReconciller = (orders, setOrders) => {
     return (
       <div className='w-96 flex flex-col gap-2 text-2xl p-4'>
         <div className='flex flex-row justify-between'>
-          <div className='text-3xl cnter-items mt-2'>Reconcile Totals</div>
+          <div className='text-3xl cnter-items mt-2 font-bold'>
+            Reconcile Totals
+          </div>
           <div
             className='btn btn-error text-lg'
             onContextMenu={() => handleClickClose()}
-            onTouchEnd={() => handleClickClose()}>
+            onClick={() => handleClickClose()}>
             Cancel
           </div>
         </div>
@@ -117,7 +118,7 @@ const useReconciller = (orders, setOrders) => {
           <div
             className='btn btn-neutral text-lg'
             onContextMenu={() => handleSetValue('cash')}
-            onTouchEnd={() => handleSetValue('cash')}>
+            onClick={() => handleSetValue('cash')}>
             €{reconcileAmt.cash.toFixed(2)}
             <img src={dropdownSVG} className='w-6 invert-icon' />
           </div>
@@ -127,7 +128,7 @@ const useReconciller = (orders, setOrders) => {
           <div
             className='btn btn-neutral text-lg'
             onContextMenu={() => handleSetValue('card')}
-            onTouchEnd={() => handleSetValue('card')}>
+            onClick={() => handleSetValue('card')}>
             €{reconcileAmt.card.toFixed(2)}
             <img src={dropdownSVG} className='w-6 invert-icon' />
           </div>
@@ -144,7 +145,7 @@ const useReconciller = (orders, setOrders) => {
         <div
           className='w-full btn h-full btn-primary text-lg'
           onContextMenu={(e) => handleReconcile()}
-          onTouchEnd={(e) => handleReconcile()}>{`Record Z-Total as €${(
+          onClick={(e) => handleReconcile()}>{`Record Z-Total as €${(
           reconcileAmt.card + reconcileAmt.cash
         ).toFixed(2)}`}</div>
       </div>

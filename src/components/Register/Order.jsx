@@ -120,14 +120,14 @@ export default function Order(props) {
         <div
           className='btn btn-error h-full p-0 w-12'
           onContextMenu={() => handleOrderItemQuantityChange('down', orderItem)}
-          onTouchEnd={() => handleOrderItemQuantityChange('down', orderItem)}>
+          onClick={() => handleOrderItemQuantityChange('down', orderItem)}>
           <img src={minusSVG} className='w-6 invert-icon' />
         </div>
         <OrderItem orderItem={orderItem} index={index} key={index.toString()} />
         <div
           className='btn btn-success h-full p-0 w-12'
           onContextMenu={() => handleOrderItemQuantityChange('up', orderItem)}
-          onTouchEnd={() => handleOrderItemQuantityChange('up', orderItem)}>
+          onClick={() => handleOrderItemQuantityChange('up', orderItem)}>
           <img src={addSVG} className='w-6 fill-white invert-icon' />
         </div>
       </div>
@@ -139,7 +139,7 @@ export default function Order(props) {
       <Keypad />
       <Alert />
       <Confirm />
-      <div className='col-span-4 row-span-1 h-auto self-stretch flex flex-col overflow-hidden border-l border-colour my-2'>
+      <div className='col-span-4 row-span-1 h-auto self-stretch flex flex-col overflow-hidden border-l border-colour py-2'>
         {payCash === true ? (
           <PayCash
             order={order}
@@ -148,12 +148,12 @@ export default function Order(props) {
             keypad={keypad}
           />
         ) : (
-          <div className='flex flex-col gap-2 h-full overflow-scroll no-scrollbar mx-2'>
+          <div className='flex flex-col gap-2 h-full overflow-scroll no-scrollbar px-2'>
             {orderItems}
           </div>
         )}
 
-        <div className=' grid grid-rows-[min-content, 1fr] grid-cols-1 gap-1 border-t border-colour mx-2 pt-1'>
+        <div className=' grid grid-rows-[min-content, 1fr] grid-cols-1 gap-1 border-t border-colour px-2 pt-1'>
           <div className='row-span-1 col-span-1 flex justify-between w-full text-2xl'>
             <div className='text-left'>Total:</div>
             <div className='text-right num justify-end'>
@@ -165,7 +165,7 @@ export default function Order(props) {
               <div
                 className='p-2 btn btn-error h-full w-full text-2xl'
                 onContextMenu={() => handlePayment('cash')}
-                onTouchEnd={() => handlePayment('cash')}>
+                onClick={() => handlePayment('cash')}>
                 Cancel
               </div>
             ) : (
@@ -173,19 +173,19 @@ export default function Order(props) {
                 <div
                   className='btn btn-secondary h-full aspect-square'
                   onContextMenu={() => handlePlusMinus()}
-                  onTouchEnd={() => handlePlusMinus()}>
+                  onClick={() => handlePlusMinus()}>
                   <img src={euro} className='w-6 invert-icon' />
                 </div>
                 <div
                   className='btn text-2xl btn-primary h-full flex-grow'
                   onContextMenu={() => handlePayment('card')}
-                  onTouchEnd={() => handlePayment('card')}>
+                  onClick={() => handlePayment('card')}>
                   Card
                 </div>
                 <div
                   className='btn text-2xl btn-primary h-full flex-grow'
                   onContextMenu={() => handlePayment('cash')}
-                  onTouchEnd={() => handlePayment('cash')}>
+                  onClick={() => handlePayment('cash')}>
                   Cash
                 </div>
               </>

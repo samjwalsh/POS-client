@@ -53,7 +53,7 @@ export function ButtonOption({ setting, setSettings }) {
           <div
             className='btn text-lg btn-neutral p-2 cnter-items '
             onContextMenu={() => handleClickButtonOption(setting)}
-            onTouchEnd={() => handleClickButtonOption(setting)}>
+            onClick={() => handleClickButtonOption(setting)}>
             {setting.label}
           </div>
         </div>

@@ -6,6 +6,22 @@ const store = new Store();
 import { log } from './loggingAPI';
 import { getSetting } from './settingsAPI';
 
+// ipcMain.handle('getAllOrders', () => {
+//   let orders = store.get('orders');
+//   if (Array.isArray(orders) === false) {
+//     store.set('orders', []);
+//     orders = [];
+//   }
+//   let notDeletedOrEodOrders = [];
+//   orders.forEach((order) => {
+//     if (!order.deleted && !order.eod && order.shop == getSetting('Shop Name')) {
+//       notDeletedOrEodOrders.push(order);
+//     }
+//   });
+
+//   return notDeletedOrEodOrders;
+// });
+
 ipcMain.handle('getAllOrders', () => {
   let orders = store.get('orders');
   if (Array.isArray(orders) === false) {
@@ -13,13 +29,66 @@ ipcMain.handle('getAllOrders', () => {
     orders = [];
   }
   let notDeletedOrEodOrders = [];
-  orders.forEach((order) => {
+
+  for (const order of orders) {
+    if (notDeletedOrEodOrders.length >= 50) break;
     if (!order.deleted && !order.eod && order.shop == getSetting('Shop Name')) {
       notDeletedOrEodOrders.push(order);
     }
-  });
+  }
 
   return notDeletedOrEodOrders;
+});
+
+ipcMain.handle('getOrderStats', () => {
+  let orders = store.get('orders');
+  if (Array.isArray(orders) === false) {
+    store.set('orders', []);
+    orders = [];
+  }
+
+  let cashTotal = 0;
+  let cardTotal = 0;
+  let quantityOrders = 0;
+  let quantityItems = 0;
+
+  var currOrder = 0,
+    ordersLength = orders.length;
+  while (currOrder < ordersLength) {
+    const order = orders[currOrder];
+    currOrder++;
+    if (order.deleted || order.eod) continue;
+    quantityOrders++;
+
+    if (order.paymentMethod === 'Card') {
+      cardTotal += order.subtotal;
+    } else {
+      cashTotal += order.subtotal;
+    }
+    var currItem = 0,
+      itemsLength = order.items.length;
+    while (currItem < itemsLength) {
+      const item = order.items[currItem];
+      currItem++;
+      if (item.quantity === undefined) {
+        quantityItems++;
+      } else {
+        quantityItems += item.quantity;
+      }
+    }
+  }
+
+  const xTotal = cashTotal + cardTotal;
+  const averageSale = xTotal / (quantityOrders == 0 ? 1 : quantityOrders);
+
+  return {
+    cashTotal,
+    cardTotal,
+    quantityItems,
+    quantityOrders,
+    averageSale,
+    xTotal,
+  };
 });
 
 ipcMain.handle('addOrder', async (e, args) => {
@@ -56,59 +125,6 @@ ipcMain.handle('addOrder', async (e, args) => {
   } catch (e) {
     log(JSON.stringify(e), 'Error while adding order', [args]);
   }
-});
-
-ipcMain.handle('getOrdersPerformant', (e, limit) => {
-  let orders = store.get('orders');
-  if (Array.isArray(orders) === false) {
-    store.set('orders', []);
-    orders = [];
-  }
-
-  if (limit == undefined) limit = orders.length;
-
-  let returnedOrders = [];
-  let noOrdersReturned = 0;
-  let cashTotal = 0;
-  let cardTotal = 0;
-  let quantityOrders = 0;
-  let quantityItems = 0;
-  for (const order of orders) {
-    if (order.deleted || order.eod || order.shop != getSetting('Shop Name'))
-      continue;
-    quantityOrders++;
-
-    if (order.paymentMethod === 'Card') {
-      cardTotal += order.subtotal;
-    } else {
-      cashTotal += order.subtotal;
-    }
-    for (const item of order.items) {
-      if (item.quantity === undefined) {
-        quantityItems++;
-      } else {
-        quantityItems += item.quantity;
-      }
-    }
-
-    if (noOrdersReturned >= limit) continue;
-    returnedOrders.push(order);
-    noOrdersReturned++;
-  }
-  const xTotal = cashTotal + cardTotal;
-  const averageSale = xTotal / (quantityOrders == 0 ? 1 : quantityOrders);
-
-  return {
-    orders: returnedOrders,
-    stats: {
-      cashTotal,
-      cardTotal,
-      quantityItems,
-      quantityOrders,
-      averageSale,
-      xTotal,
-    },
-  };
 });
 
 ipcMain.handle('removeOldOrders', () => {
@@ -166,7 +182,7 @@ ipcMain.handle('removeOrder', (e, deletedOrder) => {
     orders[deletedOrderIndex].deleted = true;
     store.set('orders', orders);
   }
-  return store.get('orders');
+  return;
 });
 
 ipcMain.handle('syncOrders', async () => {

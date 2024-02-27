@@ -8,8 +8,8 @@ export function getAllOrders() {
   return ipcRenderer.invoke('getAllOrders');
 }
 
-export function getOrdersPerformant(limit) {
-  return ipcRenderer.invoke('getOrdersPerformant', limit)
+export function getOrderStats() {
+  return ipcRenderer.invoke('getOrderStats');
 }
 
 export async function addOrder(order, paymentMethod) {

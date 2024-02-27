@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 
 import useConfirm from '../Reusables/ConfirmDialog.jsx';
 import useAlert from '../Reusables/Alert.jsx';
@@ -7,14 +7,13 @@ import useReconciller from './Reconciller.jsx';
 
 import infoSVG from '../../assets/appicons/info.svg';
 
-import { getSetting } from '../../tools/ipc.js';
+import { getSetting, getOrderStats } from '../../tools/ipc.js';
 
 import {
   getAllOrders,
   printEndOfDay,
   removeOldOrders,
   endOfDay,
-  getOrdersPerformant,
 } from '../../tools/ipc.js';
 
 import playBeep from '../../tools/playBeep.js';
@@ -23,15 +22,15 @@ import OrdersStats from './OrdersStats.jsx';
 
 export default function Reports(props) {
   const [orders, setOrders] = useState([]);
-  const statsDefault = {
+  const [stats, setStats] = useState({
     cashTotal: 0,
     cardTotal: 0,
     quantityItems: 0,
     quantityOrders: 0,
     averageSale: 0,
     xTotal: 0,
-  };
-  const [stats, setStats] = useState(statsDefault);
+  });
+  const [ready, setReady] = useState(false);
 
   const [Dialog, confirm] = useConfirm();
   const [Reconciller, reconcile] = useReconciller(orders, setOrders);
@@ -40,17 +39,15 @@ export default function Reports(props) {
 
   useEffect(() => {
     (() => {
-      getOrdersPerformant().then((obj) => {
-        setOrders(obj.orders);
-        setStats(obj.stats);
-      });
+      refreshOrders();
     })();
   }, []);
 
   async function refreshOrders() {
-    const obj = await getOrdersPerformant();
-    setOrders(obj.orders);
-    setStats(obj.stats);
+    setReady(false);
+    setOrders(await getAllOrders());
+    setStats(await getOrderStats());
+    setReady(true);
   }
 
   async function handleEndOfDay() {
@@ -64,10 +61,9 @@ export default function Reports(props) {
     if (!choice) return;
     const hasReconciled = await reconcile();
     if (!hasReconciled) return;
-    const obj = await getOrdersPerformant();
-    setOrders(obj.orders);
-    setStats(obj.stats);
-    let orders = await getAllOrders();
+
+    await refreshOrders();
+
     await printEndOfDay(orders);
     let userFinished = false;
     while (!userFinished) {
@@ -91,42 +87,20 @@ export default function Reports(props) {
       }
     }
     await endOfDay();
-    refreshOrders();
+    await refreshOrders();
   }
 
   async function handleDeleteOldOrders() {
     playBeep();
 
     await removeOldOrders();
-    refreshOrders();
+    await refreshOrders();
   }
 
   async function handleDeleteOldOrdersHelp() {
     await alert(
       `This will end of day any orders currently saved on the till that are not from today, so if the last person forgot to end of day the till you can press this to remove any orders that weren't made today.`
     );
-  }
-
-  function createOrdersHTML() {
-    let ordersHTML = [];
-    for (
-      let noOrdersRendered = 0;
-      noOrdersRendered < 50 && noOrdersRendered < orders.length;
-      noOrdersRendered++
-    ) {
-      const order = orders[noOrdersRendered];
-      ordersHTML.push(
-        <OrderBox
-          order={order}
-          setOrders={setOrders}
-          stats={stats}
-          setStats={setStats}
-          key={order.time.toString()}
-        />
-      );
-    }
-
-    return ordersHTML;
   }
 
   return (
@@ -136,38 +110,52 @@ export default function Reports(props) {
       <Reconciller />
       <div className='overflow-y-scroll no-scrollbar h-full grid grid-cols-12 grid-rows-1'>
         <div className='overflow-y-scroll no-scrollbar col-span-8 gap-2 p-2 flex flex-row flex-wrap'>
-          {createOrdersHTML()}
+          {ready ? (
+            orders.map((order) => {
+              return (
+                <OrderBox
+                  order={order}
+                  setOrders={setOrders}
+                  key={order.time.toString()}
+                  setReady={setReady}
+                  setStats={setStats}
+                />
+              );
+            })
+          ) : (
+            <div className='text-2xl w-full cnter-items'>Please wait...</div>
+          )}
           <div className='orderbox'></div>
           <div className='orderbox'></div>
         </div>
-        <div className='col-span-4 border-l border-colour my-2  w-full'>
+        <div className='col-span-4 border-l border-colour py-2  w-full'>
           <div className='flex flex-col h-full'>
             <OrdersStats stats={stats} />
-            <div className='mt-auto mx-2 flex flex-col gap-2'>
+            <div className='mt-auto px-2 flex flex-col gap-2'>
               <div
-                className='btn btn-neutral text-lg h-auto w-full flex-grow'
+                className='btn-neutral btn text-lg h-12 p-2 w-full'
                 onContextMenu={() => refreshOrders()}
-                onTouchEnd={() => refreshOrders()}>
-                Refresh Orders
+                onClick={() => refreshOrders()}>
+                Refresh Orders & Totals
               </div>
-              <div className='flex flex-row h-auto w-full gap-2'>
+              <div className='flex flex-row w-full gap-2 h-12'>
                 <div
                   className='btn btn-warning text-lg h-auto flex-grow'
                   onContextMenu={() => handleDeleteOldOrders()}
-                  onTouchEnd={() => handleDeleteOldOrders()}>
+                  onClick={() => handleDeleteOldOrders()}>
                   Delete Old Orders
                 </div>
                 <div
                   className='btn-primary btn'
                   onContextMenu={() => handleDeleteOldOrdersHelp()}
-                  onTouchEnd={() => handleDeleteOldOrdersHelp()}>
+                  onClick={() => handleDeleteOldOrdersHelp()}>
                   <img src={infoSVG} className='w-6 invert-icon' />
                 </div>
               </div>
               <div
-                className='btn-error btn text-lg h-auto p-2 w-full'
+                className='btn-error btn text-lg  p-2 w-full h-12'
                 onContextMenu={() => handleEndOfDay()}
-                onTouchEnd={() => handleEndOfDay()}>
+                onClick={() => handleEndOfDay()}>
                 End Of Day
               </div>
             </div>

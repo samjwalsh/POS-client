@@ -26,14 +26,12 @@ export default function PayCash(props) {
 
     const subtotal = calculateSubtotal(order);
 
-
     let change = 0;
     if (typeof value === 'number') {
       change = value - subtotal;
 
       setChange(change);
     }
-
 
     if (value === 'custom') {
       const tendered = await keypad(0, 'currency');
@@ -60,45 +58,45 @@ export default function PayCash(props) {
             <div
               className=' btn btn-secondary h-full text-2xl flex-grow '
               onContextMenu={() => handleButtonPress('custom')}
-              onTouchEnd={() => handleButtonPress('custom')}>
+              onClick={() => handleButtonPress('custom')}>
               Custom
             </div>
             <div
               className='btn-primary btn h-full aspect-square'
               onContextMenu={(e) => handlePayCashHelp()}
-              onTouchEnd={(e) => handlePayCashHelp()}>
+              onClick={(e) => handlePayCashHelp()}>
               <img src={infoSVG} className='w-8 invert-icon' />
             </div>
           </div>
           <div
             className='col-span-1 row-span-1 num btn btn-neutral h-full text-2xl'
             onContextMenu={() => handleButtonPress(50)}
-            onTouchEnd={() => handleButtonPress(50)}>
+            onClick={() => handleButtonPress(50)}>
             €50
           </div>
           <div
             className='col-span-1 row-span-1 num btn btn-neutral h-full text-2xl'
             onContextMenu={() => handleButtonPress(20)}
-            onTouchEnd={() => handleButtonPress(20)}>
+            onClick={() => handleButtonPress(20)}>
             €20
           </div>
           <div
             className='col-span-1 row-span-1 num btn btn-neutral h-full text-2xl'
             onContextMenu={() => handleButtonPress(10)}
-            onTouchEnd={() => handleButtonPress(10)}>
+            onClick={() => handleButtonPress(10)}>
             €10
           </div>
           <div
             className='col-span-1 row-span-1 num btn btn-neutral h-full text-2xl'
             onContextMenu={() => handleButtonPress(5)}
-            onTouchEnd={() => handleButtonPress(5)}>
+            onClick={() => handleButtonPress(5)}>
             €5
           </div>
 
           <div
             className='col-span-2 row-span-2 btn btn-primary h-full text-2xl'
             onContextMenu={() => handleButtonPress('exit')}
-            onTouchEnd={() => handleButtonPress('exit')}>
+            onClick={() => handleButtonPress('exit')}>
             Done
           </div>
         </div>

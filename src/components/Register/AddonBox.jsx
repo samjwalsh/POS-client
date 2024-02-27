@@ -19,7 +19,7 @@ export default function AddonBox({
       onContextMenu={() => {
         handleAddonToggle(item, currentOrder, setCurrentOrder, index);
       }}
-      onTouchEnd={() => {
+      onClick={() => {
         handleAddonToggle(item, currentOrder, setCurrentOrder, index);
       }}>
       <div className='flex flex-row justify-between w-full gap-2'>

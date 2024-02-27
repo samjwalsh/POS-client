@@ -174,11 +174,13 @@ const useVoucherCreator = (order, setOrder) => {
       return (
         <div className='w-96 flex flex-col gap-2 text-2xl p-4'>
           <div className='flex flex-row justify-between'>
-            <div className='text-3xl cnter-items mt-2'>Voucher Creator</div>
+            <div className='text-3xl cnter-items mt-2 font-bold'>
+              Voucher Creator
+            </div>
             <div
               className='btn btn-error text-lg'
               onContextMenu={(event) => handleClickClose()}
-              onTouchEnd={(event) => handleClickClose()}>
+              onClick={(event) => handleClickClose()}>
               Cancel
             </div>
           </div>
@@ -188,7 +190,7 @@ const useVoucherCreator = (order, setOrder) => {
             <div
               className='btn btn-neutral text-lg'
               onContextMenu={(e) => handleSetQuantity()}
-              onTouchEnd={(e) => handleSetQuantity()}>
+              onClick={(e) => handleSetQuantity()}>
               {voucherState.quantity == undefined
                 ? 'Enter'
                 : voucherState.quantity}
@@ -200,7 +202,7 @@ const useVoucherCreator = (order, setOrder) => {
             <div
               className='btn btn-neutral text-lg'
               onContextMenu={(e) => handleSetValue()}
-              onTouchEnd={(e) => handleSetValue()}>
+              onClick={(e) => handleSetValue()}>
               €
               {voucherState.value == undefined
                 ? 'Enter'
@@ -220,7 +222,7 @@ const useVoucherCreator = (order, setOrder) => {
           <div
             className='w-full btn h-full btn-primary text-lg'
             onContextMenu={(e) => handleCreateVouchers()}
-            onTouchEnd={(e) => handleCreateVouchers()}>{`Create ${
+            onClick={(e) => handleCreateVouchers()}>{`Create ${
             voucherState.quantity
           } voucher${
             voucherState.quantity !== 1 ? 's' : ''

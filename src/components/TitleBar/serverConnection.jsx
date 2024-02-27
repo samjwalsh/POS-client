@@ -84,18 +84,18 @@ export default function ServerConnection() {
 
   return (
     <div
-      className={`flex flex-row text-sm h-full px-1 rounded-btn
+      className={`flex flex-row text-sm h-full p-1 rounded-btn
        ${isOnline.status ? 'bg-success' : 'bg-error'}`}>
       <div className='grid grid-rows-2 grid-cols-1'>
         <div className='row-span-1 col-span-1 text-center'>SRV</div>
-        <div className='row-span-1 col-span-1 text-center'>
+        <div className='row-span-1 col-span-1 text-center num'>
           {isOnline.status
             ? `${String(isOnline.ping).padStart(3, '0')}`
             : '---'}
         </div>
       </div>
 
-      <div className='grid grid-rows-2 grid-cols-3 text-sm px-1'>
+      <div className='grid grid-rows-2 grid-cols-3 text-sm px-1 num'>
         <div className='col-span-1 row-span-1'>
           {isOnline.ordersToAdd == 0 ? '-' : isOnline.ordersToAdd}
         </div>
@@ -117,7 +117,7 @@ export default function ServerConnection() {
       </div>
       <div className='grid grid-rows-2 grid-cols-1 text-sm'>
         <div className='col-span-1 row-span-1 text-center'>{isOnline.shop}</div>
-        <div className='col-span-1 row-span-1 text-center'>{`${
+        <div className='col-span-1 row-span-1 text-center num'>{`${
           isOnline.till != undefined ? '' + isOnline.till + '' : ''
         }`}</div>
       </div>
