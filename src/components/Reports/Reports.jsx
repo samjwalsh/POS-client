@@ -40,7 +40,7 @@ export default function Reports(props) {
 
   useEffect(() => {
     (() => {
-      getOrdersPerformant(50).then((obj) => {
+      getOrdersPerformant().then((obj) => {
         setOrders(obj.orders);
         setStats(obj.stats);
       });
@@ -48,7 +48,7 @@ export default function Reports(props) {
   }, []);
 
   async function refreshOrders() {
-    const obj = await getOrdersPerformant(50);
+    const obj = await getOrdersPerformant();
     setOrders(obj.orders);
     setStats(obj.stats);
   }
@@ -64,10 +64,10 @@ export default function Reports(props) {
     if (!choice) return;
     const hasReconciled = await reconcile();
     if (!hasReconciled) return;
-    let orders = await getAllOrders();
-    const obj = await getOrdersPerformant(50);
+    const obj = await getOrdersPerformant();
     setOrders(obj.orders);
     setStats(obj.stats);
+    let orders = await getAllOrders();
     await printEndOfDay(orders);
     let userFinished = false;
     while (!userFinished) {
@@ -91,18 +91,14 @@ export default function Reports(props) {
       }
     }
     await endOfDay();
-    orders = await getAllOrders();
-    setOrders(orders);
-    setStats(statsDefault);
+    refreshOrders();
   }
 
   async function handleDeleteOldOrders() {
     playBeep();
 
     await removeOldOrders();
-    const orders = await getAllOrders();
-
-    setOrders(orders);
+    refreshOrders();
   }
 
   async function handleDeleteOldOrdersHelp() {
@@ -123,6 +119,8 @@ export default function Reports(props) {
         <OrderBox
           order={order}
           setOrders={setOrders}
+          stats={stats}
+          setStats={setStats}
           key={order.time.toString()}
         />
       );

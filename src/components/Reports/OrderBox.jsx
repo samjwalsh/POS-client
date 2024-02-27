@@ -4,11 +4,16 @@ import OrderItem from '../Reusables/OrderItem.jsx';
 import closeSVG from '../../assets/appicons/close.svg';
 import useConfirm from '../Reusables/ConfirmDialog.jsx';
 import playBeep from '../../tools/playBeep.js';
-import { removeOrder, getAllOrders, printOrder } from '../../tools/ipc.js';
+import {
+  removeOrder,
+  getAllOrders,
+  printOrder,
+  getOrdersPerformant,
+} from '../../tools/ipc.js';
 
 import { calculateDateString } from './Reports.jsx';
 
-export function OrderBox({ order, setOrders }) {
+export function OrderBox({ order, setOrders, stats, setStats }) {
   const orderDateString = calculateDateString(order.time);
 
   const [Dialog, confirm] = useConfirm();
@@ -28,9 +33,9 @@ export function OrderBox({ order, setOrders }) {
 
     let localOrders = await removeOrder(deletedOrder);
 
-    localOrders = await getAllOrders();
-
-    setOrders(localOrders);
+    const obj = await getOrdersPerformant();
+    setOrders(obj.orders);
+    setStats(obj.stats);
   }
   return (
     <>
