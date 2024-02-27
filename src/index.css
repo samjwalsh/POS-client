@@ -47,7 +47,8 @@ body {
 }
 
 .invert-icon {
-  @apply invert z-0;
+  @apply z-0;
+  /* @apply invert z-0; */
 }
 .menu-itm {
   @apply btn w-48 h-32 max-w-5xl flex-grow flex p-2 text-left text-2xl items-end justify-start text-neutral-content;

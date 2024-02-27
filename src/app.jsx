@@ -3,6 +3,7 @@ import * as ReactDOM from 'react-dom/client';
 import { useState } from 'react';
 
 import './index.css';
+import './assets/fonts/Forma/stylesheet.css';
 
 import Register from './components/Register/Register.jsx';
 import Reports from './components/Reports/Reports.jsx';

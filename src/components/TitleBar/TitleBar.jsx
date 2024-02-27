@@ -54,18 +54,16 @@ export default function TitleBar(props) {
       <VoucherRedeemer />
       <VoucherChecker />
       <ListSelect />
-      <div className='flex flex-row justify-between h-14 shadow-md'>
+      <div className='flex flex-row justify-between h-14 px-2 cnter-items'>
         <div
-          className='h-10 btn btn-primary text-lg ml-2 m-1'
+          className='h-10 btn btn-primary text-lg'
           onContextMenu={(e) => handleClickHamburger(setHamburger)}
           onTouchEnd={(e) => handleClickHamburger(setHamburger)}>
-          {/* <img src={hamburger} className=' invert-icon w-6' /> */}
           <div className=''>Menu</div>
         </div>
-
-        <div className='flex flex-row items-center justify-end w-full px-1'>
+        <div className='flex flex-row items-center justify-end w-full'>
           <div
-            className=' h-10 btn btn-secondary mx-1 my-2 text-lg'
+            className=' h-10 btn btn-secondary text-lg'
             onContextMenu={(e) => handlePrintRecentOrder()}
             onTouchEnd={(e) => handlePrintRecentOrder()}>
             Print Receipt
@@ -78,16 +76,16 @@ export default function TitleBar(props) {
             Vouchers
           </div>
           <div className='border-r border-colour h-10 mx-5'></div>
-          <div className='pr-1 num font-bold text-white'>
+          <div className='pr-1 num font-bold'>
             <PrinterConnection />
           </div>
-          <div className='pr-1 num font-bold text-white'>
+          <div className='pr-1 num font-bold'>
             <Connection />
           </div>
-          <div className='pr-1 num font-bold text-white'>
+          <div className='pr-1 num font-bold'>
             <ServerConnection />
           </div>
-          <div className='pr-1 num font-bold'>
+          <div className='num font-bold'>
             <Clock />
           </div>
         </div>
