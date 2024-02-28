@@ -48,10 +48,10 @@ export function RangeOption({ setting, settings, setSettings }) {
       <div className='flex flex-row gap-2'>
         <div
           className='btn text-lg   btn-error  p-2 cnter-items'
-          onContextMenu={(e) =>
+          onAuxClick={(e) =>
             handleClickRangeOption(setting, 'decrease', settings)
           }
-          onClick={(e) =>
+          onTouchEnd={(e) =>
             handleClickRangeOption(setting, 'decrease', settings)
           }>
           <img src={minusSVG} className='w-6 icon' />
@@ -59,20 +59,20 @@ export function RangeOption({ setting, settings, setSettings }) {
         <div className='cnter-items text-xl'>{setting.value}</div>
         <div
           className='btn text-lg  btn-success p-2 cnter-items'
-          onContextMenu={(e) =>
+          onAuxClick={(e) =>
             handleClickRangeOption(setting, 'increase', settings)
           }
-          onClick={(e) =>
+          onTouchEnd={(e) =>
             handleClickRangeOption(setting, 'increase', settings)
           }>
           <img src={addSVG} className='w-6 icon' />
         </div>
         <div
           className=' btn text-lg btn-neutral p-2 cnter-items '
-          onContextMenu={(e) =>
+          onAuxClick={(e) => handleClickRangeOption(setting, 'reset', settings)}
+          onTouchEnd={(e) =>
             handleClickRangeOption(setting, 'reset', settings)
-          }
-          onClick={(e) => handleClickRangeOption(setting, 'reset', settings)}>
+          }>
           {' '}
           <img src={undo} className='w-6 icon' />
         </div>

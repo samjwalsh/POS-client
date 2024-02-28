@@ -34,8 +34,8 @@ const useAlert = () => {
               <div className='justify-end flex flex-row min-w-[18rem] gap-2 whitespace-nowrap'>
                 <div
                   className='row-span-1 btn btn-primary text-lg w-min h-full'
-                  onContextMenu={handleConfirm}
-                  onClick={handleConfirm}>
+                  onAuxClick={handleConfirm}
+                  onTouchEnd={handleConfirm}>
                   Okay
                 </div>
               </div>

@@ -40,14 +40,14 @@ const useConfirm = () => {
               <div className='justify-end flex flex-row min-w-[18rem] gap-2 whitespace-nowrap'>
                 <div
                   className='row-span-1 btn btn-error text-lg w-min h-full'
-                  onContextMenu={handleCancel}
-                  onClick={handleCancel}>
+                  onAuxClick={handleCancel}
+                  onTouchEnd={handleCancel}>
                   {text[1]}
                 </div>
                 <div
                   className='row-span-1 btn btn-primary text-lg w-min h-full'
-                  onContextMenu={handleConfirm}
-                  onClick={handleConfirm}>
+                  onAuxClick={handleConfirm}
+                  onTouchEnd={handleConfirm}>
                   {text[2]}
                 </div>
               </div>

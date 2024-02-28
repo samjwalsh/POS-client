@@ -44,14 +44,14 @@ export function OrderBox({ order, setOrders, setReady, setStats }) {
         <div className='flex flex-row w-full p-2 justify-between border-b bc'>
           <div
             className=' btn btn-primary text-lg'
-            onContextMenu={(e) => handlePrintReceipt(order)}
-            onClick={(e) => handlePrintReceipt(order)}>
+            onAuxClick={(e) => handlePrintReceipt(order)}
+            onTouchEnd={(e) => handlePrintReceipt(order)}>
             Receipt
           </div>
           <div
             className='btn-error btn'
-            onContextMenu={(e) => handleDeleteOrder(order)}
-            onClick={(e) => handleDeleteOrder(order)}>
+            onAuxClick={(e) => handleDeleteOrder(order)}
+            onTouchEnd={(e) => handleDeleteOrder(order)}>
             <img src={closeSVG} className='w-6 icon' />
           </div>
         </div>

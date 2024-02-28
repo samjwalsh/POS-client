@@ -89,8 +89,8 @@ export default function HamburgerMenu(props) {
             <div className='title self-end'>Menu</div>
             <div
               className='negative btn btn-error aspect-square p-0'
-              onContextMenu={() => handleCloseSideMenu(setHamburger)}
-              onClick={() => handleCloseSideMenu(setHamburger)}>
+              onAuxClick={() => handleCloseSideMenu(setHamburger)}
+              onTouchEnd={() => handleCloseSideMenu(setHamburger)}>
               <img src={closeSVG} className='w-6 icon' />
             </div>
           </div>
@@ -99,42 +99,42 @@ export default function HamburgerMenu(props) {
           <div className=' flex flex-col gap-2 p-2 '>
             <div
               className='btn btn-neutral text-lg'
-              onContextMenu={() => handleSetAppState('Register')}
-              onClick={() => handleSetAppState('Register')}>
+              onAuxClick={() => handleSetAppState('Register')}
+              onTouchEnd={() => handleSetAppState('Register')}>
               Register
             </div>
             <div
               className='btn btn-neutral text-lg'
-              onContextMenu={() => handleSetAppState('Reports')}
-              onClick={() => handleSetAppState('Reports')}>
+              onAuxClick={() => handleSetAppState('Reports')}
+              onTouchEnd={() => handleSetAppState('Reports')}>
               Reports
             </div>
           </div>
           <div className='mt-auto p-2 flex flex-col gap-2'>
             <div
               className='btn btn-neutral text-lg'
-              onContextMenu={() => handleCleanScreen()}
-              onClick={() => handleCleanScreen()}>
+              onAuxClick={() => handleCleanScreen()}
+              onTouchEnd={() => handleCleanScreen()}>
               Cleaning Mode
             </div>
             <div
               className='btn btn-warning text-lg'
-              onContextMenu={() => handleSetAppState('Settings')}
-              onClick={() => handleSetAppState('Settings')}>
+              onAuxClick={() => handleSetAppState('Settings')}
+              onTouchEnd={() => handleSetAppState('Settings')}>
               Settings
             </div>
             <div
               className='btn btn-error text-lg'
-              onContextMenu={() => handleTerminatePOS()}
-              onClick={() => handleTerminatePOS()}>
+              onAuxClick={() => handleTerminatePOS()}
+              onTouchEnd={() => handleTerminatePOS()}>
               Exit POS
             </div>
           </div>
         </div>
         <div
           className='row-span-1 col-span-9 transparent'
-          onContextMenu={() => handleCloseSideMenu(setHamburger)}
-          onClick={() => handleCloseSideMenu(setHamburger)}></div>
+          onAuxClick={() => handleCloseSideMenu(setHamburger)}
+          onTouchEnd={() => handleCloseSideMenu(setHamburger)}></div>
       </div>
       <div className='fixed bottom-0 right-0 bg-base-100 text-xs h-min w-min font-bold p-1 m-1 z-50 whitespace-nowrap'>
         {createVersionString(version)}

@@ -57,8 +57,8 @@ export default function Menu(props) {
               : 'btn-neutral text-neutral-content'
           } ${classes}`}
           id={item.name}
-          onContextMenu={() => handleItemClick(item, passProps)}
-          onClick={() => handleItemClick(item, passProps)}>
+          onAuxClick={() => handleItemClick(item, passProps)}
+          onTouchEnd={() => handleItemClick(item, passProps)}>
           {item.name === 'Back' ? (
             <img src={undoSVG} className='w-8 icon' />
           ) : (

@@ -28,8 +28,8 @@ export function NumberInputOption({ setting, setSettings }) {
         <div className='flex flex-row gap-2'>
           <div
             className='btn text-lg btn-neutral p-2 cnter-items '
-            onContextMenu={(e) => handleClickNumberInputOption(setting)}
-            onClick={(e) => handleClickNumberInputOption(setting)}>
+            onAuxClick={(e) => handleClickNumberInputOption(setting)}
+            onTouchEnd={(e) => handleClickNumberInputOption(setting)}>
             {setting.value == undefined ? 'Enter' : setting.value}
             <img src={dropdownSVG} className='w-6 icon' />
           </div>

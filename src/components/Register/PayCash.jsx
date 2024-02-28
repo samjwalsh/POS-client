@@ -57,46 +57,46 @@ export default function PayCash(props) {
           <div className='col-span-2 row-span-1 flex h-auto flex-row gap-2'>
             <div
               className=' btn btn-secondary h-auto text-2xl flex-grow '
-              onContextMenu={() => handleButtonPress('custom')}
-              onClick={() => handleButtonPress('custom')}>
+              onAuxClick={() => handleButtonPress('custom')}
+              onTouchEnd={() => handleButtonPress('custom')}>
               Custom
             </div>
             <div
               className='btn-primary btn h-auto aspect-square'
-              onContextMenu={(e) => handlePayCashHelp()}
-              onClick={(e) => handlePayCashHelp()}>
+              onAuxClick={(e) => handlePayCashHelp()}
+              onTouchEnd={(e) => handlePayCashHelp()}>
               <img src={infoSVG} className='w-6 icon' />
             </div>
           </div>
           <div
             className='col-span-1 row-span-1 num btn btn-neutral h-auto text-2xl'
-            onContextMenu={() => handleButtonPress(50)}
-            onClick={() => handleButtonPress(50)}>
+            onAuxClick={() => handleButtonPress(50)}
+            onTouchEnd={() => handleButtonPress(50)}>
             €50
           </div>
           <div
             className='col-span-1 row-span-1 num btn btn-neutral h-auto text-2xl'
-            onContextMenu={() => handleButtonPress(20)}
-            onClick={() => handleButtonPress(20)}>
+            onAuxClick={() => handleButtonPress(20)}
+            onTouchEnd={() => handleButtonPress(20)}>
             €20
           </div>
           <div
             className='col-span-1 row-span-1 num btn btn-neutral h-auto text-2xl'
-            onContextMenu={() => handleButtonPress(10)}
-            onClick={() => handleButtonPress(10)}>
+            onAuxClick={() => handleButtonPress(10)}
+            onTouchEnd={() => handleButtonPress(10)}>
             €10
           </div>
           <div
             className='col-span-1 row-span-1 num btn btn-neutral h-auto text-2xl'
-            onContextMenu={() => handleButtonPress(5)}
-            onClick={() => handleButtonPress(5)}>
+            onAuxClick={() => handleButtonPress(5)}
+            onTouchEnd={() => handleButtonPress(5)}>
             €5
           </div>
 
           <div
             className='col-span-2 row-span-2 btn btn-primary h-auto text-2xl'
-            onContextMenu={() => handleButtonPress('exit')}
-            onClick={() => handleButtonPress('exit')}>
+            onAuxClick={() => handleButtonPress('exit')}
+            onTouchEnd={() => handleButtonPress('exit')}>
             Done
           </div>
         </div>
