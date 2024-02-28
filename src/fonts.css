@@ -26,6 +26,13 @@
 
 @font-face {
   font-family: 'Forma DJR Micro';
+  src: url('./assets/fonts/Forma/FormaDJRMicro-Regular.ttf');
+  font-weight: 300;
+  font-style:normal;
+}
+
+@font-face {
+  font-family: 'Forma DJR Micro';
   src: url('./assets/fonts/Forma/FormaDJRMicro-Bold.ttf');
   font-weight: bold;
   font-style: normal;
