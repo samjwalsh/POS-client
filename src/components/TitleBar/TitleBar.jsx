@@ -1,7 +1,5 @@
 import * as React from 'react';
 
-import hamburger from '../../assets/appicons/hamburger.svg';
-
 import playBeep from '../../tools/playBeep';
 import Connection from './Connection.jsx';
 import Clock from './Clock.jsx';

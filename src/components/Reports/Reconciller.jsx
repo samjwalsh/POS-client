@@ -98,7 +98,7 @@ const useReconciller = (orders, setOrders, stats) => {
             Cancel
           </div>
         </div>
-        <div className='text-xl'>
+        <div className='text-xl font-light'>
           Enter the total amount of cash and card for the day. This must match
           the totals written on the day sheet.
         </div>
