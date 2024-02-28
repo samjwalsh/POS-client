@@ -28,7 +28,7 @@ export default function ShortcutBox({
     }
     return (
       <div
-        className='mt-2 btn btn-primary flex-grow w-48 h-48 flex flex-col'
+        className='btn btn-primary flex-grow w-48 h-48 flex flex-col'
         onContextMenu={() =>
           handleClickShortcut(
             item,

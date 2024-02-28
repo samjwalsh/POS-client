@@ -3,15 +3,15 @@
 @tailwind utilities;
 
 html,
-body {
-  height: 100%;
-  @apply no-scrollbar select-none no-animation ;
-}
-
 /* body {
   height: 100%;
-  @apply no-scrollbar select-none no-animation;
+  @apply no-scrollbar select-none;
 } */
+
+body {
+  height: 100%;
+  @apply no-scrollbar select-none no-animation;
+}
 
 @font-face {
   font-family: Gabarito;
@@ -61,7 +61,7 @@ body {
   /* @apply invert z-0; */
 }
 .menu-itm {
-  @apply btn w-48 h-32 max-w-5xl flex-grow flex p-2 text-left text-2xl items-end justify-start;
+  @apply btn w-48 h-32 max-w-5xl flex-grow flex p-2 text-left text-2xl items-end justify-start text-neutral-content;
 }
 
 .menu-itm-filler {
@@ -93,7 +93,7 @@ body {
 }
 
 .border-colour {
-  @apply border-base-content;
+  @apply border-text-neutral-content;
 }
 
 .orderbox {
@@ -108,3 +108,31 @@ body {
   @apply flex-grow btn h-full text-xl text-neutral-content;
 }
 
+/* new stuff */
+/* .btn {
+  @apply gap-2 font-semibold no-underline inline-flex min-h-[3rem]  flex-wrap items-center justify-center px-4 text-center;
+}
+
+.btn-primary {
+  @apply bg-primary text-primary-content;
+}
+
+.btn-secondary {
+  @apply bg-secondary text-secondary-content;
+}
+
+.btn-neutral {
+  @apply bg-neutral text-neutral-content;
+}
+
+.btn-success {
+  @apply bg-success text-success-content;
+}
+
+.btn-warning {
+  @apply bg-warning text-warning-content;
+}
+
+.btn-error {
+  @apply bg-error text-error-content;
+} */

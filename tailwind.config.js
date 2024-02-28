@@ -16,6 +16,22 @@
         mono: ['IBM Plex Mono'],
         emoji: ['Segoe UI Emoji'],
       },
+      colors: {
+        primary: '#51A1F8',
+        'primary-content': '#000',
+        secondary: '#D3D3D7',
+        'secondary-content': '#000',
+        neutral: '#F8E268',
+        'neutral-content': '#000',
+        'base-100': '#f4eddd',
+        success: '#5ECC7B',
+        'success-content': '#000',
+        warning: '#E68E33',
+        'warning-content': '#000',
+        error: '#FF5E4D',
+        'error-content': '#000',
+        'text-neutral-content' : "#000"
+      }
     },
   },
   daisyui: {

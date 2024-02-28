@@ -8,7 +8,7 @@ import playBeep from '../../tools/playBeep.js';
 import useConfirm from '../Reusables/ConfirmDialog.jsx';
 import useAlert from '../Reusables/Alert.jsx';
 import { addOrder, getAllOrders } from '../../tools/ipc.js';
-const useReconciller = (orders, setOrders) => {
+const useReconciller = (orders, setOrders, stats) => {
   const [promise, setPromise] = useState(null);
   const [reconcileAmt, setReconcileAmt] = useState({
     card: 0,
@@ -55,15 +55,10 @@ const useReconciller = (orders, setOrders) => {
   };
 
   const handleReconcile = async () => {
-    let totalCard = 0;
-    let totalCash = 0;
-    for (const order of orders) {
-      if (order.paymentMethod === 'Card') {
-        totalCard += order.subtotal;
-      } else {
-        totalCash += order.subtotal;
-      }
-    }
+
+    const totalCard = stats.cardTotal;
+    const totalCash = stats.cashTotal;
+    
     if (Math.abs(reconcileAmt.card - totalCard) >= 0.005) {
       addOrder(
         [
@@ -88,15 +83,13 @@ const useReconciller = (orders, setOrders) => {
         'Cash'
       );
     }
-    const storedOrders = await getAllOrders();
-    setOrders([...storedOrders]);
     promise?.resolve(true);
     handleClose();
   };
 
   const createHTML = () => {
     return (
-      <div className='w-96 flex flex-col gap-2 text-2xl p-4'>
+      <div className='w-96 flex flex-col gap-2 text-2xl p-4 border border-colour'>
         <div className='flex flex-row justify-between'>
           <div className='text-3xl cnter-items mt-2 font-bold'>
             Reconcile Totals

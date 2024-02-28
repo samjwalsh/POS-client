@@ -398,7 +398,9 @@ const useKeyboard = () => {
     return (
       <div className='absolute top-0 bottom-0 right-0 left-0 h-screen w-screen z-20 grid grid-rows-6 grid-cols-1 fill-slate-300'>
         <div className='transparent row-span-2 col-span-1'></div>
-        <div className='row-span-4 col-span-1'>{createKeyboardHTML()}</div>
+        <div className='row-span-4 col-span-1 border-t border-colour'>
+          {createKeyboardHTML()}
+        </div>
       </div>
     );
   };

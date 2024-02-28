@@ -76,7 +76,7 @@ const useVoucherRedeemer = (order, setOrder) => {
   const createHTML = () => {
     if (clickable) {
       return (
-        <div className='w-min flex flex-col gap-2 text-2xl p-4'>
+        <div className='w-min flex flex-col gap-2 text-2xl p-4 border border-colour'>
           <div className='flex flex-row justify-between'>
             <div className='text-3xl cnter-items whitespace-nowrap pr-2 font-bold'>
               Voucher Redeemer

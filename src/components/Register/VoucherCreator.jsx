@@ -172,7 +172,7 @@ const useVoucherCreator = (order, setOrder) => {
   const createHTML = () => {
     if (clickable) {
       return (
-        <div className='w-96 flex flex-col gap-2 text-2xl p-4'>
+        <div className='w-96 flex flex-col gap-2 text-2xl p-4 border border-colour'>
           <div className='flex flex-row justify-between'>
             <div className='text-3xl cnter-items mt-2 font-bold'>
               Voucher Creator

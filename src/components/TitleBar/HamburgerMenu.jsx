@@ -84,7 +84,7 @@ export default function HamburgerMenu(props) {
       <Dialog />
       <DisableTouch />
       <div className='fixed top-0 grid grid-cols-12 grid-rows-1 w-screen h-screen z-10'>
-        <div className='row-span-1 col-span-3 flex background flex-col '>
+        <div className='row-span-1 col-span-3 flex background flex-col border-r border-colour'>
           <div className='flex flex-row w-100 justify-between p-2 items-stretch '>
             <div className='text-2xl self-end'>Menu</div>
             <div

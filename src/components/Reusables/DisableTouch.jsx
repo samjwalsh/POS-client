@@ -29,7 +29,7 @@ const useDisableTouch = () => {
     return (
       <div className='fixed h-screen w-screen z-50'>
         <div className='fixed top-0 left-0 m-0 p-0 transparent h-screen w-screen z-50'></div>
-        <div className='fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-50 background rounded-box max-w-[30rem]'>
+        <div className='fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-50 background rounded-box max-w-[30rem]  border border-colour'>
           <div className='flex flex-col p-4 gap-2'>
             <div className='text-2xl flex items-start'>Cleaning Mode</div>
             <div className='text-lg flex items-start'>

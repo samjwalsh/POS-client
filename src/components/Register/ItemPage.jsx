@@ -19,6 +19,7 @@ export default function ItemPage({
 }) {
   const [Alert, alert] = useAlert();
   const handleClickHelp = async () => {
+    playBeep();
     await alert(
       <div className='w-[80vw]'>
         <div className='text-xl'>Shortcut Buttons</div>
@@ -74,9 +75,9 @@ export default function ItemPage({
   return (
     <>
       <Alert />
-      <div className='flex flex-col h-full content-start p-2'>
-        <div className='grid grid-cols-2 grid-rows-1 text-2xl h-min'>
-          <div className='col-span-1 text-left w-auto h-min whitespace-nowrap mt-2'>
+      <div className='flex flex-col h-full content-start'>
+        <div className='grid grid-cols-2 grid-rows-1 text-2xl h-min p-2 border-b border-colour'>
+          <div className='col-span-1 text-left text-3xl w-auto h-full whitespace-nowrap mt-2 font-bold'>
             {menuState.name}
           </div>
           <div className='col-span-1 text-right self-end justify-self-end flex flex-row gap-4'>
@@ -97,7 +98,7 @@ export default function ItemPage({
           </div>
         </div>
         <div className='w-full h-min flex-grow-0 overflow-y-scroll no-scrollbar'>
-          <div className='flex flex-row gap-2 h-auto'>
+          <div className='flex flex-row gap-2 h-auto border-b border-colour p-2'>
             {item.shortcuts.map((shortcut) => {
               return (
                 <ShortcutBox
@@ -113,7 +114,7 @@ export default function ItemPage({
               );
             })}
           </div>
-          <div className='flex flex-row flex-wrap gap-2 py-2 overflow-y-scroll no-scrollbar flex-grow-0 '>
+          <div className='flex flex-row flex-wrap gap-2 overflow-y-scroll no-scrollbar flex-grow-0 p-2'>
             {item.addons.map((addon, index) => {
               return (
                 <AddonBox
@@ -129,7 +130,7 @@ export default function ItemPage({
             <div className='w-72 max-w-full flex-grow flex flex-row '></div>
           </div>
         </div>
-        <div className='w-full flex flex-row mt-auto gap-2 pt-2 h-16'>
+        <div className='w-full flex flex-row mt-auto gap-2 p-2 h-16 border-t border-colour'>
           <div className='flex flex-row '>
             <div
               className='w-14 h-auto cnter-items btn btn-error '

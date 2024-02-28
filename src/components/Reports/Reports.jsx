@@ -33,7 +33,7 @@ export default function Reports(props) {
   const [ready, setReady] = useState(false);
 
   const [Dialog, confirm] = useConfirm();
-  const [Reconciller, reconcile] = useReconciller(orders, setOrders);
+  const [Reconciller, reconcile] = useReconciller(orders, setOrders, stats);
 
   const [Alert, alert] = useAlert();
 
