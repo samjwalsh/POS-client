@@ -68,13 +68,6 @@ body {
   @apply w-48 h-0 max-w-5xl flex-grow;
 }
 
-.borderD {
-  @apply border;
-}
-
-.borderB {
-  @apply border border-colour;
-}
 
 .transparent {
   @apply bg-black bg-opacity-25;
@@ -92,7 +85,7 @@ body {
   @apply btn w-full h-full text-2xl text-neutral-content;
 }
 
-.border-colour {
+.bc {
   @apply border-text-neutral-content;
 }
 

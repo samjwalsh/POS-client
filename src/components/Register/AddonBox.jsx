@@ -14,7 +14,7 @@ export default function AddonBox({
   }
   return (
     <div
-      className='w-72 max-w-full flex-grow flex flex-row h-16'
+      className='w-72 max-w-full flex-grow flex flex-row h-auto min-h-[3.5rem]'
       id={index}
       onContextMenu={() => {
         handleAddonToggle(item, currentOrder, setCurrentOrder, index);

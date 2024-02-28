@@ -97,7 +97,7 @@ const useKeyboard = () => {
         }`}
         onContextMenu={(event) => handleKeyboardClick(event)}
         onClick={(event) => handleKeyboardClick(event)}>
-        <div className='borderD border-colour rnd p-2 col-span-1 row-span 1 text-3xl justify-between w-full num text-left normal-case'>
+        <div className='border bc rnd p-2 col-span-1 row-span 1 text-3xl justify-between w-full num text-left normal-case'>
           {keyboardValue + '_'}
         </div>
         <div className='col-span-1 row-span-1 flex justify-between gap-2'>
@@ -398,7 +398,7 @@ const useKeyboard = () => {
     return (
       <div className='absolute top-0 bottom-0 right-0 left-0 h-screen w-screen z-20 grid grid-rows-6 grid-cols-1 fill-slate-300'>
         <div className='transparent row-span-2 col-span-1'></div>
-        <div className='row-span-4 col-span-1 border-t border-colour'>
+        <div className='row-span-4 col-span-1 border-t bc'>
           {createKeyboardHTML()}
         </div>
       </div>

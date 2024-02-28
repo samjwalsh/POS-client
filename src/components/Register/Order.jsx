@@ -139,7 +139,7 @@ export default function Order(props) {
       <Keypad />
       <Alert />
       <Confirm />
-      <div className='col-span-4 row-span-1 h-auto self-stretch flex flex-col overflow-hidden border-l border-colour py-2'>
+      <div className='col-span-4 row-span-1 h-auto self-stretch flex flex-col overflow-hidden border-l bc py-2'>
         {payCash === true ? (
           <PayCash
             order={order}
@@ -153,7 +153,7 @@ export default function Order(props) {
           </div>
         )}
 
-        <div className=' grid grid-rows-[min-content, 1fr] grid-cols-1 gap-1 border-t border-colour px-2 pt-1'>
+        <div className=' grid grid-rows-[min-content, 1fr] grid-cols-1 gap-1 border-t bc px-2 pt-1'>
           <div className='row-span-1 col-span-1 flex justify-between w-full text-2xl'>
             <div className='text-left'>Total:</div>
             <div className='text-right num justify-end'>

@@ -84,7 +84,7 @@ export default function HamburgerMenu(props) {
       <Dialog />
       <DisableTouch />
       <div className='fixed top-0 grid grid-cols-12 grid-rows-1 w-screen h-screen z-10'>
-        <div className='row-span-1 col-span-3 flex background flex-col border-r border-colour'>
+        <div className='row-span-1 col-span-3 flex background flex-col border-r bc'>
           <div className='flex flex-row w-100 justify-between p-2 items-stretch '>
             <div className='text-2xl self-end'>Menu</div>
             <div
@@ -94,7 +94,7 @@ export default function HamburgerMenu(props) {
               <img src={closeSVG} className='w-6 invert-icon' />
             </div>
           </div>
-          <div className='border-b border-colour px-2'></div>
+          <div className='border-b bc px-2'></div>
 
           <div className=' flex flex-col gap-2 p-2 '>
             <div

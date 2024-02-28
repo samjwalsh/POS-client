@@ -1,6 +1,7 @@
 import * as React from 'react';
 
-import getMenu from '../../tools/menuAPI';
+import { getMenu } from '../../tools/menuAPI.js';
+
 import { handleAddToOrder } from './ItemPage.jsx';
 
 import undoSVG from '../../assets/appicons/undo.svg';

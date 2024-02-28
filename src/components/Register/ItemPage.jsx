@@ -76,7 +76,7 @@ export default function ItemPage({
     <>
       <Alert />
       <div className='flex flex-col h-full content-start'>
-        <div className='grid grid-cols-2 grid-rows-1 text-2xl h-min p-2 border-b border-colour'>
+        <div className='grid grid-cols-2 grid-rows-1 text-2xl h-min p-2 border-b bc'>
           <div className='col-span-1 text-left text-3xl w-auto h-full whitespace-nowrap mt-2 font-bold'>
             {menuState.name}
           </div>
@@ -97,8 +97,8 @@ export default function ItemPage({
             </button>
           </div>
         </div>
-        <div className='w-full h-min flex-grow-0 overflow-y-scroll no-scrollbar'>
-          <div className='flex flex-row gap-2 h-auto border-b border-colour p-2'>
+        <div className='w-full h-full flex-grow flex flex-col '>
+          <div className='flex flex-row gap-2 flex-grow border-b bc p-2 max-h-[14rem] min-h-[10rem]'>
             {item.shortcuts.map((shortcut) => {
               return (
                 <ShortcutBox
@@ -114,7 +114,7 @@ export default function ItemPage({
               );
             })}
           </div>
-          <div className='flex flex-row flex-wrap gap-2 overflow-y-scroll no-scrollbar flex-grow-0 p-2'>
+          <div className='flex flex-row flex-wrap gap-2 p-2 overflow-y-scroll no-scrollbar'>
             {item.addons.map((addon, index) => {
               return (
                 <AddonBox
@@ -130,7 +130,7 @@ export default function ItemPage({
             <div className='w-72 max-w-full flex-grow flex flex-row '></div>
           </div>
         </div>
-        <div className='w-full flex flex-row mt-auto gap-2 p-2 h-16 border-t border-colour'>
+        <div className='w-full flex flex-row mt-auto gap-2 p-2 h-16 border-t bc'>
           <div className='flex flex-row '>
             <div
               className='w-14 h-auto cnter-items btn btn-error '

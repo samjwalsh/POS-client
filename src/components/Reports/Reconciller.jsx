@@ -55,10 +55,9 @@ const useReconciller = (orders, setOrders, stats) => {
   };
 
   const handleReconcile = async () => {
-
     const totalCard = stats.cardTotal;
     const totalCash = stats.cashTotal;
-    
+
     if (Math.abs(reconcileAmt.card - totalCard) >= 0.005) {
       addOrder(
         [
@@ -89,7 +88,7 @@ const useReconciller = (orders, setOrders, stats) => {
 
   const createHTML = () => {
     return (
-      <div className='w-96 flex flex-col gap-2 text-2xl p-4 border border-colour'>
+      <div className='w-96 flex flex-col gap-2 text-2xl p-4 border bc'>
         <div className='flex flex-row justify-between'>
           <div className='text-3xl cnter-items mt-2 font-bold'>
             Reconcile Totals
@@ -105,7 +104,7 @@ const useReconciller = (orders, setOrders, stats) => {
           Enter the total amount of cash and card for the day. This must match
           the totals written on the day sheet.
         </div>
-        <div className='w-full border-b border-colour'></div>
+        <div className='w-full border-b bc'></div>
         <div className='flex flex-row justify-between'>
           <div className='cnter-items'>Total Cash:</div>
           <div
@@ -126,7 +125,7 @@ const useReconciller = (orders, setOrders, stats) => {
             <img src={dropdownSVG} className='w-6 invert-icon' />
           </div>
         </div>
-        <div className='w-full border-b border-colour'></div>
+        <div className='w-full border-b bc'></div>
 
         <div className='flex flex-row justify-between text-3xl'>
           <div className='cnter-items'>Z-Total:</div>
@@ -134,7 +133,7 @@ const useReconciller = (orders, setOrders, stats) => {
             €{(reconcileAmt.cash + reconcileAmt.card).toFixed(2)}
           </div>
         </div>
-        <div className='w-full border-b border-colour'></div>
+        <div className='w-full border-b bc'></div>
         <div
           className='w-full btn h-full btn-primary text-lg'
           onContextMenu={(e) => handleReconcile()}

@@ -4,11 +4,16 @@ import OrderItem from '../Reusables/OrderItem.jsx';
 import closeSVG from '../../assets/appicons/close.svg';
 import useConfirm from '../Reusables/ConfirmDialog.jsx';
 import playBeep from '../../tools/playBeep.js';
-import { removeOrder, getAllOrders, printOrder, getOrderStats } from '../../tools/ipc.js';
+import {
+  removeOrder,
+  getAllOrders,
+  printOrder,
+  getOrderStats,
+} from '../../tools/ipc.js';
 
 import { calculateDateString } from './Reports.jsx';
 
-export function OrderBox({ order, setOrders, setReady , setStats}) {
+export function OrderBox({ order, setOrders, setReady, setStats }) {
   const orderDateString = calculateDateString(order.time);
   const [Dialog, confirm] = useConfirm();
 
@@ -35,8 +40,8 @@ export function OrderBox({ order, setOrders, setReady , setStats}) {
   return (
     <>
       <Dialog />
-      <div className='orderbox borderD border-colour flex max-h-96 flex-col'>
-        <div className='flex flex-row w-full p-2 justify-between border-b border-colour'>
+      <div className='orderbox border bc flex max-h-96 flex-col'>
+        <div className='flex flex-row w-full p-2 justify-between border-b bc'>
           <div
             className=' btn btn-primary text-lg'
             onContextMenu={(e) => handlePrintReceipt(order)}
@@ -50,7 +55,7 @@ export function OrderBox({ order, setOrders, setReady , setStats}) {
             <img src={closeSVG} className='w-6 invert-icon' />
           </div>
         </div>
-        <div className='flex flex-col p-2 border-b border-colour text-lg'>
+        <div className='flex flex-col p-2 border-b bc text-lg'>
           <div className='flex flex-row justify-between'>
             <div className=''>Time:</div>
             <div className=''>{orderDateString}</div>

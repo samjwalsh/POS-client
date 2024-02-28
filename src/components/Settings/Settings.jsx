@@ -9,8 +9,7 @@ import { ToggleOption } from './ToggleOption.jsx';
 import { TextInputOption } from './TextInputOption.jsx';
 import { NumberInputOption } from './NumberInputOption.jsx';
 
-export default function Settings({settings, setSettings}) {
-
+export default function Settings({ settings, setSettings }) {
   const [version, setVersion] = useState();
 
   useEffect(() => {
@@ -78,12 +77,8 @@ export default function Settings({settings, setSettings}) {
         }
       });
       return (
-        <div
-          className='w-full border border-colour  p-2 rounded-box'
-          key={category.name}>
-          <div className='border-b border-colour text-2xl'>
-            {category.name}{' '}
-          </div>{' '}
+        <div className='w-full border bc  p-2 rounded-box' key={category.name}>
+          <div className='border-b bc text-2xl'>{category.name} </div>{' '}
           <div className='flex flex-col justify-between pt-2 gap-2'>
             {' '}
             {categoryHTML}{' '}

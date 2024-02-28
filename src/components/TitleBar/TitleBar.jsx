@@ -54,7 +54,7 @@ export default function TitleBar(props) {
       <VoucherRedeemer />
       <VoucherChecker />
       <ListSelect />
-      <div className='flex flex-row justify-between h-16 px-2 border-b border-colour cnter-items'>
+      <div className='flex flex-row justify-between h-16 px-2 border-b bc cnter-items'>
         <div
           className=' btn btn-primary text-lg'
           onContextMenu={(e) => handleClickHamburger(setHamburger)}
@@ -77,7 +77,7 @@ export default function TitleBar(props) {
             onClick={(e) => handleClickVoucherMenu()}>
             Vouchers
           </div>
-          <div className='border-r border-colour h-16 mx-5'></div>
+          <div className='border-r bc h-16 mx-5'></div>
 
           <div className='flex flex-row gap-1 h-12 font-bold'>
             <PrinterConnection />

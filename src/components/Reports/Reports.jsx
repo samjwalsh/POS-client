@@ -81,7 +81,7 @@ export default function Reports(props) {
           `You can choose to attempt to print the end of day sheet again or view it on the screen.`,
         ]);
         if (!tryAgain) {
-          await alert(await createEodHTML(orders));
+          await alert(await createEodHTML());
           userFinished = true;
         }
       }
@@ -128,7 +128,7 @@ export default function Reports(props) {
           <div className='orderbox'></div>
           <div className='orderbox'></div>
         </div>
-        <div className='col-span-4 border-l border-colour py-2  w-full'>
+        <div className='col-span-4 border-l bc py-2  w-full'>
           <div className='flex flex-col h-full'>
             <OrdersStats stats={stats} />
             <div className='mt-auto px-2 flex flex-col gap-2'>
@@ -185,34 +185,16 @@ export function calculateDateString(time) {
   return dateString;
 }
 
-const createEodHTML = async (orders) => {
-  let cashTotal = 0;
-  let cardTotal = 0;
-  let quantityItems = 0;
-  let quantityOrders = orders.length;
+const createEodHTML = async () => {
+  const {
+    cashTotal,
+    cardTotal,
+    quantityItems,
+    quantityOrders,
+    averageSale,
+    xTotal,
+  } = await getOrderStats();
 
-  for (const order of orders) {
-    if (order.paymentMethod === 'Card') {
-      cardTotal += order.subtotal;
-    } else {
-      cashTotal += order.subtotal;
-    }
-
-    for (const item of order.items) {
-      if (item.quantity === undefined) {
-        quantityItems++;
-      } else {
-        quantityItems += item.quantity;
-      }
-    }
-  }
-
-  let xTotal = cashTotal + cardTotal;
-
-  let averageSale = 0;
-  if (quantityOrders !== 0 && quantityOrders !== undefined) {
-    averageSale = xTotal / quantityOrders;
-  }
 
   return (
     <div className='text-xl w-full'>
