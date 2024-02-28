@@ -88,9 +88,9 @@ const useVoucherChecker = (order, setOrder) => {
   const createHTML = () => {
     if (clickable) {
       return (
-        <div className='w-96 flex flex-col gap-2 text-2xl p-4 border border-colour'>
+        <div className='w-96 flex flex-col gap-2 text-2xl p-4 border bc'>
           <div className='flex flex-row justify-between '>
-            <div className='text-3xl cnter-items font-bold'>
+            <div className='title cnter-items'>
               Voucher Checker
             </div>
             <div
@@ -100,7 +100,7 @@ const useVoucherChecker = (order, setOrder) => {
               Cancel
             </div>
           </div>
-          <div className='w-full border-b border-colour'></div>
+          <div className='w-full border-b bc'></div>
           <div className='flex flex-row justify-between'>
             <div className='cnter-items'>Code:</div>
             <div
@@ -114,7 +114,7 @@ const useVoucherChecker = (order, setOrder) => {
         </div>
       );
     } else {
-      return <div className='text-2xl cnter-items'>Please wait...</div>;
+      return <Wait/>;
     }
   };
 

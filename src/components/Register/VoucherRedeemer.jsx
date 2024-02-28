@@ -7,6 +7,7 @@ import playBeep from '../../tools/playBeep.js';
 import { redeemVoucher } from '../../tools/ipc.js';
 import useAlert from '../Reusables/Alert.jsx';
 import { handleAddToOrder } from './ItemPage.jsx';
+import Wait from '../Reusables/Wait.jsx';
 const useVoucherRedeemer = (order, setOrder) => {
   const [promise, setPromise] = useState(null);
   const [clickable, setClickable] = useState(true);
@@ -78,7 +79,7 @@ const useVoucherRedeemer = (order, setOrder) => {
       return (
         <div className='w-min flex flex-col gap-2 text-2xl p-4 border bc'>
           <div className='flex flex-row justify-between'>
-            <div className='text-3xl cnter-items whitespace-nowrap pr-2 font-bold'>
+            <div className=' cnter-items whitespace-nowrap pr-2 title'>
               Voucher Redeemer
             </div>
             <div
@@ -102,7 +103,7 @@ const useVoucherRedeemer = (order, setOrder) => {
         </div>
       );
     } else {
-      return <div className='text-2xl cnter-items'>Please wait...</div>;
+      return <Wait/>;
     }
   };
 

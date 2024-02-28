@@ -86,7 +86,7 @@ export default function HamburgerMenu(props) {
       <div className='fixed top-0 grid grid-cols-12 grid-rows-1 w-screen h-screen z-10'>
         <div className='row-span-1 col-span-3 flex background flex-col border-r bc'>
           <div className='flex flex-row w-100 justify-between p-2 items-stretch '>
-            <div className='text-2xl self-end'>Menu</div>
+            <div className='title self-end'>Menu</div>
             <div
               className='negative btn btn-error aspect-square p-0'
               onContextMenu={() => handleCloseSideMenu(setHamburger)}

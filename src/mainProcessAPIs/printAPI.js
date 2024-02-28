@@ -1,5 +1,6 @@
 const { ipcMain, app } = require('electron');
 const Store = require('electron-store');
+import { log } from './loggingAPI';
 const settingsStore = new Store();
 const {
   ThermalPrinter,

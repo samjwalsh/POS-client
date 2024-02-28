@@ -19,6 +19,7 @@ import {
 import playBeep from '../../tools/playBeep.js';
 import { OrderBox } from './OrderBox.jsx';
 import OrdersStats from './OrdersStats.jsx';
+import Wait from '../Reusables/Wait.jsx';
 
 export default function Reports(props) {
   const [orders, setOrders] = useState([]);
@@ -123,7 +124,7 @@ export default function Reports(props) {
               );
             })
           ) : (
-            <div className='text-2xl w-full cnter-items'>Please wait...</div>
+            <Wait/>
           )}
           <div className='orderbox'></div>
           <div className='orderbox'></div>
@@ -194,7 +195,6 @@ const createEodHTML = async () => {
     averageSale,
     xTotal,
   } = await getOrderStats();
-
 
   return (
     <div className='text-xl w-full'>

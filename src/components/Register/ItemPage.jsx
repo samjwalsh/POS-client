@@ -76,8 +76,8 @@ export default function ItemPage({
     <>
       <Alert />
       <div className='flex flex-col h-full content-start'>
-        <div className='grid grid-cols-2 grid-rows-1 text-2xl h-min p-2 border-b bc'>
-          <div className='col-span-1 text-left text-3xl w-auto h-full whitespace-nowrap mt-2 font-bold'>
+        <div className='grid grid-cols-2 grid-rows-1 h-min p-2 border-b bc'>
+          <div className='col-span-1 text-left w-auto h-full whitespace-nowrap mt-2 title'>
             {menuState.name}
           </div>
           <div className='col-span-1 text-right self-end justify-self-end flex flex-row gap-4'>

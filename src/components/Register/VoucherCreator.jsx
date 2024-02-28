@@ -8,6 +8,7 @@ import playBeep from '../../tools/playBeep.js';
 import { createVouchers, printVouchers } from '../../tools/ipc.js';
 import useConfirm from '../Reusables/ConfirmDialog.jsx';
 import useAlert from '../Reusables/Alert.jsx';
+import Wait from '../Reusables/Wait.jsx';
 const useVoucherCreator = (order, setOrder) => {
   const [promise, setPromise] = useState(null);
   const [voucherState, setVoucherState] = useState({
@@ -172,11 +173,9 @@ const useVoucherCreator = (order, setOrder) => {
   const createHTML = () => {
     if (clickable) {
       return (
-        <div className='w-96 flex flex-col gap-2 text-2xl p-4 border border-colour'>
+        <div className='w-96 flex flex-col gap-2 text-2xl p-4 border bc'>
           <div className='flex flex-row justify-between'>
-            <div className='text-3xl cnter-items mt-2 font-bold'>
-              Voucher Creator
-            </div>
+            <div className=' cnter-items mt-2 title'>Voucher Creator</div>
             <div
               className='btn btn-error text-lg'
               onContextMenu={(event) => handleClickClose()}
@@ -184,7 +183,7 @@ const useVoucherCreator = (order, setOrder) => {
               Cancel
             </div>
           </div>
-          <div className='w-full border-b border-colour'></div>
+          <div className='w-full border-b bc'></div>
           <div className='flex flex-row justify-between'>
             <div className='cnter-items'>Quantity:</div>
             <div
@@ -210,15 +209,15 @@ const useVoucherCreator = (order, setOrder) => {
               <img src={dropdownSVG} className='w-6 invert-icon' />
             </div>
           </div>
-          <div className='w-full border-b border-colour'></div>
+          <div className='w-full border-b bc'></div>
 
-          <div className='flex flex-row justify-between text-3xl'>
+          <div className='flex flex-row justify-between title'>
             <div className='cnter-items'>Total Cost:</div>
             <div className='cnter-items'>
               €{(voucherState.value * voucherState.quantity).toFixed(2)}
             </div>
           </div>
-          <div className='w-full border-b border-colour'></div>
+          <div className='w-full border-b bc'></div>
           <div
             className='w-full btn h-full btn-primary text-lg'
             onContextMenu={(e) => handleCreateVouchers()}
@@ -232,7 +231,7 @@ const useVoucherCreator = (order, setOrder) => {
         </div>
       );
     } else {
-      return <div className='text-2xl cnter-items'>Please wait...</div>;
+      return <Wait/>;
     }
   };
 

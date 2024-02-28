@@ -90,9 +90,7 @@ const useReconciller = (orders, setOrders, stats) => {
     return (
       <div className='w-96 flex flex-col gap-2 text-2xl p-4 border bc'>
         <div className='flex flex-row justify-between'>
-          <div className='text-3xl cnter-items mt-2 font-bold'>
-            Reconcile Totals
-          </div>
+          <div className=' cnter-items mt-2 title'>Reconcile Totals</div>
           <div
             className='btn btn-error text-lg'
             onContextMenu={() => handleClickClose()}
@@ -127,7 +125,7 @@ const useReconciller = (orders, setOrders, stats) => {
         </div>
         <div className='w-full border-b bc'></div>
 
-        <div className='flex flex-row justify-between text-3xl'>
+        <div className='flex flex-row justify-between title'>
           <div className='cnter-items'>Z-Total:</div>
           <div className='cnter-items'>
             €{(reconcileAmt.cash + reconcileAmt.card).toFixed(2)}

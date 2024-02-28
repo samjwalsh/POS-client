@@ -100,11 +100,18 @@ body {
   @apply flex-grow btn h-full text-xl text-neutral-content;
 }
 
-
 /* new stuff */
 .btn {
-  @apply shadow-none border border-transparent hover:border-black hover:border;
+  @apply shadow-none;
 }
+
+.title {
+  @apply font-bold text-3xl;
+}
+
+/* .btn {
+  @apply shadow-none border bc hover:border-black;
+} */
 
 .btn-primary {
   @apply hover:bg-primary text-primary-content;
