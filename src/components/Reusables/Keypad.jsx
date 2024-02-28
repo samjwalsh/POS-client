@@ -176,16 +176,16 @@ const useKeypad = () => {
           </div>
         </div>
         <div className='col-span-1 row-span-1 keypad btn-error' id='exit'>
-          <img src={closeSVG} className='w-6 invert-icon' id='exit' />
+          <img src={closeSVG} className='w-6 icon' id='exit' />
         </div>
         <div className='col-span-1 row-span-1 keypad btn-error' id='minus'>
-          <img src={minusSVG} className='w-6 invert-icon' id='minus' />
+          <img src={minusSVG} className='w-6 icon' id='minus' />
         </div>
         <div className='col-span-1 row-span-1 keypad btn-success' id='plus'>
-          <img src={addSVG} className='w-6 invert-icon' id='plus' />
+          <img src={addSVG} className='w-6 icon' id='plus' />
         </div>
         <div className='col-span-1 row-span-1 keypad btn-warning' id='delete'>
-          <img src={backSVG} className='w-6 invert-icon' id='delete' />
+          <img src={backSVG} className='w-6 icon' id='delete' />
         </div>
         <div className='col-span-1 row-span-1 keypad btn btn-secondary' id='7'>
           7
@@ -241,7 +241,7 @@ const useKeypad = () => {
           00
         </div>
         <div className='col-span-1 row-span-1 keypad btn-primary' id='enter'>
-          <img src={enterSVG} className='w-6 invert-icon' id='enter' />
+          <img src={enterSVG} className='w-6 icon' id='enter' />
         </div>
       </div>
     );

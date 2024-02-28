@@ -26,16 +26,16 @@ body {
   }
 }
 
-.invert-icon {
+.icon {
   @apply z-0;
   /* @apply invert z-0; */
 }
 .menu-itm {
-  @apply btn w-48 h-32 max-w-5xl flex-grow flex p-2 text-left text-2xl items-end justify-start text-neutral-content;
+  @apply btn w-48 h-32  flex-grow flex p-2 text-left text-2xl items-end justify-start text-neutral-content;
 }
 
 .menu-itm-filler {
-  @apply w-48 h-0 max-w-5xl flex-grow;
+  @apply w-48 h-0 flex-grow;
 }
 
 .transparent {
@@ -51,7 +51,7 @@ body {
 }
 
 .keypad {
-  @apply btn w-full h-full text-2xl text-neutral-content;
+  @apply btn w-full h-full text-2xl text-neutral-content font-mono;
 }
 
 .bc {
@@ -67,11 +67,7 @@ body {
 }
 
 .keyboardKey {
-  @apply flex-grow btn h-full text-xl text-neutral-content;
-}
-
-.btn {
-  @apply shadow-none;
+  @apply flex-grow btn h-full text-xl font-normal text-neutral-content;
 }
 
 .title {
@@ -79,11 +75,10 @@ body {
 }
 
 .btn {
-  /* @apply hover:shadow-none border bc hover:border-base-content font-normal; */
-}
-
-.btn {
-  @apply hover:shadow-none border bc hover:border-base-content font-normal shadow-[0.2rem_0.2rem];
+  @apply shadow-none font-normal;
+  @apply border bc hover:border-base-content;
+  /* @apply shadow-[0.2rem_0.2rem];
+  @apply hover:shadow-none */
 }
 
 .btn-primary {

@@ -91,7 +91,7 @@ export default function HamburgerMenu(props) {
               className='negative btn btn-error aspect-square p-0'
               onContextMenu={() => handleCloseSideMenu(setHamburger)}
               onClick={() => handleCloseSideMenu(setHamburger)}>
-              <img src={closeSVG} className='w-6 invert-icon' />
+              <img src={closeSVG} className='w-6 icon' />
             </div>
           </div>
           <div className='border-b bc px-2'></div>

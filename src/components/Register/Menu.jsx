@@ -60,7 +60,7 @@ export default function Menu(props) {
           onContextMenu={() => handleItemClick(item, passProps)}
           onClick={() => handleItemClick(item, passProps)}>
           {item.name === 'Back' ? (
-            <img src={undoSVG} className='w-8 invert-icon' />
+            <img src={undoSVG} className='w-8 icon' />
           ) : (
             item.name
           )}

@@ -52,7 +52,7 @@ export function DropdownOption({ setting, setSettings }) {
               : setting.value.length > 0
               ? setting.value
               : 'Select'}
-            <img src={dropdownSVG} className='w-6 invert-icon' />
+            <img src={dropdownSVG} className='w-6 icon' />
           </div>
         </div>
       </div>

@@ -150,7 +150,7 @@ export default function ItemPage({
                   'down'
                 )
               }>
-              <img src={minusSVG} className='w-6 invert-icon' />
+              <img src={minusSVG} className='w-6 icon' />
             </div>
             <div className=' w-16 h-auto num cnter-items text-2xl'>
               {quantity}
@@ -163,7 +163,7 @@ export default function ItemPage({
               onClick={() =>
                 handleChangeQuantity(item, currentOrder, setCurrentOrder, 'up')
               }>
-              <img src={addSVG} className='w-6 invert-icon' />
+              <img src={addSVG} className='w-6 icon' />
             </div>
           </div>
           <div className='text-2xl w-full h-auto num cnter-items'>€{price}</div>

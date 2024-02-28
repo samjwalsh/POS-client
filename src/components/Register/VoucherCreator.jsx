@@ -193,7 +193,7 @@ const useVoucherCreator = (order, setOrder) => {
               {voucherState.quantity == undefined
                 ? 'Enter'
                 : voucherState.quantity}
-              <img src={dropdownSVG} className='w-6 invert-icon' />
+              <img src={dropdownSVG} className='w-6 icon' />
             </div>
           </div>
           <div className='flex flex-row justify-between'>
@@ -206,7 +206,7 @@ const useVoucherCreator = (order, setOrder) => {
               {voucherState.value == undefined
                 ? 'Enter'
                 : voucherState.value.toFixed(2)}
-              <img src={dropdownSVG} className='w-6 invert-icon' />
+              <img src={dropdownSVG} className='w-6 icon' />
             </div>
           </div>
           <div className='w-full border-b bc'></div>

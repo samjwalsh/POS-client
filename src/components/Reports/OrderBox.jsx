@@ -52,7 +52,7 @@ export function OrderBox({ order, setOrders, setReady, setStats }) {
             className='btn-error btn'
             onContextMenu={(e) => handleDeleteOrder(order)}
             onClick={(e) => handleDeleteOrder(order)}>
-            <img src={closeSVG} className='w-6 invert-icon' />
+            <img src={closeSVG} className='w-6 icon' />
           </div>
         </div>
         <div className='flex flex-col p-2 border-b bc text-lg'>

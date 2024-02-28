@@ -31,7 +31,7 @@ export function NumberInputOption({ setting, setSettings }) {
             onContextMenu={(e) => handleClickNumberInputOption(setting)}
             onClick={(e) => handleClickNumberInputOption(setting)}>
             {setting.value == undefined ? 'Enter' : setting.value}
-            <img src={dropdownSVG} className='w-6 invert-icon' />
+            <img src={dropdownSVG} className='w-6 icon' />
           </div>
         </div>
       </div>

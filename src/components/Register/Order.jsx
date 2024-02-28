@@ -121,14 +121,14 @@ export default function Order(props) {
           className='btn btn-error h-full p-0 w-12'
           onContextMenu={() => handleOrderItemQuantityChange('down', orderItem)}
           onClick={() => handleOrderItemQuantityChange('down', orderItem)}>
-          <img src={minusSVG} className='w-6 invert-icon' />
+          <img src={minusSVG} className='w-6 icon' />
         </div>
         <OrderItem orderItem={orderItem} index={index} key={index.toString()} />
         <div
           className='btn btn-success h-full p-0 w-12'
           onContextMenu={() => handleOrderItemQuantityChange('up', orderItem)}
           onClick={() => handleOrderItemQuantityChange('up', orderItem)}>
-          <img src={addSVG} className='w-6 fill-white invert-icon' />
+          <img src={addSVG} className='w-6 fill-white icon' />
         </div>
       </div>
     );
@@ -174,7 +174,7 @@ export default function Order(props) {
                   className='btn btn-secondary h-full aspect-square'
                   onContextMenu={() => handlePlusMinus()}
                   onClick={() => handlePlusMinus()}>
-                  <img src={euro} className='w-6 invert-icon' />
+                  <img src={euro} className='w-6 icon' />
                 </div>
                 <div
                   className='btn text-2xl btn-primary h-full flex-grow'

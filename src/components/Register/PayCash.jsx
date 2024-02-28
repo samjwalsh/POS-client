@@ -50,7 +50,7 @@ export default function PayCash(props) {
   }
 
   return (
-<>
+    <>
       <Alert />
       <div className='flex flex-col h-full p-2 pb-1'>
         <div className='grid grid-cols-2 grid-rows-5 gap-2 h-full flex-grow'>
@@ -65,7 +65,7 @@ export default function PayCash(props) {
               className='btn-primary btn h-auto aspect-square'
               onContextMenu={(e) => handlePayCashHelp()}
               onClick={(e) => handlePayCashHelp()}>
-              <img src={infoSVG} className='w-6 invert-icon' />
+              <img src={infoSVG} className='w-6 icon' />
             </div>
           </div>
           <div
@@ -105,7 +105,7 @@ export default function PayCash(props) {
           <div className='text-right num justify-end'>€{change.toFixed(2)}</div>
         </div>
       </div>
-      </>
+    </>
   );
 }
 

@@ -102,7 +102,7 @@ const useKeyboard = () => {
         </div>
         <div className='col-span-1 row-span-1 flex justify-between gap-2'>
           <div className='keyboardKey btn-error' id='exit'>
-            <img src={closeSVG} className='w-6 invert-icon' id='exit' />
+            <img src={closeSVG} className='w-6 icon' id='exit' />
           </div>
           <div
             className='keyboardKey btn-secondary text-neutral-content'
@@ -166,7 +166,7 @@ const useKeyboard = () => {
           </div>
 
           <div className='keyboardKey btn-warning w-20' id='delete'>
-            <img src={backSVG} className='w-6 invert-icon' id='delete' />
+            <img src={backSVG} className='w-6 icon' id='delete' />
           </div>
         </div>
         <div className='col-span-1 row-span-1 flex justify-between gap-2'>
@@ -308,7 +308,7 @@ const useKeyboard = () => {
           </div>
 
           <div className='keyboardKey btn-primary w-20' id='enter'>
-            <img src={enterSVG} className='w-6 invert-icon' id='enter' />
+            <img src={enterSVG} className='w-6 icon' id='enter' />
           </div>
         </div>
         <div className='col-span-1 row-span-1 flex justify-between gap-2'>

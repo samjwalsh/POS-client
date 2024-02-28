@@ -24,7 +24,7 @@ export function ToggleOption({ setting, setSettings }) {
           onContextMenu={(e) => handleClickToggleOption(setting)}
           onClick={(e) => handleClickToggleOption(setting)}>
           {setting.value ? (
-            <img src={checkSVG} className='w-6 invert-icon' />
+            <img src={checkSVG} className='w-6 icon' />
           ) : (
             <div className='w-6 h-6'></div>
           )}

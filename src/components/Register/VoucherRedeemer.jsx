@@ -97,13 +97,13 @@ const useVoucherRedeemer = (order, setOrder) => {
               onContextMenu={(e) => handleEnterCode()}
               onClick={(e) => handleEnterCode()}>
               Enter Code
-              <img src={dropdownSVG} className='w-6 invert-icon' />
+              <img src={dropdownSVG} className='w-6 icon' />
             </div>
           </div>
         </div>
       );
     } else {
-      return <Wait/>;
+      return <Wait />;
     }
   };
 

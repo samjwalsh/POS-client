@@ -17,7 +17,7 @@ export default function HelpPageButton() {
       <div className='h-full cnter-items primary'>
         <img
           src={question}
-          className='w-8 invert-icon cnter-items h-full'
+          className='w-8 icon cnter-items h-full'
           onContextMenu={useHelp}
           onClick={useHelp}
         />

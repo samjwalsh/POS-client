@@ -110,7 +110,7 @@ const useReconciller = (orders, setOrders, stats) => {
             onContextMenu={() => handleSetValue('cash')}
             onClick={() => handleSetValue('cash')}>
             €{reconcileAmt.cash.toFixed(2)}
-            <img src={dropdownSVG} className='w-6 invert-icon' />
+            <img src={dropdownSVG} className='w-6 icon' />
           </div>
         </div>
         <div className='flex flex-row justify-between'>
@@ -120,7 +120,7 @@ const useReconciller = (orders, setOrders, stats) => {
             onContextMenu={() => handleSetValue('card')}
             onClick={() => handleSetValue('card')}>
             €{reconcileAmt.card.toFixed(2)}
-            <img src={dropdownSVG} className='w-6 invert-icon' />
+            <img src={dropdownSVG} className='w-6 icon' />
           </div>
         </div>
         <div className='w-full border-b bc'></div>

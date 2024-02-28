@@ -54,7 +54,7 @@ export function RangeOption({ setting, settings, setSettings }) {
           onClick={(e) =>
             handleClickRangeOption(setting, 'decrease', settings)
           }>
-          <img src={minusSVG} className='w-6 invert-icon' />
+          <img src={minusSVG} className='w-6 icon' />
         </div>
         <div className='cnter-items text-xl'>{setting.value}</div>
         <div
@@ -65,7 +65,7 @@ export function RangeOption({ setting, settings, setSettings }) {
           onClick={(e) =>
             handleClickRangeOption(setting, 'increase', settings)
           }>
-          <img src={addSVG} className='w-6 invert-icon' />
+          <img src={addSVG} className='w-6 icon' />
         </div>
         <div
           className=' btn text-lg btn-neutral p-2 cnter-items '
@@ -74,7 +74,7 @@ export function RangeOption({ setting, settings, setSettings }) {
           }
           onClick={(e) => handleClickRangeOption(setting, 'reset', settings)}>
           {' '}
-          <img src={undo} className='w-6 invert-icon' />
+          <img src={undo} className='w-6 icon' />
         </div>
       </div>
     </div>

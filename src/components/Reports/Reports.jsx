@@ -124,7 +124,7 @@ export default function Reports(props) {
               );
             })
           ) : (
-            <Wait/>
+            <Wait />
           )}
           <div className='orderbox'></div>
           <div className='orderbox'></div>
@@ -150,7 +150,7 @@ export default function Reports(props) {
                   className='btn-primary btn'
                   onContextMenu={() => handleDeleteOldOrdersHelp()}
                   onClick={() => handleDeleteOldOrdersHelp()}>
-                  <img src={infoSVG} className='w-6 invert-icon' />
+                  <img src={infoSVG} className='w-6 icon' />
                 </div>
               </div>
               <div
