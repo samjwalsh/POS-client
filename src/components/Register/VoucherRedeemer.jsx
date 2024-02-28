@@ -114,9 +114,9 @@ const useVoucherRedeemer = (order, setOrder) => {
         <>
           <Keyboard />
           <Alert />
-          <div className='fixed h-screen w-screen z-1'>
-            <div className='fixed top-0 left-0 m-0 p-0 transparent h-screen w-screen z-50'></div>
-            <div className='fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-50 background rounded-box'>
+          <div className='fixed h-screen w-screen z-10'>
+            <div className='fixed top-0 left-0 m-0 p-0 transparent h-screen w-screen'></div>
+            <div className='fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 background rounded-box'>
               {createHTML()}
             </div>
           </div>

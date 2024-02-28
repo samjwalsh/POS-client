@@ -1,0 +1,32 @@
+@font-face {
+  font-family: Segoe UI Emoji;
+  src: url(./assets/fonts/SegoeEmoji.ttf);
+}
+
+@font-face {
+  font-family: IBM Plex Mono;
+  font-weight: normal;
+  font-style: normal;
+  src: url('./assets/fonts/IBM/IBMPlexMono-Medium.ttf');
+}
+
+@font-face {
+  font-family: IBM Plex Mono;
+  src: url('./assets/fonts/IBM/IBMPlexMono-Bold.ttf');
+  font-weight: bold;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Forma DJR Micro';
+  src: url('./assets/fonts/Forma/FormaDJRMicro-Medium.ttf');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Forma DJR Micro';
+  src: url('./assets/fonts/Forma/FormaDJRMicro-Bold.ttf');
+  font-weight: bold;
+  font-style: normal;
+}

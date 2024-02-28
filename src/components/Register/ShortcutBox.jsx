@@ -52,9 +52,9 @@ export default function ShortcutBox({
           )
         }
         key={shortcut.name}>
-        <div className='text-xl'>{shortcut.name}</div>
-        <div className='num text-sm'>€{shortcut.price.toFixed(2)}</div>
-        <div className='text-sm'>{addonsString}</div>
+        <div className='title'>{shortcut.name}</div>
+        <div className='num text-lg'>€{shortcut.price.toFixed(2)}</div>
+        <div className='text-lg'>{addonsString}</div>
       </div>
     );
   }
