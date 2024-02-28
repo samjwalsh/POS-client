@@ -31,7 +31,7 @@ body {
   /* @apply invert z-0; */
 }
 .menu-itm {
-  @apply btn w-48 h-32  flex-grow flex p-2 text-left text-2xl items-end justify-start text-neutral-content;
+  @apply btn w-48 h-32 flex-grow flex p-2 text-left text-2xl items-end justify-start text-neutral-content;
 }
 
 .menu-itm-filler {
