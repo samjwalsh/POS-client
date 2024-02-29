@@ -14,8 +14,16 @@ export const settingsSchema = [
       {
         name: 'Theme',
         type: 'dropdown',
-        value: 'default',
-        list: ['emerald', 'teddys', 'corporate', 'retro', 'cyberpunk', 'night'],
+        value: 'summer',
+        list: [
+          'emerald',
+          'summer',
+          'teddys',
+          'corporate',
+          'retro',
+          'cyberpunk',
+          'night',
+        ],
       },
     ],
   },
