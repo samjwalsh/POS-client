@@ -59,8 +59,7 @@ export default function TitleBar(props) {
           onTouchEnd={(e) => handleClickHamburger(setHamburger)}>
           <div className=''>Menu</div>
         </div>
-        {/* <div className='text-2xl'>**Be careful! Items have moved!**</div> */}
-
+        {/* <HelpPageButton/> */}
         <div className='flex flex-row h-full items-center justify-end w-full'>
           <div
             className='  btn btn-secondary  text-lg'

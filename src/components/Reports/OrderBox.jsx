@@ -40,7 +40,7 @@ export function OrderBox({ order, setOrders, setReady, setStats }) {
   return (
     <>
       <Dialog />
-      <div className='orderbox border bc flex max-h-96 flex-col'>
+      <div className='orderbox border bc flex max-h-96 flex-col rounded-box'>
         <div className='flex flex-row w-full p-2 justify-between border-b bc'>
           <div
             className=' btn btn-primary text-lg'

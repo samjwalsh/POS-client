@@ -88,7 +88,7 @@ const useVoucherChecker = (order, setOrder) => {
   const createHTML = () => {
     if (clickable) {
       return (
-        <div className='w-96 flex flex-col gap-2 text-2xl p-4 border bc'>
+        <div className='w-96 flex flex-col gap-2 text-2xl p-4 border bc background rounded-box'>
           <div className='flex flex-row justify-between '>
             <div className='title cnter-items'>Voucher Checker</div>
             <div
@@ -125,7 +125,7 @@ const useVoucherChecker = (order, setOrder) => {
           <Alert />
           <div className='fixed h-screen w-screen z-10'>
             <div className='fixed top-0 left-0 m-0 p-0 transparent h-screen w-screen'></div>
-            <div className='fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 background rounded-box'>
+            <div className='fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 '>
               {createHTML()}
             </div>
           </div>

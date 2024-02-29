@@ -34,7 +34,7 @@ export default function PrinterConnection() {
 
   return (
     <div
-      className={`grid grid-rows-2 grid-cols-1 text-sm h-full rounded-btn p-1 bg${
+      className={`grid grid-rows-2 grid-cols-1 text-sm h-full border bc rounded-btn p-1 bg${
         isOnline.status ? '-success' : '-error'
       }`}>
       <div className='row-span-1 col-span-1'>PTR</div>

@@ -35,7 +35,7 @@ export default function Connection() {
 
   return (
     <div
-      className={`grid grid-rows-2 grid-cols-1 text-sm h-full p-1 rounded-btn bg${
+      className={`grid grid-rows-2 grid-cols-1 text-sm h-full p-1 border bc rounded-btn bg${
         isOnline.status ? '-success' : '-error'
       }`}>
       <div className='row-span-1 col-span-1'>NET</div>

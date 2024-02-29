@@ -97,7 +97,7 @@ const useKeyboard = () => {
         }`}
         onAuxClick={(event) => handleKeyboardClick(event)}
         onTouchEnd={(event) => handleKeyboardClick(event)}>
-        <div className='border bc rnd p-2 col-span-1 row-span 1 text-3xl justify-between w-full num text-left normal-case'>
+        <div className='border bc rounded-btn p-2 col-span-1 row-span 1 text-3xl justify-between w-full num text-left normal-case'>
           {keyboardValue + '_'}
         </div>
         <div className='col-span-1 row-span-1 flex justify-between gap-2'>
