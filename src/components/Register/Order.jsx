@@ -119,15 +119,15 @@ export default function Order(props) {
         key={`${orderItem.name} [${orderItem.addons}]`}>
         <div
           className='btn btn-error h-full p-0 w-12'
-          onContextMenu={() => handleOrderItemQuantityChange('down', orderItem)}
-          onClick={() => handleOrderItemQuantityChange('down', orderItem)}>
+          onAuxClick={() => handleOrderItemQuantityChange('down', orderItem)}
+          onTouchEnd={() => handleOrderItemQuantityChange('down', orderItem)}>
           <img src={minusSVG} className='w-6 icon' />
         </div>
         <OrderItem orderItem={orderItem} index={index} key={index.toString()} />
         <div
           className='btn btn-success h-full p-0 w-12'
-          onContextMenu={() => handleOrderItemQuantityChange('up', orderItem)}
-          onClick={() => handleOrderItemQuantityChange('up', orderItem)}>
+          onAuxClick={() => handleOrderItemQuantityChange('up', orderItem)}
+          onTouchEnd={() => handleOrderItemQuantityChange('up', orderItem)}>
           <img src={addSVG} className='w-6 fill-white icon' />
         </div>
       </div>
@@ -164,28 +164,28 @@ export default function Order(props) {
             {payCash === true ? (
               <div
                 className='p-2 btn btn-error h-full w-full text-2xl'
-                onContextMenu={() => handlePayment('cash')}
-                onClick={() => handlePayment('cash')}>
+                onAuxClick={() => handlePayment('cash')}
+                onTouchEnd={() => handlePayment('cash')}>
                 Cancel
               </div>
             ) : (
               <>
                 <div
                   className='btn btn-secondary h-full aspect-square'
-                  onContextMenu={() => handlePlusMinus()}
-                  onClick={() => handlePlusMinus()}>
+                  onAuxClick={() => handlePlusMinus()}
+                  onTouchEnd={() => handlePlusMinus()}>
                   <img src={euro} className='w-6 icon' />
                 </div>
                 <div
                   className='btn text-2xl btn-primary h-full flex-grow'
-                  onContextMenu={() => handlePayment('card')}
-                  onClick={() => handlePayment('card')}>
+                  onAuxClick={() => handlePayment('card')}
+                  onTouchEnd={() => handlePayment('card')}>
                   Card
                 </div>
                 <div
                   className='btn text-2xl btn-primary h-full flex-grow'
-                  onContextMenu={() => handlePayment('cash')}
-                  onClick={() => handlePayment('cash')}>
+                  onAuxClick={() => handlePayment('cash')}
+                  onTouchEnd={() => handlePayment('cash')}>
                   Cash
                 </div>
               </>

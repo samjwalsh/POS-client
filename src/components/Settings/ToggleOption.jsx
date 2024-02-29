@@ -21,8 +21,8 @@ export function ToggleOption({ setting, setSettings }) {
       <div className='flex flex-row gap-2'>
         <div
           className='btn text-lg btn-neutral p-2 cnter-items '
-          onContextMenu={(e) => handleClickToggleOption(setting)}
-          onClick={(e) => handleClickToggleOption(setting)}>
+          onAuxClick={(e) => handleClickToggleOption(setting)}
+          onTouchEnd={(e) => handleClickToggleOption(setting)}>
           {setting.value ? (
             <img src={checkSVG} className='w-6 icon' />
           ) : (

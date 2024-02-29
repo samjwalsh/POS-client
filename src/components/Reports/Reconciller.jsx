@@ -93,8 +93,8 @@ const useReconciller = (orders, setOrders, stats) => {
           <div className=' cnter-items mt-2 title'>Reconcile Totals</div>
           <div
             className='btn btn-error text-lg'
-            onContextMenu={() => handleClickClose()}
-            onClick={() => handleClickClose()}>
+            onAuxClick={() => handleClickClose()}
+            onTouchEnd={() => handleClickClose()}>
             Cancel
           </div>
         </div>
@@ -107,8 +107,8 @@ const useReconciller = (orders, setOrders, stats) => {
           <div className='cnter-items'>Total Cash:</div>
           <div
             className='btn btn-neutral text-lg'
-            onContextMenu={() => handleSetValue('cash')}
-            onClick={() => handleSetValue('cash')}>
+            onAuxClick={() => handleSetValue('cash')}
+            onTouchEnd={() => handleSetValue('cash')}>
             €{reconcileAmt.cash.toFixed(2)}
             <img src={dropdownSVG} className='w-6 icon' />
           </div>
@@ -117,8 +117,8 @@ const useReconciller = (orders, setOrders, stats) => {
           <div className='cnter-items'>Total Card:</div>
           <div
             className='btn btn-neutral text-lg'
-            onContextMenu={() => handleSetValue('card')}
-            onClick={() => handleSetValue('card')}>
+            onAuxClick={() => handleSetValue('card')}
+            onTouchEnd={() => handleSetValue('card')}>
             €{reconcileAmt.card.toFixed(2)}
             <img src={dropdownSVG} className='w-6 icon' />
           </div>
@@ -134,8 +134,8 @@ const useReconciller = (orders, setOrders, stats) => {
         <div className='w-full border-b bc'></div>
         <div
           className='w-full btn h-full btn-primary text-lg'
-          onContextMenu={(e) => handleReconcile()}
-          onClick={(e) => handleReconcile()}>{`Record Z-Total as €${(
+          onAuxClick={(e) => handleReconcile()}
+          onTouchEnd={(e) => handleReconcile()}>{`Record Z-Total as €${(
           reconcileAmt.card + reconcileAmt.cash
         ).toFixed(2)}`}</div>
       </div>

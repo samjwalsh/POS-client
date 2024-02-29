@@ -18,8 +18,8 @@ export default function HelpPageButton() {
         <img
           src={question}
           className='w-8 icon cnter-items h-full'
-          onContextMenu={useHelp}
-          onClick={useHelp}
+          onAuxClick={useHelp}
+          onTouchEnd={useHelp}
         />
       </div>
     </>

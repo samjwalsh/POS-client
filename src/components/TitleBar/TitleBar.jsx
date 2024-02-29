@@ -55,8 +55,8 @@ export default function TitleBar(props) {
       <div className='flex flex-row justify-between h-16 px-2 border-b bc cnter-items'>
         <div
           className=' btn btn-primary text-lg'
-          onContextMenu={(e) => handleClickHamburger(setHamburger)}
-          onClick={(e) => handleClickHamburger(setHamburger)}>
+          onAuxClick={(e) => handleClickHamburger(setHamburger)}
+          onTouchEnd={(e) => handleClickHamburger(setHamburger)}>
           <div className=''>Menu</div>
         </div>
         {/* <div className='text-2xl'>**Be careful! Items have moved!**</div> */}
@@ -64,15 +64,15 @@ export default function TitleBar(props) {
         <div className='flex flex-row h-full items-center justify-end w-full'>
           <div
             className='  btn btn-secondary  text-lg'
-            onContextMenu={(e) => handlePrintRecentOrder()}
-            onClick={(e) => handlePrintRecentOrder()}>
+            onAuxClick={(e) => handlePrintRecentOrder()}
+            onTouchEnd={(e) => handlePrintRecentOrder()}>
             Print Receipt
           </div>
           <div className='cnter-items h-10 mx-5'></div>
           <div
             className=' btn btn-secondary text-lg'
-            onContextMenu={(e) => handleClickVoucherMenu()}
-            onClick={(e) => handleClickVoucherMenu()}>
+            onAuxClick={(e) => handleClickVoucherMenu()}
+            onTouchEnd={(e) => handleClickVoucherMenu()}>
             Vouchers
           </div>
           <div className='border-r bc h-16 mx-5'></div>

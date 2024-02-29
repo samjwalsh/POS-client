@@ -28,8 +28,8 @@ export function TextInputOption({ setting, setSettings }) {
         <div className='flex flex-row gap-2'>
           <div
             className='btn text-lg btn-neutral p-2 cnter-items '
-            onContextMenu={(e) => handleClickTextInputOption(setting)}
-            onClick={(e) => handleClickTextInputOption(setting)}>
+            onAuxClick={(e) => handleClickTextInputOption(setting)}
+            onTouchEnd={(e) => handleClickTextInputOption(setting)}>
             {setting.value == undefined
               ? 'Enter'
               : setting.value.length > 0

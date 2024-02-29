@@ -52,8 +52,8 @@ export function ButtonOption({ setting, setSettings }) {
         <div className='flex flex-row gap-2'>
           <div
             className='btn text-lg btn-neutral p-2 cnter-items '
-            onContextMenu={() => handleClickButtonOption(setting)}
-            onClick={() => handleClickButtonOption(setting)}>
+            onAuxClick={() => handleClickButtonOption(setting)}
+            onTouchEnd={() => handleClickButtonOption(setting)}>
             {setting.label}
           </div>
         </div>

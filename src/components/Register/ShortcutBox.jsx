@@ -29,7 +29,7 @@ export default function ShortcutBox({
     return (
       <div
         className='btn btn-primary flex-grow w-48 h-auto flex flex-col'
-        onContextMenu={() =>
+        onAuxClick={() =>
           handleClickShortcut(
             item,
             setMenuState,
@@ -40,7 +40,7 @@ export default function ShortcutBox({
             addons
           )
         }
-        onClick={() =>
+        onTouchEnd={() =>
           handleClickShortcut(
             item,
             setMenuState,

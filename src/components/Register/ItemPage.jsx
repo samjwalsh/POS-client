@@ -83,16 +83,18 @@ export default function ItemPage({
           <div className='col-span-1 text-right self-end justify-self-end flex flex-row gap-4'>
             <button
               className='whitespace-nowrap text-lg btn btn-primary'
-              onContextMenu={() => handleClickHelp()}
-              onClick={() => handleClickHelp()}>
+              onAuxClick={() => handleClickHelp()}
+              onTouchEnd={() => handleClickHelp()}>
               Help
             </button>
             <button
               className='col-span-1 text-right self-end justify-self-end w-min h-min whitespace-nowrap p-2 text-lg btn btn-error'
-              onContextMenu={() =>
+              onAuxClick={() =>
                 handleExitItemPage(setMenuState, setCurrentOrder)
               }
-              onClick={() => handleExitItemPage(setMenuState, setCurrentOrder)}>
+              onTouchEnd={() =>
+                handleExitItemPage(setMenuState, setCurrentOrder)
+              }>
               Cancel
             </button>
           </div>
@@ -134,7 +136,7 @@ export default function ItemPage({
           <div className='flex flex-row '>
             <div
               className='w-14 h-auto cnter-items btn btn-error '
-              onContextMenu={() =>
+              onAuxClick={() =>
                 handleChangeQuantity(
                   item,
                   currentOrder,
@@ -142,7 +144,7 @@ export default function ItemPage({
                   'down'
                 )
               }
-              onClick={() =>
+              onTouchEnd={() =>
                 handleChangeQuantity(
                   item,
                   currentOrder,
@@ -157,10 +159,10 @@ export default function ItemPage({
             </div>
             <div
               className='btn btn-success w-14 h-auto cnter-items'
-              onContextMenu={() =>
+              onAuxClick={() =>
                 handleChangeQuantity(item, currentOrder, setCurrentOrder, 'up')
               }
-              onClick={() =>
+              onTouchEnd={() =>
                 handleChangeQuantity(item, currentOrder, setCurrentOrder, 'up')
               }>
               <img src={addSVG} className='w-6 icon' />
@@ -169,7 +171,7 @@ export default function ItemPage({
           <div className='text-2xl w-full h-auto num cnter-items'>€{price}</div>
           <div
             className='btn btn-primary text-xl h-full positive w-48'
-            onContextMenu={() =>
+            onAuxClick={() =>
               handleAddToOrder(
                 item,
                 setMenuState,
@@ -179,7 +181,7 @@ export default function ItemPage({
                 setOrder
               )
             }
-            onClick={() =>
+            onTouchEnd={() =>
               handleAddToOrder(
                 item,
                 setMenuState,

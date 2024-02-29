@@ -178,8 +178,8 @@ const useVoucherCreator = (order, setOrder) => {
             <div className=' cnter-items mt-2 title'>Voucher Creator</div>
             <div
               className='btn btn-error text-lg'
-              onContextMenu={(event) => handleClickClose()}
-              onClick={(event) => handleClickClose()}>
+              onAuxClick={(event) => handleClickClose()}
+              onTouchEnd={(event) => handleClickClose()}>
               Cancel
             </div>
           </div>
@@ -188,8 +188,8 @@ const useVoucherCreator = (order, setOrder) => {
             <div className='cnter-items'>Quantity:</div>
             <div
               className='btn btn-neutral text-lg'
-              onContextMenu={(e) => handleSetQuantity()}
-              onClick={(e) => handleSetQuantity()}>
+              onAuxClick={(e) => handleSetQuantity()}
+              onTouchEnd={(e) => handleSetQuantity()}>
               {voucherState.quantity == undefined
                 ? 'Enter'
                 : voucherState.quantity}
@@ -200,8 +200,8 @@ const useVoucherCreator = (order, setOrder) => {
             <div className='cnter-items'>Value:</div>
             <div
               className='btn btn-neutral text-lg'
-              onContextMenu={(e) => handleSetValue()}
-              onClick={(e) => handleSetValue()}>
+              onAuxClick={(e) => handleSetValue()}
+              onTouchEnd={(e) => handleSetValue()}>
               €
               {voucherState.value == undefined
                 ? 'Enter'
@@ -220,8 +220,8 @@ const useVoucherCreator = (order, setOrder) => {
           <div className='w-full border-b bc'></div>
           <div
             className='w-full btn h-full btn-primary text-lg'
-            onContextMenu={(e) => handleCreateVouchers()}
-            onClick={(e) => handleCreateVouchers()}>{`Create ${
+            onAuxClick={(e) => handleCreateVouchers()}
+            onTouchEnd={(e) => handleCreateVouchers()}>{`Create ${
             voucherState.quantity
           } voucher${
             voucherState.quantity !== 1 ? 's' : ''

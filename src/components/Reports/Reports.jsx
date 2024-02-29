@@ -99,6 +99,7 @@ export default function Reports(props) {
   }
 
   async function handleDeleteOldOrdersHelp() {
+    playBeep();
     await alert(
       `This will end of day any orders currently saved on the till that are not from today, so if the last person forgot to end of day the till you can press this to remove any orders that weren't made today.`
     );
@@ -135,28 +136,28 @@ export default function Reports(props) {
             <div className='mt-auto px-2 flex flex-col gap-2'>
               <div
                 className='btn-neutral btn text-lg h-12 p-2 w-full'
-                onContextMenu={() => refreshOrders()}
-                onClick={() => refreshOrders()}>
+                onAuxClick={() => refreshOrders()}
+                onTouchEnd={() => refreshOrders()}>
                 Refresh Orders & Totals
               </div>
               <div className='flex flex-row w-full gap-2 h-12'>
                 <div
                   className='btn btn-warning text-lg h-auto flex-grow'
-                  onContextMenu={() => handleDeleteOldOrders()}
-                  onClick={() => handleDeleteOldOrders()}>
+                  onAuxClick={() => handleDeleteOldOrders()}
+                  onTouchEnd={() => handleDeleteOldOrders()}>
                   Delete Old Orders
                 </div>
                 <div
                   className='btn-primary btn'
-                  onContextMenu={() => handleDeleteOldOrdersHelp()}
-                  onClick={() => handleDeleteOldOrdersHelp()}>
+                  onAuxClick={() => handleDeleteOldOrdersHelp()}
+                  onTouchEnd={() => handleDeleteOldOrdersHelp()}>
                   <img src={infoSVG} className='w-6 icon' />
                 </div>
               </div>
               <div
                 className='btn-error btn text-lg  p-2 w-full h-12'
-                onContextMenu={() => handleEndOfDay()}
-                onClick={() => handleEndOfDay()}>
+                onAuxClick={() => handleEndOfDay()}
+                onTouchEnd={() => handleEndOfDay()}>
                 End Of Day
               </div>
             </div>

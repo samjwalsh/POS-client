@@ -95,8 +95,8 @@ const useKeyboard = () => {
         className={`grid grid-cols-1 grid-rows-6 w-full h-full gap-2 p-2 text-2xl font-mono bg-base-100 ${
           keyboardState !== 'normal' ? 'uppercase' : ''
         }`}
-        onContextMenu={(event) => handleKeyboardClick(event)}
-        onClick={(event) => handleKeyboardClick(event)}>
+        onAuxClick={(event) => handleKeyboardClick(event)}
+        onTouchEnd={(event) => handleKeyboardClick(event)}>
         <div className='border bc rnd p-2 col-span-1 row-span 1 text-3xl justify-between w-full num text-left normal-case'>
           {keyboardValue + '_'}
         </div>

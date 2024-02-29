@@ -93,8 +93,8 @@ const useVoucherChecker = (order, setOrder) => {
             <div className='title cnter-items'>Voucher Checker</div>
             <div
               className='btn btn-error text-lg'
-              onContextMenu={(event) => handleClickClose()}
-              onClick={(event) => handleClickClose()}>
+              onAuxClick={(event) => handleClickClose()}
+              onTouchEnd={(event) => handleClickClose()}>
               Cancel
             </div>
           </div>
@@ -103,8 +103,8 @@ const useVoucherChecker = (order, setOrder) => {
             <div className='cnter-items'>Code:</div>
             <div
               className='btn btn-primary text-lg'
-              onContextMenu={(e) => handleEnterCode()}
-              onClick={(e) => handleEnterCode()}>
+              onAuxClick={(e) => handleEnterCode()}
+              onTouchEnd={(e) => handleEnterCode()}>
               Enter Code
               <img src={dropdownSVG} className='w-6 icon' />
             </div>

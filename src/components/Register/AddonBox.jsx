@@ -16,10 +16,10 @@ export default function AddonBox({
     <div
       className='w-72 max-w-full flex-grow flex flex-row h-auto min-h-[3.5rem]'
       id={index}
-      onContextMenu={() => {
+      onAuxClick={() => {
         handleAddonToggle(item, currentOrder, setCurrentOrder, index);
       }}
-      onClick={() => {
+      onTouchEnd={() => {
         handleAddonToggle(item, currentOrder, setCurrentOrder, index);
       }}>
       <div className='flex flex-row justify-between w-full gap-2'>
