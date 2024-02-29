@@ -77,8 +77,8 @@ body {
 .btn {
   @apply shadow-none font-normal;
   @apply border bc hover:border-base-content;
-  /* @apply shadow-[0.2rem_0.2rem];
-  @apply hover:shadow-none */
+  @apply shadow-[0.1rem_0.1rem];
+  /* @apply hover:shadow-none; */
 }
 
 .btn-primary {
