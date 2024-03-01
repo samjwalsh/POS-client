@@ -12,6 +12,9 @@
     extend: {
       gridTemplateRows: { layout: 'h-min 1fr' },
       fontFamily: {
+        // sans: ['riccionets'],
+        // mono: ['riccionets'],
+        // emoji: ['Segoe UI Emoji'],
         sans: ['Forma DJR Micro'],
         mono: ['IBM Plex Mono'],
         emoji: ['Segoe UI Emoji'],

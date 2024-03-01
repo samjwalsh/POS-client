@@ -37,3 +37,8 @@
   font-weight: bold;
   font-style: normal;
 }
+
+@font-face {
+  font-family: "riccionets";
+  src: url("./assets/fonts/riccionets.woff") format('woff');
+}
