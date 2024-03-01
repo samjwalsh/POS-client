@@ -22,13 +22,21 @@ const store = new Store();
     }
 
     category.settings.forEach((setting, settingIndex) => {
-      if (settingIndex + 1 <= localSettings[categoryIndex]) {
-        // Code to check if individual settings match the schema
+      if (settingIndex + 1 <= localSettings[categoryIndex].settings.length) {
+        const settingFromSchema = category.settings[settingIndex];
+        const localSetting =
+          localSettings[categoryIndex].settings[settingIndex];
+        if (settingFromSchema.name === localSetting.name) {
+          if (settingFromSchema.type === 'dropdown') {
+            localSetting.list = settingFromSchema.list;
+          }
+        }
       } else {
         localSettings[categoryIndex].settings.push(setting);
       }
     });
   });
+  store.set('settings', localSettings);
 })();
 
 ipcMain.handle('getSettings', () => {

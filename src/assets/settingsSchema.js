@@ -22,7 +22,7 @@ export const settingsSchema = [
           'corporate',
           'retro',
           'cyberpunk',
-          'night',
+          'night'
         ],
       },
     ],
