@@ -136,7 +136,7 @@ export default function HamburgerMenu(props) {
           onAuxClick={() => handleCloseSideMenu(setHamburger)}
           onTouchEnd={() => handleCloseSideMenu(setHamburger)}></div>
       </div>
-      <div className='fixed bottom-0 right-0 bg-base-100 text-xs h-min w-min font-bold p-1 m-1 z-50 whitespace-nowrap'>
+      <div className='fixed bottom-0 right-0 bg-base-100 text-xs h-min w-min font-bold p-1 font-mono m-2 z-50 whitespace-nowrap border bc'>
         {createVersionString(version)}
       </div>
     </>

@@ -28,7 +28,7 @@
   font-family: 'Forma DJR Micro';
   src: url('./assets/fonts/Forma/FormaDJRMicro-Regular.ttf');
   font-weight: 300;
-  font-style:normal;
+  font-style: normal;
 }
 
 @font-face {
@@ -39,6 +39,6 @@
 }
 
 @font-face {
-  font-family: "riccionets";
-  src: url("./assets/fonts/riccionets.woff") format('woff');
+  font-family: 'TS Riccione';
+  src: url('./assets/fonts/TS Riccione.woff') format('woff');
 }

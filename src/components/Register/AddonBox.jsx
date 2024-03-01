@@ -1,6 +1,7 @@
 import * as React from 'react';
 
 import playBeep from '../../tools/playBeep';
+import checkSVG from '../../assets/appicons/check.svg';
 
 export default function AddonBox({
   addon,
@@ -29,12 +30,9 @@ export default function AddonBox({
             <div className='num cnter-items'>€{addon.price.toFixed(2)}</div>
           </div>
           <div className='cnter-items h-full'>
-            <input
-              readOnly
-              type='checkbox'
-              checked={addon.selected ? 'checked' : ''}
-              className='checkbox checkbox-lg checkbox-secondary border-0 '
-            />
+            <div className=''>
+              {addon.selected? <img src={checkSVG} className='w-8 icon border bc' /> : ''}
+            </div>
           </div>
         </div>
       </div>
