@@ -41,32 +41,7 @@ export default function ServerConnection() {
     const beginPing = Date.now();
     const connection = await syncOrders();
     const endPing = Date.now();
-    let shop = (await getSetting('Shop Name')).slice(0,2).toUpperCase();
-    // switch (shop) {
-    //   case 'DEV': {
-    //     shop = 'DV';
-    //     break;
-    //   }
-    //   case 'Main': {
-    //     shop = 'MN';
-    //     break;
-    //   }
-    //   case 'Lighthouse': {
-    //     shop = 'LH';
-    //     break;
-    //   }
-    //   case 'West Pier': {
-    //     shop = 'WP';
-    //     break;
-    //   }
-    //   case 'Bray': {
-    //     shop = 'BR';
-    //     break;
-    //   }
-    //   default: {
-    //     shop = 'XX';
-    //   }
-    // }
+    let shop = (await getSetting('Shop Name')).slice(0, 2).toUpperCase();
 
     return {
       status: connection.success,
@@ -95,7 +70,7 @@ export default function ServerConnection() {
         </div>
       </div>
 
-      <div className='grid grid-rows-2 grid-cols-3 text-sm px-1 num'>
+      <div className='grid grid-rows-2 grid-cols-3 text-sm px-1 num gap-1'>
         <div className='col-span-1 row-span-1'>
           {isOnline.ordersToAdd == 0 ? '-' : isOnline.ordersToAdd}
         </div>

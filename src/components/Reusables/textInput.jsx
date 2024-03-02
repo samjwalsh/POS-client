@@ -173,7 +173,7 @@ const useKeyboard = () => {
           <div
             className='keyboardKey btn-secondary text-neutral-content w-12'
             id='clear'>
-            CLEAR
+            CLR
           </div>
           <div
             className='keyboardKey btn-secondary text-neutral-content'
