@@ -10,7 +10,7 @@ import Reports from './components/Reports/Reports.jsx';
 import Settings, { executeSettings } from './components/Settings/Settings.jsx';
 
 import HamburgerMenu from './components/TitleBar/HamburgerMenu.jsx';
-import { getSettings, log } from './tools/ipc.js';
+import { getSettings } from './tools/ipc.js';
 
 const domNode = document.getElementById('App');
 const root = ReactDOM.createRoot(domNode);
@@ -33,7 +33,7 @@ function App() {
 
   return (
     <div className='flex flex-col h-screen'>
-      <div className=''>
+
         <HamburgerMenu
           hamburgerOpen={hamburgerOpen}
           setHamburger={setHamburgerOpen}
@@ -42,7 +42,7 @@ function App() {
           order={order}
           setOrder={setOrder}
         />
-      </div>
+
       <div className='overflow-y-hidden h-full'>
         {(() => {
           if (appState === 'Register') {

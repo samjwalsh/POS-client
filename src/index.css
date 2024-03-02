@@ -30,12 +30,13 @@ body {
   @apply z-0;
   /* @apply invert z-0; */
 }
+
 .menu-itm {
-  @apply btn w-48 h-32 flex-grow flex p-2 text-left text-2xl items-end justify-start text-neutral-content;
+  @apply btn w-48 h-32 flex-grow flex p-2 text-left justify-start items-end text-[1.7rem]  text-neutral-content mb-2;
 }
 
 .menu-itm-filler {
-  @apply w-48 h-0 flex-grow;
+  @apply w-48 h-0 flex-grow p-0 m-0 gap-0;
 }
 
 .transparent {
@@ -67,7 +68,7 @@ body {
 }
 
 .keyboardKey {
-  @apply flex-grow btn h-full text-xl font-normal text-neutral-content;
+  @apply flex-grow btn h-full text-xl text-neutral-content ;
 }
 
 .title {
@@ -75,7 +76,8 @@ body {
 }
 
 .btn {
-  @apply shadow-none font-normal;
+  @apply shadow-none;
+  /* @apply font-normal; */
   @apply border bc hover:border-base-content;
   @apply shadow-[0.2rem_0.2rem_rgba(0,0,0,1)];
   /* @apply hover:shadow-none; */

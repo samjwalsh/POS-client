@@ -101,7 +101,7 @@ export default function PayCash(props) {
           </div>
         </div>
         <div className='flex justify-between w-full text-2xl pt-1'>
-          <div className=''>Change:</div>
+          Change:
           <div className='text-right num justify-end'>€{change.toFixed(2)}</div>
         </div>
       </div>

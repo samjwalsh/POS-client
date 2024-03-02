@@ -94,15 +94,15 @@ export function OrderBox({ order, setOrders, setReady, setStats }) {
         </div>
         <div className='flex flex-col p-2 border-b bc text-lg'>
           <div className='flex flex-row justify-between'>
-            <div className=''>Time:</div>
+            Time:
             <div className=''>{orderDateString}</div>
           </div>
           <div className='flex flex-row justify-between'>
-            <div className=''>Till:</div>
+            Till:
             <div className=''>{order.shop + '-' + order.till}</div>
           </div>
           <div className='flex flex-row justify-between'>
-            <div className=''>Subtotal:</div>
+            Subtotal:
             <div className='num'>€{order.subtotal.toFixed(2)}</div>
           </div>
           <div className='flex flex-row justify-between'>

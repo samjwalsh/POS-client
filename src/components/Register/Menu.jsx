@@ -60,21 +60,40 @@ export default function Menu(props) {
           onAuxClick={() => handleItemClick(item, passProps)}
           onTouchEnd={() => handleItemClick(item, passProps)}>
           {item.name === 'Back' ? (
-            <img src={undoSVG} className='w-8 icon' />
+            <img src={undoSVG} className='w-10 icon' />
           ) : (
-            item.name
+            <div className='h-full w-full flex flex-col justify-between'>
+              <div className='ml-auto'>
+                <img src={item.icon} className='w-12 icon' />
+              </div>
+              {item.name}
+            </div>
           )}
         </div>
       );
     });
 
     return (
-      <div className='col-span-8 row-span-1 flex flex-wrap gap-2 p-2 overflow-y-scroll no-scrollbar content-start'>
+      <div className='col-span-8 row-span-1 flex flex-wrap gap-x-2 pt-2 px-2 overflow-y-scroll no-scrollbar content-start'>
         {itemsHTML}
         <div className='menu-itm-filler'></div>
         <div className='menu-itm-filler'></div>
         <div className='menu-itm-filler'></div>
+        <div className='menu-itm-filler'></div>
+        <div className='menu-itm-filler'></div>
+        <div className='menu-itm-filler'></div>
+        <div className='menu-itm-filler'></div>
+        <div className='menu-itm-filler'></div>
+        <div className='menu-itm-filler'></div>
+        <div className='menu-itm-filler'></div>
       </div>
+      // <div className='col-span-8 row-span-1 grid grid-rows-4 grid-cols-3 gap-2 p-2'>
+      //   {itemsHTML}
+      // </div>
+      // Put the following in index.css to use grid for menu items
+      // .menu-itm {
+      //   @apply btn p-2 text-left text-[1.7rem] items-end justify-start text-neutral-content row-span-1 col-span-1 h-full;
+      // }
     );
   } else if (menuState.modifiers !== undefined) {
     return (

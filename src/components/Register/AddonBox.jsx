@@ -30,9 +30,11 @@ export default function AddonBox({
             <div className='num cnter-items'>€{addon.price.toFixed(2)}</div>
           </div>
           <div className='cnter-items h-full'>
-            <div className=''>
-              {addon.selected? <img src={checkSVG} className='w-8 icon border bc' /> : ''}
-            </div>
+            {addon.selected ? (
+              <img src={checkSVG} className='w-8 icon border bc' />
+            ) : (
+              ''
+            )}
           </div>
         </div>
       </div>

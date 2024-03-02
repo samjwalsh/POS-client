@@ -28,7 +28,7 @@ export default function ShortcutBox({
     }
     return (
       <div
-        className='btn btn-primary flex-grow w-48 h-auto flex flex-col'
+        className='btn btn-primary basis-1 flex-grow h-auto flex flex-col justify-between p-2'
         onAuxClick={() =>
           handleClickShortcut(
             item,
@@ -53,8 +53,10 @@ export default function ShortcutBox({
         }
         key={shortcut.name}>
         <div className='title'>{shortcut.name}</div>
-        <div className='num text-lg'>€{shortcut.price.toFixed(2)}</div>
-        <div className='text-lg'>{addonsString}</div>
+        <div>
+          <div className='num text-lg'>€{shortcut.price.toFixed(2)}</div>
+          <div className='text-lg'>{addonsString}</div>
+        </div>
       </div>
     );
   }

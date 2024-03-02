@@ -31,8 +31,7 @@
           // secondary: '#D3D3D7',
           'secondary-content': '#000',
           // neutral: '#F8E268',
-          neutral: '#FFCDF0',
-
+          neutral: '#8eced4',
           'neutral-content': '#000',
           success: '#5ECC7B',
           'success-content': '#000',

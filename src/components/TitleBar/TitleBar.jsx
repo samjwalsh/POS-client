@@ -57,10 +57,14 @@ export default function TitleBar(props) {
           className=' btn btn-primary text-lg'
           onAuxClick={(e) => handleClickHamburger(setHamburger)}
           onTouchEnd={(e) => handleClickHamburger(setHamburger)}>
-          <div className=''>Menu</div>
+          Menu
         </div>
         {/* <HelpPageButton/> */}
-        <div className='flex flex-row h-full items-center justify-end w-full'>
+        <div className='flex flex-row h-full items-center mr- justify-end w-full'>
+          {/* <div
+            className=' mr-12 title'>
+            *Menu Has Changed*
+          </div> */}
           <div
             className='  btn btn-secondary  text-lg'
             onAuxClick={(e) => handlePrintRecentOrder()}

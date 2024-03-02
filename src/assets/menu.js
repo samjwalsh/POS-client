@@ -32,11 +32,21 @@ export const menu = [
         addons: [],
       },
       {
-        name: '99',
+        name: '99 Cone',
         price: 3,
         addons: [
           {
             name: 'Flake',
+            price: 0.5,
+          },
+        ],
+      },
+      {
+        name: 'Special Cone',
+        price: 3,
+        addons: [
+          {
+            name: 'Toppings',
             price: 0.5,
           },
         ],
@@ -118,6 +128,16 @@ export const menu = [
         ],
       },
       {
+        name: "Kid's Special",
+        price: 2.5,
+        addons: [
+          {
+            name: 'Toppings',
+            price: 0.5,
+          },
+        ],
+      },
+      {
         name: "Kid's Special 99",
         price: 3,
         addons: [
@@ -161,6 +181,11 @@ export const menu = [
             selectedAddons.includes('Flake')
           ) {
             addonsCost += 0.3;
+          } else if (
+            selectedAddons.includes('Toppings') &&
+            !selectedAddons.includes('Flake')
+          ) {
+            addonsCost -= 0.3;
           }
 
           return addonsCost;
@@ -173,28 +198,28 @@ export const menu = [
     type: 'category',
     items: [
       {
-        name: 'Flake',
+        name: 'Extra Flake',
         price: 0.5,
+      },
+      {
+        name: 'Family Special',
+        price: 10,
       },
       {
         name: 'Empty Cone',
         price: 0.3,
       },
       {
-        name: 'Waffle Cone',
+        name: 'Empty Waffle Cone',
         price: 1,
       },
       {
-        name: 'Toppings',
+        name: 'Extra Toppings',
         price: 0.5,
       },
-      { name: 'Ferrero', price: 1.5 },
-      { name: 'Strawberries', price: 1.5 },
-      { name: 'Chocolate Dip', price: 1.5 },
-      {
-        name: 'Family Special',
-        price: 10,
-      },
+      { name: 'Extra Ferrero', price: 1.5 },
+      { name: 'Extra Strawberries', price: 1.5 },
+      { name: 'Extra Chocolate Dip', price: 1.5 },
     ],
   },
 
@@ -227,6 +252,16 @@ export const menu = [
         addons: [
           {
             name: 'Flake',
+            price: 0.5,
+          },
+        ],
+      },
+      {
+        name: 'Special Pink Tub',
+        price: 3,
+        addons: [
+          {
+            name: 'Toppings',
             price: 0.5,
           },
         ],
@@ -267,6 +302,16 @@ export const menu = [
         ],
       },
       {
+        name: "Kid's Special Tub",
+        price: 2.5,
+        addons: [
+          {
+            name: 'Toppings',
+            price: 0.5,
+          },
+        ],
+      },
+      {
         name: "Kid's Special 99 Tub",
         price: 3,
         addons: [
@@ -291,6 +336,29 @@ export const menu = [
         price: 0.5,
       },
       { name: 'Crush Flake', price: 1.5 },
+      {
+        priceCheck: function (addons) {
+          // Add code to check for chocolate dip, both choco dip with and without flake are 3.5
+          let addonsCost = 0;
+          let selectedAddons = [];
+
+          for (const addon of addons) {
+            if (addon.selected == true) {
+              selectedAddons.push(addon.name);
+              addonsCost += addon.price;
+            }
+          }
+
+          if (
+            selectedAddons.includes('Toppings') &&
+            !selectedAddons.includes('Flake')
+          ) {
+            addonsCost -= 0.3;
+          }
+
+          return addonsCost;
+        },
+      },
     ],
   },
   {
@@ -326,6 +394,16 @@ export const menu = [
             addons: [
               {
                 name: 'Flake',
+                price: 0.5,
+              },
+            ],
+          },
+          {
+            name: 'Special Large Tub',
+            price: 4.5,
+            addons: [
+              {
+                name: 'Toppings',
                 price: 0.5,
               },
             ],
@@ -371,6 +449,16 @@ export const menu = [
             ],
           },
           {
+            name: 'Special Sundae',
+            price: 4.5,
+            addons: [
+              {
+                name: 'Toppings',
+                price: 0.5,
+              },
+            ],
+          },
+          {
             name: 'Special 99 Sundae',
             price: 5,
             addons: [
@@ -405,6 +493,16 @@ export const menu = [
             addons: [
               {
                 name: 'Flake',
+                price: 0.5,
+              },
+            ],
+          },
+          {
+            name: 'Special Screwball',
+            price: 3.5,
+            addons: [
+              {
+                name: 'Toppings',
                 price: 0.5,
               },
             ],
@@ -521,20 +619,47 @@ export const menu = [
             name: 'Flake',
             price: 0.5,
           },
+          {
+            name: 'Honeycomb Heaven',
+            price: 0,
+          },
+          {
+            name: 'Rocky Road Mess',
+            price: 0,
+          },
+          {
+            name: 'Chocolate Brownie Bliss',
+            price: 0,
+          },
         ],
         shortcuts: [
           {
-            name: 'Treat Tub',
+            name: 'Honeycomb Heaven',
             price: 6,
-            addons: [],
-          },
-          {
-            name: '99 Treat Tub',
-            price: 6.5,
             addons: [
               {
-                name: 'Flake',
-                price: 0.5,
+                name: 'Honeycomb Heaven',
+                price: 0,
+              },
+            ],
+          },
+          {
+            name: 'Rocky Road Mess',
+            price: 6,
+            addons: [
+              {
+                name: 'Rocky Road Mess',
+                price: 0,
+              },
+            ],
+          },
+          {
+            name: 'Chocolate Brownie Bliss',
+            price: 6,
+            addons: [
+              {
+                name: 'Chocolate Brownie Bliss',
+                price: 0,
               },
             ],
           },
@@ -606,11 +731,11 @@ export const menu = [
             addons: [],
           },
           {
-            name: 'Re-Turn Can',
+            name: 'Re-turn Can',
             price: 2.15,
             addons: [
               {
-                name: 'Re-Turn (15c)',
+                name: 'Re-turn (15c)',
                 price: 0.15,
               },
             ],
@@ -618,7 +743,7 @@ export const menu = [
         ],
         modifiers: [
           {
-            name: 'Re-Turn (15c)',
+            name: 'Re-turn (15c)',
             price: 0.15,
           },
         ],
@@ -633,11 +758,11 @@ export const menu = [
             addons: [],
           },
           {
-            name: 'Re-Turn Soft Bottle',
+            name: 'Re-turn Soft Bottle',
             price: 2.65,
             addons: [
               {
-                name: 'Re-Turn (15c)',
+                name: 'Re-turn (15c)',
                 price: 0.15,
               },
             ],
@@ -645,7 +770,7 @@ export const menu = [
         ],
         modifiers: [
           {
-            name: 'Re-Turn (15c)',
+            name: 'Re-turn (15c)',
             price: 0.15,
           },
         ],
@@ -672,18 +797,6 @@ export const menu = [
     name: 'Hot Drinks',
     type: 'category',
     items: [
-      {
-        name: 'Americano',
-        price: 2.8,
-      },
-      {
-        name: 'Cappuccino',
-        price: 3,
-      },
-      {
-        name: 'Latte',
-        price: 3,
-      },
       {
         name: 'Tea',
         price: 2.5,
@@ -716,6 +829,18 @@ export const menu = [
         ],
       },
       {
+        name: 'Americano',
+        price: 2.8,
+      },
+      {
+        name: 'Latte',
+        price: 3,
+      },
+      {
+        name: 'Cappuccino',
+        price: 3,
+      },
+      {
         name: 'Double Espresso',
         price: 2.8,
       },
@@ -734,15 +859,11 @@ export const menu = [
         price: 1,
       },
       {
-        name: 'Refresher',
+        name: 'Refresher, Wham',
         price: 0.8,
       },
       {
-        name: 'Wham Bar',
-        price: 0.8,
-      },
-      {
-        name: 'Jawbreaker',
+        name: 'Golf Balls, Jawbreaker',
         price: 1.2,
       },
       {
@@ -750,24 +871,12 @@ export const menu = [
         price: 1.3,
       },
       {
-        name: 'Lipstick',
+        name: 'Double Dip, Lipstick',
         price: 0.8,
-      },
-      {
-        name: 'Double Dip',
-        price: 0.8,
-      },
-      {
-        name: "Dunk'n Dip",
-        price: 1,
       },
       {
         name: '2 Euro Bag',
         price: 2,
-      },
-      {
-        name: 'Golf Balls',
-        price: 1.2,
       },
     ],
   },
@@ -790,11 +899,11 @@ export const menu = [
     type: 'category',
     items: [
       {
-        name: 'Crisps',
+        name: 'Tayto',
         price: 1.6,
       },
       {
-        name: 'Snax, Hula Hoops',
+        name: 'Hula Hoops, Snax',
         price: 1.5,
       },
 
