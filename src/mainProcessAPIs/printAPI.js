@@ -1,5 +1,6 @@
-const { ipcMain, app } = require('electron');
+const { ipcMain } = require('electron');
 const Store = require('electron-store');
+import { getOrderStats } from './ordersAPI';
 import { log } from './loggingAPI';
 const settingsStore = new Store();
 const {
@@ -135,10 +136,12 @@ ipcMain.handle('printOrder', async (e, order) => {
     let quantityItems = 0;
     let total = 0;
     order.items.forEach((item, index) => {
+      // Find price of each item
       let price = item.price * item.quantity;
       quantityItems += item.quantity;
       total += price;
       printer.leftRight(item.name, `€${price.toFixed(2)}`);
+      // Create the addon string if addons are present
       if (item.addons !== undefined && item.addons.length > 0) {
         let addonsString = 'Addons: ';
         item.addons.forEach((addon, index) => {
@@ -150,9 +153,11 @@ ipcMain.handle('printOrder', async (e, order) => {
         });
         printer.println(addonsString);
       }
+      // Show each price if quantity > 1
       if (item.quantity > 1) {
         printer.println(`${item.quantity} @ €${item.price.toFixed(2)}`);
       }
+      // Draw a divider
       if (!(index + 1 === order.items.length)) {
         printer.leftRight('---', '---');
       }
@@ -247,38 +252,14 @@ ipcMain.handle('printEndOfDay', async (e, orders) => {
     printer.alignLeft();
     printer.drawLine();
 
-    let cashTotal = 0;
-    let cardTotal = 0;
-    let quantityItems = 0;
-    let quantityOrders = orders.length;
-
-    orders.forEach((order) => {
-      if (order.paymentMethod === 'Card') {
-        cardTotal += order.subtotal;
-      } else {
-        cashTotal += order.subtotal;
-      }
-
-      order.items.forEach((item) => {
-        if (item.quantity === undefined) {
-          quantityItems++;
-          log(
-            'Item with no quantity detected',
-            'Error while printing receipt',
-            order
-          );
-        } else {
-          quantityItems += item.quantity;
-        }
-      });
-    });
-
-    let xTotal = cashTotal + cardTotal;
-
-    let averageSale = 0;
-    if (quantityOrders !== 0 && quantityOrders !== undefined) {
-      averageSale = xTotal / quantityOrders;
-    }
+    const {
+      cashTotal,
+      cardTotal,
+      quantityItems,
+      quantityOrders,
+      averageSale,
+      xTotal,
+    } = getOrderStats();
 
     printer.setTextDoubleWidth();
     printer.leftRight('Cash:', `€${cashTotal.toFixed(2)}`);

@@ -32,6 +32,10 @@ export function removeOrder(order) {
   return ipcRenderer.invoke('removeOrder', order);
 }
 
+export function swapPaymentMethod(order) {
+  return ipcRenderer.invoke('swapPaymentMethod', order);
+}
+
 export function getSettings() {
   return ipcRenderer.invoke('getSettings');
 }

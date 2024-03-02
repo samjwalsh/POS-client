@@ -46,12 +46,12 @@ export default function Reports(props) {
 
   async function refreshOrders() {
     setReady(false);
-    getAllOrders().then(orders => {
+    getAllOrders().then((orders) => {
       setOrders(orders);
-    })
-    getOrderStats().then(stats => {
-      setStats(stats)
-    })
+    });
+    getOrderStats().then((stats) => {
+      setStats(stats);
+    });
     setReady(true);
   }
 
@@ -122,7 +122,7 @@ export default function Reports(props) {
                 <OrderBox
                   order={order}
                   setOrders={setOrders}
-                  key={order.time.toString()}
+                  key={order.id}
                   setReady={setReady}
                   setStats={setStats}
                 />

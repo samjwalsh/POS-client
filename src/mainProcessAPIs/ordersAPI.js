@@ -1,26 +1,10 @@
-const { ipcMain, ipcRenderer } = require('electron');
+const { ipcMain } = require('electron');
 
 const axios = require('axios');
 const Store = require('electron-store');
 const store = new Store();
 import { log } from './loggingAPI';
 import { getSetting } from './settingsAPI';
-
-// ipcMain.handle('getAllOrders', () => {
-//   let orders = store.get('orders');
-//   if (Array.isArray(orders) === false) {
-//     store.set('orders', []);
-//     orders = [];
-//   }
-//   let notDeletedOrEodOrders = [];
-//   orders.forEach((order) => {
-//     if (!order.deleted && !order.eod && order.shop == getSetting('Shop Name')) {
-//       notDeletedOrEodOrders.push(order);
-//     }
-//   });
-
-//   return notDeletedOrEodOrders;
-// });
 
 ipcMain.handle('getAllOrders', () => {
   let orders = store.get('orders');
@@ -45,7 +29,7 @@ ipcMain.handle('getAllOrders', () => {
   return notDeletedOrEodOrders;
 });
 
-ipcMain.handle('getOrderStats', () => {
+export const getOrderStats = () => {
   let orders = store.get('orders');
   if (Array.isArray(orders) === false) {
     store.set('orders', []);
@@ -102,7 +86,15 @@ ipcMain.handle('getOrderStats', () => {
     averageSale,
     xTotal,
   };
+};
+
+ipcMain.handle('getOrderStats', () => {
+  return getOrderStats();
 });
+
+export const generateID = () => {
+  return (Date.now() + Math.random()).toString();
+};
 
 ipcMain.handle('addOrder', async (e, args) => {
   try {
@@ -117,7 +109,7 @@ ipcMain.handle('addOrder', async (e, args) => {
     });
 
     const order = {
-      id: (Date.now() + Math.random()).toString(),
+      id: generateID(),
       time: new Date(),
       subtotal,
       paymentMethod: args.paymentMethod,
@@ -129,11 +121,11 @@ ipcMain.handle('addOrder', async (e, args) => {
     };
 
     const orders = store.get('orders');
-    if (Array.isArray(orders) === false) {
-      store.set('orders', [order]);
-    } else {
+    if (Array.isArray(orders)) {
       orders.unshift(order);
       store.set('orders', orders);
+    } else {
+      store.set('orders', [order]);
     }
   } catch (e) {
     log(JSON.stringify(e), 'Error while adding order', [args]);
@@ -183,19 +175,46 @@ ipcMain.handle('endOfDay', () => {
 });
 
 ipcMain.handle('removeOrder', (e, deletedOrder) => {
-  let orders = store.get('orders');
+  removeOrder(deletedOrder);
+});
 
-  let deletedOrderLocalEntry = orders.find(
-    (order) => order.id === deletedOrder.id
-  );
+export const removeOrder = (deletedOrder) => {
+  const orders = store.get('orders');
 
-  let deletedOrderIndex = orders.indexOf(deletedOrderLocalEntry);
+  let deletedOrderIndex = findOrderIndex(deletedOrder.id);
 
   if (deletedOrderIndex > -1) {
     orders[deletedOrderIndex].deleted = true;
     store.set('orders', orders);
   }
   return;
+};
+
+export const findOrderIndex = (id) => {
+  const orders = store.get('orders');
+
+  const deletedOrderLocalEntry = orders.find((order) => order.id === id);
+
+  const deletedOrderIndex = orders.indexOf(deletedOrderLocalEntry);
+
+  return deletedOrderIndex;
+};
+
+ipcMain.handle('swapPaymentMethod', (e, order) => {
+  let orders = store.get('orders');
+  const index = findOrderIndex(order.id);
+  removeOrder(orders[index]);
+  if (order.paymentMethod === 'Cash') {
+    order.paymentMethod = 'Card';
+  } else {
+    order.paymentMethod = 'Cash';
+  }
+  if (order._id) delete order._id;
+  order.id = generateID();
+  // Need to get orders again because the current copy in memory does not have the deleted order in it;
+  orders = store.get('orders');
+  orders.splice(index, 0, order);
+  store.set('orders', orders);
 });
 
 ipcMain.handle('syncOrders', async () => {

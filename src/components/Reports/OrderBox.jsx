@@ -2,6 +2,9 @@ import * as React from 'react';
 
 import OrderItem from '../Reusables/OrderItem.jsx';
 import closeSVG from '../../assets/appicons/close.svg';
+import editSVG from '../../assets/appicons/edit.svg';
+
+import useListSelect from '../Reusables/ListSelect.jsx';
 import useConfirm from '../Reusables/ConfirmDialog.jsx';
 import playBeep from '../../tools/playBeep.js';
 import {
@@ -9,6 +12,7 @@ import {
   getAllOrders,
   printOrder,
   getOrderStats,
+  swapPaymentMethod,
 } from '../../tools/ipc.js';
 
 import { calculateDateString } from './Reports.jsx';
@@ -16,6 +20,7 @@ import { calculateDateString } from './Reports.jsx';
 export function OrderBox({ order, setOrders, setReady, setStats }) {
   const orderDateString = calculateDateString(order.time);
   const [Dialog, confirm] = useConfirm();
+  const [ListSelect, chooseOption] = useListSelect();
 
   async function handleDeleteOrder(deletedOrder) {
     playBeep();
@@ -37,8 +42,32 @@ export function OrderBox({ order, setOrders, setReady, setStats }) {
     setStats(await getOrderStats());
     setReady(true);
   }
+
+  async function handleEditOrder(order) {
+    playBeep();
+    const choice = await chooseOption(['Swap Payment Method']);
+    if (!choice) return;
+    if (choice === 'Swap Payment Method') {
+      const choice = await confirm([
+        'Swap Payment Method',
+        'Cancel',
+        'Swap',
+        `Swap payment method for this order from ${order.paymentMethod} to ${
+          order.paymentMethod === 'Cash' ? 'Card' : 'Cash'
+        }?`,
+      ]);
+      if (!choice) return;
+      await swapPaymentMethod(order);
+      
+      setReady(false);
+      setOrders(await getAllOrders());
+      setStats(await getOrderStats());
+      setReady(true);
+    }
+  }
   return (
     <>
+      <ListSelect />
       <Dialog />
       <div className='orderbox border bc flex max-h-96 flex-col rounded-box'>
         <div className='flex flex-row w-full p-2 justify-between border-b bc'>
@@ -48,11 +77,19 @@ export function OrderBox({ order, setOrders, setReady, setStats }) {
             onTouchEnd={(e) => handlePrintReceipt(order)}>
             Receipt
           </div>
-          <div
-            className='btn-error btn'
-            onAuxClick={(e) => handleDeleteOrder(order)}
-            onTouchEnd={(e) => handleDeleteOrder(order)}>
-            <img src={closeSVG} className='w-6 icon' />
+          <div className='flex flex-row gap-2'>
+            <div
+              className='btn-neutral btn'
+              onAuxClick={(e) => handleEditOrder(order)}
+              onTouchEnd={(e) => handleEditOrder(order)}>
+              <img src={editSVG} className='w-6 icon' />
+            </div>
+            <div
+              className='btn-error btn'
+              onAuxClick={(e) => handleDeleteOrder(order)}
+              onTouchEnd={(e) => handleDeleteOrder(order)}>
+              <img src={closeSVG} className='w-6 icon' />
+            </div>
           </div>
         </div>
         <div className='flex flex-col p-2 border-b bc text-lg'>
