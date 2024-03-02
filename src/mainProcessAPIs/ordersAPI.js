@@ -28,15 +28,20 @@ ipcMain.handle('getAllOrders', () => {
     store.set('orders', []);
     orders = [];
   }
-  let notDeletedOrEodOrders = [];
+  const notDeletedOrEodOrders = [];
 
-  for (const order of orders) {
-    if (notDeletedOrEodOrders.length >= 50) break;
-    if (!order.deleted && !order.eod && order.shop == getSetting('Shop Name')) {
-      notDeletedOrEodOrders.push(order);
-    }
+  let currOrder = 0,
+    ordersLength = orders.length;
+  const shop = getSetting('Shop Name');
+  let loop = 0;
+  while (currOrder < ordersLength) {
+    const order = orders[currOrder];
+    currOrder++;
+    loop++;
+    if (notDeletedOrEodOrders.length >= 50) currOrder = ordersLength;
+    if (order.deleted || order.eod || order.shop !== shop) continue;
+    notDeletedOrEodOrders.push(order);
   }
-
   return notDeletedOrEodOrders;
 });
 
@@ -52,12 +57,15 @@ ipcMain.handle('getOrderStats', () => {
   let quantityOrders = 0;
   let quantityItems = 0;
 
-  var currOrder = 0,
+  const shop = getSetting('Shop Name');
+
+  let currOrder = 0,
     ordersLength = orders.length;
+
   while (currOrder < ordersLength) {
     const order = orders[currOrder];
     currOrder++;
-    if (order.deleted || order.eod) continue;
+    if (order.deleted || order.eod || order.shop !== shop) continue;
     quantityOrders++;
 
     if (order.paymentMethod === 'Card') {
@@ -70,10 +78,15 @@ ipcMain.handle('getOrderStats', () => {
     while (currItem < itemsLength) {
       const item = order.items[currItem];
       currItem++;
-      if (item.quantity === undefined) {
-        quantityItems++;
-      } else {
+      if (item.quantity !== undefined) {
         quantityItems += item.quantity;
+      } else {
+        quantityItems++;
+        log(
+          'Item with no quantity detected',
+          'Error while getting order stats',
+          order
+        );
       }
     }
   }

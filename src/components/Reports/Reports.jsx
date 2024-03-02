@@ -46,8 +46,12 @@ export default function Reports(props) {
 
   async function refreshOrders() {
     setReady(false);
-    setOrders(await getAllOrders());
-    setStats(await getOrderStats());
+    getAllOrders().then(orders => {
+      setOrders(orders);
+    })
+    getOrderStats().then(stats => {
+      setStats(stats)
+    })
     setReady(true);
   }
 

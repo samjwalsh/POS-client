@@ -262,6 +262,11 @@ ipcMain.handle('printEndOfDay', async (e, orders) => {
       order.items.forEach((item) => {
         if (item.quantity === undefined) {
           quantityItems++;
+          log(
+            'Item with no quantity detected',
+            'Error while printing receipt',
+            order
+          );
         } else {
           quantityItems += item.quantity;
         }

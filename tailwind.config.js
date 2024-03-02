@@ -106,6 +106,7 @@
       'cyberpunk',
       'night',
     ],
+    logs: false,
   },
   plugins: [require('daisyui')],
   darkMode: 'class',

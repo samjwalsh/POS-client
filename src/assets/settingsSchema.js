@@ -14,7 +14,7 @@ export const settingsSchema = [
       {
         name: 'Theme',
         type: 'dropdown',
-        value: 'emerald',
+        value: 'summer',
         list: [
           'emerald',
           'summer',
@@ -22,7 +22,7 @@ export const settingsSchema = [
           'corporate',
           'retro',
           'cyberpunk',
-          'night'
+          'night',
         ],
       },
     ],
