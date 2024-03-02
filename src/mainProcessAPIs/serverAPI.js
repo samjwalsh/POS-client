@@ -1,6 +1,7 @@
 const { ipcMain, ipcRenderer } = require('electron');
 
 import { getSetting } from './settingsAPI';
+import { log } from './loggingAPI';
 
 const axios = require('axios');
 const Store = require('electron-store');

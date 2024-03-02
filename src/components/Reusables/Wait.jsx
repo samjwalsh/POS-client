@@ -4,13 +4,13 @@ import { useState, useEffect, useRef } from 'react';
 export default function Wait() {
   const [dots, setDots] = useState(3);
 
-  // useInterval(() => {
-  //   if (dots < 3) setDots(dots + 1);
-  //   else setDots(0);
-  // }, 1);
+  useInterval(() => {
+    if (dots < 3) setDots(dots + 1);
+    else setDots(0);
+  }, 100);
 
   return (
-    <div className='title cnter-items p-2 w-full'>
+    <div className='title cnter-items p-2 w-full bg-base-100'>
       Please wait {'.'.repeat(dots)}
     </div>
   );
