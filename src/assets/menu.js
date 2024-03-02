@@ -169,17 +169,72 @@ export const menu = [
     ],
   },
   {
-    name: 'Family Sp.',
-    price: 10,
-  },
-  {
+    name: 'Extras',
     type: 'category',
-    name: 'Tubs',
     items: [
       {
-        name: 'Pink Tub',
+        name: 'Flake',
+        price: 0.5,
+      },
+      {
+        name: 'Empty Cone',
+        price: 0.3,
+      },
+      {
+        name: 'Waffle Cone',
+        price: 1,
+      },
+      {
+        name: 'Toppings',
+        price: 0.5,
+      },
+      { name: 'Ferrero', price: 1.5 },
+      { name: 'Strawberries', price: 1.5 },
+      { name: 'Chocolate Dip', price: 1.5 },
+      {
+        name: 'Family Special',
+        price: 10,
+      },
+    ],
+  },
+
+  {
+    name: 'Pink Tub',
+    price: 2.5,
+    modifiers: [
+      {
+        name: 'Flake',
+        price: 0.5,
+      },
+      {
+        name: 'Toppings',
+        price: 0.5,
+      },
+      {
+        name: 'Crush Flake',
+        price: 1.5,
+      },
+    ],
+    shortcuts: [
+      {
+        name: 'Plain Pink Tub',
         price: 2.5,
-        modifiers: [
+        addons: [],
+      },
+      {
+        name: '99 Pink Tub',
+        price: 3,
+        addons: [
+          {
+            name: 'Flake',
+            price: 0.5,
+          },
+        ],
+      },
+      {
+        name: 'Special 99 Pink Tub',
+        price: 3.5,
+        addons: [
           {
             name: 'Flake',
             price: 0.5,
@@ -188,45 +243,62 @@ export const menu = [
             name: 'Toppings',
             price: 0.5,
           },
-          {
-            name: 'Crush Flake',
-            price: 1.5,
-          },
         ],
-        shortcuts: [
+      },
+    ],
+  },
+  {
+    name: "Kid's Tub",
+    price: 2.3,
+    shortcuts: [
+      {
+        name: "Kid's Tub",
+        price: 2.3,
+        addons: [],
+      },
+      {
+        name: "Kid's 99 Tub",
+        price: 2.5,
+        addons: [
           {
-            name: 'Plain Pink Tub',
-            price: 2.5,
-            addons: [],
-          },
-          {
-            name: '99 Pink Tub',
-            price: 3,
-            addons: [
-              {
-                name: 'Flake',
-                price: 0.5,
-              },
-            ],
-          },
-          {
-            name: 'Special 99 Pink Tub',
-            price: 3.5,
-            addons: [
-              {
-                name: 'Flake',
-                price: 0.5,
-              },
-              {
-                name: 'Toppings',
-                price: 0.5,
-              },
-            ],
+            name: 'Flake',
+            price: 0.2,
           },
         ],
       },
       {
-        name: 'Large Tub',
+        name: "Kid's Special 99 Tub",
+        price: 3,
+        addons: [
+          {
+            name: 'Flake',
+            price: 0.2,
+          },
+          {
+            name: 'Toppings',
+            price: 0.5,
+          },
+        ],
+      },
+    ],
+    modifiers: [
+      {
+        name: 'Flake',
+        price: 0.2,
+      },
+      {
+        name: 'Toppings',
+        price: 0.5,
+      },
+      { name: 'Crush Flake', price: 1.5 },
+    ],
+  },
+  {
+    type: 'category',
+    name: 'Tubs',
+    items: [
+      {
+        name: 'Orange Tub',
         price: 4.0,
         modifiers: [
           {
@@ -376,11 +448,19 @@ export const menu = [
         ],
       },
       {
+        name: 'Float',
+        price: 5,
+      },
+      {
         name: 'Hot Ferrero',
         price: 6,
         modifiers: [
           {
             name: 'Flake',
+            price: 0.5,
+          },
+          {
+            name: 'Strawberries',
             price: 0.5,
           },
         ],
@@ -430,31 +510,8 @@ export const menu = [
         ],
       },
       {
-        name: 'Hot Ferrero & Strawberries',
-        price: 6.5,
-        modifiers: [
-          {
-            name: 'Flake',
-            price: 0.5,
-          },
-        ],
-        shortcuts: [
-          {
-            name: 'Hot Ferrero & Strawberries',
-            price: 6.5,
-            addons: [],
-          },
-          {
-            name: '99 Hot Ferrero & Strawberries',
-            price: 7,
-            addons: [
-              {
-                name: 'Flake',
-                price: 0.5,
-              },
-            ],
-          },
-        ],
+        name: 'Affogato',
+        price: 5,
       },
       {
         name: 'Treat Tub',
@@ -484,12 +541,46 @@ export const menu = [
         ],
       },
       {
-        name: 'Float',
+        name: 'Kinder Bueno & Ice Cream',
+        price: 6,
+      },
+    ],
+  },
+  {
+    name: 'Toys',
+    type: 'category',
+    items: [
+      {
+        name: 'Small Spade & Bucket',
+        price: 3.5,
+      },
+      {
+        name: 'Medium Spade & Bucket',
+        price: 4.5,
+      },
+      {
+        name: 'Ice Cream Bucket',
+        price: 6.5,
+      },
+      {
+        name: 'Penguin Bucket',
+        price: 6.5,
+      },
+      {
+        name: 'Large Spade & Unicorn Bucket',
+        price: 7,
+      },
+      {
+        name: 'Small Rainbow Ball',
         price: 5,
       },
       {
-        name: 'Coffee Ice.',
-        price: 5,
+        name: 'Large Rainbow Ball',
+        price: 7,
+      },
+      {
+        name: 'Pump Blaster',
+        price: 3.5,
       },
     ],
   },
@@ -498,23 +589,69 @@ export const menu = [
     name: 'Cold Drinks',
     items: [
       {
-        name: 'Soft Bottles',
-        price: 2.5,
-      },
-      {
-        name: 'Water',
-        price: 2,
-      },
-      {
-        name: 'Cans',
-        price: 2,
-      },
-      {
         name: 'Ribena',
         price: 2,
       },
       {
         name: 'Capri-Sun',
+        price: 2,
+      },
+      {
+        name: 'Cans',
+        price: 2,
+        shortcuts: [
+          {
+            name: 'Can',
+            price: 2,
+            addons: [],
+          },
+          {
+            name: 'Re-Turn Can',
+            price: 2.15,
+            addons: [
+              {
+                name: 'Re-Turn (15c)',
+                price: 0.15,
+              },
+            ],
+          },
+        ],
+        modifiers: [
+          {
+            name: 'Re-Turn (15c)',
+            price: 0.15,
+          },
+        ],
+      },
+      {
+        name: 'Soft Bottles',
+        price: 2.5,
+        shortcuts: [
+          {
+            name: 'Soft Bottle',
+            price: 2.5,
+            addons: [],
+          },
+          {
+            name: 'Re-Turn Soft Bottle',
+            price: 2.65,
+            addons: [
+              {
+                name: 'Re-Turn (15c)',
+                price: 0.15,
+              },
+            ],
+          },
+        ],
+        modifiers: [
+          {
+            name: 'Re-Turn (15c)',
+            price: 0.15,
+          },
+        ],
+      },
+      {
+        name: 'Water',
         price: 2,
       },
       {
@@ -585,31 +722,6 @@ export const menu = [
     ],
   },
   {
-    name: 'Extras',
-    type: 'category',
-    items: [
-      {
-        name: 'Flake',
-        price: 0.5,
-      },
-      {
-        name: 'Empty Cone',
-        price: 0.3,
-      },
-      {
-        name: 'Waffle Cone',
-        price: 1,
-      },
-      {
-        name: 'Toppings',
-        price: 0.5,
-      },
-      { name: 'Ferrero', price: 1.5 },
-      { name: 'Strawberries', price: 1.5 },
-      { name: 'Chocolate Dip', price: 1.5 },
-    ],
-  },
-  {
     name: 'Sweets',
     type: 'category',
     items: [
@@ -670,44 +782,6 @@ export const menu = [
       {
         name: 'Purple Snack',
         price: 1.5,
-      },
-    ],
-  },
-  {
-    name: 'Toys',
-    type: 'category',
-    items: [
-      {
-        name: 'Small Spade & Bucket',
-        price: 3.5,
-      },
-      {
-        name: 'Medium Spade & Bucket',
-        price: 4.5,
-      },
-      {
-        name: 'Ice Cream Bucket',
-        price: 6.5,
-      },
-      {
-        name: 'Penguin Bucket',
-        price: 6.5,
-      },
-      {
-        name: 'Large Spade & Unicorn Bucket',
-        price: 7,
-      },
-      {
-        name: 'Small Rainbow Ball',
-        price: 5,
-      },
-      {
-        name: 'Large Rainbow Ball',
-        price: 7,
-      },
-      {
-        name: 'Pump Blaster',
-        price: 3.5,
       },
     ],
   },

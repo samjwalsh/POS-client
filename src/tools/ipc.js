@@ -12,6 +12,10 @@ export function getOrderStats() {
   return ipcRenderer.invoke('getOrderStats');
 }
 
+export function getRollingRevenue() {
+  return ipcRenderer.invoke('getRollingRevenue');
+}
+
 export async function addOrder(order, paymentMethod) {
   return ipcRenderer.invoke('addOrder', { order, paymentMethod });
 }

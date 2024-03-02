@@ -40,17 +40,33 @@ export const getOrderStats = () => {
   let cardTotal = 0;
   let quantityOrders = 0;
   let quantityItems = 0;
+  let rollingRevenue = 0;
 
   const shop = getSetting('Shop Name');
 
+  const hourCutoff = new Date(Date.now() - 60 * 60 * 1000);
+
   let currOrder = 0,
     ordersLength = orders.length;
+
+  let underRRCutoff = true;
 
   while (currOrder < ordersLength) {
     const order = orders[currOrder];
     currOrder++;
     if (order.deleted || order.eod || order.shop !== shop) continue;
     quantityOrders++;
+
+    if (underRRCutoff) {
+      if (new Date(order.time) > hourCutoff) {
+        const delay = Date.now() - new Date(order.time);
+        const weight = (-2 * delay) / (60 * 60 * 1000) + 2;
+        rollingRevenue += weight * order.subtotal;
+      }
+    } else {
+      underRRCutoff = false;
+      // This stops the expensive check of dates once an order outside of the date range is reached
+    }
 
     if (order.paymentMethod === 'Card') {
       cardTotal += order.subtotal;
@@ -85,8 +101,41 @@ export const getOrderStats = () => {
     quantityOrders,
     averageSale,
     xTotal,
+    rollingRevenue,
   };
 };
+
+ipcMain.handle('getRollingRevenue', () => {
+  let orders = store.get('orders');
+  if (Array.isArray(orders) === false) {
+    store.set('orders', []);
+    orders = [];
+  }
+  let quantityOrders = 0;
+  let rollingRevenue = 0;
+
+  const shop = getSetting('Shop Name');
+
+  const hourCutoff = new Date(Date.now() - 60 * 60 * 1000);
+
+  let currOrder = 0,
+    ordersLength = orders.length;
+
+  while (currOrder < ordersLength) {
+    const order = orders[currOrder];
+    currOrder++;
+    if (order.deleted || order.eod || order.shop !== shop) continue;
+    quantityOrders++;
+
+    if (new Date(order.time) > hourCutoff) {
+      const delay = Date.now() - new Date(order.time);
+      const weight = (-2 * delay) / (60 * 60 * 1000) + 2;
+      rollingRevenue += weight * order.subtotal;
+    } else break;
+  }
+
+  return rollingRevenue;
+});
 
 ipcMain.handle('getOrderStats', () => {
   return getOrderStats();

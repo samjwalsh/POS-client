@@ -21,7 +21,7 @@ const root = ReactDOM.createRoot(domNode);
 })();
 
 function App() {
-  const [appState, setAppState] = useState('Reports');
+  const [appState, setAppState] = useState('Register');
 
   const [menuState, setMenuState] = useState('');
   const [currentOrder, setCurrentOrder] = useState('');

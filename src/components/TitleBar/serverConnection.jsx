@@ -70,7 +70,7 @@ export default function ServerConnection() {
         </div>
       </div>
 
-      <div className='grid grid-rows-2 grid-cols-3 text-sm px-1 num gap-1'>
+      <div className='grid grid-rows-2 grid-cols-3 text-sm px-1 num'>
         <div className='col-span-1 row-span-1'>
           {isOnline.ordersToAdd == 0 ? '-' : isOnline.ordersToAdd}
         </div>

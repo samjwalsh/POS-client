@@ -88,6 +88,8 @@ export default function Reports(props) {
         if (!tryAgain) {
           await alert(await createEodHTML());
           userFinished = true;
+        } else {
+          await printEndOfDay(orders);
         }
       }
     }
