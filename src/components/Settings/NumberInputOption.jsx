@@ -27,7 +27,7 @@ export function NumberInputOption({ setting, setSettings }) {
         <div className='text-xl self-center'>{setting.name}</div>
         <div className='flex flex-row gap-2'>
           <div
-            className='btn text-lg btn-neutral p-2 cnter-items '
+            className='btn text-lg btn-neutral p-2 cnter '
             onAuxClick={(e) => handleClickNumberInputOption(setting)}
             onTouchEnd={(e) => handleClickNumberInputOption(setting)}>
             {setting.value == undefined ? 'Enter' : setting.value}

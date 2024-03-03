@@ -10,7 +10,7 @@ export default function Wait() {
   }, 100);
 
   return (
-    <div className='title cnter-items p-2 w-full bg-base-100'>
+    <div className='title cnter p-2 w-full bg-base-100'>
       Please wait {'.'.repeat(dots)}
     </div>
   );

@@ -135,7 +135,7 @@ export default function ItemPage({
         <div className='w-full flex flex-row mt-auto gap-2 p-2 h-16 border-t bc'>
           <div className='flex flex-row '>
             <div
-              className='w-14 h-auto cnter-items btn btn-error '
+              className='w-14 h-auto cnter btn btn-error '
               onAuxClick={() =>
                 handleChangeQuantity(
                   item,
@@ -154,11 +154,9 @@ export default function ItemPage({
               }>
               <img src={minusSVG} className='w-6 icon' />
             </div>
-            <div className=' w-16 h-auto num cnter-items text-2xl'>
-              {quantity}
-            </div>
+            <div className=' w-16 h-auto num cnter text-2xl'>{quantity}</div>
             <div
-              className='btn btn-success w-14 h-auto cnter-items'
+              className='btn btn-success w-14 h-auto cnter'
               onAuxClick={() =>
                 handleChangeQuantity(item, currentOrder, setCurrentOrder, 'up')
               }
@@ -168,7 +166,7 @@ export default function ItemPage({
               <img src={addSVG} className='w-6 icon' />
             </div>
           </div>
-          <div className='text-2xl w-full h-auto num cnter-items'>€{price}</div>
+          <div className='text-2xl w-full h-auto num cnter'>€{price}</div>
           <div
             className='btn btn-primary text-xl h-full positive w-48'
             onAuxClick={() =>

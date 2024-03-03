@@ -4,39 +4,15 @@ const Store = require('electron-store');
 const { settingsSchema } = require('../assets/settingsSchema');
 const store = new Store();
 
-// add code here to check that all the settings match the newest schema, it will run once on startup
 (() => {
-  let localSettings = store.get('settings');
   let newSettings = settingsSchema;
-  settingsSchema.forEach((category, categoryIndex) => {
-    if (localSettings === undefined) {
-      localSettings = [];
-    }
-    if (categoryIndex + 1 <= localSettings.length) {
-      if (category.name !== localSettings[categoryIndex].name) {
-        store.set('settings', newSettings);
-        return;
-      }
-    } else {
-      localSettings.push(category);
-    }
-
-    category.settings.forEach((setting, settingIndex) => {
-      if (settingIndex + 1 <= localSettings[categoryIndex].settings.length) {
-        const settingFromSchema = category.settings[settingIndex];
-        const localSetting =
-          localSettings[categoryIndex].settings[settingIndex];
-        if (settingFromSchema.name === localSetting.name) {
-          if (settingFromSchema.type === 'dropdown') {
-            localSetting.list = settingFromSchema.list;
-          }
-        }
-      } else {
-        localSettings[categoryIndex].settings.push(setting);
-      }
+  newSettings.forEach((category) => {
+    category.settings.forEach((setting) => {
+      const localValue = getSetting(setting.name);
+      if (localValue !== '') setting.value = localValue;
     });
   });
-  store.set('settings', localSettings);
+  store.set('settings', newSettings);
 })();
 
 ipcMain.handle('getSettings', () => {
@@ -49,16 +25,7 @@ ipcMain.handle('getSettings', () => {
 });
 
 ipcMain.handle('getSetting', (e, settingName) => {
-  let foundValue;
-  const settings = store.get('settings');
-  settings.forEach((category) => {
-    category.settings.forEach((setting) => {
-      if (setting.name == settingName) {
-        foundValue = setting.value;
-      }
-    });
-  });
-  return foundValue;
+  return getSetting(settingName);
 });
 
 ipcMain.handle('setSetting', (e, settingName, value) => {
@@ -75,18 +42,18 @@ ipcMain.handle('setSetting', (e, settingName, value) => {
   }
 });
 
-export const getSetting = (setting) => {
+export function getSetting(settingName) {
   let foundSetting = '';
   const settings = store.get('settings');
   settings.forEach((localCategory) => {
     localCategory.settings.forEach((localSetting) => {
-      if (localSetting.name == setting) {
+      if (localSetting.name == settingName) {
         foundSetting = localSetting.value;
       }
     });
   });
   return foundSetting;
-};
+}
 
 ipcMain.handle('updateSettings', (e, newSettings) => {
   store.set('settings', newSettings);

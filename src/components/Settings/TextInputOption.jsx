@@ -12,7 +12,7 @@ export function TextInputOption({ setting, setSettings }) {
   async function handleClickTextInputOption(setting) {
     playBeep();
 
-    const response = await keyboard(setting.value);
+    const response = await keyboard(setting.value, `${setting.name}`);
     if (!response) {
       return;
     }
@@ -27,7 +27,7 @@ export function TextInputOption({ setting, setSettings }) {
         <div className='text-xl self-center'>{setting.name}</div>
         <div className='flex flex-row gap-2'>
           <div
-            className='btn text-lg btn-neutral p-2 cnter-items '
+            className='btn text-lg btn-neutral p-2 cnter '
             onAuxClick={(e) => handleClickTextInputOption(setting)}
             onTouchEnd={(e) => handleClickTextInputOption(setting)}>
             {setting.value == undefined

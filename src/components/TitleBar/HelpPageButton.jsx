@@ -14,10 +14,10 @@ export default function HelpPageButton() {
   return (
     <>
       <HelpPage />
-      <div className='h-full cnter-items primary'>
+      <div className='h-full cnter primary'>
         <img
           src={question}
-          className='w-8 icon cnter-items h-full'
+          className='w-8 icon cnter h-full'
           onAuxClick={useHelp}
           onTouchEnd={useHelp}
         />

@@ -51,7 +51,7 @@ export function ButtonOption({ setting, setSettings }) {
         <div className='text-xl self-center'>{setting.name}</div>
         <div className='flex flex-row gap-2'>
           <div
-            className='btn text-lg btn-neutral p-2 cnter-items '
+            className='btn text-lg btn-neutral p-2 cnter '
             onAuxClick={() => handleClickButtonOption(setting)}
             onTouchEnd={() => handleClickButtonOption(setting)}>
             {setting.label}

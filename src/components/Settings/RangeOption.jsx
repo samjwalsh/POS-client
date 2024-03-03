@@ -47,7 +47,7 @@ export function RangeOption({ setting, settings, setSettings }) {
       <div className='text-xl self-center'>{setting.name}</div>
       <div className='flex flex-row gap-2'>
         <div
-          className='btn text-lg   btn-error  p-2 cnter-items'
+          className='btn text-lg   btn-error  p-2 cnter'
           onAuxClick={(e) =>
             handleClickRangeOption(setting, 'decrease', settings)
           }
@@ -56,9 +56,9 @@ export function RangeOption({ setting, settings, setSettings }) {
           }>
           <img src={minusSVG} className='w-6 icon' />
         </div>
-        <div className='cnter-items text-xl'>{setting.value}</div>
+        <div className='cnter text-xl'>{setting.value}</div>
         <div
-          className='btn text-lg  btn-success p-2 cnter-items'
+          className='btn text-lg  btn-success p-2 cnter'
           onAuxClick={(e) =>
             handleClickRangeOption(setting, 'increase', settings)
           }
@@ -68,7 +68,7 @@ export function RangeOption({ setting, settings, setSettings }) {
           <img src={addSVG} className='w-6 icon' />
         </div>
         <div
-          className=' btn text-lg btn-neutral p-2 cnter-items '
+          className=' btn text-lg btn-neutral p-2 cnter '
           onAuxClick={(e) => handleClickRangeOption(setting, 'reset', settings)}
           onTouchEnd={(e) =>
             handleClickRangeOption(setting, 'reset', settings)

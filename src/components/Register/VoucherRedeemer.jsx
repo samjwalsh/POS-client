@@ -32,7 +32,10 @@ const useVoucherRedeemer = (order, setOrder) => {
 
   const handleEnterCode = async () => {
     playBeep();
-    const code = await keyboard('');
+    const code = await keyboard(
+      '',
+      'Enter voucher code (Letters only, Not case sensitive)'
+    );
     if (!code) return;
     if (code.length < 5) {
       await alert('Voucher codes are at least 5 characters long.');
@@ -79,7 +82,7 @@ const useVoucherRedeemer = (order, setOrder) => {
       return (
         <div className='w-min flex flex-col gap-2 text-2xl p-4 border bc  background rounded-box'>
           <div className='flex flex-row justify-between'>
-            <div className=' cnter-items whitespace-nowrap pr-2 title'>
+            <div className=' cnter whitespace-nowrap pr-2 title'>
               Voucher Redeemer
             </div>
             <div
@@ -91,7 +94,7 @@ const useVoucherRedeemer = (order, setOrder) => {
           </div>
           <div className='w-full border-b bc'></div>
           <div className='flex flex-row justify-between'>
-            <div className='cnter-items'>Code:</div>
+            <div className='cnter'>Code:</div>
             <div
               className='btn btn-primary text-lg'
               onAuxClick={(e) => handleEnterCode()}

@@ -52,7 +52,7 @@ export default function TitleBar(props) {
       <VoucherRedeemer />
       <VoucherChecker />
       <ListSelect />
-      <div className='flex flex-row justify-between h-16 px-2 border-b bc cnter-items'>
+      <div className='flex flex-row justify-between h-16 px-2 border-b bc cnter'>
         <div
           className=' btn btn-primary text-lg'
           onAuxClick={(e) => handleClickHamburger(setHamburger)}
@@ -71,7 +71,7 @@ export default function TitleBar(props) {
             onTouchEnd={(e) => handlePrintRecentOrder()}>
             Print Receipt
           </div>
-          <div className='cnter-items h-10 mx-5'></div>
+          <div className='cnter h-10 mx-5'></div>
           <div
             className=' btn btn-secondary text-lg'
             onAuxClick={(e) => handleClickVoucherMenu()}

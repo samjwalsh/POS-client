@@ -26,10 +26,10 @@ export default function AddonBox({
       <div className='flex flex-row justify-between w-full gap-2'>
         <div className='flex-grow flex flex-row justify-between p-2 btn-neutral btn h-full'>
           <div className='flex flex-row gap-2'>
-            <div className='text-xl cnter-items'>{addon.name}</div>
-            <div className='num cnter-items'>€{addon.price.toFixed(2)}</div>
+            <div className='text-xl cnter'>{addon.name}</div>
+            <div className='num cnter'>€{addon.price.toFixed(2)}</div>
           </div>
-          <div className='cnter-items h-full'>
+          <div className='cnter h-full'>
             {addon.selected ? (
               <img src={checkSVG} className='w-8 icon border bc' />
             ) : (

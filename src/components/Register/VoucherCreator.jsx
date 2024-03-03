@@ -175,7 +175,7 @@ const useVoucherCreator = (order, setOrder) => {
       return (
         <div className='w-96 flex flex-col gap-2 text-2xl p-4 border bc  background rounded-box'>
           <div className='flex flex-row justify-between'>
-            <div className=' cnter-items mt-2 title'>Voucher Creator</div>
+            <div className=' cnter mt-2 title'>Voucher Creator</div>
             <div
               className='btn btn-error text-lg'
               onAuxClick={(event) => handleClickClose()}
@@ -185,7 +185,7 @@ const useVoucherCreator = (order, setOrder) => {
           </div>
           <div className='w-full border-b bc'></div>
           <div className='flex flex-row justify-between'>
-            <div className='cnter-items'>Quantity:</div>
+            <div className='cnter'>Quantity:</div>
             <div
               className='btn btn-neutral text-lg'
               onAuxClick={(e) => handleSetQuantity()}
@@ -197,7 +197,7 @@ const useVoucherCreator = (order, setOrder) => {
             </div>
           </div>
           <div className='flex flex-row justify-between'>
-            <div className='cnter-items'>Value:</div>
+            <div className='cnter'>Value:</div>
             <div
               className='btn btn-neutral text-lg'
               onAuxClick={(e) => handleSetValue()}
@@ -212,8 +212,8 @@ const useVoucherCreator = (order, setOrder) => {
           <div className='w-full border-b bc'></div>
 
           <div className='flex flex-row justify-between title'>
-            <div className='cnter-items'>Total Cost:</div>
-            <div className='cnter-items'>
+            <div className='cnter'>Total Cost:</div>
+            <div className='cnter'>
               €{(voucherState.value * voucherState.quantity).toFixed(2)}
             </div>
           </div>

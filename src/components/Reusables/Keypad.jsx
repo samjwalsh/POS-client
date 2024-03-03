@@ -168,10 +168,10 @@ const useKeypad = () => {
         onAuxClick={(event) => handleKeypadClick(event)}
         onTouchEnd={(event) => handleKeypadClick(event)}>
         <div className=' rounded-btn p-2 col-span-2 row-span 1 flex flex-row text-3xl justify-between w-full num'>
-          <div className='text-left cnter-items'>
+          <div className='text-left cnter'>
             {keypadState.numberFormat === 'currency' ? '€' : ''}
           </div>
-          <div className='text-right justify-end cnter-items'>
+          <div className='text-right justify-end cnter'>
             {keypadValueString}
           </div>
         </div>
