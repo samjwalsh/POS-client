@@ -32,7 +32,7 @@ body {
 }
 
 .menu-itm {
-  @apply btn w-48 h-32 flex-grow flex p-2 text-left justify-start items-end text-[1.7rem]  text-neutral-content mb-2;
+  @apply btn w-48 h-32 flex-grow flex p-2 text-left justify-start items-end text-4xl text-neutral-content mb-2;
 }
 
 .menu-itm-filler {
@@ -68,7 +68,7 @@ body {
 }
 
 .keyboardKey {
-  @apply flex-grow btn h-full text-xl text-neutral-content ;
+  @apply flex-grow btn h-full text-xl text-neutral-content;
 }
 
 .title {

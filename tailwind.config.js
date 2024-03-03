@@ -19,6 +19,62 @@
         mono: ['IBM Plex Mono'],
         emoji: ['Segoe UI Emoji'],
       },
+      fontSize: {
+        xs: [
+          '0.75rem',
+          {
+            lineHeight: '0.94rem',
+          },
+        ],
+        sm: [
+          '0.875rem',
+          {
+            lineHeight: '1.1rem',
+          },
+        ],
+        base: [
+          '1rem',
+          {
+            lineHeight: '1.25rem',
+            letterSpacing: '-0.02rem',
+          },
+        ],
+        lg: [
+          '1.125rem',
+          {
+            lineHeight: '1.4rem',
+            letterSpacing: '-0.02rem',
+          },
+        ],
+        xl: [
+          '1.25rem',
+          {
+            lineHeight: '1.56rem',
+            letterSpacing: '-0.02rem',
+          },
+        ],
+        '2xl': [
+          '1.5rem',
+          {
+            lineHeight: '1.875rem',
+            letterSpacing: '-0.02rem',
+          },
+        ],
+        '3xl': [
+          '1.875rem',
+          {
+            lineHeight: '1.875rem',
+            letterSpacing: '-0.02rem',
+          },
+        ],
+        '4xl': [
+          '1.7rem',
+          {
+            lineHeight: '1.7rem',
+            letterSpacing: '-0.02rem',
+          },
+        ],
+      },
     },
   },
   daisyui: {
