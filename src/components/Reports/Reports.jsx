@@ -46,13 +46,12 @@ export default function Reports(props) {
   }, []);
 
   // This checks if the orders need to be refreshed based on what the server sent back
-
   useEffect(() => {
     const updateOrdersInterval = setInterval(() => {
       console.log('check...');
       if (updateOrders) {
         console.log('and updated');
-        setUpdateOrders(false);
+        console.log(setUpdateOrders)
         refreshOrders();
       }
     }, 1000);

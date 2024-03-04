@@ -7,7 +7,8 @@ let syncFrequency;
   syncFrequency = (await getSetting('Sync Frequency')) * 1000;
 })();
 
-export default function ServerConnection({ setUpdateOrders }) {
+export default function ServerConnection(props) {
+  const { setUpdateOrders } = props;
   const [isOnline, setIsOnline] = useState({
     status: true,
     ping: 0,

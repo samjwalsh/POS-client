@@ -83,7 +83,7 @@ export default function TitleBar(props) {
           <div className='flex flex-row gap-1 h-12 font-bold'>
             <PrinterConnection />
             <Connection />
-            <ServerConnection setUpdateOrder={setUpdateOrders} />
+            <ServerConnection setUpdateOrders={setUpdateOrders} />
             <Clock />
           </div>
         </div>
