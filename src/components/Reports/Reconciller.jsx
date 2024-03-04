@@ -62,8 +62,6 @@ const useReconciller = (props) => {
   };
 
   const handleReconcile = async () => {
-    console.log(Math.abs(reconcileAmt.card - cardTotal));
-
     if (Math.abs(reconcileAmt.card - cardTotal) >= 0.005) {
       addOrder(
         [

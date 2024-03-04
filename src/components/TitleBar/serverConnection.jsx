@@ -9,7 +9,7 @@ let syncFrequency;
 })();
 
 export default function ServerConnection(props) {
-  const { updateOrders, setUpdateOrders } = props;
+  const { updateOrders, setUpdateOrders, appState } = props;
   const [isOnline, setIsOnline] = useState({
     status: true,
     ping: 0,
@@ -44,7 +44,7 @@ export default function ServerConnection(props) {
       connection.ordersToAdd +
       connection.ordersToDelete +
       connection.ordersToEod;
-    if (totalLocalUpdates > 0) {
+    if (totalLocalUpdates > 0 && appState === 'Reports') {
       setUpdateOrders(true);
     }
 

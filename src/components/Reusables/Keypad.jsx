@@ -189,56 +189,56 @@ const useKeypad = () => {
         <div className='col-span-1 row-span-1 keypad btn-warning' id='delete'>
           <img src={backSVG} className='w-6 icon' id='delete' />
         </div>
-        <div className='col-span-1 row-span-1 keypad btn btn-neutral' id='7'>
+        <div className='col-span-1 row-span-1 keypad btn btn-secondary' id='7'>
           7
         </div>
         <div
-          className='col-span-1 row-span-1 keypad btn-neutral text-neutral-content'
+          className='col-span-1 row-span-1 keypad btn-secondary text-neutral-content'
           id='8'>
           8
         </div>
         <div
-          className='col-span-1 row-span-1 keypad btn-neutral text-neutral-content'
+          className='col-span-1 row-span-1 keypad btn-secondary text-neutral-content'
           id='9'>
           9
         </div>
         <div
-          className='col-span-1 row-span-1 keypad btn-neutral text-neutral-content'
+          className='col-span-1 row-span-1 keypad btn-secondary text-neutral-content'
           id='4'>
           4
         </div>
         <div
-          className='col-span-1 row-span-1 keypad btn-neutral text-neutral-content'
+          className='col-span-1 row-span-1 keypad btn-secondary text-neutral-content'
           id='5'>
           5
         </div>
         <div
-          className='col-span-1 row-span-1 keypad btn-neutral text-neutral-content'
+          className='col-span-1 row-span-1 keypad btn-secondary text-neutral-content'
           id='6'>
           6
         </div>
         <div
-          className='col-span-1 row-span-1 keypad btn-neutral text-neutral-content'
+          className='col-span-1 row-span-1 keypad btn-secondary text-neutral-content'
           id='1'>
           1
         </div>
         <div
-          className='col-span-1 row-span-1 keypad btn-neutral text-neutral-content'
+          className='col-span-1 row-span-1 keypad btn-secondary text-neutral-content'
           id='2'>
           2
         </div>
         <div
-          className='col-span-1 row-span-1 keypad btn-neutral text-neutral-content'
+          className='col-span-1 row-span-1 keypad btn-secondary text-neutral-content'
           id='3'>
           3
         </div>
         <div
-          className='col-span-1 row-span-1 keypad btn-neutral text-neutral-content'
+          className='col-span-1 row-span-1 keypad btn-secondary text-neutral-content'
           id='0'>
           0
         </div>
         <div
-          className='col-span-1 row-span-1 keypad btn-neutral text-neutral-content'
+          className='col-span-1 row-span-1 keypad btn-secondary text-neutral-content'
           id='00'>
           00
         </div>

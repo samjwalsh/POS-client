@@ -16,6 +16,7 @@ export default function HamburgerMenu(props) {
   const {
     hamburgerOpen,
     setHamburger,
+    appState,
     setAppState,
     order,
     setOrder,
@@ -88,6 +89,7 @@ export default function HamburgerMenu(props) {
         setOrder={setOrder}
         updateOrders={updateOrders}
         setUpdateOrders={setUpdateOrders}
+        appState={appState}
       />
     );
   }
@@ -100,6 +102,7 @@ export default function HamburgerMenu(props) {
         setOrder={setOrder}
         updateOrders={updateOrders}
         setUpdateOrders={setUpdateOrders}
+        appState={appState}
       />
       <Keypad />
       <Dialog />

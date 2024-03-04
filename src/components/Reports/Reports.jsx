@@ -42,14 +42,13 @@ export default function Reports(props) {
 
   useEffect(() => {
     (() => {
-      refreshOrders();
+        refreshOrders();
     })();
   }, []);
 
   // This checks if the orders need to be refreshed based on what the server sent back
   useInterval(async () => {
     if (updateOrders) {
-      console.log('updated orders');
       setUpdateOrders(false);
       await refreshOrders();
     }
