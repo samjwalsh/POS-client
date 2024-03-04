@@ -22,9 +22,9 @@ ipcMain.handle('getAllOrders', () => {
     const order = orders[currOrder];
     currOrder++;
     loop++;
-    if (notDeletedOrEodOrders.length >= 50) currOrder = ordersLength;
     if (order.deleted || order.eod || order.shop !== shop) continue;
     notDeletedOrEodOrders.push(order);
+    if (notDeletedOrEodOrders.length >= 50) currOrder = ordersLength;
   }
   return notDeletedOrEodOrders;
 });

@@ -43,6 +43,7 @@ const useVoucherCreator = (order, setOrder) => {
   const handleSetQuantity = async () => {
     playBeep();
     const quantity = await keypad(0, 'passcode');
+    if (!quantity) return;
     if (quantity > 20) {
       await alert(
         'If you need to create more than 20 vouchers, you have to create them in multiple batches.'
@@ -60,6 +61,7 @@ const useVoucherCreator = (order, setOrder) => {
   const handleSetValue = async () => {
     playBeep();
     const value = await keypad();
+    if (!value) return;
     if (value > 0) {
       setVoucherState({
         value,

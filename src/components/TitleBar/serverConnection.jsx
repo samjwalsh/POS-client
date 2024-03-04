@@ -105,5 +105,3 @@ export default function ServerConnection(props) {
     </div>
   );
 }
-
-// {`[${isOnline.ordersToAdd} ${isOnline.ordersToDelete} ${isOnline.ordersToEod} ${isOnline.ordersMissingInDb} ${isOnline.ordersDeletedInDb} ${isOnline.ordersEodedInDb}]`}

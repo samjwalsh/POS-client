@@ -36,7 +36,7 @@ export default function Order(props) {
       return;
 
     const keypadValue = await keypad();
-    if (keypadValue === 0) return;
+    if (!keypadValue) return;
 
     let temp_order = order;
 

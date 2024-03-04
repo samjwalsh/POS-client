@@ -13,6 +13,7 @@ export function NumberInputOption({ setting, setSettings }) {
     playBeep();
 
     let response = await keypad(setting.value, 'passcode');
+    if (!response) return;
     if (response < 1 && setting.name === 'Sync Frequency') {
       response = 1;
     }

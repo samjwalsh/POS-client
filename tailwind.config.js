@@ -80,10 +80,10 @@
   daisyui: {
     themes: [
       {
-        summer: {
-          primary: '#5ebaf8',
+          summer: {
+          primary: '#51A1F8',
           'primary-content': '#000',
-          secondary: '#b4b7bf',
+          secondary: '#b4c2cb',
           'secondary-content': '#000',
           neutral: '#8eced4',
           'neutral-content': '#000',
