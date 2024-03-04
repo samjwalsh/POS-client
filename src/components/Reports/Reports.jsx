@@ -51,7 +51,7 @@ export default function Reports(props) {
       console.log('check...');
       if (updateOrders) {
         console.log('and updated');
-        console.log(setUpdateOrders)
+        setUpdateOrders(false);
         refreshOrders();
       }
     }, 1000);

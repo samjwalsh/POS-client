@@ -73,13 +73,13 @@ export default function HamburgerMenu(props) {
 
   if (hamburgerOpen === false) {
     return (
-      <TitleBar setHamburger={setHamburger} order={order} setOrder={setOrder} />
+      <TitleBar setHamburger={setHamburger} order={order} setOrder={setOrder} setUpdateOrders={setUpdateOrders}/>
     );
   }
 
   return (
     <>
-      <TitleBar setHamburger={setHamburger} setUpdateOrders={setUpdateOrders}/>
+      <TitleBar setHamburger={setHamburger} order={order} setOrder={setOrder} setUpdateOrders={setUpdateOrders}/>
       <Keypad />
       <Dialog />
       <DisableTouch />
