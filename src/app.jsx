@@ -42,6 +42,7 @@ function App() {
         setAppState={setAppState}
         order={order}
         setOrder={setOrder}
+        updateOrders={updateOrders}
         setUpdateOrders={setUpdateOrders}
       />
 
@@ -61,8 +62,8 @@ function App() {
           } else if (appState === 'Reports') {
             return (
               <Reports
-                updateOrders={updateOrders}
-                setUpdateOrders={setUpdateOrders}
+              updateOrders={updateOrders}
+              setUpdateOrders={setUpdateOrders}
               />
             );
           } else if (appState === 'Settings') {

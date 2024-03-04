@@ -81,7 +81,7 @@
     themes: [
       {
         summer: {
-          primary: '#51A1F8',
+          primary: '#5ebaf8',
           'primary-content': '#000',
           secondary: '#b4b7bf',
           'secondary-content': '#000',

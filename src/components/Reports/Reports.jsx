@@ -4,6 +4,7 @@ import { useState, useEffect, useMemo } from 'react';
 import useConfirm from '../Reusables/ConfirmDialog.jsx';
 import useAlert from '../Reusables/Alert.jsx';
 import useReconciller from './Reconciller.jsx';
+import { useInterval } from '../Reusables/Wait.jsx';
 
 import infoSVG from '../../assets/appicons/info.svg';
 
@@ -46,19 +47,12 @@ export default function Reports(props) {
   }, []);
 
   // This checks if the orders need to be refreshed based on what the server sent back
-  useEffect(() => {
-    const updateOrdersInterval = setInterval(() => {
-      console.log('check...');
-      if (updateOrders) {
-        console.log('and updated');
-        setUpdateOrders(false);
-        refreshOrders();
-      }
-    }, 1000);
-    return () => {
-      clearInterval(updateOrdersInterval);
-    };
-  }, []);
+  useInterval(async () => {
+    if (updateOrders) {
+      setUpdateOrders(false);
+      await refreshOrders();
+    }
+  }, 1000);
 
   async function refreshOrders() {
     setReady(false);
@@ -162,17 +156,17 @@ export default function Reports(props) {
             <OrdersStats stats={stats} />
             <div className='mt-auto px-2 flex flex-col gap-2'>
               <div
-                className='btn-secondary btn text-lg h-12 p-2 w-full'
+                className='btn-neutral btn text-lg h-12 p-2 w-full'
                 onAuxClick={reconcileTotals}
                 onTouchEnd={reconcileTotals}>
                 Update Totals
               </div>
-              <div
+              {/* <div
                 className='btn-neutral btn text-lg h-12 p-2 w-full'
                 onAuxClick={refreshOrders}
                 onTouchEnd={refreshOrders}>
                 Refresh Orders & Totals
-              </div>
+              </div> */}
               <div className='flex flex-row w-full gap-2 h-12'>
                 <div
                   className='btn btn-warning text-lg h-auto flex-grow'
@@ -181,7 +175,7 @@ export default function Reports(props) {
                   Delete Old Orders
                 </div>
                 <div
-                  className='btn-primary btn'
+                  className='btn-secondary btn'
                   onAuxClick={handleDeleteOldOrdersHelp}
                   onTouchEnd={handleDeleteOldOrdersHelp}>
                   <img src={infoSVG} className='w-6 icon' />

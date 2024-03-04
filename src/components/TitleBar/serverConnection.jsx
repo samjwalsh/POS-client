@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { getSetting, syncOrders } from '../../tools/ipc';
+import { useInterval } from '../Reusables/Wait.jsx';
 
 let syncFrequency;
 
@@ -8,7 +9,7 @@ let syncFrequency;
 })();
 
 export default function ServerConnection(props) {
-  const { setUpdateOrders } = props;
+  const { updateOrders, setUpdateOrders } = props;
   const [isOnline, setIsOnline] = useState({
     status: true,
     ping: 0,
@@ -22,21 +23,16 @@ export default function ServerConnection(props) {
 
   useEffect(() => {
     (async () => {
-      setIsOnline(await syncOrdersInterval());
+      await syncOrdersInterval();
     })();
   }, []);
 
-  useEffect(() => {
-    const connectionCheckInterval = setInterval(
-      async () => {
-        setIsOnline(await syncOrdersInterval());
-      },
-      typeof syncFrequency === 'number' ? syncFrequency : 5000
-    );
-    return () => {
-      clearInterval(connectionCheckInterval);
-    };
-  }, []);
+  useInterval(
+    async () => {
+      await syncOrdersInterval();
+    },
+    typeof syncFrequency === 'number' ? syncFrequency : 5000
+  );
 
   async function syncOrdersInterval() {
     const beginPing = Date.now();
@@ -44,7 +40,15 @@ export default function ServerConnection(props) {
     const endPing = Date.now();
     let shop = (await getSetting('Shop Name')).slice(0, 2).toUpperCase();
 
-    return {
+    const totalLocalUpdates =
+      connection.ordersToAdd +
+      connection.ordersToDelete +
+      connection.ordersToEod;
+    if (totalLocalUpdates > 0) {
+      setUpdateOrders(true);
+    }
+
+    setIsOnline({
       status: connection.success,
       ping: endPing - beginPing,
       ordersToAdd: connection.ordersToAdd,
@@ -55,13 +59,8 @@ export default function ServerConnection(props) {
       ordersEodedInDb: connection.ordersEodedInDb,
       shop,
       till: await getSetting('Till Number'),
-    };
-  }
-
-  const totalLocalUpdates =
-    isOnline.ordersToAdd + isOnline.ordersToDelete + isOnline.ordersToEod;
-  if (totalLocalUpdates > 0) {
-    setUpdateOrders(true);
+    });
+    return;
   }
 
   return (
