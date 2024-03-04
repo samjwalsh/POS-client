@@ -7,8 +7,9 @@ import useKeypad from '../Reusables/Keypad.jsx';
 import playBeep from '../../tools/playBeep.js';
 import useConfirm from '../Reusables/ConfirmDialog.jsx';
 import useAlert from '../Reusables/Alert.jsx';
-import { addOrder, getAllOrders } from '../../tools/ipc.js';
-const useReconciller = (orders, setOrders, stats) => {
+import { addOrder } from '../../tools/ipc.js';
+const useReconciller = (props) => {
+  const { cashTotal, cardTotal } = props;
   const [promise, setPromise] = useState(null);
   const [reconcileAmt, setReconcileAmt] = useState({
     card: 0,
@@ -18,9 +19,13 @@ const useReconciller = (orders, setOrders, stats) => {
   const [Confirm, confirm] = useConfirm();
   const [Alert, alert] = useAlert();
 
-  const Reconciller = () =>
+  const [mode, setMode] = useState();
+
+  const Reconciller = (mode, cashTotal, cardTotal) =>
     new Promise((resolve, reject) => {
       setPromise({ resolve });
+      if (mode === 'X') setReconcileAmt({ cash: cashTotal, card: cardTotal });
+      setMode(mode);
     });
 
   const handleClose = () => {
@@ -29,6 +34,7 @@ const useReconciller = (orders, setOrders, stats) => {
       card: 0,
       cash: 0,
     });
+    setMode();
   };
 
   const handleClickClose = () => {
@@ -40,6 +46,7 @@ const useReconciller = (orders, setOrders, stats) => {
   const handleSetValue = async (type) => {
     playBeep();
     const value = await keypad();
+    if (typeof value !== 'number') return;
     if (value < 0) return;
     if (type === 'card') {
       setReconcileAmt({
@@ -55,27 +62,26 @@ const useReconciller = (orders, setOrders, stats) => {
   };
 
   const handleReconcile = async () => {
-    const totalCard = stats.cardTotal;
-    const totalCash = stats.cashTotal;
+    console.log(Math.abs(reconcileAmt.card - cardTotal));
 
-    if (Math.abs(reconcileAmt.card - totalCard) >= 0.005) {
+    if (Math.abs(reconcileAmt.card - cardTotal) >= 0.005) {
       addOrder(
         [
           {
             name: 'Reconcilliation Balance Adjustment',
-            price: reconcileAmt.card - totalCard,
+            price: reconcileAmt.card - cardTotal,
             quantity: 1,
           },
         ],
         'Card'
       );
     }
-    if (Math.abs(reconcileAmt.cash - totalCash) >= 0.005) {
+    if (Math.abs(reconcileAmt.cash - cashTotal) >= 0.005) {
       addOrder(
         [
           {
             name: 'Reconcilliation Balance Adjustment',
-            price: reconcileAmt.cash - totalCash,
+            price: reconcileAmt.cash - cashTotal,
             quantity: 1,
           },
         ],
@@ -99,8 +105,10 @@ const useReconciller = (orders, setOrders, stats) => {
           </div>
         </div>
         <div className='text-xl font-light'>
-          Enter the total amount of cash and card for the day. This must match
-          the totals written on the day sheet.
+          {mode === 'Z'
+            ? `Enter the total amount of cash and card for the day. This must match
+          the totals written on the day sheet.`
+            : `Enter the total amount of cash and card made so far.`}
         </div>
         <div className='w-full border-b bc'></div>
         <div className='flex flex-row justify-between'>
@@ -126,7 +134,7 @@ const useReconciller = (orders, setOrders, stats) => {
         <div className='w-full border-b bc'></div>
 
         <div className='flex flex-row justify-between title'>
-          <div className='cnter'>Z-Total:</div>
+          <div className='cnter'>{mode}-Total:</div>
           <div className='cnter'>
             €{(reconcileAmt.cash + reconcileAmt.card).toFixed(2)}
           </div>
@@ -135,7 +143,7 @@ const useReconciller = (orders, setOrders, stats) => {
         <div
           className='w-full btn h-full btn-primary text-lg'
           onAuxClick={(e) => handleReconcile()}
-          onTouchEnd={(e) => handleReconcile()}>{`Record Z-Total as €${(
+          onTouchEnd={(e) => handleReconcile()}>{`Record ${mode}-Total as €${(
           reconcileAmt.card + reconcileAmt.cash
         ).toFixed(2)}`}</div>
       </div>

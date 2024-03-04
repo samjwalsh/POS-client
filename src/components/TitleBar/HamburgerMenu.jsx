@@ -13,7 +13,7 @@ import useDisableTouch from '../Reusables/DisableTouch.jsx';
 import { getVersionNo, log } from '../../tools/ipc';
 
 export default function HamburgerMenu(props) {
-  const { hamburgerOpen, setHamburger, setAppState, order, setOrder } = props;
+  const { hamburgerOpen, setHamburger, setAppState, order, setOrder, setUpdateOrders } = props;
 
   const [Dialog, confirm] = useConfirm('Exit?');
 
@@ -79,7 +79,7 @@ export default function HamburgerMenu(props) {
 
   return (
     <>
-      <TitleBar setHamburger={setHamburger} />
+      <TitleBar setHamburger={setHamburger} setUpdateOrders={setUpdateOrders}/>
       <Keypad />
       <Dialog />
       <DisableTouch />

@@ -9,6 +9,9 @@ import enterSVG from '../../assets/appicons/enter.svg';
 
 import playBeep from '../../tools/playBeep';
 
+const currLimit = 7;
+const passLimit = 10;
+
 const useKeypad = () => {
   const [promise, setPromise] = useState(null);
   const [keypadState, setkeypadState] = useState({
@@ -50,7 +53,7 @@ const useKeypad = () => {
 
     switch (button) {
       case 'exit': {
-        handleClose(0);
+        handleClose(false);
         break;
       }
       case 'minus': {
@@ -78,25 +81,24 @@ const useKeypad = () => {
         break;
       }
       case 'enter': {
-        if (keypadState.value.length === 0) handleClose(0);
-        else if (keypadState.numberFormat === 'currency') {
+        if (keypadState.numberFormat === 'currency') {
           let keypadValue = parseInt(keypadState.value) / 100;
           if (keypadState.sign === '-') {
             keypadValue *= -1;
           }
-          handleClose(keypadValue);
+          handleClose(isNaN(keypadValue) ? 0 : keypadValue);
         } else if (keypadState.numberFormat === 'passcode') {
           let keypadValue = parseInt(keypadState.value);
           if (keypadState.sign === '-') {
             keypadValue *= -1;
           }
-          handleClose(keypadValue);
+          handleClose(isNaN(keypadValue) ? 0 : keypadValue);
         }
         break;
       }
       case '00': {
         if (
-          keypadState.value.length >= 5 ||
+          keypadState.value.length >= (currLimit - 1) ||
           keypadState.value === '' ||
           keypadState.value === '0'
         ) {
@@ -111,7 +113,7 @@ const useKeypad = () => {
       }
       case '0': {
         if (
-          keypadState.value.length >= 6 ||
+          keypadState.value.length >= currLimit ||
           keypadState.value === '' ||
           keypadState.value === '0'
         ) {
@@ -127,7 +129,7 @@ const useKeypad = () => {
       default: {
         if (
           keypadState.numberFormat === 'currency' &&
-          keypadState.value.length === 6
+          keypadState.value.length === currLimit
         ) {
           break;
         }

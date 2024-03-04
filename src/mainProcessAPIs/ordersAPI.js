@@ -55,6 +55,13 @@ export const getOrderStats = () => {
     const order = orders[currOrder];
     currOrder++;
     if (order.deleted || order.eod || order.shop !== shop) continue;
+
+    if (order.paymentMethod === 'Card') {
+      cardTotal += order.subtotal;
+    } else {
+      cashTotal += order.subtotal;
+    }
+
     quantityOrders++;
 
     if (underRRCutoff) {
@@ -68,11 +75,7 @@ export const getOrderStats = () => {
       // This stops the expensive check of dates once an order outside of the date range is reached
     }
 
-    if (order.paymentMethod === 'Card') {
-      cardTotal += order.subtotal;
-    } else {
-      cashTotal += order.subtotal;
-    }
+
     var currItem = 0,
       itemsLength = order.items.length;
     while (currItem < itemsLength) {
@@ -156,6 +159,8 @@ ipcMain.handle('addOrder', async (e, args) => {
     items.forEach((item) => {
       subtotal += item.price * item.quantity;
     });
+
+    subtotal = parseFloat(subtotal.toFixed(2));
 
     const order = {
       id: generateID(),

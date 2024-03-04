@@ -308,7 +308,7 @@ const useKeyboard = () => {
           {!title ? (
             ''
           ) : (
-            <div className='title bg-base-100 p-2 border bc'>{title}</div>
+            <div className='title bg-base-100 p-4 border bc'>{title}</div>
           )}
         </div>
         <div className='row-span-4 col-span-1 border-t bc'>

@@ -14,7 +14,7 @@ import { getAllOrders, printOrder, getSetting } from '../../tools/ipc.js';
 import useConfirm from '../Reusables/ConfirmDialog.jsx';
 
 export default function TitleBar(props) {
-  const { setHamburger, order, setOrder } = props;
+  const { setHamburger, order, setOrder, setUpdateOrders } = props;
   const [ListSelect, chooseOption] = useListSelect();
   const [Confirm, confirm] = useConfirm();
   const [VoucherCreator, voucherCreator] = useVoucherCreator(order, setOrder);
@@ -83,7 +83,7 @@ export default function TitleBar(props) {
           <div className='flex flex-row gap-1 h-12 font-bold'>
             <PrinterConnection />
             <Connection />
-            <ServerConnection />
+            <ServerConnection setUpdateOrder={setUpdateOrders} />
             <Clock />
           </div>
         </div>

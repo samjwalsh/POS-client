@@ -22,6 +22,7 @@ import OrdersStats from './OrdersStats.jsx';
 import Wait from '../Reusables/Wait.jsx';
 
 export default function Reports(props) {
+  const { updateOrders, setUpdateOrders } = props;
   const [orders, setOrders] = useState([]);
   const [stats, setStats] = useState({
     cashTotal: 0,
@@ -34,7 +35,7 @@ export default function Reports(props) {
   const [ready, setReady] = useState(false);
 
   const [Dialog, confirm] = useConfirm();
-  const [Reconciller, reconcile] = useReconciller(orders, setOrders, stats);
+  const [Reconciller, reconcile] = useReconciller(stats);
 
   const [Alert, alert] = useAlert();
 
@@ -42,6 +43,22 @@ export default function Reports(props) {
     (() => {
       refreshOrders();
     })();
+  }, []);
+
+  // This checks if the orders need to be refreshed based on what the server sent back
+
+  useEffect(() => {
+    const updateOrdersInterval = setInterval(() => {
+      console.log('check...');
+      if (updateOrders) {
+        console.log('and updated');
+        setUpdateOrders(false);
+        refreshOrders();
+      }
+    }, 1000);
+    return () => {
+      clearInterval(updateOrdersInterval);
+    };
   }, []);
 
   async function refreshOrders() {
@@ -64,7 +81,7 @@ export default function Reports(props) {
       "This will print an end of day sheet and upload all of today's orders to the cloud.",
     ]);
     if (!choice) return;
-    const hasReconciled = await reconcile();
+    const hasReconciled = await reconcile('Z');
     if (!hasReconciled) return;
 
     await refreshOrders();
@@ -111,6 +128,11 @@ export default function Reports(props) {
     );
   }
 
+  async function reconcileTotals() {
+    await reconcile('X', stats.cashTotal, stats.cardTotal);
+    await refreshOrders();
+  }
+
   return (
     <>
       <Dialog />
@@ -141,29 +163,35 @@ export default function Reports(props) {
             <OrdersStats stats={stats} />
             <div className='mt-auto px-2 flex flex-col gap-2'>
               <div
+                className='btn-secondary btn text-lg h-12 p-2 w-full'
+                onAuxClick={reconcileTotals}
+                onTouchEnd={reconcileTotals}>
+                Update Totals
+              </div>
+              <div
                 className='btn-neutral btn text-lg h-12 p-2 w-full'
-                onAuxClick={() => refreshOrders()}
-                onTouchEnd={() => refreshOrders()}>
+                onAuxClick={refreshOrders}
+                onTouchEnd={refreshOrders}>
                 Refresh Orders & Totals
               </div>
               <div className='flex flex-row w-full gap-2 h-12'>
                 <div
                   className='btn btn-warning text-lg h-auto flex-grow'
-                  onAuxClick={() => handleDeleteOldOrders()}
-                  onTouchEnd={() => handleDeleteOldOrders()}>
+                  onAuxClick={handleDeleteOldOrders}
+                  onTouchEnd={handleDeleteOldOrders}>
                   Delete Old Orders
                 </div>
                 <div
                   className='btn-primary btn'
-                  onAuxClick={() => handleDeleteOldOrdersHelp()}
-                  onTouchEnd={() => handleDeleteOldOrdersHelp()}>
+                  onAuxClick={handleDeleteOldOrdersHelp}
+                  onTouchEnd={handleDeleteOldOrdersHelp}>
                   <img src={infoSVG} className='w-6 icon' />
                 </div>
               </div>
               <div
                 className='btn-error btn text-lg  p-2 w-full h-12'
-                onAuxClick={() => handleEndOfDay()}
-                onTouchEnd={() => handleEndOfDay()}>
+                onAuxClick={handleEndOfDay}
+                onTouchEnd={handleEndOfDay}>
                 End Of Day
               </div>
             </div>

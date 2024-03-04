@@ -21,7 +21,7 @@ const root = ReactDOM.createRoot(domNode);
 })();
 
 function App() {
-  const [appState, setAppState] = useState('Register');
+  const [appState, setAppState] = useState('Reports');
 
   const [menuState, setMenuState] = useState('');
   const [currentOrder, setCurrentOrder] = useState('');
@@ -29,19 +29,21 @@ function App() {
 
   const [hamburgerOpen, setHamburgerOpen] = useState(false);
 
+  const [updateOrders, setUpdateOrders] = useState(false);
+
   const [settings, setSettings] = useState();
 
   return (
     <div className='flex flex-col h-screen'>
-
-        <HamburgerMenu
-          hamburgerOpen={hamburgerOpen}
-          setHamburger={setHamburgerOpen}
-          appState={appState}
-          setAppState={setAppState}
-          order={order}
-          setOrder={setOrder}
-        />
+      <HamburgerMenu
+        hamburgerOpen={hamburgerOpen}
+        setHamburger={setHamburgerOpen}
+        appState={appState}
+        setAppState={setAppState}
+        order={order}
+        setOrder={setOrder}
+        setUpdateOrders={setUpdateOrders}
+      />
 
       <div className='overflow-y-hidden h-full'>
         {(() => {
@@ -57,7 +59,12 @@ function App() {
               />
             );
           } else if (appState === 'Reports') {
-            return <Reports />;
+            return (
+              <Reports
+                updateOrders={updateOrders}
+                setUpdateOrders={setUpdateOrders}
+              />
+            );
           } else if (appState === 'Settings') {
             return <Settings settings={settings} setSettings={setSettings} />;
           }

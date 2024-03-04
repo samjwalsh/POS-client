@@ -7,7 +7,7 @@ let syncFrequency;
   syncFrequency = (await getSetting('Sync Frequency')) * 1000;
 })();
 
-export default function ServerConnection() {
+export default function ServerConnection({ setUpdateOrders }) {
   const [isOnline, setIsOnline] = useState({
     status: true,
     ping: 0,
@@ -55,6 +55,12 @@ export default function ServerConnection() {
       shop,
       till: await getSetting('Till Number'),
     };
+  }
+
+  const totalLocalUpdates =
+    isOnline.ordersToAdd + isOnline.ordersToDelete + isOnline.ordersToEod;
+  if (totalLocalUpdates > 0) {
+    setUpdateOrders(true);
   }
 
   return (
