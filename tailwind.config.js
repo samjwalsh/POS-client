@@ -83,7 +83,7 @@
           summer: {
           primary: '#51A1F8',
           'primary-content': '#000',
-          secondary: '#b4c2cb',
+          secondary: '#c9d6dc',
           'secondary-content': '#000',
           neutral: '#8eced4',
           'neutral-content': '#000',
