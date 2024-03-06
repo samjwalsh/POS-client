@@ -21,6 +21,7 @@ import playBeep from '../../tools/playBeep.js';
 import { OrderBox } from './OrderBox.jsx';
 import OrdersStats from './OrdersStats.jsx';
 import Wait from '../Reusables/Wait.jsx';
+import { cF, nF } from '../../tools/numbers.js';
 
 export default function Reports(props) {
   const { updateOrders, setUpdateOrders } = props;
@@ -42,7 +43,7 @@ export default function Reports(props) {
 
   useEffect(() => {
     (() => {
-        refreshOrders();
+      refreshOrders();
     })();
   }, []);
 
@@ -236,31 +237,31 @@ const createEodHTML = async () => {
       </div>
       <div className='flex flex-row justify-between font-bold'>
         <div>Cash:</div>
-        <div>{`€${cashTotal.toFixed(2)}`}</div>
+        <div>{cF(cashTotal)}</div>
       </div>
       <div className='flex flex-row justify-between font-bold'>
         <div>Card:</div>
-        <div>{`€${cardTotal.toFixed(2)}`}</div>
+        <div>{cF(cardTotal)}</div>
       </div>
       <div className='flex flex-row justify-between font-bold'>
         <div>Total:</div>
-        <div>{`€${xTotal.toFixed(2)}`}</div>
+        <div>{cF(xTotal)}</div>
       </div>
       <div className='flex flex-row justify-between'>
         <div>Vat Total:</div>
-        <div>{`€${(0.23 * xTotal).toFixed(2)}`}</div>
+        <div>{cF(0.23 * xTotal)}</div>
       </div>
       <div className='flex flex-row justify-between'>
         <div>Total Items:</div>
-        <div>{quantityItems}</div>
+        <div>{nF(quantityItems)}</div>
       </div>
       <div className='flex flex-row justify-between'>
         <div>Total Orders:</div>
-        <div>{quantityOrders}</div>
+        <div>{nF(quantityOrders)}</div>
       </div>
       <div className='flex flex-row justify-between'>
         <div>Average Sale:</div>
-        <div>{`€${averageSale.toFixed(2)}`}</div>
+        <div>{cF(averageSale)}</div>
       </div>
       <div className='flex flex-row justify-between'>
         <div>Time</div>

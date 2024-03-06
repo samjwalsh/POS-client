@@ -8,6 +8,7 @@ import playBeep from '../../tools/playBeep.js';
 import useConfirm from '../Reusables/ConfirmDialog.jsx';
 import useAlert from '../Reusables/Alert.jsx';
 import { addOrder } from '../../tools/ipc.js';
+import { cF } from '../../tools/numbers.js';
 const useReconciller = (props) => {
   const { cashTotal, cardTotal } = props;
   const [promise, setPromise] = useState(null);
@@ -115,7 +116,7 @@ const useReconciller = (props) => {
             className='btn btn-neutral text-lg'
             onAuxClick={() => handleSetValue('cash')}
             onTouchEnd={() => handleSetValue('cash')}>
-            €{reconcileAmt.cash.toFixed(2)}
+            {cF(reconcileAmt.cash)}
             <img src={dropdownSVG} className='w-6 icon' />
           </div>
         </div>
@@ -125,7 +126,7 @@ const useReconciller = (props) => {
             className='btn btn-neutral text-lg'
             onAuxClick={() => handleSetValue('card')}
             onTouchEnd={() => handleSetValue('card')}>
-            €{reconcileAmt.card.toFixed(2)}
+            {cF(reconcileAmt.card)}
             <img src={dropdownSVG} className='w-6 icon' />
           </div>
         </div>
@@ -134,16 +135,14 @@ const useReconciller = (props) => {
         <div className='flex flex-row justify-between title'>
           <div className='cnter'>{mode}-Total:</div>
           <div className='cnter'>
-            €{(reconcileAmt.cash + reconcileAmt.card).toFixed(2)}
+            {cF(reconcileAmt.cash + reconcileAmt.card)}
           </div>
         </div>
         <div className='w-full border-b bc'></div>
         <div
           className='w-full btn h-full btn-primary text-lg'
           onAuxClick={(e) => handleReconcile()}
-          onTouchEnd={(e) => handleReconcile()}>{`Record ${mode}-Total as €${(
-          reconcileAmt.card + reconcileAmt.cash
-        ).toFixed(2)}`}</div>
+          onTouchEnd={(e) => handleReconcile()}>{`Record ${mode}-Total as ${cF(reconcileAmt.card + reconcileAmt.cash)}`}</div>
       </div>
     );
   };

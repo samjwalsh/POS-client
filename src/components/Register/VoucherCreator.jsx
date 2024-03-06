@@ -9,6 +9,7 @@ import { createVouchers, printVouchers } from '../../tools/ipc.js';
 import useConfirm from '../Reusables/ConfirmDialog.jsx';
 import useAlert from '../Reusables/Alert.jsx';
 import Wait from '../Reusables/Wait.jsx';
+import { cF } from '../../tools/numbers.js';
 const useVoucherCreator = (order, setOrder) => {
   const [promise, setPromise] = useState(null);
   const [voucherState, setVoucherState] = useState({
@@ -147,8 +148,8 @@ const useVoucherCreator = (order, setOrder) => {
           });
           await alert(
             <div className='flex flex-col overflow-y-hidden'>
-              <div>{`Write the vouchers manually using the codes. Each voucher is for €${voucherResult.vouchers[0].value.toFixed(
-                2
+              <div>{`Write the vouchers manually using the codes. Each voucher is for ${cF(
+                voucherResult.vouchers[0].value
               )}. Don't forget to sign each one and date it.`}</div>
               {vouchersHTML}
             </div>
@@ -204,10 +205,9 @@ const useVoucherCreator = (order, setOrder) => {
               className='btn btn-neutral text-lg'
               onAuxClick={(e) => handleSetValue()}
               onTouchEnd={(e) => handleSetValue()}>
-              €
               {voucherState.value == undefined
                 ? 'Enter'
-                : voucherState.value.toFixed(2)}
+                : cF(voucherState.value)}
               <img src={dropdownSVG} className='w-6 icon' />
             </div>
           </div>
@@ -216,7 +216,7 @@ const useVoucherCreator = (order, setOrder) => {
           <div className='flex flex-row justify-between title'>
             <div className='cnter'>Total Cost:</div>
             <div className='cnter'>
-              €{(voucherState.value * voucherState.quantity).toFixed(2)}
+              {cF(voucherState.value * voucherState.quantity)}
             </div>
           </div>
           <div className='w-full border-b bc'></div>
@@ -227,9 +227,7 @@ const useVoucherCreator = (order, setOrder) => {
             voucherState.quantity
           } voucher${
             voucherState.quantity !== 1 ? 's' : ''
-          } for €${voucherState.value.toFixed(2)} totalling €${(
-            voucherState.quantity * voucherState.value
-          ).toFixed(2)}`}</div>
+          } for ${cF(voucherState.value)} totalling ${cF(voucherState.quantity * voucherState.value)}`}</div>
         </div>
       );
     } else {

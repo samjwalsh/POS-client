@@ -20,6 +20,10 @@ export const log = async (errMsg, note, objsOfInterest) => {
       objsOfInterest,
       errMsg,
     };
+    if (errMsg.includes('timeout') || errMsg.includes("ETIMEDOUT")) {
+      // Stops the huge quantity of timeout errors on dev when testing server functions
+      return;
+    }
     let res = await axios({
       method: 'get',
       url: `${https ? 'https' : 'http'}://${syncServer}/api/sendLog`,

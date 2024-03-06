@@ -14,6 +14,7 @@ import useKeypad from '../Reusables/Keypad.jsx';
 import useAlert from '../Reusables/Alert.jsx';
 import OrderItem from '../Reusables/OrderItem.jsx';
 import useConfirm from '../Reusables/ConfirmDialog.jsx';
+import { cF } from '../../tools/numbers.js';
 
 export default function Order(props) {
   const { order, setOrder } = props;
@@ -157,7 +158,7 @@ export default function Order(props) {
           <div className='row-span-1 col-span-1 flex justify-between w-full text-2xl'>
             <div className='text-left'>Total:</div>
             <div className='text-right num justify-end'>
-              €{subtotal.toFixed(2)}
+              {cF(subtotal)}
             </div>
           </div>
           <div className='row-span-1 col-span-1 flex gap-2 items-stretch h-20 text-2xl'>

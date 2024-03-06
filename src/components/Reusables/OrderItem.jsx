@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { cF } from '../../tools/numbers';
 
 export default function OrderItem({ orderItem, index }) {
   return (
@@ -9,7 +10,7 @@ export default function OrderItem({ orderItem, index }) {
             (orderItem.quantity > 1 ? ` (${orderItem.quantity})` : '')}
         </div>
         <div className=' text-right num font-bold'>
-          €{(orderItem.price * orderItem.quantity).toFixed(2)}
+          {cF(orderItem.price * orderItem.quantity)}
         </div>
       </div>
       <div className='flex flex-row justify-between'>
@@ -17,7 +18,7 @@ export default function OrderItem({ orderItem, index }) {
           {orderItem.addons === undefined ? '' : orderItem.addons.join(', ')}
         </div>
         <div className='text-right num text-sm whitespace-nowrap'>
-          €{orderItem.price.toFixed(2)} EA
+          {cF(orderItem.price)} EA
         </div>
       </div>
     </div>

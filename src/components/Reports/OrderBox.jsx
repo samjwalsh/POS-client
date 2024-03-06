@@ -16,6 +16,7 @@ import {
 } from '../../tools/ipc.js';
 
 import { calculateDateString } from './Reports.jsx';
+import { cF } from '../../tools/numbers.js';
 
 export function OrderBox({ order, setOrders, setReady, setStats }) {
   const orderDateString = calculateDateString(order.time);
@@ -29,9 +30,7 @@ export function OrderBox({ order, setOrders, setReady, setStats }) {
       `Delete order?`,
       'Cancel',
       'Delete',
-      `Delete this order for €${deletedOrder.subtotal.toFixed(
-        2
-      )}, this action cannot be undone.`,
+      `Delete this order for ${cF(deletedOrder.subtotal)}, this action cannot be undone.`,
     ]);
     if (!choice) return;
 
@@ -103,7 +102,7 @@ export function OrderBox({ order, setOrders, setReady, setStats }) {
           </div>
           <div className='flex flex-row justify-between'>
             Subtotal:
-            <div className='num'>€{order.subtotal.toFixed(2)}</div>
+            <div className='num'>{cF(order.subtotal)}</div>
           </div>
           <div className='flex flex-row justify-between'>
             <div className=''>Payment:</div>

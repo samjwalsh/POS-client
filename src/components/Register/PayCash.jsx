@@ -7,6 +7,7 @@ import useAlert from '../Reusables/Alert.jsx';
 
 import playBeep from '../../tools/playBeep';
 import { addOrder, openCashDrawer } from '../../tools/ipc';
+import { cF } from '../../tools/numbers.js';
 
 export default function PayCash(props) {
   const { order, setOrder, setPayCash, keypad } = props;
@@ -102,7 +103,7 @@ export default function PayCash(props) {
         </div>
         <div className='flex justify-between w-full text-2xl pt-1'>
           Change:
-          <div className='text-right num justify-end'>€{change.toFixed(2)}</div>
+          <div className='text-right num justify-end'>{cF(change)}</div>
         </div>
       </div>
     </>

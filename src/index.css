@@ -31,6 +31,11 @@ body {
   /* @apply invert z-0; */
 }
 
+.menuicon {
+  @apply z-0 opacity-50;
+  /* @apply invert z-0; */
+}
+
 .menu-itm {
   @apply btn w-48 h-32 flex-grow flex p-2 text-left justify-start items-end text-4xl text-neutral-content mb-2;
 }

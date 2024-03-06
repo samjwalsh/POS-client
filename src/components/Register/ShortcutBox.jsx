@@ -2,6 +2,7 @@ import * as React from 'react';
 
 import { handleAddToOrder } from './ItemPage.jsx';
 import playBeep from '../../tools/playBeep';
+import { cF } from '../../tools/numbers.js';
 
 export default function ShortcutBox({
   shortcut,
@@ -54,7 +55,7 @@ export default function ShortcutBox({
         key={shortcut.name}>
         <div className='title'>{shortcut.name}</div>
         <div>
-          <div className='num text-lg'>€{shortcut.price.toFixed(2)}</div>
+          <div className='num text-lg'>{cF(shortcut.price)}</div>
           <div className='text-lg'>{addonsString}</div>
         </div>
       </div>

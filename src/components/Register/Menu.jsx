@@ -64,7 +64,7 @@ export default function Menu(props) {
           ) : (
             <div className='h-full w-full flex flex-col justify-between'>
               <div className='ml-auto'>
-                <img src={item.icon} className='w-12 icon' />
+                {/* <img src={item.icon} className='w-12 menuicon' /> */}
               </div>
               {item.name}
             </div>

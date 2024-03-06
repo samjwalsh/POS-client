@@ -2,6 +2,7 @@ const { ipcMain } = require('electron');
 const Store = require('electron-store');
 import { getOrderStats } from './ordersAPI';
 import { log } from './loggingAPI';
+import { cF } from '../tools/numbers';
 const settingsStore = new Store();
 const {
   ThermalPrinter,
@@ -77,12 +78,8 @@ ipcMain.handle('printVouchers', async (e, vouchers) => {
     const printer = createPrinter();
 
     for (const voucher of vouchers) {
-      printHeader(printer);
+      printHeader(printer, 'Voucher');
 
-      printer.alignCenter();
-      printer.setTextQuadArea();
-      printer.println('VOUCHER');
-      printer.setTextNormal();
       printer.println("To be redeemed at any Teddy's outlet");
       printer.drawLine();
       printer.setTextQuadArea();
@@ -108,21 +105,32 @@ ipcMain.handle('printVouchers', async (e, vouchers) => {
   }
 });
 
-const printHeader = (printer) => {
+const printHeader = (printer, title) => {
   printer.bold(true);
 
   printer.alignCenter();
   printer.setTextQuadArea();
   printer.underlineThick(true);
+
   printer.println("Teddy's Ice Cream");
   printer.underlineThick(false);
+
   printer.setTextNormal();
+
   printer.newLine();
+
   printer.println('1a Windsor Terrace');
   printer.println('Dún Laoghaire');
   printer.println('Co. Dublin');
-  printer.alignLeft();
+
   printer.drawLine();
+
+  printer.setTextQuadArea();
+  printer.println(title);
+  printer.drawLine();
+
+  printer.setTextNormal();
+  printer.alignLeft();
 };
 
 ipcMain.handle('printOrder', async (e, order) => {
@@ -131,7 +139,7 @@ ipcMain.handle('printOrder', async (e, order) => {
     const printer = createPrinter();
 
     // MUST SET USB002 PORT ON PRINTER PROPERTIES IN WINDOWS
-    printHeader(printer);
+    printHeader(printer, 'Receipt');
 
     let quantityItems = 0;
     let total = 0;
@@ -140,7 +148,7 @@ ipcMain.handle('printOrder', async (e, order) => {
       let price = item.price * item.quantity;
       quantityItems += item.quantity;
       total += price;
-      printer.leftRight(item.name, `€${price.toFixed(2)}`);
+      printer.leftRight(item.name, cF(price));
       // Create the addon string if addons are present
       if (item.addons !== undefined && item.addons.length > 0) {
         let addonsString = 'Addons: ';
@@ -155,7 +163,7 @@ ipcMain.handle('printOrder', async (e, order) => {
       }
       // Show each price if quantity > 1
       if (item.quantity > 1) {
-        printer.println(`${item.quantity} @ €${item.price.toFixed(2)}`);
+        printer.println(`${item.quantity} @ ${cF(item.price)}`);
       }
       // Draw a divider
       if (!(index + 1 === order.items.length)) {
@@ -165,8 +173,8 @@ ipcMain.handle('printOrder', async (e, order) => {
 
     printer.drawLine();
     printer.setTextQuadArea();
-    printer.leftRight('Total:', `€${total.toFixed(2)}`);
-    printer.leftRight('VAT Total:', `€${(0.23 * total).toFixed(2)}`);
+    printer.leftRight('Total:', cF(total));
+    printer.leftRight('VAT Total:', cF(0.23 * total));
     printer.setTextNormal();
     printer.newLine();
     printer.leftRight('Paid By:', order.paymentMethod);
@@ -215,15 +223,7 @@ ipcMain.handle('printEndOfDay', async (e, orders) => {
     const printer = createPrinter();
 
     // MUST SET USB002 PORT ON PRINTER PROPERTIES IN WINDOWS
-    printHeader(printer);
-
-    printer.alignCenter();
-    printer.setTextQuadArea();
-    printer.underlineThick(false);
-    printer.println('End Of Day');
-    printer.setTextNormal();
-    printer.drawLine();
-    printer.setTextDoubleWidth();
+    printHeader(printer, 'End Of Day');
 
     let shopName = '';
     let tillNo = '';
@@ -262,20 +262,20 @@ ipcMain.handle('printEndOfDay', async (e, orders) => {
     } = getOrderStats();
 
     printer.setTextDoubleWidth();
-    printer.leftRight('Cash:', `€${cashTotal.toFixed(2)}`);
+    printer.leftRight('Cash:', cF(cashTotal));
     printer.newLine();
-    printer.leftRight('Card:', `€${cardTotal.toFixed(2)}`);
+    printer.leftRight('Card:', cF(cardTotal));
     printer.newLine();
     printer.setTextQuadArea();
-    printer.leftRight('Total:', `€${xTotal.toFixed(2)}`);
+    printer.leftRight('Total:', cF(xTotal));
     printer.newLine();
     printer.setTextDoubleWidth();
-    printer.leftRight('VAT Total:', `€${(0.23 * xTotal).toFixed(2)}`);
+    printer.leftRight('VAT Total:', cF(0.23 * xTotal));
     printer.setTextNormal();
     printer.newLine();
     printer.leftRight('Total Items:', quantityItems);
     printer.leftRight('Total Orders:', quantityOrders);
-    printer.leftRight('Average Sale:', `€${averageSale.toFixed(2)}`);
+    printer.leftRight('Average Sale:', cF(averageSale));
     printer.newLine();
     printer.leftRight('Time:', calculateDateString(new Date().getTime()));
 

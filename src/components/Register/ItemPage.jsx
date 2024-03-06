@@ -8,6 +8,7 @@ import ShortcutBox from './ShortcutBox.jsx';
 
 import addSVG from '../../assets/appicons/add.svg';
 import minusSVG from '../../assets/appicons/minus.svg';
+import { cF } from '../../tools/numbers.js';
 
 export default function ItemPage({
   menuState,
@@ -166,7 +167,7 @@ export default function ItemPage({
               <img src={addSVG} className='w-6 icon' />
             </div>
           </div>
-          <div className='text-2xl w-full h-auto num cnter'>€{price}</div>
+          <div className='text-2xl w-full h-auto num cnter'>{cF(price)}</div>
           <div
             className='btn btn-primary text-xl h-full positive w-48'
             onAuxClick={() =>

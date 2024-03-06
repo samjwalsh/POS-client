@@ -2,6 +2,7 @@ import * as React from 'react';
 
 import playBeep from '../../tools/playBeep';
 import checkSVG from '../../assets/appicons/check.svg';
+import { cF } from '../../tools/numbers';
 
 export default function AddonBox({
   addon,
@@ -27,7 +28,7 @@ export default function AddonBox({
         <div className='flex-grow flex flex-row justify-between p-2 btn-neutral btn h-full'>
           <div className='flex flex-row gap-2'>
             <div className='text-xl cnter'>{addon.name}</div>
-            <div className='num cnter'>€{addon.price.toFixed(2)}</div>
+            <div className='num cnter'>{cF(addon.price)}</div>
           </div>
           <div className='cnter h-full'>
             {addon.selected ? (

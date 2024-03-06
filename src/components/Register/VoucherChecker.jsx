@@ -6,6 +6,7 @@ import useKeyboard from '../Reusables/textInput.jsx';
 import playBeep from '../../tools/playBeep.js';
 import { checkVoucher } from '../../tools/ipc.js';
 import useAlert from '../Reusables/Alert.jsx';
+import { cF } from '../../tools/numbers.js';
 const useVoucherChecker = (order, setOrder) => {
   const [promise, setPromise] = useState(null);
   const [clickable, setClickable] = useState(true);
@@ -72,7 +73,7 @@ const useVoucherChecker = (order, setOrder) => {
       alertHTML.push(addToAlertHTML('Shop Redeemed', res.voucher.shopRedeemed));
     }
 
-    alertHTML.push(addToAlertHTML('Value', '€' + res.voucher.value.toFixed(2)));
+    alertHTML.push(addToAlertHTML('Value', cF(res.voucher.value)));
     alertHTML.push(addToAlertHTML('Code', res.voucher.code.toUpperCase()));
 
     await alert(<div className='flex flex-col w-full'>{alertHTML}</div>);

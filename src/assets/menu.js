@@ -25,6 +25,7 @@ export const menu = [
   {
     name: 'Cone',
     price: 2.5,
+    icon: require('../assets/menuicons/ice-cream-cone.svg'),
     shortcuts: [
       {
         name: 'Plain Cone',
@@ -111,6 +112,7 @@ export const menu = [
   {
     name: "Kid's Cone",
     price: 2.3,
+    icon: require('../assets/menuicons/ice-cream-cone.svg'),
     shortcuts: [
       {
         name: "Kid's Cone",
@@ -196,6 +198,8 @@ export const menu = [
   {
     name: 'Extras',
     type: 'category',
+    icon: require('../assets/menuicons/extras.png'),
+
     items: [
       {
         name: 'Extra Flake',
@@ -222,10 +226,10 @@ export const menu = [
       { name: 'Extra Chocolate Dip', price: 1.5 },
     ],
   },
-
   {
     name: 'Pink Tub',
     price: 2.5,
+    icon: require('../assets/menuicons/ice-cream-tub.png'),
     modifiers: [
       {
         name: 'Flake',
@@ -285,6 +289,7 @@ export const menu = [
   {
     name: "Kid's Tub",
     price: 2.3,
+    icon: require('../assets/menuicons/ice-cream-tub.png'),
     shortcuts: [
       {
         name: "Kid's Tub",
@@ -364,6 +369,7 @@ export const menu = [
   {
     type: 'category',
     name: 'Tubs',
+    icon: require('../assets/menuicons/ice-cream-cup.png'),
     items: [
       {
         name: 'Orange Tub',
@@ -674,6 +680,7 @@ export const menu = [
   {
     name: 'Toys',
     type: 'category',
+    icon: require('../assets/menuicons/toys.png'),
     items: [
       {
         name: 'Small Spade & Bucket',
@@ -712,6 +719,7 @@ export const menu = [
   {
     type: 'category',
     name: 'Cold Drinks',
+    icon: require('../assets/menuicons/soft-drink.png'),
     items: [
       {
         name: 'Ribena',
@@ -796,6 +804,7 @@ export const menu = [
   {
     name: 'Hot Drinks',
     type: 'category',
+    icon: require('../assets/menuicons/coffee-cup.png'),
     items: [
       {
         name: 'Tea',
@@ -849,6 +858,7 @@ export const menu = [
   {
     name: 'Sweets',
     type: 'category',
+    icon: require('../assets/menuicons/candy.png'),
     items: [
       {
         name: 'Quarter of Sweets',
@@ -883,6 +893,7 @@ export const menu = [
   {
     name: 'Chocolate Bars',
     type: 'category',
+    icon: require('../assets/menuicons/chocolate-bar.png'),
     items: [
       {
         name: 'Standard Chocolate Bar',
@@ -897,6 +908,7 @@ export const menu = [
   {
     name: 'Crisps, Popcorn & Candyfloss',
     type: 'category',
+    icon: require('../assets/menuicons/snack.png'),
     items: [
       {
         name: 'Tayto',
