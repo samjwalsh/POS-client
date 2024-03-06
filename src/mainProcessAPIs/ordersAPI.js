@@ -69,12 +69,11 @@ export const getOrderStats = () => {
         const delay = Date.now() - new Date(order.time);
         const weight = (-2 * delay) / (60 * 60 * 1000) + 2;
         rollingRevenue += weight * order.subtotal;
+      } else {
+        underRRCutoff = false;
+        // This stops the expensive check of dates once an order outside of the date range is reached
       }
-    } else {
-      underRRCutoff = false;
-      // This stops the expensive check of dates once an order outside of the date range is reached
     }
-
 
     var currItem = 0,
       itemsLength = order.items.length;
