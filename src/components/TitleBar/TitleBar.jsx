@@ -52,7 +52,7 @@ export default function TitleBar(props) {
       <VoucherRedeemer />
       <VoucherChecker />
       <ListSelect />
-      <div className='flex flex-row justify-between h-16 px-2 border-b bc cnter'>
+      <div className='flex flex-row justify-between h-16 px-2 border-b bc cnter drag'>
         <div
           className=' btn btn-primary text-lg'
           onAuxClick={(e) => handleClickHamburger(setHamburger)}

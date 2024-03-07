@@ -14,6 +14,8 @@ const createWindow = () => {
   const mainWindow = new BrowserWindow({
     width: 1024,
     height: 600,
+    titleBarStyle: 'hidden',
+    frame: false,
     backgroundColor: '#b4b7bf',
     webPreferences: {
       nodeIntegration: true,

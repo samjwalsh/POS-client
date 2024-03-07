@@ -16,6 +16,7 @@ export const settingsSchema = [
         type: 'dropdown',
         value: 'summer',
         list: [
+          'IBM Carbon',
           'emerald',
           'summer',
           'teddys',
