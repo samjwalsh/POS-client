@@ -7,6 +7,7 @@ import playBeep from '../../tools/playBeep.js';
 import { checkVoucher } from '../../tools/ipc.js';
 import useAlert from '../Reusables/Alert.jsx';
 import { cF } from '../../tools/numbers.js';
+import Button from '../Reusables/Button.jsx';
 const useVoucherChecker = (order, setOrder) => {
   const [promise, setPromise] = useState(null);
   const [clickable, setClickable] = useState(true);
@@ -94,24 +95,21 @@ const useVoucherChecker = (order, setOrder) => {
       return (
         <div className='w-96 flex flex-col gap-2 text-2xl p-4 border bc background rounded-box'>
           <div className='flex flex-row justify-between '>
-            <div className='title cnter'>Voucher Checker</div>
-            <div
-              className='btn btn-error text-lg'
-              onAuxClick={(event) => handleClickClose()}
-              onTouchEnd={(event) => handleClickClose()}>
+            <div className='title mt-auto pb-1'>Voucher Checker</div>
+            <Button type='danger' className='w-20' onClick={handleClickClose}>
               Cancel
-            </div>
+            </Button>
           </div>
           <div className='w-full border-b bc'></div>
           <div className='flex flex-row justify-between'>
             <div className='cnter'>Code:</div>
-            <div
-              className='btn btn-primary text-lg'
-              onAuxClick={(e) => handleEnterCode()}
-              onTouchEnd={(e) => handleEnterCode()}>
+            <Button
+              type='primary'
+              className=''
+              icon={dropdownSVG}
+              onClick={handleEnterCode}>
               Enter Code
-              <img src={dropdownSVG} className='w-6 icon' />
-            </div>
+            </Button>
           </div>
         </div>
       );

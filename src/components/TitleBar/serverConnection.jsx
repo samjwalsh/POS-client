@@ -65,7 +65,7 @@ export default function ServerConnection(props) {
 
   return (
     <div
-      className={`flex flex-row text-sm h-full p-1 rounded-btn border bc
+      className={`flex flex-row text-sm h-full p-1 rounded-btn border bc text-error-content
        ${isOnline.status ? 'bg-success' : 'bg-error'}`}>
       <div className='grid grid-rows-2 grid-cols-1'>
         <div className='row-span-1 col-span-1 text-center'>SRV</div>

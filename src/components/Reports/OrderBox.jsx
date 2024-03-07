@@ -17,6 +17,7 @@ import {
 
 import { calculateDateString } from './Reports.jsx';
 import { cF } from '../../tools/numbers.js';
+import Button from '../Reusables/Button.jsx';
 
 export function OrderBox({ order, setOrders, setReady, setStats }) {
   const orderDateString = calculateDateString(order.time);
@@ -30,7 +31,9 @@ export function OrderBox({ order, setOrders, setReady, setStats }) {
       `Delete order?`,
       'Cancel',
       'Delete',
-      `Delete this order for ${cF(deletedOrder.subtotal)}, this action cannot be undone.`,
+      `Delete this order for ${cF(
+        deletedOrder.subtotal
+      )}, this action cannot be undone.`,
     ]);
     if (!choice) return;
 
@@ -57,7 +60,7 @@ export function OrderBox({ order, setOrders, setReady, setStats }) {
       ]);
       if (!choice) return;
       await swapPaymentMethod(order);
-      
+
       setReady(false);
       setOrders(await getAllOrders());
       setStats(await getOrderStats());
@@ -69,26 +72,21 @@ export function OrderBox({ order, setOrders, setReady, setStats }) {
       <ListSelect />
       <Dialog />
       <div className='orderbox border bc flex max-h-96 flex-col rounded-box'>
-        <div className='flex flex-row w-full p-2 justify-between border-b bc'>
-          <div
-            className=' btn btn-primary text-lg'
-            onAuxClick={(e) => handlePrintReceipt(order)}
-            onTouchEnd={(e) => handlePrintReceipt(order)}>
+        <div className='flex flex-row w-full p-2 justify-between border-b bc '>
+          <Button type='primary' onClick={() => handlePrintReceipt(order)}>
             Receipt
-          </div>
+          </Button>
           <div className='flex flex-row gap-2'>
-            <div
-              className='btn-neutral btn'
-              onAuxClick={(e) => handleEditOrder(order)}
-              onTouchEnd={(e) => handleEditOrder(order)}>
-              <img src={editSVG} className='w-6 icon' />
-            </div>
-            <div
-              className='btn-error btn'
-              onAuxClick={(e) => handleDeleteOrder(order)}
-              onTouchEnd={(e) => handleDeleteOrder(order)}>
-              <img src={closeSVG} className='w-6 icon' />
-            </div>
+            <Button
+              type='secondary'
+              className='aspect-square'
+              onClick={() => handleEditOrder(order)}
+              icon={editSVG}></Button>
+            <Button
+              type='danger'
+              className='aspect-square'
+              onClick={(e) => handleDeleteOrder(order)}
+              icon={closeSVG}></Button>
           </div>
         </div>
         <div className='flex flex-col p-2 border-b bc text-lg'>

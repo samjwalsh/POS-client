@@ -9,6 +9,7 @@ import ShortcutBox from './ShortcutBox.jsx';
 import addSVG from '../../assets/appicons/add.svg';
 import minusSVG from '../../assets/appicons/minus.svg';
 import { cF } from '../../tools/numbers.js';
+import Button from '../Reusables/Button.jsx';
 
 export default function ItemPage({
   menuState,
@@ -77,27 +78,18 @@ export default function ItemPage({
     <>
       <Alert />
       <div className='flex flex-col h-full content-start'>
-        <div className='grid grid-cols-2 grid-rows-1 h-min p-2 border-b bc'>
-          <div className='col-span-1 text-left w-auto h-full whitespace-nowrap mt-2 title'>
-            {menuState.name}
-          </div>
-          <div className='col-span-1 text-right self-end justify-self-end flex flex-row gap-4'>
-            <button
-              className='whitespace-nowrap text-lg btn btn-primary'
-              onAuxClick={() => handleClickHelp()}
-              onTouchEnd={() => handleClickHelp()}>
+        <div className='flex flex-row justify-between h-min p-2 border-b bc'>
+          <div className='title pb-1 mt-auto'>{menuState.name}</div>
+          <div className='flex flex-row gap-2'>
+            <Button type='ghost' className='w-20' onClick={handleClickHelp}>
               Help
-            </button>
-            <button
-              className='col-span-1 text-right self-end justify-self-end w-min h-min whitespace-nowrap p-2 text-lg btn btn-error'
-              onAuxClick={() =>
-                handleExitItemPage(setMenuState, setCurrentOrder)
-              }
-              onTouchEnd={() =>
-                handleExitItemPage(setMenuState, setCurrentOrder)
-              }>
+            </Button>
+            <Button
+              type='danger'
+              className='w-20'
+              onClick={() => handleExitItemPage(setMenuState, setCurrentOrder)}>
               Cancel
-            </button>
+            </Button>
           </div>
         </div>
         <div className='w-full h-full flex-grow flex flex-col '>
@@ -135,52 +127,33 @@ export default function ItemPage({
         </div>
         <div className='w-full flex flex-row mt-auto gap-2 p-2 h-16 border-t bc'>
           <div className='flex flex-row '>
-            <div
-              className='w-14 h-auto cnter btn btn-error '
-              onAuxClick={() =>
+            <Button
+              type='danger'
+              icon={minusSVG}
+              className='aspect-square'
+              onClick={() =>
                 handleChangeQuantity(
                   item,
                   currentOrder,
                   setCurrentOrder,
                   'down'
                 )
-              }
-              onTouchEnd={() =>
-                handleChangeQuantity(
-                  item,
-                  currentOrder,
-                  setCurrentOrder,
-                  'down'
-                )
-              }>
-              <img src={minusSVG} className='w-6 icon' />
-            </div>
+              }></Button>
             <div className=' w-16 h-auto num cnter text-2xl'>{quantity}</div>
-            <div
-              className='btn btn-success w-14 h-auto cnter'
-              onAuxClick={() =>
+            <Button
+              type='success'
+              icon={addSVG}
+              className='aspect-square'
+              onClick={() =>
                 handleChangeQuantity(item, currentOrder, setCurrentOrder, 'up')
-              }
-              onTouchEnd={() =>
-                handleChangeQuantity(item, currentOrder, setCurrentOrder, 'up')
-              }>
-              <img src={addSVG} className='w-6 icon' />
-            </div>
+              }></Button>
           </div>
           <div className='text-2xl w-full h-auto num cnter'>{cF(price)}</div>
-          <div
-            className='btn btn-primary text-xl h-full positive w-48'
-            onAuxClick={() =>
-              handleAddToOrder(
-                item,
-                setMenuState,
-                currentOrder,
-                setCurrentOrder,
-                order,
-                setOrder
-              )
-            }
-            onTouchEnd={() =>
+          <Button
+          type='primary'
+          className='w-72'
+          size='large'
+            onClick={() =>
               handleAddToOrder(
                 item,
                 setMenuState,
@@ -191,7 +164,7 @@ export default function ItemPage({
               )
             }>
             Add
-          </div>
+          </Button>
         </div>
       </div>
     </>

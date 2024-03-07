@@ -21,7 +21,7 @@ export default function OrdersStats({ stats }) {
         <div className=''>Card:</div>
         <div className='num text-right justify-end '>{cF(cardTotal)}</div>
       </div>
-      <div className='flex flex-row w-full justify-between pb-2 font-bold'>
+      <div className='flex flex-row w-full justify-between pb-2 font-bold '>
         <div className=''>X-Total:</div>
         <div className='num text-right justify-end'>{cF(xTotal)}</div>
       </div>

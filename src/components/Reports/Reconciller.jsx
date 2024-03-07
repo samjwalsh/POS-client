@@ -6,6 +6,7 @@ import useKeypad from '../Reusables/Keypad.jsx';
 
 import playBeep from '../../tools/playBeep.js';
 import useConfirm from '../Reusables/ConfirmDialog.jsx';
+import Button from '../Reusables/Button.jsx';
 import useAlert from '../Reusables/Alert.jsx';
 import { addOrder } from '../../tools/ipc.js';
 import { cF } from '../../tools/numbers.js';
@@ -95,15 +96,12 @@ const useReconciller = (props) => {
     return (
       <div className='w-96 flex flex-col gap-2 text-2xl p-4 border bc'>
         <div className='flex flex-row justify-between'>
-          <div className=' cnter mt-2 title'>Reconcile Totals</div>
-          <div
-            className='btn btn-error text-lg'
-            onAuxClick={() => handleClickClose()}
-            onTouchEnd={() => handleClickClose()}>
+          <div className='title mt-auto pb-1'>Reconcile Totals</div>
+          <Button type='danger' className='w-20' onClick={handleClickClose}>
             Cancel
-          </div>
+          </Button>
         </div>
-        <div className='text-xl font-light'>
+        <div className='text-base font-normal'>
           {mode === 'Z'
             ? `Enter the total amount of cash and card for the day. This must match
           the totals written on the day sheet.`
@@ -112,23 +110,17 @@ const useReconciller = (props) => {
         <div className='w-full border-b bc'></div>
         <div className='flex flex-row justify-between'>
           <div className='cnter'>Total Cash:</div>
-          <div
-            className='btn btn-neutral text-lg'
-            onAuxClick={() => handleSetValue('cash')}
-            onTouchEnd={() => handleSetValue('cash')}>
+          <Button type='secondary' onClick={() => handleSetValue('cash')}>
             {cF(reconcileAmt.cash)}
-            <img src={dropdownSVG} className='w-6 icon' />
-          </div>
+            <img src={dropdownSVG} className='w-8 icon icon-secondary' />
+          </Button>
         </div>
         <div className='flex flex-row justify-between'>
           <div className='cnter'>Total Card:</div>
-          <div
-            className='btn btn-neutral text-lg'
-            onAuxClick={() => handleSetValue('card')}
-            onTouchEnd={() => handleSetValue('card')}>
+          <Button type='secondary' onClick={() => handleSetValue('card')}>
             {cF(reconcileAmt.card)}
-            <img src={dropdownSVG} className='w-6 icon' />
-          </div>
+            <img src={dropdownSVG} className='w-8 icon icon-secondary' />
+          </Button>
         </div>
         <div className='w-full border-b bc'></div>
 
@@ -139,10 +131,11 @@ const useReconciller = (props) => {
           </div>
         </div>
         <div className='w-full border-b bc'></div>
-        <div
-          className='w-full btn h-full btn-primary text-lg'
-          onAuxClick={(e) => handleReconcile()}
-          onTouchEnd={(e) => handleReconcile()}>{`Record ${mode}-Total as ${cF(reconcileAmt.card + reconcileAmt.cash)}`}</div>
+        <Button
+          type='primary'
+          onClick={handleReconcile}>{`Record ${mode}-Total as ${cF(
+          reconcileAmt.card + reconcileAmt.cash
+        )}`}</Button>
       </div>
     );
   };

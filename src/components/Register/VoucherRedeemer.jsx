@@ -8,6 +8,7 @@ import { redeemVoucher } from '../../tools/ipc.js';
 import useAlert from '../Reusables/Alert.jsx';
 import { handleAddToOrder } from './ItemPage.jsx';
 import Wait from '../Reusables/Wait.jsx';
+import Button from '../Reusables/Button.jsx';
 const useVoucherRedeemer = (order, setOrder) => {
   const [promise, setPromise] = useState(null);
   const [clickable, setClickable] = useState(true);
@@ -85,23 +86,20 @@ const useVoucherRedeemer = (order, setOrder) => {
             <div className=' cnter whitespace-nowrap pr-2 title'>
               Voucher Redeemer
             </div>
-            <div
-              className='btn btn-error text-lg'
-              onAuxClick={(event) => handleClickClose()}
-              onTouchEnd={(event) => handleClickClose()}>
+            <Button type='danger' className='w-20' onClick={handleClickClose}>
               Cancel
-            </div>
+            </Button>
           </div>
           <div className='w-full border-b bc'></div>
           <div className='flex flex-row justify-between'>
             <div className='cnter'>Code:</div>
-            <div
-              className='btn btn-primary text-lg'
-              onAuxClick={(e) => handleEnterCode()}
-              onTouchEnd={(e) => handleEnterCode()}>
+            <Button
+              type='primary'
+              className=''
+              icon={dropdownSVG}
+              onClick={handleEnterCode}>
               Enter Code
-              <img src={dropdownSVG} className='w-6 icon' />
-            </div>
+            </Button>
           </div>
         </div>
       );

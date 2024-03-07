@@ -22,6 +22,7 @@ import { OrderBox } from './OrderBox.jsx';
 import OrdersStats from './OrdersStats.jsx';
 import Wait from '../Reusables/Wait.jsx';
 import { cF, nF } from '../../tools/numbers.js';
+import Button from '../Reusables/Button.jsx';
 
 export default function Reports(props) {
   const { updateOrders, setUpdateOrders } = props;
@@ -156,38 +157,26 @@ export default function Reports(props) {
           <div className='flex flex-col h-full'>
             <OrdersStats stats={stats} />
             <div className='mt-auto px-2 flex flex-col gap-2'>
-              <div
-                className='btn-neutral btn text-lg h-12 p-2 w-full'
-                onAuxClick={reconcileTotals}
-                onTouchEnd={reconcileTotals}>
+              <Button onClick={reconcileTotals} type='primary'>
                 Update Totals
-              </div>
-              {/* <div
-                className='btn-neutral btn text-lg h-12 p-2 w-full'
-                onAuxClick={refreshOrders}
-                onTouchEnd={refreshOrders}>
-                Refresh Orders & Totals
-              </div> */}
+              </Button>
+
               <div className='flex flex-row w-full gap-2 h-12'>
-                <div
-                  className='btn btn-warning text-lg h-auto flex-grow'
-                  onAuxClick={handleDeleteOldOrders}
-                  onTouchEnd={handleDeleteOldOrders}>
+                <Button
+                  type='danger-tertiary'
+                  className='flex-grow'
+                  onClick={handleDeleteOldOrders}>
                   Delete Old Orders
-                </div>
-                <div
-                  className='btn-secondary btn'
-                  onAuxClick={handleDeleteOldOrdersHelp}
-                  onTouchEnd={handleDeleteOldOrdersHelp}>
-                  <img src={infoSVG} className='w-6 icon' />
-                </div>
+                </Button>
+                <Button
+                  type='ghost'
+                  className='aspect-square w-12'
+                  onClick={handleDeleteOldOrdersHelp}
+                  icon={infoSVG}></Button>
               </div>
-              <div
-                className='btn-error btn text-lg  p-2 w-full h-12'
-                onAuxClick={handleEndOfDay}
-                onTouchEnd={handleEndOfDay}>
+              <Button type='danger' onClick={handleEndOfDay}>
                 End Of Day
-              </div>
+              </Button>
             </div>
           </div>
         </div>

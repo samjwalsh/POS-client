@@ -3,6 +3,7 @@ import * as React from 'react';
 import { handleAddToOrder } from './ItemPage.jsx';
 import playBeep from '../../tools/playBeep';
 import { cF } from '../../tools/numbers.js';
+import Button from '../Reusables/Button.jsx';
 
 export default function ShortcutBox({
   shortcut,
@@ -28,37 +29,27 @@ export default function ShortcutBox({
       addonsString = 'No Addons';
     }
     return (
-      <div
-        className='btn btn-primary basis-1 flex-grow h-auto flex flex-col justify-between p-2'
-        onAuxClick={() =>
-          handleClickShortcut(
-            item,
-            setMenuState,
-            currentOrder,
-            setCurrentOrder,
-            order,
-            setOrder,
-            addons
-          )
-        }
-        onTouchEnd={() =>
-          handleClickShortcut(
-            item,
-            setMenuState,
-            currentOrder,
-            setCurrentOrder,
-            order,
-            setOrder,
-            addons
-          )
-        }
-        key={shortcut.name}>
-        <div className='title'>{shortcut.name}</div>
-        <div>
+      <Button
+      onClick={() =>
+        handleClickShortcut(
+          item,
+          setMenuState,
+          currentOrder,
+          setCurrentOrder,
+          order,
+          setOrder,
+          addons
+        )
+      }
+      type='primary'
+      className='basis-1 flex-grow flex flex-col justify-between p-2'
+      key={shortcut.name}>
+        <div className='w-full text-3xl'>{shortcut.name}</div>
+        <div className='w-full mt-auto'>
           <div className='num text-lg'>{cF(shortcut.price)}</div>
           <div className='text-lg'>{addonsString}</div>
         </div>
-      </div>
+      </Button>
     );
   }
 }

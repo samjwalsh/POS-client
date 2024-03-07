@@ -4,6 +4,7 @@ import { useState } from 'react';
 import infoSVG from '../../assets/appicons/info.svg';
 
 import useAlert from '../Reusables/Alert.jsx';
+import Button from '../Reusables/Button.jsx';
 
 import playBeep from '../../tools/playBeep';
 import { addOrder, openCashDrawer } from '../../tools/ipc';
@@ -56,52 +57,57 @@ export default function PayCash(props) {
       <div className='flex flex-col h-full p-2 pb-1'>
         <div className='grid grid-cols-2 grid-rows-5 gap-2 h-full flex-grow'>
           <div className='col-span-2 row-span-1 flex h-auto flex-row gap-2'>
-            <div
-              className=' btn btn-secondary h-auto text-2xl flex-grow '
-              onAuxClick={() => handleButtonPress('custom')}
-              onTouchEnd={() => handleButtonPress('custom')}>
+            <Button
+              type='secondary'
+              className='w-full'
+              size='large'
+              onClick={() => handleButtonPress('custom')}>
               Custom
-            </div>
-            <div
-              className='btn-primary btn h-auto aspect-square'
-              onAuxClick={(e) => handlePayCashHelp()}
-              onTouchEnd={(e) => handlePayCashHelp()}>
-              <img src={infoSVG} className='w-6 icon' />
-            </div>
+            </Button>
+            <Button
+              type='ghost'
+              icon={infoSVG}
+              className='aspect-square'
+              onClick={handlePayCashHelp}></Button>
           </div>
-          <div
-            className='col-span-1 row-span-1 num btn btn-neutral h-auto text-2xl'
-            onAuxClick={() => handleButtonPress(50)}
-            onTouchEnd={() => handleButtonPress(50)}>
+          <Button
+            type='tertiary'
+            size='large'
+            className='col-span-1 row-span-1'
+            onClick={() => handleButtonPress(50)}>
             €50
-          </div>
-          <div
-            className='col-span-1 row-span-1 num btn btn-neutral h-auto text-2xl'
-            onAuxClick={() => handleButtonPress(20)}
-            onTouchEnd={() => handleButtonPress(20)}>
+          </Button>
+          <Button
+            type='tertiary'
+            size='large'
+            className='col-span-1 row-span-1'
+            onClick={() => handleButtonPress(20)}>
             €20
-          </div>
-          <div
-            className='col-span-1 row-span-1 num btn btn-neutral h-auto text-2xl'
-            onAuxClick={() => handleButtonPress(10)}
-            onTouchEnd={() => handleButtonPress(10)}>
+          </Button>
+          <Button
+            type='tertiary'
+            size='large'
+            className='col-span-1 row-span-1'
+            onClick={() => handleButtonPress(10)}>
             €10
-          </div>
-          <div
-            className='col-span-1 row-span-1 num btn btn-neutral h-auto text-2xl'
-            onAuxClick={() => handleButtonPress(5)}
-            onTouchEnd={() => handleButtonPress(5)}>
+          </Button>
+          <Button
+            type='tertiary'
+            size='large'
+            className='col-span-1 row-span-1'
+            onClick={() => handleButtonPress(5)}>
             €5
-          </div>
+          </Button>
 
-          <div
-            className='col-span-2 row-span-2 btn btn-primary h-auto text-2xl'
-            onAuxClick={() => handleButtonPress('exit')}
-            onTouchEnd={() => handleButtonPress('exit')}>
+          <Button
+            type='primary'
+            size='large'
+            className='col-span-2 row-span-2'
+            onClick={() => handleButtonPress('exit')}>
             Done
-          </div>
+          </Button>
         </div>
-        <div className='flex justify-between w-full text-2xl pt-1'>
+        <div className='flex justify-between w-full text-2xl pt-1 px-1'>
           Change:
           <div className='text-right num justify-end'>{cF(change)}</div>
         </div>

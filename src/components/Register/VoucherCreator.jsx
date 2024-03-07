@@ -10,6 +10,7 @@ import useConfirm from '../Reusables/ConfirmDialog.jsx';
 import useAlert from '../Reusables/Alert.jsx';
 import Wait from '../Reusables/Wait.jsx';
 import { cF } from '../../tools/numbers.js';
+import Button from '../Reusables/Button.jsx';
 const useVoucherCreator = (order, setOrder) => {
   const [promise, setPromise] = useState(null);
   const [voucherState, setVoucherState] = useState({
@@ -178,38 +179,29 @@ const useVoucherCreator = (order, setOrder) => {
       return (
         <div className='w-96 flex flex-col gap-2 text-2xl p-4 border bc  background rounded-box'>
           <div className='flex flex-row justify-between'>
-            <div className=' cnter mt-2 title'>Voucher Creator</div>
-            <div
-              className='btn btn-error text-lg'
-              onAuxClick={(event) => handleClickClose()}
-              onTouchEnd={(event) => handleClickClose()}>
+            <div className='title mt-auto pb-1'>Voucher Creator</div>
+            <Button type='danger' className='w-20' onClick={handleClickClose}>
               Cancel
-            </div>
+            </Button>
           </div>
           <div className='w-full border-b bc'></div>
           <div className='flex flex-row justify-between'>
             <div className='cnter'>Quantity:</div>
-            <div
-              className='btn btn-neutral text-lg'
-              onAuxClick={(e) => handleSetQuantity()}
-              onTouchEnd={(e) => handleSetQuantity()}>
-              {voucherState.quantity == undefined
-                ? 'Enter'
-                : voucherState.quantity}
-              <img src={dropdownSVG} className='w-6 icon' />
-            </div>
+            <Button
+              type='secondary'
+              onClick={handleSetQuantity}
+              icon={dropdownSVG}>
+              {voucherState.quantity <= 0 ? 'Enter' : voucherState.quantity}
+            </Button>
           </div>
           <div className='flex flex-row justify-between'>
             <div className='cnter'>Value:</div>
-            <div
-              className='btn btn-neutral text-lg'
-              onAuxClick={(e) => handleSetValue()}
-              onTouchEnd={(e) => handleSetValue()}>
-              {voucherState.value == undefined
-                ? 'Enter'
-                : cF(voucherState.value)}
-              <img src={dropdownSVG} className='w-6 icon' />
-            </div>
+            <Button
+              type='secondary'
+              onClick={handleSetValue}
+              icon={dropdownSVG}>
+              {voucherState.value <= 0 ? 'Enter' : cF(voucherState.value)}
+            </Button>
           </div>
           <div className='w-full border-b bc'></div>
 
@@ -220,14 +212,13 @@ const useVoucherCreator = (order, setOrder) => {
             </div>
           </div>
           <div className='w-full border-b bc'></div>
-          <div
-            className='w-full btn h-full btn-primary text-lg'
-            onAuxClick={(e) => handleCreateVouchers()}
-            onTouchEnd={(e) => handleCreateVouchers()}>{`Create ${
+          <Button type='primary' onClick={handleCreateVouchers}>{`Create ${
             voucherState.quantity
-          } voucher${
-            voucherState.quantity !== 1 ? 's' : ''
-          } for ${cF(voucherState.value)} totalling ${cF(voucherState.quantity * voucherState.value)}`}</div>
+          } voucher${voucherState.quantity !== 1 ? 's' : ''} for ${cF(
+            voucherState.value
+          )} totalling ${cF(
+            voucherState.quantity * voucherState.value
+          )}`}</Button>
         </div>
       );
     } else {
