@@ -16,6 +16,7 @@
         // mono: ['TS Riccione'],
         // emoji: ['Segoe UI Emoji'],
         sans: ['Forma DJR Micro'],
+        sans: ['IBM Plex Sans'],
         mono: ['IBM Plex Mono'],
         emoji: ['Segoe UI Emoji'],
       },
