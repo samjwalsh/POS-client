@@ -80,13 +80,17 @@ export function OrderBox({ order, setOrders, setReady, setStats }) {
             <Button
               type='secondary'
               className='aspect-square'
+              center={true}
               onClick={() => handleEditOrder(order)}
-              icon={editSVG}></Button>
+              icon={editSVG}
+              iconSize={6}></Button>
             <Button
               type='danger'
               className='aspect-square'
               onClick={(e) => handleDeleteOrder(order)}
-              icon={closeSVG}></Button>
+              center={true}
+              icon={closeSVG}
+              iconSize={6}></Button>
           </div>
         </div>
         <div className='flex flex-col p-2 border-b bc text-lg'>

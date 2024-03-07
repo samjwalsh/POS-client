@@ -1,11 +1,22 @@
 import React from 'react';
 
-const Button = ({ children, type, className, onClick, icon, size, center }) => {
+const Button = ({
+  children,
+  type,
+  className,
+  onClick,
+  icon,
+  size,
+  center,
+  iconSize,
+}) => {
+  if (!iconSize) iconSize = 8;
   let classes = '';
   if (!center) {
     classes = 'dBtn ';
   } else {
-    classes = 'cnter justify-center items-center ';
+    classes =
+      'flex p-2 text-left min-h-[3rem] cnter justify-center items-center ';
   }
 
   switch (size) {
@@ -57,15 +68,12 @@ const Button = ({ children, type, className, onClick, icon, size, center }) => {
       className={classes + ' ' + className}
       onAuxClick={onClick}
       onTouchEnd={onClick}>
-      {children ? (
-        <>
-          {children}
-          <div className='pr-2'></div>
-        </>
+      {children ? <>{children}</> : ''}
+      {icon ? (
+        <img src={icon} className={`w-${iconSize} icon icon-${type}`} />
       ) : (
         ''
       )}
-      {icon ? <img src={icon} className={`w-8 icon icon-${type}`} /> : ''}
     </button>
   );
 };

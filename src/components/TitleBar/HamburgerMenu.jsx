@@ -116,6 +116,8 @@ export default function HamburgerMenu(props) {
               type='danger'
               className='aspect-square'
               onClick={() => handleCloseSideMenu(setHamburger)}
+              center={true}
+              iconSize={6}
               icon={closeSVG}></Button>
           </div>
           <div className='border-b bc px-2'></div>
