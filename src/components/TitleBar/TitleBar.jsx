@@ -69,19 +69,21 @@ export default function TitleBar(props) {
             Menu
           </Button>
           <div className='w-[25rem]'></div>
-          <Button
-            type='primary'
-            className='w-32 h-full'
-            onClick={handlePrintRecentOrder}>
-            Print Receipt
-          </Button>
-          <div className='cnter h-10 mr-2'></div>
-          <Button
-            type='secondary'
-            className='w-32 h-full'
-            onClick={handleClickVoucherMenu}>
-            Vouchers
-          </Button>
+          <div className='flex flex-row gap-[1px]'>
+            {' '}
+            <Button
+              type='primary'
+              className='w-32 h-full'
+              onClick={handlePrintRecentOrder}>
+              Print Receipt
+            </Button>
+            <Button
+              type='secondary'
+              className='w-32 h-full'
+              onClick={handleClickVoucherMenu}>
+              Vouchers
+            </Button>
+          </div>
         </div>
         {/* <HelpPageButton/> */}
         <div className='flex flex-row h-full items-center justify-end'>

@@ -167,7 +167,7 @@ export default function Reports(props) {
                 Update Totals
               </Button>
 
-              <div className='flex flex-row w-full gap-2 h-12'>
+              <div className='flex flex-row w-full gap-[1px] h-12'>
                 <Button
                   type='danger-tertiary'
                   className='flex-grow'

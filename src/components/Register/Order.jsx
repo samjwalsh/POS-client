@@ -125,7 +125,7 @@ export default function Order(props) {
   let orderItems = order.map((orderItem, index) => {
     return (
       <div
-        className='flex flex-row h-min  w-full max-w-full gap-0'
+        className='flex flex-row h-min w-full max-w-full gap-[1px]'
         key={`${orderItem.name} [${orderItem.addons}]`}>
         <Button
           type='danger'
@@ -172,7 +172,7 @@ export default function Order(props) {
             <div className='text-left'>Total:</div>
             <div className='text-right num justify-end'>{cF(subtotal)}</div>
           </div>
-          <div className='row-span-1 col-span-1 flex gap-2 items-stretch h-20 text-2xl'>
+          <div className='row-span-1 col-span-1 flex gap-[1px] items-stretch h-20 text-2xl'>
             {payCash === true ? (
               <Button
                 type='danger'

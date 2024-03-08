@@ -56,7 +56,7 @@ export default function PayCash(props) {
       <Alert />
       <div className='flex flex-col h-full p-2 pb-1'>
         <div className='grid grid-cols-2 grid-rows-5 gap-2 h-full flex-grow'>
-          <div className='col-span-2 row-span-1 flex h-auto flex-row gap-2'>
+          <div className='col-span-2 row-span-1 flex h-auto flex-row gap-[1px]'>
             <Button
               type='secondary'
               className='w-full'

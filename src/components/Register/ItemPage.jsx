@@ -68,7 +68,7 @@ export default function ItemPage({
           </div>
         </div>
         <div className='w-full h-full flex-grow flex flex-col '>
-          <div className='flex flex-row gap-2 flex-grow border-b bc p-2 max-h-[14rem] min-h-[10rem]'>
+          <div className='flex flex-row gap-[1px] flex-grow border-b bc p-2 max-h-[14rem] min-h-[10rem]'>
             {item.shortcuts.map((shortcut) => {
               return (
                 <ShortcutBox
@@ -84,7 +84,7 @@ export default function ItemPage({
               );
             })}
           </div>
-          <div className='flex flex-row flex-wrap gap-2 p-2 overflow-y-scroll no-scrollbar'>
+          <div className='flex flex-row flex-wrap gap-[1px] p-2 overflow-y-scroll no-scrollbar'>
             {item.addons.map((addon, index) => {
               return (
                 <AddonBox
