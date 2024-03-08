@@ -61,16 +61,14 @@ export default function TitleBar(props) {
       <VoucherChecker />
       <ListSelect />
       <div className='flex flex-row justify-between h-16 border-b bc cnter drag'>
-        <div className='flex flex-row h-full w-full justify-start'>
+        <div className='flex flex-row h-full w-full justify-between'>
           <Button
             type='primary'
             className='w-20 h-full'
             onClick={(e) => handleClickHamburger(setHamburger)}>
             Menu
           </Button>
-          <div className='w-[25rem]'></div>
           <div className='flex flex-row gap-[1px]'>
-            {' '}
             <Button
               type='primary'
               className='w-32 h-full'
@@ -83,6 +81,7 @@ export default function TitleBar(props) {
               onClick={handleClickVoucherMenu}>
               Vouchers
             </Button>
+            <div className='w-20'></div>
           </div>
         </div>
         {/* <HelpPageButton/> */}

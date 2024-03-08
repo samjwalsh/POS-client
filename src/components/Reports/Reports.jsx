@@ -128,6 +128,7 @@ export default function Reports(props) {
   }
 
   async function reconcileTotals() {
+    playBeep();
     await reconcile('X', stats.cashTotal, stats.cardTotal);
     await refreshOrders();
   }

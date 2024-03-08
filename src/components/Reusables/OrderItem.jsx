@@ -13,7 +13,7 @@ export default function OrderItem({ orderItem, index }) {
           {cF(orderItem.price * orderItem.quantity)}
         </div>
       </div>
-      <div className='flex flex-row justify-between text-base'>
+      <div className='flex flex-row justify-between text-sm'>
         <div className='pr-4'>
           {orderItem.addons === undefined ? '' : orderItem.addons.join(', ')}
         </div>

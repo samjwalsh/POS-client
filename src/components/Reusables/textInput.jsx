@@ -11,7 +11,7 @@ const TextInput = ({ value, onClick, dim }) => {
       onAuxClick={onClick}
       onTouchEnd={onClick}>
       <div className='cnter'>{value}</div>
-      <img src={lettersSVG} className='h-full' />
+      <img src={lettersSVG} className='h-full aspect-square w-8' />
     </div>
   );
 };

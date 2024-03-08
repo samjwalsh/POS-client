@@ -11,7 +11,7 @@ const NumberInput = ({ value, onClick, dim }) => {
       onAuxClick={onClick}
       onTouchEnd={onClick}>
       <div className='cnter'>{value}</div>
-      <img src={euroSVG} className='h-full' />
+      <img src={euroSVG} className='h-full aspect-square w-8' />
     </div>
   );
 };
