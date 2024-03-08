@@ -35,11 +35,11 @@ export default function Connection() {
 
   return (
     <div
-      className={`grid grid-rows-2 grid-cols-1 text-sm h-full p-1 border text-error-content bc rounded-btn bg${
+      className={`flex flex-col justify-between h-full p-1 text-error-content bg${
         isOnline.status ? '-success' : '-error'
       }`}>
-      <div className='row-span-1 col-span-1'>NET</div>
-      <div className='row-span-1 col-span-1 num'>
+      <div>NET</div>
+      <div className='num'>
         {isOnline.status ? `${String(isOnline.ping).padStart(3, '0')} ` : '---'}
       </div>
     </div>

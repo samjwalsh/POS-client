@@ -3,7 +3,7 @@ import { cF } from '../../tools/numbers';
 
 export default function OrderItem({ orderItem, index }) {
   return (
-    <div className='w-full min-h-[3.5rem] flex flex-col justify-between text-base py-1 px-2 text-base-content bg-base-200'>
+    <div className='w-full min-h-[3.5rem] flex flex-col justify-between text-base py-1 px-2 bg-secondary text-secondary-content'>
       <div className='flex flex-row justify-between text-lg'>
         <div className='pr-1'>
           {orderItem.name +

@@ -77,7 +77,7 @@
         ],
       },
       spacing: {
-        2: '0.5rem',
+        2: '.5rem',
       },
     },
   },
@@ -105,13 +105,14 @@
           '--btn-text-case': 'uppercase',
           '--navbar-padding': '0rem',
           '--border-btn': '0px',
-          'base-100': '#fff',
-          'base-200': '#e0e0e0',
+          'base-100': '#ffffff',
+          'base-200': '#f4f4f4',
+          'base-300': '#ffffff',
           'base-content': '#000',
         },
       },
       {
-        'IBM Carbon Dark': {
+        Carbon: {
           primary: '#0043ce',
           'primary-content': '#fff',
           secondary: '#262626',
@@ -134,7 +135,7 @@
           '--border-btn': '0px',
           'base-100': '#161616',
           'base-200': '#262626',
-          'base-content': '#000',
+          'base-content': '#fff',
         },
       },
       {

@@ -46,7 +46,7 @@ export default function PayCash(props) {
   }
 
   async function handlePayCashHelp() {
-    await alert(
+    await alert('Change Calculator',
       `You can use the buttons labelled with 5, 10, 20 and 50 euro to calculate your change, or press custom and key in an amount. You don't have to use these buttons if you already know what the change is. Press done to finish the transaction.`
     );
   }

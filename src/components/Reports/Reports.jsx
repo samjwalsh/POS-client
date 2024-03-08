@@ -69,12 +69,15 @@ export default function Reports(props) {
 
   async function handleEndOfDay() {
     playBeep();
-    const choice = await confirm([
-      'End of day?',
-      'Cancel',
-      'Continue',
-      "This will print an end of day sheet and upload all of today's orders to the cloud.",
-    ]);
+    const choice = await confirm(
+      [
+        'End of day?',
+        'Cancel',
+        'Continue',
+        "This will print an end of day sheet and upload all of today's orders to the cloud.",
+      ],
+      true
+    );
     if (!choice) return;
     const hasReconciled = await reconcile('Z');
     if (!hasReconciled) return;
@@ -98,7 +101,7 @@ export default function Reports(props) {
           `You can choose to attempt to print the end of day sheet again or view it on the screen.`,
         ]);
         if (!tryAgain) {
-          await alert(await createEodHTML());
+          await alert('End Of Day', await createEodHTML());
           userFinished = true;
         } else {
           await printEndOfDay(orders);
@@ -119,6 +122,7 @@ export default function Reports(props) {
   async function handleDeleteOldOrdersHelp() {
     playBeep();
     await alert(
+      'End of Day',
       `This will end of day any orders currently saved on the till that are not from today, so if the last person forgot to end of day the till you can press this to remove any orders that weren't made today.`
     );
   }
@@ -148,7 +152,9 @@ export default function Reports(props) {
               );
             })
           ) : (
-            <Wait />
+            <div className='cnter p-4 w-full'>
+              <Wait />
+            </div>
           )}
           <div className='orderbox'></div>
           <div className='orderbox'></div>
@@ -170,7 +176,7 @@ export default function Reports(props) {
                 </Button>
                 <Button
                   type='ghost'
-                  className='aspect-square w-12'
+                  className='aspect-square'
                   onClick={handleDeleteOldOrdersHelp}
                   icon={infoSVG}></Button>
               </div>

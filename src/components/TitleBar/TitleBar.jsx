@@ -12,9 +12,17 @@ import useVoucherRedeemer from '../Register/VoucherRedeemer.jsx';
 import useVoucherChecker from '../Register/VoucherChecker.jsx';
 import { getAllOrders, printOrder, getSetting } from '../../tools/ipc.js';
 import useConfirm from '../Reusables/ConfirmDialog.jsx';
+import Button from '../Reusables/Button.jsx';
 
 export default function TitleBar(props) {
-  const { setHamburger, order, setOrder, updateOrders, setUpdateOrders, appState } = props;
+  const {
+    setHamburger,
+    order,
+    setOrder,
+    updateOrders,
+    setUpdateOrders,
+    appState,
+  } = props;
   const [ListSelect, chooseOption] = useListSelect();
   const [Confirm, confirm] = useConfirm();
   const [VoucherCreator, voucherCreator] = useVoucherCreator(order, setOrder);
@@ -52,38 +60,39 @@ export default function TitleBar(props) {
       <VoucherRedeemer />
       <VoucherChecker />
       <ListSelect />
-      <div className='flex flex-row justify-between h-16 px-2 border-b bc cnter drag'>
-        <div
-          className=' btn btn-primary text-lg'
-          onAuxClick={(e) => handleClickHamburger(setHamburger)}
-          onTouchEnd={(e) => handleClickHamburger(setHamburger)}>
-          Menu
+      <div className='flex flex-row justify-between h-16 border-b bc cnter drag'>
+        <div className='flex flex-row h-full w-full justify-start'>
+          <Button
+            type='primary'
+            className='w-20 h-full'
+            onClick={(e) => handleClickHamburger(setHamburger)}>
+            Menu
+          </Button>
+          <div className='w-[25rem]'></div>
+          <Button
+            type='primary'
+            className='w-32 h-full'
+            onClick={handlePrintRecentOrder}>
+            Print Receipt
+          </Button>
+          <div className='cnter h-10 mr-2'></div>
+          <Button
+            type='secondary'
+            className='w-32 h-full'
+            onClick={handleClickVoucherMenu}>
+            Vouchers
+          </Button>
         </div>
         {/* <HelpPageButton/> */}
-        <div className='flex flex-row h-full items-center mr- justify-end w-full'>
-          {/* <div
-            className=' mr-12 title'>
-            *Menu Has Changed*
-          </div> */}
-          <div
-            className='  btn btn-secondary  text-lg'
-            onAuxClick={(e) => handlePrintRecentOrder()}
-            onTouchEnd={(e) => handlePrintRecentOrder()}>
-            Print Receipt
-          </div>
-          <div className='cnter h-10 mx-5'></div>
-          <div
-            className=' btn btn-secondary text-lg'
-            onAuxClick={(e) => handleClickVoucherMenu()}
-            onTouchEnd={(e) => handleClickVoucherMenu()}>
-            Vouchers
-          </div>
-          <div className='border-r bc h-16 mx-5'></div>
-
-          <div className='flex flex-row gap-1 h-12 font-bold'>
+        <div className='flex flex-row h-full items-center justify-end'>
+          <div className='flex flex-row gap-[0px] h-full'>
             <PrinterConnection />
             <Connection />
-            <ServerConnection updateOrders={updateOrders} setUpdateOrders={setUpdateOrders} appState={appState}/>
+            <ServerConnection
+              updateOrders={updateOrders}
+              setUpdateOrders={setUpdateOrders}
+              appState={appState}
+            />
             <Clock />
           </div>
         </div>

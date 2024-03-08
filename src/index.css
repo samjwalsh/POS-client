@@ -41,7 +41,7 @@ body {
 }
 
 .menu-itm {
-  @apply bg-neutral w-48 h-32 flex-grow flex p-2 text-left justify-start items-end text-4xl text-neutral-content mb-2;
+  @apply w-48 h-32 flex-grow flex p-2 text-left justify-start items-end text-4xl mb-2;
 }
 
 .menu-itm-filler {
@@ -49,7 +49,7 @@ body {
 }
 
 .transparent {
-  @apply bg-black bg-opacity-25;
+  @apply bg-black bg-opacity-30;
 }
 
 .background {
@@ -77,7 +77,7 @@ body {
 }
 
 .keyboardKey {
-  @apply flex-grow btn h-full text-xl text-neutral-content;
+  @apply flex-grow h-full text-xl text-neutral-content;
 }
 
 .title {
@@ -118,6 +118,7 @@ body {
 
 .dBtn {
   @apply flex justify-start items-end p-2 text-left min-h-[3rem];
+  -webkit-app-region: no-drag;
 }
 
 .icon-primary {
@@ -137,5 +138,9 @@ body {
 }
 
 .icon-success {
+  @apply invert z-0;
+}
+
+.icon-warn {
   @apply invert z-0;
 }

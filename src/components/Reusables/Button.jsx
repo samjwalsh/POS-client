@@ -9,6 +9,7 @@ const Button = ({
   size,
   center,
   iconSize,
+  id,
 }) => {
   if (!iconSize) iconSize = 8;
   let classes = '';
@@ -62,15 +63,19 @@ const Button = ({
       classes += 'bg-warning text-warning-content ';
       break;
     }
+    case 'base': {
+      classes += 'bg-base-100 text-base-content';
+    }
   }
   return (
     <button
       className={classes + ' ' + className}
       onAuxClick={onClick}
-      onTouchEnd={onClick}>
+      onTouchEnd={onClick}
+      id={id}>
       {children ? <>{children}</> : ''}
       {icon ? (
-        <img src={icon} className={`w-${iconSize} icon icon-${type}`} />
+        <img src={icon} id={id} className={`w-${iconSize} icon icon-${type}`} />
       ) : (
         ''
       )}

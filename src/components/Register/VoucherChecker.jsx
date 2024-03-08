@@ -2,27 +2,33 @@ import { useState } from 'react';
 import * as React from 'react';
 
 import dropdownSVG from '../../assets/appicons/dropdown.svg';
-import useKeyboard from '../Reusables/textInput.jsx';
+import useKeyboard from '../Reusables/Keyboard.jsx';
 import playBeep from '../../tools/playBeep.js';
+import Wait from '../Reusables/Wait.jsx';
 import { checkVoucher } from '../../tools/ipc.js';
 import useAlert from '../Reusables/Alert.jsx';
 import { cF } from '../../tools/numbers.js';
 import Button from '../Reusables/Button.jsx';
+import Modal from '../Reusables/Modal.jsx';
+import ButtonStack from '../Reusables/ButtonStack.jsx';
+import NumberInput from '../Reusables/NumberInput.jsx';
+import TextInput from '../Reusables/textInput.jsx';
 const useVoucherChecker = (order, setOrder) => {
   const [promise, setPromise] = useState(null);
   const [clickable, setClickable] = useState(true);
   const [Keyboard, keyboard] = useKeyboard();
   const [Alert, alert] = useAlert();
+  const [code, setCode] = useState();
 
   const voucherChecker = () =>
     new Promise((resolve, reject) => {
       setPromise({ resolve });
-      handleEnterCode();
     });
 
   const handleClose = () => {
     setPromise(null);
     setClickable(true);
+    setCode();
   };
 
   const handleClickClose = () => {
@@ -30,22 +36,22 @@ const useVoucherChecker = (order, setOrder) => {
     handleClose();
   };
 
-  const handleEnterCode = async () => {
-    playBeep();
-    const code = await keyboard(
-      '',
-      'Enter voucher code (Letters only, Not case sensitive)'
-    );
-    if (!code) return;
-    if (code.length < 5) {
-      await alert('Voucher codes are at least 5 characters long.');
+  const checkCode = async () => {
+    setClickable(false);
+    if (typeof code !== 'string') {
+      await alert(
+        'Error',
+        'Something went wrong. Check you typed the code correctly and that the till is connected to the internet.'
+      );
+
+      handleClose();
       return;
     }
-    setClickable(false);
     const res = await checkVoucher(code);
 
     if (!res.success) {
       await alert(
+        'Error',
         'Something went wrong. Check you typed the code correctly and that the till is connected to the internet.'
       );
 
@@ -55,6 +61,7 @@ const useVoucherChecker = (order, setOrder) => {
 
     if (!res.exists) {
       await alert(
+        'Error',
         'A voucher with this code does not exist. Check you typed the code correctly.'
       );
       handleClose();
@@ -77,8 +84,25 @@ const useVoucherChecker = (order, setOrder) => {
     alertHTML.push(addToAlertHTML('Value', cF(res.voucher.value)));
     alertHTML.push(addToAlertHTML('Code', res.voucher.code.toUpperCase()));
 
-    await alert(<div className='flex flex-col w-full'>{alertHTML}</div>);
+    await alert(
+      'Voucher Checker',
+      <div className='flex flex-col w-full'>{alertHTML}</div>
+    );
     handleClose();
+  };
+
+  const handleEnterCode = async () => {
+    playBeep();
+    const code = await keyboard(
+      '',
+      'Enter voucher code (Letters only, Not case sensitive)'
+    );
+    if (!code) return;
+    if (code.length < 5) {
+      await alert('Error', 'Voucher codes are at least 5 characters long.');
+      return;
+    }
+    setCode(code);
   };
 
   const addToAlertHTML = (title, value) => {
@@ -93,28 +117,36 @@ const useVoucherChecker = (order, setOrder) => {
   const createHTML = () => {
     if (clickable) {
       return (
-        <div className='w-96 flex flex-col gap-2 text-2xl p-4 border bc background rounded-box'>
-          <div className='flex flex-row justify-between '>
-            <div className='title mt-auto pb-1'>Voucher Checker</div>
-            <Button type='danger' className='w-20' onClick={handleClickClose}>
+        <>
+          <div className='flex flex-col w-full px-2'>
+            <div>Code</div>
+            <TextInput
+              value={code === undefined ? 'E.g. abcdef' : code}
+              dim={code === undefined}
+              onClick={handleEnterCode}></TextInput>
+          </div>
+          <ButtonStack>
+            <Button
+              type='secondary'
+              className='flex-grow basis-1'
+              onClick={handleClickClose}>
               Cancel
             </Button>
-          </div>
-          <div className='w-full border-b bc'></div>
-          <div className='flex flex-row justify-between'>
-            <div className='cnter'>Code:</div>
             <Button
               type='primary'
-              className=''
-              icon={dropdownSVG}
-              onClick={handleEnterCode}>
-              Enter Code
+              className='flex-grow basis-1'
+              onClick={checkCode}>
+              Check
             </Button>
-          </div>
-        </div>
+          </ButtonStack>
+        </>
       );
     } else {
-      return <Wait />;
+      return (
+        <div className='cnter p-4'>
+          <Wait />
+        </div>
+      );
     }
   };
 
@@ -125,12 +157,7 @@ const useVoucherChecker = (order, setOrder) => {
         <>
           <Keyboard />
           <Alert />
-          <div className='fixed h-screen w-screen z-10'>
-            <div className='fixed top-0 left-0 m-0 p-0 transparent h-screen w-screen'></div>
-            <div className='fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 '>
-              {createHTML()}
-            </div>
-          </div>
+          <Modal title='Voucher Checker'> {createHTML()}</Modal>
         </>
       );
   };

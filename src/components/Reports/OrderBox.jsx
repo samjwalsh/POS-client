@@ -27,14 +27,17 @@ export function OrderBox({ order, setOrders, setReady, setStats }) {
   async function handleDeleteOrder(deletedOrder) {
     playBeep();
 
-    const choice = await confirm([
-      `Delete order?`,
-      'Cancel',
-      'Delete',
-      `Delete this order for ${cF(
-        deletedOrder.subtotal
-      )}, this action cannot be undone.`,
-    ]);
+    const choice = await confirm(
+      [
+        `Delete order?`,
+        'Cancel',
+        'Delete',
+        `Delete this order for ${cF(
+          deletedOrder.subtotal
+        )}, this action cannot be undone.`,
+      ],
+      true
+    );
     if (!choice) return;
 
     await removeOrder(deletedOrder);
@@ -72,7 +75,7 @@ export function OrderBox({ order, setOrders, setReady, setStats }) {
       <ListSelect />
       <Dialog />
       <div className='orderbox border bc flex max-h-96 flex-col rounded-box'>
-        <div className='flex flex-row w-full p-2 justify-between border-b bc '>
+        <div className='flex flex-row w-full p-2 justify-between  border-b bc '>
           <Button type='primary' onClick={() => handlePrintReceipt(order)}>
             Receipt
           </Button>

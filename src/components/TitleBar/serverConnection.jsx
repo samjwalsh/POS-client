@@ -65,9 +65,9 @@ export default function ServerConnection(props) {
 
   return (
     <div
-      className={`flex flex-row text-sm h-full p-1 rounded-btn border bc text-error-content
+      className={`flex flex-row justify-between h-full p-1 gap-1 text-error-content
        ${isOnline.status ? 'bg-success' : 'bg-error'}`}>
-      <div className='grid grid-rows-2 grid-cols-1'>
+      <div className='flex flex-col justify-between'>
         <div className='row-span-1 col-span-1 text-center'>SRV</div>
         <div className='row-span-1 col-span-1 text-center num'>
           {isOnline.status
@@ -75,30 +75,30 @@ export default function ServerConnection(props) {
             : '---'}
         </div>
       </div>
-
-      <div className='grid grid-rows-2 grid-cols-3 text-sm px-1 num'>
-        <div className='col-span-1 row-span-1'>
-          {isOnline.ordersToAdd == 0 ? '-' : isOnline.ordersToAdd}
+      <div className='flex flex-col justify-between'>
+        <div className='flex flex-row justify-between'>
+          <div>{isOnline.ordersToAdd == 0 ? '-' : isOnline.ordersToAdd}</div>
+          <div>
+            {isOnline.ordersToDelete == 0 ? '-' : isOnline.ordersToDelete}
+          </div>
+          <div>{isOnline.ordersToEod == 0 ? '-' : isOnline.ordersToEod}</div>
         </div>
-        <div className='col-span-1 row-span-1'>
-          {isOnline.ordersToDelete == 0 ? '-' : isOnline.ordersToDelete}
-        </div>
-        <div className='col-span-1 row-span-1'>
-          {isOnline.ordersToEod == 0 ? '-' : isOnline.ordersToEod}
-        </div>
-        <div className='col-span-1 row-span-1'>
-          {isOnline.ordersMissingInDb == 0 ? '-' : isOnline.ordersMissingInDb}
-        </div>
-        <div className='col-span-1 row-span-1'>
-          {isOnline.ordersDeletedInDb == 0 ? '-' : isOnline.ordersDeletedInDb}
-        </div>
-        <div className='col-span-1 row-span-1'>
-          {isOnline.ordersEodedInDb == 0 ? '-' : isOnline.ordersEodedInDb}
+        <div className='flex flex-row justify-between'>
+          <div>
+            {isOnline.ordersMissingInDb == 0 ? '-' : isOnline.ordersMissingInDb}
+          </div>
+          <div>
+            {isOnline.ordersDeletedInDb == 0 ? '-' : isOnline.ordersDeletedInDb}
+          </div>
+          <div>
+            {isOnline.ordersEodedInDb == 0 ? '-' : isOnline.ordersEodedInDb}
+          </div>
         </div>
       </div>
-      <div className='grid grid-rows-2 grid-cols-1 text-sm'>
-        <div className='col-span-1 row-span-1 text-center'>{isOnline.shop}</div>
-        <div className='col-span-1 row-span-1 text-center num'>{`${
+
+      <div className='flex flex-col justify-between'>
+        <div>{isOnline.shop}</div>
+        <div>{`${
           isOnline.till != undefined ? '' + isOnline.till + '' : ''
         }`}</div>
       </div>

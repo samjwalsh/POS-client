@@ -7,7 +7,7 @@
   font-family: IBM Plex Mono;
   font-weight: normal;
   font-style: normal;
-  src: url('./assets/fonts/IBM/IBMPlexMono-Medium.ttf');
+  src: url('./assets/fonts/IBM/IBMPlexMono-Regular.ttf');
 }
 
 @font-face {
@@ -28,7 +28,7 @@
   font-family: IBM Plex Sans;
   font-weight: normal;
   font-style: normal;
-  src: url('./assets/fonts/IBM Sans/IBMPlexSans-Medium.ttf');
+  src: url('./assets/fonts/IBM Sans/IBMPlexSans-Regular.ttf');
 }
 
 @font-face {

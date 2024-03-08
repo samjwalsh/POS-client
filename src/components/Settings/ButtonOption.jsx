@@ -9,6 +9,7 @@ import {
 } from '../../tools/ipc';
 import { executeSettings } from './Settings.jsx';
 import useConfirm from '../Reusables/ConfirmDialog.jsx';
+import Button from '../Reusables/Button.jsx';
 
 export function ButtonOption({ setting, setSettings }) {
   const [ConfirmDialog, confirm] = useConfirm();
@@ -16,12 +17,15 @@ export function ButtonOption({ setting, setSettings }) {
   async function handleClickButtonOption(setting) {
     playBeep();
 
-    const choice = await confirm([
-      setting.name + '?',
-      'Cancel',
-      'Continue',
-      'This cannot be undone and may have negative side effects.',
-    ]);
+    const choice = await confirm(
+      [
+        setting.name + '?',
+        'Cancel',
+        'Continue',
+        'This cannot be undone and may have negative side effects.',
+      ],
+      true
+    );
 
     if (!choice) return;
 
@@ -47,16 +51,14 @@ export function ButtonOption({ setting, setSettings }) {
   return (
     <>
       <ConfirmDialog />
-      <div className='w-full flex flex-row p-2 whitespace-nowrap gap-2 justify-between'>
-        <div className='text-xl self-center'>{setting.name}</div>
-        <div className='flex flex-row gap-2'>
-          <div
-            className='btn text-lg btn-neutral p-2 cnter '
-            onAuxClick={() => handleClickButtonOption(setting)}
-            onTouchEnd={() => handleClickButtonOption(setting)}>
+      <div className='flex flex-col w-full px-2'>
+        <div className='text-xl'>{setting.name}</div>
+          <Button
+            type='danger-tertiary'
+            className='w-full'
+            onClick={() => handleClickButtonOption(setting)}>
             {setting.label}
-          </div>
-        </div>
+          </Button>
       </div>
     </>
   );

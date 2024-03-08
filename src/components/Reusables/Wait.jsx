@@ -7,12 +7,10 @@ export default function Wait() {
   useInterval(() => {
     if (dots < 3) setDots(dots + 1);
     else setDots(0);
-  }, 100);
+  },100);
 
   return (
-    <div className='title cnter p-2 w-full bg-base-100'>
-      Please wait {'.'.repeat(dots)}
-    </div>
+    <div className='title bg-base-200 p-2'>Please wait {'.'.repeat(dots)}</div>
   );
 }
 

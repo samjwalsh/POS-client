@@ -6,6 +6,7 @@ import useListSelect from '../Reusables/ListSelect.jsx';
 import playBeep from '../../tools/playBeep';
 import { getAllPrinters, setSetting, getSettings } from '../../tools/ipc';
 import { executeSettings } from './Settings.jsx';
+import Button from '../Reusables/Button.jsx';
 
 export function DropdownOption({ setting, setSettings }) {
   const [ListSelect, chooseOption] = useListSelect();
@@ -40,21 +41,19 @@ export function DropdownOption({ setting, setSettings }) {
   return (
     <>
       <ListSelect />
-      <div className='w-full flex flex-row p-2 whitespace-nowrap gap-2 justify-between'>
-        <div className='text-xl self-center'>{setting.name}</div>
-        <div className='flex flex-row gap-2'>
-          <div
-            className='btn text-lg btn-neutral p-2 cnter '
-            onAuxClick={(e) => handleClickDropdownOption(setting)}
-            onTouchEnd={(e) => handleClickDropdownOption(setting)}>
+      <div className='flex flex-col w-full px-2'>
+        <div className='text-xl'>{setting.name}</div>
+          <Button
+            type='base'
+            className='w-full'
+            onClick={(e) => handleClickDropdownOption(setting)}>
             {setting.value == undefined
               ? 'Select'
               : setting.value.length > 0
               ? setting.value
               : 'Select'}
-            <img src={dropdownSVG} className='w-6 icon' />
-          </div>
-        </div>
+            <img src={dropdownSVG} className='w-6 icon icon-ghost ml-auto' />
+          </Button>
       </div>
     </>
   );

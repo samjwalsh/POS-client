@@ -83,17 +83,24 @@ export default function Order(props) {
 
         if (direction === 'up') {
           if (orderItem.name === 'Voucher') {
-            await alert('Use the voucher creator to create more vouchers');
+            await alert(
+              'Error',
+              'Use the voucher creator to create more vouchers'
+            );
             return;
           }
           if (orderItem.name === 'Redeem Voucher') {
-            await alert('Use the voucher redeemer to redeem more vouchers');
+            await alert(
+              'Error',
+              'Use the voucher redeemer to redeem more vouchers'
+            );
             return;
           }
           temp_order[index].quantity++;
         } else if (orderItem.quantity > 1) {
           if (orderItem.name === 'Redeem Voucher') {
             await alert(
+              'Error',
               'You cannot unredeem a voucher, you can create a new one with the same value in the voucher creator'
             );
             return;
@@ -102,6 +109,7 @@ export default function Order(props) {
         } else {
           if (orderItem.name === 'Redeem Voucher') {
             await alert(
+              'Error',
               'You cannot unredeem a voucher, you can create a new one with the same value in the voucher creator'
             );
             return;
@@ -166,10 +174,11 @@ export default function Order(props) {
           </div>
           <div className='row-span-1 col-span-1 flex gap-2 items-stretch h-20 text-2xl'>
             {payCash === true ? (
-              <Button type='danger' 
-              className='w-full'
-              size='large'
-              onClick={() => handlePayment('cash')}>
+              <Button
+                type='danger'
+                className='w-full'
+                size='large'
+                onClick={() => handlePayment('cash')}>
                 Cancel
               </Button>
             ) : (

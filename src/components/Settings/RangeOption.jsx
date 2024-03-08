@@ -7,6 +7,7 @@ import minusSVG from '../../assets/appicons/minus.svg';
 import playBeep from '../../tools/playBeep';
 import { setSetting, getSettings, getSetting } from '../../tools/ipc';
 import { executeSettings } from './Settings.jsx';
+import Button from '../Reusables/Button.jsx';
 
 export function RangeOption({ setting, settings, setSettings }) {
   async function handleClickRangeOption(setting, method, settings) {
@@ -43,39 +44,32 @@ export function RangeOption({ setting, settings, setSettings }) {
   }
 
   return (
-    <div className='w-full flex flex-row p-2 whitespace-nowrap gap-2 justify-between'>
-      <div className='text-xl self-center'>{setting.name}</div>
+    <div className='flex flex-col w-full px-2'>
+      <div className='text-xl'>{setting.name}</div>
       <div className='flex flex-row gap-2'>
-        <div
-          className='btn text-lg   btn-error  p-2 cnter'
-          onAuxClick={(e) =>
-            handleClickRangeOption(setting, 'decrease', settings)
-          }
-          onTouchEnd={(e) =>
+        <Button
+          className='aspect-square'
+          type='danger'
+          onClick={(e) =>
             handleClickRangeOption(setting, 'decrease', settings)
           }>
-          <img src={minusSVG} className='w-6 icon' />
-        </div>
-        <div className='cnter text-xl'>{setting.value}</div>
-        <div
-          className='btn text-lg  btn-success p-2 cnter'
-          onAuxClick={(e) =>
-            handleClickRangeOption(setting, 'increase', settings)
-          }
-          onTouchEnd={(e) =>
+          <img src={minusSVG} className='w-8 icon icon-secondary' />
+        </Button>
+        <Button type='base' className='text-xl w-full'>{setting.value}</Button>
+        <Button
+          className='aspect-square'
+          type='success'
+          onClick={(e) =>
             handleClickRangeOption(setting, 'increase', settings)
           }>
-          <img src={addSVG} className='w-6 icon' />
-        </div>
-        <div
-          className=' btn text-lg btn-neutral p-2 cnter '
-          onAuxClick={(e) => handleClickRangeOption(setting, 'reset', settings)}
-          onTouchEnd={(e) =>
-            handleClickRangeOption(setting, 'reset', settings)
-          }>
-          {' '}
-          <img src={undo} className='w-6 icon' />
-        </div>
+          <img src={addSVG} className='w-8 icon icon-secondary' />
+        </Button>
+        <Button
+          className='aspect-square'
+          type='secondary'
+          onClick={(e) => handleClickRangeOption(setting, 'reset', settings)}>
+          <img src={undo} className='w-8 icon icon-secondary' />
+        </Button>
       </div>
     </div>
   );

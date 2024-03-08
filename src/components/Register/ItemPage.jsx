@@ -22,32 +22,7 @@ export default function ItemPage({
   const [Alert, alert] = useAlert();
   const handleClickHelp = async () => {
     playBeep();
-    await alert(
-      <div className='w-[80vw]'>
-        <div className='text-xl'>Shortcut Buttons</div>
-        <div className='text-base whitespace-pre-line'>
-          The large buttons at the top of the container are shortcut buttons,
-          pressing a shortcut button is the same as manually clicking the addon
-          buttons for the shortcut you clicked (if you clicked Special 99 it
-          would add a flake and toppings) and then adding the item to the cart.
-          {'\n\n'}
-          If you have already selected some addons, like crushed flake, and
-          changed the quantity, these changes will stay after you click a
-          shortcut button, so if you add crushed flake and increase the quantity
-          to 2 before pressing the 99 shortcut button, 2 99s with crushed flake
-          will be added to the cart.{'\n\n'}
-        </div>
-        <div className='text-xl'>Addon Buttons</div>
-        <div className='text-base whitespace-pre-line'>
-          The addon buttons are in the bottom half of the container, clicking an
-          addon button will toggle it on or off (so if you tap flake once it
-          adds a flake but if you tap it again it takes it away).{'\n\n'}
-          If you select an addon like a flake and then press the shortcut button
-          for a 99, a 99 will be added to the cart with only 1 flake, not 0 or
-          2. If you want to add a second flake you can find it in the extras
-          section.
-        </div>
-      </div>
+    await alert('Shortcut Buttons',`The large blue buttons are shortcut buttons. Clicking a shortcut button selects the relevant addons and adds the item to the cart. It will not remove any addons or changes to quantity that were previously selected.`
     );
   };
 

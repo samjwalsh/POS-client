@@ -9,6 +9,7 @@ import undoSVG from '../../assets/appicons/undo.svg';
 import ItemPage from './ItemPage.jsx';
 
 import playBeep from '../../tools/playBeep';
+import Button from '../Reusables/Button.jsx';
 
 export default function Menu(props) {
   const menuState = props.menuState;
@@ -49,27 +50,38 @@ export default function Menu(props) {
       let classes = 'menu-itm';
 
       itemsHTML.push(
-        <div
+        <Button
           key={item.name}
-          className={`${
-            item.name === 'Back'
-              ? 'btn-error'
-              : 'btn-neutral text-neutral-content'
-          } ${classes}`}
-          id={item.name}
-          onAuxClick={() => handleItemClick(item, passProps)}
-          onTouchEnd={() => handleItemClick(item, passProps)}>
+          type={`${item.name === 'Back' ? 'danger' : 'secondary'}`}
+          onClick={() => handleItemClick(item, passProps)}
+          className={classes}>
           {item.name === 'Back' ? (
-            <img src={undoSVG} className='w-10 icon' />
+            <img src={undoSVG} className='w-8 icon icon-danger' />
           ) : (
-            <div className='h-full w-full flex flex-col justify-between'>
-              <div className='ml-auto'>
-              {/* <img src={item.icon} className='w-12 menuicon' />  */}
-              </div>
-              {item.name}
-            </div>
+            item.name
           )}
-        </div>
+        </Button>
+        // <div
+        //   key={item.name}
+        //   className={`${
+        //     item.name === 'Back'
+        //       ? 'btn-error'
+        //       : 'btn-neutral text-neutral-content'
+        //   } ${classes}`}
+        //   id={item.name}
+        //   onAuxClick={() => handleItemClick(item, passProps)}
+        //   onTouchEnd={() => handleItemClick(item, passProps)}>
+        //   {item.name === 'Back' ? (
+        //     <img src={undoSVG} className='w-10 icon' />
+        //   ) : (
+        //     <div className='h-full w-full flex flex-col justify-between'>
+        //       <div className='ml-auto'>
+        //       {/* <img src={item.icon} className='w-12 menuicon' />  */}
+        //       </div>
+        //       {item.name}
+        //     </div>
+        //   )}
+        // </div>
       );
     });
 

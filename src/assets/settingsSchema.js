@@ -17,7 +17,7 @@ export const settingsSchema = [
         value: 'summer',
         list: [
           'IBM Carbon',
-          'IBM Carbon Dark',
+          'Carbon',
           'emerald',
           'summer',
           'teddys',

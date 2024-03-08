@@ -42,12 +42,10 @@ export default function HamburgerMenu(props) {
   async function handleTerminatePOS() {
     playBeep();
 
-    const choice = await confirm([
-      'Exit?',
-      'Cancel',
-      'Continue',
-      `This will close the till software.`,
-    ]);
+    const choice = await confirm(
+      ['Exit?', 'Cancel', 'Continue', `This will close the till software.`],
+      true
+    );
 
     if (!choice) return;
 
@@ -60,7 +58,7 @@ export default function HamburgerMenu(props) {
       'Cancel',
       'Continue',
       `This will disable the touchscreen for 15 seconds so the screen can be cleaned.`,
-    ]);
+    ], false);
     if (!choice) {
       return;
     }
@@ -153,7 +151,7 @@ export default function HamburgerMenu(props) {
           onAuxClick={() => handleCloseSideMenu(setHamburger)}
           onTouchEnd={() => handleCloseSideMenu(setHamburger)}></div>
       </div>
-      <div className='fixed bottom-0 right-0 bg-base-100 text-xs h-min w-min font-bold p-1 font-mono m-2 z-50 whitespace-nowrap border bc'>
+      <div className='fixed bottom-0 right-0 bg-base-100 text-xs h-min w-min font-bold p-1 font-mono m-2 z-10 whitespace-nowrap border bc'>
         {createVersionString(version)}
       </div>
     </>

@@ -7,6 +7,8 @@ import minusSVG from '../../assets/appicons/minus.svg';
 import backSVG from '../../assets/appicons/backspace.svg';
 import enterSVG from '../../assets/appicons/enter.svg';
 
+import Button from '../Reusables/Button.jsx';
+
 import playBeep from '../../tools/playBeep';
 
 const currLimit = 7;
@@ -98,7 +100,7 @@ const useKeypad = () => {
       }
       case '00': {
         if (
-          keypadState.value.length >= (currLimit - 1) ||
+          keypadState.value.length >= currLimit - 1 ||
           keypadState.value === '' ||
           keypadState.value === '0'
         ) {
@@ -166,10 +168,10 @@ const useKeypad = () => {
   function createKeypadHTML() {
     return (
       <div
-        className='grid grid-cols-3 grid-rows-6 w-full h-full gap-2 text-2xl rounded-box background p-4 border bc'
+        className='grid grid-cols-3 grid-rows-6 w-full h-full gap-2 text-2xl background p-2'
         onAuxClick={(event) => handleKeypadClick(event)}
         onTouchEnd={(event) => handleKeypadClick(event)}>
-        <div className=' rounded-btn p-2 col-span-2 row-span 1 flex flex-row text-3xl justify-between w-full num'>
+        <div className=' rounded-btn p-2 col-span-2 row-span 1 flex flex-row text-3xl justify-between w-full'>
           <div className='text-left cnter'>
             {keypadState.numberFormat === 'currency' ? '€' : ''}
           </div>
@@ -177,74 +179,109 @@ const useKeypad = () => {
             {keypadValueString}
           </div>
         </div>
-        <div className='col-span-1 row-span-1 keypad btn-error' id='exit'>
-          <img src={closeSVG} className='w-6 icon' id='exit' />
-        </div>
-        <div className='col-span-1 row-span-1 keypad btn-error' id='minus'>
-          <img src={minusSVG} className='w-6 icon' id='minus' />
-        </div>
-        <div className='col-span-1 row-span-1 keypad btn-success' id='plus'>
-          <img src={addSVG} className='w-6 icon' id='plus' />
-        </div>
-        <div className='col-span-1 row-span-1 keypad btn-warning' id='delete'>
-          <img src={backSVG} className='w-6 icon' id='delete' />
-        </div>
-        <div className='col-span-1 row-span-1 keypad btn btn-secondary' id='7'>
+        <Button
+          type='danger'
+          icon={closeSVG}
+          className='col-span-1 row-span-1'
+          id='exit'></Button>
+        <Button
+          type='danger'
+          icon={minusSVG}
+          className='col-span-1 row-span-1'
+          id='minus'></Button>
+        <Button
+          type='success'
+          icon={addSVG}
+          className='col-span-1 row-span-1'
+          id='plus'></Button>
+        <Button
+          type='warn'
+          icon={backSVG}
+          className='col-span-1 row-span-1'
+          id='delete'></Button>
+        <Button
+          type='secondary'
+          className='col-span-1 row-span-1'
+          size='large'
+          id='7'>
           7
-        </div>
-        <div
-          className='col-span-1 row-span-1 keypad btn-secondary text-neutral-content'
+        </Button>
+        <Button
+          type='secondary'
+          className='col-span-1 row-span-1'
+          size='large'
           id='8'>
           8
-        </div>
-        <div
-          className='col-span-1 row-span-1 keypad btn-secondary text-neutral-content'
+        </Button>
+        <Button
+          type='secondary'
+          className='col-span-1 row-span-1'
+          size='large'
           id='9'>
           9
-        </div>
-        <div
-          className='col-span-1 row-span-1 keypad btn-secondary text-neutral-content'
+        </Button>
+        <Button
+          type='secondary'
+          className='col-span-1 row-span-1'
+          size='large'
           id='4'>
           4
-        </div>
-        <div
-          className='col-span-1 row-span-1 keypad btn-secondary text-neutral-content'
+        </Button>
+        <Button
+          type='secondary'
+          className='col-span-1 row-span-1'
+          size='large'
           id='5'>
           5
-        </div>
-        <div
-          className='col-span-1 row-span-1 keypad btn-secondary text-neutral-content'
+        </Button>
+        <Button
+          type='secondary'
+          className='col-span-1 row-span-1'
+          size='large'
           id='6'>
           6
-        </div>
-        <div
-          className='col-span-1 row-span-1 keypad btn-secondary text-neutral-content'
+        </Button>
+        <Button
+          type='secondary'
+          className='col-span-1 row-span-1'
+          size='large'
           id='1'>
           1
-        </div>
-        <div
-          className='col-span-1 row-span-1 keypad btn-secondary text-neutral-content'
+        </Button>
+        <Button
+          type='secondary'
+          className='col-span-1 row-span-1'
+          size='large'
           id='2'>
           2
-        </div>
-        <div
-          className='col-span-1 row-span-1 keypad btn-secondary text-neutral-content'
+        </Button>
+        <Button
+          type='secondary'
+          className='col-span-1 row-span-1'
+          size='large'
           id='3'>
           3
-        </div>
-        <div
-          className='col-span-1 row-span-1 keypad btn-secondary text-neutral-content'
+        </Button>
+        <Button
+          type='secondary'
+          className='col-span-1 row-span-1'
+          size='large'
           id='0'>
           0
-        </div>
-        <div
-          className='col-span-1 row-span-1 keypad btn-secondary text-neutral-content'
+        </Button>
+        <Button
+          type='secondary'
+          className='col-span-1 row-span-1'
+          size='large'
           id='00'>
           00
-        </div>
-        <div className='col-span-1 row-span-1 keypad btn-primary' id='enter'>
-          <img src={enterSVG} className='w-6 icon' id='enter' />
-        </div>
+        </Button>
+        <Button
+          type='primary'
+          size='large'
+          className='col-span-1 row-span-1'
+          id='enter'
+          icon={enterSVG}></Button>
       </div>
     );
   }

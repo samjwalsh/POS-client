@@ -1,6 +1,8 @@
 import { useState } from 'react';
 import * as React from 'react';
 
+import Modal from './Modal.jsx';
+
 import playBeep from '../../tools/playBeep.js';
 const useDisableTouch = () => {
   const [promise, setPromise] = useState(null);
@@ -27,18 +29,10 @@ const useDisableTouch = () => {
         }
       });
     return (
-      <div className='fixed h-screen w-screen z-50'>
-        <div className='fixed top-0 left-0 m-0 p-0 transparent h-screen w-screen z-50'></div>
-        <div className='fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-50 background rounded-box max-w-[30rem]  border bc'>
-          <div className='flex flex-col p-4 gap-2'>
-            <div className='title flex items-start'>Cleaning Mode</div>
-            <div className='text-lg flex items-start font-light'>
-              Touch screen will turn back on in {seconds}{' '}
-              {seconds == 1 ? 'second' : 'seconds'}.
-            </div>
-          </div>
-        </div>
-      </div>
+      <Modal z={50}
+        title='Cleaning Mode'
+        text={`Touch screen will turn back on in ${seconds}
+      ${seconds == 1 ? 'second' : 'seconds'}.`}></Modal>
     );
   };
   return [disableTouchArea, disableTouch];
