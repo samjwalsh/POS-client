@@ -22,7 +22,9 @@ export default function ItemPage({
   const [Alert, alert] = useAlert();
   const handleClickHelp = async () => {
     playBeep();
-    await alert('Shortcut Buttons',`The large blue buttons are shortcut buttons. Clicking a shortcut button selects the relevant addons and adds the item to the cart. It will not remove any addons or changes to quantity that were previously selected.`
+    await alert(
+      'Shortcut Buttons',
+      `The large blue buttons are shortcut buttons. Clicking a shortcut button selects the relevant addons and adds the item to the cart. It will not remove any addons or changes to quantity that were previously selected.`
     );
   };
 
@@ -55,13 +57,13 @@ export default function ItemPage({
       <div className='flex flex-col h-full content-start'>
         <div className='flex flex-row justify-between h-min p-2 border-b bc'>
           <div className='title pb-1 mt-auto'>{menuState.name}</div>
-          <div className='flex flex-row gap-2'>
+          <div className='flex flex-row gap-[1px]'>
             <Button type='ghost' className='w-20' onClick={handleClickHelp}>
               Help
             </Button>
             <Button
               type='danger'
-              className='w-20'
+              className='w-32'
               onClick={() => handleExitItemPage(setMenuState, setCurrentOrder)}>
               Cancel
             </Button>
@@ -125,9 +127,9 @@ export default function ItemPage({
           </div>
           <div className='text-2xl w-full h-auto num cnter'>{cF(price)}</div>
           <Button
-          type='primary'
-          className='w-72'
-          size='large'
+            type='primary'
+            className='w-72'
+            size='large'
             onClick={() =>
               handleAddToOrder(
                 item,
