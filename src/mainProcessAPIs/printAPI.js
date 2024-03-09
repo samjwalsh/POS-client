@@ -127,9 +127,10 @@ const printHeader = (printer, title) => {
 
   printer.setTextQuadArea();
   printer.println(title);
+  printer.setTextNormal();
+
   printer.drawLine();
 
-  printer.setTextNormal();
   printer.alignLeft();
 };
 
