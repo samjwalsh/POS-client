@@ -9,7 +9,7 @@ export default function OrderItem({ orderItem, index }) {
           {orderItem.name +
             (orderItem.quantity > 1 ? ` (${orderItem.quantity})` : '')}
         </div>
-        <div className=' text-right num'>
+        <div className=' text-right num whitespace-nowrap'>
           {cF(orderItem.price * orderItem.quantity)}
         </div>
       </div>
