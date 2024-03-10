@@ -29,7 +29,7 @@ ipcMain.handle('createVouchers', async (e, quantity, value) => {
       url: `${https ? 'https' : 'http'}://${syncServer}/api/createVoucher`,
       headers: {},
       data,
-      timeout: 30000,
+      timeout: 120000,
     });
     const vouchers = res.data;
     return { vouchers, success: true };
