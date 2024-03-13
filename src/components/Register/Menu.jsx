@@ -58,7 +58,10 @@ export default function Menu(props) {
           {item.name === 'Back' ? (
             <img src={undoSVG} className='w-8 icon icon-danger' />
           ) : (
-            item.name
+            <>
+              {item.name}
+              {/* <img src={item.icon} className='w-12 menuicon' /> */}
+            </>
           )}
         </Button>
         // <div
@@ -76,7 +79,7 @@ export default function Menu(props) {
         //   ) : (
         //     <div className='h-full w-full flex flex-col justify-between'>
         //       <div className='ml-auto'>
-        //       {/* <img src={item.icon} className='w-12 menuicon' />  */}
+        // {/* <img src={item.icon} className='w-12 menuicon' />  */}
         //       </div>
         //       {item.name}
         //     </div>

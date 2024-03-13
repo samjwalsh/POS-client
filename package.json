@@ -1,7 +1,7 @@
 {
   "name": "pos-client",
   "productName": "pos-client",
-  "version": "4.0.0-alpha",
+  "version": "4.0.1",
   "description": "pos-client",
   "main": ".webpack/main",
   "scripts": {
