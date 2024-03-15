@@ -177,9 +177,7 @@ const useKeypad = () => {
             {keypadState.numberFormat === 'currency' ? '€' : ''}
           </div>
           <div className='text-right justify-end cnter'>
-            {keypadState.numberFormat === 'currency'
-              ? parseFloat(keypadValueString).toFixed(2)
-              : keypadValueString}
+            {keypadValueString}
           </div>
         </div>
         <Button
