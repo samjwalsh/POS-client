@@ -7,7 +7,7 @@ export default function Wait() {
   useInterval(() => {
     if (dots < 3) setDots(dots + 1);
     else setDots(0);
-  },100);
+  }, 100);
 
   return (
     <div className='title bg-base-200 p-2'>Please wait {'.'.repeat(dots)}</div>

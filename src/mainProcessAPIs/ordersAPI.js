@@ -6,6 +6,14 @@ const store = new Store();
 import { log } from './loggingAPI';
 import { getSetting } from './settingsAPI';
 
+(() => {
+  let orders = store.get('orders');
+  if (Array.isArray(orders) === false) {
+    store.set('orders', []);
+    orders = [];
+  }
+})();
+
 ipcMain.handle('getAllOrders', () => {
   let orders = store.get('orders');
   if (Array.isArray(orders) === false) {
