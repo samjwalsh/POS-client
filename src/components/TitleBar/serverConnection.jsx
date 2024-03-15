@@ -39,7 +39,7 @@ export default function ServerConnection(props) {
     const connection = await syncOrders();
     const endPing = Date.now();
     let shop = (await getSetting('Shop Name')).slice(0, 2).toUpperCase();
-
+    console.log('sent')
     const totalLocalUpdates =
       connection.ordersToAdd +
       connection.ordersToDelete +

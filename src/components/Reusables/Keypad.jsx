@@ -10,6 +10,7 @@ import enterSVG from '../../assets/appicons/enter.svg';
 import Button from '../Reusables/Button.jsx';
 
 import playBeep from '../../tools/playBeep';
+import { cF, fF } from '../../tools/numbers.js';
 
 const currLimit = 7;
 const passLimit = 10;

@@ -221,6 +221,10 @@ export const menu = [
         name: 'Extra Toppings',
         price: 0.5,
       },
+      {
+        name: 'Extra Crush Flake',
+        price: 1.5,
+      },
       { name: 'Extra Ferrero', price: 1.5 },
       { name: 'Extra Strawberries', price: 1.5 },
       { name: 'Extra Chocolate Dip', price: 1.5 },
@@ -288,27 +292,27 @@ export const menu = [
   },
   {
     name: "Kid's Tub",
-    price: 2.3,
+    price: 2.5,
     icon: require('../assets/menuicons/ice-cream-tub.png'),
     shortcuts: [
       {
         name: "Kid's Tub",
-        price: 2.3,
+        price: 2.5,
         addons: [],
       },
       {
         name: "Kid's 99 Tub",
-        price: 2.5,
+        price: 3,
         addons: [
           {
             name: 'Flake',
-            price: 0.2,
+            price: 0.5,
           },
         ],
       },
       {
         name: "Kid's Special Tub",
-        price: 2.5,
+        price: 3,
         addons: [
           {
             name: 'Toppings',
@@ -318,11 +322,11 @@ export const menu = [
       },
       {
         name: "Kid's Special 99 Tub",
-        price: 3,
+        price: 3.5,
         addons: [
           {
             name: 'Flake',
-            price: 0.2,
+            price: 0.5,
           },
           {
             name: 'Toppings',
@@ -334,36 +338,13 @@ export const menu = [
     modifiers: [
       {
         name: 'Flake',
-        price: 0.2,
+        price: 0.5,
       },
       {
         name: 'Toppings',
         price: 0.5,
       },
       { name: 'Crush Flake', price: 1.5 },
-      {
-        priceCheck: function (addons) {
-          // Add code to check for chocolate dip, both choco dip with and without flake are 3.5
-          let addonsCost = 0;
-          let selectedAddons = [];
-
-          for (const addon of addons) {
-            if (addon.selected == true) {
-              selectedAddons.push(addon.name);
-              addonsCost += addon.price;
-            }
-          }
-
-          if (
-            selectedAddons.includes('Toppings') &&
-            !selectedAddons.includes('Flake')
-          ) {
-            addonsCost -= 0.3;
-          }
-
-          return addonsCost;
-        },
-      },
     ],
   },
   {
@@ -486,6 +467,10 @@ export const menu = [
         modifiers: [
           { name: 'Flake', price: 0.5 },
           { name: 'Toppings', price: 0.5 },
+          {
+            name: 'Crush Flake',
+            price: 1.5,
+          },
         ],
         shortcuts: [
           {
@@ -732,56 +717,10 @@ export const menu = [
       {
         name: 'Cans',
         price: 2,
-        shortcuts: [
-          {
-            name: 'Can',
-            price: 2,
-            addons: [],
-          },
-          {
-            name: 'Re-turn Can',
-            price: 2.15,
-            addons: [
-              {
-                name: 'Re-turn (15c)',
-                price: 0.15,
-              },
-            ],
-          },
-        ],
-        modifiers: [
-          {
-            name: 'Re-turn (15c)',
-            price: 0.15,
-          },
-        ],
       },
       {
         name: 'Soft Bottles',
-        price: 2.5,
-        shortcuts: [
-          {
-            name: 'Soft Bottle',
-            price: 2.5,
-            addons: [],
-          },
-          {
-            name: 'Re-turn Soft Bottle',
-            price: 2.65,
-            addons: [
-              {
-                name: 'Re-turn (15c)',
-                price: 0.15,
-              },
-            ],
-          },
-        ],
-        modifiers: [
-          {
-            name: 'Re-turn (15c)',
-            price: 0.15,
-          },
-        ],
+        price: 2.8,
       },
       {
         name: 'Water',
