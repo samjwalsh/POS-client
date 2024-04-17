@@ -36,7 +36,7 @@ body {
 }
 
 .menuicon {
-  @apply z-0 opacity-50;
+  @apply z-0 opacity-100 invert;
   /* @apply invert z-0; */
 }
 

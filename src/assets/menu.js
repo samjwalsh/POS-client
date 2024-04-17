@@ -25,7 +25,7 @@ export const menu = [
   {
     name: 'Cone',
     price: 2.5,
-    icon: require('../assets/menuicons/ice-cream-cone.svg'),
+    icon: require('../assets/menuicons/ice-cream-cone.png'),
     shortcuts: [
       {
         name: 'Plain Cone',
@@ -112,7 +112,7 @@ export const menu = [
   {
     name: "Kid's Cone",
     price: 2.3,
-    icon: require('../assets/menuicons/ice-cream-cone.svg'),
+    icon: require('../assets/menuicons/ice-cream-cone.png'),
     shortcuts: [
       {
         name: "Kid's Cone",

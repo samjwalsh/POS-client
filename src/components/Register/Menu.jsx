@@ -58,10 +58,11 @@ export default function Menu(props) {
           {item.name === 'Back' ? (
             <img src={undoSVG} className='w-8 icon icon-danger' />
           ) : (
-            <>
+            <div className='flex flex-col justify-between h-full'>
+              <img src={item.icon} className='w-10 menuicon' />
+
               {item.name}
-              {/* <img src={item.icon} className='w-12 menuicon' /> */}
-            </>
+            </div>
           )}
         </Button>
         // <div
