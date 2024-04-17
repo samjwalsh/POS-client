@@ -5,6 +5,8 @@ const { settingsSchema } = require('../assets/settingsSchema');
 const store = new Store();
 
 (() => {
+  let settings = store.get('settings');
+  if (!settings) store.set('settings', settingsSchema);
   let newSettings = settingsSchema;
   newSettings.forEach((category) => {
     category.settings.forEach((setting) => {

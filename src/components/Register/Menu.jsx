@@ -113,7 +113,7 @@ export default function Menu(props) {
     );
   } else if (menuState.modifiers !== undefined) {
     return (
-      <div className='col-span-8 row-span-1'>
+      <div className='col-span-8 row-span-1 '>
         <ItemPage
           menuState={menuState}
           setMenuState={setMenuState}

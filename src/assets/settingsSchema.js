@@ -14,7 +14,7 @@ export const settingsSchema = [
       {
         name: 'Theme',
         type: 'dropdown',
-        value: 'summer',
+        value: 'IBM Carbon',
         list: [
           'IBM Carbon',
           'Carbon',
