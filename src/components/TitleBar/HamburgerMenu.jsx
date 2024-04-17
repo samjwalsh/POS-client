@@ -106,14 +106,14 @@ export default function HamburgerMenu(props) {
       <Keypad />
       <Dialog />
       <DisableTouch />
-      <div className='fixed top-0 grid grid-cols-12 grid-rows-1 w-screen h-screen z-10'>
+      <div className='fixed top-0 grid grid-cols-12 grid-rows-1 w-screen h-screen z-10 nodrag'>
         <div className='row-span-1 col-span-3 flex background flex-col border-r bc'>
           <div className='flex flex-row w-100 justify-between p-2 items-stretch '>
             <div className='title self-end'>Menu</div>
             <Button
               type='danger'
               className='aspect-square'
-              onClick={() => handleCloseSideMenu(setHamburger)}
+              onClick={() => {console.log("here");handleCloseSideMenu(setHamburger)}}
               center={true}
               iconSize={6}
               icon={closeSVG}></Button>
