@@ -57,10 +57,8 @@ const useVoucherCreator = (order, setOrder) => {
       );
       return;
     }
-    console.log(quantity);
 
     if (quantity >= 0) {
-      console.log(quantity);
 
       setVoucherState({
         value: voucherState.value,
@@ -82,19 +80,6 @@ const useVoucherCreator = (order, setOrder) => {
   };
 
   const handleCreateVouchers = async () => {
-    const discouraged = await confirm(
-      [
-        'Not enabled',
-        'Cancel',
-        'Continue',
-        `Vouchers from the till are not finished yet, use a printed voucher instead.`,
-      ],
-      true
-    );
-    if (!discouraged) {
-      handleClose();
-      return;
-    }
     if (!clickable) return;
     playBeep();
 

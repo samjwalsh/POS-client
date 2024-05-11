@@ -49,6 +49,7 @@ export const getOrderStats = () => {
   let quantityOrders = 0;
   let quantityItems = 0;
   let rollingRevenue = 0;
+  let reconcilledAmt = 0;
 
   const shop = getSetting('Shop Name');
 
@@ -68,6 +69,11 @@ export const getOrderStats = () => {
       cardTotal += order.subtotal;
     } else {
       cashTotal += order.subtotal;
+    }
+
+    if (order.items[0].name == 'Reconcilliation Balance Adjustment') {
+      reconcilledAmt += order.subtotal;
+      continue;
     }
 
     quantityOrders++;
@@ -102,7 +108,7 @@ export const getOrderStats = () => {
   }
 
   const xTotal = cashTotal + cardTotal;
-  const averageSale = xTotal / (quantityOrders == 0 ? 1 : quantityOrders);
+  const averageSale = (xTotal - reconcilledAmt) / (quantityOrders == 0 ? 1 : quantityOrders);
 
   return {
     cashTotal,
@@ -134,7 +140,7 @@ ipcMain.handle('getRollingRevenue', () => {
   while (currOrder < ordersLength) {
     const order = orders[currOrder];
     currOrder++;
-    if (order.deleted || order.eod || order.shop !== shop) continue;
+    if (order.deleted || order.eod || order.shop !== shop || order.items[0].name=='Reconcilliation Balance Adjustment') continue;
     quantityOrders++;
 
     if (new Date(order.time) > hourCutoff) {
@@ -365,7 +371,7 @@ ipcMain.handle('syncOrders', async () => {
       ordersEodedInDb,
     };
   } catch (e) {
-    log(JSON.stringify(e), 'Error while syncing orders', [orders]);
+    // log(JSON.stringify(e), 'Error while syncing orders', [orders]);
     return {
       success: false,
       ordersToAdd: 0,

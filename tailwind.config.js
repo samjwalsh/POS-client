@@ -16,7 +16,7 @@
         // mono: ['TS Riccione'],
         // emoji: ['Segoe UI Emoji'],
         // sans: ['Forma DJR Micro'],
-        sans: ['IBM Plex Sans'],
+        sans: ['Forma DJR Micro'],
         mono: ['IBM Plex Mono'],
         emoji: ['Segoe UI Emoji'],
       },
@@ -69,10 +69,10 @@
           },
         ],
         '4xl': [
-          '1.7rem',
+          '2.1rem',
           {
-            lineHeight: '1.7rem',
-            letterSpacing: '-0.02rem',
+            lineHeight: '2.1rem',
+            // letterSpacing: '-0.05rem',
           },
         ],
       },

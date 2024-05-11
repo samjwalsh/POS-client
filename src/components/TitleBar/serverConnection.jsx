@@ -39,7 +39,6 @@ export default function ServerConnection(props) {
     const connection = await syncOrders();
     const endPing = Date.now();
     let shop = (await getSetting('Shop Name')).slice(0, 2).toUpperCase();
-    console.log('sent')
     const totalLocalUpdates =
       connection.ordersToAdd +
       connection.ordersToDelete +
@@ -72,7 +71,7 @@ export default function ServerConnection(props) {
         <div className='row-span-1 col-span-1 text-center num'>
           {isOnline.status
             ? `${String(isOnline.ping).padStart(3, '0')}`
-            : '---'}
+            : ''}
         </div>
       </div>
       <div className='flex flex-col justify-between'>

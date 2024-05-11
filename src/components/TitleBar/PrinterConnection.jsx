@@ -39,7 +39,7 @@ export default function PrinterConnection() {
       }`}>
       <div>PTR</div>
       <div className='num'>
-        {isOnline.status ? `${String(isOnline.ping).padStart(3, '0')} ` : '---'}
+        {isOnline.status ? `${String(isOnline.ping).padStart(3, '0')} ` : ''}
       </div>
     </div>
   );

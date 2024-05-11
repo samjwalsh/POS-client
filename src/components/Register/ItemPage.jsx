@@ -197,7 +197,7 @@ export function handleAddToOrder(
   currentOrder,
   setCurrentOrder,
   order,
-  setOrder
+  setOrder,
 ) {
   playBeep();
 
@@ -205,6 +205,7 @@ export function handleAddToOrder(
     name: item.name,
     price: computePriceNoQuantity(item, currentOrder),
     quantity: currentOrder.quantity === undefined ? 1 : currentOrder.quantity,
+    colour: item.colour ? item.colour : undefined,
   };
 
   parsedOrder.addons = [];

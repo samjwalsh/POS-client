@@ -35,17 +35,17 @@ body {
 }
 
 .icon {
-  @apply z-0;
+  @apply z-0 ;
   /* @apply invert z-0; */
 }
 
 .menuicon {
-  @apply z-0 opacity-100 invert;
+  @apply z-0 opacity-75;
   /* @apply invert z-0; */
 }
 
 .menu-itm {
-  @apply w-48 h-32 flex-grow flex p-2 text-left justify-start items-end text-4xl mb-2;
+  @apply w-48 h-32 flex-grow flex p-2 text-left justify-start items-end text-4xl mb-2 ;
 }
 
 .menu-itm-filler {
@@ -65,7 +65,7 @@ body {
 }
 
 .keypad {
-  @apply btn w-full h-full text-2xl text-neutral-content font-mono;
+  @apply btn w-full h-full text-4xl text-neutral-content font-mono;
 }
 
 .bc {
@@ -92,8 +92,8 @@ body {
   -webkit-app-region: no-drag;
   @apply shadow-none;
   @apply font-normal;
-  /* @apply border bc hover:border-base-content; */
-  /* @apply shadow-[0.2rem_0.2rem_rgba(0,0,0,1)]; */
+  /* @apply border bc hover:border-base-content; 
+  @apply shadow-[0.2rem_0.2rem_rgba(0,0,0,1)]; */
 }
 
 .btn-primary {

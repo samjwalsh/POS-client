@@ -15,7 +15,7 @@ ipcMain.handle('getAllPrinters', () => {
   return printerDriver.getPrinters();
 });
 
-const createPrinter = () => {
+const createPrinter = async () => {
   let printerOptions = { name: '', type: '', characterSet: '' };
   const settings = settingsStore.get('settings');
   let useCOM = false;
@@ -47,17 +47,20 @@ const createPrinter = () => {
     });
   });
 
-  return new ThermalPrinter({
+  const printer = new ThermalPrinter({
     type: PrinterTypes[printerOptions.type],
     interface: useCOM ? printerOptions.port : printerOptions.name,
     driver: printerDriver,
     characterSet: CharacterSet[printerOptions.characterSet],
   });
+  await printer.execute();
+
+  return printer;
 };
 
 ipcMain.handle('checkPrinterConnection', async () => {
   try {
-    const printer = createPrinter();
+    const printer =await createPrinter();
     const isConnected = await printer.isPrinterConnected();
     return isConnected;
   } catch (e) {
@@ -67,7 +70,7 @@ ipcMain.handle('checkPrinterConnection', async () => {
 
 ipcMain.handle('openCashDrawer', async () => {
   try {
-    const printer = createPrinter();
+    const printer =await createPrinter();
     printer.openCashDrawer();
     await printer.execute();
   } catch (e) {}
@@ -75,7 +78,7 @@ ipcMain.handle('openCashDrawer', async () => {
 
 ipcMain.handle('printVouchers', async (e, vouchers) => {
   try {
-    const printer = createPrinter();
+    const printer =await createPrinter();
 
     for (const voucher of vouchers) {
       printHeader(printer, 'Voucher');
@@ -137,7 +140,7 @@ const printHeader = (printer, title) => {
 ipcMain.handle('printOrder', async (e, order) => {
   try {
     // return printerDriver.getPrinters();
-    const printer = createPrinter();
+    const printer =await createPrinter();
 
     // MUST SET USB002 PORT ON PRINTER PROPERTIES IN WINDOWS
     printHeader(printer, 'Receipt');
@@ -221,7 +224,7 @@ ipcMain.handle('printOrder', async (e, order) => {
 
 ipcMain.handle('printEndOfDay', async (e, orders) => {
   try {
-    const printer = createPrinter();
+    const printer =await createPrinter();
 
     // MUST SET USB002 PORT ON PRINTER PROPERTIES IN WINDOWS
     printHeader(printer, 'End Of Day');
@@ -295,7 +298,7 @@ ipcMain.handle('printEndOfDay', async (e, orders) => {
 
 ipcMain.handle('printTestPage', async () => {
   try {
-    const printer = createPrinter();
+    const printer =await createPrinter();
     const testString =
       '!"#$%&\'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~';
     printer.setTextQuadArea();

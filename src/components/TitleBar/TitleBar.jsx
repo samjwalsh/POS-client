@@ -60,33 +60,42 @@ export default function TitleBar(props) {
       <VoucherRedeemer />
       <VoucherChecker />
       <ListSelect />
-      <div className='flex flex-row justify-between h-16 border-b bc cnter drag'>
-        <div className='flex flex-row h-full w-full justify-between'>
+      <div className='flex flex-row justify-between h-16 border-b bc drag relative'>
+        <div className='flex flex-row h-full gap-0 w-8/12 justify-between'>
+          <div className='flex flex-row gap-2'>
           <Button
             type='primary'
             className='w-20 h-full'
             onClick={(e) => handleClickHamburger(setHamburger)}>
             Menu
           </Button>
-          <div className='flex flex-row gap-[1px]'>
-            <Button
-              type='primary'
-              className='w-32 h-full'
-              onClick={handlePrintRecentOrder}>
-              Print Receipt
-            </Button>
-            <Button
-              type='secondary'
-              className='w-32 h-full'
-              onClick={handleClickVoucherMenu}>
-              Vouchers
-            </Button>
-            <div className='w-20'></div>
+          <div className='text-2xl mt-auto mb-1'>{appState}</div>
           </div>
+          {appState === 'Register' ? (
+            <>
+            <div className='flex flex-row gap-[1px]'>
+              <Button
+                type='primary'
+                className='w-32 h-full'
+                onClick={handlePrintRecentOrder}>
+                Print Receipt
+              </Button>
+              <Button
+                type='secondary'
+                className='w-32 h-full'
+                onClick={handleClickVoucherMenu}>
+                Vouchers
+              </Button>
+            </div>
+            </>
+          ) : (
+            ''
+          )}
         </div>
+
         {/* <HelpPageButton/> */}
-        <div className='flex flex-row h-full items-center justify-end'>
-          <div className='flex flex-row gap-[0px] h-full'>
+        <div className='flex flex-row h-full items-center justify-end absolute right-0 top-0'>
+          <div className='flex flex-row gap-[0px] h-full text-center'>
             <PrinterConnection />
             <Connection />
             <ServerConnection

@@ -53,12 +53,15 @@ export default function HamburgerMenu(props) {
   }
 
   async function handleCleanScreen() {
-    const choice = await confirm([
-      'Enter cleaning mode?',
-      'Cancel',
-      'Continue',
-      `This will disable the touchscreen for 15 seconds so the screen can be cleaned.`,
-    ], false);
+    const choice = await confirm(
+      [
+        'Enter cleaning mode?',
+        'Cancel',
+        'Continue',
+        `This will disable the touchscreen for 15 seconds so the screen can be cleaned.`,
+      ],
+      false
+    );
     if (!choice) {
       return;
     }
@@ -113,7 +116,9 @@ export default function HamburgerMenu(props) {
             <Button
               type='danger'
               className='aspect-square'
-              onClick={() => {console.log("here");handleCloseSideMenu(setHamburger)}}
+              onClick={() => {
+                handleCloseSideMenu(setHamburger);
+              }}
               center={true}
               iconSize={6}
               icon={closeSVG}></Button>

@@ -14,23 +14,23 @@ export default function ShortcutBox({
   order,
   setOrder,
 }) {
-  if (shortcut !== undefined) {
-    let addons = shortcut.addons;
-    let addonsString = '';
-    if (addons.length > 0) {
-      addons.forEach((addon, index) => {
-        if (index + 1 !== addons.length) {
-          addonsString += `${addon.name}, `;
-        } else {
-          addonsString += `${addon.name}`;
-        }
-      });
-    } else {
-      addonsString = 'No Addons';
-    }
-    return (
-      <Button
-      onClick={() =>
+  if (shortcut == undefined) return;
+  let addons = shortcut.addons;
+  let addonsString = '';
+  if (addons.length > 0) {
+    addons.forEach((addon, index) => {
+      if (index + 1 !== addons.length) {
+        addonsString += `${addon.name}, `;
+      } else {
+        addonsString += `${addon.name}`;
+      }
+    });
+  } else {
+    addonsString = 'No Addons';
+  }
+  return (
+    <Button
+      onClick={() => {
         handleClickShortcut(
           item,
           setMenuState,
@@ -38,20 +38,21 @@ export default function ShortcutBox({
           setCurrentOrder,
           order,
           setOrder,
-          addons
-        )
-      }
+          addons,
+          shortcut.colour
+        );
+      }}
       type='primary'
       className='basis-1 flex-grow flex flex-col justify-between p-2'
-      key={shortcut.name}>
-        <div className='w-full text-3xl'>{shortcut.name}</div>
-        <div className='w-full mt-auto'>
-          <div className='num text-lg'>{cF(shortcut.price)}</div>
-          <div className='text-lg'>{addonsString}</div>
-        </div>
-      </Button>
-    );
-  }
+      key={shortcut.name}
+      colour={shortcut.colour ? shortcut.colour : undefined}>
+      <div className='w-full text-3xl'>{shortcut.name}</div>
+      <div className='w-full mt-auto'>
+        <div className='num text-lg'>{cF(shortcut.price)}</div>
+        <div className='text-lg'>{addonsString}</div>
+      </div>
+    </Button>
+  );
 }
 
 function handleClickShortcut(
@@ -61,8 +62,10 @@ function handleClickShortcut(
   setCurrentOrder,
   order,
   setOrder,
-  addons
+  addons,
+  colour
 ) {
+  if (colour) item.colour = colour;
   playBeep();
   addons.forEach((shortcutAddon) => {
     item.addons.forEach((itemAddon) => {

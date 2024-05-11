@@ -1,7 +1,7 @@
 {
   "name": "pos-client",
   "productName": "pos-client",
-  "version": "4.0.2",
+  "version": "4.0.0",
   "description": "pos-client",
   "main": ".webpack/main",
   "scripts": {
@@ -42,6 +42,7 @@
   "dependencies": {
     "@thiagoelg/node-printer": "^0.6.2",
     "axios": "^1.6.2",
+    "colorjs.io": "^0.5.0",
     "copy-webpack-plugin": "^11.0.0",
     "electron-squirrel-startup": "^1.0.0",
     "electron-store": "^8.1.0",
