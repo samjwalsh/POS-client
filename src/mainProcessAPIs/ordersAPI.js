@@ -30,7 +30,14 @@ ipcMain.handle('getAllOrders', () => {
     const order = orders[currOrder];
     currOrder++;
     loop++;
-    if (order.deleted || order.eod || order.shop !== shop) continue;
+    if (
+      order.deleted ||
+      order.eod ||
+      order.shop !== shop
+      || order.items[0].name == 'Reconcilliation Balance Adjustment'
+    )
+      continue;
+
     notDeletedOrEodOrders.push(order);
     if (notDeletedOrEodOrders.length >= 50) currOrder = ordersLength;
   }
@@ -49,7 +56,9 @@ export const getOrderStats = () => {
   let quantityOrders = 0;
   let quantityItems = 0;
   let rollingRevenue = 0;
-  let reconcilledAmt = 0;
+  let reconcilledCard = 0;
+  let reconcilledCash = 0;
+  let mostRecentReconcilliation = new Date(0);
 
   const shop = getSetting('Shop Name');
 
@@ -72,7 +81,13 @@ export const getOrderStats = () => {
     }
 
     if (order.items[0].name == 'Reconcilliation Balance Adjustment') {
-      reconcilledAmt += order.subtotal;
+      if (order.paymentMethod === 'Card') {
+        reconcilledCard += order.subtotal;
+      } else {
+        reconcilledCash += order.subtotal;
+      }
+      if (new Date(order.time) > mostRecentReconcilliation)
+        mostRecentReconcilliation = new Date(order.time);
       continue;
     }
 
@@ -108,7 +123,9 @@ export const getOrderStats = () => {
   }
 
   const xTotal = cashTotal + cardTotal;
-  const averageSale = (xTotal - reconcilledAmt) / (quantityOrders == 0 ? 1 : quantityOrders);
+  const averageSale =
+    (xTotal - reconcilledCard - reconcilledCash) /
+    (quantityOrders == 0 ? 1 : quantityOrders);
 
   return {
     cashTotal,
@@ -118,6 +135,9 @@ export const getOrderStats = () => {
     averageSale,
     xTotal,
     rollingRevenue,
+    reconcilledCard,
+    reconcilledCash,
+    mostRecentReconcilliation,
   };
 };
 
@@ -140,7 +160,13 @@ ipcMain.handle('getRollingRevenue', () => {
   while (currOrder < ordersLength) {
     const order = orders[currOrder];
     currOrder++;
-    if (order.deleted || order.eod || order.shop !== shop || order.items[0].name=='Reconcilliation Balance Adjustment') continue;
+    if (
+      order.deleted ||
+      order.eod ||
+      order.shop !== shop ||
+      order.items[0].name == 'Reconcilliation Balance Adjustment'
+    )
+      continue;
     quantityOrders++;
 
     if (new Date(order.time) > hourCutoff) {
@@ -161,9 +187,12 @@ export const generateID = () => {
   return (Date.now() + Math.random()).toString();
 };
 
-ipcMain.handle('addOrder', async (e, args) => {
+ipcMain.handle('addOrder', (e, items, paymentMethod) => {
+  addOrder(items, paymentMethod);
+});
+
+const addOrder = (items, paymentMethod) => {
   try {
-    let items = args.order;
     if (!Array.isArray(items)) {
       items = [];
     }
@@ -179,7 +208,7 @@ ipcMain.handle('addOrder', async (e, args) => {
       id: generateID(),
       time: new Date(),
       subtotal,
-      paymentMethod: args.paymentMethod,
+      paymentMethod,
       shop: getSetting('Shop Name'),
       till: getSetting('Till Number'),
       deleted: false,
@@ -197,7 +226,7 @@ ipcMain.handle('addOrder', async (e, args) => {
   } catch (e) {
     log(JSON.stringify(e), 'Error while adding order', [args]);
   }
-});
+};
 
 ipcMain.handle('removeOldOrders', () => {
   const orders = store.get('orders');
@@ -266,6 +295,70 @@ export const findOrderIndex = (id) => {
 
   return deletedOrderIndex;
 };
+
+ipcMain.handle('reconcile', (e, desiredCard, desiredCash) => {
+  // Find the current card and cash totals
+  let orders = store.get('orders');
+  const shop = getSetting('Shop Name');
+  let reconcilledCard = 0;
+  let reconcilledCash = 0;
+  let cardTotal = 0;
+  let cashTotal = 0;
+  let oldRecIDs = [];
+  let currOrder = 0;
+  const ordersLegnth = orders.length;
+
+  while (currOrder < ordersLegnth) {
+    const order = orders[currOrder];
+    currOrder++;
+    if (order.deleted || order.eod || order.shop !== shop) continue;
+
+    if (order.paymentMethod === 'Card') {
+      cardTotal += order.subtotal;
+    } else {
+      cashTotal += order.subtotal;
+    }
+
+    if (order.items[0].name == 'Reconcilliation Balance Adjustment') {
+      if (order.paymentMethod === 'Card') {
+        reconcilledCard += order.subtotal;
+      } else {
+        reconcilledCash += order.subtotal;
+      }
+      oldRecIDs.push(order.id);
+    }
+  }
+  // Find what needs to be added removed to each, this is our reconcileAmount
+  // Find how much has already been reconilled for cash and card, we want an array of these orders
+  // Add up their totals and subtract them from the reconcileAmounts
+  let cardRecAmt = desiredCard - cardTotal + reconcilledCard;
+  let cashRecAmt = desiredCash - cashTotal + reconcilledCash;
+  // Delete the old reconcileOrders
+  for (const id of oldRecIDs) {
+    removeOrder({ id });
+  }
+  // Add the new orders
+  if (Math.abs(cardRecAmt) >= 0.05) {
+    const cardItem = [
+      {
+        name: 'Reconcilliation Balance Adjustment',
+        price: cardRecAmt,
+        quantity: 1,
+      },
+    ];
+    addOrder(cardItem, 'Card');
+  }
+  if (Math.abs(cashRecAmt) >= 0.05) {
+    const cashItem = [
+      {
+        name: 'Reconcilliation Balance Adjustment',
+        price: cashRecAmt,
+        quantity: 1,
+      },
+    ];
+    addOrder(cashItem, 'Cash');
+  }
+});
 
 ipcMain.handle('swapPaymentMethod', (e, order) => {
   let orders = store.get('orders');

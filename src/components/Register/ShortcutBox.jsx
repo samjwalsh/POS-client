@@ -43,10 +43,10 @@ export default function ShortcutBox({
         );
       }}
       type='primary'
-      className='basis-1 flex-grow flex flex-col justify-between p-2'
+      className='basis-1 flex-grow flex flex-col justify-between p-2 w-0 whitespace-normal'
       key={shortcut.name}
       colour={shortcut.colour ? shortcut.colour : undefined}>
-      <div className='w-full text-3xl'>{shortcut.name}</div>
+      <div className='w-full text-3xl '>{shortcut.name}</div>
       <div className='w-full mt-auto'>
         <div className='num text-lg'>{cF(shortcut.price)}</div>
         <div className='text-lg'>{addonsString}</div>

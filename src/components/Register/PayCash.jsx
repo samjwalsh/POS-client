@@ -9,11 +9,24 @@ import Button from '../Reusables/Button.jsx';
 import playBeep from '../../tools/playBeep';
 import { addOrder, openCashDrawer } from '../../tools/ipc';
 import { cF } from '../../tools/numbers.js';
+import { useInterval } from '../Reusables/Wait.jsx';
 
 export default function PayCash(props) {
   const { order, setOrder, setPayCash, keypad } = props;
 
   const [change, setChange] = useState(0);
+
+  const [pos, setPos] = useState(0);
+
+  const step = 1000;
+  const totalTime = 20;
+  useInterval(() => {
+    if (pos < 100) setPos(pos + (step / (totalTime * 1000)) * 100);
+    else {
+      setPos(0);
+      handleButtonPress('exit');
+    }
+  }, step);
 
   const [Alert, alert] = useAlert();
 
@@ -46,7 +59,8 @@ export default function PayCash(props) {
   }
 
   async function handlePayCashHelp() {
-    await alert('Change Calculator',
+    await alert(
+      'Change Calculator',
       `You can use the buttons labelled with 5, 10, 20 and 50 euro to calculate your change, or press custom and key in an amount. You don't have to use these buttons if you already know what the change is. Press done to finish the transaction.`
     );
   }
@@ -102,9 +116,15 @@ export default function PayCash(props) {
           <Button
             type='primary'
             size='large'
-            className='col-span-2 row-span-2'
+            className='col-span-2 row-span-2 relative'
             onClick={() => handleButtonPress('exit')}>
             Done
+            <div
+              className={`absolute top-0 left-0 h-full w-0 opacity-75 bg-white`}
+              style={{
+                width: pos + '%',
+                transition: 'all ' + step / 1000 + 's linear',
+              }}></div>
           </Button>
         </div>
         <div className='flex justify-between w-full text-2xl pt-1 px-1'>
@@ -115,7 +135,6 @@ export default function PayCash(props) {
     </>
   );
 }
-
 export function calculateSubtotal(order) {
   let subtotal = 0;
   order.forEach((orderItem) => {

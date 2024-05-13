@@ -17,7 +17,7 @@ export function getRollingRevenue() {
 }
 
 export async function addOrder(order, paymentMethod) {
-  return ipcRenderer.invoke('addOrder', { order, paymentMethod });
+  return ipcRenderer.invoke('addOrder', order, paymentMethod);
 }
 
 export function removeOldOrders(orders) {
@@ -118,4 +118,8 @@ export function checkVoucher(voucherCode) {
 
 export async function log(errMsg, note, objsOfInterest) {
   return ipcRenderer.invoke('log', errMsg, note, objsOfInterest);
+}
+
+export async function reconcile(trueCard, trueCash) {
+  return ipcRenderer.invoke('reconcile', trueCard, trueCash);
 }

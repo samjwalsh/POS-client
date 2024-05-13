@@ -8,7 +8,7 @@ import playBeep from '../../tools/playBeep.js';
 import useConfirm from '../Reusables/ConfirmDialog.jsx';
 import Button from '../Reusables/Button.jsx';
 import useAlert from '../Reusables/Alert.jsx';
-import { addOrder } from '../../tools/ipc.js';
+import { addOrder, reconcile } from '../../tools/ipc.js';
 import { cF } from '../../tools/numbers.js';
 import Modal from '../Reusables/Modal.jsx';
 import NumberInput from '../Reusables/NumberInput.jsx';
@@ -67,30 +67,32 @@ const useReconciller = (props) => {
   };
 
   const handleReconcile = async () => {
-    if (Math.abs(reconcileAmt.card - cardTotal) >= 0.005) {
-      addOrder(
-        [
-          {
-            name: 'Reconcilliation Balance Adjustment',
-            price: reconcileAmt.card - cardTotal,
-            quantity: 1,
-          },
-        ],
-        'Card'
-      );
-    }
-    if (Math.abs(reconcileAmt.cash - cashTotal) >= 0.005) {
-      addOrder(
-        [
-          {
-            name: 'Reconcilliation Balance Adjustment',
-            price: reconcileAmt.cash - cashTotal,
-            quantity: 1,
-          },
-        ],
-        'Cash'
-      );
-    }
+    playBeep();
+    reconcile(reconcileAmt.card, reconcileAmt.cash)
+    // if (Math.abs(reconcileAmt.card - cardTotal) >= 0.005) {
+    //   addOrder(
+    //     [
+    //       {
+    //         name: 'Reconcilliation Balance Adjustment',
+    //         price: reconcileAmt.card - cardTotal,
+    //         quantity: 1,
+    //       },
+    //     ],
+    //     'Card'
+    //   );
+    // }
+    // if (Math.abs(reconcileAmt.cash - cashTotal) >= 0.005) {
+    //   addOrder(
+    //     [
+    //       {
+    //         name: 'Reconcilliation Balance Adjustment',
+    //         price: reconcileAmt.cash - cashTotal,
+    //         quantity: 1,
+    //       },
+    //     ],
+    //     'Cash'
+    //   );
+    // }
     promise?.resolve(true);
     handleClose();
   };

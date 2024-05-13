@@ -16,6 +16,7 @@ import OrderItem from '../Reusables/OrderItem.jsx';
 import useConfirm from '../Reusables/ConfirmDialog.jsx';
 import { cF } from '../../tools/numbers.js';
 import Button from '../Reusables/Button.jsx';
+import ButtonStack from '../Reusables/ButtonStack.jsx';
 
 export default function Order(props) {
   const { order, setOrder } = props;
@@ -172,7 +173,7 @@ export default function Order(props) {
             <div className='text-left'>Total:</div>
             <div className='text-right num justify-end'>{cF(subtotal)}</div>
           </div>
-          <div className='row-span-1 col-span-1 flex gap-[1px] items-stretch h-20 text-2xl'>
+          <div className='row-span-1 col-span-1 flex gap-1 items-stretch h-20 text-2xl'>
             {payCash === true ? (
               <Button
                 type='danger'
@@ -182,28 +183,28 @@ export default function Order(props) {
                 Cancel
               </Button>
             ) : (
-              <>
-                <Button
-                  size='large'
-                  type='secondary'
-                  className='aspect-square'
-                  onClick={() => handlePlusMinus()}
-                  icon={euro}></Button>
-                <Button
-                  size='large'
-                  type='primary'
-                  className='flex-grow'
-                  onClick={() => handlePayment('card')}>
-                  Card
-                </Button>
-                <Button
-                  size='large'
-                  type='primary'
-                  className='flex-grow'
-                  onClick={() => handlePayment('cash')}>
-                  Cash
-                </Button>
-              </>
+                <ButtonStack className='h-full'>
+                  <Button
+                    size='large'
+                    type='secondary'
+                    className='aspect-square'
+                    onClick={() => handlePlusMinus()}
+                    icon={euro}></Button>
+                  <Button
+                    size='large'
+                    type='primary'
+                    className='flex-grow'
+                    onClick={() => handlePayment('card')}>
+                    Card
+                  </Button>
+                  <Button
+                    size='large'
+                    type='primary'
+                    className='flex-grow'
+                    onClick={() => handlePayment('cash')}>
+                    Cash
+                  </Button>
+                </ButtonStack>
             )}
           </div>
         </div>

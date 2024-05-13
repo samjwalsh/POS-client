@@ -10,6 +10,7 @@ import addSVG from '../../assets/appicons/add.svg';
 import minusSVG from '../../assets/appicons/minus.svg';
 import { cF } from '../../tools/numbers.js';
 import Button from '../Reusables/Button.jsx';
+import ButtonStack from '../Reusables/ButtonStack.jsx';
 
 export default function ItemPage({
   menuState,
@@ -70,7 +71,7 @@ export default function ItemPage({
           </div>
         </div>
         <div className='w-full h-full flex-grow flex flex-col '>
-          <div className='flex flex-row gap-[1px] flex-grow border-b bc p-2 max-h-[14rem] min-h-[10rem]'>
+          <ButtonStack className='flex-grow border-b bc p-2 max-h-[14rem] min-h-[10rem] '>
             {item.shortcuts.map((shortcut) => {
               return (
                 <ShortcutBox
@@ -85,7 +86,7 @@ export default function ItemPage({
                 />
               );
             })}
-          </div>
+          </ButtonStack>
           <div className='flex flex-row flex-wrap gap-[1px] p-2 overflow-y-scroll no-scrollbar'>
             {item.addons.map((addon, index) => {
               return (

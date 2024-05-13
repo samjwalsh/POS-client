@@ -13,6 +13,7 @@ import useVoucherChecker from '../Register/VoucherChecker.jsx';
 import { getAllOrders, printOrder, getSetting } from '../../tools/ipc.js';
 import useConfirm from '../Reusables/ConfirmDialog.jsx';
 import Button from '../Reusables/Button.jsx';
+import ButtonStack from '../Reusables/ButtonStack.jsx';
 
 export default function TitleBar(props) {
   const {
@@ -43,7 +44,7 @@ export default function TitleBar(props) {
       return;
     }
     if (choice == 'Create Vouchers') {
-      await voucherCreator();
+      voucherCreator();
     } else if (choice == 'Redeem Voucher') {
       await voucherRedeemer();
     } else if (choice == 'Check Voucher') {
@@ -63,31 +64,29 @@ export default function TitleBar(props) {
       <div className='flex flex-row justify-between h-16 border-b bc drag relative'>
         <div className='flex flex-row h-full gap-0 w-8/12 justify-between'>
           <div className='flex flex-row gap-2'>
-          <Button
-            type='primary'
-            className='w-20 h-full'
-            onClick={(e) => handleClickHamburger(setHamburger)}>
-            Menu
-          </Button>
-          <div className='text-2xl mt-auto mb-1'>{appState}</div>
+            <Button
+              type='primary'
+              className='w-20 h-full'
+              onClick={(e) => handleClickHamburger(setHamburger)}>
+              Menu
+            </Button>
+            <div className='text-2xl mt-auto mb-1'>{appState}</div>
           </div>
           {appState === 'Register' ? (
-            <>
-            <div className='flex flex-row gap-[1px]'>
+            <ButtonStack>
               <Button
                 type='primary'
-                className='w-32 h-full'
+                className='w-32'
                 onClick={handlePrintRecentOrder}>
                 Print Receipt
               </Button>
               <Button
                 type='secondary'
-                className='w-32 h-full'
+                className='w-32'
                 onClick={handleClickVoucherMenu}>
                 Vouchers
               </Button>
-            </div>
-            </>
+            </ButtonStack>
           ) : (
             ''
           )}

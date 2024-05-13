@@ -14,7 +14,7 @@ const Button = ({
   colour,
 }) => {
   if (!iconSize) iconSize = 8;
-  let classes = '';
+  let classes = ' ';
   if (!center) {
     classes = 'dBtn ';
   } else {

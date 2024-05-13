@@ -53,6 +53,7 @@ export default function HamburgerMenu(props) {
   }
 
   async function handleCleanScreen() {
+    playBeep();
     const choice = await confirm(
       [
         'Enter cleaning mode?',

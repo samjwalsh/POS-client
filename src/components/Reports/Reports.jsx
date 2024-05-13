@@ -34,6 +34,9 @@ export default function Reports(props) {
     quantityOrders: 0,
     averageSale: 0,
     xTotal: 0,
+    reconcilledCard: 0,
+    reconcilledCash: 0,
+    mostRecentReconcilliation: new Date(0),
   });
   const [ready, setReady] = useState(false);
 

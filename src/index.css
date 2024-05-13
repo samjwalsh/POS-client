@@ -90,10 +90,10 @@ body {
 
 .btn {
   -webkit-app-region: no-drag;
-  @apply shadow-none;
+  /* @apply shadow-none; */
   @apply font-normal;
-  /* @apply border bc hover:border-base-content; 
-  @apply shadow-[0.2rem_0.2rem_rgba(0,0,0,1)]; */
+  /* @apply border   bc hover:border-base-content;  */
+  /* @apply shadow-[0.2rem_0.2rem_rgba(0,0,0,1)]; */
 }
 
 .btn-primary {
@@ -123,6 +123,7 @@ body {
 .dBtn {
   @apply flex justify-start items-end p-2 text-left min-h-[3rem];
   -webkit-app-region: no-drag;
+  
 }
 
 .icon-primary {
