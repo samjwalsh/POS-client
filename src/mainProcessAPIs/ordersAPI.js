@@ -22,24 +22,21 @@ ipcMain.handle('getAllOrders', () => {
   }
   const notDeletedOrEodOrders = [];
 
-  let currOrder = 0,
-    ordersLength = orders.length;
+  let currOrder = orders.length - 1;
   const shop = getSetting('Shop Name');
-  let loop = 0;
-  while (currOrder < ordersLength) {
+  while (currOrder >= 0) {
     const order = orders[currOrder];
-    currOrder++;
-    loop++;
+    currOrder--;
     if (
       order.deleted ||
       order.eod ||
-      order.shop !== shop
-      || order.items[0].name == 'Reconcilliation Balance Adjustment'
+      order.shop !== shop ||
+      order.items[0].name == 'Reconcilliation Balance Adjustment'
     )
       continue;
 
     notDeletedOrEodOrders.push(order);
-    if (notDeletedOrEodOrders.length >= 50) currOrder = ordersLength;
+    if (notDeletedOrEodOrders.length >= 50) break;
   }
   return notDeletedOrEodOrders;
 });
@@ -218,7 +215,7 @@ const addOrder = (items, paymentMethod) => {
 
     const orders = store.get('orders');
     if (Array.isArray(orders)) {
-      orders.unshift(order);
+      orders.push(order);
       store.set('orders', orders);
     } else {
       store.set('orders', [order]);
@@ -376,7 +373,6 @@ ipcMain.handle('swapPaymentMethod', (e, order) => {
   orders.splice(index, 0, order);
   store.set('orders', orders);
 });
-
 ipcMain.handle('syncOrders', async () => {
   let orders = store.get('orders');
   if (Array.isArray(orders) === false) {
@@ -396,13 +392,12 @@ ipcMain.handle('syncOrders', async () => {
       key,
       orders,
     };
-
     let res = await axios({
       method: 'get',
       url: `${https ? 'https' : 'http'}://${syncServer}/api/syncOrders`,
       headers: {},
       data,
-      timeout: 30000,
+      timeout: 120000,
     });
     const missingOrders = res.data.missingOrders;
     const deletedOrderIds = res.data.deletedOrderIds;
@@ -432,12 +427,13 @@ ipcMain.handle('syncOrders', async () => {
       });
     });
 
-    const uniqueOrders = orders.filter(
+    let uniqueOrders = orders.filter(
       (order, index) =>
         orders.findIndex((currentOrder) => currentOrder.id === order.id) ===
         index
     );
-    uniqueOrders.sort((a, b) => (a.time > b.time ? -1 : 1));
+
+    uniqueOrders = insertionSort(uniqueOrders);
 
     store.set('orders', uniqueOrders);
 
@@ -464,6 +460,7 @@ ipcMain.handle('syncOrders', async () => {
       ordersEodedInDb,
     };
   } catch (e) {
+    console.log(e)
     // log(JSON.stringify(e), 'Error while syncing orders', [orders]);
     return {
       success: false,
@@ -476,3 +473,17 @@ ipcMain.handle('syncOrders', async () => {
     };
   }
 });
+
+const insertionSort = (orders) => {
+  for (let i = 1; i < orders.length; i++) {
+    let key = orders[i];
+    let id = key.id;
+    let j = i - 1;
+    while (j >= 0 && orders[j].id > id) {
+      orders[j + 1] = orders[j];
+      j = j - 1;
+    }
+    orders[j + 1] = key;
+  }
+  return orders;
+};
