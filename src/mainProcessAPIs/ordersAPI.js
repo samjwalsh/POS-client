@@ -183,20 +183,29 @@ ipcMain.handle('getOrderStats', () => {
 export const generateID = () => {
   const date = Date.now().toString();
   const shop = getSetting('Shop Name');
-  const shopAsNum = shop.charCodeAt(0).toString().concat(shop.charCodeAt(1).toString())
+  const shopAsNum = shop
+    .charCodeAt(0)
+    .toString()
+    .concat(shop.charCodeAt(1).toString());
   const till = getSetting('Till Number').toString();
-  const random = Math.random().toString().substring(2,5);
-  const id = date.concat('.').concat(shopAsNum).concat('.').concat(till).concat('.').concat(random);
+  const random = Math.random().toString().substring(2, 5);
+  const id = date
+    .concat('.')
+    .concat(shopAsNum)
+    .concat('.')
+    .concat(till)
+    .concat('.')
+    .concat(random);
   return id;
 };
 
 export const refreshID = (id) => {
   console.log(id);
   const parts = id.split('.');
-  parts[3] = Math.random().toString().substring(2,5);
-  const newID =  parts.join('.');
+  parts[3] = Math.random().toString().substring(2, 5);
+  const newID = parts.join('.');
   return newID;
-}
+};
 
 ipcMain.handle('addOrder', (e, items, paymentMethod) => {
   addOrder(items, paymentMethod);
@@ -387,13 +396,24 @@ ipcMain.handle('swapPaymentMethod', (e, order) => {
   orders.splice(index, 0, order);
   store.set('orders', orders);
 });
+
+let activeReq = false;
 ipcMain.handle('syncOrders', async () => {
   let orders = store.get('orders');
   if (Array.isArray(orders) === false) {
     store.set('orders', []);
     orders = [];
   }
-
+  const noResponse = {
+    success: false,
+    ordersToAdd: 0,
+    ordersToDelete: 0,
+    ordersToEod: 0,
+    ordersMissingInDb: 0,
+    ordersDeletedInDb: 0,
+    ordersEodedInDb: 0,
+  };
+  if (activeReq) return noResponse;
   try {
     const syncServer = getSetting('Sync Server');
     const https = getSetting('HTTPS');
@@ -464,6 +484,8 @@ ipcMain.handle('syncOrders', async () => {
     const ordersEodedInDb =
       res.data.eodsCompletedInDb !== undefined ? res.data.eodsCompletedInDb : 0;
 
+    activeReq = false;
+
     return {
       success: true,
       ordersToAdd,
@@ -474,17 +496,9 @@ ipcMain.handle('syncOrders', async () => {
       ordersEodedInDb,
     };
   } catch (e) {
-    console.log(e)
+    activeReq = false;
     // log(JSON.stringify(e), 'Error while syncing orders', [orders]);
-    return {
-      success: false,
-      ordersToAdd: 0,
-      ordersToDelete: 0,
-      ordersToEod: 0,
-      ordersMissingInDb: 0,
-      ordersDeletedInDb: 0,
-      ordersEodedInDb: 0,
-    };
+    return noResponse;
   }
 });
 
