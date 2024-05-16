@@ -181,8 +181,22 @@ ipcMain.handle('getOrderStats', () => {
 });
 
 export const generateID = () => {
-  return (Date.now() + Math.random()).toString();
+  const date = Date.now().toString();
+  const shop = getSetting('Shop Name');
+  const shopAsNum = shop.charCodeAt(0).toString().concat(shop.charCodeAt(1).toString())
+  const till = getSetting('Till Number').toString();
+  const random = Math.random().toString().substring(2,5);
+  const id = date.concat('.').concat(shopAsNum).concat('.').concat(till).concat('.').concat(random);
+  return id;
 };
+
+export const refreshID = (id) => {
+  console.log(id);
+  const parts = id.split('.');
+  parts[3] = Math.random().toString().substring(2,5);
+  const newID =  parts.join('.');
+  return newID;
+}
 
 ipcMain.handle('addOrder', (e, items, paymentMethod) => {
   addOrder(items, paymentMethod);
@@ -367,7 +381,7 @@ ipcMain.handle('swapPaymentMethod', (e, order) => {
     order.paymentMethod = 'Cash';
   }
   if (order._id) delete order._id;
-  order.id = generateID();
+  order.id = refreshID(order.id);
   // Need to get orders again because the current copy in memory does not have the deleted order in it;
   orders = store.get('orders');
   orders.splice(index, 0, order);
