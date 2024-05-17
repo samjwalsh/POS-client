@@ -358,7 +358,7 @@ ipcMain.handle('reconcile', (e, desiredCard, desiredCash) => {
     removeOrder({ id });
   }
   // Add the new orders
-  if (Math.abs(cardRecAmt) >= 0.05) {
+  if (Math.abs(cardRecAmt) >= 0.005) {
     const cardItem = [
       {
         name: 'Reconcilliation Balance Adjustment',
@@ -368,7 +368,7 @@ ipcMain.handle('reconcile', (e, desiredCard, desiredCash) => {
     ];
     addOrder(cardItem, 'Card');
   }
-  if (Math.abs(cashRecAmt) >= 0.05) {
+  if (Math.abs(cashRecAmt) >= 0.005) {
     const cashItem = [
       {
         name: 'Reconcilliation Balance Adjustment',

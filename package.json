@@ -1,7 +1,7 @@
 {
   "name": "pos-client",
   "productName": "pos-client",
-  "version": "4.1.0",
+  "version": "4.2.0",
   "description": "pos-client",
   "main": ".webpack/main",
   "scripts": {
@@ -47,6 +47,7 @@
     "electron-squirrel-startup": "^1.0.0",
     "electron-store": "^8.1.0",
     "file-loader": "^6.2.0",
+    "javascript-time-ago": "^2.5.10",
     "node-thermal-printer": "^4.4.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"

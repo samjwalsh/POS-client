@@ -2,6 +2,11 @@ import * as React from 'react';
 import RollingRevenue from './RollingRevenue.jsx';
 import { cF, nF } from '../../tools/numbers.js';
 import { calculateDateString } from './Reports.jsx';
+import TimeAgo from 'javascript-time-ago';
+
+import en from 'javascript-time-ago/locale/en';
+TimeAgo.addDefaultLocale(en);
+const timeAgo = new TimeAgo('en-IE');
 
 export default function OrdersStats({ stats }) {
   const {
@@ -13,7 +18,7 @@ export default function OrdersStats({ stats }) {
     xTotal,
     reconcilledCard,
     reconcilledCash,
-    mostRecentReconcilliation
+    mostRecentReconcilliation,
   } = stats;
   return (
     <div className='flex flex-col w-full text-2xl p-2 pt-0 gap-2'>
@@ -39,7 +44,9 @@ export default function OrdersStats({ stats }) {
       </div>
       <div className='flex flex-row w-full justify-between border-b bc pb-2 text-base'>
         <div className=''>Last Updated:</div>
-        <div className='num text-right justify-end'>{new Date(mostRecentReconcilliation).toLocaleTimeString()}</div>
+        <div className='num text-right justify-end'>
+          {calculateTimeAgo(new Date(mostRecentReconcilliation))}
+        </div>
       </div>
       <div className='flex flex-row w-full justify-between border-b bc pb-2 text-base'>
         <div className=''>No. Orders:</div>
@@ -57,3 +64,8 @@ export default function OrdersStats({ stats }) {
     </div>
   );
 }
+
+const calculateTimeAgo = (date) => {
+  if ((new Date() - date) > new Date(24 * 60 * 60 * 1000)) return 'Never'
+  return timeAgo.format(date, 'round');
+};
