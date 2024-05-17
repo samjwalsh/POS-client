@@ -47,13 +47,18 @@ const createPrinter = async (test) => {
     });
   });
 
-  const printer = new ThermalPrinter({
+  let options = {
     type: PrinterTypes[printerOptions.type],
     interface: useCOM ? printerOptions.port : printerOptions.name,
     driver: printerDriver,
     characterSet: CharacterSet[printerOptions.characterSet],
-  });
+  }
+  const printer = new ThermalPrinter(options);
+  try {
   if (!test) await printer.execute();
+  } catch(e) {
+    log(JSON.stringify(e),'Error testing printer', [options])
+  }
 
   return printer;
 };
