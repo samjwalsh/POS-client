@@ -3,6 +3,7 @@ import RollingRevenue from './RollingRevenue.jsx';
 import { cF, nF } from '../../tools/numbers.js';
 import { calculateDateString } from './Reports.jsx';
 import TimeAgo from 'javascript-time-ago';
+import ReactTimeAgo from 'react-time-ago'
 
 import en from 'javascript-time-ago/locale/en';
 TimeAgo.addDefaultLocale(en);
@@ -20,6 +21,8 @@ export default function OrdersStats({ stats }) {
     reconcilledCash,
     mostRecentReconcilliation,
   } = stats;
+
+  const lastRec = new Date(mostRecentReconcilliation)
   return (
     <div className='flex flex-col w-full text-2xl p-2 pt-0 gap-2'>
       <div className='flex flex-row w-full justify-between bc'>
@@ -45,7 +48,9 @@ export default function OrdersStats({ stats }) {
       <div className='flex flex-row w-full justify-between border-b bc pb-2 text-base'>
         <div className=''>Last Updated:</div>
         <div className='num text-right justify-end'>
-          {calculateTimeAgo(new Date(mostRecentReconcilliation))}
+          {overADayAgo(lastRec) ? 'Never' : (<ReactTimeAgo date={lastRec} locale='en-IE' timeStyle='round'/>)}
+          {/* {calculateTimeAgo(new Date(mostRecentReconcilliation))} */}
+
         </div>
       </div>
       <div className='flex flex-row w-full justify-between border-b bc pb-2 text-base'>
@@ -60,9 +65,17 @@ export default function OrdersStats({ stats }) {
         <div className=''>Average Sale:</div>
         <div className='num text-right justify-end'>{cF(averageSale)}</div>
       </div>
-      <RollingRevenue />
+      <div className='flex flex-row w-full justify-between text-base'>
+        <div className=''>Hourly Revenue:</div>
+        <div className='num text-right justify-end'><RollingRevenue /></div>
+      </div>
+
     </div>
   );
+}
+
+const overADayAgo = date => {
+  return (new Date() - date) > new Date(24 * 60 * 60 * 1000);
 }
 
 const calculateTimeAgo = (date) => {

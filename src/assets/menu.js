@@ -940,10 +940,12 @@ export const menu = [
       {
         name: 'Standard Chocolate Bar',
         price: 1.8,
+        colour: chocolate
       },
       {
         name: 'Purple Snack',
         price: 1.5,
+        colour: '#b33d90'
       },
     ],
   },
@@ -956,27 +958,34 @@ export const menu = [
       {
         name: 'Tayto',
         price: 1.6,
+        colour: '#78c8f0'
       },
       {
         name: 'Hula Hoops, Snax',
         price: 1.5,
+        colour: '#ea3926'
       },
 
       {
         name: 'Popcorn Cone',
         price: 2.5,
+        colour: '#feda8d'
       },
       {
         name: 'Popcorn Bag',
         price: 3.5,
+        colour: '#feda8d'
       },
       {
         name: 'Candyfloss Bag or Stick',
         price: 2.5,
+        colour: '#f5b3d6'
       },
       {
         name: 'Candyfloss Tub',
         price: 3.5,
+        colour: '#f5b3d6'
+
       },
     ],
   },

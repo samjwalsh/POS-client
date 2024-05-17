@@ -114,12 +114,17 @@ async function handlePrintRecentOrder() {
   let orders = await getAllOrders();
   let till = await getSetting('Till Number');
   let recentOrder;
-  for (const order of orders) {
+
+  let orderIndex = 0;
+  const ordersLength = orders.length;
+  while (orderIndex < ordersLength) {
+    const order = orders[orderIndex];
     if (order.till == till) {
       recentOrder = order;
       break;
     }
   }
+
   if (recentOrder !== undefined) await printOrder(recentOrder);
 }
 

@@ -77,7 +77,7 @@ export default function Reports(props) {
         'End of day?',
         'Cancel',
         'Continue',
-        "This will print an end of day sheet and upload all of today's orders to the cloud.",
+        "Print an end of day sheet and upload all of today's orders to the cloud.",
       ],
       true
     );
@@ -126,7 +126,7 @@ export default function Reports(props) {
     playBeep();
     await alert(
       'End of Day',
-      `This will end of day any orders currently saved on the till that are not from today, so if the last person forgot to end of day the till you can press this to remove any orders that weren't made today.`
+      `End of day any orders currently saved on the till that are not from today, so if the last person forgot to end of day the till you can press this to remove any orders that weren't made today.`
     );
   }
 

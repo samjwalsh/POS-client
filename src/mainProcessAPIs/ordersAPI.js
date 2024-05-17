@@ -52,7 +52,7 @@ export const getOrderStats = () => {
   let cardTotal = 0;
   let quantityOrders = 0;
   let quantityItems = 0;
-  let rollingRevenue = 0;
+  // let rollingRevenue = 0;
   let reconcilledCard = 0;
   let reconcilledCash = 0;
   let mostRecentReconcilliation = new Date(0);
@@ -90,16 +90,16 @@ export const getOrderStats = () => {
 
     quantityOrders++;
 
-    if (underRRCutoff) {
-      if (new Date(order.time) > hourCutoff) {
-        const delay = Date.now() - new Date(order.time);
-        const weight = (-2 * delay) / (60 * 60 * 1000) + 2;
-        rollingRevenue += weight * order.subtotal;
-      } else {
-        underRRCutoff = false;
-        // This stops the expensive check of dates once an order outside of the date range is reached
-      }
-    }
+    // if (underRRCutoff) {
+    //   if (new Date(order.time) > hourCutoff) {
+    //     const delay = Date.now() - new Date(order.time);
+    //     const weight = (-2 * delay) / (60 * 60 * 1000) + 2;
+    //     rollingRevenue += weight * order.subtotal;
+    //   } else {
+    //     underRRCutoff = false;
+    //     // This stops the expensive check of dates once an order outside of the date range is reached
+    //   }
+    // }
 
     var currItem = 0,
       itemsLength = order.items.length;
@@ -131,7 +131,7 @@ export const getOrderStats = () => {
     quantityOrders,
     averageSale,
     xTotal,
-    rollingRevenue,
+    // rollingRevenue,
     reconcilledCard,
     reconcilledCash,
     mostRecentReconcilliation,
@@ -140,23 +140,19 @@ export const getOrderStats = () => {
 
 ipcMain.handle('getRollingRevenue', () => {
   let orders = store.get('orders');
-  if (Array.isArray(orders) === false) {
-    store.set('orders', []);
-    orders = [];
-  }
+
   let quantityOrders = 0;
   let rollingRevenue = 0;
 
   const shop = getSetting('Shop Name');
 
-  const hourCutoff = new Date(Date.now() - 60 * 60 * 1000);
+  const hourCutoff = new Date(new Date() - 60 * 60 * 1000);
 
-  let currOrder = 0,
-    ordersLength = orders.length;
+  let currOrder = orders.length - 1;
 
-  while (currOrder < ordersLength) {
+  while (currOrder >= 0) {
     const order = orders[currOrder];
-    currOrder++;
+    currOrder--;
     if (
       order.deleted ||
       order.eod ||
@@ -263,7 +259,12 @@ ipcMain.handle('removeOldOrders', () => {
   // set time to begin day UTC
   const currentDate = Date.UTC(year, month, day, 0, 0, 0, 0);
 
-  for (const order of orders) {
+  let orderIndex = 0;
+  const ordersLength = orders.length;
+  while (orderIndex < ordersLength) {
+    const order = orders[orderIndex];
+    orderIndex++;
+
     let orderDate = order.time;
     if (!(order.time instanceof Date)) {
       // Just to make sure the order.time is a date object
@@ -284,9 +285,12 @@ ipcMain.handle('removeAllOrders', () => {
 
 ipcMain.handle('endOfDay', () => {
   const orders = store.get('orders');
-  orders.forEach((order) => {
-    order.eod = true;
-  });
+  let orderIndex = 0;
+  const ordersLength = orders.length;
+  while (orderIndex < ordersLength) {
+    orders[orderIndex].eod = true;
+    orderIndex++;
+  }
   store.set('orders', orders);
 });
 
@@ -295,11 +299,10 @@ ipcMain.handle('removeOrder', (e, deletedOrder) => {
 });
 
 export const removeOrder = (deletedOrder) => {
-  const orders = store.get('orders');
-
   let deletedOrderIndex = findOrderIndex(deletedOrder.id);
 
   if (deletedOrderIndex > -1) {
+    const orders = store.get('orders');
     orders[deletedOrderIndex].deleted = true;
     store.set('orders', orders);
   }
@@ -358,26 +361,26 @@ ipcMain.handle('reconcile', (e, desiredCard, desiredCash) => {
     removeOrder({ id });
   }
   // Add the new orders
-  if (Math.abs(cardRecAmt) >= 0.005) {
-    const cardItem = [
-      {
-        name: 'Reconcilliation Balance Adjustment',
-        price: cardRecAmt,
-        quantity: 1,
-      },
-    ];
-    addOrder(cardItem, 'Card');
-  }
-  if (Math.abs(cashRecAmt) >= 0.005) {
-    const cashItem = [
-      {
-        name: 'Reconcilliation Balance Adjustment',
-        price: cashRecAmt,
-        quantity: 1,
-      },
-    ];
-    addOrder(cashItem, 'Cash');
-  }
+  // if (Math.abs(cardRecAmt) >= 0.005) {
+  const cardItem = [
+    {
+      name: 'Reconcilliation Balance Adjustment',
+      price: cardRecAmt,
+      quantity: 1,
+    },
+  ];
+  addOrder(cardItem, 'Card');
+  // }
+  // if (Math.abs(cashRecAmt) >= 0.005) {
+  const cashItem = [
+    {
+      name: 'Reconcilliation Balance Adjustment',
+      price: cashRecAmt,
+      quantity: 1,
+    },
+  ];
+  addOrder(cashItem, 'Cash');
+  // }
 });
 
 ipcMain.handle('swapPaymentMethod', (e, order) => {
@@ -404,6 +407,7 @@ ipcMain.handle('syncOrders', async () => {
     store.set('orders', []);
     orders = [];
   }
+
   const noResponse = {
     success: false,
     ordersToAdd: 0,
@@ -413,8 +417,9 @@ ipcMain.handle('syncOrders', async () => {
     ordersDeletedInDb: 0,
     ordersEodedInDb: 0,
   };
-  if (activeReq) return noResponse;
+  if (activeReq) return { activeReq: true };
   try {
+    activeReq = true;
     const syncServer = getSetting('Sync Server');
     const https = getSetting('HTTPS');
     const shop = getSetting('Shop Name');

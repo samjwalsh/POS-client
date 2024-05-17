@@ -1,7 +1,7 @@
 {
   "name": "pos-client",
   "productName": "pos-client",
-  "version": "4.2.0",
+  "version": "4.2.1-alpha",
   "description": "pos-client",
   "main": ".webpack/main",
   "scripts": {
@@ -50,6 +50,7 @@
     "javascript-time-ago": "^2.5.10",
     "node-thermal-printer": "^4.4.1",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-dom": "^18.2.0",
+    "react-time-ago": "^7.3.3"
   }
 }

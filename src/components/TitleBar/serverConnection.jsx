@@ -37,6 +37,7 @@ export default function ServerConnection(props) {
   async function syncOrdersInterval() {
     const beginPing = Date.now();
     const connection = await syncOrders();
+    if (connection.activeReq) return;
     const endPing = Date.now();
     let shop = (await getSetting('Shop Name')).slice(0, 2).toUpperCase();
     const totalLocalUpdates =
