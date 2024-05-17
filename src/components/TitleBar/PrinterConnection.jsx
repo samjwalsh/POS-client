@@ -16,7 +16,7 @@ export default function PrinterConnection() {
   useEffect(() => {
     const connectionCheckInterval = setInterval(async () => {
       setIsOnline(await checkPrinterInterval());
-    }, 2000);
+    }, 30000);
     return () => {
       clearInterval(connectionCheckInterval);
     };

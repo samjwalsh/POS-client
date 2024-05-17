@@ -15,7 +15,7 @@ ipcMain.handle('getAllPrinters', () => {
   return printerDriver.getPrinters();
 });
 
-const createPrinter = async () => {
+const createPrinter = async (test) => {
   let printerOptions = { name: '', type: '', characterSet: '' };
   const settings = settingsStore.get('settings');
   let useCOM = false;
@@ -53,14 +53,14 @@ const createPrinter = async () => {
     driver: printerDriver,
     characterSet: CharacterSet[printerOptions.characterSet],
   });
-  await printer.execute();
+  if (!test) await printer.execute();
 
   return printer;
 };
 
 ipcMain.handle('checkPrinterConnection', async () => {
   try {
-    const printer =await createPrinter();
+    const printer = await createPrinter(true);
     const isConnected = await printer.isPrinterConnected();
     return isConnected;
   } catch (e) {
@@ -70,7 +70,7 @@ ipcMain.handle('checkPrinterConnection', async () => {
 
 ipcMain.handle('openCashDrawer', async () => {
   try {
-    const printer =await createPrinter();
+    const printer = await createPrinter();
     printer.openCashDrawer();
     await printer.execute();
   } catch (e) {}
@@ -78,7 +78,7 @@ ipcMain.handle('openCashDrawer', async () => {
 
 ipcMain.handle('printVouchers', async (e, vouchers) => {
   try {
-    const printer =await createPrinter();
+    const printer = await createPrinter();
 
     for (const voucher of vouchers) {
       printHeader(printer, 'Voucher');
@@ -140,7 +140,7 @@ const printHeader = (printer, title) => {
 ipcMain.handle('printOrder', async (e, order) => {
   try {
     // return printerDriver.getPrinters();
-    const printer =await createPrinter();
+    const printer = await createPrinter();
 
     // MUST SET USB002 PORT ON PRINTER PROPERTIES IN WINDOWS
     printHeader(printer, 'Receipt');
@@ -224,7 +224,7 @@ ipcMain.handle('printOrder', async (e, order) => {
 
 ipcMain.handle('printEndOfDay', async (e, orders) => {
   try {
-    const printer =await createPrinter();
+    const printer = await createPrinter();
 
     // MUST SET USB002 PORT ON PRINTER PROPERTIES IN WINDOWS
     printHeader(printer, 'End Of Day');
@@ -298,7 +298,7 @@ ipcMain.handle('printEndOfDay', async (e, orders) => {
 
 ipcMain.handle('printTestPage', async () => {
   try {
-    const printer =await createPrinter();
+    const printer = await createPrinter();
     const testString =
       '!"#$%&\'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~';
     printer.setTextQuadArea();
