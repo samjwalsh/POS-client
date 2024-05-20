@@ -322,30 +322,30 @@ export const menu = [
   },
   {
     name: "Kid's Tub",
-    price: 2.5,
+    price: 2.3,
     icon: require('../assets/menuicons/ice-cream-tub.png'),
     colour: pink,
     shortcuts: [
       {
         name: "Kid's Tub",
-        price: 2.5,
+        price: 2.3,
         colour: cream,
         addons: [],
       },
       {
         name: "Kid's 99 Tub",
-        price: 3,
+        price: 2.5,
         colour: ninetynine,
         addons: [
           {
             name: 'Flake',
-            price: 0.5,
+            price: 0.2,
           },
         ],
       },
       {
         name: "Kid's Special Tub",
-        price: 3,
+        price: 2.5,
         colour: special,
         addons: [
           {
@@ -356,12 +356,12 @@ export const menu = [
       },
       {
         name: "Kid's Special 99 Tub",
-        price: 3.5,
+        price: 3,
         colour: special99,
         addons: [
           {
             name: 'Flake',
-            price: 0.5,
+            price: 0.2,
           },
           {
             name: 'Toppings',
@@ -373,13 +373,35 @@ export const menu = [
     modifiers: [
       {
         name: 'Flake',
-        price: 0.5,
+        price: 0.2,
       },
       {
         name: 'Toppings',
         price: 0.5,
       },
       { name: 'Crush Flake', price: 1.5 },
+      {
+        priceCheck: function (addons) {
+          let addonsCost = 0;
+          let selectedAddons = [];
+
+          for (const addon of addons) {
+            if (addon.selected == true) {
+              selectedAddons.push(addon.name);
+              addonsCost += addon.price;
+            }
+          }
+
+          if (
+            selectedAddons.includes('Toppings') &&
+            !selectedAddons.includes('Flake')
+          ) {
+            addonsCost -= 0.3;
+          }
+
+          return addonsCost;
+        },
+      },
     ],
   },
   {
@@ -632,10 +654,6 @@ export const menu = [
             price: 6.5,
             colour: strawberries,
             addons: [
-              {
-                name: 'Flake',
-                price: 0.5,
-              },
               {
                 name: 'Strawberries',
                 price: 0.5,
@@ -940,12 +958,12 @@ export const menu = [
       {
         name: 'Standard Chocolate Bar',
         price: 1.8,
-        colour: chocolate
+        colour: chocolate,
       },
       {
         name: 'Purple Snack',
         price: 1.5,
-        colour: '#b33d90'
+        colour: '#b33d90',
       },
     ],
   },
@@ -958,34 +976,33 @@ export const menu = [
       {
         name: 'Tayto',
         price: 1.6,
-        colour: '#78c8f0'
+        colour: '#78c8f0',
       },
       {
         name: 'Hula Hoops, Snax',
         price: 1.5,
-        colour: '#ea3926'
+        colour: '#ea3926',
       },
 
       {
         name: 'Popcorn Cone',
         price: 2.5,
-        colour: '#feda8d'
+        colour: '#feda8d',
       },
       {
         name: 'Popcorn Bag',
         price: 3.5,
-        colour: '#feda8d'
+        colour: '#feda8d',
       },
       {
         name: 'Candyfloss Bag or Stick',
         price: 2.5,
-        colour: '#f5b3d6'
+        colour: '#f5b3d6',
       },
       {
         name: 'Candyfloss Tub',
         price: 3.5,
-        colour: '#f5b3d6'
-
+        colour: '#f5b3d6',
       },
     ],
   },
