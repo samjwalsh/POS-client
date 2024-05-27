@@ -45,7 +45,7 @@ export const menu = [
         colour: cream,
       },
       {
-        name: '99 Cone',
+        name: '99',
         price: 3,
         colour: ninetynine,
         addons: [
