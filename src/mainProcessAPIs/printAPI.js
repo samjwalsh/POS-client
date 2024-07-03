@@ -52,12 +52,12 @@ const createPrinter = async (test) => {
     interface: useCOM ? printerOptions.port : printerOptions.name,
     driver: printerDriver,
     characterSet: CharacterSet[printerOptions.characterSet],
-  }
+  };
   const printer = new ThermalPrinter(options);
   try {
-  if (!test) await printer.execute();
-  } catch(e) {
-    log(JSON.stringify(e),'Error testing printer', [options])
+    if (!test) await printer.execute();
+  } catch (e) {
+    log(JSON.stringify(e), 'Error testing printer', [options]);
   }
 
   return printer;
@@ -86,7 +86,7 @@ ipcMain.handle('printVouchers', async (e, vouchers) => {
     const printer = await createPrinter();
 
     for (const voucher of vouchers) {
-      printHeader(printer, 'Voucher');
+      await printHeader(printer, 'Voucher');
 
       printer.println("To be redeemed at any Teddy's outlet");
       printer.drawLine();
@@ -113,7 +113,7 @@ ipcMain.handle('printVouchers', async (e, vouchers) => {
   }
 });
 
-const printHeader = (printer, title) => {
+const printHeader = async (printer, title) => {
   printer.bold(true);
 
   printer.alignCenter();
@@ -148,7 +148,7 @@ ipcMain.handle('printOrder', async (e, order) => {
     const printer = await createPrinter();
 
     // MUST SET USB002 PORT ON PRINTER PROPERTIES IN WINDOWS
-    printHeader(printer, 'Receipt');
+    await printHeader(printer, 'Receipt');
 
     let quantityItems = 0;
     let total = 0;
@@ -232,7 +232,7 @@ ipcMain.handle('printEndOfDay', async (e, orders) => {
     const printer = await createPrinter();
 
     // MUST SET USB002 PORT ON PRINTER PROPERTIES IN WINDOWS
-    printHeader(printer, 'End Of Day');
+    await printHeader(printer, 'End Of Day');
 
     let shopName = '';
     let tillNo = '';
