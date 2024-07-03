@@ -73,11 +73,11 @@ const useVoucherChecker = (order, setOrder) => {
       addToAlertHTML('Redeemed', res.voucher.redeemed ? 'Yes' : 'No')
     );
 
-    alertHTML.push(addToAlertHTML('Date Created', res.voucher.dateCreated));
+    alertHTML.push(addToAlertHTML('Date Created', new Date(res.voucher.dateCreated).toDateString()));
     alertHTML.push(addToAlertHTML('Shop Created', res.voucher.shopCreated));
 
     if (res.voucher.redeemed) {
-      alertHTML.push(addToAlertHTML('Date Redeemed', res.voucher.dateRedeemed));
+      alertHTML.push(addToAlertHTML('Date Redeemed', new Date(res.voucher.dateRedeemed).toDateString()));
       alertHTML.push(addToAlertHTML('Shop Redeemed', res.voucher.shopRedeemed));
     }
 

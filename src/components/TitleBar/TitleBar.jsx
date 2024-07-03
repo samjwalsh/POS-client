@@ -112,6 +112,8 @@ export default function TitleBar(props) {
 
 async function handlePrintRecentOrder() {
   let orders = await getAllOrders();
+
+  console.log(orders);
   let till = await getSetting('Till Number');
   let recentOrder;
 
@@ -119,6 +121,7 @@ async function handlePrintRecentOrder() {
   const ordersLength = orders.length;
   while (orderIndex < ordersLength) {
     const order = orders[orderIndex];
+    orderIndex++;
     if (order.till == till) {
       recentOrder = order;
       break;
