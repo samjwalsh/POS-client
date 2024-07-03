@@ -29,7 +29,7 @@ export const log = async (errMsg, note, objsOfInterest) => {
     let res = await axios({
       method: 'get',
       url: `${https ? 'https' : 'http'}://${syncServer}/api/sendLog`,
-      headers: {},
+      headers: {key},
       data,
       timeout: 30000,
     });

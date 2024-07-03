@@ -428,16 +428,16 @@ ipcMain.handle('syncOrders', async () => {
     const data = {
       shop,
       till,
-      key,
-      orders,
+      allClientOrders:orders,
     };
     let res = await axios({
-      method: 'get',
+      method: 'patch',
       url: `${https ? 'https' : 'http'}://${syncServer}/api/syncOrders`,
-      headers: {},
+      headers: {key},
       data,
       timeout: 120000,
     });
+    console.log(res.data)
     const missingOrders = res.data.missingOrders;
     const deletedOrderIds = res.data.deletedOrderIds;
     const completedEodIds = res.data.completedEodIds;
@@ -502,6 +502,7 @@ ipcMain.handle('syncOrders', async () => {
     };
   } catch (e) {
     activeReq = false;
+    console.log(e)
     // log(JSON.stringify(e), 'Error while syncing orders', [orders]);
     return noResponse;
   }
