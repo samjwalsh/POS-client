@@ -31,6 +31,7 @@ const cream = '#FFFDE8';
 const ninetynine = chocolate;
 const special = water;
 const special99 = pink;
+const honeycomb = '#F7B500'
 export const menu = [
   {
     name: 'Cone',
@@ -924,6 +925,16 @@ export const menu = [
         price: 3,
       },
       {
+        name: 'Rock',
+        price: 3,
+        colour: strawberries,
+      },
+      {
+        name: 'Honeycomb',
+        price: 2.5,
+        colour: honeycomb,
+      },
+      {
         name: 'Drumstick',
         price: 1,
       },
@@ -990,9 +1001,9 @@ export const menu = [
         colour: '#feda8d',
       },
       {
-        name: 'Popcorn Bag',
+        name: 'Flavoured Popcorn Bag',
         price: 3.5,
-        colour: '#feda8d',
+        colour: honeycomb,
       },
       {
         name: 'Candyfloss Bag or Stick',
