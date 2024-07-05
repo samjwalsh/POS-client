@@ -11,15 +11,18 @@ export const log = async (errMsg, note, objsOfInterest) => {
   const https = getSetting('HTTPS');
   const shop = getSetting('Shop Name');
   const till = getSetting('Till Number');
+  const key = getSetting('Sync Server Key');
 
   try {
+
     const data = {
-      shop,
-      till,
+      source: `${shop}-${till}`,
       note,
-      objsOfInterest,
-      errMsg,
-    };
+      objs: JSON.stringify(objsOfInterest),
+      message: errMsg
+
+    }
+
     if (errMsg.includes('timeout') || errMsg.includes('ETIMEDOUT')) {
       // Stops the huge quantity of timeout errors on dev when testing server functions
       data.objsOfInterest = [];
@@ -27,14 +30,14 @@ export const log = async (errMsg, note, objsOfInterest) => {
     }
 
     let res = await axios({
-      method: 'get',
-      url: `${https ? 'https' : 'http'}://${syncServer}/api/sendLog`,
+      method: 'post',
+      url: `${https ? 'https' : 'http'}://${syncServer}/api/log`,
       headers: {key},
       data,
       timeout: 30000,
     });
-    console.log(note);
   } catch (e) {
+    console.log(e)
     console.log('Error while sending log for ' + note);
   }
 };

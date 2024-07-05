@@ -437,12 +437,13 @@ ipcMain.handle('syncOrders', async () => {
       data,
       timeout: 120000,
     });
-    console.log(res.data)
     const missingOrders = res.data.missingOrders;
     const deletedOrderIds = res.data.deletedOrderIds;
     const completedEodIds = res.data.completedEodIds;
 
-    orders = store.get('orders');
+    log('msg', 'note', {uhh: 'hi'})
+
+    orders = store.get('orders'); 
 
     // add the relevant orders
     missingOrders.forEach((missingOrder) => {
