@@ -435,17 +435,19 @@ ipcMain.handle('syncOrders', async () => {
       data,
       timeout: 120000,
     });
-    console.log(res.data)
     const missingOrders = res.data.missingOrders;
     const deletedOrderIds = res.data.deletedOrderIds;
     const completedEodIds = res.data.completedEodIds;
 
-    orders = store.get('orders');
+    log('msg', 'note', {uhh: 'hi'})
+
+    orders = store.get('orders'); 
 
     // add the relevant orders
     missingOrders.forEach((missingOrder) => {
       orders.push(missingOrder);
     });
+    console.log(`Added ${missingOrders.length} missing orders`)
 
     // delete the relevant orders
     deletedOrderIds.forEach((deletedOrderId) => {
@@ -455,6 +457,7 @@ ipcMain.handle('syncOrders', async () => {
         }
       });
     });
+    console.log(`Marked ${deletedOrderIds.length} orders as deleted`)
 
     completedEodIds.forEach((completedEodId) => {
       orders.forEach((order, index) => {
@@ -463,12 +466,15 @@ ipcMain.handle('syncOrders', async () => {
         }
       });
     });
+    console.log(`Completed ${completedEodIds.length} EODs`)
 
     let uniqueOrders = orders.filter(
       (order, index) =>
         orders.findIndex((currentOrder) => currentOrder.id === order.id) ===
         index
     );
+
+    console.log(`Deleted ${orders.length - uniqueOrders.length} duplicate orders`)
 
     uniqueOrders = insertionSort(uniqueOrders);
 
