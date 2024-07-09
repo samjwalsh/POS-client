@@ -69,30 +69,6 @@ const useReconciller = (props) => {
   const handleReconcile = async () => {
     playBeep();
     reconcile(reconcileAmt.card, reconcileAmt.cash)
-    // if (Math.abs(reconcileAmt.card - cardTotal) >= 0.005) {
-    //   addOrder(
-    //     [
-    //       {
-    //         name: 'Reconcilliation Balance Adjustment',
-    //         price: reconcileAmt.card - cardTotal,
-    //         quantity: 1,
-    //       },
-    //     ],
-    //     'Card'
-    //   );
-    // }
-    // if (Math.abs(reconcileAmt.cash - cashTotal) >= 0.005) {
-    //   addOrder(
-    //     [
-    //       {
-    //         name: 'Reconcilliation Balance Adjustment',
-    //         price: reconcileAmt.cash - cashTotal,
-    //         quantity: 1,
-    //       },
-    //     ],
-    //     'Cash'
-    //   );
-    // }
     promise?.resolve(true);
     handleClose();
   };
