@@ -4,15 +4,29 @@ import { useState } from 'react';
 import infoSVG from '../../assets/appicons/info.svg';
 
 import useAlert from '../Reusables/Alert.jsx';
+import Button from '../Reusables/Button.jsx';
 
 import playBeep from '../../tools/playBeep';
 import { addOrder, openCashDrawer } from '../../tools/ipc';
 import { cF } from '../../tools/numbers.js';
+import { useInterval } from '../Reusables/Wait.jsx';
 
 export default function PayCash(props) {
   const { order, setOrder, setPayCash, keypad } = props;
 
   const [change, setChange] = useState(0);
+
+  const [pos, setPos] = useState(0);
+
+  const step = 1000;
+  const totalTime = 20;
+  useInterval(() => {
+    if (pos < 100) setPos(pos + (step / (totalTime * 1000)) * 100);
+    else {
+      setPos(0);
+      handleButtonPress('exit');
+    }
+  }, step);
 
   const [Alert, alert] = useAlert();
 
@@ -46,6 +60,7 @@ export default function PayCash(props) {
 
   async function handlePayCashHelp() {
     await alert(
+      'Change Calculator',
       `You can use the buttons labelled with 5, 10, 20 and 50 euro to calculate your change, or press custom and key in an amount. You don't have to use these buttons if you already know what the change is. Press done to finish the transaction.`
     );
   }
@@ -55,53 +70,64 @@ export default function PayCash(props) {
       <Alert />
       <div className='flex flex-col h-full p-2 pb-1'>
         <div className='grid grid-cols-2 grid-rows-5 gap-2 h-full flex-grow'>
-          <div className='col-span-2 row-span-1 flex h-auto flex-row gap-2'>
-            <div
-              className=' btn btn-secondary h-auto text-2xl flex-grow '
-              onAuxClick={() => handleButtonPress('custom')}
-              onTouchEnd={() => handleButtonPress('custom')}>
+          <div className='col-span-2 row-span-1 flex h-auto flex-row gap-[1px]'>
+            <Button
+              type='secondary'
+              className='w-full'
+              size='large'
+              onClick={() => handleButtonPress('custom')}>
               Custom
-            </div>
-            <div
-              className='btn-primary btn h-auto aspect-square'
-              onAuxClick={(e) => handlePayCashHelp()}
-              onTouchEnd={(e) => handlePayCashHelp()}>
-              <img src={infoSVG} className='w-6 icon' />
-            </div>
+            </Button>
+            <Button
+              type='ghost'
+              icon={infoSVG}
+              className='aspect-square'
+              onClick={handlePayCashHelp}></Button>
           </div>
-          <div
-            className='col-span-1 row-span-1 num btn btn-neutral h-auto text-2xl'
-            onAuxClick={() => handleButtonPress(50)}
-            onTouchEnd={() => handleButtonPress(50)}>
+          <Button
+            type='tertiary'
+            size='large'
+            className='col-span-1 row-span-1'
+            onClick={() => handleButtonPress(50)}>
             €50
-          </div>
-          <div
-            className='col-span-1 row-span-1 num btn btn-neutral h-auto text-2xl'
-            onAuxClick={() => handleButtonPress(20)}
-            onTouchEnd={() => handleButtonPress(20)}>
+          </Button>
+          <Button
+            type='tertiary'
+            size='large'
+            className='col-span-1 row-span-1'
+            onClick={() => handleButtonPress(20)}>
             €20
-          </div>
-          <div
-            className='col-span-1 row-span-1 num btn btn-neutral h-auto text-2xl'
-            onAuxClick={() => handleButtonPress(10)}
-            onTouchEnd={() => handleButtonPress(10)}>
+          </Button>
+          <Button
+            type='tertiary'
+            size='large'
+            className='col-span-1 row-span-1'
+            onClick={() => handleButtonPress(10)}>
             €10
-          </div>
-          <div
-            className='col-span-1 row-span-1 num btn btn-neutral h-auto text-2xl'
-            onAuxClick={() => handleButtonPress(5)}
-            onTouchEnd={() => handleButtonPress(5)}>
+          </Button>
+          <Button
+            type='tertiary'
+            size='large'
+            className='col-span-1 row-span-1'
+            onClick={() => handleButtonPress(5)}>
             €5
-          </div>
+          </Button>
 
-          <div
-            className='col-span-2 row-span-2 btn btn-primary h-auto text-2xl'
-            onAuxClick={() => handleButtonPress('exit')}
-            onTouchEnd={() => handleButtonPress('exit')}>
+          <Button
+            type='primary'
+            size='large'
+            className='col-span-2 row-span-2 relative'
+            onClick={() => handleButtonPress('exit')}>
             Done
-          </div>
+            <div
+              className={`absolute top-0 left-0 h-full w-0 opacity-75 bg-white`}
+              style={{
+                width: pos + '%',
+                transition: 'all ' + step / 1000 + 's linear',
+              }}></div>
+          </Button>
         </div>
-        <div className='flex justify-between w-full text-2xl pt-1'>
+        <div className='flex justify-between w-full text-2xl pt-1 px-1'>
           Change:
           <div className='text-right num justify-end'>{cF(change)}</div>
         </div>
@@ -109,7 +135,6 @@ export default function PayCash(props) {
     </>
   );
 }
-
 export function calculateSubtotal(order) {
   let subtotal = 0;
   order.forEach((orderItem) => {

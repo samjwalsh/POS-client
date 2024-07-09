@@ -15,7 +15,7 @@ ipcMain.handle('getAllPrinters', () => {
   return printerDriver.getPrinters();
 });
 
-const createPrinter = () => {
+const createPrinter = async (test) => {
   let printerOptions = { name: '', type: '', characterSet: '' };
   const settings = settingsStore.get('settings');
   let useCOM = false;
@@ -47,17 +47,25 @@ const createPrinter = () => {
     });
   });
 
-  return new ThermalPrinter({
+  let options = {
     type: PrinterTypes[printerOptions.type],
     interface: useCOM ? printerOptions.port : printerOptions.name,
     driver: printerDriver,
     characterSet: CharacterSet[printerOptions.characterSet],
-  });
+  };
+  const printer = new ThermalPrinter(options);
+  try {
+    if (!test) await printer.execute();
+  } catch (e) {
+    log(JSON.stringify(e), 'Error testing printer', [options]);
+  }
+
+  return printer;
 };
 
 ipcMain.handle('checkPrinterConnection', async () => {
   try {
-    const printer = createPrinter();
+    const printer = await createPrinter(true);
     const isConnected = await printer.isPrinterConnected();
     return isConnected;
   } catch (e) {
@@ -67,7 +75,7 @@ ipcMain.handle('checkPrinterConnection', async () => {
 
 ipcMain.handle('openCashDrawer', async () => {
   try {
-    const printer = createPrinter();
+    const printer = await createPrinter();
     printer.openCashDrawer();
     await printer.execute();
   } catch (e) {}
@@ -75,10 +83,10 @@ ipcMain.handle('openCashDrawer', async () => {
 
 ipcMain.handle('printVouchers', async (e, vouchers) => {
   try {
-    const printer = createPrinter();
+    const printer = await createPrinter();
 
     for (const voucher of vouchers) {
-      printHeader(printer, 'Voucher');
+      await printHeader(printer, 'Voucher');
 
       printer.println("To be redeemed at any Teddy's outlet");
       printer.drawLine();
@@ -105,7 +113,7 @@ ipcMain.handle('printVouchers', async (e, vouchers) => {
   }
 });
 
-const printHeader = (printer, title) => {
+const printHeader = async (printer, title) => {
   printer.bold(true);
 
   printer.alignCenter();
@@ -127,19 +135,20 @@ const printHeader = (printer, title) => {
 
   printer.setTextQuadArea();
   printer.println(title);
+  printer.setTextNormal();
+
   printer.drawLine();
 
-  printer.setTextNormal();
   printer.alignLeft();
 };
 
 ipcMain.handle('printOrder', async (e, order) => {
   try {
     // return printerDriver.getPrinters();
-    const printer = createPrinter();
+    const printer = await createPrinter();
 
     // MUST SET USB002 PORT ON PRINTER PROPERTIES IN WINDOWS
-    printHeader(printer, 'Receipt');
+    await printHeader(printer, 'Receipt');
 
     let quantityItems = 0;
     let total = 0;
@@ -220,10 +229,10 @@ ipcMain.handle('printOrder', async (e, order) => {
 
 ipcMain.handle('printEndOfDay', async (e, orders) => {
   try {
-    const printer = createPrinter();
+    const printer = await createPrinter();
 
     // MUST SET USB002 PORT ON PRINTER PROPERTIES IN WINDOWS
-    printHeader(printer, 'End Of Day');
+    await printHeader(printer, 'End Of Day');
 
     let shopName = '';
     let tillNo = '';
@@ -294,7 +303,7 @@ ipcMain.handle('printEndOfDay', async (e, orders) => {
 
 ipcMain.handle('printTestPage', async () => {
   try {
-    const printer = createPrinter();
+    const printer = await createPrinter();
     const testString =
       '!"#$%&\'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~';
     printer.setTextQuadArea();

@@ -15,6 +15,8 @@ import useAlert from '../Reusables/Alert.jsx';
 import OrderItem from '../Reusables/OrderItem.jsx';
 import useConfirm from '../Reusables/ConfirmDialog.jsx';
 import { cF } from '../../tools/numbers.js';
+import Button from '../Reusables/Button.jsx';
+import ButtonStack from '../Reusables/ButtonStack.jsx';
 
 export default function Order(props) {
   const { order, setOrder } = props;
@@ -82,17 +84,24 @@ export default function Order(props) {
 
         if (direction === 'up') {
           if (orderItem.name === 'Voucher') {
-            await alert('Use the voucher creator to create more vouchers');
+            await alert(
+              'Error',
+              'Use the voucher creator to create more vouchers'
+            );
             return;
           }
           if (orderItem.name === 'Redeem Voucher') {
-            await alert('Use the voucher redeemer to redeem more vouchers');
+            await alert(
+              'Error',
+              'Use the voucher redeemer to redeem more vouchers'
+            );
             return;
           }
           temp_order[index].quantity++;
         } else if (orderItem.quantity > 1) {
           if (orderItem.name === 'Redeem Voucher') {
             await alert(
+              'Error',
               'You cannot unredeem a voucher, you can create a new one with the same value in the voucher creator'
             );
             return;
@@ -101,6 +110,7 @@ export default function Order(props) {
         } else {
           if (orderItem.name === 'Redeem Voucher') {
             await alert(
+              'Error',
               'You cannot unredeem a voucher, you can create a new one with the same value in the voucher creator'
             );
             return;
@@ -116,21 +126,25 @@ export default function Order(props) {
   let orderItems = order.map((orderItem, index) => {
     return (
       <div
-        className='flex flex-row h-min w-full max-w-full gap-2'
+        className='flex flex-row h-min w-full max-w-full gap-[1px]'
         key={`${orderItem.name} [${orderItem.addons}]`}>
-        <div
-          className='btn btn-error h-full p-0 w-12'
-          onAuxClick={() => handleOrderItemQuantityChange('down', orderItem)}
-          onTouchEnd={() => handleOrderItemQuantityChange('down', orderItem)}>
-          <img src={minusSVG} className='w-6 icon' />
-        </div>
+        <Button
+          type='danger'
+          icon={minusSVG}
+          className='w-20'
+          center={true}
+          onClick={() =>
+            handleOrderItemQuantityChange('down', orderItem)
+          }></Button>
         <OrderItem orderItem={orderItem} index={index} key={index.toString()} />
-        <div
-          className='btn btn-success h-full p-0 w-12'
-          onAuxClick={() => handleOrderItemQuantityChange('up', orderItem)}
-          onTouchEnd={() => handleOrderItemQuantityChange('up', orderItem)}>
-          <img src={addSVG} className='w-6 fill-white icon' />
-        </div>
+        <Button
+          type='success'
+          className='w-20'
+          icon={addSVG}
+          center={true}
+          onClick={() =>
+            handleOrderItemQuantityChange('up', orderItem)
+          }></Button>
       </div>
     );
   });
@@ -155,41 +169,42 @@ export default function Order(props) {
         )}
 
         <div className=' grid grid-rows-[min-content, 1fr] grid-cols-1 gap-1 border-t bc px-2 pt-1 pb-2'>
-          <div className='row-span-1 col-span-1 flex justify-between w-full text-2xl'>
+          <div className='row-span-1 col-span-1 flex justify-between w-full text-2xl px-1'>
             <div className='text-left'>Total:</div>
-            <div className='text-right num justify-end'>
-              {cF(subtotal)}
-            </div>
+            <div className='text-right num justify-end'>{cF(subtotal)}</div>
           </div>
-          <div className='row-span-1 col-span-1 flex gap-2 items-stretch h-20 text-2xl'>
+          <div className='row-span-1 col-span-1 flex gap-1 items-stretch h-20 text-2xl'>
             {payCash === true ? (
-              <div
-                className='p-2 btn btn-error h-full w-full text-2xl'
-                onAuxClick={() => handlePayment('cash')}
-                onTouchEnd={() => handlePayment('cash')}>
+              <Button
+                type='danger'
+                className='w-full'
+                size='large'
+                onClick={() => handlePayment('cash')}>
                 Cancel
-              </div>
+              </Button>
             ) : (
-              <>
-                <div
-                  className='btn btn-secondary h-full aspect-square'
-                  onAuxClick={() => handlePlusMinus()}
-                  onTouchEnd={() => handlePlusMinus()}>
-                  <img src={euro} className='w-6 icon' />
-                </div>
-                <div
-                  className='btn text-2xl btn-primary h-full flex-grow'
-                  onAuxClick={() => handlePayment('card')}
-                  onTouchEnd={() => handlePayment('card')}>
-                  Card
-                </div>
-                <div
-                  className='btn text-2xl btn-primary h-full flex-grow'
-                  onAuxClick={() => handlePayment('cash')}
-                  onTouchEnd={() => handlePayment('cash')}>
-                  Cash
-                </div>
-              </>
+                <ButtonStack className='h-full'>
+                  <Button
+                    size='large'
+                    type='secondary'
+                    className='aspect-square'
+                    onClick={() => handlePlusMinus()}
+                    icon={euro}></Button>
+                  <Button
+                    size='large'
+                    type='primary'
+                    className='flex-grow'
+                    onClick={() => handlePayment('card')}>
+                    Card
+                  </Button>
+                  <Button
+                    size='large'
+                    type='primary'
+                    className='flex-grow'
+                    onClick={() => handlePayment('cash')}>
+                    Cash
+                  </Button>
+                </ButtonStack>
             )}
           </div>
         </div>

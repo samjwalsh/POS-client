@@ -8,7 +8,10 @@ import undoSVG from '../../assets/appicons/undo.svg';
 
 import ItemPage from './ItemPage.jsx';
 
+import ColorObject from 'colorjs.io';
+
 import playBeep from '../../tools/playBeep';
+import Button from '../Reusables/Button.jsx';
 
 export default function Menu(props) {
   const menuState = props.menuState;
@@ -46,30 +49,28 @@ export default function Menu(props) {
 
     items.forEach((item) => {
       //Code for adding relevent classes to each item
-      let classes = 'menu-itm';
-
+      let classes = 'menu-itm ';
       itemsHTML.push(
-        <div
+        <Button
           key={item.name}
-          className={`${
-            item.name === 'Back'
-              ? 'btn-error'
-              : 'btn-neutral text-neutral-content'
-          } ${classes}`}
-          id={item.name}
-          onAuxClick={() => handleItemClick(item, passProps)}
-          onTouchEnd={() => handleItemClick(item, passProps)}>
+          type={`${item.name === 'Back' ? 'danger' : 'secondary'}`}
+          onClick={() => handleItemClick(item, passProps)}
+          className={classes}
+          colour={item.colour ? item.colour : false}>
           {item.name === 'Back' ? (
-            <img src={undoSVG} className='w-10 icon' />
+            <img src={undoSVG} className='w-8 icon icon-danger' />
           ) : (
-            <div className='h-full w-full flex flex-col justify-between'>
-              <div className='ml-auto'>
-              {/* <img src={item.icon} className='w-12 menuicon' />  */}
+            <>
+              <div className='flex flex-col-reverse justify-between w-full h-full relative'>
+                {/* <img
+                  src={item.icon}
+                  className='absolute m-auto w-10 menuicon top-0 right-0'
+                /> */}
+                {item.name}
               </div>
-              {item.name}
-            </div>
+            </>
           )}
-        </div>
+        </Button>
       );
     });
 
@@ -97,7 +98,7 @@ export default function Menu(props) {
     );
   } else if (menuState.modifiers !== undefined) {
     return (
-      <div className='col-span-8 row-span-1'>
+      <div className='col-span-8 row-span-1 '>
         <ItemPage
           menuState={menuState}
           setMenuState={setMenuState}

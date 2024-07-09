@@ -3,6 +3,7 @@ import * as React from 'react';
 import playBeep from '../../tools/playBeep';
 import checkSVG from '../../assets/appicons/check.svg';
 import { cF } from '../../tools/numbers';
+import Button from '../Reusables/Button.jsx';
 
 export default function AddonBox({
   addon,
@@ -15,30 +16,29 @@ export default function AddonBox({
     addon.selected = false;
   }
   return (
-    <div
-      className='w-72 max-w-full flex-grow flex flex-row h-auto min-h-[3.5rem]'
-      id={index}
-      onAuxClick={() => {
-        handleAddonToggle(item, currentOrder, setCurrentOrder, index);
-      }}
-      onTouchEnd={() => {
-        handleAddonToggle(item, currentOrder, setCurrentOrder, index);
-      }}>
-      <div className='flex flex-row justify-between w-full gap-2'>
-        <div className='flex-grow flex flex-row justify-between p-2 btn-neutral btn h-full'>
-          <div className='flex flex-row gap-2'>
-            <div className='text-xl cnter'>{addon.name}</div>
-            <div className='num cnter'>{cF(addon.price)}</div>
-          </div>
-          <div className='cnter h-full'>
-            {addon.selected ? (
-              <img src={checkSVG} className='w-8 icon border bc' />
-            ) : (
-              ''
-            )}
-          </div>
+    <div className='w-72 max-w-full flex-grow flex flex-row h-16'>
+      <Button
+        type='secondary'
+        className='flex-grow'
+        onClick={() => {
+          handleAddonToggle(item, currentOrder, setCurrentOrder, index);
+        }}>
+        <div className='flex flex-row gap-2'>
+          <div className='text-xl'>{addon.name}</div>
+          <div className='text-base cnter'>{cF(addon.price)}</div>
         </div>
-      </div>
+      </Button>
+      {addon.selected ? (
+        <Button
+          type='success'
+          className='aspect-square'
+          icon={checkSVG}
+          onClick={() => {
+            handleAddonToggle(item, currentOrder, setCurrentOrder, index);
+          }}></Button>
+      ) : (
+        ''
+      )}
     </div>
   );
 }

@@ -12,9 +12,18 @@ import useVoucherRedeemer from '../Register/VoucherRedeemer.jsx';
 import useVoucherChecker from '../Register/VoucherChecker.jsx';
 import { getAllOrders, printOrder, getSetting } from '../../tools/ipc.js';
 import useConfirm from '../Reusables/ConfirmDialog.jsx';
+import Button from '../Reusables/Button.jsx';
+import ButtonStack from '../Reusables/ButtonStack.jsx';
 
 export default function TitleBar(props) {
-  const { setHamburger, order, setOrder, updateOrders, setUpdateOrders, appState } = props;
+  const {
+    setHamburger,
+    order,
+    setOrder,
+    updateOrders,
+    setUpdateOrders,
+    appState,
+  } = props;
   const [ListSelect, chooseOption] = useListSelect();
   const [Confirm, confirm] = useConfirm();
   const [VoucherCreator, voucherCreator] = useVoucherCreator(order, setOrder);
@@ -35,7 +44,7 @@ export default function TitleBar(props) {
       return;
     }
     if (choice == 'Create Vouchers') {
-      await voucherCreator();
+      voucherCreator();
     } else if (choice == 'Redeem Voucher') {
       await voucherRedeemer();
     } else if (choice == 'Check Voucher') {
@@ -52,38 +61,47 @@ export default function TitleBar(props) {
       <VoucherRedeemer />
       <VoucherChecker />
       <ListSelect />
-      <div className='flex flex-row justify-between h-16 px-2 border-b bc cnter drag'>
-        <div
-          className=' btn btn-primary text-lg'
-          onAuxClick={(e) => handleClickHamburger(setHamburger)}
-          onTouchEnd={(e) => handleClickHamburger(setHamburger)}>
-          Menu
+      <div className='flex flex-row justify-between h-16 border-b bc drag relative'>
+        <div className='flex flex-row h-full gap-0 w-8/12 justify-between'>
+          <div className='flex flex-row gap-2'>
+            <Button
+              type='primary'
+              className='w-20 h-full'
+              onClick={(e) => handleClickHamburger(setHamburger)}>
+              Menu
+            </Button>
+            <div className='text-2xl mt-auto mb-1'>{appState}</div>
+          </div>
+          {appState === 'Register' ? (
+            <ButtonStack>
+              <Button
+                type='primary'
+                className='w-32'
+                onClick={handlePrintRecentOrder}>
+                Print Receipt
+              </Button>
+              <Button
+                type='secondary'
+                className='w-32'
+                onClick={handleClickVoucherMenu}>
+                Vouchers
+              </Button>
+            </ButtonStack>
+          ) : (
+            ''
+          )}
         </div>
-        {/* <HelpPageButton/> */}
-        <div className='flex flex-row h-full items-center mr- justify-end w-full'>
-          {/* <div
-            className=' mr-12 title'>
-            *Menu Has Changed*
-          </div> */}
-          <div
-            className='  btn btn-secondary  text-lg'
-            onAuxClick={(e) => handlePrintRecentOrder()}
-            onTouchEnd={(e) => handlePrintRecentOrder()}>
-            Print Receipt
-          </div>
-          <div className='cnter h-10 mx-5'></div>
-          <div
-            className=' btn btn-secondary text-lg'
-            onAuxClick={(e) => handleClickVoucherMenu()}
-            onTouchEnd={(e) => handleClickVoucherMenu()}>
-            Vouchers
-          </div>
-          <div className='border-r bc h-16 mx-5'></div>
 
-          <div className='flex flex-row gap-1 h-12 font-bold'>
+        {/* <HelpPageButton/> */}
+        <div className='flex flex-row h-full items-center justify-end absolute right-0 top-0'>
+          <div className='flex flex-row gap-[0px] h-full text-center'>
             <PrinterConnection />
             <Connection />
-            <ServerConnection updateOrders={updateOrders} setUpdateOrders={setUpdateOrders} appState={appState}/>
+            <ServerConnection
+              updateOrders={updateOrders}
+              setUpdateOrders={setUpdateOrders}
+              appState={appState}
+            />
             <Clock />
           </div>
         </div>
@@ -94,14 +112,22 @@ export default function TitleBar(props) {
 
 async function handlePrintRecentOrder() {
   let orders = await getAllOrders();
+
+  console.log(orders);
   let till = await getSetting('Till Number');
   let recentOrder;
-  for (const order of orders) {
+
+  let orderIndex = 0;
+  const ordersLength = orders.length;
+  while (orderIndex < ordersLength) {
+    const order = orders[orderIndex];
+    orderIndex++;
     if (order.till == till) {
       recentOrder = order;
       break;
     }
   }
+
   if (recentOrder !== undefined) await printOrder(recentOrder);
 }
 

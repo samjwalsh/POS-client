@@ -77,11 +77,10 @@ export default function Settings({ settings, setSettings }) {
         }
       });
       return (
-        <div className='w-full border bc  p-2 rounded-box' key={category.name}>
-          <div className='border-b bc title'>{category.name} </div>{' '}
+        <div className='w-full border bc  p-2 rounded-box bg-base-200' key={category.name}>
+          <div className='title pb-2'>{category.name} </div>
           <div className='flex flex-col justify-between pt-2 gap-2'>
-            {' '}
-            {categoryHTML}{' '}
+            {categoryHTML}
           </div>
         </div>
       );

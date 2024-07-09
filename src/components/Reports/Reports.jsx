@@ -22,6 +22,7 @@ import { OrderBox } from './OrderBox.jsx';
 import OrdersStats from './OrdersStats.jsx';
 import Wait from '../Reusables/Wait.jsx';
 import { cF, nF } from '../../tools/numbers.js';
+import Button from '../Reusables/Button.jsx';
 
 export default function Reports(props) {
   const { updateOrders, setUpdateOrders } = props;
@@ -33,6 +34,9 @@ export default function Reports(props) {
     quantityOrders: 0,
     averageSale: 0,
     xTotal: 0,
+    reconcilledCard: 0,
+    reconcilledCash: 0,
+    mostRecentReconcilliation: new Date(0),
   });
   const [ready, setReady] = useState(false);
 
@@ -68,12 +72,15 @@ export default function Reports(props) {
 
   async function handleEndOfDay() {
     playBeep();
-    const choice = await confirm([
-      'End of day?',
-      'Cancel',
-      'Continue',
-      "This will print an end of day sheet and upload all of today's orders to the cloud.",
-    ]);
+    const choice = await confirm(
+      [
+        'End of day?',
+        'Cancel',
+        'Continue',
+        "Print an end of day sheet and upload all of today's orders to the cloud.",
+      ],
+      true
+    );
     if (!choice) return;
     const hasReconciled = await reconcile('Z');
     if (!hasReconciled) return;
@@ -97,7 +104,7 @@ export default function Reports(props) {
           `You can choose to attempt to print the end of day sheet again or view it on the screen.`,
         ]);
         if (!tryAgain) {
-          await alert(await createEodHTML());
+          await alert('End Of Day', await createEodHTML());
           userFinished = true;
         } else {
           await printEndOfDay(orders);
@@ -118,11 +125,13 @@ export default function Reports(props) {
   async function handleDeleteOldOrdersHelp() {
     playBeep();
     await alert(
-      `This will end of day any orders currently saved on the till that are not from today, so if the last person forgot to end of day the till you can press this to remove any orders that weren't made today.`
+      'End of Day',
+      `End of day any orders currently saved on the till that are not from today, so if the last person forgot to end of day the till you can press this to remove any orders that weren't made today.`
     );
   }
 
   async function reconcileTotals() {
+    playBeep();
     await reconcile('X', stats.cashTotal, stats.cardTotal);
     await refreshOrders();
   }
@@ -147,7 +156,9 @@ export default function Reports(props) {
               );
             })
           ) : (
-            <Wait />
+            <div className='cnter p-4 w-full'>
+              <Wait />
+            </div>
           )}
           <div className='orderbox'></div>
           <div className='orderbox'></div>
@@ -156,38 +167,26 @@ export default function Reports(props) {
           <div className='flex flex-col h-full'>
             <OrdersStats stats={stats} />
             <div className='mt-auto px-2 flex flex-col gap-2'>
-              <div
-                className='btn-neutral btn text-lg h-12 p-2 w-full'
-                onAuxClick={reconcileTotals}
-                onTouchEnd={reconcileTotals}>
+              <Button onClick={reconcileTotals} type='primary'>
                 Update Totals
-              </div>
-              {/* <div
-                className='btn-neutral btn text-lg h-12 p-2 w-full'
-                onAuxClick={refreshOrders}
-                onTouchEnd={refreshOrders}>
-                Refresh Orders & Totals
-              </div> */}
-              <div className='flex flex-row w-full gap-2 h-12'>
-                <div
-                  className='btn btn-warning text-lg h-auto flex-grow'
-                  onAuxClick={handleDeleteOldOrders}
-                  onTouchEnd={handleDeleteOldOrders}>
+              </Button>
+
+              <div className='flex flex-row w-full gap-[1px] h-12'>
+                <Button
+                  type='danger-tertiary'
+                  className='flex-grow'
+                  onClick={handleDeleteOldOrders}>
                   Delete Old Orders
-                </div>
-                <div
-                  className='btn-secondary btn'
-                  onAuxClick={handleDeleteOldOrdersHelp}
-                  onTouchEnd={handleDeleteOldOrdersHelp}>
-                  <img src={infoSVG} className='w-6 icon' />
-                </div>
+                </Button>
+                <Button
+                  type='ghost'
+                  className='aspect-square'
+                  onClick={handleDeleteOldOrdersHelp}
+                  icon={infoSVG}></Button>
               </div>
-              <div
-                className='btn-error btn text-lg  p-2 w-full h-12'
-                onAuxClick={handleEndOfDay}
-                onTouchEnd={handleEndOfDay}>
+              <Button type='danger' onClick={handleEndOfDay}>
                 End Of Day
-              </div>
+              </Button>
             </div>
           </div>
         </div>

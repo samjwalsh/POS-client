@@ -3,6 +3,8 @@ import * as React from 'react';
 
 import dropdownSVG from '../../assets/appicons/dropdown.svg';
 import useKeypad from '../Reusables/Keypad.jsx';
+import euroSVG from '../../assets/appicons/euro.svg';
+import NumberInput from '../Reusables/NumberInput.jsx';
 
 import playBeep from '../../tools/playBeep.js';
 import { createVouchers, printVouchers } from '../../tools/ipc.js';
@@ -10,6 +12,9 @@ import useConfirm from '../Reusables/ConfirmDialog.jsx';
 import useAlert from '../Reusables/Alert.jsx';
 import Wait from '../Reusables/Wait.jsx';
 import { cF } from '../../tools/numbers.js';
+import Button from '../Reusables/Button.jsx';
+import Modal from '../Reusables/Modal.jsx';
+import ButtonStack from '../Reusables/ButtonStack.jsx';
 const useVoucherCreator = (order, setOrder) => {
   const [promise, setPromise] = useState(null);
   const [voucherState, setVoucherState] = useState({
@@ -45,13 +50,16 @@ const useVoucherCreator = (order, setOrder) => {
     playBeep();
     const quantity = await keypad(0, 'passcode');
     if (!quantity) return;
-    if (quantity > 20) {
+    if (quantity > 10) {
       await alert(
-        'If you need to create more than 20 vouchers, you have to create them in multiple batches.'
+        'Error',
+        'If you need to create more than 10 vouchers, you have to create them in multiple batches.'
       );
       return;
     }
+
     if (quantity >= 0) {
+
       setVoucherState({
         value: voucherState.value,
         quantity,
@@ -72,16 +80,6 @@ const useVoucherCreator = (order, setOrder) => {
   };
 
   const handleCreateVouchers = async () => {
-    const discouraged = await confirm([
-      'Not enabled',
-      'Continue',
-      'Cancel',
-      `Vouchers from the till are not finished yet, use a printed voucher instead.`,
-    ]);
-    if (discouraged) {
-      handleClose();
-      return;
-    }
     if (!clickable) return;
     playBeep();
 
@@ -90,6 +88,7 @@ const useVoucherCreator = (order, setOrder) => {
     const value = voucherState.value;
     if (quantity < 1 || value <= 0) {
       await alert(
+        'Error',
         'You must create at least 1 voucher with a value above €0.00'
       );
       // handleClose();
@@ -106,6 +105,7 @@ const useVoucherCreator = (order, setOrder) => {
       voucherResult.success === false
     ) {
       await alert(
+        'Error',
         'Something went wrong, check the internet connection or write the vouchers manually.'
       );
       handleClose();
@@ -147,6 +147,7 @@ const useVoucherCreator = (order, setOrder) => {
             );
           });
           await alert(
+            'Error',
             <div className='flex flex-col overflow-y-hidden'>
               <div>{`Write the vouchers manually using the codes. Each voucher is for ${cF(
                 voucherResult.vouchers[0].value
@@ -176,59 +177,50 @@ const useVoucherCreator = (order, setOrder) => {
   const createHTML = () => {
     if (clickable) {
       return (
-        <div className='w-96 flex flex-col gap-2 text-2xl p-4 border bc  background rounded-box'>
-          <div className='flex flex-row justify-between'>
-            <div className=' cnter mt-2 title'>Voucher Creator</div>
-            <div
-              className='btn btn-error text-lg'
-              onAuxClick={(event) => handleClickClose()}
-              onTouchEnd={(event) => handleClickClose()}>
-              Cancel
-            </div>
-          </div>
-          <div className='w-full border-b bc'></div>
-          <div className='flex flex-row justify-between'>
-            <div className='cnter'>Quantity:</div>
-            <div
-              className='btn btn-neutral text-lg'
-              onAuxClick={(e) => handleSetQuantity()}
-              onTouchEnd={(e) => handleSetQuantity()}>
-              {voucherState.quantity == undefined
-                ? 'Enter'
-                : voucherState.quantity}
-              <img src={dropdownSVG} className='w-6 icon' />
-            </div>
-          </div>
-          <div className='flex flex-row justify-between'>
-            <div className='cnter'>Value:</div>
-            <div
-              className='btn btn-neutral text-lg'
-              onAuxClick={(e) => handleSetValue()}
-              onTouchEnd={(e) => handleSetValue()}>
-              {voucherState.value == undefined
-                ? 'Enter'
-                : cF(voucherState.value)}
-              <img src={dropdownSVG} className='w-6 icon' />
-            </div>
-          </div>
-          <div className='w-full border-b bc'></div>
+        <>
+          <div className='flex flex-col w-full px-2'>
+            <div>Quantity</div>
+            <NumberInput
+              value={
+                voucherState.quantity <= 0 ? 'E.g. 12' : voucherState.quantity
+              }
+              dim={voucherState.quantity <= 0}
+              onClick={handleSetQuantity}></NumberInput>
+            <div>Value</div>
+            <NumberInput
+              value={
+                voucherState.value <= 0 ? 'E.g. €3.50' : cF(voucherState.value)
+              }
+              dim={voucherState.value <= 0}
+              onClick={handleSetValue}></NumberInput>
 
-          <div className='flex flex-row justify-between title'>
-            <div className='cnter'>Total Cost:</div>
-            <div className='cnter'>
-              {cF(voucherState.value * voucherState.quantity)}
+            <div className='flex flex-row justify-between title py-2'>
+              <div className='cnter'>Total Cost</div>
+              <div className='cnter'>
+                {cF(voucherState.value * voucherState.quantity)}
+              </div>
             </div>
+            {`Create ${
+              voucherState.quantity
+            } voucher${voucherState.quantity !== 1 ? 's' : ''} for ${cF(
+              voucherState.value
+            )} totalling ${cF(
+              voucherState.quantity * voucherState.value
+            )}.`}
           </div>
-          <div className='w-full border-b bc'></div>
-          <div
-            className='w-full btn h-full btn-primary text-lg'
-            onAuxClick={(e) => handleCreateVouchers()}
-            onTouchEnd={(e) => handleCreateVouchers()}>{`Create ${
-            voucherState.quantity
-          } voucher${
-            voucherState.quantity !== 1 ? 's' : ''
-          } for ${cF(voucherState.value)} totalling ${cF(voucherState.quantity * voucherState.value)}`}</div>
-        </div>
+          <ButtonStack>
+            <Button
+              type='secondary'
+              className='flex-grow basis-1'
+              onClick={handleClickClose}>
+              Cancel
+            </Button>
+            <Button
+              type='primary'
+              className='flex-grow basis-1'
+              onClick={handleCreateVouchers}>Create</Button>
+          </ButtonStack>
+        </>
       );
     } else {
       return <Wait />;
@@ -243,12 +235,7 @@ const useVoucherCreator = (order, setOrder) => {
           <Alert />
           <Confirm />
           <Keypad />
-          <div className='fixed h-screen w-screen z-10'>
-            <div className='fixed top-0 left-0 m-0 p-0 transparent h-screen w-screen'></div>
-            <div className='fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2'>
-              {createHTML()}
-            </div>
-          </div>
+          <Modal title='Voucher Creator'> {createHTML()}</Modal>
         </>
       );
   };

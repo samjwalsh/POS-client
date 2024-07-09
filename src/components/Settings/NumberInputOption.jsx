@@ -5,6 +5,7 @@ import { getSettings, setSetting } from '../../tools/ipc';
 import dropdownSVG from '../../assets/appicons/dropdown.svg';
 
 import useKeypad from '../Reusables/Keypad.jsx';
+import NumberInput from '../Reusables/NumberInput.jsx';
 
 export function NumberInputOption({ setting, setSettings }) {
   const [Keypad, keypad] = useKeypad();
@@ -24,17 +25,13 @@ export function NumberInputOption({ setting, setSettings }) {
   return (
     <>
       <Keypad />
-      <div className='w-full flex flex-row p-2 whitespace-nowrap gap-2 justify-between'>
-        <div className='text-xl self-center'>{setting.name}</div>
-        <div className='flex flex-row gap-2'>
-          <div
-            className='btn text-lg btn-neutral p-2 cnter '
-            onAuxClick={(e) => handleClickNumberInputOption(setting)}
-            onTouchEnd={(e) => handleClickNumberInputOption(setting)}>
-            {setting.value == undefined ? 'Enter' : setting.value}
-            <img src={dropdownSVG} className='w-6 icon' />
-          </div>
-        </div>
+      <div className='flex flex-col w-full px-2'>
+        <div className='text-xl'>{setting.name}</div>{' '}
+        <NumberInput
+          value={setting.value}
+          onClick={(e) => handleClickNumberInputOption(setting)}>
+          <img src={dropdownSVG} className='w-6 icon' />
+        </NumberInput>
       </div>
     </>
   );

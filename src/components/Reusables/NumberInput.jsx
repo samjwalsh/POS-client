@@ -1,8 +1,8 @@
 import React from 'react';
 
-import lettersSVG from '../../assets/appicons/letters.svg';
+import euroSVG from '../../assets/appicons/euro.svg';
 
-const TextInput = ({ value, onClick, dim }) => {
+const NumberInput = ({ value, onClick, dim }) => {
   return (
     <div
       className={`bg-base-100 w-full p-2 border-b bc flex flex-row justify-between text-lg mb-2 ${
@@ -11,9 +11,9 @@ const TextInput = ({ value, onClick, dim }) => {
       onAuxClick={onClick}
       onTouchEnd={onClick}>
       <div className='cnter'>{value}</div>
-      <img src={lettersSVG} className='h-full aspect-square w-8' />
+      <img src={euroSVG} className='h-full aspect-square w-8' />
     </div>
   );
 };
 
-export default TextInput;
+export default NumberInput;

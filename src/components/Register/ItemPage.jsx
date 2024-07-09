@@ -9,6 +9,8 @@ import ShortcutBox from './ShortcutBox.jsx';
 import addSVG from '../../assets/appicons/add.svg';
 import minusSVG from '../../assets/appicons/minus.svg';
 import { cF } from '../../tools/numbers.js';
+import Button from '../Reusables/Button.jsx';
+import ButtonStack from '../Reusables/ButtonStack.jsx';
 
 export default function ItemPage({
   menuState,
@@ -22,31 +24,8 @@ export default function ItemPage({
   const handleClickHelp = async () => {
     playBeep();
     await alert(
-      <div className='w-[80vw]'>
-        <div className='text-xl'>Shortcut Buttons</div>
-        <div className='text-base whitespace-pre-line'>
-          The large buttons at the top of the container are shortcut buttons,
-          pressing a shortcut button is the same as manually clicking the addon
-          buttons for the shortcut you clicked (if you clicked Special 99 it
-          would add a flake and toppings) and then adding the item to the cart.
-          {'\n\n'}
-          If you have already selected some addons, like crushed flake, and
-          changed the quantity, these changes will stay after you click a
-          shortcut button, so if you add crushed flake and increase the quantity
-          to 2 before pressing the 99 shortcut button, 2 99s with crushed flake
-          will be added to the cart.{'\n\n'}
-        </div>
-        <div className='text-xl'>Addon Buttons</div>
-        <div className='text-base whitespace-pre-line'>
-          The addon buttons are in the bottom half of the container, clicking an
-          addon button will toggle it on or off (so if you tap flake once it
-          adds a flake but if you tap it again it takes it away).{'\n\n'}
-          If you select an addon like a flake and then press the shortcut button
-          for a 99, a 99 will be added to the cart with only 1 flake, not 0 or
-          2. If you want to add a second flake you can find it in the extras
-          section.
-        </div>
-      </div>
+      'Shortcut Buttons',
+      `The large blue buttons are shortcut buttons. Clicking a shortcut button selects the relevant addons and adds the item to the cart. It will not remove any addons or changes to quantity that were previously selected.`
     );
   };
 
@@ -77,31 +56,22 @@ export default function ItemPage({
     <>
       <Alert />
       <div className='flex flex-col h-full content-start'>
-        <div className='grid grid-cols-2 grid-rows-1 h-min p-2 border-b bc'>
-          <div className='col-span-1 text-left w-auto h-full whitespace-nowrap mt-2 title'>
-            {menuState.name}
-          </div>
-          <div className='col-span-1 text-right self-end justify-self-end flex flex-row gap-4'>
-            <button
-              className='whitespace-nowrap text-lg btn btn-primary'
-              onAuxClick={() => handleClickHelp()}
-              onTouchEnd={() => handleClickHelp()}>
+        <div className='flex flex-row justify-between h-min p-2 border-b bc'>
+          <div className='title pb-1 mt-auto'>{menuState.name}</div>
+          <div className='flex flex-row gap-[1px]'>
+            <Button type='ghost' className='w-20' onClick={handleClickHelp}>
               Help
-            </button>
-            <button
-              className='col-span-1 text-right self-end justify-self-end w-min h-min whitespace-nowrap p-2 text-lg btn btn-error'
-              onAuxClick={() =>
-                handleExitItemPage(setMenuState, setCurrentOrder)
-              }
-              onTouchEnd={() =>
-                handleExitItemPage(setMenuState, setCurrentOrder)
-              }>
+            </Button>
+            <Button
+              type='danger'
+              className='w-32'
+              onClick={() => handleExitItemPage(setMenuState, setCurrentOrder)}>
               Cancel
-            </button>
+            </Button>
           </div>
         </div>
         <div className='w-full h-full flex-grow flex flex-col '>
-          <div className='flex flex-row gap-2 flex-grow border-b bc p-2 max-h-[14rem] min-h-[10rem]'>
+          <ButtonStack className='flex-grow border-b bc p-2 max-h-[14rem] min-h-[10rem] '>
             {item.shortcuts.map((shortcut) => {
               return (
                 <ShortcutBox
@@ -116,8 +86,8 @@ export default function ItemPage({
                 />
               );
             })}
-          </div>
-          <div className='flex flex-row flex-wrap gap-2 p-2 overflow-y-scroll no-scrollbar'>
+          </ButtonStack>
+          <div className='flex flex-row flex-wrap gap-[1px] p-2 overflow-y-scroll no-scrollbar'>
             {item.addons.map((addon, index) => {
               return (
                 <AddonBox
@@ -135,52 +105,33 @@ export default function ItemPage({
         </div>
         <div className='w-full flex flex-row mt-auto gap-2 p-2 h-16 border-t bc'>
           <div className='flex flex-row '>
-            <div
-              className='w-14 h-auto cnter btn btn-error '
-              onAuxClick={() =>
+            <Button
+              type='danger'
+              icon={minusSVG}
+              className='aspect-square'
+              onClick={() =>
                 handleChangeQuantity(
                   item,
                   currentOrder,
                   setCurrentOrder,
                   'down'
                 )
-              }
-              onTouchEnd={() =>
-                handleChangeQuantity(
-                  item,
-                  currentOrder,
-                  setCurrentOrder,
-                  'down'
-                )
-              }>
-              <img src={minusSVG} className='w-6 icon' />
-            </div>
+              }></Button>
             <div className=' w-16 h-auto num cnter text-2xl'>{quantity}</div>
-            <div
-              className='btn btn-success w-14 h-auto cnter'
-              onAuxClick={() =>
+            <Button
+              type='success'
+              icon={addSVG}
+              className='aspect-square'
+              onClick={() =>
                 handleChangeQuantity(item, currentOrder, setCurrentOrder, 'up')
-              }
-              onTouchEnd={() =>
-                handleChangeQuantity(item, currentOrder, setCurrentOrder, 'up')
-              }>
-              <img src={addSVG} className='w-6 icon' />
-            </div>
+              }></Button>
           </div>
           <div className='text-2xl w-full h-auto num cnter'>{cF(price)}</div>
-          <div
-            className='btn btn-primary text-xl h-full positive w-48'
-            onAuxClick={() =>
-              handleAddToOrder(
-                item,
-                setMenuState,
-                currentOrder,
-                setCurrentOrder,
-                order,
-                setOrder
-              )
-            }
-            onTouchEnd={() =>
+          <Button
+            type='primary'
+            className='w-72'
+            size='large'
+            onClick={() =>
               handleAddToOrder(
                 item,
                 setMenuState,
@@ -191,7 +142,7 @@ export default function ItemPage({
               )
             }>
             Add
-          </div>
+          </Button>
         </div>
       </div>
     </>
@@ -247,7 +198,7 @@ export function handleAddToOrder(
   currentOrder,
   setCurrentOrder,
   order,
-  setOrder
+  setOrder,
 ) {
   playBeep();
 
@@ -255,6 +206,7 @@ export function handleAddToOrder(
     name: item.name,
     price: computePriceNoQuantity(item, currentOrder),
     quantity: currentOrder.quantity === undefined ? 1 : currentOrder.quantity,
+    colour: item.colour ? item.colour : undefined,
   };
 
   parsedOrder.addons = [];

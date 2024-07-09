@@ -21,19 +21,19 @@ ipcMain.handle('createVouchers', async (e, quantity, value) => {
       till,
       value,
       quantity,
-      key,
     };
 
     let res = await axios({
-      method: 'get',
-      url: `${https ? 'https' : 'http'}://${syncServer}/api/createVoucher`,
-      headers: {},
+      method: 'post',
+      url: `${https ? 'https' : 'http'}://${syncServer}/api/vouchers`,
+      headers: {key},
       data,
-      timeout: 30000,
+      timeout: 120000,
     });
     const vouchers = res.data;
     return { vouchers, success: true };
   } catch (e) {
+    console.log(e);
     log(JSON.stringify(e), 'Error while creating vouchers', [quantity, value]);
     return {
       success: false,
@@ -55,13 +55,12 @@ ipcMain.handle('redeemVoucher', async (e, voucherCode) => {
       shop,
       till,
       code: voucherCode,
-      key,
     };
 
     let res = await axios({
       method: 'get',
       url: `${https ? 'https' : 'http'}://${syncServer}/api/redeemVoucher`,
-      headers: {},
+      headers : {key},
       data,
       timeout: 30000,
     });
@@ -89,17 +88,16 @@ ipcMain.handle('checkVoucher', async (e, voucherCode) => {
       shop,
       till,
       code: voucherCode,
-      key,
     };
 
     let res = await axios({
       method: 'get',
-      url: `${https ? 'https' : 'http'}://${syncServer}/api/checkVoucher`,
-      headers: {},
-      data,
+      url: `${https ? 'https' : 'http'}://${syncServer}/api/vouchers`,
+      headers: {key},
+      params: data,
       timeout: 30000,
     });
-
+    res.data.success = true;
     const voucherResult = res.data;
     return voucherResult;
   } catch (e) {

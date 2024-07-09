@@ -16,7 +16,7 @@ export default function PrinterConnection() {
   useEffect(() => {
     const connectionCheckInterval = setInterval(async () => {
       setIsOnline(await checkPrinterInterval());
-    }, 2000);
+    }, 30000);
     return () => {
       clearInterval(connectionCheckInterval);
     };
@@ -34,12 +34,12 @@ export default function PrinterConnection() {
 
   return (
     <div
-      className={`grid grid-rows-2 grid-cols-1 text-sm h-full border bc rounded-btn p-1 bg${
+      className={`flex flex-col justify-between text-error-content h-full p-1 bg${
         isOnline.status ? '-success' : '-error'
       }`}>
-      <div className='row-span-1 col-span-1'>PTR</div>
-      <div className='row-span-1 col-span-1 num'>
-        {isOnline.status ? `${String(isOnline.ping).padStart(3, '0')} ` : '---'}
+      <div>PTR</div>
+      <div className='num'>
+        {isOnline.status ? `${String(isOnline.ping).padStart(3, '0')} ` : ''}
       </div>
     </div>
   );

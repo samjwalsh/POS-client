@@ -2,17 +2,24 @@ import { useState } from 'react';
 import * as React from 'react';
 
 import playBeep from '../../tools/playBeep.js';
+import Modal from './Modal.jsx';
+import ButtonStack from './ButtonStack.jsx';
+import Button from './Button.jsx';
 const useConfirm = () => {
   const [promise, setPromise] = useState(null);
   const [text, setText] = useState(['Continue?', 'Cancel', 'Confirm']);
+  const [danger, setDanger] = useState(false);
 
-  const confirm = (args) =>
+  const confirm = (args, danger) =>
     new Promise((resolve, reject) => {
       if (args) setText(args);
+      if (danger) setDanger(true);
       setPromise({ resolve });
     });
 
   const handleClose = () => {
+    setText();
+    setDanger(false);
     setPromise(null);
   };
 
@@ -31,29 +38,22 @@ const useConfirm = () => {
     if (promise === null) return;
     else
       return (
-        <div className='fixed h-screen w-screen z-50'>
-          <div className='fixed top-0 left-0 m-0 p-0 transparent h-screen w-screen z-50'></div>
-          <div className='fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-50 background rounded-box max-w-[25rem]  border bc'>
-            <div className='flex flex-col p-4 gap-2'>
-              <div className='title flex items-start'>{text[0]}</div>
-              <div className='text-lg flex items-start font-light'>{text[3]}</div>
-              <div className='justify-end flex flex-row min-w-[18rem] gap-2 whitespace-nowrap'>
-                <div
-                  className='row-span-1 btn btn-error text-lg w-min h-full'
-                  onAuxClick={handleCancel}
-                  onTouchEnd={handleCancel}>
-                  {text[1]}
-                </div>
-                <div
-                  className='row-span-1 btn btn-primary text-lg w-min h-full'
-                  onAuxClick={handleConfirm}
-                  onTouchEnd={handleConfirm}>
-                  {text[2]}
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
+        <Modal title={text[0]} text={text[3]} z={50}>
+          <ButtonStack>
+            <Button
+              type='secondary'
+              className='flex-grow basis-1'
+              onClick={handleCancel}>
+              {text[1]}
+            </Button>
+            <Button
+              type={danger ? 'danger' : 'primary'}
+              className='flex-grow basis-1'
+              onClick={handleConfirm}>
+              {text[2]}
+            </Button>
+          </ButtonStack>
+        </Modal>
       );
   };
   return [ConfirmationDialog, confirm];
