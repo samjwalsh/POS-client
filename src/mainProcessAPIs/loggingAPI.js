@@ -28,7 +28,7 @@ export const log = async (errMsg, note, objsOfInterest) => {
       data.objsOfInterest = [];
       data.errMsg = 'Server connection timed out, check pos-server for error?';
     }
-
+    console.log(data)
     let res = await axios({
       method: 'post',
       url: `${https ? 'https' : 'http'}://${syncServer}/api/log`,
