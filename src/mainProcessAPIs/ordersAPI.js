@@ -441,8 +441,6 @@ ipcMain.handle('syncOrders', async () => {
     const deletedOrderIds = res.data.deletedOrderIds;
     const completedEodIds = res.data.completedEodIds;
 
-    log('msg', 'note', {uhh: 'hi'})
-
     orders = store.get('orders'); 
 
     // add the relevant orders
