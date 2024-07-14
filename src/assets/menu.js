@@ -925,11 +925,6 @@ export const menu = [
         price: 3,
       },
       {
-        name: 'Rock',
-        price: 3,
-        colour: strawberries,
-      },
-      {
         name: 'Honeycomb',
         price: 2.5,
         colour: honeycomb,
@@ -937,7 +932,7 @@ export const menu = [
       {
         name: 'Stick of Rock',
         price: 2.5,
-        colour: honeycomb,
+        colour: strawberries,
       },
       {
         name: 'Refresher, Wham',
