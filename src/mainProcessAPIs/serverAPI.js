@@ -58,8 +58,8 @@ ipcMain.handle('redeemVoucher', async (e, voucherCode) => {
     };
 
     let res = await axios({
-      method: 'get',
-      url: `${https ? 'https' : 'http'}://${syncServer}/api/redeemVoucher`,
+      method: 'patch',
+      url: `${https ? 'https' : 'http'}://${syncServer}/api/vouchers`,
       headers : {key},
       data,
       timeout: 30000,
