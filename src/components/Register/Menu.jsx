@@ -141,6 +141,7 @@ function handleItemClick(item, props) {
     setMenuState(item);
   } else {
     // category pressed
+    console.log(item.type)
     setMenuState(item);
   }
 }

@@ -65,7 +65,7 @@ export default function ItemPage({
             <Button
               type='danger'
               className='w-32'
-              onClick={() => handleExitItemPage(setMenuState, setCurrentOrder)}>
+              onClick={() => handleExitItemPage(setMenuState, setCurrentOrder, menuState)}>
               Cancel
             </Button>
           </div>
@@ -185,8 +185,9 @@ function handleChangeQuantity(item, currentOrder, setCurrentOrder, direction) {
   });
 }
 
-function handleExitItemPage(setMenuState, setCurrentOrder) {
+function handleExitItemPage(setMenuState, setCurrentOrder, menuState) {
   playBeep();
+  console.log(menuState)
 
   setMenuState('');
   setCurrentOrder('');
