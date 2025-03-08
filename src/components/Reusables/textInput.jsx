@@ -9,7 +9,7 @@ const TextInput = ({ value, onClick, dim }) => {
         dim ? 'text-black text-opacity-50' : ''
       }`}
       onAuxClick={onClick}
-      onTouchEnd={onClick}>
+      onClick={onClick}>
       <div className='cnter'>{value}</div>
       <img src={lettersSVG} className='h-full aspect-square w-8' />
     </div>

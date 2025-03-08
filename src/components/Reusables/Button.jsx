@@ -1,5 +1,5 @@
 import React from 'react';
-import Color from "colorjs.io/dist/color.js";
+import Color from 'colorjs.io/dist/color.js';
 
 const Button = ({
   children,
@@ -89,7 +89,7 @@ const Button = ({
       className={classes + ' ' + className}
       style={colour ? colour : undefined}
       onAuxClick={onClick}
-      onTouchEnd={onClick}
+      onClick={onClick}
       id={id}>
       {children ? <>{children}</> : ''}
       {icon ? (

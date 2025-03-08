@@ -764,44 +764,9 @@ export const menu = [
     ],
   },
   {
-    name: 'Toys',
-    type: 'category',
-    icon: require('../assets/menuicons/toys.png'),
-    colour: '#78be17',
-    items: [
-      {
-        name: 'Small Spade & Bucket',
-        price: 3.5,
-      },
-      {
-        name: 'Medium Spade & Bucket',
-        price: 4.5,
-      },
-      {
-        name: 'Ice Cream Bucket',
-        price: 6.5,
-      },
-      {
-        name: 'Penguin Bucket',
-        price: 6.5,
-      },
-      {
-        name: 'Large Spade & Unicorn Bucket',
-        price: 7,
-      },
-      {
-        name: 'Small Rainbow Ball',
-        price: 5,
-      },
-      {
-        name: 'Large Rainbow Ball',
-        price: 7,
-      },
-      {
-        name: 'Pump Blaster',
-        price: 3.5,
-      },
-    ],
+    name: 'Ice Pop',
+    price: 4,
+    colour: strawberries,
   },
   {
     type: 'category',
@@ -1018,6 +983,46 @@ export const menu = [
         name: 'Candyfloss Tub',
         price: 3.5,
         colour: '#f5b3d6',
+      },
+    ],
+  },
+  {
+    name: 'Toys',
+    type: 'category',
+    icon: require('../assets/menuicons/toys.png'),
+    colour: '#78be17',
+    items: [
+      {
+        name: 'Small Spade & Bucket',
+        price: 3.5,
+      },
+      {
+        name: 'Medium Spade & Bucket',
+        price: 4.5,
+      },
+      {
+        name: 'Ice Cream Bucket',
+        price: 6.5,
+      },
+      {
+        name: 'Penguin Bucket',
+        price: 6.5,
+      },
+      {
+        name: 'Large Spade & Unicorn Bucket',
+        price: 7,
+      },
+      {
+        name: 'Small Rainbow Ball',
+        price: 5,
+      },
+      {
+        name: 'Large Rainbow Ball',
+        price: 7,
+      },
+      {
+        name: 'Pump Blaster',
+        price: 3.5,
       },
     ],
   },

@@ -37,7 +37,7 @@ const useAlert = () => {
               type='primary'
               className='w-full'
               onClick={handleConfirm}
-              onTouchEnd={handleConfirm}>
+              onClick={handleConfirm}>
               Okay
             </Button>
           </ButtonStack>

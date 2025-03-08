@@ -19,7 +19,7 @@ export default function HelpPageButton() {
           src={question}
           className='w-8 icon cnter h-full'
           onAuxClick={useHelp}
-          onTouchEnd={useHelp}
+          onClick={useHelp}
         />
       </div>
     </>

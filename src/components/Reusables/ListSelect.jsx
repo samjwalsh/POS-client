@@ -27,7 +27,7 @@ const useListSelect = () => {
       <div
         className='btn btn-neutral text-2xl p-4 h-auto'
         onAuxClick={(e) => handleChooseOption(option)}
-        onTouchEnd={(e) => handleChooseOption(option)}
+        onClick={(e) => handleChooseOption(option)}
         key={option}>
         {option}
       </div>
@@ -42,7 +42,7 @@ const useListSelect = () => {
           <div
             className='fixed top-0 left-0 m-0 p-0 transparent h-screen w-screen  '
             onAuxClick={(e) => handleChooseOption(null)}
-            onTouchEnd={(e) => handleChooseOption(null)}></div>
+            onClick={(e) => handleChooseOption(null)}></div>
           <div className='fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2  background flex flex-col gap-2 rounded-box min-w-[15rem] p-4 overflow-hidden overflow-y-scroll max-h-[100vh] no-scrollbar'>
             {optionsHTML}
           </div>

@@ -98,7 +98,7 @@ const useKeyboard = () => {
           keyboardState !== 'normal' ? 'uppercase' : ''
         }`}
         onAuxClick={(event) => handleKeyboardClick(event)}
-        onTouchEnd={(event) => handleKeyboardClick(event)}>
+        onClick={(event) => handleKeyboardClick(event)}>
         <div className='border bc rounded-btn p-2 col-span-1 row-span 1 text-3xl justify-between w-full num text-left normal-case'>
           {keyboardValue + '_'}
         </div>
