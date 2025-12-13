@@ -405,7 +405,7 @@ ipcMain.handle('syncOrders', async () => {
     store.set('orders', []);
     orders = [];
   }
-
+  orders = orders.slice(0,2500);
   const noResponse = {
     success: false,
     ordersToAdd: 0,

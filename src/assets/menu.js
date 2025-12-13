@@ -22,7 +22,7 @@ items: [...]
 */
 const chocolate = '#734300';
 const coffee = '#592f03';
-const strawberries = '#FF3642';
+const strawberry = '#FF3642';
 const cone = '#ffed7a';
 const pink = '#ff80b3';
 const water = '#8ce4ff';
@@ -32,186 +32,144 @@ const ninetynine = chocolate;
 const special = water;
 const special99 = pink;
 const honeycomb = '#F7B500';
+
+const flake = {
+  name: 'Flake',
+  price: 0.5,
+};
+const toppings = {
+  name: 'Toppings',
+  price: 0.5,
+};
+const waffleCone = {
+  name: 'Waffle Cone',
+  price: 1.5,
+};
+const crushFlake = {
+  name: 'Crush Flake',
+  price: 2,
+};
+const chocDip = { name: 'Choc Dip', price: 0.8 };
+const strawberries = {
+  name: 'Strawberries',
+  price: 0.5,
+};
+
 export const menu = [
   {
     name: 'Cone',
-    price: 2.5,
+    price: 3,
     icon: require('../assets/menuicons/ice-cream-cone.png'),
     colour: cone,
     shortcuts: [
       {
         name: 'Plain Cone',
-        price: 2.5,
+        price: 3,
         addons: [],
         colour: cream,
       },
       {
         name: '99',
-        price: 3,
+        price: 3.5,
         colour: ninetynine,
-        addons: [
-          {
-            name: 'Flake',
-            price: 0.5,
-          },
-        ],
+        addons: [flake],
       },
       {
         name: 'Special Cone',
-        price: 3,
+        price: 3.5,
         colour: special,
-        addons: [
-          {
-            name: 'Toppings',
-            price: 0.5,
-          },
-        ],
+        addons: [toppings],
       },
       {
         name: 'Special 99',
-        price: 3.5,
+        price: 4,
         colour: special99,
-        addons: [
-          {
-            name: 'Flake',
-            price: 0.5,
-          },
-          {
-            name: 'Toppings',
-            price: 0.5,
-          },
-        ],
+        addons: [flake, toppings],
       },
     ],
     modifiers: [
-      {
-        name: 'Flake',
-        price: 0.5,
-      },
-      {
-        name: 'Toppings',
-        price: 0.5,
-      },
-      {
-        name: 'Waffle Cone',
-        price: 1,
-      },
-      {
-        name: 'Crush Flake',
-        price: 1.5,
-      },
-      { name: 'Choc Dip', price: 1.0 },
+      flake,
+      toppings,
+      waffleCone,
+      crushFlake,
+      chocDip,
       {
         priceCheck: function (addons) {
-          let addonsCost = 0;
-          let selectedAddons = [];
+          let price = 0;
+          let item = [];
 
           for (const addon of addons) {
             if (addon.selected === true) {
-              selectedAddons.push(addon.name);
-              addonsCost += addon.price;
+              item.push(addon.name);
+              price += addon.price;
             }
           }
 
-          if (
-            selectedAddons.includes('Choc Dip') &&
-            !selectedAddons.includes('Flake')
-          ) {
-            addonsCost -= 0.2;
+          if (item.includes('Choc Dip') && item.includes('Flake')) {
+            price += 0.7;
           }
 
-          return addonsCost;
+          return price;
         },
       },
     ],
   },
   {
     name: "Kid's Cone",
-    price: 2.3,
+    price: 2.8,
     icon: require('../assets/menuicons/ice-cream-cone.png'),
     colour: cone,
     shortcuts: [
       {
         name: "Kid's Cone",
-        price: 2.3,
+        price: 2.8,
         colour: cream,
         addons: [],
       },
       {
         name: "Kid's 99",
-        price: 2.5,
+        price: 3,
         colour: ninetynine,
-        addons: [
-          {
-            name: 'Flake',
-            price: 0.2,
-          },
-        ],
+        addons: [flake],
       },
       {
         name: "Kid's Special",
-        price: 2.5,
+        price: 3.3,
         colour: special,
-        addons: [
-          {
-            name: 'Toppings',
-            price: 0.5,
-          },
-        ],
+        addons: [toppings],
       },
       {
         name: "Kid's Special 99",
-        price: 3,
+        price: 3.5,
         colour: special99,
-        addons: [
-          {
-            name: 'Flake',
-            price: 0.2,
-          },
-          {
-            name: 'Toppings',
-            price: 0.5,
-          },
-        ],
+        addons: [flake, toppings],
       },
     ],
     modifiers: [
-      {
-        name: 'Flake',
-        price: 0.2,
-      },
-      {
-        name: 'Toppings',
-        price: 0.5,
-      },
-      { name: 'Crush Flake', price: 1.5 },
-      { name: 'Choc Dip', price: 0.7 },
+      flake,
+      toppings,
+      crushFlake,
+      chocDip,
       {
         priceCheck: function (addons) {
           // Add code to check for chocolate dip, both choco dip with and without flake are 3.5
-          let addonsCost = 0;
-          let selectedAddons = [];
-
+          let price = 0;
+          let item = [];
           for (const addon of addons) {
             if (addon.selected == true) {
-              selectedAddons.push(addon.name);
-              addonsCost += addon.price;
+              item.push(addon.name);
+              price += addon.price;
             }
           }
 
-          if (
-            selectedAddons.includes('Choc Dip') &&
-            selectedAddons.includes('Flake')
-          ) {
-            addonsCost += 0.3;
-          } else if (
-            selectedAddons.includes('Toppings') &&
-            !selectedAddons.includes('Flake')
-          ) {
-            addonsCost -= 0.3;
-          }
+          if (item.includes('Flake')) price -= 0.3;
+          if (item.includes('Crush Flake')) price -= 0.3;
+          if (item.includes('Crush Flake') && item.includes('Flake'))
+            price -= 0.2;
 
-          return addonsCost;
+          if (item.includes('Choc Dip')) price -= 0.1;
+          if (item.includes('Choc Dip') && item.includes('Flake')) price += 0.8;
+          return price;
         },
       },
     ],
@@ -222,185 +180,109 @@ export const menu = [
     icon: require('../assets/menuicons/extras.png'),
 
     items: [
-      {
-        name: 'Extra Flake',
-        price: 0.5,
-        colour: chocolate,
-      },
+      flake,
       {
         name: 'Family Special',
-        price: 10,
+        price: 12,
       },
       {
         name: 'Empty Cone',
         price: 0.3,
         colour: cone,
       },
-      {
-        name: 'Empty Waffle Cone',
-        price: 1,
-        colour: cone,
-      },
-      {
-        name: 'Extra Toppings',
-        price: 0.5,
-        colour: '#FFB3CB',
-      },
-      {
-        name: 'Extra Crush Flake',
-        price: 1.5,
-        colour: chocolate,
-      },
-      { name: 'Extra Ferrero', price: 1.5, colour: chocolate },
-      { name: 'Extra Strawberries', price: 1.5, colour: strawberries },
-      { name: 'Extra Chocolate Dip', price: 1.5, colour: chocolate },
+      waffleCone,
+      toppings,
+      crushFlake,
+      { name: 'Ferrero', price: 2, colour: chocolate },
+      { name: 'Strawberries', price: 2, colour: strawberry },
+      chocDip,
     ],
   },
   {
     name: 'Pink Tub',
-    price: 2.5,
+    price: 3,
     icon: require('../assets/menuicons/ice-cream-tub.png'),
     colour: pink,
-    modifiers: [
-      {
-        name: 'Flake',
-        price: 0.5,
-      },
-      {
-        name: 'Toppings',
-        price: 0.5,
-      },
-      {
-        name: 'Crush Flake',
-        price: 1.5,
-      },
-    ],
+    modifiers: [flake, toppings, crushFlake],
     shortcuts: [
       {
         name: 'Plain Pink Tub',
-        price: 2.5,
+        price: 3,
         colour: cream,
         addons: [],
       },
       {
         name: '99 Pink Tub',
-        price: 3,
+        price: 3.5,
         colour: ninetynine,
-        addons: [
-          {
-            name: 'Flake',
-            price: 0.5,
-          },
-        ],
+        addons: [flake],
       },
       {
         name: 'Special Pink Tub',
-        price: 3,
+        price: 3.5,
         colour: special,
-        addons: [
-          {
-            name: 'Toppings',
-            price: 0.5,
-          },
-        ],
+        addons: [toppings],
       },
       {
         name: 'Special 99 Pink Tub',
-        price: 3.5,
+        price: 4,
         colour: special99,
-        addons: [
-          {
-            name: 'Flake',
-            price: 0.5,
-          },
-          {
-            name: 'Toppings',
-            price: 0.5,
-          },
-        ],
+        addons: [flake, toppings],
       },
     ],
   },
   {
     name: "Kid's Tub",
-    price: 2.3,
+    price: 2.8,
     icon: require('../assets/menuicons/ice-cream-tub.png'),
     colour: pink,
     shortcuts: [
       {
         name: "Kid's Tub",
-        price: 2.3,
+        price: 2.8,
         colour: cream,
         addons: [],
       },
       {
         name: "Kid's 99 Tub",
-        price: 2.5,
+        price: 3,
         colour: ninetynine,
-        addons: [
-          {
-            name: 'Flake',
-            price: 0.2,
-          },
-        ],
+        addons: [flake],
       },
       {
         name: "Kid's Special Tub",
-        price: 2.5,
+        price: 3.3,
         colour: special,
-        addons: [
-          {
-            name: 'Toppings',
-            price: 0.5,
-          },
-        ],
+        addons: [toppings],
       },
       {
         name: "Kid's Special 99 Tub",
-        price: 3,
+        price: 3.5,
         colour: special99,
-        addons: [
-          {
-            name: 'Flake',
-            price: 0.2,
-          },
-          {
-            name: 'Toppings',
-            price: 0.5,
-          },
-        ],
+        addons: [flake, toppings],
       },
     ],
     modifiers: [
-      {
-        name: 'Flake',
-        price: 0.2,
-      },
-      {
-        name: 'Toppings',
-        price: 0.5,
-      },
-      { name: 'Crush Flake', price: 1.5 },
+      flake,
+      toppings,
+      crushFlake,
       {
         priceCheck: function (addons) {
-          let addonsCost = 0;
-          let selectedAddons = [];
-
+          let price = 0;
+          let item = [];
           for (const addon of addons) {
             if (addon.selected == true) {
-              selectedAddons.push(addon.name);
-              addonsCost += addon.price;
+              item.push(addon.name);
+              price += addon.price;
             }
           }
 
-          if (
-            selectedAddons.includes('Toppings') &&
-            !selectedAddons.includes('Flake')
-          ) {
-            addonsCost -= 0.3;
-          }
+          if (item.includes('Flake')) price -= 0.3;
+          if (item.includes('Crush Flake')) price -= 0.3;
+          if (item.includes('Crush Flake') && item.includes('Flake'))
+            price -= 0.2;
 
-          return addonsCost;
+          return price;
         },
       },
     ],
@@ -412,301 +294,121 @@ export const menu = [
     colour: '#ff954a',
     items: [
       {
-        name: 'Orange Tub',
-        price: 4.0,
-        colour: '#ff954a',
-        modifiers: [
-          {
-            name: 'Flake',
-            price: 0.5,
-          },
-          {
-            name: 'Toppings',
-            price: 0.5,
-          },
-          {
-            name: 'Crush Flake',
-            price: 1.5,
-          },
-        ],
-        shortcuts: [
-          {
-            name: 'Plain Large Tub',
-            price: 4,
-            colour: cream,
-            addons: [],
-          },
-          {
-            name: '99 Large Tub',
-            price: 4.5,
-            colour: ninetynine,
-            addons: [
-              {
-                name: 'Flake',
-                price: 0.5,
-              },
-            ],
-          },
-          {
-            name: 'Special Large Tub',
-            price: 4.5,
-            colour: special,
-            addons: [
-              {
-                name: 'Toppings',
-                price: 0.5,
-              },
-            ],
-          },
-          {
-            name: 'Special 99 Large Tub',
-            price: 5,
-            colour: special99,
-            addons: [
-              {
-                name: 'Flake',
-                price: 0.5,
-              },
-              {
-                name: 'Toppings',
-                price: 0.5,
-              },
-            ],
-          },
-        ],
-      },
-      {
         name: 'Sundae',
-        price: 4.0,
+        price: 4.5,
         colour: '#BDFF4A',
-        modifiers: [
-          { name: 'Flake', price: 0.5 },
-          { name: 'Toppings', price: 0.5 },
-          { name: 'Crush Flake', price: 1.5 },
-        ],
+        modifiers: [flake, toppings, crushFlake],
         shortcuts: [
           {
             name: 'Plain Sundae',
-            price: 4,
+            price: 4.5,
             colour: cream,
             addons: [],
           },
           {
             name: '99 Sundae',
-            price: 4.5,
+            price: 5,
             colour: ninetynine,
-            addons: [
-              {
-                name: 'Flake',
-                price: 0.5,
-              },
-            ],
+            addons: [flake],
           },
           {
             name: 'Special Sundae',
-            price: 4.5,
+            price: 5,
             colour: special,
-            addons: [
-              {
-                name: 'Toppings',
-                price: 0.5,
-              },
-            ],
+            addons: [toppings],
           },
           {
             name: 'Special 99 Sundae',
-            price: 5,
+            price: 5.5,
             colour: special99,
-            addons: [
-              {
-                name: 'Flake',
-                price: 0.5,
-              },
-              {
-                name: 'Toppings',
-                price: 0.5,
-              },
-            ],
+            addons: [flake, toppings],
           },
         ],
       },
       {
-        name: 'Screwball',
-        price: 3,
-        colour: '#FFA600',
-        modifiers: [
-          { name: 'Flake', price: 0.5 },
-          { name: 'Toppings', price: 0.5 },
-          {
-            name: 'Crush Flake',
-            price: 1.5,
-          },
-        ],
+        name: 'Orange Tub',
+        price: 4.5,
+        colour: '#ff954a',
+        modifiers: [flake, toppings, crushFlake],
         shortcuts: [
           {
-            name: 'Plain Screwball',
-            price: 3,
+            name: 'Plain Large Tub',
+            price: 4.5,
             colour: cream,
             addons: [],
           },
           {
-            name: '99 Screwball',
-            price: 3.5,
+            name: '99 Large Tub',
+            price: 5,
             colour: ninetynine,
-            addons: [
-              {
-                name: 'Flake',
-                price: 0.5,
-              },
-            ],
+            addons: [flake],
           },
           {
-            name: 'Special Screwball',
-            price: 3.5,
+            name: 'Special Large Tub',
+            price: 5,
             colour: special,
-            addons: [
-              {
-                name: 'Toppings',
-                price: 0.5,
-              },
-            ],
+            addons: [toppings],
           },
           {
-            name: 'Special 99 Screwball',
-            price: 4,
+            name: 'Special 99 Large Tub',
+            price: 5.5,
             colour: special99,
-            addons: [
-              {
-                name: 'Flake',
-                price: 0.5,
-              },
-              {
-                name: 'Toppings',
-                price: 0.5,
-              },
-            ],
+            addons: [flake, toppings],
           },
         ],
       },
       {
         name: 'Boat (w/ Flake)',
-        price: 4,
-        modifiers: [{ name: 'Toppings', price: 0.5 }],
+        price: 4.5,
+        modifiers: [toppings],
         colour: '#00E6E6',
         shortcuts: [
           {
             name: 'Boat (w/ Flake)',
-            price: 4,
+            price: 4.5,
             colour: ninetynine,
             addons: [],
           },
           {
             name: 'Special Boat (w/ Flake)',
-            price: 4.5,
+            price: 5,
             colour: special99,
-            addons: [
-              {
-                name: 'Toppings',
-                price: 0.5,
-              },
-            ],
+            addons: [toppings],
           },
         ],
-      },
-      {
-        name: 'Float',
-        price: 5,
-        colour: coke,
       },
       {
         name: 'Hot Ferrero',
-        price: 6,
+        price: 6.5,
         colour: chocolate,
-        modifiers: [
-          {
-            name: 'Flake',
-            price: 0.5,
-          },
-          {
-            name: 'Strawberries',
-            price: 0.5,
-          },
-        ],
+        modifiers: [flake, strawberries],
         shortcuts: [
           {
             name: 'Hot Ferrero',
-            price: 6,
+            price: 6.5,
             colour: cream,
             addons: [],
           },
           {
             name: '99 Hot Ferrero',
-            price: 6.5,
+            price: 7,
             colour: ninetynine,
-            addons: [
-              {
-                name: 'Flake',
-                price: 0.5,
-              },
-            ],
+            addons: [flake],
           },
           {
             name: 'Hot Ferrero & Strawberries',
-            price: 6.5,
-            colour: strawberries,
-            addons: [
-              {
-                name: 'Strawberries',
-                price: 0.5,
-              },
-            ],
+            price: 7,
+            colour: strawberry,
+            addons: [strawberries],
           },
         ],
-      },
-      {
-        name: 'Strawberries & Ice Cream',
-        price: 6,
-        colour: strawberries,
-        modifiers: [
-          {
-            name: 'Flake',
-            price: 0.5,
-          },
-        ],
-        shortcuts: [
-          {
-            name: 'Strawberries & Ice Cream',
-            price: 6,
-            colour: strawberries,
-            addons: [],
-          },
-          {
-            name: '99 Strawberries & Ice Cream',
-            price: 6.5,
-            colour: ninetynine,
-            addons: [
-              {
-                name: 'Flake',
-                price: 0.5,
-              },
-            ],
-          },
-        ],
-      },
-      {
-        name: 'Affogato',
-        price: 5,
-        colour: coffee,
       },
       {
         name: 'Treat Tub',
-        price: 6,
+        price: 6.5,
         colour: cone,
         modifiers: [
-          {
-            name: 'Flake',
-            price: 0.5,
-          },
+          flake,
           {
             name: 'Honeycomb Heaven',
             price: 0,
@@ -723,7 +425,7 @@ export const menu = [
         shortcuts: [
           {
             name: 'Honeycomb Heaven',
-            price: 6,
+            price: 6.5,
             colour: '#F7B500',
             addons: [
               {
@@ -734,7 +436,7 @@ export const menu = [
           },
           {
             name: 'Rocky Road Mess',
-            price: 6,
+            price: 6.5,
             colour: '#D6B083',
             addons: [
               {
@@ -745,7 +447,7 @@ export const menu = [
           },
           {
             name: 'Chocolate Brownie Bliss',
-            price: 6,
+            price: 6.5,
             colour: ninetynine,
             addons: [
               {
@@ -757,16 +459,83 @@ export const menu = [
         ],
       },
       {
+        name: 'Screwball',
+        price: 4,
+        colour: '#FFA600',
+        modifiers: [flake, toppings, crushFlake],
+        shortcuts: [
+          {
+            name: 'Plain Screwball',
+            price: 4,
+            colour: cream,
+            addons: [],
+          },
+          {
+            name: '99 Screwball',
+            price: 4.5,
+            colour: ninetynine,
+            addons: [flake],
+          },
+          {
+            name: 'Special Screwball',
+            price: 4.5,
+            colour: special,
+            addons: [toppings],
+          },
+          {
+            name: 'Special 99 Screwball',
+            price: 5,
+            colour: special99,
+            addons: [flake, toppings],
+          },
+        ],
+      },
+      {
+        name: 'Strawberries & Ice Cream',
+        price: 6.5,
+        colour: strawberry,
+        modifiers: [flake],
+        shortcuts: [
+          {
+            name: 'Strawberries & Ice Cream',
+            price: 6.5,
+            colour: strawberry,
+            addons: [],
+          },
+          {
+            name: '99 Strawberries & Ice Cream',
+            price: 7,
+            colour: ninetynine,
+            addons: [flake],
+          },
+        ],
+      },
+      {
         name: 'Kinder Bueno & Ice Cream',
         colour: chocolate,
-        price: 6,
+        price: 6.5,
       },
+      {
+        name: 'Affogato',
+        price: 5.5,
+        colour: coffee,
+      },
+      {
+        name: 'Float',
+        price: 5,
+        colour: coke,
+      },
+      {
+        name: "Ice Cream Nachos",
+        price: 8.5,
+        colour: special
+      }
     ],
   },
   {
     name: 'Ice Pop',
     price: 4,
-    colour: strawberries,
+    colour: strawberry,
   },
   {
     type: 'category',
@@ -816,6 +585,7 @@ export const menu = [
       },
     ],
   },
+
   {
     name: 'Hot Drinks',
     type: 'category',
@@ -829,7 +599,7 @@ export const menu = [
       },
       {
         name: 'Hot Chocolate',
-        price: 3,
+        price: 3.5,
         colour: chocolate,
         modifiers: [
           {
@@ -840,13 +610,13 @@ export const menu = [
         shortcuts: [
           {
             name: 'Hot Chocolate',
-            price: 3,
+            price: 3.5,
             colour: ninetynine,
             addons: [],
           },
           {
             name: 'Hot Chocolate w/ Marshmallows',
-            price: 3.5,
+            price: 4,
             colour: cream,
             addons: [
               {
@@ -859,26 +629,27 @@ export const menu = [
       },
       {
         name: 'Americano',
-        price: 2.8,
+        price: 3.8,
         colour: coffee,
       },
       {
         name: 'Latte',
-        price: 3,
+        price: 3.8,
         colour: '#F0B771',
       },
       {
         name: 'Cappuccino',
-        price: 3,
+        price: 3.8,
         colour: '#F0B771',
       },
       {
         name: 'Double Espresso',
-        price: 2.8,
+        price: 3,
         colour: coffee,
       },
     ],
   },
+
   {
     name: 'Sweets',
     type: 'category',
@@ -890,17 +661,11 @@ export const menu = [
         price: 3,
       },
       {
-        name: 'Honeycomb',
+        name: 'Stick of Rock, Honeycomb',
         price: 2.5,
-        colour: honeycomb,
       },
       {
-        name: 'Stick of Rock',
-        price: 2.5,
-        colour: strawberries,
-      },
-      {
-        name: 'Refresher, Wham',
+        name: 'Refresher, Wham, Dip Dab',
         price: 0.8,
       },
       {
@@ -910,10 +675,6 @@ export const menu = [
       {
         name: 'Chewits',
         price: 1.3,
-      },
-      {
-        name: 'Double Dip, Lipstick',
-        price: 0.8,
       },
       {
         name: '2 Euro Bag',
@@ -927,14 +688,6 @@ export const menu = [
         name: 'Liquorice',
         price: 0.25,
       },
-    ],
-  },
-  {
-    name: 'Chocolate Bars',
-    type: 'category',
-    icon: require('../assets/menuicons/chocolate-bar.png'),
-    colour: chocolate,
-    items: [
       {
         name: 'Standard Chocolate Bar',
         price: 1.8,
